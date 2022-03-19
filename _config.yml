@@ -161,7 +161,7 @@ defaults:
         type: WebPage
 
 kramdown:
-  math_engine: katex
+  math_engine: mathjax # Github Page Doesn't support KaTex cuz KaTex uses JS pre-render
   math_engine_opts: {}
   footnote_backlink: "&#x21a9;&#xfe0e;"
 
