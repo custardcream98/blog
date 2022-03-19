@@ -1,0 +1,142 @@
+<!--
+Code used for embedding Gumroad on the Hydejack Site. 
+Left here for reference, feel free to delete.
+-->
+<!-- <link rel="apple-touch-icon" sizes="57x57" href="/assets/icons/apple-icon-57x57.png">
+<link rel="apple-touch-icon" sizes="60x60" href="/assets/icons//apple-icon-60x60.png">
+<link rel="apple-touch-icon" sizes="72x72" href="/assets/icons//apple-icon-72x72.png">
+<link rel="apple-touch-icon" sizes="76x76" href="/assets/icons//apple-icon-76x76.png">
+<link rel="apple-touch-icon" sizes="114x114" href="/assets/icons//apple-icon-114x114.png">
+<link rel="apple-touch-icon" sizes="120x120" href="/assets/icons//apple-icon-120x120.png">
+<link rel="apple-touch-icon" sizes="144x144" href="/assets/icons//apple-icon-144x144.png">
+<link rel="apple-touch-icon" sizes="152x152" href="/assets/icons//apple-icon-152x152.png">
+<link rel="apple-touch-icon" sizes="180x180" href="/assets/icons//apple-icon-180x180.png"> -->
+<link
+  rel="icon"
+  type="image/png"
+  sizes="192x192"
+  href="/assets/icons/icon.png"
+/>
+<link
+  rel="icon"
+  type="image/png"
+  sizes="310x310"
+  href="/assets/icons/icon-310x310.png"
+/>
+<link
+  rel="icon"
+  type="image/png"
+  sizes="150x150"
+  href="/assets/icons/icon-150x150.png"
+/>
+<link
+  rel="icon"
+  type="image/png"
+  sizes="144x144"
+  href="/assets/icons/icon-144x144.png"
+/>
+<link
+  rel="icon"
+  type="image/png"
+  sizes="70x70"
+  href="/assets/icons/icon-70x70.png"
+/>
+
+<link
+  href="/assets/highlight/styles/rainbow.min.css"
+  rel="stylesheet"
+  type="text/css"
+/>
+<script src="/assets/highlight/highlight.min.js" defer></script>
+<!-- <link rel="manifest" href="/manifest.json" /> -->
+<link rel="dns-prefetch" href="https://assets.gumroad.com" />
+
+<!-- <script type="module">
+  let p;
+  const promisify = (f) => (x) =>
+    new Promise((r) => f(x).addEventListener("load", r));
+  const loadJS = promisify(window.loadJS);
+  document.querySelector("hy-push-state").addEventListener("load", () => {
+    const io = new IntersectionObserver(
+      async (entries) => {
+        if (entries.some((x) => x.isIntersecting)) {
+          p = p || loadJS("https://gumroad.com/js/gumroad-embed.js");
+          await p;
+          if (!window.GumroadEmbed) {
+            await new Promise(function check1(res) {
+              if ("createGumroadEmbed" in window)
+                res(window.createGumroadEmbed());
+              else setTimeout(() => check1(res), 200);
+            });
+          }
+          await new Promise(function check2(res) {
+            if ("GumroadEmbed" in window) res(GumroadEmbed.reload());
+            else setTimeout(() => check2(res), 200);
+          });
+        }
+      },
+      { rootMargin: "1440px" }
+    );
+    document
+      .querySelectorAll(".gumroad-product-embed")
+      .forEach((el) => io.observe(el));
+  });
+</script>
+<script type="module">
+  let p;
+  const promisify = (f) => (x) =>
+    new Promise((r) => f(x).addEventListener("load", r));
+  const loadJS = promisify(window.loadJS);
+  document.querySelector("hy-push-state").addEventListener("load", () => {
+    const io = new IntersectionObserver(
+      async (entries) => {
+        if (entries.some((x) => x.isIntersecting)) {
+          p = p || loadJS("https://gumroad.com/js/gumroad.js");
+          await p;
+          if (!window.GumroadOverlay) {
+            await new Promise(function check(res) {
+              if ("createGumroadOverlay" in window)
+                res(window.createGumroadOverlay());
+              else setTimeout(() => check(res), 200);
+            });
+          }
+        }
+      },
+      { rootMargin: "300px" }
+    );
+    document
+      .querySelectorAll(".gumroad-button")
+      .forEach((el) => io.observe(el));
+  });
+</script> -->
+<script type="module">
+  document.querySelector("hy-push-state").addEventListener("load", () => {
+    let tocElement = document.getElementById("markdown-toc");
+
+    if (tocElement) {
+      let affixedDiv = document.createElement("div");
+      affixedDiv.style.position = "relative";
+      affixedDiv.style.top = "-1rem";
+      tocElement.parentNode.insertBefore(affixedDiv, tocElement);
+
+      let headerList = document.getElementsByClassName("permalink");
+      let prevElement;
+      window.addEventListener("scroll", () => {
+        let hurdleTop = affixedDiv.getBoundingClientRect().top;
+        if (hurdleTop <= 0) tocElement.classList.add("affix");
+        else tocElement.classList.remove("affix");
+
+        for (let i = 0; i < headerList.length; i++) {
+          if (headerList[i].getBoundingClientRect().top >= 0) {
+            prevElement?.style.removeProperty("font-weight");
+            let tocId = "markdown-toc-" + headerList[i].parentNode.id;
+            prevElement = document.getElementById(tocId);
+            prevElement.style.fontWeight = "bold";
+
+            break;
+          }
+        }
+      });
+    }
+  });
+</script>

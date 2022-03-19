@@ -1,0 +1,54 @@
+---
+layout: post
+title: 블로그에 다크모드, 댓글, applause 기능 추가
+# image:
+#   path: /assets/img/blog/jeremy-bishop@0,5x.jpg
+description: >
+  블로그에 다크모드, 댓글과 applase 버튼 등을 추가했습니다.
+hide_description: true
+tags: [jekyll, Github, Github Pages]
+hide_last_modified: true
+---
+
+Hydejack Theme의 무료 버전에서는 제공하지 않는 다크모드와, `utteranc.es`의 댓글 API, `applause-button`을 추가했습니다.
+{:.lead}
+
+이렇게 toc도 편리하게 생성할 수 있게 됐습니다. 👇
+
+- this unordered seed list will be replaced by the toc
+{:toc}
+
+# 어떻게든 해냈다
+
+개발 경험이 거의 없어 엄청나게 헤멨지만 어떻게든 해냈습니다. 코드를 여기 저기서 가져와 정리가 안된 느낌이지만 결과물이 마음에 듭니다.
+
+toc 생성이나 다크모드는 원래 `Hydejack Pro`에서만 제공하는 기능인데, 직접 코드를 추가해 구현했습니다. 코드는 아래 ChangeLog에 있는 `alpha-src`님의 Github Page를 참고했는데, 코드를 보니 원래 `markdown-toc`라는 문법이 있는 것 같습니다. 마크다운에도 여러 엔진이 있는 것으로 보입니다. 추후 좀 더 공부하고자 합니다.
+
+Code Block 인식에는 [highlight.js](https://highlightjs.org/)라는 하이라이터를 가져왔습니다.
+
+## ChangeLog
+
+- 이제 **다크모드**를 지원합니다. 상단 바에서 토글할 수 있습니다.
+- 상단 바에 카테고리가 보이게 됐습니다.
+- `utteranc.es`의 댓글을 사용할 수 있게 됐습니다. `disqus`와 고민했는데 이쪽이 더 이쁘고 깃허브와의 연동성이 마음에 들었습니다.
+- [applause-button](https://applause-button.com/)이 추가됐습니다.
+
+많은 도움이 됐던 Github Page 링크입니다.
+
+[alpha-src](https://alpha-src.github.io/)  
+[lazyren](https://lazyren.github.io/)
+
+# TODOs
+
+- [ ] 구글에서 검색 가능하게 만들기
+- [ ] Robots.txt 작성하기
+- [ ] 네이버에서 검색 가능하게 만들기
+- [ ] 구글 에드센스 도전하기
+- [ ] lists 뷰에서 글 제목 옆에 applaud 카운트 보이게 하기
+- [ ] 블로그 내에 search bar 추가하기
+- [ ] 블로그 글씨체 변경하기 (필요하다면)
+
+# 404 페이지
+
+시립대 공간정보공학과 개발동아리 404:Not Found 광고 겸 404페이지 커스텀도 했습니다ㅋㅋㅋ  
+[404: Not Found](http://custardcream98.github.io/404)

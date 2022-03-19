@@ -31,7 +31,7 @@ permalink: Permalink
 permalink_icon: "content-hash"
 templates: Templates (for web app)
 present: present
-toc: Table of Contents
+toc: 이 글의 순서
 note: Note
 description: Description
 search: Search
@@ -41,7 +41,7 @@ loading: Loading…
 redirecting: Redirecting…
 
 continue_reading: >
-  더 보기 <!--post_title-->
+  계속 읽기 <!--post_title-->
 
 cookies_banner:
   text: >

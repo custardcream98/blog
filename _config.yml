@@ -30,7 +30,17 @@ description: >
 tagline: Shioo, Park
 
 # A list of keywords for your blog
-keywords: []
+keywords:
+  [
+    developer,
+    college,
+    geoinformatics,
+    개발자,
+    개발,
+    프론트엔드,
+    백엔드,
+    공간정보공학,
+  ]
 
 # A (square) logo for your site.
 # If provided, it will be shown at the top of the sidebar.
@@ -49,8 +59,8 @@ author:
 menu:
   # - title: Example
   #   url: /example/
-  - title: Post
-    url: /posts/
+  - title: Dev Log
+    url: /devlog/
   # - title: Tags
   #   url: /tags/
   - title: About
@@ -76,30 +86,27 @@ permalink: /:categories/:year-:month-:day-:title/
 paginate: 10
 paginate_path: /:num/
 
-paginate: 10
-paginate_path: /posts/:num/
-
 # Theme
 # ---------------------------------------------------------------------------------------
 
-# theme: jekyll-theme-hydejack
-remote_theme: hydecorp/hydejack@v9
+theme: jekyll-theme-hydejack
+# remote_theme: hydecorp/hydejack@v9
 
 # Customizaton
 # ----------------------------------------------------------------------------------------
 
 # Sidebar image and theme color of the site.
 accent_image: /assets/img/sidebar-bg.jpg
-accent_color: rgb(98,98,98)
+accent_color: rgb(0,160,209)
 
 # This is used for the `theme-color` meta tag,
 # which changes the background color of the browser UI in certain browsers.
 # Defaults to `accent_color`.
-theme_color: rgb(25,55,71)
+theme_color: rgb(71, 71, 71)
 
 # The string encoding which fonts to fetch from Google Fonts.
 # See: <https://hydejack.com/docs/configuration/>
-google_fonts: Roboto+Slab:700|Noto+Sans:400,400i,700,700i
+google_fonts: IBM+Plex+Sans+KR:wght@200|Roboto+Slab:700|Noto+Sans:400,400i,700,700i
 
 # The text font. Expects a string that is a valid CSS font-family value.
 # To change font-weight, see _sass/variables.scss
@@ -141,6 +148,8 @@ defaults:
       type: posts
     values:
       comments: true
+      applause_button: true
+      sitemap: true
 
   # `jekyll-seo-tag` will mark collection outputs as `BlogPosting`,
   # but we want them to be `WebPage`s:
@@ -163,7 +172,7 @@ defaults:
 kramdown:
   math_engine: mathjax # Github Page Doesn't support KaTex cuz KaTex uses JS pre-render
   math_engine_opts: {}
-  footnote_backlink: "&#x21a9;&#xfe0e;"
+  # footnote_backlink: "&#x21a9;&#xfe0e;"
 
 # 3rd Party Integrations
 # ----------------------------------------------------------------------------------------
@@ -174,7 +183,19 @@ kramdown:
 
 # Setting a disqus shortname will enable the comment section on
 # pages with `comments: true` in the front matter.
-disqus: coding is sweet
+# Set which comment system to use
+comments:
+  # 'disqus' or 'utterances' are available
+  provider: utterances
+
+# You must install utterances github app before use.(https://github.com/apps/utterances)
+# Make sure all variables are set properly. Check below link for detail.
+# https://utteranc.es/
+utterances:
+  repo: "custardcream98/custardcream98.github.io"
+  issue-term: "pathname"
+  label: "comments"
+  theme: "photon-dark"
 
 # Setting a tinyletter username will enable the newsletter subscription box.
 # PRO version only!
@@ -186,10 +207,11 @@ disqus: coding is sweet
 
 hydejack:
   # Configure the order of complementary content on blog posts
-  post_addons: [related, comments]
+  post_addons: [about, newsletter, related, random, applause_button, comments]
 
   # Configure the order of complementary content on project pages
-  project_addons: [other, comments]
+  project_addons:
+    [about, newsletter, related, random, applause_button, comments]
 
   # Set to `true` if you don't want to show an icon indicating external links
   no_mark_external: false
@@ -216,7 +238,7 @@ hydejack:
 
   # Set to `true` if you don't intend on changing the accent color on a per-page basis.
   # This will increase site build speed!
-  no_page_style: true
+  no_page_style: false
 
   # Code blocks and tables "break" the layout by spanning the full available width.
   # Set this to true if you want them to be the same width as other content.
@@ -415,3 +437,9 @@ jekyll_compose:
       links:
         - title: Project Link
           url: https://example.com
+# Analytics
+# analytics:
+#   provider: "google-gtag" # 구글 어날리틱스 등록 false (default), "google", "google-universal", "custom"
+#   google:
+#     tracking_id: "G-CLMB9QF3KZ"
+#     anonymize_ip: # true, false (default)

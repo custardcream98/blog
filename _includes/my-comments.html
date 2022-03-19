@@ -1,0 +1,28 @@
+{% assign provider = site.comments.provider | default:"disqus" %}
+{% if provider == "disqus" %}
+  {% assign disqus = site.disqus | default:site.disqus_shortname %}
+  {% if disqus %}
+    <div id="disqus_thread"></div>
+    <script>
+        (function() {
+        var d = document, s = d.createElement('script');
+        s.src = 'https://alpha-src.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', +new Date());
+        (d.head || d.body).appendChild(s);
+        })();
+    </script>
+    <noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+  {% endif %}
+{% elsif provider == "utterances" %}
+  {% assign utterances = site.utterances %}
+  {% if utterances.repo %}
+    <script src="https://utteranc.es/client.js"
+            repo=        {{ utterances.repo }}
+            issue-term=  {{ utterances.issue-term }}
+            label=       {{ utterances.label }}
+            theme=       {{ utterances.theme }}
+            crossorigin= "anonymous"
+            async>
+    </script>
+  {% endif %}
+{% endif %}
