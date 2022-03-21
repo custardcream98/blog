@@ -49,6 +49,20 @@ body {
   background-color: var(--main-background-color) !important;
 }
 
+// .icon-search::after {
+//     content: "";
+//     display: block;
+//     box-sizing: border-box;
+//     position: absolute;
+//     border-radius: 3px;
+//     width: 2px;
+//     height: 8px;
+//     background: currentColor;
+//     transform: rotate(-45deg);
+//     top: 10px;
+//     left: 12px
+// }
+
 article {
   max-width: 650px;
   margin: 2em auto;

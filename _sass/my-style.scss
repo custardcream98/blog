@@ -1,3 +1,27 @@
+html[data-theme="light"] {
+  --link-color: rgb(0, 112, 201);
+  --main-background-color: #fff;
+  --main-text-color: hsl(0, 0%, 20%);
+  --border-color: #ebebeb;
+  --highlight-color: #b98f8f;
+  --menu-text-color: rgb(71, 71, 71);
+  --highlight-bg: rgba(196, 196, 196, 0.219);
+  --gray-bg: rgba(0, 0, 0, 0.025);
+  --applause-button-after: rgb(0, 160, 209);
+}
+
+html[data-theme="dark"] {
+  --link-color: rgb(100, 210, 255);
+  --main-background-color: hsl(0, 0%, 20%);
+  --main-text-color: hsl(0, 0%, 85%);
+  --border-color: #307d99;
+  --menu-text-color: #bbb;
+  --highlight-bg: rgba(161, 161, 161, 0.096);
+  --code-text: #abb2bf;
+  --gray-bg: rgba(255, 255, 255, 0.033);
+  --applause-button-after: rgb(0, 160, 209);
+}
+
 .dl-table {
   a {
     @supports (
@@ -22,8 +46,40 @@
   display: inline-block;
 }
 
+.nav-btn {
+    border-left: none;
+    border-right: none;
+}
+
+#_search-box {
+    position: absolute;
+    display: flex;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    transform: translateY(-9999px);
+    background-color: var(--main-background-color);
+}
+
+#_search-box.show {
+    transform: none;
+}
+
+.hide {
+    display: none;
+}
+
+#_search-input-box {
+    height: 100%;
+    display: flex;
+    padding-left: 3rem;
+    padding-right: 3rem;
+}
+
 .nav-btn,
-.nav-btn-bar {
+.nav-btn-bar
+{
   height: 3rem;
 }
 .top-menu {
