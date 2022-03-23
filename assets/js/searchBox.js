@@ -103,5 +103,4 @@ fetch('/assets/sitedata.json').then(response => {
     }
 }).catch(e => {
     console.log('Error: ', e.message);
-
 });

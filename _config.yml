@@ -353,7 +353,7 @@ plugins:
   - jekyll-redirect-from
   - jekyll-relative-links
   - jekyll-seo-tag
-  # - jekyll-sitemap
+  - jekyll-sitemap
   - jekyll-titles-from-headings
   - jekyll-include-cache
   - jekyll-last-modified-at
@@ -381,11 +381,10 @@ plugins:
 #   admins:              <id>
 
 # Used on index and about sites
-# social:
-#   name:                <firstname> <lastname>
-#   links:
-#     - https://twitter.com/<username>
-#     - https://github.com/<username>
+social:
+  name:                Shioo Park
+  links:
+    - https://github.com/custardcream98
 
 # Plugin Configs
 # ---------------------------------------------------------------------------------------
