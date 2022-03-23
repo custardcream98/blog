@@ -15,20 +15,29 @@
           <label class="sr-only" for="_search-input">Search</label>
           <span class="icon-search"></span>
         </button>
-        <div id="_search-box">
+        <form id="_search-box">
             <div class="nav-btn"><span class="icon-search"></span></div>
-            <form id="_search-input-box">
-                <input
-                  id="_search-input"
-                  type="search"
-                  class="nav-btn"
-                  placeholder="Type something…"
-                />
-                <button id="reset-btn" type="reset" class="nav-btn no-hover">
-                  <span class="sr-only">Close</span> <span class="icon-cross"></span>
-                </button>
-            </form>
+            <input
+              id="_search-input"
+              type="search"
+              class="nav-btn"
+              placeholder="Type something…"
+            />
+            <button id="reset-btn" type="reset" class="nav-btn no-hover">
+              <span class="sr-only">Close</span> <span class="icon-cross"></span>
+            </button>
+        </form>
+        <div id="_search-hits" class="hide">
         </div>
+        <template id="_search-item-template">
+            <a id="_search-item" href="#">
+                <img class="search-img" />
+                <div class="search-text">
+                    <span class="search-text__title"></span>
+                    <small></small>
+                </div>
+            </a>
+        </template>
         <div class="top-menu">
           {% if site.menu %} {% for node in site.menu %} {% assign url =
           node.url | default: node.href %}
