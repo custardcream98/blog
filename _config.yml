@@ -11,6 +11,12 @@
 # NOTE: You don't need to provide this property when hosting on GitHub Pages or Netlify.
 # baseurl:               '/hydejack-starter-kit'
 
+# Theme
+# ---------------------------------------------------------------------------------------
+
+theme: jekyll-theme-hydejack
+# remote_theme: hydecorp/hydejack@v9
+
 # General settings
 # ---------------------------------------------------------------------------------------
 
@@ -85,12 +91,6 @@ permalink: /:categories/:year-:month-:day-:title/
 # Pagination configuration (used by the `blog` layout)
 paginate: 10
 paginate_path: /:num/
-
-# Theme
-# ---------------------------------------------------------------------------------------
-
-# theme: jekyll-theme-hydejack
-remote_theme: hydecorp/hydejack@v9
 
 # Customizaton
 # ----------------------------------------------------------------------------------------

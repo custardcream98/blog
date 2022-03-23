@@ -1,7 +1,7 @@
 ---
 sitemap: false
 ---
-data = {% assign pages = site.html_pages | where_exp:"page","page.sitemap != false" %}
+{% assign pages = site.html_pages | where_exp:"page","page.sitemap != false" %}
 {% assign docs = site.documents | where_exp:"doc","doc.sitemap != false and doc.layout == 'post'" %}
 {
   "pages": [
@@ -24,7 +24,7 @@ data = {% assign pages = site.html_pages | where_exp:"page","page.sitemap != fal
       {% if doc.tags        %}"tags": {{        doc.tags        | jsonify }},{% endif %}
       {% if doc.keywords    %}"keywords": {{    doc.keywords    | jsonify }},{% endif %}
       "collection": {{                          doc.collection  | jsonify }},
-      "url": {{                                 doc.url         | jsonify }},
+      "url": {{                                 doc.url         | jsonify }}
     }{% unless forloop.last %},{% endunless %}{% endfor %}
   ]
 }
