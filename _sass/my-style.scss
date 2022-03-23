@@ -1,3 +1,27 @@
+html[data-theme="light"] {
+  --link-color: rgb(0, 112, 201);
+  --main-background-color: #fff;
+  --main-text-color: hsl(0, 0%, 20%);
+  --border-color: #ebebeb;
+  --highlight-color: #b98f8f;
+  --menu-text-color: rgb(71, 71, 71);
+  --highlight-bg: rgba(196, 196, 196, 0.219);
+  --gray-bg: rgba(0, 0, 0, 0.025);
+  --applause-button-after: rgb(0, 160, 209);
+}
+
+html[data-theme="dark"] {
+  --link-color: rgb(100, 210, 255);
+  --main-background-color: hsl(0, 0%, 20%);
+  --main-text-color: hsl(0, 0%, 85%);
+  --border-color: #307d99;
+  --menu-text-color: #bbb;
+  --highlight-bg: rgba(161, 161, 161, 0.096);
+  --code-text: #abb2bf;
+  --gray-bg: rgba(255, 255, 255, 0.033);
+  --applause-button-after: rgb(0, 160, 209);
+}
+
 .dl-table {
   a {
     @supports (
@@ -22,8 +46,100 @@
   display: inline-block;
 }
 
+.nav-btn {
+    border-left: none;
+    border-right: none;
+}
+
+#_search-box {
+    position: absolute;
+    display: flex;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    transform: translateY(-9999px);
+    background-color: var(--main-background-color);
+}
+
+#_search-input {
+    height: 100%;
+    flex: 1;
+    padding-left: 3rem;
+    padding-right: 3rem;
+}
+
+#_search-box>button[type=reset] {
+    position: absolute;
+    top: 0;
+    right: 0;
+    border: none;
+}
+
+#_search-box>div.nav-btn {
+    position: absolute;
+    top: 0;
+    left: 0;
+    border: none;
+}
+
+#_search-hits {
+    background: var(--main-background-color);
+    position: absolute;
+    top: 3rem;
+    left: 0;
+    right: 0;
+    display: inline-block;
+    max-height: calc(100vh - 5rem);
+    overflow-y: auto;
+    overscroll-behavior-y: none;
+    box-shadow: 0 0.5rem 5rem rgba(0,0,0,0.35);
+    padding-bottom: 1rem;
+}
+
+#_search-box.show {
+    transform: none;
+}
+
+.hide {
+    display: none !important; 
+}
+
+#_search-item {
+    height: 3.7rem;
+    color: var(--main-text-color);
+    padding-left: 1rem;
+    padding-right: 1rem;
+    margin-top: 1rem;
+    display: flex;
+    box-sizing: border-box;
+}
+
+.search-img {
+    width: 20%;
+    height: 2.9rem;
+    object-fit: cover;
+}
+
+.search-text {
+    margin-left: 2rem;
+    margin-right: 3rem;
+    width: 80%;
+    display: inline-flex;
+}
+
+.search-text__title {
+    width: 50%;
+}
+
+.search-text>small {
+    width: 50%;
+    margin-left: 2rem;
+}
+
 .nav-btn,
-.nav-btn-bar {
+.nav-btn-bar
+{
   height: 3rem;
 }
 .top-menu {
