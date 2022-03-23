@@ -10,7 +10,6 @@ fetch('/assets/sitedata.json').then(response => {
     const HIDE_CLASS = "hide";
     const ONOFF_SWITCH_CLASS = ".switch-button";
     const ITEM_TAMPLATE_ID = "_search-item-template";
-    const ITEM_ID = "#_search_item";
     const ITEM_IMG_CLASS = ".search-img";
     const ITEM_TITLE_CLASS = ".search-text__title";
     const ITEM_SUBTITLE_TAG = "small";
