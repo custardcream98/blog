@@ -1,9 +1,7 @@
 ---
-# assets/sitedata.json
-encoding: UTF-8
 ---
 {% assign pages = site.html_pages | where_exp:"page","page.sitemap != false" %}
-{% assign docs = site.documents | where_exp:"doc","doc.sitemap != false and doc.layout == 'post'" %}
+{% assign docs = site.documents | where_exp:"doc","doc.sitemap != false" | where_exp:"doc","doc.layout == 'post'" %}
 {
   "pages": [
     {% for page in pages %}{
