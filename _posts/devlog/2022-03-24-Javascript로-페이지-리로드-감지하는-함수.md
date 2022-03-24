@@ -48,7 +48,7 @@ history.pushState.apply(history, arguments)
 (function(history){
     var pushState = history.pushState;
     history.pushState = function(state) {
-        resetBtn.click(); // 여기에 원하는 기능을 넣는다.
+        resetBtn.click(); // 여기에 원하는 기능을 넣습니다.
         return pushState.apply(history, arguments);
     };
 })(window.history);
