@@ -1,8 +1,8 @@
 ---
 layout: post
 title: 페이지 URL 변경을 감지하기
-# image:
-#   path: /assets/img/devlog/fusejs.png
+image:
+  path: /assets/img/thumbnail/220324.png
 description: >
   Vanilla JS로 페이지의 URL이 변경될 때 trigger되는 함수 만들기 (window.history 객체)
 hide_description: true
