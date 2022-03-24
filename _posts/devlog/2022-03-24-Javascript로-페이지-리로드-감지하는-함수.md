@@ -46,6 +46,7 @@ history.pushState.apply(history, arguments)
 [이 글을 참고하여](https://www.geeksforgeeks.org/how-to-get-history-changes-notification-via-history-pushstate-method/) 아래의 코드를 추가했습니다.
 
 ```javascript
+// file: "assets/js/searchBox.js
 // Monkey Patching window.history
 (function(history){
     var pushState = history.pushState;
