@@ -101,6 +101,16 @@ fetch('/assets/sitedata.json').then(response => {
     function fuse(pattern) {
         return [fuse_pages.search(pattern), fuse_documents.search(pattern)];
     }
+
+    // Monkey Patching window.history
+    (function(history){
+        var pushState = history.pushState;
+        history.pushState = function(state) {
+            resetBtn.click();
+            return pushState.apply(history, arguments);
+        };
+    })(window.history);
 }).catch(e => {
     console.log('Error: ', e.message);
 });
+

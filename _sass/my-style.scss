@@ -137,6 +137,18 @@ html[data-theme="dark"] {
     margin-left: 2rem;
 }
 
+code.language-plaintext.highlighter-rouge {
+    color: #cfcfcf;
+    background-color: #494949ce;
+    border-radius: 0.5rem;
+    margin-right: 0.2rem;
+    margin-left: 0.2rem;
+}
+
+.task-list-item-checkbox {
+    margin-right: 0.3rem !important;
+}
+
 .nav-btn,
 .nav-btn-bar
 {
