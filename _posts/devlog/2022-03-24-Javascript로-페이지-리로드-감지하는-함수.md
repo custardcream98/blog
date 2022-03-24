@@ -10,6 +10,8 @@ category: devlog
 tags: [Github, Github Pages, Blogs, JavaScript]
 hide_last_modified: true
 ---
+Thumbnail Made by [썸네일 메이커 v 1.2.1](https://wonkooklee.github.io/thumbnail_maker/)
+{:.figcaption}
 
 블로그 검색 창이 링크를 클릭할 때 닫히지 않는 문제를 해결하기 위해 `window.history`객체를 이용해 블로그의 URL이 바뀌는 것을 감지하는 함수를 코드에 추가했습니다.
 {:.lead}
