@@ -12,11 +12,11 @@ html[data-theme="light"] {
 
 html[data-theme="dark"] {
   --link-color: rgb(100, 210, 255);
-  --main-background-color: hsl(0, 0%, 20%);
+  --main-background-color: #121212;
   --main-text-color: hsl(0, 0%, 85%);
   --border-color: #307d99;
   --menu-text-color: #bbb;
-  --highlight-bg: rgba(161, 161, 161, 0.096);
+  --highlight-bg: rgba(185, 185, 185, 0.336);
   --code-text: #abb2bf;
   --gray-bg: rgba(255, 255, 255, 0.033);
   --applause-button-after: rgb(0, 160, 209);
@@ -93,7 +93,7 @@ html[data-theme="dark"] {
     max-height: calc(100vh - 5rem);
     overflow-y: auto;
     overscroll-behavior-y: none;
-    box-shadow: 0 0.5rem 5rem rgba(0,0,0,0.35);
+    box-shadow: 0 0.5rem 5rem rgba(131, 131, 131, 0.35);
     padding-bottom: 1rem;
 }
 

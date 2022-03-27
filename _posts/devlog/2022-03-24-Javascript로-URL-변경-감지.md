@@ -5,7 +5,6 @@ image:
   path: /assets/img/thumbnail/220324.png
 description: >
   Vanilla JS로 페이지의 URL이 변경될 때 trigger되는 함수 만들기 (window.history 객체)
-hide_description: true
 category: devlog
 tags: [Github, Github Pages, Blogs, JavaScript]
 hide_last_modified: true
@@ -27,7 +26,7 @@ Thumbnail Made by [썸네일 메이커 v 1.2.1](https://wonkooklee.github.io/thu
 
 ![window-history](/assets/img/devlog/window-history.png){:style="display:block; margin:auto;" width="70%"}
 
-`browser.history()`는 브라우저의 방문 목록을 저장하는 객체인데요, `window.history()`는 이를 참조해 윈도우의 방문 목록을 URL의 배열로 반환합니다. `history.back()`, `history.forward()` 등 사용자의 히스토리를 이용해 여러가지 조작을 할 수 있으며, `history stack`의 내용까지도 바꿀 수 있습니다. 참고로, URL 자체를 String 따위의 형식으로 가져오는건 보안상 문제로 불가능하다고 합니다.
+`browser.history()`는 브라우저의 방문 목록을 저장하는 객체인데요, `window.history()`는 이를 참조해 윈도우의 방문 목록을 URL의 배열로 반환합니다. `history.back()`, `history.forward()` 등 사용자의 히스토리를 이용해 여러가지 조작을 할 수 있으며, `history stack`의 내용까지도 바꿀 수 있습니다. 참고로, UNRL 자체를 String 따위의 형식으로 가져오는건 보안상 문제로 불가능하다고 합니다.
 
 조금 더 자세한 내용은 [여기를 참고해주세요.](https://linuxhint.com/window-history-object/)
 
