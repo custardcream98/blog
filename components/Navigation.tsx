@@ -1,4 +1,5 @@
 import React from "react";
+import Link from "next/link";
 import styled from "styled-components";
 
 const NavContainer = styled.div`
@@ -45,7 +46,7 @@ const Navigation = () => (
     <Nav>
       <Title>{'<Custard is="sweet"/>'}</Title>
       <NavMenu>
-        <a>블로그</a>
+        <Link href="/blog">블로그</Link>
         <a>이력서</a>
       </NavMenu>
     </Nav>
