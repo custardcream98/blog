@@ -1,11 +1,14 @@
 import React from "react";
 import Link from "next/link";
 import styled from "styled-components";
+import { useSetRecoilState, useRecoilValue } from "recoil";
+import { isDarkAtom } from "../lib/atoms";
+import { motion } from "framer-motion";
 
 const NavContainer = styled.div`
   height: 50px;
   width: 100vw;
-  box-shadow: inset 0 -1px 0 0 hsla(0, 0%, 100%, 0.1);
+  box-shadow: ${(props) => props.theme.navLineShadow};
   position: sticky;
   top: 0;
   z-index: 101;
@@ -33,6 +36,27 @@ const NavMenu = styled.div`
   }
 `;
 
+const DarkmodeSwitch = styled.div`
+  width: 50px;
+  height: 30px;
+  background-color: rgb(138, 138, 138);
+  display: flex;
+  justify-content: flex-start;
+  border-radius: 50px;
+  padding: 3px;
+  cursor: pointer;
+  &[data-isOn="true"] {
+    justify-content: flex-end;
+  }
+`;
+
+const DarkmodeSwitchHandle = styled(motion.div)`
+  width: 24px;
+  height: 24px;
+  background-color: white;
+  border-radius: 40px;
+`;
+
 const Title = styled.h1`
   background-clip: text;
   -webkit-background-clip: text;
@@ -41,16 +65,31 @@ const Title = styled.h1`
   font: 800 23px ${(props) => props.theme.codingFont};
 `;
 
-const Navigation = () => (
-  <NavContainer>
-    <Nav>
-      {/* <Title>{'<Custard is="sweet"/>'}</Title> */}
-      {/* <NavMenu>
+const spring = {
+  type: "spring",
+  stiffness: 700,
+  damping: 30,
+};
+
+const Navigation = () => {
+  const isDark = useRecoilValue(isDarkAtom);
+  const setDarkAtom = useSetRecoilState(isDarkAtom);
+  const toggleSwitch = () => setDarkAtom((prev) => !prev);
+
+  return (
+    <NavContainer>
+      <Nav>
+        <Title></Title>
+        {/* <NavMenu>
         <Link href="/posts">posts</Link>
         <a>이력서</a>
       </NavMenu> */}
-    </Nav>
-  </NavContainer>
-);
+        <DarkmodeSwitch data-isOn={isDark} onClick={toggleSwitch}>
+          <DarkmodeSwitchHandle layout transition={spring} />
+        </DarkmodeSwitch>
+      </Nav>
+    </NavContainer>
+  );
+};
 
 export default Navigation;

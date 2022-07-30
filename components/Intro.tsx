@@ -1,12 +1,11 @@
-import React from "react";
+import React, { useState } from "react";
 import styled from "styled-components";
-import { motion, useTransform, useMotionValue } from "framer-motion";
+import { motion } from "framer-motion";
+import { useRecoilValue } from "recoil";
+import { gradientTextColorSelector } from "../lib/atoms";
 
 const TitleSpan = styled(motion.span)`
   text-align: center;
-  /* background-clip: text;
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent; */
   font-weight: 900;
   font-size: 4rem;
   line-height: 1;
@@ -15,13 +14,11 @@ const TitleSpan = styled(motion.span)`
 
 const Title1 = styled(TitleSpan)`
   letter-spacing: -0.09rem;
-  /* background-image: linear-gradient(90deg, rgb(129, 1, 188), rgb(255, 15, 163)); */
 `;
 
 const Title2 = styled(TitleSpan)`
   letter-spacing: -0.13rem;
   font-size: 4.5rem;
-  /* background-image: linear-gradient(90deg, rgb(223, 56, 56), rgb(255, 200, 0)); */
 `;
 
 const TitleContainer = styled.div`
@@ -29,21 +26,10 @@ const TitleContainer = styled.div`
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  padding-top: 4rem;
+  padding-top: 3rem;
 `;
 
-// const titleContainerVar = {
-//   start: {
-//     backgroundImage:
-//       "linear-gradient(90deg, rgb(129, 1, 188), rgb(255, 15, 163))",
-//   },
-//   end: {
-//     backgroundImage: "rgb(255,255,255)",
-//     transition: { duration: 1, repeat: Infinity },
-//   },
-// };
-
-const title1Var = {
+const title1Var = (stringColor: string) => ({
   start: {
     backgroundClip: "text",
     WebkitBackgroundClip: "text",
@@ -57,7 +43,7 @@ const title1Var = {
     WebkitTextFillColor: "transparent",
     backgroundImage: [
       "linear-gradient(90deg, rgb(129, 1, 188), rgb(255, 15, 163))",
-      "linear-gradient(90deg, rgb(255, 255, 255), rgb(255, 255, 255))",
+      stringColor,
       "linear-gradient(90deg, rgb(129, 1, 188), rgb(255, 15, 163))",
     ],
     transition: {
@@ -66,24 +52,23 @@ const title1Var = {
       repeat: Infinity,
     },
   },
-};
+});
 
-const title2Var = {
+const title2Var = (stringColor: string) => ({
   start: {
     backgroundClip: "text",
     WebkitBackgroundClip: "text",
     WebkitTextFillColor: "transparent",
-    backgroundImage:
-      "linear-gradient(90deg, rgb(255, 255, 255), rgb(255, 255, 255))",
+    backgroundImage: stringColor,
   },
   end: {
     backgroundClip: "text",
     WebkitBackgroundClip: "text",
     WebkitTextFillColor: "transparent",
     backgroundImage: [
-      "linear-gradient(90deg, rgb(255, 255, 255), rgb(255, 255, 255))",
+      stringColor,
       "linear-gradient(90deg, rgb(223, 56, 56), rgb(255, 200, 0))",
-      "linear-gradient(90deg, rgb(255, 255, 255), rgb(255, 255, 255))",
+      stringColor,
     ],
     transition: {
       type: "linear",
@@ -91,35 +76,21 @@ const title2Var = {
       repeat: Infinity,
     },
   },
+});
+
+const Intro = () => {
+  const stringColor = useRecoilValue(gradientTextColorSelector);
+  return (
+    <>
+      <TitleContainer>
+        <Title1 variants={title1Var(stringColor)} initial="start" animate="end">
+          Dedicated to
+        </Title1>
+        <Title2 variants={title2Var(stringColor)} initial="start" animate="end">
+          CODING
+        </Title2>
+      </TitleContainer>
+    </>
+  );
 };
-
-// const gradient1 = useMotionValue(
-//   "linear-gradient(90deg, rgb(255, 255, 255), rgb(255, 255, 255))"
-// );
-// const gradient1Transform = useTransform(gradient1);
-
-//     [rgb(129, 1, 188), rgb(255,255,255)]
-
-//   )
-// const gradientWhite = {
-//   "background-image": "white",
-//   scalef": 1
-// }
-
-// const x = useMotionvalue(0)
-
-// const bgColor useTransform(x,[0,1])
-
-const Intro = () => (
-  <>
-    <TitleContainer>
-      <Title1 variants={title1Var} initial="start" animate="end">
-        Dedicated to
-      </Title1>
-      <Title2 variants={title2Var} initial="start" animate="end">
-        CODING
-      </Title2>
-    </TitleContainer>
-  </>
-);
 export default Intro;
