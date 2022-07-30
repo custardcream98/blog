@@ -3,6 +3,7 @@ import Head from "next/head";
 import Image from "next/image";
 import Navigation from "../components/Navigation";
 import Post from "../interfaces/post";
+import Intro from "../components/Intro";
 import { getAllPosts } from "../lib/api";
 
 type Props = {
@@ -10,11 +11,10 @@ type Props = {
 };
 
 const Home = ({ allPosts }: Props) => {
-  console.log(allPosts);
-
   return (
     <>
       <Navigation />
+      <Intro />
     </>
   );
 };

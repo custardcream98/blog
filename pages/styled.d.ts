@@ -8,5 +8,7 @@ declare module "styled-components" {
       accentColor: string;
       mainColor: string;
       mainGradient: string;
+      codingFont: string;
+      mainFont: string;
     }
 }

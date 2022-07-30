@@ -38,17 +38,17 @@ const Title = styled.h1`
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-image: ${(props) => props.theme.mainGradient};
-  font: 800 23px "Source Code Pro", monospace;
+  font: 800 23px ${(props) => props.theme.codingFont};
 `;
 
 const Navigation = () => (
   <NavContainer>
     <Nav>
-      <Title>{'<Custard is="sweet"/>'}</Title>
-      <NavMenu>
-        <Link href="/blog">블로그</Link>
+      {/* <Title>{'<Custard is="sweet"/>'}</Title> */}
+      {/* <NavMenu>
+        <Link href="/posts">posts</Link>
         <a>이력서</a>
-      </NavMenu>
+      </NavMenu> */}
     </Nav>
   </NavContainer>
 );

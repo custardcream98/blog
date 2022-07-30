@@ -18,6 +18,11 @@
     "react": "18.2.0",
     "react-dom": "18.2.0",
     "reading-time": "^1.5.0",
+    "recoil": "^0.7.4",
+    "rehype-highlight": "^5.0.2",
+    "rehype-stringify": "^9.0.3",
+    "remark": "^14.0.2",
+    "remark-rehype": "^10.1.0",
     "styled-components": "^5.3.5"
   },
   "devDependencies": {
