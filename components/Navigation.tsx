@@ -1,4 +1,5 @@
 import React from "react";
+import { useRouter } from "next/router";
 import Link from "next/link";
 import styled from "styled-components";
 import { useSetRecoilState, useRecoilValue } from "recoil";
@@ -44,8 +45,9 @@ const DarkmodeSwitch = styled.div`
   justify-content: flex-start;
   border-radius: 50px;
   padding: 3px;
+  margin-left: 20px;
   cursor: pointer;
-  &[data-isOn="true"] {
+  &[data-ison="true"] {
     justify-content: flex-end;
   }
 `;
@@ -76,17 +78,18 @@ const Navigation = () => {
   const setDarkAtom = useSetRecoilState(isDarkAtom);
   const toggleSwitch = () => setDarkAtom((prev) => !prev);
 
+  const router = useRouter();
+
   return (
     <NavContainer>
       <Nav>
-        <Title></Title>
-        {/* <NavMenu>
-        <Link href="/posts">posts</Link>
-        <a>이력서</a>
-      </NavMenu> */}
-        <DarkmodeSwitch data-isOn={isDark} onClick={toggleSwitch}>
-          <DarkmodeSwitchHandle layout transition={spring} />
-        </DarkmodeSwitch>
+        <Title>Custardcream</Title>
+        <NavMenu>
+          {router.route !== "/" ? <Link href="/">홈으로</Link> : null}
+          <DarkmodeSwitch data-ison={isDark} onClick={toggleSwitch}>
+            <DarkmodeSwitchHandle layout transition={spring} />
+          </DarkmodeSwitch>
+        </NavMenu>
       </Nav>
     </NavContainer>
   );

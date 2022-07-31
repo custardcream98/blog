@@ -1,17 +1,17 @@
 import React from "react";
 import { useRouter } from "next/router";
 import ErrorPage from "next/error";
-// import Container from "../../components/container";
-// import PostBody from "../../components/post-body";
-// import Header from "../../components/header";
-// import PostHeader from "../../components/post-header";
-// import Layout from "../../components/layout";
+import Navigation from "../../components/Navigation";
 import { getPostBySlug, getAllPosts } from "../../lib/api";
-// import PostTitle from "../../components/post-title";
 import Head from "next/head";
-// import { CMS_NAME } from "../../lib/constants";
 import markdownToHtml from "../../lib/markdownToHtml";
 import type PostType from "../../interfaces/post";
+import { useRecoilValue } from "recoil";
+import { isDarkAtom } from "../../lib/atoms";
+import { darkTheme, lightTheme } from "../theme";
+import { ThemeProvider } from "styled-components";
+import { GlobalStyle } from "..";
+import PostBody from "../../components/PostBody";
 
 type Props = {
   post: PostType;
@@ -20,11 +20,19 @@ type Props = {
 };
 
 export default function Post({ post, morePosts, preview }: Props) {
+  const isDark = useRecoilValue(isDarkAtom);
+
   const router = useRouter();
   if (!router.isFallback && !post?.slug) {
     return <ErrorPage statusCode={404} />;
   }
-  return <div dangerouslySetInnerHTML={{ __html: post.content }}></div>;
+  return (
+    <ThemeProvider theme={isDark ? darkTheme : lightTheme}>
+      <GlobalStyle />
+      <Navigation />
+      <PostBody content={post.content} />
+    </ThemeProvider>
+  );
 }
 
 type Params = {

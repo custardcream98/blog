@@ -9,10 +9,10 @@ function MyApp({ Component, pageProps }: AppProps) {
       <Head>
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link rel="preconnect" href="https://fonts.gstatic.com" />
-        <link
+        {/* <link
           rel="stylesheet"
           href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100;400;700&display=optional"
-        />
+        /> */}
         <link
           href="https://fonts.googleapis.com/css2?family=Source+Code+Pro:wght@600&display=swap"
           rel="stylesheet"

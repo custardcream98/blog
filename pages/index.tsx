@@ -7,7 +7,7 @@ import { isDarkAtom } from "../lib/atoms";
 import { getAllPosts } from "../lib/api";
 import Home from "../components/Home";
 
-const GlobalStyle = createGlobalStyle`
+export const GlobalStyle = createGlobalStyle`
     html, body, div, span, applet, object, iframe,
 h1, h2, h3, h4, h5, h6, p, blockquote, pre,
 a, abbr, acronym, address, big, cite, code,
