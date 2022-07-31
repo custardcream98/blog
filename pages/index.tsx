@@ -6,6 +6,7 @@ import Post from "../interfaces/post";
 import { isDarkAtom } from "../lib/atoms";
 import { getAllPosts } from "../lib/api";
 import Home from "../components/Home";
+import Footer from "../components/Footer";
 
 export const GlobalStyle = createGlobalStyle`
     html, body, div, span, applet, object, iframe,
@@ -80,6 +81,7 @@ const Index = ({ allPosts }: Props) => {
     <ThemeProvider theme={isDark ? darkTheme : lightTheme}>
       <GlobalStyle />
       <Home allPosts={allPosts} />
+      <Footer />
     </ThemeProvider>
   );
 };

@@ -12,6 +12,7 @@ import { darkTheme, lightTheme } from "../../lib/theme";
 import { ThemeProvider } from "styled-components";
 import { GlobalStyle } from "..";
 import PostBody from "../../components/PostBody";
+import Footer from "../../components/Footer";
 
 type Props = {
   post: PostType;
@@ -31,6 +32,7 @@ export default function Post({ post, morePosts, preview }: Props) {
       <GlobalStyle />
       <Navigation />
       <PostBody content={post.content} />
+      <Footer />
     </ThemeProvider>
   );
 }

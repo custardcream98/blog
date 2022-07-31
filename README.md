@@ -1,3 +1,7 @@
+# [블로그 링크](https://custardcream.netlify.app/)
+
+Netlify로 deploy되었습니다!!
+
 ## React.js로 100% 나만의 블로그를 개발해보자
 
 이전까지 방치돼있던 제 jekyll을 이용한 블로그를 싹 지우고, 완전히 처음부터 모든 것을 만들어 보려 합니다.
