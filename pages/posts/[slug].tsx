@@ -8,7 +8,7 @@ import markdownToHtml from "../../lib/markdownToHtml";
 import type PostType from "../../interfaces/post";
 import { useRecoilValue } from "recoil";
 import { isDarkAtom } from "../../lib/atoms";
-import { darkTheme, lightTheme } from "../theme";
+import { darkTheme, lightTheme } from "../../lib/theme";
 import { ThemeProvider } from "styled-components";
 import { GlobalStyle } from "..";
 import PostBody from "../../components/PostBody";

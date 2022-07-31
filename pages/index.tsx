@@ -1,7 +1,7 @@
 import React from "react";
 import { useRecoilValue } from "recoil";
 import { ThemeProvider, createGlobalStyle } from "styled-components";
-import { lightTheme, darkTheme } from "./theme";
+import { lightTheme, darkTheme } from "../lib/theme";
 import Post from "../interfaces/post";
 import { isDarkAtom } from "../lib/atoms";
 import { getAllPosts } from "../lib/api";
