@@ -60,10 +60,11 @@ const DarkmodeSwitchHandle = styled(motion.div)`
 `;
 
 const Title = styled.h1`
-  background-clip: text;
+  /* background-clip: text;
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
-  background-image: ${(props) => props.theme.mainGradient};
+  background-image: ${(props) => props.theme.mainGradient}; */
+  color: rgb(255, 255, 255);
   font: 800 23px ${(props) => props.theme.codingFont};
 `;
 
