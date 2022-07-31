@@ -1,10 +1,11 @@
 import React from "react";
 import { useRouter } from "next/router";
 import Link from "next/link";
-import styled from "styled-components";
+import styled, { useTheme } from "styled-components";
 import { useSetRecoilState, useRecoilValue } from "recoil";
-import { isDarkAtom } from "../lib/atoms";
 import { motion } from "framer-motion";
+import { isDarkAtom } from "../lib/atoms";
+import BlogIcon from "./BlogIcon";
 
 const NavContainer = styled.div`
   height: 50px;
@@ -59,15 +60,23 @@ const DarkmodeSwitchHandle = styled(motion.div)`
   border-radius: 40px;
 `;
 
-const Title = styled.h1`
+const Title = styled.span`
   /* background-clip: text;
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-image: ${(props) => props.theme.mainGradient}; */
-  color: rgb(255, 255, 255);
+  color: ${(props) => props.theme.textColor};
   font: 800 23px ${(props) => props.theme.codingFont};
 `;
 
+const LogoTitle = styled.div`
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  span {
+    margin-left: 7px;
+  }
+`;
 const spring = {
   type: "spring",
   stiffness: 700,
@@ -81,10 +90,15 @@ const Navigation = () => {
 
   const router = useRouter();
 
+  const theme = useTheme();
+
   return (
     <NavContainer>
       <Nav>
-        <Title>Custardcream</Title>
+        <LogoTitle>
+          <BlogIcon color={theme.textColor} size={1} />
+          <Title>Custardcream</Title>
+        </LogoTitle>
         <NavMenu>
           {router.route !== "/" ? <Link href="/">홈으로</Link> : null}
           <DarkmodeSwitch data-ison={isDark} onClick={toggleSwitch}>
