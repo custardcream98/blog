@@ -7,9 +7,12 @@ import { gradientTextColorSelector } from "../lib/atoms";
 const TitleSpan = styled(motion.span)`
   text-align: center;
   font-weight: 900;
-  font-size: 4rem;
+  font-size: 13vw;
   line-height: 1;
   font: 800 ${(props) => props.theme.titleFont};
+  @media (min-width: 800px) {
+    font-size: 104px;
+  }
 `;
 
 const Title1 = styled(TitleSpan)`
@@ -18,7 +21,6 @@ const Title1 = styled(TitleSpan)`
 
 const Title2 = styled(TitleSpan)`
   letter-spacing: -0.13rem;
-  font-size: 4.5rem;
 `;
 
 const TitleContainer = styled.div`
