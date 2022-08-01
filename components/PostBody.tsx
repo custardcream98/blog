@@ -10,7 +10,7 @@ const MarkdownContainer = styled.div`
 const MardownBody = styled.div`
   -ms-text-size-adjust: 100%;
   -webkit-text-size-adjust: 100%;
-  margin: 0;
+  margin: 2rem 0;
   color: ${(props) => props.theme.textColor};
   background-color: ${(props) => props.theme.bgColor};
   font-size: 0.85em;
@@ -103,8 +103,8 @@ const MardownBody = styled.div`
   blockquote {
     margin: 0;
     padding: 0 1em;
-    color: #8b949e;
-    border-left: 0.25em solid #30363d;
+    color: ${(props) => props.theme.textColor};
+    border-left: 0.25em solid #f9dc00;
   }
   code,
   tt {
@@ -115,6 +115,30 @@ const MardownBody = styled.div`
     font-size: 85%;
     background-color: rgba(110, 118, 129, 0.4);
     border-radius: 6px;
+  }
+
+  /* pre code {
+    font-size: 100%;
+    display: inline;
+    max-width: auto;
+    padding: 0;
+    margin: 0;
+    overflow: visible;
+    line-height: inherit;
+    word-wrap: normal;
+    background-color: transparent;
+    border: 0;
+  } */
+
+  div > pre > code {
+    display: grid;
+    background-color: transparent;
+  }
+
+  div[data-rehype-pretty-code-fragment] {
+    padding: 0.7rem;
+    margin: 0.7rem 0;
+    background-color: #1e2228;
   }
 `;
 
