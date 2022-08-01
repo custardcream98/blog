@@ -1,5 +1,7 @@
 import React from "react";
 import { useRouter } from "next/router";
+import { BsFillMoonFill } from "react-icons/bs";
+import { ImSun } from "react-icons/im";
 import Link from "next/link";
 import styled, { useTheme } from "styled-components";
 import { useSetRecoilState, useRecoilValue } from "recoil";
@@ -41,7 +43,7 @@ const NavMenu = styled.div`
 const DarkmodeSwitch = styled.div`
   width: 50px;
   height: 30px;
-  background-color: rgb(138, 138, 138);
+  background-color: rgb(189, 189, 189);
   display: flex;
   justify-content: flex-start;
   border-radius: 50px;
@@ -58,6 +60,10 @@ const DarkmodeSwitchHandle = styled(motion.div)`
   height: 24px;
   background-color: white;
   border-radius: 40px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 4px;
 `;
 
 const Title = styled.span`
@@ -66,10 +72,13 @@ const Title = styled.span`
   -webkit-text-fill-color: transparent;
   background-image: ${(props) => props.theme.mainGradient}; */
   color: ${(props) => props.theme.textColor};
-  font: 800 23px ${(props) => props.theme.codingFont};
+  font: 800 20px ${(props) => props.theme.codingFont};
+  @media (max-width: 800px) {
+    visibility: hidden;
+  }
 `;
 
-const LogoTitle = styled.div`
+const LogoTitle = styled.a`
   display: flex;
   justify-content: flex-start;
   align-items: center;
@@ -95,14 +104,20 @@ const Navigation = () => {
   return (
     <NavContainer>
       <Nav>
-        <LogoTitle>
+        <LogoTitle href="/">
           <BlogIcon color={theme.textColor} size={1} />
           <Title>Custardcream</Title>
         </LogoTitle>
         <NavMenu>
-          {router.route !== "/" ? <Link href="/">홈으로</Link> : null}
+          {/* {router.route !== "/" ? <Link href="/">홈으로</Link> : null} */}
           <DarkmodeSwitch data-ison={isDark} onClick={toggleSwitch}>
-            <DarkmodeSwitchHandle layout transition={spring} />
+            <DarkmodeSwitchHandle layout transition={spring}>
+              {isDark ? (
+                <BsFillMoonFill color="#e5c704" />
+              ) : (
+                <ImSun color="#e5c704" />
+              )}
+            </DarkmodeSwitchHandle>
           </DarkmodeSwitch>
         </NavMenu>
       </Nav>
