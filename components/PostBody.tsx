@@ -139,6 +139,8 @@ const MardownBody = styled.div`
     padding: 0.7rem;
     margin: 0.7rem 0;
     background-color: #1e2228;
+    overflow: auto;
+    overflow-y: hidden;
   }
 `;
 
