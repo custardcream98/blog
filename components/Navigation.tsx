@@ -78,10 +78,13 @@ const Title = styled.span`
   }
 `;
 
-const LogoTitle = styled.a`
+const LogoTitle = styled.span`
   display: flex;
   justify-content: flex-start;
   align-items: center;
+  &:hover {
+    cursor: pointer;
+  }
   span {
     margin-left: 7px;
   }
@@ -104,10 +107,12 @@ const Navigation = () => {
   return (
     <NavContainer>
       <Nav>
-        <LogoTitle href="/">
-          <BlogIcon color={theme.textColor} size={1} />
-          <Title>Custardcream</Title>
-        </LogoTitle>
+        <Link href="/">
+          <LogoTitle>
+            <BlogIcon color={theme.textColor} size={1} />
+            <Title>Custardcream</Title>
+          </LogoTitle>
+        </Link>
         <NavMenu>
           {/* {router.route !== "/" ? <Link href="/">홈으로</Link> : null} */}
           <DarkmodeSwitch data-ison={isDark} onClick={toggleSwitch}>
