@@ -45,7 +45,7 @@ const DarkmodeSwitch = styled.div`
   justify-content: flex-start;
   border-radius: 50px;
   padding: 3px;
-  margin: 0 0.25rem;
+  margin-left: 0.25rem;
   cursor: pointer;
   &[data-ison="true"] {
     justify-content: flex-end;
