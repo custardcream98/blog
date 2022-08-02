@@ -120,6 +120,9 @@ const Navigation = () => {
           </LogoTitle>
         </Link>
         <NavMenu>
+          <Link href="/#Posts_Title">
+            <NavItemLinkDecorated>Posts</NavItemLinkDecorated>
+          </Link>
           <Link href="/about">
             <NavItemLinkDecorated>About</NavItemLinkDecorated>
           </Link>

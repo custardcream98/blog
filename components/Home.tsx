@@ -21,7 +21,7 @@ const Home = ({ allPosts }: Props) => {
     <Layout>
       <Intro />
       <Container>
-        <Title>Posts</Title>
+        <Title id="Posts_Title">Posts</Title>
         <section>
           {React.Children.toArray(
             allPosts.map((post) => (
