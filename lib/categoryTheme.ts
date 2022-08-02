@@ -10,7 +10,7 @@ const categoryTheme:ICategoryTheme = {
   TypeScript: { backgroundColor: "#0707ff4e", borderColor: "#0707ff" },
   Python: { backgroundColor: "#ffc9074e", borderColor: "#ffc907" },
   "Coding Test": { backgroundColor: "#ff076e4e", borderColor: "#ff076e" },
-  "Next.js": { backgroundColor: "white", borderColor: "white" },
+  "Next.js": { backgroundColor: "#ffffff4e", borderColor: "white" },
   JavaScript: {backgroundColor: "#ffea074e", borderColor: "#ffea07"}
 }
 
