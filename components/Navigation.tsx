@@ -15,7 +15,7 @@ const NavContainer = styled.div`
   width: 100vw;
   box-shadow: ${(props) => props.theme.navLineShadow};
   position: sticky;
-  top: 0;
+  top: -1px;
   z-index: 101;
   display: flex;
   justify-content: center;
