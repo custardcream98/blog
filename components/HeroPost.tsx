@@ -3,20 +3,15 @@ import Link from "next/link";
 import styled from "styled-components";
 import { LinkDecorated, Date } from "./styledComponents";
 
-const Container = styled.div`
+const ContentContainer = styled.div`
   display: flex;
   width: 100%;
   align-items: flex-start;
-
   p {
-    flex: 2.5 1 0;
+    flex: 1.5 1 0;
     font-size: 0.9rem;
     font-weight: 300;
     line-height: 1.5;
-  }
-
-  @media (min-width: 800px) {
-    margin-bottom: 1rem;
   }
 `;
 
@@ -25,28 +20,23 @@ const Title = styled.h1`
   flex-direction: column;
   font-size: 1rem;
   line-height: 1.3;
+  margin-right: 1rem;
+  flex: 1 1 0;
 `;
 
-const TitleContainer = styled.div`
-  margin-right: 1rem;
-  display: flex;
-  flex: 1 1 0;
-  div {
-    margin: 1rem 2vw;
-    height: auto;
-    width: 0.1rem;
-    background-color: ${(props) => props.theme.textColor};
-  }
+const Separator = styled.div`
+  height: 1.3rem;
+  width: 60%;
+  border-bottom: 3px solid #25282c;
+  margin-bottom: 1.3rem;
+  align-self: flex-end;
+`;
 
-  @media (max-width: 800px) {
-    flex-direction: column;
-    div {
-      margin: 1rem 1rem;
-      height: 0.1rem;
-      width: auto;
-      background-color: ${(props) => props.theme.textColor};
-    }
-  }
+const Container = styled.div`
+  display: flex;
+  width: 100%;
+  flex-direction: column;
+  align-items: center;
 `;
 
 type Props = {
@@ -60,16 +50,16 @@ type Props = {
 const HeroPost = ({ title, coverImage, date, excerpt, slug }: Props) => {
   return (
     <Container>
-      <TitleContainer>
+      <ContentContainer>
         <Title>
           <Link href={`/posts/${slug}`}>
             <LinkDecorated>{title}</LinkDecorated>
           </Link>
           <Date>{date}</Date>
         </Title>
-        <div></div>
-      </TitleContainer>
-      <p>{excerpt}</p>
+        <p>{excerpt}</p>
+      </ContentContainer>
+      <Separator />
     </Container>
   );
 };
