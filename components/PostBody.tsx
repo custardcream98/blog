@@ -1,12 +1,6 @@
 import React from "react";
 import styled from "styled-components";
 
-const MarkdownContainer = styled.div`
-  width: 85vw;
-  max-width: 800px;
-  margin: 0 auto;
-`;
-
 const MardownBody = styled.div`
   -ms-text-size-adjust: 100%;
   -webkit-text-size-adjust: 100%;
@@ -148,12 +142,8 @@ type Props = {
   content: string;
 };
 
-const PostBody = ({ content }: Props) => {
-  return (
-    <MarkdownContainer>
-      <MardownBody dangerouslySetInnerHTML={{ __html: content }} />
-    </MarkdownContainer>
-  );
-};
+const PostBody = ({ content }: Props) => (
+  <MardownBody dangerouslySetInnerHTML={{ __html: content }} />
+);
 
 export default PostBody;

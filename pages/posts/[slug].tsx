@@ -1,4 +1,5 @@
 import React from "react";
+import styled from "styled-components";
 import { useRouter } from "next/router";
 import ErrorPage from "next/error";
 import Navigation from "../../components/Navigation";
@@ -13,6 +14,13 @@ import { ThemeProvider } from "styled-components";
 import { GlobalStyle } from "..";
 import PostBody from "../../components/PostBody";
 import Footer from "../../components/Footer";
+import PostTitle from "../../components/PostTitle";
+
+const Container = styled.div`
+  width: 85vw;
+  max-width: 800px;
+  margin: 0 auto;
+`;
 
 type Props = {
   post: PostType;
@@ -31,7 +39,10 @@ export default function Post({ post, morePosts, preview }: Props) {
     <ThemeProvider theme={isDark ? darkTheme : lightTheme}>
       <GlobalStyle />
       <Navigation />
-      <PostBody content={post.content} />
+      <Container>
+        <PostTitle coverImage={post.coverImage} title={post.title} />
+        <PostBody content={post.content} />
+      </Container>
       <Footer />
     </ThemeProvider>
   );
