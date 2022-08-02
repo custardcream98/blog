@@ -80,6 +80,22 @@ const title2Var = (stringColor: string) => ({
   },
 });
 
+export const Container = styled.div`
+  width: 70vw;
+  max-width: 600px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin: 0 auto auto;
+`;
+
+const IntroParagraph = styled.p`
+  padding: 3rem 0;
+  line-height: 1.75;
+  font-size: 0.8rem;
+  color: ${(props) => props.theme.subTextColor};
+`;
+
 const Intro = () => {
   const stringColor = useRecoilValue(gradientTextColorSelector);
   return (
@@ -92,6 +108,12 @@ const Intro = () => {
           CODING
         </Title2>
       </TitleContainer>
+      <Container>
+        <IntroParagraph>
+          예쁘고 간결한 것을 정말 좋아하는 개발자 박시우의 블로그입니다. 공부한
+          것들, 공유하고 싶은 내용을 올립니다.
+        </IntroParagraph>
+      </Container>
     </>
   );
 };
