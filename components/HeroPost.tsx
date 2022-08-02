@@ -1,7 +1,7 @@
 import React from "react";
 import Link from "next/link";
 import styled from "styled-components";
-import { LinkDecorated } from "./styledComponents";
+import { LinkDecorated, Date } from "./styledComponents";
 
 const Container = styled.div`
   display: flex;
@@ -47,13 +47,6 @@ const TitleContainer = styled.div`
       background-color: ${(props) => props.theme.textColor};
     }
   }
-`;
-
-const Date = styled.span`
-  margin-top: 0.2rem;
-  font-weight: 300;
-  font-size: 0.8rem;
-  color: ${(props) => props.theme.subTextColor};
 `;
 
 type Props = {
