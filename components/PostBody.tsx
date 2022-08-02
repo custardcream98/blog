@@ -4,7 +4,7 @@ import styled from "styled-components";
 const MardownBody = styled.div`
   -ms-text-size-adjust: 100%;
   -webkit-text-size-adjust: 100%;
-  width: inherit;
+  width: 100%;
   margin: 2rem 0;
   color: ${(props) => props.theme.textColor};
   background-color: ${(props) => props.theme.bgColor};
