@@ -28,6 +28,7 @@ time, mark, audio, video {
   font-size: 100%;
   font: inherit;
   vertical-align: baseline;
+  -webkit-tap-highlight-color: rgba(0,0,0,0);
 }
 /* HTML5 display-role reset for older browsers */
 article, aside, details, figcaption, figure,
