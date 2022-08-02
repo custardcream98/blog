@@ -35,10 +35,6 @@ const NavMenu = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
-
-  a {
-    margin-left: 20px;
-  }
 `;
 
 const DarkmodeSwitch = styled.div`
@@ -49,7 +45,7 @@ const DarkmodeSwitch = styled.div`
   justify-content: flex-start;
   border-radius: 50px;
   padding: 3px;
-  margin-left: 20px;
+  margin: 0 0.25rem;
   cursor: pointer;
   &[data-ison="true"] {
     justify-content: flex-end;
@@ -93,6 +89,7 @@ const LogoTitle = styled.span`
 
 const NavItemLinkDecorated = styled(LinkDecorated)`
   font-size: 0.8rem;
+  margin: 0 0.25rem;
 `;
 
 const spring = {
