@@ -1,7 +1,8 @@
-import React, { useEffect } from "react";
+import React from "react";
 import styled from "styled-components";
 import Image from "next/image";
 import CategoryBadge from "./CategoryBadge";
+import imageLoader from "../lib/imageLoader";
 
 const TitleContainer = styled.div`
   padding-top: 2rem;
@@ -18,6 +19,7 @@ const Title = styled.h1`
 const BadgeContainer = styled.div`
   display: flex;
   flex-wrap: wrap;
+
   margin: 0.5rem 0;
 `;
 
@@ -29,14 +31,17 @@ type Props = {
 
 const PostTitle = ({ coverImage, title, category }: Props) => (
   <TitleContainer>
-    {coverImage && <Image src={coverImage} layout="responsive" />}
+    {coverImage && (
+      <Image src={coverImage} layout="responsive" loader={imageLoader} />
+    )}
     <Title>{title}</Title>
-    <BadgeContainer>
-      {category &&
-        React.Children.toArray(
+    {category && (
+      <BadgeContainer>
+        {React.Children.toArray(
           category.map((keyword) => <CategoryBadge category={keyword} />)
         )}
-    </BadgeContainer>
+      </BadgeContainer>
+    )}
   </TitleContainer>
 );
 
