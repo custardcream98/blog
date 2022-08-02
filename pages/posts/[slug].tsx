@@ -21,6 +21,7 @@ export default function Post({ post }: Props) {
           coverImage={post.coverImage}
           title={post.title}
           category={post.category}
+          date={post.date}
         />
         <PostBody content={post.content} />
       </Container>
