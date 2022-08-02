@@ -7,9 +7,11 @@ import { Container } from "./styledComponents";
 import Layout from "./Layout";
 
 const Title = styled.h1`
-  margin-bottom: 1rem;
-  padding-bottom: 0.3rem;
+  margin-bottom: 2rem;
+  padding-bottom: 0.2rem;
   border-bottom: 3px solid #3a3e43;
+  font-size: 1.25rem;
+  font-weight: 600;
 `;
 
 type Props = {
@@ -21,7 +23,7 @@ const Home = ({ allPosts }: Props) => {
     <Layout>
       <Intro />
       <Container>
-        <Title id="Posts_Title">Posts</Title>
+        <Title id="Posts_Title">{"<Posts />"}</Title>
         <section>
           {React.Children.toArray(
             allPosts.map((post) => (
