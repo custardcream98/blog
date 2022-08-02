@@ -15,12 +15,7 @@ import { GlobalStyle } from "..";
 import PostBody from "../../components/PostBody";
 import Footer from "../../components/Footer";
 import PostTitle from "../../components/PostTitle";
-
-const Container = styled.div`
-  width: 85vw;
-  max-width: 800px;
-  margin: 0 auto;
-`;
+import { Container } from "../../components/styledComponents";
 
 type Props = {
   post: PostType;
