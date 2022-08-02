@@ -10,7 +10,6 @@ import { isDarkAtom } from "../lib/atoms";
 import BlogIcon from "./BlogIcon";
 import { LinkDecorated } from "./styledComponents";
 
-
 const NavContainer = styled.div`
   height: 50px;
   width: 100vw;
@@ -92,6 +91,10 @@ const LogoTitle = styled.span`
   }
 `;
 
+const NavItemLinkDecorated = styled(LinkDecorated)`
+  font-size: 0.8rem;
+`;
+
 const spring = {
   type: "spring",
   stiffness: 700,
@@ -117,7 +120,9 @@ const Navigation = () => {
           </LogoTitle>
         </Link>
         <NavMenu>
-          <Link href="/"><LinkDecorated>홈으로</LinkDecorated></Link>
+          <Link href="/about">
+            <NavItemLinkDecorated>About</NavItemLinkDecorated>
+          </Link>
           <DarkmodeSwitch data-ison={isDark} onClick={toggleSwitch}>
             <DarkmodeSwitchHandle layout transition={spring}>
               {isDark ? (
