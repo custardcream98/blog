@@ -1,6 +1,6 @@
-# [블로그 링크](https://custardcream.netlify.app/)
+# [블로그 링크](https://custardcream.vercel.app/)
 
-Netlify로 deploy되었습니다!!
+Vercel로 deploy되었습니다!!
 
 ## React.js로 100% 나만의 블로그를 개발해보자
 
