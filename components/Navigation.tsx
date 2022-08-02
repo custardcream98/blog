@@ -8,6 +8,8 @@ import { useSetRecoilState, useRecoilValue } from "recoil";
 import { motion } from "framer-motion";
 import { isDarkAtom } from "../lib/atoms";
 import BlogIcon from "./BlogIcon";
+import { LinkDecorated } from "./styledComponents";
+
 
 const NavContainer = styled.div`
   height: 50px;
@@ -89,6 +91,7 @@ const LogoTitle = styled.span`
     margin-left: 7px;
   }
 `;
+
 const spring = {
   type: "spring",
   stiffness: 700,
@@ -114,7 +117,7 @@ const Navigation = () => {
           </LogoTitle>
         </Link>
         <NavMenu>
-          {/* {router.route !== "/" ? <Link href="/">홈으로</Link> : null} */}
+          <Link href="/"><LinkDecorated>홈으로</LinkDecorated></Link>
           <DarkmodeSwitch data-ison={isDark} onClick={toggleSwitch}>
             <DarkmodeSwitchHandle layout transition={spring}>
               {isDark ? (
