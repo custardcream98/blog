@@ -25,7 +25,6 @@ export default class MyDocument extends Document {
             href="https://fonts.googleapis.com/css2?family=Poppins:wght@700&display=swap"
             rel="stylesheet"
           />
-          <title>Custardcream의 삽질log</title>
         </Head>
         <body>
           <Main />

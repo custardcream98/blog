@@ -1,10 +1,9 @@
 import React from "react";
-import styled from "styled-components";
-import Navigation from "../components/Navigation";
 import Intro from "../components/Intro";
 import Post from "../interfaces/post";
 import HeroPost from "./HeroPost";
 import { Container } from "./styledComponents";
+import Layout from "./Layout";
 
 type Props = {
   allPosts: Post[];
@@ -12,8 +11,7 @@ type Props = {
 
 const Home = ({ allPosts }: Props) => {
   return (
-    <>
-      <Navigation />
+    <Layout>
       <Intro />
       <Container>
         <section>
@@ -30,7 +28,7 @@ const Home = ({ allPosts }: Props) => {
           )}
         </section>
       </Container>
-    </>
+    </Layout>
   );
 };
 
