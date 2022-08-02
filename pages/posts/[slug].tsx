@@ -10,16 +10,18 @@ import check404 from "../../lib/check404";
 
 type Props = {
   post: PostType;
-  morePosts: PostType[];
-  preview?: boolean;
 };
 
-export default function Post({ post, morePosts, preview }: Props) {
+export default function Post({ post }: Props) {
   check404();
   return (
     <Layout title={post.slug}>
       <Container>
-        <PostTitle coverImage={post.coverImage} title={post.title} />
+        <PostTitle
+          coverImage={post.coverImage}
+          title={post.title}
+          category={post.category}
+        />
         <PostBody content={post.content} />
       </Container>
     </Layout>
@@ -37,10 +39,10 @@ export async function getStaticProps({ params }: Params) {
     "title",
     "date",
     "slug",
-    "author",
     "content",
     "ogImage",
     "coverImage",
+    "category",
   ]);
 
   const content = await markdownToHtml(post.content || "");

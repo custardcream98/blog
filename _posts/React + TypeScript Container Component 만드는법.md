@@ -2,6 +2,7 @@
 title: "React + TypeScript Container Component 만드는법"
 excerpt: "React.js에서 TypeScript를 사용할 때 다른 컴포넌트를 감싸는 컴포넌트는 어떻게 선언할 수 있을까요?"
 date: "2022-08-02"
+category: ["React.js", "TypeScript"]
 ---
 
 > `React.js`에서 TypeScript를 사용할 때 다른 컴포넌트를 감싸는 컴포넌트는 어떻게 선언할 수 있을까요?
