@@ -101,6 +101,17 @@ const spring = {
   damping: 30,
 };
 
+type NavItemProps = {
+  href: string;
+  content: string;
+};
+
+const NavItem = ({ href, content }: NavItemProps) => (
+  <Link href={href}>
+    <NavItemLinkDecorated>{content}</NavItemLinkDecorated>
+  </Link>
+);
+
 const Navigation = () => {
   const isDark = useRecoilValue(isDarkAtom);
   const setDarkAtom = useSetRecoilState(isDarkAtom);
@@ -120,12 +131,8 @@ const Navigation = () => {
           </LogoTitle>
         </Link>
         <NavMenu>
-          <Link href="/#Posts_Title">
-            <NavItemLinkDecorated>Posts</NavItemLinkDecorated>
-          </Link>
-          <Link href="/about">
-            <NavItemLinkDecorated>About</NavItemLinkDecorated>
-          </Link>
+          <NavItem href="/#Posts_Title" content="Posts" />
+          <NavItem href="/about" content="About" />
           <DarkmodeSwitch data-ison={isDark} onClick={toggleSwitch}>
             <DarkmodeSwitchHandle layout transition={spring}>
               {isDark ? (
