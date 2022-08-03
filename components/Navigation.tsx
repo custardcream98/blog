@@ -1,5 +1,4 @@
 import React from "react";
-import { useRouter } from "next/router";
 import { BsFillMoonFill } from "react-icons/bs";
 import { ImSun } from "react-icons/im";
 import Link from "next/link";
@@ -69,9 +68,10 @@ const Title = styled.span`
   -webkit-text-fill-color: transparent;
   background-image: ${(props) => props.theme.mainGradient}; */
   color: ${(props) => props.theme.textColor};
-  font: 800 20px ${(props) => props.theme.codingFont};
+  font: 800 1rem ${(props) => props.theme.codingFont};
+  letter-spacing: -0.03rem;
   @media (max-width: 800px) {
-    visibility: hidden;
+    font-size: 0.7rem;
   }
 `;
 
@@ -113,8 +113,6 @@ const Navigation = () => {
   const isDark = useRecoilValue(isDarkAtom);
   const setDarkAtom = useSetRecoilState(isDarkAtom);
   const toggleSwitch = () => setDarkAtom((prev) => !prev);
-
-  const router = useRouter();
 
   const theme = useTheme();
 
