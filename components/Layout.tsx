@@ -83,7 +83,7 @@ const Layout = ({ children, title }: Props) => {
     <ThemeProvider theme={isDark ? darkTheme : lightTheme}>
       <GlobalStyle />
       <Head>
-        <title>{title ?? "Custardcream의 삽질log"}</title>
+        <title>{title ?? "Custardcream 개발 블로그"}</title>
       </Head>
       <Navigation />
       {children}
