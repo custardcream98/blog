@@ -97,9 +97,15 @@ const MardownBody = styled.div`
   }
   blockquote {
     margin: 0;
-    padding: 0 1em;
-    color: ${(props) => props.theme.textColor};
-    border-left: 0.25em solid #f9dc00;
+    padding: 0.6rem 0.6rem 0.2rem 0.9rem;
+    color: white;
+    border-left: 0.3rem solid #f9bf00;
+    font-style: italic;
+    font-size: 0.85rem;
+    font-weight: 400;
+    background-color: #4b4b4b;
+  }
+  .stacked {
   }
   code,
   tt {
@@ -134,7 +140,7 @@ const MardownBody = styled.div`
     padding: 0.7rem;
     margin: 0.7rem 0;
     background-color: #1e2228;
-    overflow: auto;
+    overflow: scroll;
     overflow-y: hidden;
   }
 `;
