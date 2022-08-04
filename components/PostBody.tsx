@@ -156,6 +156,13 @@ const MardownBody = styled.div`
     margin: auto;
     align-self: center;
   }
+
+  ul > li::before {
+    content: "👉";
+    display: inline-block;
+    vertical-align: middle;
+    padding: 0 0.4rem 0.2rem 0.3rem;
+  }
 `;
 
 type Props = {
