@@ -76,7 +76,7 @@ const EditTextarea = styled.textarea`
   border: 1px solid ${(props) => props.theme.textColor};
   outline-width: 0;
   font-family: ${(props) => props.theme.mainFont};
-  margin-left: !important 1rem;
+  /* margin-left: !important 1rem; */
   font-size: 0.9rem;
 `;
 
@@ -153,13 +153,13 @@ type Props = {
 };
 
 const dateToString = (date: Date) =>
-  `${date.getFullYear()}-${date.getMonth().toString().padStart(2, "0")}-${date
-    .getDay()
+  `${date.getFullYear()}-${(date.getMonth() + 1)
     .toString()
-    .padStart(2, "0")}`;
+    .padStart(2, "0")}-${date.getDay().toString().padStart(2, "0")}`;
 
 const CommentCard = ({ comment, title }: Props) => {
   const [isEditing, setIsEditing] = useState(false);
+  const [isDeleting, setIsDeleting] = useState(false);
   const [isPasswordCorrect, setIsPasswordCorrect] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
   const [password, setPassword] = useState("");
@@ -183,11 +183,12 @@ const CommentCard = ({ comment, title }: Props) => {
         setIsEditing(true);
         break;
       case "delete":
-        await deleteDoc(commentDocRef);
+        setIsDeleting(true);
         break;
       case "cancel":
         setIsEditing(false);
         setIsPasswordCorrect(false);
+        setIsDeleting(false);
         setPassword("");
     }
   };
@@ -211,20 +212,27 @@ const CommentCard = ({ comment, title }: Props) => {
 
     switch (event.target.name) {
       case "password":
-        if (password === comment.password) {
-          setIsPasswordCorrect(true);
+        if (isEditing) {
+          if (password === comment.password) {
+            setIsPasswordCorrect(true);
+          } else {
+            setIsPasswordCorrect(false);
+            setIsEditing(false);
+          }
         } else {
-          setIsPasswordCorrect(false);
-          setIsEditing(false);
+          await deleteDoc(commentDocRef);
+          setIsDeleting(false);
         }
         setPassword("");
         break;
       case "comment":
+        setIsLoading(true);
         if (comment.comment !== commentText) {
           await updateDoc(commentDocRef, { comment: commentText });
         }
         setIsPasswordCorrect(false);
         setIsEditing(false);
+        setIsLoading(true);
         break;
     }
   };
@@ -276,6 +284,21 @@ const CommentCard = ({ comment, title }: Props) => {
             </BtnContainer>
           </PasswordForm>
         )
+      ) : isDeleting ? (
+        <PasswordForm onSubmit={onSubmit} name="password">
+          <PasswordInput
+            name="password"
+            type="pasword"
+            placeholder="비밀번호"
+            onChange={onChange}
+          />
+          <BtnContainer>
+            <CancelEditBtn name="cancel" onClick={onClick}>
+              취소
+            </CancelEditBtn>
+            <SubmitEditBtn name="password" value="입력" type="submit" />
+          </BtnContainer>
+        </PasswordForm>
       ) : (
         <CommentContainer>
           <Comment>{comment.comment}</Comment>
