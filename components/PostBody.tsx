@@ -95,14 +95,19 @@ const MardownBody = styled.div`
     margin-top: 0;
     margin-bottom: 10px;
   }
+
   blockquote {
-    margin: 0;
+    margin: 0 0 0.7rem 0;
     padding: 0.6rem 0.6rem 0.2rem 0.9rem;
     color: white;
-    border-left: 0.3rem solid #f9bf00;
+    border-left: 0.15rem solid #f9bf00;
     font-style: italic;
     font-size: 0.85rem;
     font-weight: 400;
+  }
+
+  blockquote:nth-child(1) {
+    border-left: 0.3rem solid #f9bf00;
     background-color: #4b4b4b;
   }
   .stacked {
@@ -142,6 +147,14 @@ const MardownBody = styled.div`
     background-color: #1e2228;
     overflow: scroll;
     overflow-y: hidden;
+  }
+
+  img {
+    max-width: 100%;
+    image-resolution: from-image;
+    display: flex;
+    margin: auto;
+    align-self: center;
   }
 `;
 
