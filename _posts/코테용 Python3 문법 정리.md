@@ -1,5 +1,5 @@
 ---
-title: "코테용 Python3 문법 / 모듈 정리"
+title: "코테용 Python3 문법, 모듈 정리"
 excerpt: "코딩테스트를 준비하며 정리한 유용한 Python3 문법 / 모듈들입니다."
 date: "2022-08-01"
 category: ["Python", "Coding Test"]
