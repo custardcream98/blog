@@ -1,7 +1,7 @@
 import React from "react";
 import Link from "next/link";
 import styled from "styled-components";
-import { LinkDecorated, Date } from "./styledComponents";
+import { LinkDecorated, DateSpan } from "./styledComponents";
 
 const ContentContainer = styled.div`
   display: flex;
@@ -55,7 +55,7 @@ const HeroPost = ({ title, coverImage, date, excerpt, slug }: Props) => {
           <Link href={`/posts/${slug}`}>
             <LinkDecorated>{title}</LinkDecorated>
           </Link>
-          <Date>{date}</Date>
+          <DateSpan>{date}</DateSpan>
         </Title>
         <Link href={`/posts/${slug}`} passHref={true}>
           <LinkDecorated as="p">

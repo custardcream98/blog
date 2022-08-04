@@ -16,7 +16,7 @@ export const Container = styled.div`
   margin: 0 auto auto;
 `;
 
-export const Date = styled.span`
+export const DateSpan = styled.span`
   margin-top: 0.2rem;
   font-weight: 300;
   font-size: 0.8rem;
