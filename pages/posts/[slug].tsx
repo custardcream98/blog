@@ -25,7 +25,7 @@ export default function Post({ post }: Props) {
           date={post.date}
         />
         <PostBody content={post.content} />
-        <Comments title={post.title} />
+        <Comments title={post.title.replaceAll("/", ",")} />
       </Container>
     </Layout>
   );
