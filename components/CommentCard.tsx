@@ -224,7 +224,9 @@ const CommentCard = ({ comment, title }: Props) => {
             setIsEditing(false);
           }
         } else {
-          await deleteDoc(commentDocRef);
+          if (password === comment.password) {
+            await deleteDoc(commentDocRef);
+          }
           setIsDeleting(false);
         }
         setPassword("");
