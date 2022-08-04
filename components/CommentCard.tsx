@@ -131,11 +131,15 @@ const PasswordForm = styled(EditForm)``;
 
 const PasswordInput = styled.input`
   width: 100%;
+  height: 1.9rem;
   color: ${(props) => props.theme.textColor};
   background-color: transparent;
   border: 1px solid ${(props) => props.theme.textColor};
   outline-width: 0;
   font-size: 0.9rem;
+  @media (max-width: 800px) {
+    height: 4rem;
+  }
 `;
 
 const LoadingBtn = styled.div`

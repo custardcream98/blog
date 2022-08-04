@@ -19,32 +19,10 @@ const NamePasswordContainer = styled.div`
   width: 100%;
 `;
 
-const NamePasswordSubContainer = styled.div`
-  display: flex;
-  align-items: center;
-  /* @media (max-width: 800px) {
-    line-height: 1.5;
-    input {
-      max-width: 7rem;
-    }
-  } */
-`;
-
-const Label = styled.label`
-  width: 50%;
-  height: 1.4rem;
-  text-align: center;
-  line-height: 1.4rem;
-  color: ${(props) => props.theme.bgColor};
-  background-color: ${(props) => props.theme.textColor};
-  font-size: 0.9rem;
-  padding: 0 0.5rem;
-`;
-
 const Input = styled.input`
   padding-left: 0.3rem;
   width: 50%;
-  height: 1.4rem;
+  height: 1.9rem;
   box-sizing: border-box;
   outline-width: 0;
   color: ${(props) => props.theme.textColor};
@@ -145,7 +123,23 @@ const CommentForm = ({ title }: Props) => {
   return (
     <Form onSubmit={onSubmit}>
       <NamePasswordContainer>
-        <NamePasswordSubContainer>
+        <Input
+          type="text"
+          name="username"
+          placeholder="닉네임"
+          onChange={onChange}
+          value={username}
+        />
+        <Input
+          type="password"
+          name="password"
+          placeholder="비밀번호"
+          required
+          minLength={4}
+          onChange={onChange}
+          value={password}
+        />
+        {/* <NamePasswordSubContainer>
           <Label htmlFor="username">이름</Label>
           <Input
             type="text"
@@ -164,7 +158,7 @@ const CommentForm = ({ title }: Props) => {
             onChange={onChange}
             value={password}
           />
-        </NamePasswordSubContainer>
+        </NamePasswordSubContainer> */}
       </NamePasswordContainer>
       <SubmitContainer>
         <Textarea name="comment" onChange={onChange} value={comment} />
