@@ -5,6 +5,7 @@ import markdownToHtml from "../../lib/markdownToHtml";
 import type PostType from "../../interfaces/post";
 import PostBody from "../../components/PostBody";
 import PostTitle from "../../components/PostTitle";
+import Comments from "../../components/Comments";
 import Layout from "../../components/Layout";
 import check404 from "../../lib/check404";
 
@@ -24,6 +25,7 @@ export default function Post({ post }: Props) {
           date={post.date}
         />
         <PostBody content={post.content} />
+        <Comments title={post.title} />
       </Container>
     </Layout>
   );
