@@ -163,6 +163,20 @@ const MardownBody = styled.div`
     vertical-align: middle;
     padding: 0 0.4rem 0.2rem 0.3rem;
   }
+
+  ol {
+    counter-reset: count;
+  }
+
+  ol > li::before {
+    counter-increment: count;
+    content: counter(count) ". ";
+    font-size: 1rem;
+    font-weight: 500;
+    display: inline-block;
+    vertical-align: middle;
+    padding: 0 0.4rem 0.2rem 0.3rem;
+  }
 `;
 
 type Props = {
