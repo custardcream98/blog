@@ -9,8 +9,6 @@ import Document, {
 import { ServerStyleSheet } from "styled-components";
 
 export default class MyDocument extends Document {
-  // static async
-
   render() {
     return (
       <Html lang="kr">

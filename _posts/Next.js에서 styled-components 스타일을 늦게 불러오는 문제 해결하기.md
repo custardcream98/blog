@@ -1,0 +1,78 @@
+---
+title: "Next.js에서 styled-components 스타일을 늦게 불러오는 문제 해결하기"
+excerpt: "Next.js가 html을 불러올 때 JavaScript의 실행이 한 발짝씩 늦어서 styled-components로 지정된 스타일이 뒤늦게 로드되는 문제를 해결해보겠습니다."
+date: "2022-08-05"
+category: ["Next.js", "styled-components"]
+---
+
+> Next.js가 html을 불러올 때 JavaScript의 실행이 한 발짝씩 늦어서 styled-components로 지정된 스타일이 뒤늦게 로드되는 문제를 해결해보겠습니다.
+
+# Intro
+
+![blink](../img/Next.js%EC%97%90%EC%84%9C%20styled-components%20%EC%8A%A4%ED%83%80%EC%9D%BC%EC%9D%84%20%EB%8A%A6%EA%B2%8C%20%EB%B6%88%EB%9F%AC%EC%98%A4%EB%8A%94%20%EB%AC%B8%EC%A0%9C%20%ED%95%B4%EA%B2%B0%ED%95%98%EA%B8%B0/blink.gif)
+
+블로그를 처음 들어오면 이런 깜빡임이 보이는 문제가 있습니다. 자바스크립트에서 선언되는 `styled-components`의 스타일이 뒤늦게 로드되는건데요, 오늘은 이 문제를 해결해보려고 합니다.
+
+# 해결
+
+[Next.js의 example](https://github.com/vercel/next.js/blob/canary/examples/with-styled-components)을 참고했습니다!
+
+## 1. `styled-components`용 `Babel` 플러그인 설치
+
+```code
+npm i -D babel-plugin-styled-components
+```
+
+`devDependency`로 설치합니다. 해당 플러그인은 첫 렌더링시에 `styled-components`를 이용해 스타일을 적용할 수 있게 해줄 뿐만 아니라, 컴포넌트의 `hashed className`을 환경간 일관되게 유지해줍니다. (SSR에는 필수적으로 필요)
+
+## 2. `ServerStyleSheet`을 `_document.tsx`에 추가
+
+기존에 이미 만들어뒀던 `_document.tsx`에 아래 코드를 추가합니다. `_document.tsx`는 `<html>`태그나 `<body>`태그에 접근할 수 있도록 해줍니다. 번들러로 처음 만들었을 때는 없는데, 커스텀이 필요할 때 생성합니다. 저는 Google Fonts를 로드하는 부분 때문에 미리 만들어뒀었습니다.
+
+```tsx
+import { ServerStyleSheet } from "styled-components";
+
+MyDocument.getInitialProps = async (ctx: DocumentContext) => {
+  const sheet = new ServerStyleSheet();
+  const originalRenderPage = ctx.renderPage;
+
+  try {
+    ctx.renderPage = () =>
+      originalRenderPage({
+        enhanceApp: (App) => (props) => sheet.collectStyles(<App {...props} />),
+      });
+
+    const initialProps = await Document.getInitialProps(ctx);
+    return {
+      ...initialProps,
+      styles: [initialProps.styles, sheet.getStyleElement()],
+    };
+  } finally {
+    sheet.seal();
+  }
+};
+```
+
+`MyDocument` 클래스(`Document`를 상속하는 클래스입니다)의 `getInitialProps()` 함수를 정의합니다. 여기에서 `ServerStyleSheet`를 생성해 모든 페이지에 대해 스타일을 모으고, `<App>`에 prop으로 넘겨주는 식입니다.
+
+이제 `MyDocument`에서 `<Head>`에 아래 한 줄을 추가하면 됩니다.
+
+```tsx
+export default class MyDocument extends Document {
+  render() {
+    return (
+      <Html lang="kr">
+        <Head>
+          {this.props.styles} {/* 이 한 줄만 추가하면 됩니다. */}
+        </Head>
+        <body>
+          <Main />
+          <NextScript />
+        </body>
+      </Html>
+    );
+  }
+}
+```
+
+이제 깜빡임도 사라지고 더 부드럽게 돌아가는 블로그가 됐습니다 😄
