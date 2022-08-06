@@ -33,8 +33,6 @@
 ![Adobe Illustrator](https://img.shields.io/badge/adobe%20illustrator-%23FF9A00.svg?style=flat-square&logo=adobe%20illustrator&logoColor=white)
 ![Figma](https://img.shields.io/badge/figma-%23F24E1E.svg?style=flat-square&logo=figma&logoColor=white)
 
-and ArcGIS, QGIS, MATLAB
-
 ## 🧑‍💻 저는 이런 일을 했어요!
 
 ### 경로 기반 일정 스케줄링 크로스플랫폼 어플리케이션 개발
