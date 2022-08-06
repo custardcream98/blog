@@ -1,10 +1,11 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import styled from "styled-components";
 import Intro from "../components/Intro";
 import Post from "../interfaces/post";
 import HeroPost from "./HeroPost";
 import { Container } from "./styledComponents";
 import Layout from "./Layout";
+import Paging from "./Paging";
 
 const Title = styled.h1`
   margin-bottom: 2rem;
@@ -19,6 +20,27 @@ type Props = {
 };
 
 const Home = ({ allPosts }: Props) => {
+  const [currentPage, setCurrentPage] = useState(0);
+  const [postByPage, setPostByPage] = useState<[Post[]]>([[]]);
+
+  const onPageChange = (to: number) => setCurrentPage((prev) => to);
+
+  useEffect(() => {
+    let counter = 0;
+    let postByPageArr: [Post[]] = [[]];
+    allPosts.forEach((post, index) => {
+      if (index % 5 === 0 && index !== 0) {
+        counter++;
+        postByPageArr.push([]);
+      }
+
+      postByPageArr[counter].push(post);
+    });
+
+    setPostByPage((prev) => [...postByPageArr]);
+    console.log(Math.ceil(allPosts.length / 5));
+  }, []);
+
   return (
     <Layout>
       <Intro />
@@ -26,7 +48,7 @@ const Home = ({ allPosts }: Props) => {
         <Title id="Posts_Title">{"<Posts />"}</Title>
         <section>
           {React.Children.toArray(
-            allPosts.map((post) => (
+            postByPage[currentPage].map((post) => (
               <HeroPost
                 title={post.title}
                 coverImage={post.coverImage}
@@ -37,6 +59,11 @@ const Home = ({ allPosts }: Props) => {
             ))
           )}
         </section>
+        <Paging
+          pageScale={Math.ceil(allPosts.length / 5)}
+          currentPage={currentPage}
+          onPageChange={onPageChange}
+        />
       </Container>
     </Layout>
   );
