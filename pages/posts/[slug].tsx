@@ -16,7 +16,12 @@ type Props = {
 export default function Post({ post }: Props) {
   check404();
   return (
-    <Layout title={post.slug}>
+    <Layout
+      title={post.slug}
+      description={post.excerpt}
+      image={post.coverImage}
+      url={post.slug}
+    >
       <Container>
         <PostTitle
           coverImage={post.coverImage}
@@ -42,6 +47,7 @@ export async function getStaticProps({ params }: Params) {
     "title",
     "date",
     "slug",
+    "excerpt",
     "content",
     "ogImage",
     "coverImage",

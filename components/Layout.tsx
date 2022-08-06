@@ -74,9 +74,12 @@ a {
 type Props = {
   children: string | JSX.Element | JSX.Element[] | null;
   title?: string;
+  description?: string;
+  image?: string;
+  url?: string;
 };
 
-const Layout = ({ children, title }: Props) => {
+const Layout = ({ children, title, description, image, url }: Props) => {
   const isDark = useRecoilValue(isDarkAtom);
 
   return (
@@ -84,6 +87,26 @@ const Layout = ({ children, title }: Props) => {
       <GlobalStyle />
       <Head>
         <title>{title ?? "Custardcream 개발 블로그"}</title>
+        <meta
+          property="og:title"
+          content={title ?? "Custardcream 개발 블로그"}
+        />
+        <meta
+          name="description"
+          content={
+            description ??
+            "예쁘고 간결한 것을 정말 좋아하는 개발자 박시우의 블로그입니다. 공부한 것들, 공유하고 싶은 내용을 올립니다."
+          }
+        />
+        <meta
+          property="og:url"
+          content={`https://custardcream.vercel.app/${url ?? ""}`}
+        />
+        <meta
+          property="og:image"
+          content={image ?? "../static/img/thumbnail.png"}
+        />
+        <meta name="viewport" content="initial-scale=1.0, width=device-width" />
       </Head>
       <Navigation />
       {children}
