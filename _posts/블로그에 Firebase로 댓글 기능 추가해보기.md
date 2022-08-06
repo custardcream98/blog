@@ -11,9 +11,9 @@ category: ["Firebase"]
 
 보통 블로그를 개발할 때 사용하는 댓글 플랫폼으로는 `Utterance`, `Disqus` 등이 있습니다.
 
-![Disqus](../img/블로그에_Firebase로_댓글,_좋아요_기능_추가해보기/Disqus.png)
+![Disqus](../static/img/블로그에_Firebase로_댓글,_좋아요_기능_추가해보기/Disqus.png)
 
-![Utterance](../img/블로그에_Firebase로_댓글,_좋아요_기능_추가해보기/Utterances.png)
+![Utterance](../static/img/블로그에_Firebase로_댓글,_좋아요_기능_추가해보기/Utterances.png)
 
 `Utterence`가 이쁘고 `Markdown` 입력도 가능해서 좋은데, 깃헙 로그인만 지원하는 문제가 있습니다. (댓글들은 특정 레포지토리의 issue로 관리된다는 킬러 기능이 있긴 하지만요)
 

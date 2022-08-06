@@ -1,8 +1,6 @@
 import React from "react";
 import styled from "styled-components";
-import Image from "next/image";
 import CategoryBadge from "./CategoryBadge";
-import imageLoader from "../lib/imageLoader";
 import { DateSpan } from "./styledComponents";
 
 const TitleContainer = styled.div`
@@ -10,6 +8,7 @@ const TitleContainer = styled.div`
   flex-direction: column;
   padding-top: 2rem;
   border-bottom: 3px solid #25282c;
+  width: 100%;
 `;
 
 const Title = styled.h1`
@@ -30,6 +29,10 @@ const DateSpanforTitle = styled(DateSpan)`
   font-weight: 400;
 `;
 
+const Thumbnail = styled.img`
+  width: 100%;
+`;
+
 type Props = {
   coverImage?: string;
   title: string;
@@ -37,21 +40,21 @@ type Props = {
   date: string;
 };
 
-const PostTitle = ({ coverImage, title, category, date }: Props) => (
-  <TitleContainer>
-    {coverImage && (
-      <Image src={coverImage} layout="responsive" loader={imageLoader} />
-    )}
-    <Title>{title}</Title>
-    <DateSpanforTitle>{date}</DateSpanforTitle>
-    {category && (
-      <BadgeContainer>
-        {React.Children.toArray(
-          category.map((keyword) => <CategoryBadge category={keyword} />)
-        )}
-      </BadgeContainer>
-    )}
-  </TitleContainer>
-);
+const PostTitle = ({ coverImage, title, category, date }: Props) => {
+  return (
+    <TitleContainer>
+      {coverImage && <Thumbnail src={coverImage} alt="thumbnail" />}
+      <Title>{title}</Title>
+      <DateSpanforTitle>{date}</DateSpanforTitle>
+      {category && (
+        <BadgeContainer>
+          {React.Children.toArray(
+            category.map((keyword) => <CategoryBadge category={keyword} />)
+          )}
+        </BadgeContainer>
+      )}
+    </TitleContainer>
+  );
+};
 
 export default PostTitle;

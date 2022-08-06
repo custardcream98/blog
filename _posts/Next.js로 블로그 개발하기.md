@@ -3,6 +3,7 @@ title: "Next.js로 블로그 개발하기"
 excerpt: "이전까지 방치돼있던 제 jekyll을 이용한 블로그를 싹 지우고, 완전히 처음부터 모든 것을 만들어 보려 합니다."
 date: "2022-07-31"
 category: ["Next.js", "JavaScript"]
+coverImage: "/static/img/Next.js로 블로그 개발하기/thumbnail.png"
 ---
 
 > 이전까지 방치돼있던 제 jekyll을 이용한 블로그를 싹 지우고, 완전히 처음부터 모든 것을 만들어 보려 합니다.
