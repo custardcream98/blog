@@ -30,7 +30,7 @@ const Nav = styled.nav`
   align-items: center;
 `;
 
-const NavMenu = styled.div`
+const NavMenu = styled.ul`
   display: flex;
   justify-content: center;
   align-items: center;
@@ -104,9 +104,11 @@ type NavItemProps = {
 };
 
 const NavItem = ({ href, content }: NavItemProps) => (
-  <Link href={href}>
-    <NavItemLinkDecorated>{content}</NavItemLinkDecorated>
-  </Link>
+  <li>
+    <Link href={href}>
+      <NavItemLinkDecorated>{content}</NavItemLinkDecorated>
+    </Link>
+  </li>
 );
 
 const Navigation = () => {
