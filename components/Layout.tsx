@@ -99,6 +99,13 @@ const Layout = ({ children, title, description, image, url }: Props) => {
           }
         />
         <meta
+          name="og:description"
+          content={
+            description ??
+            "예쁘고 간결한 것을 정말 좋아하는 개발자 박시우의 블로그입니다. 공부한 것들, 공유하고 싶은 내용을 올립니다."
+          }
+        />
+        <meta
           property="og:url"
           content={`https://custardcream.vercel.app/${url ?? ""}`}
         />
