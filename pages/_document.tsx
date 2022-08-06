@@ -30,6 +30,14 @@ export default class MyDocument extends Document {
           />
           <meta property="og:article:author" content="Custardcream98" />
           <meta property="og:type" content="website" />
+          <meta
+            name="google-site-verification"
+            content="uEQH_kf2TBUnEK9r0_FjuR-nICr97lyWeNkTlQJt1XI"
+          />
+          <meta
+            name="naver-site-verification"
+            content="f97b3212948a936aa8bb8d14b7f84ba8d01f9cc1"
+          />
           {this.props.styles}
         </Head>
         <body>
