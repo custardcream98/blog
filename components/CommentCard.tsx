@@ -9,7 +9,7 @@ import {
   COLLECTION_COMMENTS,
   COLLECTION_POSTS,
 } from "../lib/firebaseSetup/collectionNames";
-import { DateSpan } from "./styledComponents";
+import DateSpan from "./DateSpan";
 import ICommentData from "../interfaces/comment";
 
 const CommentCardContainer = styled.div`
@@ -35,7 +35,7 @@ const CommentInfoContainer = styled.div`
   display: flex;
   flex-direction: column;
   align-items: flex-start;
-  width: 75px;
+  width: 5rem;
   margin-right: 5px;
 `;
 
@@ -156,11 +156,6 @@ type Props = {
   title: string;
 };
 
-const dateToString = (date: Date) =>
-  `${date.getFullYear()}-${(date.getMonth() + 1)
-    .toString()
-    .padStart(2, "0")}-${date.getDay().toString().padStart(2, "0")}`;
-
 const CommentCard = ({ comment, title }: Props) => {
   const [isEditing, setIsEditing] = useState(false);
   const [isDeleting, setIsDeleting] = useState(false);
@@ -247,9 +242,7 @@ const CommentCard = ({ comment, title }: Props) => {
     <CommentCardContainer>
       <CommentInfoContainer>
         <Username>{comment.username}</Username>
-        <CommentDateSpan>
-          {dateToString(new Date(comment.createdAt))}
-        </CommentDateSpan>
+        <CommentDateSpan date={comment.createdAt} />
       </CommentInfoContainer>
       {isEditing ? (
         isPasswordCorrect ? (

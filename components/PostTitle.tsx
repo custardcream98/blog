@@ -1,7 +1,7 @@
 import React from "react";
 import styled from "styled-components";
 import CategoryBadge from "./CategoryBadge";
-import { DateSpan } from "./styledComponents";
+import DateSpan from "./DateSpan";
 
 const TitleContainer = styled.div`
   display: flex;
@@ -25,7 +25,7 @@ const BadgeContainer = styled.div`
 `;
 
 const DateSpanforTitle = styled(DateSpan)`
-  margin-top: 1rem;
+  margin-top: 1.1rem;
   font-weight: 400;
 `;
 
@@ -45,7 +45,7 @@ const PostTitle = ({ coverImage, title, category, date }: Props) => {
     <TitleContainer>
       {coverImage && <Thumbnail src={coverImage} alt="thumbnail" />}
       <Title>{title}</Title>
-      <DateSpanforTitle>{date}</DateSpanforTitle>
+      <DateSpanforTitle date={date} />
       {category && (
         <BadgeContainer>
           {React.Children.toArray(

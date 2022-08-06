@@ -15,10 +15,3 @@ export const Container = styled.div`
   align-items: center;
   margin: 0 auto auto;
 `;
-
-export const DateSpan = styled.span`
-  margin-top: 0.2rem;
-  font-weight: 300;
-  font-size: 0.8rem;
-  color: ${(props) => props.theme.subTextColor};
-`;
