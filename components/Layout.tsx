@@ -104,7 +104,7 @@ const Layout = ({ children, title, description, image, url }: Props) => {
         />
         <meta
           property="og:image"
-          content={image ?? "../static/img/thumbnail.png"}
+          content={image ?? "/static/img/thumbnail.png"}
         />
         <meta name="viewport" content="initial-scale=1.0, width=device-width" />
       </Head>
