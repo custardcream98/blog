@@ -30,7 +30,7 @@ category: ["React.js", "TypeScript", "Express.js"]
 
 [https://og-img-generator-server.herokuapp.com/api/ogimage/타이틀/서브타이틀](https://og-img-generator-server.herokuapp.com/api/ogimage/타이틀/서브타이틀)
 
-![sample](../static/img/React%20+%20Express로%20Open%20Graph%20Image,%20Thumbnail%20Generator%20개발하기/sample.png)
+![sample](../static/img/React_Express로_Open_Graph_Image,_Thumbnail_Generator_개발하기/sample.png)
 
 # 해결할 점
 
