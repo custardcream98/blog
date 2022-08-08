@@ -25,10 +25,10 @@ type Props = {
 };
 
 const CategoryBadge = ({ category }: Props) => {
-  const { backgroundColor, borderColor } = categoryTheme[category];
+  const { color } = categoryTheme[category];
 
   return (
-    <Badge backgroundColor={backgroundColor} borderColor={borderColor}>
+    <Badge backgroundColor={`${color}4e`} borderColor={color}>
       {category}
     </Badge>
   );
