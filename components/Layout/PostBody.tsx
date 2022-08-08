@@ -1,5 +1,5 @@
 import React from "react";
-import MarkdownBody from "./MarkdownBody";
+import MarkdownBody from "../Common/MarkdownBody";
 
 type Props = {
   content: string;

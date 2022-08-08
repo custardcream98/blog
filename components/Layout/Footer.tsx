@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import { LinkDecorated } from "./styledComponents";
+import { LinkDecorated } from "../Common/styledComponents";
 
 const Container = styled.div`
   height: 5rem;

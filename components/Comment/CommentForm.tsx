@@ -1,11 +1,11 @@
 import React, { useState } from "react";
 import { Rings } from "react-loader-spinner";
 import { addDoc, collection } from "firebase/firestore";
-import { fireStore } from "../lib/firebaseSetup";
+import { fireStore } from "../../lib/firebaseSetup";
 import {
   COLLECTION_COMMENTS,
   COLLECTION_POSTS,
-} from "../lib/firebaseSetup/collectionNames";
+} from "../../lib/firebaseSetup/collectionNames";
 import styled, { useTheme } from "styled-components";
 
 const Form = styled.form`

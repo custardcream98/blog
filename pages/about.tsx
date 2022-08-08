@@ -1,8 +1,8 @@
 import React from "react";
 import styled from "styled-components";
-import Layout from "../components/Layout";
-import MarkdownBody from "../components/MarkdownBody";
-import { Container } from "../components/styledComponents";
+import Layout from "../components/Layout/Layout";
+import MarkdownBody from "../components/Common/MarkdownBody";
+import { Container } from "../components/Common/styledComponents";
 import { getAboutContent } from "../lib/api";
 import markdownToHtml from "../lib/markdownToHtml";
 

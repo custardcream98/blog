@@ -5,9 +5,9 @@ import Link from "next/link";
 import styled, { useTheme } from "styled-components";
 import { useSetRecoilState, useRecoilValue } from "recoil";
 import { motion } from "framer-motion";
-import { isDarkAtom } from "../lib/atoms";
-import BlogIcon from "./BlogIcon";
-import { LinkDecorated } from "./styledComponents";
+import { isDarkAtom } from "../../lib/atoms";
+import BlogIcon from "../Common/BlogIcon";
+import { LinkDecorated } from "../Common/styledComponents";
 
 const NavContainer = styled.div`
   height: 50px;

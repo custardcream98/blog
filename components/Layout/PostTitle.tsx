@@ -1,7 +1,7 @@
 import React from "react";
 import styled from "styled-components";
-import CategoryBadge from "./CategoryBadge";
-import DateSpan from "./DateSpan";
+import CategoryBadge from "../Common/CategoryBadge";
+import DateSpan from "../Common/DateSpan";
 
 const TitleContainer = styled.div`
   display: flex;

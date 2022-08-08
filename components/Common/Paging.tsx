@@ -1,4 +1,3 @@
-import Link from "next/link";
 import styled, { useTheme } from "styled-components";
 import {
   MdOutlineKeyboardArrowLeft,

@@ -1,8 +1,8 @@
 import React from "react";
 import Link from "next/link";
 import styled from "styled-components";
-import { LinkDecorated } from "./styledComponents";
-import DateSpan from "./DateSpan";
+import { LinkDecorated } from "../Common/styledComponents";
+import DateSpan from "../Common/DateSpan";
 
 const ContentContainer = styled.div`
   display: flex;

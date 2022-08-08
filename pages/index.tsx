@@ -1,7 +1,7 @@
 import React from "react";
 import Post from "../interfaces/post";
 import { getAllPosts } from "../lib/api";
-import Home from "../components/Home";
+import Home from "../components/Home/Home";
 
 type Props = {
   allPosts: Post[];

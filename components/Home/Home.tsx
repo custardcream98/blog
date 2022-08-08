@@ -1,11 +1,11 @@
 import React, { useState, useEffect } from "react";
 import styled from "styled-components";
-import Intro from "../components/Intro";
-import Post from "../interfaces/post";
+import Intro from "./Intro";
+import Post from "../../interfaces/post";
 import HeroPost from "./HeroPost";
-import { Container } from "./styledComponents";
-import Layout from "./Layout";
-import Paging from "./Paging";
+import { Container } from "../Common/styledComponents";
+import Layout from "../Layout/Layout";
+import Paging from "../Common/Paging";
 
 const Title = styled.h1`
   margin-bottom: 2rem;

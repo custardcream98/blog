@@ -4,13 +4,13 @@ import { AiFillEdit } from "react-icons/ai";
 import { MdDelete } from "react-icons/md";
 import styled, { useTheme } from "styled-components";
 import { deleteDoc, doc, updateDoc } from "firebase/firestore";
-import { fireStore } from "../lib/firebaseSetup";
+import { fireStore } from "../../lib/firebaseSetup";
 import {
   COLLECTION_COMMENTS,
   COLLECTION_POSTS,
-} from "../lib/firebaseSetup/collectionNames";
-import DateSpan from "./DateSpan";
-import ICommentData from "../interfaces/comment";
+} from "../../lib/firebaseSetup/collectionNames";
+import DateSpan from "../Common/DateSpan";
+import ICommentData from "../../interfaces/comment";
 
 const CommentCardContainer = styled.div`
   display: flex;

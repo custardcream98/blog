@@ -1,6 +1,6 @@
 import React from "react";
 import styled from "styled-components";
-import categoryTheme from "../lib/categoryTheme";
+import categoryTheme from "../../lib/categoryTheme";
 
 interface IBadge {
   backgroundColor: string;
