@@ -34,5 +34,11 @@ category: ["React.js", "TypeScript", "Express.js"]
 
 # 해결할 점
 
-1. Heroku의 한계로 api가 이미지를 응답하는 속도가 매우 느립니다. (10초정도) 따라서, 실제로 사용하려면 다른 방법을 강구하거나, `getServerSideProps()`에서 처리해 주어야겠습니다.
+1. Heroku의 한계로 api가 이미지를 응답하는 속도가 매우 느립니다. (10초정도) 따라서, 실제로 사용하려면 다른 방법을 강구하거나, `getStaticProps()`에서 처리해 주어야겠습니다.
 2. 좀 더 발전시켜서 유연한 Thumbnail / Open Graph Image Generator를 개발해보고 싶습니다.
+
+---
+
+#### 2022.08.11
+
+약간의 변경점이 있었습니다. [이 글](https://custardcream.vercel.app/posts/Open%20Graph%20Image,%20Thumbnail%20Generator%20완성)을 참고해주세요!

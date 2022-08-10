@@ -1,0 +1,37 @@
+---
+title: "Open Graph Image, Thumbnail Generator 완성"
+excerpt: "블로그를 Deploy 할 때마다 자동으로 썸네일, OG 이미지를 생성해 Firebase Store에 올리는 방법으로 해결했습니다."
+date: "2022-08-11"
+category: ["Next.js", "Firebase"]
+---
+
+> 블로그를 Deploy 할 때마다 자동으로 썸네일, OG 이미지를 생성해 Firebase Store에 올리는 방법으로 해결했습니다.
+
+# Intro
+
+[지난번 글](https://custardcream.vercel.app/posts/React,%20Express%EB%A1%9C%20Open%20Graph%20Image,%20Thumbnail%20Generator%20%EA%B0%9C%EB%B0%9C%ED%95%98%EA%B8%B0)에서 **해결할 점**으로 생각했던 부분 중 'Heroku 서버의 느린 응답 속도'를 resolve하고자 합니다.
+
+# Idea
+
+아래의 방법으로 flow를 바꿔서 해결하고자 했습니다.
+
+1. Deploy시 `getStaticProps()`에서 Heroku server로 이미지 생성을 요청합니다.
+2. Heroku server에서는 `Firebase Store`에 해당 이미지가 있는지 여부를 확인하고, 없다면 `puppeteer`를 이용해 이미지를 생성, Store에 저장합니다.
+3. 저장된 이미지의 `download url`을 받아 response합니다.
+4. 서버로부터 받은 url을 사용해 static page를 생성합니다.
+
+# 직면했던 문제
+
+Heroku에서 `puppeteer`로 생성한 스크린샷 이미지를 `Firebase Store`로 업로드할 때 `Buffer` 타입을 어떻게 Storage 서버로 전달할 지 고민하는 부분에서 조금 헤맸습니다.
+
+```ts
+const image = await page.screenshot({ type: "webp" });
+
+await uploadBytes(storageRef, (image as Buffer).buffer);
+```
+
+`Firebase`에서 제공하는 `uploadBytes()`함수는 `ArrayBuffer`를 업로드 할 수 있습니다. 따라서 `Buffer`를 `ArrayBuffer`로 바꾸면 됩니다.
+
+`node.js 4.x` 이상 부터는 `Buffer`가 `UInt8Array`의 subclass입니다.([참고](https://nodejs.org/docs/latest/api/buffer.html#buffer)) 따라서 `.buffer`로 `ArrayBuffer`를 간단하게 얻을 수 있었습니다.
+
+> 이제 Deploy하는 것만으로 이미지가 생성되고 Firebase의 이미지 호스팅 URL을 얻을 수 있게 됐습니다 🙌
