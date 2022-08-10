@@ -4,7 +4,7 @@ const MarkdownBody = styled.div`
   -ms-text-size-adjust: 100%;
   -webkit-text-size-adjust: 100%;
   width: 100%;
-  margin: 2rem 0;
+  margin-top: 2rem;
   color: ${(props) => props.theme.textColor};
   background-color: ${(props) => props.theme.bgColor};
   font-size: 0.85em;
@@ -98,7 +98,7 @@ const MarkdownBody = styled.div`
   blockquote {
     margin: 0 0 0.7rem 0;
     padding: 0.6rem 0.6rem 0.2rem 0.9rem;
-    color: white;
+    color: ${(props) => props.theme.textColor};
     border-left: 0.15rem solid #f9bf00;
     font-style: italic;
     font-size: 0.85rem;
@@ -108,6 +108,7 @@ const MarkdownBody = styled.div`
   blockquote:nth-child(1) {
     border-left: 0.3rem solid #f9bf00;
     background-color: #4b4b4b;
+    color: white;
   }
 
   code,
