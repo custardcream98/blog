@@ -1,7 +1,7 @@
 import { DefaultTheme } from "styled-components";
 
 export const lightTheme: DefaultTheme = {
-  bgColor: "white",
+  bgColor: "#efefef",
   textColor: "#1a1a1a",
   subTextColor:"rgb(177, 177, 177)",
   navLineShadow: "rgba(17, 17, 26, 0.1) 0px 1px 0px",
