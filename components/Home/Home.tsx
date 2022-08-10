@@ -38,7 +38,6 @@ const Home = ({ allPosts }: Props) => {
     });
 
     setPostByPage((prev) => [...postByPageArr]);
-    console.log(Math.ceil(allPosts.length / 5));
   }, []);
 
   return (

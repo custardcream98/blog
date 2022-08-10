@@ -1,5 +1,4 @@
 import Link from "next/link";
-import { useEffect } from "react";
 import styled from "styled-components";
 import PostType from "../../interfaces/post";
 
@@ -68,30 +67,25 @@ type Props = {
   post: PostType;
 };
 
-const PrevNextPostBtn = ({ post }: Props) => {
-  useEffect(() => {
-    console.log(post);
-  }, []);
-  return (
-    <Container isPrevOnly={!post.nextTitle} isNextOnly={!post.prevTitle}>
-      {post.prevTitle ? (
-        <Btn>
-          <Link href={`../posts/${post.prevSlug}`}>← 이전글</Link>
-          <Link href={`../posts/${post.prevSlug}`}>{post.prevTitle}</Link>
-        </Btn>
-      ) : (
-        <div></div>
-      )}
-      {post.nextTitle ? (
-        <Btn>
-          <Link href={`../posts/${post.nextSlug}`}>다음글 →</Link>
-          <Link href={`../posts/${post.nextSlug}`}>{post.nextTitle}</Link>
-        </Btn>
-      ) : (
-        <div></div>
-      )}
-    </Container>
-  );
-};
+const PrevNextPostBtn = ({ post }: Props) => (
+  <Container isPrevOnly={!post.nextTitle} isNextOnly={!post.prevTitle}>
+    {post.prevTitle ? (
+      <Btn>
+        <Link href={`../posts/${post.prevSlug}`}>← 이전글</Link>
+        <Link href={`../posts/${post.prevSlug}`}>{post.prevTitle}</Link>
+      </Btn>
+    ) : (
+      <div></div>
+    )}
+    {post.nextTitle ? (
+      <Btn>
+        <Link href={`../posts/${post.nextSlug}`}>다음글 →</Link>
+        <Link href={`../posts/${post.nextSlug}`}>{post.nextTitle}</Link>
+      </Btn>
+    ) : (
+      <div></div>
+    )}
+  </Container>
+);
 
 export default PrevNextPostBtn;
