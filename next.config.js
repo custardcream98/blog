@@ -7,5 +7,4 @@ module.exports = {
     loader: "custom",
   },
   staticPageGenerationTimeout: 100000,
-  trailingSlash: true,
 };
