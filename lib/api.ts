@@ -63,5 +63,5 @@ export async function getOgImage(title: string) {
   // }
   // return imagePath
 
-  return `https://og-img-generator-server.herokuapp.com/api/ogimage/개발자 시우의 블로그/${title}`
+  return `https://og-img-generator-server.herokuapp.com/개발자 시우의 블로그/${title}`
 }

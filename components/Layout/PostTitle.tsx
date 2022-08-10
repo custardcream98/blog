@@ -31,6 +31,7 @@ const DateSpanforTitle = styled(DateSpan)`
 
 const Thumbnail = styled.img`
   width: 100%;
+  margin: 1rem 0;
 `;
 
 type Props = {
@@ -42,18 +43,20 @@ type Props = {
 
 const PostTitle = ({ coverImage, title, category, date }: Props) => {
   return (
-    <TitleContainer>
+    <>
+      <TitleContainer>
+        <Title>{title}</Title>
+        <DateSpanforTitle date={date} />
+        {category && (
+          <BadgeContainer>
+            {React.Children.toArray(
+              category.map((keyword) => <CategoryBadge category={keyword} />)
+            )}
+          </BadgeContainer>
+        )}
+      </TitleContainer>
       {coverImage && <Thumbnail src={coverImage} alt="thumbnail" />}
-      <Title>{title}</Title>
-      <DateSpanforTitle date={date} />
-      {category && (
-        <BadgeContainer>
-          {React.Children.toArray(
-            category.map((keyword) => <CategoryBadge category={keyword} />)
-          )}
-        </BadgeContainer>
-      )}
-    </TitleContainer>
+    </>
   );
 };
 
