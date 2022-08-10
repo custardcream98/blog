@@ -1,5 +1,7 @@
 import React from "react";
+import Image from "next/image";
 import styled from "styled-components";
+import imageLoader from "../../lib/imageLoader";
 import CategoryBadge from "../Common/CategoryBadge";
 import DateSpan from "../Common/DateSpan";
 
@@ -29,7 +31,7 @@ const DateSpanforTitle = styled(DateSpan)`
   font-weight: 400;
 `;
 
-const Thumbnail = styled.img`
+const Thumbnail = styled(Image)`
   width: 100%;
   margin: 1rem 0;
 `;
@@ -55,7 +57,16 @@ const PostTitle = ({ coverImage, title, category, date }: Props) => {
           </BadgeContainer>
         )}
       </TitleContainer>
-      {coverImage && <Thumbnail src={coverImage} alt="thumbnail" />}
+      {coverImage && (
+        <Thumbnail
+          src={coverImage}
+          alt="thumbnail"
+          priority={true}
+          width="1200px"
+          height="630px"
+          loader={imageLoader}
+        />
+      )}
     </>
   );
 };

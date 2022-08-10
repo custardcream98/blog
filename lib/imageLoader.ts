@@ -3,6 +3,6 @@ type Props = {
   width: number
 }
 
-const imageLoader = ({ src, width }:Props) => `..${src}?width=${width}`
+const imageLoader = ({ src, width }:Props) => src
 
 export default imageLoader;
