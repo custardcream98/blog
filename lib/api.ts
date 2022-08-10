@@ -1,13 +1,14 @@
 import fs from 'fs'
 import { join } from 'path'
 import matter from 'gray-matter'
+import { PrevNextPosts } from '../interfaces/post'
 
 const postsDirectory = join(process.cwd(), '_posts')
 const aboutPageDirectory = join(process.cwd(), 'about.md')
 
 type Items = {
-    [key: string]: string
-  }
+  [key: string]: string
+}
 
 export function getPostSlugs() {
   return fs.readdirSync(postsDirectory)
@@ -21,18 +22,14 @@ export function getPostBySlug(slug: string, fields: string[] = []) {
 
   const items: Items = {}
 
-  // Ensure only the minimal needed data is exposed
   fields.forEach((field) => {
     if (field === 'slug') {
       items[field] = realSlug
     }
-    if (field === 'content') {
+    else if (field === 'content') {
       items[field] = content
     }
-    if (field === 'category') {
-      items[field] = content
-    }
-    if (typeof data[field] !== 'undefined') {
+    else if (typeof data[field] !== 'undefined') {
       items[field] = data[field]
     }
   })
@@ -44,8 +41,34 @@ export function getAllPosts(fields: string[] = []) {
   const slugs = getPostSlugs()
   const posts = slugs
     .map((slug) => getPostBySlug(slug, fields))
-    .sort((post1, post2) => (post1.date > post2.date ? -1 : 1))
+    .sort((post1, post2) => (new Date(post2.date).getTime() - new Date(post1.date).getTime()));
   return posts
+}
+
+export function getPrevNextPosts(slug: string):PrevNextPosts {
+  const posts = getAllPosts(["title", "slug", "excerpt", "date"]);
+
+  const index = posts.findIndex((p) => p.slug === slug);
+
+  const next = index !== 0 ? {
+    title: posts[index - 1].title,
+    slug: posts[index - 1].slug,
+    excerpt: posts[index - 1].excerpt
+  } : null;
+  const prev = posts.length - 1 !== index ? {
+    title: posts[index + 1].title,
+    slug: posts[index + 1].slug,
+    excerpt: posts[index + 1].excerpt
+  } : null;
+
+  return {
+    prevTitle: prev?.title,
+    prevSlug: prev?.slug,
+    prevExcerpt: prev?.excerpt,
+    nextTitle:next?.title,
+    nextSlug:next?.slug,
+    nextExcerpt:next?.excerpt
+  }
 }
 
 export const getAboutContent = () => fs.readFileSync(aboutPageDirectory, 'utf8')

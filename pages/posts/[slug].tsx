@@ -1,11 +1,17 @@
 import React from "react";
-import { getPostBySlug, getAllPosts, getOgImage } from "../../lib/api";
+import {
+  getPostBySlug,
+  getAllPosts,
+  getOgImage,
+  getPrevNextPosts,
+} from "../../lib/api";
 import { Container } from "../../components/Common/styledComponents";
 import markdownToHtml from "../../lib/markdownToHtml";
 import type PostType from "../../interfaces/post";
-import PostBody from "../../components/Layout/PostBody";
-import PostTitle from "../../components/Layout/PostTitle";
+import PostBody from "../../components/Post/PostBody";
+import PostTitle from "../../components/Post/PostTitle";
 import Comments from "../../components/Comment/Comments";
+import PrevNextPostBtn from "../../components/Post/PrevNextPostBtn";
 import Layout from "../../components/Layout/Layout";
 import check404 from "../../lib/check404";
 
@@ -30,6 +36,7 @@ export default function Post({ post }: Props) {
           date={post.date}
         />
         <PostBody content={post.content} />
+        <PrevNextPostBtn post={post} />
         <Comments title={post.title.replaceAll("/", ",")} />
       </Container>
     </Layout>
@@ -38,7 +45,9 @@ export default function Post({ post }: Props) {
 
 type Params = {
   params: {
+    prev?: string;
     slug: string;
+    next?: string;
   };
 };
 
@@ -54,6 +63,8 @@ export async function getStaticProps({ params }: Params) {
     "category",
   ]);
 
+  const prevNextPosts = getPrevNextPosts(params.slug);
+
   const content = await markdownToHtml(post.content || "");
   const coverImage = await getOgImage(post.slug);
 
@@ -63,6 +74,12 @@ export async function getStaticProps({ params }: Params) {
         ...post,
         content,
         coverImage,
+        prevTitle: prevNextPosts.prevTitle ?? null,
+        prevSlug: prevNextPosts.prevSlug ?? null,
+        prevExcerpt: prevNextPosts.prevExcerpt ?? null,
+        nextTitle: prevNextPosts.nextTitle ?? null,
+        nextSlug: prevNextPosts.nextSlug ?? null,
+        nextExcerpt: prevNextPosts.nextExcerpt ?? null,
       },
     },
   };
