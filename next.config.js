@@ -6,4 +6,5 @@ module.exports = {
   images: {
     loader: "custom",
   },
+  staticPageGenerationTimeout: 100000,
 };

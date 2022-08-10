@@ -1,5 +1,5 @@
 import React from "react";
-import { getPostBySlug, getAllPosts } from "../../lib/api";
+import { getPostBySlug, getAllPosts, getOgImage } from "../../lib/api";
 import { Container } from "../../components/Common/styledComponents";
 import markdownToHtml from "../../lib/markdownToHtml";
 import type PostType from "../../interfaces/post";
@@ -55,12 +55,14 @@ export async function getStaticProps({ params }: Params) {
   ]);
 
   const content = await markdownToHtml(post.content || "");
+  const coverImage = await getOgImage(post.slug);
 
   return {
     props: {
       post: {
         ...post,
         content,
+        coverImage,
       },
     },
   };
