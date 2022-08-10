@@ -17,7 +17,7 @@ export default function Post({ post }: Props) {
   check404();
   return (
     <Layout
-      title={post.slug}
+      title={post.title}
       description={post.excerpt}
       image={post.coverImage}
       url={post.slug}

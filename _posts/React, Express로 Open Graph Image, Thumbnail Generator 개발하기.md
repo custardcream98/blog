@@ -28,7 +28,7 @@ category: ["React.js", "TypeScript", "Express.js"]
 
 ## Sample API
 
-[https://og-img-generator-server.herokuapp.com/api/ogimage/타이틀/서브타이틀](https://og-img-generator-server.herokuapp.com/api/ogimage/타이틀/서브타이틀)
+[https://og-img-generator-server.herokuapp.com/og/타이틀/서브타이틀](https://og-img-generator-server.herokuapp.com/og/타이틀/서브타이틀)
 
 ![sample](../static/img/React_Express로_Open_Graph_Image,_Thumbnail_Generator_개발하기/sample.png)
 
