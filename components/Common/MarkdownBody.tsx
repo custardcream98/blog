@@ -7,7 +7,7 @@ const MarkdownBody = styled.div`
   margin-top: 2rem;
   color: ${(props) => props.theme.textColor};
   background-color: ${(props) => props.theme.bgColor};
-  font-size: 0.85em;
+  font-size: 1rem;
   line-height: 1.7;
   word-wrap: break-word;
 
@@ -30,7 +30,6 @@ const MarkdownBody = styled.div`
   h4,
   h5,
   h6 {
-    margin-top: 24px;
     margin-bottom: 16px;
     font-weight: 600;
     line-height: 1.25;
@@ -51,48 +50,37 @@ const MarkdownBody = styled.div`
     font-size: inherit;
   }
   h1 {
-    margin: 0.67em 0;
+    margin: 1em 0 0.8rem 0;
     font-weight: 600;
     padding-bottom: 0.3em;
-    font-size: 2em;
+    font-size: 2.1em;
     border-bottom: 1px solid #21262d;
   }
   h2 {
     font-weight: 600;
     padding-bottom: 0.3em;
-    font-size: 1.5em;
+    font-size: 1.7em;
     border-bottom: 1px solid #21262d;
   }
   h3 {
     font-weight: 600;
-    font-size: 1.25em;
-  }
-  h2 {
-    font-weight: 600;
-    padding-bottom: 0.3em;
-    font-size: 1.5em;
-    border-bottom: 1px solid #21262d;
-  }
-  h3 {
-    font-weight: 600;
-    font-size: 1.25em;
+    font-size: 1.55em;
   }
   h4 {
     font-weight: 600;
-    font-size: 1em;
+    font-size: 1.3em;
   }
   h5 {
     font-weight: 600;
-    font-size: 0.875em;
+    font-size: 1.175em;
   }
   h6 {
     font-weight: 600;
-    font-size: 0.85em;
+    font-size: 1.15em;
     color: #8b949e;
   }
   p {
-    margin-top: 0;
-    margin-bottom: 10px;
+    margin-bottom: 1rem;
   }
 
   blockquote {
@@ -101,7 +89,7 @@ const MarkdownBody = styled.div`
     color: ${(props) => props.theme.textColor};
     border-left: 0.15rem solid #f9bf00;
     font-style: italic;
-    font-size: 0.85rem;
+    font-size: 1rem;
     font-weight: 400;
   }
 
@@ -122,27 +110,15 @@ const MarkdownBody = styled.div`
     border-radius: 6px;
   }
 
-  /* pre code {
-    font-size: 100%;
-    display: inline;
-    max-width: auto;
-    padding: 0;
-    margin: 0;
-    overflow: visible;
-    line-height: inherit;
-    word-wrap: normal;
-    background-color: transparent;
-    border: 0;
-  } */
-
   div > pre > code {
     display: grid;
     background-color: transparent;
+    font-size: 0.75rem;
   }
 
   div[data-rehype-pretty-code-fragment] {
     padding: 0.7rem;
-    margin: 0.7rem 0;
+    margin: 1rem 0;
     background-color: #1e2228;
     overflow: scroll;
     overflow-y: hidden;
@@ -157,24 +133,60 @@ const MarkdownBody = styled.div`
   }
 
   ul > li::before {
-    content: "👉";
+    content: "•";
     display: inline-block;
     vertical-align: middle;
-    padding: 0 0.4rem 0.2rem 0.3rem;
+    padding: 0 0.4rem 0 0.3rem;
+    /* margin-left: 1rem; */
+    font-weight: 900;
+  }
+
+  ul > li {
+    display: block;
+    padding-left: 1rem;
+    margin: 0.7rem 0;
+    line-height: 1.4;
   }
 
   ol {
-    counter-reset: count;
+    counter-reset: item;
+  }
+
+  & > ol,
+  & > ul {
+    margin: 0.5rem 0;
+  }
+
+  ol > li {
+    display: block;
+    padding-left: 1rem;
+    margin: 0.25rem 0;
   }
 
   ol > li::before {
-    counter-increment: count;
-    content: counter(count) ". ";
+    content: counters(item, ".") " ";
     font-size: 1rem;
     font-weight: 500;
-    display: inline-block;
-    vertical-align: middle;
+    /* display: inline-block; */
+    /* vertical-align: middle; */
     padding: 0 0.4rem 0.2rem 0.3rem;
+    counter-increment: item;
+  }
+
+  hr {
+    margin: 2rem 0;
+  }
+
+  .toc {
+    width: fit-content;
+    background-color: #4b4b4b;
+    color: white;
+    margin-bottom: 2rem;
+    padding: 0.9rem 1.2rem 0.9rem 0;
+    font-size: 0.8rem;
+    a {
+      color: white;
+    }
   }
 `;
 
