@@ -7,7 +7,7 @@ const MarkdownBody = styled.div`
   margin-top: 2rem;
   color: ${(props) => props.theme.textColor};
   background-color: ${(props) => props.theme.bgColor};
-  font-size: 1rem;
+  font-size: 0.9rem;
   line-height: 1.8;
   word-wrap: break-word;
 
@@ -53,30 +53,30 @@ const MarkdownBody = styled.div`
     margin: 1em 0 0.8rem 0;
     font-weight: 600;
     padding-bottom: 0.3em;
-    font-size: 2.1em;
+    font-size: 1.9em;
     border-bottom: 1px solid #21262d;
   }
   h2 {
     font-weight: 600;
     padding-bottom: 0.3em;
-    font-size: 1.7em;
+    font-size: 1.6em;
     border-bottom: 1px solid #21262d;
   }
   h3 {
     font-weight: 600;
-    font-size: 1.55em;
+    font-size: 1.4em;
   }
   h4 {
     font-weight: 600;
-    font-size: 1.3em;
+    font-size: 1.25em;
   }
   h5 {
     font-weight: 600;
-    font-size: 1.175em;
+    font-size: 1.15em;
   }
   h6 {
     font-weight: 600;
-    font-size: 1.15em;
+    font-size: 1.1em;
     color: #8b949e;
   }
   p {
@@ -89,7 +89,6 @@ const MarkdownBody = styled.div`
     color: ${(props) => props.theme.textColor};
     border-left: 0.15rem solid #f9bf00;
     font-style: italic;
-    font-size: 1rem;
     font-weight: 400;
     p {
       margin: 0;
@@ -167,7 +166,6 @@ const MarkdownBody = styled.div`
 
   ol > li::before {
     content: counters(item, ".") " ";
-    font-size: 1rem;
     font-weight: 500;
     /* display: inline-block; */
     /* vertical-align: middle; */
@@ -181,13 +179,18 @@ const MarkdownBody = styled.div`
 
   .toc {
     width: fit-content;
-    background-color: #4b4b4b;
+    background-color: #7c7c7c99;
     color: white;
     margin-bottom: 2rem;
-    padding: 0.9rem 1.2rem 0.9rem 0;
+    padding: 0.3rem 0.8rem 0.3rem 0;
     font-size: 0.8rem;
     a {
       color: white;
+    }
+    ol > li::before {
+      content: counters(item, ".") " ";
+      font-weight: 500;
+      padding: 0 0.4rem 0.2rem 0rem;
     }
   }
 `;

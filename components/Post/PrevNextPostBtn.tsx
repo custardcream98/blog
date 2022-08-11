@@ -22,12 +22,33 @@ const Container = styled.div<StyleProps>`
     border-left: ${(props) => (props.isNextOnly ? "" : "none")};
     text-align: end;
   }
+  & div {
+    width: 50%;
+  }
+
+  @media (max-width: 800px) {
+    flex-direction: column;
+    & div {
+      width: 100%;
+      height: 4.5rem;
+      justify-content: center;
+    }
+    & div:first-child {
+      border: ${(props) =>
+        !props.isNextOnly ? `2px solid ${props.theme.textColor}` : "none"};
+    }
+    & div:last-child {
+      border: ${(props) =>
+        !props.isPrevOnly ? `2px solid ${props.theme.textColor}` : "none"};
+      border-top: ${(props) => (props.isNextOnly ? "" : "none")};
+      text-align: end;
+    }
+  }
 `;
 
 const Btn = styled.div`
   display: flex;
   flex-direction: column;
-  width: 50%;
   padding: 1rem;
   & a {
     word-break: keep-all;
@@ -52,12 +73,12 @@ const Btn = styled.div`
   @media (max-width: 800px) {
     padding: 0.5rem;
     & a:first-child {
-      font-size: 0.5rem;
+      font-size: 0.7rem;
     }
     & a:last-child {
       text-overflow: ellipsis;
       margin-top: 0.4rem;
-      font-size: 0.6rem;
+      font-size: 0.8rem;
       line-height: 1.3;
     }
   }
