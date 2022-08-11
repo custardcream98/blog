@@ -8,7 +8,7 @@ const MarkdownBody = styled.div`
   color: ${(props) => props.theme.textColor};
   background-color: ${(props) => props.theme.bgColor};
   font-size: 1rem;
-  line-height: 1.7;
+  line-height: 1.8;
   word-wrap: break-word;
 
   a {
@@ -84,19 +84,21 @@ const MarkdownBody = styled.div`
   }
 
   blockquote {
-    margin: 0 0 0.7rem 0;
-    padding: 0.6rem 0.6rem 0.2rem 0.9rem;
+    margin: 0 0 1rem 0;
+    padding: 0.6rem 0.6rem 0.6rem 0.9rem;
     color: ${(props) => props.theme.textColor};
     border-left: 0.15rem solid #f9bf00;
     font-style: italic;
     font-size: 1rem;
     font-weight: 400;
-  }
-
-  blockquote:nth-child(1) {
-    border-left: 0.3rem solid #f9bf00;
-    background-color: #4b4b4b;
-    color: white;
+    p {
+      margin: 0;
+    }
+    :first-of-type {
+      border-left: 0.3rem solid #f9bf00;
+      background-color: #4b4b4b;
+      color: white;
+    }
   }
 
   code,
