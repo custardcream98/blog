@@ -14,15 +14,16 @@ category: ["React.js", "TypeScript", "Express.js"]
 # 방법론
 
 1. TypeScript 환경으로 Express 서버 개발
-2. Heroku로 서버 Deploy
 
-- React Component로 html을 생성, `react-dom/server`의 `renderToString()` 함수를 이용해 생성된 html을 stringify했습니다.
-- string으로 바뀐 html을 `puppeteer` 패키지를 활용해 이미지로 바꿉니다.
-- respons head의 `Content-Type`을 `image/png`로 지정해줬습니다.
-- image의 사이즈를 동적으로 바꾸는 것은 어렵지 않은 문제이지만 우선은 MVP 개발이므로 흔히 쓰이는 1200 X 630으로 고정했습니다.
-- 원래는 간편하게 Vercel을 이용해 Deploy하려고 했으나, AWS Lambda의 50mb 용량 제한으로 불가능했습니다. 이에, Heroku로 배포하는 방법으로 선회했습니다.
-- 한글 폰트 깨짐 issue가 발생해, NotoSansKR 폰트를 static 파일로 읽어오는 코드를 추가했습니다.
-- Deploy시 Heroku에서 `puppeteer`를 사용할 수 있도록 해주는 [buildpack](https://github.com/jontewks/puppeteer-heroku-buildpack)을 추가해줬습니다.
+   - React Component로 html을 생성, `react-dom/server`의 `renderToString()` 함수를 이용해 생성된 html을 stringify했습니다.
+   - string으로 바뀐 html을 `puppeteer` 패키지를 활용해 이미지로 바꿉니다.
+   - respons head의 `Content-Type`을 `image/png`로 지정해줬습니다.
+   - image의 사이즈를 동적으로 바꾸는 것은 어렵지 않은 문제이지만 우선은 MVP 개발이므로 흔히 쓰이는 1200 X 630으로 고정했습니다.
+
+2. Heroku로 서버 Deploy
+   - 원래는 간편하게 Vercel을 이용해 Deploy하려고 했으나, AWS Lambda의 50mb 용량 제한으로 불가능했습니다. 이에, Heroku로 배포하는 방법으로 선회했습니다.
+   - 한글 폰트 깨짐 issue가 발생해, NotoSansKR 폰트를 static 파일로 읽어오는 코드를 추가했습니다.
+   - Deploy시 Heroku에서 `puppeteer`를 사용할 수 있도록 해주는 [buildpack](https://github.com/jontewks/puppeteer-heroku-buildpack)을 추가해줬습니다.
 
 # 결과
 
