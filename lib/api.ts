@@ -1,13 +1,14 @@
 import fs from 'fs'
 import { join } from 'path'
 import matter from 'gray-matter'
+import PostType from '../interfaces/post'
 import { PrevNextPosts } from '../interfaces/post'
 
 const postsDirectory = join(process.cwd(), '_posts')
 const aboutPageDirectory = join(process.cwd(), 'about.md')
 
-type Items = {
-  [key: string]: string
+interface Items extends PostType {
+  [key: string]: string | string[] | object | undefined;
 }
 
 export function getPostSlugs() {
@@ -20,7 +21,18 @@ export function getPostBySlug(slug: string, fields: string[] = []) {
   const fileContents = fs.readFileSync(fullPath, 'utf8')
   const { data, content } = matter(fileContents)
 
-  const items: Items = {}
+  const items: Items = {
+    slug: '',
+    title: '',
+    date: '',
+    category: [],
+    coverImage: '',
+    excerpt: '',
+    ogImage: {
+      url: ''
+    },
+    content: ''
+  }
 
   fields.forEach((field) => {
     if (field === 'slug') {
@@ -89,4 +101,18 @@ export async function getOgImage(title: string) {
   const { created: fileName } = await fetch(`https://og-img-generator-server.herokuapp.com/og/개발자 시우의 블로그/${title}`, { mode: "no-cors" }).then((res) => res.json())
 
   return fileName;
+}
+
+export function getPostByCategory(category: string) {
+  const posts = getAllPosts(["title", "slug", "excerpt", "date", "category"]);
+  let categoryPosts:Items[] = []
+
+  posts.forEach((post) => {
+    post.category.forEach((c) => {
+      if (c === category)
+        categoryPosts.push(post)
+    })
+  })
+
+  return categoryPosts
 }

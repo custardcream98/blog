@@ -28,6 +28,10 @@ const Nav = styled.nav`
   display: flex;
   justify-content: space-between;
   align-items: center;
+
+  @media (max-width: 800px) {
+    width: 90vw;
+  }
 `;
 
 const NavMenu = styled.ul`
@@ -49,6 +53,12 @@ const DarkmodeSwitch = styled.div`
   &[data-ison="true"] {
     justify-content: flex-end;
   }
+
+  @media (max-width: 800px) {
+    width: 1.4rem;
+    height: 1rem;
+    padding: 0.09rem;
+  }
 `;
 
 const DarkmodeSwitchHandle = styled(motion.div)`
@@ -60,6 +70,11 @@ const DarkmodeSwitchHandle = styled(motion.div)`
   justify-content: center;
   align-items: center;
   padding: 4px;
+
+  @media (max-width: 800px) {
+    width: 0.82rem;
+    height: 0.82rem;
+  }
 `;
 
 const Title = styled.span`
@@ -90,6 +105,13 @@ const LogoTitle = styled.span`
 const NavItemLinkDecorated = styled(LinkDecorated)`
   font-size: 0.8rem;
   margin: 0 0.25rem;
+  @media (max-width: 800px) {
+    font-size: 0.7rem;
+  }
+`;
+const NavItemLi = styled.li`
+  display: flex;
+  align-items: center;
 `;
 
 const spring = {
@@ -104,11 +126,11 @@ type NavItemProps = {
 };
 
 const NavItem = ({ href, content }: NavItemProps) => (
-  <li>
+  <NavItemLi>
     <Link href={href} passHref>
       <NavItemLinkDecorated>{content}</NavItemLinkDecorated>
     </Link>
-  </li>
+  </NavItemLi>
 );
 
 const Navigation = () => {
@@ -129,6 +151,7 @@ const Navigation = () => {
         </Link>
         <NavMenu>
           <NavItem href="/#Posts_Title" content="Posts" />
+          <NavItem href="/categories" content="Category" />
           <NavItem href="/about" content="About" />
           <DarkmodeSwitch data-ison={isDark} onClick={toggleSwitch}>
             <DarkmodeSwitchHandle layout transition={spring}>

@@ -10,7 +10,7 @@ interface IBadge {
 
 const Badge = styled.div<IBadge>`
   display: block;
-  margin-right: 0.3rem;
+  margin: 0.3rem;
   padding: 0.3rem;
   font-weight: 500;
   font-size: 0.6rem;
@@ -28,7 +28,7 @@ const Badge = styled.div<IBadge>`
 export const BadgeContainer = styled.div`
   display: flex;
   flex-wrap: wrap;
-  margin: 1rem 0;
+  margin: 0.7rem -0.3rem;
 `;
 
 type Props = {
