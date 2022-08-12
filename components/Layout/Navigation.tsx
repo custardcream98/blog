@@ -105,7 +105,7 @@ type NavItemProps = {
 
 const NavItem = ({ href, content }: NavItemProps) => (
   <li>
-    <Link href={href}>
+    <Link href={href} passHref>
       <NavItemLinkDecorated>{content}</NavItemLinkDecorated>
     </Link>
   </li>

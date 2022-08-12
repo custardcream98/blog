@@ -53,12 +53,12 @@ const HeroPost = ({ title, coverImage, date, excerpt, slug }: Props) => {
     <Container>
       <ContentContainer>
         <Title>
-          <Link href={`/posts/${slug}`}>
+          <Link href={`/posts/${slug}`} passHref>
             <LinkDecorated>{title}</LinkDecorated>
           </Link>
           <DateSpan date={date} />
         </Title>
-        <Link href={`/posts/${slug}`} passHref={true}>
+        <Link href={`/posts/${slug}`} passHref>
           <LinkDecorated as="p">
             <p>{excerpt}</p>
           </LinkDecorated>
