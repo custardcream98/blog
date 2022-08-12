@@ -26,7 +26,7 @@ export default function Post({ post }: Props) {
       title={post.title}
       description={post.excerpt}
       image={post.coverImage}
-      url={post.slug}
+      url={`posts/${post.slug}`}
     >
       <Container>
         <PostTitle
