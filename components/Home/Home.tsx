@@ -3,17 +3,9 @@ import styled from "styled-components";
 import Intro from "./Intro";
 import Post from "../../interfaces/post";
 import HeroPost from "./HeroPost";
-import { Container } from "../Common/styledComponents";
+import { Container, Title } from "../Common/styledComponents";
 import Layout from "../Layout/Layout";
 import Paging from "../Common/Paging";
-
-const Title = styled.h1`
-  margin-bottom: 2rem;
-  padding-bottom: 0.2rem;
-  border-bottom: 3px solid #3a3e43;
-  font-size: 1.25rem;
-  font-weight: 600;
-`;
 
 type Props = {
   allPosts: Post[];
