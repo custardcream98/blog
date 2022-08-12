@@ -1,5 +1,6 @@
 import React from "react";
 import styled from "styled-components";
+import Link from "next/link";
 import categoryTheme from "../../lib/categoryTheme";
 
 interface IBadge {
@@ -9,7 +10,7 @@ interface IBadge {
 
 const Badge = styled.div<IBadge>`
   display: block;
-  margin-right: 0.3rem;
+  margin: 0.3rem;
   padding: 0.3rem;
   font-weight: 500;
   font-size: 0.6rem;
@@ -18,6 +19,16 @@ const Badge = styled.div<IBadge>`
   color: ${(props) => props.borderColor};
   background-color: ${(props) => props.backgroundColor};
   flex-wrap: nowrap;
+
+  &:hover {
+    cursor: pointer;
+  }
+`;
+
+export const BadgeContainer = styled.div`
+  display: flex;
+  flex-wrap: wrap;
+  margin: 0.7rem -0.3rem;
 `;
 
 type Props = {
@@ -28,9 +39,11 @@ const CategoryBadge = ({ category }: Props) => {
   const { color } = categoryTheme[category];
 
   return (
-    <Badge backgroundColor={`${color}4e`} borderColor={color}>
-      {category}
-    </Badge>
+    <Link href={`/categories/${category}`}>
+      <Badge backgroundColor={`${color}4e`} borderColor={color}>
+        {category}
+      </Badge>
+    </Link>
   );
 };
 

@@ -20,3 +20,11 @@ export const Container = styled.div`
   align-items: center;
   margin: 0 auto auto;
 `;
+
+export const Title = styled.h1`
+  margin: 2rem 0;
+  padding-bottom: 0.2rem;
+  border-bottom: 3px solid #3a3e43;
+  font-size: 1.25rem;
+  font-weight: 600;
+`;

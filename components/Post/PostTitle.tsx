@@ -2,7 +2,7 @@ import React from "react";
 import Image from "next/image";
 import styled from "styled-components";
 import imageLoader from "../../lib/imageLoader";
-import CategoryBadge from "../Common/CategoryBadge";
+import CategoryBadge, { BadgeContainer } from "../Common/CategoryBadge";
 import DateSpan from "../Common/DateSpan";
 
 const TitleContainer = styled.div`
@@ -20,12 +20,6 @@ const Title = styled.h1`
   font-weight: 800;
   font-size: 1.8em;
   line-height: 1.25;
-`;
-
-const BadgeContainer = styled.div`
-  display: flex;
-  flex-wrap: wrap;
-  margin: 1rem 0;
 `;
 
 const DateSpanforTitle = styled(DateSpan)`
