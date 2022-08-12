@@ -45,9 +45,7 @@ export default function Post({ post }: Props) {
 
 type Params = {
   params: {
-    prev?: string;
     slug: string;
-    next?: string;
   };
 };
 
