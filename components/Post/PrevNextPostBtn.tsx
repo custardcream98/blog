@@ -12,17 +12,19 @@ const Container = styled.div<StyleProps>`
   width: 100%;
   margin: 2rem 0;
   justify-content: space-between;
+
   & div:first-child {
     border: ${(props) =>
-      !props.isNextOnly ? `2px solid ${props.theme.textColor}` : "none"};
+      !props.isNextOnly ? `1px solid ${props.theme.textColor}` : "none"};
   }
   & div:last-child {
     border: ${(props) =>
-      !props.isPrevOnly ? `2px solid ${props.theme.textColor}` : "none"};
+      !props.isPrevOnly ? `1px solid ${props.theme.textColor}` : "none"};
     border-left: ${(props) => (props.isNextOnly ? "" : "none")};
     text-align: end;
   }
   & div {
+    border-radius: 5px;
     width: 50%;
   }
 
@@ -35,11 +37,11 @@ const Container = styled.div<StyleProps>`
     }
     & div:first-child {
       border: ${(props) =>
-        !props.isNextOnly ? `2px solid ${props.theme.textColor}` : "none"};
+        !props.isNextOnly ? `1px solid ${props.theme.textColor}` : "none"};
     }
     & div:last-child {
       border: ${(props) =>
-        !props.isPrevOnly ? `2px solid ${props.theme.textColor}` : "none"};
+        !props.isPrevOnly ? `1px solid ${props.theme.textColor}` : "none"};
       border-top: ${(props) => (props.isNextOnly ? "" : "none")};
       text-align: end;
     }

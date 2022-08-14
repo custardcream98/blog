@@ -8,6 +8,7 @@ const MarkdownBody = styled.div`
   color: ${(props) => props.theme.textColor};
   background-color: ${(props) => props.theme.bgColor};
   font-size: 0.9rem;
+  font-weight: 300;
   line-height: 1.8;
   word-wrap: break-word;
 
@@ -21,7 +22,8 @@ const MarkdownBody = styled.div`
     outline-width: 0;
     text-decoration: underline;
   }
-  b strong {
+  b,
+  strong {
     font-weight: 600;
   }
   h1,
@@ -87,16 +89,15 @@ const MarkdownBody = styled.div`
     margin: 0 0 1rem 0;
     padding: 0.6rem 0.6rem 0.6rem 0.9rem;
     color: ${(props) => props.theme.textColor};
-    border-left: 0.15rem solid #f9bf00;
+    border-left: 0.2rem solid #f9bf00;
     font-style: italic;
-    font-weight: 400;
+    border-radius: 4px;
+    background-color: #1e1e1e;
+    color: white;
     p {
       margin: 0;
     }
     :first-of-type {
-      border-left: 0.3rem solid #f9bf00;
-      background-color: #4b4b4b;
-      color: white;
     }
   }
 
@@ -123,6 +124,7 @@ const MarkdownBody = styled.div`
     background-color: #1e2228;
     overflow: scroll;
     overflow-y: hidden;
+    border-radius: 4px;
   }
 
   img {
@@ -179,11 +181,12 @@ const MarkdownBody = styled.div`
 
   .toc {
     width: fit-content;
-    background-color: #7c7c7c99;
+    background-color: #1e1e1e;
     color: white;
     margin-bottom: 2rem;
     padding: 0.3rem 0.8rem 0.3rem 0;
     font-size: 0.8rem;
+    border-radius: 4px;
     a {
       color: white;
     }

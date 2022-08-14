@@ -28,7 +28,11 @@ const Input = styled.input`
   color: ${(props) => props.theme.textColor};
   background-color: transparent;
   border: 1px solid ${(props) => props.theme.textColor};
+  border-bottom: none;
   outline-color: ${(props) => props.theme.textColor};
+  :last-of-type {
+    border-left: none;
+  }
 `;
 
 const SubmitBtn = styled.input`
