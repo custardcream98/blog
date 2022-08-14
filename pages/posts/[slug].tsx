@@ -64,7 +64,7 @@ export async function getStaticProps({ params }: Params) {
   const prevNextPosts = getPrevNextPosts(params.slug);
 
   const content = await markdownToHtml(post.content || "");
-  const coverImage = await getOgImage(post.slug);
+  const coverImage = await getOgImage(post.title);
 
   return {
     props: {

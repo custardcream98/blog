@@ -98,7 +98,7 @@ export async function getOgImage(title: string) {
   // }
   // return imagePath
 
-  const { created: fileName } = await fetch(`https://og-img-generator-server.herokuapp.com/og/개발자 시우의 블로그/${title}`, { mode: "no-cors" }).then((res) => res.json())
+  const { created: fileName } = await fetch(`https://og-img-generator-server.herokuapp.com/og/개발자 시우의 블로그/${encodeURI(title)}`, { mode: "no-cors" }).then((res) => res.json())
 
   return fileName;
 }
