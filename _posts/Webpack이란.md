@@ -100,7 +100,7 @@ module.exports = {
 
 webpack의 핵심 기능이라고 볼 수 있습니다.
 
-![webpack](../static/img/webpack이란/webpack.png)
+![webpack](../static/img/Webpack이란/webpack.png)
 
 bundler는 이렇게 다양한 형태의 파일들을 간단하게 묶어주는 일을 합니다. 그 중에서도 webpack은 자바스크립트가 아닌 파일들조차 번들링을 해줍니다. 그 과정이 바로 loader를 통해 이뤄집니다. webpack을 얼마나 잘 다루는가에 대한 부분도 이 loader를 얼마나 다양하고 유연하게 사용할 수 있는가에 따라 갈린다고 합니다.
 
