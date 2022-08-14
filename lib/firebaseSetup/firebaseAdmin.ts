@@ -1,5 +1,6 @@
+import admin from "firebase-admin"
+import { getStorage } from "firebase/storage"
 import { initializeApp } from "firebase/app";
-import { getFirestore } from "firebase/firestore";
 
 const firebaseConfig = {
   apiKey: process.env.NEXT_PUBLIC_API_KEY,
@@ -11,5 +12,7 @@ const firebaseConfig = {
 };
 
 const firebaseApp = initializeApp(firebaseConfig);
+export const firebaseStorage = getStorage(firebaseApp);
 
-export const fireStore = getFirestore();
+admin.initializeApp(firebaseConfig);
+export const adminBucket = admin.storage().bucket();

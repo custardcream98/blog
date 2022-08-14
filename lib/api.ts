@@ -4,6 +4,15 @@ import matter from 'gray-matter'
 import PostType from '../interfaces/post'
 import { PrevNextPosts } from '../interfaces/post'
 
+import { renderToString } from "react-dom/server"
+import chrome from 'chrome-aws-lambda';
+import puppeteer from 'puppeteer-core';
+import { createHash } from "crypto"
+import { ref, uploadBytes, getDownloadURL } from "firebase/storage";
+import { firebaseStorage, adminBucket } from './firebaseSetup/firebaseAdmin';
+import Thumbnail from '../components/Thumbnail'
+
+
 const postsDirectory = join(process.cwd(), '_posts')
 const aboutPageDirectory = join(process.cwd(), 'about.md')
 
@@ -86,21 +95,58 @@ export function getPrevNextPosts(slug: string):PrevNextPosts {
 export const getAboutContent = () => fs.readFileSync(aboutPageDirectory, 'utf8')
 
 export async function getOgImage(title: string) {
-  // const ogImageDir = `public/static/img/og`
-  // const imagePath = `static/img/og/${title}.png`
-  
-  // fs.mkdirSync(ogImageDir, { recursive: true });
 
-  // if (!fs.existsSync(`public/${imagePath}`)) {
-  //   const image = await fetch(`https://og-img-generator-server.herokuapp.com/api/ogimage/개발자 시우의 블로그/${title}`, { mode: "no-cors" }).then((res) => res.blob())
+  const hashedName = createHash('md5').update(`개발자 시우의 블로그${title}`).digest('hex')
+  const fileName = `thumbnails/${hashedName}.png`
+  const file = adminBucket.file(fileName);
+  const storageRef = ref(firebaseStorage, fileName);
+
+  await file.exists().then(
+  ).catch(async () => {
+    const htmlString = renderToString(Thumbnail({ title:"개발자 시우의 블로그", subtitle: title }))
+
+    const content = `
+    <style>
+      body {
+        margin: 0;
+        padding: 0;
+      }
+
+      h1, p {
+        margin: 0;
+        padding: 0;
+      }
+      </style>
+      <body>
+      ${htmlString}
+      </body>
+    `
     
-  //   await fs.promises.writeFile(`public/${imagePath}`, image.stream())
-  // }
-  // return imagePath
+    const options = process.env.AWS_REGION
+    ? {
+        args: chrome.args,
+        executablePath: await chrome.executablePath,
+        headless: chrome.headless
+      }
+    : {
+        args: [],
+        executablePath:
+          '/Applications/Google Chrome.app/Contents/MacOS/Google Chrome'
+      };
+    const browser = await puppeteer.launch(options)
+    const page = await browser.newPage();
+    await page.setViewport({
+      width: 1200,
+      height: 630,
+    });
+    await page.setContent(content, { waitUntil: "domcontentloaded" });  
+    const image = await page.screenshot({ omitBackground: true, type:'png'});  
+    await browser.close();
+    
+    await uploadBytes(storageRef, (image as Buffer).buffer)
+  })
 
-  const { created: fileName } = await fetch(`https://og-img-generator-server.herokuapp.com/og/개발자 시우의 블로그/${encodeURI(title)}`, { mode: "no-cors" }).then((res) => res.json())
-
-  return fileName;
+  return await getDownloadURL(storageRef);
 }
 
 export function getPostByCategory(category: string) {
