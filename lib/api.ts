@@ -104,7 +104,7 @@ export async function getOgImage(title: string) {
       return fileName;
     } catch (e) {
       console.log('retry getting img');
-      await delay(5000);
+      await delay(10000);
     }
   }
 }
