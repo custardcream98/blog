@@ -12,6 +12,7 @@
   },
   "dependencies": {
     "@jsdevtools/rehype-toc": "^3.0.2",
+    "axios": "^0.27.2",
     "dayjs": "^1.11.4",
     "firebase": "^9.9.1",
     "framer-motion": "^6.5.1",

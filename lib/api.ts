@@ -1,6 +1,7 @@
 import fs from 'fs'
 import { join } from 'path'
 import matter from 'gray-matter'
+import axios from "axios"
 import PostType from '../interfaces/post'
 import { PrevNextPosts } from '../interfaces/post'
 
@@ -88,10 +89,18 @@ export const getAboutContent = () => fs.readFileSync(aboutPageDirectory, 'utf8')
 export async function getOgImage(title: string) {
   const delay = (ms:number) => new Promise(resolve => setTimeout(resolve, ms))
   while (true) {
-    try {      
-      const { created: fileName } = await fetch(`https://og-img-generator-server.herokuapp.com/og`, { method:"POST", mode: "no-cors", body: JSON.stringify({title:"개발자 시우의 블로그", subtitle:title}) }).then((res) => res.json())
+    try {
+      const { created: fileName } = await axios
+          .post(`http://custardcream.iptime.org:5000/og`, {
+            title: "개발자 시우의 블로그",
+            subtitle: title,
+          }, {timeout:60000})
+        .then((res) => res.data);
       return fileName;
     } catch (e) {
+      
+      console.log(JSON.stringify({title:"개발자 시우의 블로그", subtitle:title}));
+      
       console.log('retry getting img');
       await delay(10000);
     }
