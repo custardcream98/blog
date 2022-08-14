@@ -110,6 +110,7 @@ const MarkdownBody = styled.div`
     font-size: 85%;
     background-color: rgba(110, 118, 129, 0.4);
     border-radius: 6px;
+    font-weight: 400;
   }
 
   div > pre > code {
@@ -119,12 +120,20 @@ const MarkdownBody = styled.div`
   }
 
   div[data-rehype-pretty-code-fragment] {
-    padding: 0.7rem;
     margin: 1rem 0;
     background-color: #1e2228;
-    overflow: scroll;
-    overflow-y: hidden;
     border-radius: 4px;
+    pre {
+      overflow: auto;
+      overflow-y: hidden;
+      padding: 0.75rem 1rem;
+      code {
+        padding: 0;
+        > span {
+          padding-right: 1rem;
+        }
+      }
+    }
   }
 
   img {

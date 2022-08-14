@@ -24,7 +24,7 @@ const Container = styled.div<StyleProps>`
     text-align: end;
   }
   & div {
-    border-radius: 5px;
+    border-radius: 4px;
     width: 50%;
   }
 

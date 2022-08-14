@@ -30,8 +30,12 @@ const Input = styled.input`
   border: 1px solid ${(props) => props.theme.textColor};
   border-bottom: none;
   outline-color: ${(props) => props.theme.textColor};
+  :first-of-type {
+    border-top-left-radius: 4px;
+  }
   :last-of-type {
     border-left: none;
+    border-top-right-radius: 4px;
   }
 `;
 
@@ -41,6 +45,7 @@ const SubmitBtn = styled.input`
   color: ${(props) => props.theme.bgColor};
   background-color: ${(props) => props.theme.textColor};
   border-color: transparent;
+  border-bottom-right-radius: 4px;
   &:hover {
     cursor: pointer;
   }
@@ -57,6 +62,7 @@ const Textarea = styled.textarea`
   border: 1px solid ${(props) => props.theme.textColor};
   outline-width: 0;
   font-family: ${(props) => props.theme.mainFont};
+  border-bottom-left-radius: 4px;
 `;
 
 const LoadingBtn = styled.div`
@@ -131,6 +137,7 @@ const CommentForm = ({ title }: Props) => {
           type="text"
           name="username"
           placeholder="닉네임"
+          required
           onChange={onChange}
           value={username}
         />
@@ -165,7 +172,7 @@ const CommentForm = ({ title }: Props) => {
         </NamePasswordSubContainer> */}
       </NamePasswordContainer>
       <SubmitContainer>
-        <Textarea name="comment" onChange={onChange} value={comment} />
+        <Textarea name="comment" onChange={onChange} value={comment} required />
         {isLoading ? (
           <LoadingBtn>
             <Rings color={theme.bgColor} width="2rem" />
