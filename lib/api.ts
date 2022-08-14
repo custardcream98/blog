@@ -86,21 +86,10 @@ export function getPrevNextPosts(slug: string):PrevNextPosts {
 export const getAboutContent = () => fs.readFileSync(aboutPageDirectory, 'utf8')
 
 export async function getOgImage(title: string) {
-  // const ogImageDir = `public/static/img/og`
-  // const imagePath = `static/img/og/${title}.png`
-  
-  // fs.mkdirSync(ogImageDir, { recursive: true });
-
-  // if (!fs.existsSync(`public/${imagePath}`)) {
-  //   const image = await fetch(`https://og-img-generator-server.herokuapp.com/api/ogimage/개발자 시우의 블로그/${title}`, { mode: "no-cors" }).then((res) => res.blob())
-    
-  //   await fs.promises.writeFile(`public/${imagePath}`, image.stream())
-  // }
-  // return imagePath
   const delay = (ms:number) => new Promise(resolve => setTimeout(resolve, ms))
   while (true) {
-    try {
-      const { created: fileName } = await fetch(`https://og-img-generator-server.herokuapp.com/og/개발자 시우의 블로그/${encodeURI(title)}`, { mode: "no-cors" }).then((res) => res.json())
+    try {      
+      const { created: fileName } = await fetch(`https://og-img-generator-server.herokuapp.com/og`, { method:"POST", mode: "no-cors", body: JSON.stringify({title:"개발자 시우의 블로그", subtitle:title}) }).then((res) => res.json())
       return fileName;
     } catch (e) {
       console.log('retry getting img');
