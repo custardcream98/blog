@@ -97,12 +97,14 @@ export async function getOgImage(title: string) {
   //   await fs.promises.writeFile(`public/${imagePath}`, image.stream())
   // }
   // return imagePath
-
+  const delay = (ms:number) => new Promise(resolve => setTimeout(resolve, ms))
   while (true) {
     try {
       const { created: fileName } = await fetch(`https://og-img-generator-server.herokuapp.com/og/개발자 시우의 블로그/${encodeURI(title)}`, { mode: "no-cors" }).then((res) => res.json())
       return fileName;
-    } catch (e) {console.log('retry getting img');
+    } catch (e) {
+      console.log('retry getting img');
+      await delay(5000);
     }
   }
 }
