@@ -97,10 +97,7 @@ export async function getOgImage(title: string) {
           }, {timeout:60000})
         .then((res) => res.data);
       return fileName;
-    } catch (e) {
-      
-      console.log(JSON.stringify({title:"개발자 시우의 블로그", subtitle:title}));
-      
+    } catch (e) {      
       console.log('retry getting img');
       await delay(10000);
     }
