@@ -28,6 +28,7 @@
     "reading-time": "^1.5.0",
     "recoil": "^0.7.4",
     "rehype-pretty-code": "^0.3.2",
+    "rehype-raw": "^6.1.1",
     "rehype-slug": "^5.0.1",
     "rehype-stringify": "^9.0.3",
     "remark": "^14.0.2",
