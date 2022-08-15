@@ -2,7 +2,7 @@
 title: "Webpack이란?"
 excerpt: "bundler의 대표주자 Webpack이 무엇인지, Core Concepts를 확실하게 정리해두려고 합니다."
 date: "2022-08-14"
-category: ["Web"]
+category: ["etc"]
 ---
 
 > `bundler`의 대표주자 `Webpack`이 무엇인지, Core Concepts를 확실하게 정리해두려고 합니다.

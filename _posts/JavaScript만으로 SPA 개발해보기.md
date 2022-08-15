@@ -1,8 +1,8 @@
 ---
 title: "JavaScript만으로 SPA 개발해보기"
 excerpt: "바람직한 웹 개발자는 Vanilla JS를 잘 다룰줄 알아야 합니다. Single Page Application을 React.js 등 프레임워크의 도움 없이 Vanilla JS로 개발해보겠습니다."
-date: "2022-08-15"
-category: ["Web", "JavaScript"]
+date: "2022-08-15T22:30:00+09:00"
+category: ["JavaScript"]
 ---
 
 > 바람직한 웹 개발자는 Vanilla JS를 잘 다룰줄 알아야 합니다. Single Page Application을 React.js 등 프레임워크의 도움 없이 Vanilla JS로 개발해보겠습니다.
