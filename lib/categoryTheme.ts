@@ -5,7 +5,7 @@ interface ICategoryTheme {
 }
 
 const categoryTheme: ICategoryTheme = {
-  Web: { color: "#b00035" },
+  etc: { color: "#b00035" },
   "React.js": { color: "#3fc7ed" },
   TypeScript: { color: "#0707ff" },
   Python: { color: "#ffc907" },
