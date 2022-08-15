@@ -106,7 +106,7 @@ const NavItemLinkDecorated = styled(LinkDecorated)`
   font-size: 0.8rem;
   margin: 0 0.25rem;
   @media (max-width: 800px) {
-    font-size: 0.7rem;
+    font-size: 0.75rem;
   }
 `;
 const NavItemLi = styled.li`

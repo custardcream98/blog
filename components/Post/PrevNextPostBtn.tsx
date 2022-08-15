@@ -13,19 +13,20 @@ const Container = styled.div<StyleProps>`
   margin: 2rem 0;
   justify-content: space-between;
 
+  & div {
+    width: 50%;
+  }
   & div:first-child {
     border: ${(props) =>
       !props.isNextOnly ? `1px solid ${props.theme.textColor}` : "none"};
+    border-radius: 4px 0 0 4px;
   }
   & div:last-child {
     border: ${(props) =>
       !props.isPrevOnly ? `1px solid ${props.theme.textColor}` : "none"};
     border-left: ${(props) => (props.isNextOnly ? "" : "none")};
+    border-radius: 0 4px 4px 0;
     text-align: end;
-  }
-  & div {
-    border-radius: 4px;
-    width: 50%;
   }
 
   @media (max-width: 800px) {
@@ -38,11 +39,13 @@ const Container = styled.div<StyleProps>`
     & div:first-child {
       border: ${(props) =>
         !props.isNextOnly ? `1px solid ${props.theme.textColor}` : "none"};
+      border-radius: 4px 4px 0 0;
     }
     & div:last-child {
       border: ${(props) =>
         !props.isPrevOnly ? `1px solid ${props.theme.textColor}` : "none"};
       border-top: ${(props) => (props.isNextOnly ? "" : "none")};
+      border-radius: 0 0 4px 4px;
       text-align: end;
     }
   }

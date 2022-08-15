@@ -24,7 +24,7 @@ const MarkdownBody = styled.div`
   }
   b,
   strong {
-    font-weight: 600;
+    font-weight: 500;
   }
   h1,
   h2,
