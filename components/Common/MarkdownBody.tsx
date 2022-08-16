@@ -84,9 +84,6 @@ const MarkdownBody = styled.div`
   p {
     margin-bottom: 1rem;
   }
-  code {
-    vertical-align: bottom;
-  }
 
   blockquote {
     margin: 0 0 1rem 0;
@@ -112,6 +109,10 @@ const MarkdownBody = styled.div`
     background-color: rgba(110, 118, 129, 0.4);
     border-radius: 6px;
     font-weight: 400;
+    vertical-align: bottom;
+    @media (max-width: 800px) {
+      vertical-align: 0.06rem;
+    }
   }
 
   div > pre > code {
