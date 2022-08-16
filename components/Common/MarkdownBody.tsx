@@ -1,4 +1,4 @@
-import styled, { ThemedStyledFunction, DefaultTheme } from "styled-components";
+import styled from "styled-components";
 
 const MarkdownBody = styled.div`
   -ms-text-size-adjust: 100%;
@@ -84,6 +84,9 @@ const MarkdownBody = styled.div`
   p {
     margin-bottom: 1rem;
   }
+  code {
+    vertical-align: bottom;
+  }
 
   blockquote {
     margin: 0 0 1rem 0;
@@ -96,8 +99,6 @@ const MarkdownBody = styled.div`
     color: white;
     p {
       margin: 0;
-    }
-    :first-of-type {
     }
   }
 
