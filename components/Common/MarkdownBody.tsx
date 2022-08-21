@@ -82,6 +82,7 @@ const MarkdownBody = styled.div`
     color: #8b949e;
   }
   p {
+    display: block;
     margin-bottom: 1rem;
   }
 
@@ -96,6 +97,9 @@ const MarkdownBody = styled.div`
     color: white;
     p {
       margin: 0;
+      code {
+        vertical-align: text-top;
+      }
     }
   }
 
@@ -108,11 +112,10 @@ const MarkdownBody = styled.div`
     font-size: 85%;
     background-color: rgba(110, 118, 129, 0.4);
     border-radius: 6px;
-    font-weight: 400;
     vertical-align: bottom;
-    @media (max-width: 800px) {
+    /* @media (max-width: 800px) {
       vertical-align: 0.06rem;
-    }
+    } */
   }
 
   div > pre > code {
@@ -149,7 +152,7 @@ const MarkdownBody = styled.div`
   ul > li::before {
     content: "•";
     display: inline-block;
-    vertical-align: middle;
+    vertical-align: bottom;
     padding: 0 0.4rem 0 0.3rem;
     /* margin-left: 1rem; */
     font-weight: 900;
@@ -159,7 +162,6 @@ const MarkdownBody = styled.div`
     display: block;
     padding-left: 1rem;
     margin: 0.7rem 0;
-    line-height: 1.4;
   }
 
   ol {
