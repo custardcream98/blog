@@ -1,13 +1,15 @@
 import styled from "styled-components";
 
 const MarkdownBody = styled.div`
+  --main-font-size: 1.1rem;
+
   -ms-text-size-adjust: 100%;
   -webkit-text-size-adjust: 100%;
   width: 100%;
   margin-top: 2rem;
   color: ${(props) => props.theme.textColor};
   background-color: ${(props) => props.theme.bgColor};
-  font-size: 0.9rem;
+  font-size: var(--main-font-size);
   font-weight: 300;
   line-height: 1.8;
   word-wrap: break-word;
@@ -55,30 +57,30 @@ const MarkdownBody = styled.div`
     margin: 1em 0 0.8rem 0;
     font-weight: 600;
     padding-bottom: 0.3em;
-    font-size: 1.9em;
+    font-size: calc(var(--main-font-size) * 2);
     border-bottom: 1px solid #21262d;
   }
   h2 {
     font-weight: 600;
     padding-bottom: 0.3em;
-    font-size: 1.6em;
+    font-size: calc(var(--main-font-size) * 1.8);
     border-bottom: 1px solid #21262d;
   }
   h3 {
     font-weight: 600;
-    font-size: 1.4em;
+    font-size: calc(var(--main-font-size) * 1.6);
   }
   h4 {
     font-weight: 600;
-    font-size: 1.25em;
+    font-size: calc(var(--main-font-size) * 1.4);
   }
   h5 {
     font-weight: 600;
-    font-size: 1.15em;
+    font-size: calc(var(--main-font-size) * 1.25);
   }
   h6 {
     font-weight: 600;
-    font-size: 1.1em;
+    font-size: calc(var(--main-font-size) * 1.1);
     color: #8b949e;
   }
   p {
@@ -112,7 +114,7 @@ const MarkdownBody = styled.div`
     font-size: 85%;
     background-color: rgba(110, 118, 129, 0.4);
     border-radius: 6px;
-    vertical-align: bottom;
+    vertical-align: text-top;
     /* @media (max-width: 800px) {
       vertical-align: 0.06rem;
     } */
@@ -121,7 +123,7 @@ const MarkdownBody = styled.div`
   div > pre > code {
     display: grid;
     background-color: transparent;
-    font-size: 0.75rem;
+    font-size: calc(var(--main-font-size)) * 0.9;
   }
 
   div[data-rehype-pretty-code-fragment] {
@@ -161,7 +163,7 @@ const MarkdownBody = styled.div`
   ul > li {
     display: block;
     padding-left: 1rem;
-    margin: 0.7rem 0;
+    margin: 0.25rem 0;
   }
 
   ol {
@@ -198,7 +200,7 @@ const MarkdownBody = styled.div`
     color: white;
     margin-bottom: 2rem;
     padding: 0.3rem 0.8rem 0.3rem 0;
-    font-size: 0.8rem;
+    font-size: calc(var(--main-font-size) * 0.9);
     border-radius: 4px;
     a {
       color: white;

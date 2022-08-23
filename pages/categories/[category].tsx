@@ -1,5 +1,4 @@
 import React from "react";
-import styled from "styled-components";
 import { getPostByCategory } from "../../lib/api";
 import categoryTheme from "../../lib/categoryTheme";
 import { Container, Title } from "../../components/Common/styledComponents";
