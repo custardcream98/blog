@@ -1,7 +1,10 @@
 import styled from "styled-components";
 
 const MarkdownBody = styled.div`
-  --main-font-size: 1.1rem;
+  --main-font-size: 1.3rem;
+  @media (max-width: 800px) {
+    --main-font-size: 1.1rem;
+  }
 
   -ms-text-size-adjust: 100%;
   -webkit-text-size-adjust: 100%;
