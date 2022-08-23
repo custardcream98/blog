@@ -61,7 +61,7 @@ table {
     box-sizing: border-box;
 }
 body {
-    font-family: 'Noto Sans KR', sans-serif;
+    font-family: ${(props) => props.theme.mainFont};
     background-color: ${(props) => props.theme.bgColor};
     color: ${(props) => props.theme.textColor};
 }

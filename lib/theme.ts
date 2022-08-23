@@ -10,7 +10,7 @@ export const lightTheme: DefaultTheme = {
   mainColor:"#d7a306",
   mainGradient: "linear-gradient(90deg, #d7a306, #fbf2c8)",
   codingFont: '"Source Code Pro", monospace',
-  mainFont: '"Noto Sans KR", -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji"',
+  mainFont: '-apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji"',
   titleFont: '"Poppins", sans-serif'
 }
 
@@ -24,7 +24,7 @@ export const darkTheme: DefaultTheme = {
   mainColor:"#d7a306",
   mainGradient: "linear-gradient(90deg, #d7a306, #fbf2c8)",
   codingFont: '"Source Code Pro", monospace',
-  mainFont: '"Noto Sans KR", -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji"',
+  mainFont: '-apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji"',
   titleFont: '"Poppins", sans-serif'
 }
 

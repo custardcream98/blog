@@ -9,7 +9,7 @@ const ContentContainer = styled.div`
   width: 100%;
   align-items: flex-start;
   p {
-    flex: 1.5 1 0;
+    flex: 1.5 1.5 0;
     font-size: 1rem;
     font-weight: 300;
     line-height: 1.5;

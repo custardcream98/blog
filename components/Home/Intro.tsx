@@ -9,7 +9,7 @@ const TitleSpan = styled(motion.span)`
   font-weight: 900;
   font-size: 13vw;
   line-height: 1;
-  font: 800 ${(props) => props.theme.titleFont};
+  font: 800 "Poppins";
   @media (min-width: 800px) {
     font-size: 104px;
   }
@@ -96,6 +96,9 @@ const IntroParagraph = styled.p`
   text-align: center;
   word-break: keep-all;
   color: ${(props) => props.theme.subTextColor};
+  @media (max-width:800px) {
+    font-size: 0.8rem
+  }
 `;
 
 const Intro = () => {
