@@ -103,7 +103,7 @@ const LogoTitle = styled.span`
 `;
 
 const NavItemLinkDecorated = styled(LinkDecorated)`
-  font-size: 0.8rem;
+  font-size: 1rem;
   margin: 0 0.25rem;
   @media (max-width: 800px) {
     font-size: 0.75rem;

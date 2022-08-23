@@ -10,7 +10,7 @@ const ContentContainer = styled.div`
   align-items: flex-start;
   p {
     flex: 1.5 1 0;
-    font-size: 0.9rem;
+    font-size: 1rem;
     font-weight: 300;
     line-height: 1.5;
   }
@@ -19,7 +19,7 @@ const ContentContainer = styled.div`
 const Title = styled.h1`
   display: flex;
   flex-direction: column;
-  font-size: 1rem;
+  font-size: 1.1rem;
   line-height: 1.3;
   margin-right: 1rem;
   flex: 1 1 0;
