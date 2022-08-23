@@ -92,7 +92,7 @@ export const Container = styled.div`
 const IntroParagraph = styled.p`
   padding: 3rem 0;
   line-height: 1.75;
-  font-size: 0.8rem;
+  font-size: 1rem;
   text-align: center;
   word-break: keep-all;
   color: ${(props) => props.theme.subTextColor};
