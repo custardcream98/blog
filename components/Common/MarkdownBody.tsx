@@ -211,6 +211,19 @@ const MarkdownBody = styled.div`
       padding: 0 0.4rem 0.2rem 0rem;
     }
   }
+  em {
+    font-family: 'Nanum Myeongjo', serif;
+    font-style: italic;
+    letter-spacing: -0.05rem;
+    &::before {
+      content: "'";
+      margin-left: 0.2rem;
+    }
+    &::after {
+      content: "'";
+      margin-right: 0.2rem;
+    }
+  }
 `;
 
 export default MarkdownBody;

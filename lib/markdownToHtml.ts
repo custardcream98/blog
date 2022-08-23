@@ -1,4 +1,4 @@
-import { remark } from 'remark'
+import { remark } from 'remark';
 import remarkRehype from "remark-rehype";
 import rehypeRaw from "rehype-raw";
 import rehypeSlug from "rehype-slug";
