@@ -100,10 +100,12 @@ const MarkdownBody = styled.div`
     border-radius: 4px;
     background-color: #1e1e1e;
     color: white;
+    font-size: 90%;
     p {
       margin: 0;
       code {
-        vertical-align: text-top;
+        font-size: 76.5%;
+        vertical-align: middle;
       }
     }
   }
@@ -215,7 +217,7 @@ const MarkdownBody = styled.div`
     }
   }
   em {
-    font-family: 'Nanum Myeongjo', serif;
+    font-family: "Nanum Myeongjo", serif;
     font-style: italic;
     letter-spacing: -0.05rem;
     &::before {

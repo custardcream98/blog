@@ -60,6 +60,12 @@ table {
 * {
     box-sizing: border-box;
 }
+
+@font-face {
+  font-family: 'Noto Sans';
+  src: url('https://fonts.googleapis.com/css2?family=Noto+Sans:wght@100;400;700&display=optional');
+  unicode-range:U+0041-005A, U+0061-007A, U+0030-0039;
+}
 body {
     font-family: ${(props) => props.theme.mainFont};
     background-color: ${(props) => props.theme.bgColor};
