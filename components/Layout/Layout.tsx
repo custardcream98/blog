@@ -63,11 +63,59 @@ table {
 
 @font-face {
   font-family: 'Noto Sans';
-  src: url('https://fonts.googleapis.com/css2?family=Noto+Sans:wght@100;400;700&display=optional');
+  src: url('../static/fonts/Noto_Sans/NotoSans-Thin.ttf');
+  font-weight: 100;
   unicode-range:U+0041-005A, U+0061-007A, U+0030-0039;
 }
+
+@font-face {
+  font-family: 'Noto Sans';
+  src: url('../static/fonts/Noto_Sans/NotoSans-Regular.ttf');
+  font-weight: 400;
+  unicode-range:U+0041-005A, U+0061-007A, U+0030-0039;
+}
+
+@font-face {
+  font-family: 'Noto Sans';
+  src: url('../static/fonts/Noto_Sans/NotoSans-Bold.ttf');
+  font-weight: 700;
+  unicode-range:U+0041-005A, U+0061-007A, U+0030-0039;
+}
+
+@font-face {
+  font-family: 'Noto Sans KR';
+  src: url('../static/fonts/Noto_Sans_KR/NotoSansKR-Thin.otf');
+  font-weight: 100;
+}
+
+@font-face {
+  font-family: 'Noto Sans KR';
+  src: url('../static/fonts/Noto_Sans_KR/NotoSansKR-Regular.otf');
+  font-weight: 400;
+}
+
+@font-face {
+  font-family: 'Noto Sans KR';
+  src: url('../static/fonts/Noto_Sans_KR/NotoSansKR-Bold.otf');
+  font-weight: 700;
+}
+
+@font-face {
+  font-family: 'Poppins';
+  src: url('../static/fonts/Poppins/Poppins-ExtraBold.ttf');
+  font-weight: 800;
+  unicode-range:U+0041-005A, U+0061-007A, U+0030-0039;
+}
+
+@font-face {
+  font-family: 'Source Code Pro';
+  src: url('../static/fonts/Source_Code_Pro/SourceCodePro-Bold.ttf');
+  font-weight: 800;
+  unicode-range:U+0041-005A, U+0061-007A, U+0030-0039;
+}
+
 body {
-    font-family: ${(props) => props.theme.mainFont};
+    font-family: "Noto Sans", "Noto Sans KR", -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji";
     background-color: ${(props) => props.theme.bgColor};
     color: ${(props) => props.theme.textColor};
 }

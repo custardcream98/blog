@@ -14,12 +14,6 @@ export default class MyDocument extends Document {
       <Html lang="kr">
         <Head>
           <link rel="icon" type="image/png" href="../static/icon.png" />
-          <link rel="preconnect" href="https://fonts.googleapis.com" />
-          <link rel="preconnect" href="https://fonts.gstatic.com" />
-          <link
-            rel="stylesheet"
-            href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100;400;700&family=Nanum+Myeongjo&family=Source+Code+Pro:wght@600&family=Poppins:wght@800&display=optional"
-          />
           <meta property="og:article:author" content="Custardcream98" />
           <meta property="og:type" content="website" />
           <meta
