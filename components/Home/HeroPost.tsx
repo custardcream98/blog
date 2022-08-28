@@ -22,6 +22,7 @@ const Title = styled.h1`
   font-size: 1.1rem;
   line-height: 1.3;
   margin-right: 1rem;
+  font-weight: 600;
   flex: 1 1 0;
 `;
 
