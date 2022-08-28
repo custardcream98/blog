@@ -1,9 +1,10 @@
 import styled from "styled-components";
 
 const MarkdownBody = styled.div`
-  --main-font-size: 1.3rem;
+  --main-font-size: 1.1rem;
+  --main-heading-margin: 4rem;
   @media (max-width: 800px) {
-    --main-font-size: 1.1rem;
+    --main-font-size: 0.95rem;
   }
 
   -ms-text-size-adjust: 100%;
@@ -57,38 +58,43 @@ const MarkdownBody = styled.div`
     font-size: inherit;
   }
   h1 {
-    margin: 1em 0 0.8rem 0;
+    margin: var(--main-heading-margin) 0 1rem 0;
     font-weight: 600;
     padding-bottom: 0.3em;
     font-size: calc(var(--main-font-size) * 2);
     border-bottom: 1px solid #21262d;
   }
   h2 {
+    margin: calc(var(--main-heading-margin) * 0.5) 0 1rem 0;
     font-weight: 600;
     padding-bottom: 0.3em;
-    font-size: calc(var(--main-font-size) * 1.8);
+    font-size: calc(var(--main-font-size) * 1.6);
     border-bottom: 1px solid #21262d;
   }
   h3 {
+    margin: calc(var(--main-heading-margin) * 0.5) 0 1rem 0;
     font-weight: 600;
-    font-size: calc(var(--main-font-size) * 1.6);
+    font-size: calc(var(--main-font-size) * 1.3);
   }
   h4 {
+    margin: calc(var(--main-heading-margin) * 0.5) 0 1rem 0;
     font-weight: 600;
-    font-size: calc(var(--main-font-size) * 1.4);
+    font-size: calc(var(--main-font-size) * 1.2);
   }
   h5 {
-    font-weight: 600;
-    font-size: calc(var(--main-font-size) * 1.25);
-  }
-  h6 {
+    margin: calc(var(--main-heading-margin) * 0.5) 0 1rem 0;
     font-weight: 600;
     font-size: calc(var(--main-font-size) * 1.1);
+  }
+  h6 {
+    margin: calc(var(--main-heading-margin) * 0.5) 0 1rem 0;
+    font-weight: 600;
+    font-size: calc(var(--main-font-size) * 1.05);
     color: #8b949e;
   }
   p {
     display: block;
-    margin-bottom: 1rem;
+    margin-bottom: calc(var(--main-heading-margin) * 0.23);
   }
 
   blockquote {
@@ -120,15 +126,12 @@ const MarkdownBody = styled.div`
     background-color: rgba(110, 118, 129, 0.4);
     border-radius: 6px;
     vertical-align: text-top;
-    /* @media (max-width: 800px) {
-      vertical-align: 0.06rem;
-    } */
   }
 
   div > pre > code {
     display: grid;
     background-color: transparent;
-    font-size: calc(var(--main-font-size)) * 0.9;
+    font-size: calc(var(--main-font-size)) * 0.85;
   }
 
   div[data-rehype-pretty-code-fragment] {
@@ -161,7 +164,6 @@ const MarkdownBody = styled.div`
     display: inline-block;
     vertical-align: bottom;
     padding: 0 0.4rem 0 0.3rem;
-    /* margin-left: 1rem; */
     font-weight: 900;
   }
 
@@ -189,8 +191,6 @@ const MarkdownBody = styled.div`
   ol > li::before {
     content: counters(item, ".") " ";
     font-weight: 500;
-    /* display: inline-block; */
-    /* vertical-align: middle; */
     padding: 0 0.4rem 0.2rem 0.3rem;
     counter-increment: item;
   }
