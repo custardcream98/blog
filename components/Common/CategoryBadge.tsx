@@ -13,8 +13,9 @@ const Badge = styled.div<IBadge>`
   margin: 0.3rem;
   padding: 0.3rem;
   font-weight: 500;
-  font-size: 0.6rem;
+  font-size: 0.85rem;
   border-radius: 100px;
+  letter-spacing: 0.02rem;
   border: 0.1rem solid ${(props) => props.borderColor};
   color: ${(props) => props.borderColor};
   background-color: ${(props) => props.backgroundColor};

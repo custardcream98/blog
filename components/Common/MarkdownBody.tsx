@@ -38,7 +38,6 @@ const MarkdownBody = styled.div`
   h4,
   h5,
   h6 {
-    margin-bottom: 16px;
     font-weight: 600;
     line-height: 1.25;
   }
@@ -59,38 +58,31 @@ const MarkdownBody = styled.div`
   }
   h1 {
     margin: var(--main-heading-margin) 0 1rem 0;
-    font-weight: 600;
     padding-bottom: 0.3em;
     font-size: calc(var(--main-font-size) * 2);
     border-bottom: 1px solid #21262d;
   }
   h2 {
     margin: calc(var(--main-heading-margin) * 0.5) 0 1rem 0;
-    font-weight: 600;
     padding-bottom: 0.3em;
     font-size: calc(var(--main-font-size) * 1.6);
     border-bottom: 1px solid #21262d;
   }
   h3 {
     margin: calc(var(--main-heading-margin) * 0.5) 0 1rem 0;
-    font-weight: 600;
     font-size: calc(var(--main-font-size) * 1.3);
   }
   h4 {
     margin: calc(var(--main-heading-margin) * 0.5) 0 1rem 0;
-    font-weight: 600;
     font-size: calc(var(--main-font-size) * 1.2);
   }
   h5 {
     margin: calc(var(--main-heading-margin) * 0.5) 0 1rem 0;
-    font-weight: 600;
     font-size: calc(var(--main-font-size) * 1.1);
   }
   h6 {
     margin: calc(var(--main-heading-margin) * 0.5) 0 1rem 0;
-    font-weight: 600;
     font-size: calc(var(--main-font-size) * 1.05);
-    color: #8b949e;
   }
   p {
     display: block;
@@ -106,7 +98,7 @@ const MarkdownBody = styled.div`
     border-radius: 4px;
     background-color: #1e1e1e;
     color: white;
-    font-size: 90%;
+    font-size: 93%;
     p {
       margin: 0;
       code {
