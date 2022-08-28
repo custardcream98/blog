@@ -70,6 +70,22 @@ a {
     text-decoration: none;
     color: inherit;
 }
+
+/*
+Webkit / Moz
+*/
+
+input, textarea, button{
+  appearance: none;
+  border-radius: 0;
+  -moz-appearance: none;
+  -webkit-appearance: none;
+  -moz-border-radius: 0;
+  -webkit-border-radius: 0;
+}
+input[type='radio'] {
+  appearance: auto;
+}
 `;
 
 type Props = {
