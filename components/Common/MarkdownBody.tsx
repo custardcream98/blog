@@ -30,7 +30,7 @@ const MarkdownBody = styled.div`
   }
   b,
   strong {
-    font-weight: 500;
+    font-weight: 600;
   }
   h1,
   h2,
@@ -38,7 +38,7 @@ const MarkdownBody = styled.div`
   h4,
   h5,
   h6 {
-    font-weight: 600;
+    font-weight: 700;
     line-height: 1.25;
   }
   h1 tt,
