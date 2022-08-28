@@ -16,6 +16,9 @@ const Container = styled.div`
 
 const LinkDecoratedForCate = styled(LinkDecorated)`
   font-size: 1.2rem;
+  font-weight: 600;
+  line-height: 1.2;
+  padding-bottom: 0.2rem;
 `;
 
 type Props = {

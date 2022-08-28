@@ -25,7 +25,7 @@ export default class MyDocument extends Document {
             content="f97b3212948a936aa8bb8d14b7f84ba8d01f9cc1"
           />
           <link
-            href="https://fonts.googleapis.com/css2?family=Nanum+Myeongjo&family=Noto+Sans+KR:wght@300;600;700&family=Noto+Sans:wght@300;600;700&family=Poppins:wght@800&family=Source+Code+Pro:wght@800&display=optional"
+            href="https://fonts.googleapis.com/css2?family=Nanum+Myeongjo&family=Noto+Sans+KR:wght@300;500;600;700&family=Noto+Sans:wght@300;500;600;700&family=Poppins:wght@800&family=Source+Code+Pro:wght@800&display=optional"
             rel="stylesheet"
           />
           {this.props.styles}
