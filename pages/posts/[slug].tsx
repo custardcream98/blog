@@ -37,7 +37,10 @@ export default function Post({ post }: Props) {
         />
         <PostBody content={post.content} />
         <PrevNextPostBtn post={post} />
-        <Comments title={post.title.replaceAll("/", ",")} />
+        <Comments
+          key={post.title.replaceAll("/", ",")}
+          title={post.title.replaceAll("/", ",")}
+        />
       </Container>
     </Layout>
   );
