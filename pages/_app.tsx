@@ -14,6 +14,8 @@ import "@fontsource/nanum-myeongjo";
 import "@fontsource/source-code-pro/800.css";
 import "@fontsource/poppins/800.css";
 
+import "../styles/reset.css";
+
 function MyApp({ Component, pageProps }: AppProps) {
   return (
     <RecoilRoot>
