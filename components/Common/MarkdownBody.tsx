@@ -123,7 +123,7 @@ const MarkdownBody = styled.div`
   div > pre > code {
     display: grid;
     background-color: transparent;
-    font-size: calc(var(--main-font-size)) * 0.85;
+    font-size: calc(var(--main-font-size) * 0.85);
   }
 
   div[data-rehype-pretty-code-fragment] {
