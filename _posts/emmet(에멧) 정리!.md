@@ -42,7 +42,7 @@ category: ["etc"]
 <div class="awesome"></div>
 ```
 
-여러개도 됩니다.
+여러 개도 됩니다.
 
 # id
 
