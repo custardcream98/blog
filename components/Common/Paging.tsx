@@ -5,7 +5,7 @@ import {
 } from "react-icons/md";
 import React from "react";
 
-const PagingContainer = styled.div`
+const Container = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
@@ -57,7 +57,7 @@ const Paging = ({ pageScale, currentPage, onPageChange }: Props) => {
   };
 
   return (
-    <PagingContainer>
+    <Container>
       {currentPage !== 0 && (
         <Arrow name="forward" onClick={onClick}>
           <MdOutlineKeyboardArrowLeft color={theme.textColor} size="1.5rem" />
@@ -81,7 +81,7 @@ const Paging = ({ pageScale, currentPage, onPageChange }: Props) => {
           <MdOutlineKeyboardArrowRight color={theme.textColor} size="1.5rem" />
         </Arrow>
       )}
-    </PagingContainer>
+    </Container>
   );
 };
 

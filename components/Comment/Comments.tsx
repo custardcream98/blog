@@ -5,13 +5,13 @@ import CommentCard from "./CommentCard";
 import ICommentData from "../../interfaces/comment";
 import { getComments } from "../../lib/firebaseSetup/firebaseApps";
 
-const CommentsContainer = styled.div`
+const Container = styled.section`
   display: flex;
   flex-direction: column;
   width: 100%;
 `;
 
-const CommentSection = styled.h1`
+const CommentsTitle = styled.h1`
   width: 100%;
   font-weight: 500;
   font-size: 1.5rem;
@@ -32,15 +32,15 @@ const Comments = ({ title }: Props) => {
   }, []);
 
   return (
-    <CommentsContainer>
-      <CommentSection>Comments({comments.length})</CommentSection>
+    <Container>
+      <CommentsTitle>Comments({comments.length})</CommentsTitle>
       <CommentForm title={title} />
       {React.Children.toArray(
         comments.map((comment) => (
           <CommentCard comment={comment} title={title} />
         ))
       )}
-    </CommentsContainer>
+    </Container>
   );
 };
 

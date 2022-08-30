@@ -10,7 +10,6 @@ const Form = styled.form`
 
 const NamePasswordContainer = styled.div`
   display: flex;
-  /* margin-bottom: 0.5rem; */
   width: 100%;
 `;
 

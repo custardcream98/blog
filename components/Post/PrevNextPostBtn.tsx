@@ -7,7 +7,7 @@ type StyleProps = {
   isNextOnly: boolean;
 };
 
-const Container = styled.div<StyleProps>`
+const Container = styled.section<StyleProps>`
   display: flex;
   width: 100%;
   margin: 2rem 0;

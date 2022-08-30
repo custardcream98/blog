@@ -11,7 +11,7 @@ import {
   updateComment,
 } from "../../lib/firebaseSetup/firebaseApps";
 
-const CommentCardContainer = styled.div`
+const Container = styled.section`
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -231,7 +231,7 @@ const CommentCard = ({ comment, title }: Props) => {
   };
 
   return (
-    <CommentCardContainer>
+    <Container>
       <CommentInfoContainer>
         <Username>{comment.username}</Username>
         <CommentDateSpan date={comment.createdAt} />
@@ -263,7 +263,7 @@ const CommentCard = ({ comment, title }: Props) => {
           <PasswordForm onSubmit={onSubmit} name="password">
             <PasswordInput
               name="password"
-              type="pasword"
+              type="password"
               placeholder="비밀번호"
               onChange={onChange}
             />
@@ -279,7 +279,7 @@ const CommentCard = ({ comment, title }: Props) => {
         <PasswordForm onSubmit={onSubmit} name="password">
           <PasswordInput
             name="password"
-            type="pasword"
+            type="password"
             placeholder="비밀번호"
             onChange={onChange}
           />
@@ -303,7 +303,7 @@ const CommentCard = ({ comment, title }: Props) => {
           </EditContainer>
         </CommentContainer>
       )}
-    </CommentCardContainer>
+    </Container>
   );
 };
 

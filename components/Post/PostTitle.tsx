@@ -6,7 +6,7 @@ import CategoryBadge, { BadgeContainer } from "../Common/CategoryBadge";
 import DateSpan from "../Common/DateSpan";
 import getFullURL from "../../lib/url";
 
-const TitleContainer = styled.section`
+const Container = styled.section`
   display: flex;
   flex-direction: column;
   padding-top: 2rem;
@@ -52,7 +52,7 @@ type Props = {
 const PostTitle = ({ coverImage, title, category, date }: Props) => {
   return (
     <>
-      <TitleContainer>
+      <Container>
         <Title>{title}</Title>
         <DateSpanforTitle date={date} />
         <BadgeHitsCounterContainer>
@@ -71,7 +71,7 @@ const PostTitle = ({ coverImage, title, category, date }: Props) => {
             />
           </HitsCounter>
         </BadgeHitsCounterContainer>
-      </TitleContainer>
+      </Container>
       {coverImage && (
         <Thumbnail
           src={coverImage}

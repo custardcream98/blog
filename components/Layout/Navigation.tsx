@@ -9,7 +9,7 @@ import { isDarkAtom } from "../../lib/atoms";
 import BlogIcon from "../Common/BlogIcon";
 import { LinkDecorated } from "../Common/styledComponents";
 
-const NavContainer = styled.div`
+const Container = styled.section`
   height: 50px;
   width: 100vw;
   box-shadow: ${(props) => props.theme.navLineShadow};
@@ -137,7 +137,7 @@ const Navigation = () => {
   const theme = useTheme();
 
   return (
-    <NavContainer>
+    <Container>
       <Nav>
         <Link href="/">
           <LogoTitle>
@@ -160,7 +160,7 @@ const Navigation = () => {
           </DarkmodeSwitch>
         </NavMenu>
       </Nav>
-    </NavContainer>
+    </Container>
   );
 };
 
