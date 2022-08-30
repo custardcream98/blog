@@ -12,7 +12,7 @@ export const LinkDecorated = styled.a`
   }
 `;
 
-export const Container = styled.div`
+export const Container = styled.section`
   width: 85vw;
   max-width: 800px;
   display: flex;
