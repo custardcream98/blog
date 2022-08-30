@@ -4,8 +4,9 @@ import styled from "styled-components";
 import imageLoader from "../../lib/imageLoader";
 import CategoryBadge, { BadgeContainer } from "../Common/CategoryBadge";
 import DateSpan from "../Common/DateSpan";
+import getFullURL from "../../lib/url";
 
-const TitleContainer = styled.div`
+const TitleContainer = styled.section`
   display: flex;
   flex-direction: column;
   padding-top: 2rem;
@@ -31,6 +32,16 @@ const Thumbnail = styled(Image)`
   width: 100%;
 `;
 
+const BadgeHitsCounterContainer = styled.div`
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+`;
+
+const HitsCounter = styled.a`
+  margin: 1.136rem 0;
+`;
+
 type Props = {
   coverImage?: string;
   title: string;
@@ -44,13 +55,22 @@ const PostTitle = ({ coverImage, title, category, date }: Props) => {
       <TitleContainer>
         <Title>{title}</Title>
         <DateSpanforTitle date={date} />
-        {category && (
-          <BadgeContainer>
-            {React.Children.toArray(
-              category.map((keyword) => <CategoryBadge category={keyword} />)
-            )}
-          </BadgeContainer>
-        )}
+        <BadgeHitsCounterContainer>
+          {category && (
+            <BadgeContainer>
+              {React.Children.toArray(
+                category.map((keyword) => <CategoryBadge category={keyword} />)
+              )}
+            </BadgeContainer>
+          )}
+          <HitsCounter href="https://hits.seeyoufarm.com">
+            <img
+              src={`https://hits.seeyoufarm.com/api/count/incr/badge.svg?url=${encodeURI(
+                getFullURL()
+              )}&count_bg=%23F3C035&title_bg=%23555555&icon=&icon_color=%23E7E7E7&title=hits&edge_flat=true`}
+            />
+          </HitsCounter>
+        </BadgeHitsCounterContainer>
       </TitleContainer>
       {coverImage && (
         <Thumbnail
