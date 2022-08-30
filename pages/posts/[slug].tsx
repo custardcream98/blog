@@ -30,7 +30,6 @@ export default function Post({ post }: Props) {
     >
       <Container>
         <PostTitle
-          key={post.coverImage}
           coverImage={post.coverImage}
           title={post.title}
           category={post.category}
