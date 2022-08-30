@@ -1,12 +1,7 @@
 import React, { useState } from "react";
 import { Rings } from "react-loader-spinner";
-import { addDoc, collection } from "firebase/firestore";
-import { fireStore } from "../../lib/firebaseSetup";
-import {
-  COLLECTION_COMMENTS,
-  COLLECTION_POSTS,
-} from "../../lib/firebaseSetup/collectionNames";
 import styled, { useTheme } from "styled-components";
+import { addComment } from "../../lib/firebaseSetup/firebaseApps";
 
 const Form = styled.form`
   width: 100%;
@@ -111,18 +106,7 @@ const CommentForm = ({ title }: Props) => {
 
     setIsLoading(true);
 
-    const commentCollectionRef = collection(
-      fireStore,
-      COLLECTION_POSTS,
-      title,
-      COLLECTION_COMMENTS
-    );
-    await addDoc(commentCollectionRef, {
-      createdAt: Date.now(),
-      password,
-      comment,
-      username,
-    });
+    await addComment({ title, password, comment, username });
 
     setComment("");
     setPassword("");
@@ -150,26 +134,6 @@ const CommentForm = ({ title }: Props) => {
           onChange={onChange}
           value={password}
         />
-        {/* <NamePasswordSubContainer>
-          <Label htmlFor="username">이름</Label>
-          <Input
-            type="text"
-            name="username"
-            onChange={onChange}
-            value={username}
-          />
-        </NamePasswordSubContainer>
-        <NamePasswordSubContainer>
-          <Label htmlFor="password">비밀번호</Label>
-          <Input
-            type="password"
-            name="password"
-            required
-            minLength={4}
-            onChange={onChange}
-            value={password}
-          />
-        </NamePasswordSubContainer> */}
       </NamePasswordContainer>
       <SubmitContainer>
         <Textarea name="comment" onChange={onChange} value={comment} required />

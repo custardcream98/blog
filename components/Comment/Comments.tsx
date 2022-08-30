@@ -1,14 +1,9 @@
 import React, { useState, useEffect } from "react";
-import { onSnapshot, collection } from "firebase/firestore";
-import { fireStore } from "../../lib/firebaseSetup";
-import {
-  COLLECTION_COMMENTS,
-  COLLECTION_POSTS,
-} from "../../lib/firebaseSetup/collectionNames";
 import styled from "styled-components";
 import CommentForm from "./CommentForm";
 import CommentCard from "./CommentCard";
 import ICommentData from "../../interfaces/comment";
+import { getComments } from "../../lib/firebaseSetup/firebaseApps";
 
 const CommentsContainer = styled.div`
   display: flex;
@@ -33,20 +28,7 @@ const Comments = ({ title }: Props) => {
   const [comments, setComments] = useState<ICommentData[]>([]);
 
   useEffect(() => {
-    onSnapshot(
-      collection(fireStore, COLLECTION_POSTS, title, COLLECTION_COMMENTS),
-      (snapshot) => {
-        const commentsArr: ICommentData[] = [];
-        snapshot.docs
-          .sort((post1, post2) =>
-            post1.data().createdAt > post2.data().createdAt ? -1 : 1
-          )
-          .map((doc) =>
-            commentsArr.push({ ...(doc.data() as ICommentData), id: doc.id })
-          );
-        setComments((_) => [...commentsArr]);
-      }
-    );
+    getComments(title, setComments);
   }, []);
 
   return (

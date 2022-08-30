@@ -3,14 +3,13 @@ import { Rings } from "react-loader-spinner";
 import { AiFillEdit } from "react-icons/ai";
 import { MdDelete } from "react-icons/md";
 import styled, { useTheme } from "styled-components";
-import { deleteDoc, doc, updateDoc } from "firebase/firestore";
-import { fireStore } from "../../lib/firebaseSetup";
-import {
-  COLLECTION_COMMENTS,
-  COLLECTION_POSTS,
-} from "../../lib/firebaseSetup/collectionNames";
 import DateSpan from "../Common/DateSpan";
 import ICommentData from "../../interfaces/comment";
+import {
+  deleteComment,
+  getCommentDocRef,
+  updateComment,
+} from "../../lib/firebaseSetup/firebaseApps";
 
 const CommentCardContainer = styled.div`
   display: flex;
@@ -76,7 +75,6 @@ const EditTextarea = styled.textarea`
   border: 1px solid ${(props) => props.theme.textColor};
   outline-width: 0;
   font-family: ${(props) => props.theme.mainFont};
-  /* margin-left: !important 1rem; */
   font-size: 0.9rem;
 `;
 
@@ -165,13 +163,7 @@ const CommentCard = ({ comment, title }: Props) => {
   const [commentText, setCommentText] = useState(comment.comment);
   const theme = useTheme();
 
-  const commentDocRef = doc(
-    fireStore,
-    COLLECTION_POSTS,
-    title,
-    COLLECTION_COMMENTS,
-    comment.id
-  );
+  const commentDocRef = getCommentDocRef({ title, commentId: comment.id });
 
   const onClick = async (event: React.MouseEvent<HTMLButtonElement>) => {
     event.preventDefault();
@@ -220,7 +212,7 @@ const CommentCard = ({ comment, title }: Props) => {
           }
         } else {
           if (password === comment.password) {
-            await deleteDoc(commentDocRef);
+            await deleteComment(commentDocRef);
           }
           setIsDeleting(false);
         }
@@ -229,7 +221,7 @@ const CommentCard = ({ comment, title }: Props) => {
       case "comment":
         setIsLoading(true);
         if (comment.comment !== commentText) {
-          await updateDoc(commentDocRef, { comment: commentText });
+          await updateComment(commentDocRef, commentText);
         }
         setIsPasswordCorrect(false);
         setIsEditing(false);
