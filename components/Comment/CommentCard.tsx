@@ -22,6 +22,7 @@ const Comment = styled.p`
   margin-left: 0.2rem;
   text-align: start;
   font-size: 0.9rem;
+  line-height: 1.4;
 `;
 
 const CommentContainer = styled.div`
