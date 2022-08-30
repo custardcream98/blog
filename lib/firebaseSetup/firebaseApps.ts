@@ -10,7 +10,11 @@ import {
 } from "firebase/firestore";
 import ICommentData from "../../interfaces/comment";
 import { fireStore } from "./";
-import { COLLECTION_COMMENTS, COLLECTION_POSTS } from "./collectionNames";
+import {
+  COLLECTION_COMMENTS,
+  COLLECTION_POSTS,
+  COLLECTION_VIEWS,
+} from "./collectionNames";
 
 interface IAddCommentProps {
   title: string;
@@ -24,8 +28,14 @@ interface ICommentDocRefProps {
   commentId: string;
 }
 
+const getPostDocRef = (title: string) =>
+  doc(fireStore, COLLECTION_POSTS, title);
+
+const getCommentCollectionRef = (title: string) =>
+  collection(getPostDocRef(title), COLLECTION_COMMENTS);
+
 export const getCommentDocRef = ({ title, commentId }: ICommentDocRefProps) =>
-  doc(fireStore, COLLECTION_POSTS, title, COLLECTION_COMMENTS, commentId);
+  doc(getPostDocRef(title), COLLECTION_COMMENTS, commentId);
 
 export const deleteComment = async (docRef: DocumentReference<DocumentData>) =>
   await deleteDoc(docRef);
@@ -41,12 +51,7 @@ export const addComment = async ({
   comment,
   username,
 }: IAddCommentProps) => {
-  const commentCollectionRef = collection(
-    fireStore,
-    COLLECTION_POSTS,
-    title,
-    COLLECTION_COMMENTS
-  );
+  const commentCollectionRef = getCommentCollectionRef(title);
   await addDoc(commentCollectionRef, {
     createdAt: Date.now(),
     password,
@@ -59,18 +64,17 @@ export const getComments = (
   title: string,
   setComments: React.Dispatch<React.SetStateAction<ICommentData[]>>
 ) => {
-  onSnapshot(
-    collection(fireStore, COLLECTION_POSTS, title, COLLECTION_COMMENTS),
-    (snapshot) => {
-      const commentsArr: ICommentData[] = [];
-      snapshot.docs
-        .sort((post1, post2) =>
-          post1.data().createdAt > post2.data().createdAt ? -1 : 1
-        )
-        .map((doc) =>
-          commentsArr.push({ ...(doc.data() as ICommentData), id: doc.id })
-        );
-      setComments((_) => [...commentsArr]);
-    }
-  );
+  const commentCollectionRef = getCommentCollectionRef(title);
+
+  onSnapshot(commentCollectionRef, (snapshot) => {
+    const commentsArr: ICommentData[] = [];
+    snapshot.docs
+      .sort((post1, post2) =>
+        post1.data().createdAt > post2.data().createdAt ? -1 : 1
+      )
+      .map((doc) =>
+        commentsArr.push({ ...(doc.data() as ICommentData), id: doc.id })
+      );
+    setComments((_) => [...commentsArr]);
+  });
 };
