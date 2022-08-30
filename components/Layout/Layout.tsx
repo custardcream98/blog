@@ -7,6 +7,7 @@ import { darkTheme, lightTheme } from "../../lib/theme";
 import { createGlobalStyle } from "styled-components";
 import Navigation from "./Navigation";
 import Footer from "./Footer";
+import getFullURL from "../../lib/url";
 
 export const GlobalStyle = createGlobalStyle`
     html, body, div, span, applet, object, iframe,
@@ -122,10 +123,7 @@ const Layout = ({ children, title, description, image, url }: Props) => {
             "예쁘고 간결한 것을 정말 좋아하는 개발자 박시우의 블로그입니다. 공부한 것들, 공유하고 싶은 내용을 올립니다."
           }
         />
-        <meta
-          property="og:url"
-          content={`https://custardcream.vercel.app/${url ?? ""}`}
-        />
+        <meta property="og:url" content={getFullURL()} />
         <meta
           property="og:image"
           content={image ?? "/static/img/thumbnail.png"}
