@@ -59,7 +59,7 @@ const PostTitle = ({ coverImage, title, category, date }: Props) => {
               )}
             </BadgeContainer>
           )}
-          <ViewsLikesCounter title={title} />
+          <ViewsLikesCounter key={title} title={title} />
         </BadgeViewsLikesCounterContainer>
       </Container>
       {coverImage && (
