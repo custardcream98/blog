@@ -19,6 +19,10 @@ export const Container = styled.div`
   flex-direction: column;
   align-items: center;
   margin: 0 auto auto;
+
+  h2:target {
+    scroll-margin-top: 60px;
+  }
 `;
 
 export const Title = styled.h2`

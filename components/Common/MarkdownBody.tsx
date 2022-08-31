@@ -219,6 +219,10 @@ const MarkdownBody = styled.section`
       margin-right: 0.2rem;
     }
   }
+
+  span:target {
+    scroll-margin-top: 60px;
+  }
 `;
 
 export default MarkdownBody;
