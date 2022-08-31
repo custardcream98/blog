@@ -11,7 +11,7 @@ const Container = styled.section`
   width: 100%;
 `;
 
-const CommentsTitle = styled.h1`
+const CommentsTitle = styled.h3`
   width: 100%;
   font-weight: 500;
   font-size: 1.5rem;

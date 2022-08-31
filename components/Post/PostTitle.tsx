@@ -6,7 +6,7 @@ import CategoryBadge, { BadgeContainer } from "../Common/CategoryBadge";
 import DateSpan from "../Common/DateSpan";
 import ViewsLikesCounter from "./ViewsLikesCounter";
 
-const Container = styled.section`
+const Container = styled.header`
   display: flex;
   flex-direction: column;
   padding-top: 2rem;
@@ -15,7 +15,7 @@ const Container = styled.section`
   width: 100%;
 `;
 
-const Title = styled.h1`
+const Title = styled.h2`
   color: ${(props) => props.theme.textColor};
   word-break: keep-all;
   font-weight: 800;

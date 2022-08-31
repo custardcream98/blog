@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from "react";
-import styled from "styled-components";
 import Intro from "./Intro";
 import Post from "../../interfaces/post";
 import HeroPost from "./HeroPost";

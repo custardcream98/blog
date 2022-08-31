@@ -16,7 +16,7 @@ const ContentContainer = styled.div`
   }
 `;
 
-const Title = styled.h1`
+const Title = styled.h3`
   display: flex;
   flex-direction: column;
   font-size: 1.1rem;

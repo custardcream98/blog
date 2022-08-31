@@ -77,7 +77,7 @@ const DarkmodeSwitchHandle = styled(motion.div)`
   }
 `;
 
-const Title = styled.span`
+const Title = styled.h1`
   color: ${(props) => props.theme.textColor};
   font: 800 1rem ${(props) => props.theme.codingFont};
   letter-spacing: -0.03rem;

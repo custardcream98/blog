@@ -21,7 +21,7 @@ export const Container = styled.section`
   margin: 0 auto auto;
 `;
 
-export const Title = styled.h1`
+export const Title = styled.h2`
   margin: 2rem 0;
   padding-bottom: 0.2rem;
   border-bottom: 3px solid #3a3e43;
