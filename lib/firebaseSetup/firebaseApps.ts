@@ -48,8 +48,6 @@ export const createPostDoc = async (title: string) => {
   try {
     const _ = await (await getDoc(postDocRef)).data()![KEY_VIEWS];
   } catch (e) {
-    console.log(e);
-
     if (e instanceof FirebaseError) {
       if (e.code === "not-found") {
         await setDoc(postDocRef, { views: [], likes: 0 });

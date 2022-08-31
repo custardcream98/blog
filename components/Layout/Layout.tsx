@@ -56,6 +56,10 @@ const Layout = ({ children, title, description, image, tags }: Props) => {
           property="og:image"
           content={image ?? "/static/img/thumbnail.png"}
         />
+        <meta
+          name="keywords"
+          content={tags?.join(", ") ?? "HTML, CSS, JavaScript"}
+        ></meta>
         <meta name="viewport" content="initial-scale=1.0, width=device-width" />
       </Head>
       <Navigation />

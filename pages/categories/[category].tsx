@@ -15,7 +15,7 @@ type Props = {
 export default function Post({ category, posts }: Props) {
   check404();
   return (
-    <Layout title={`카테고리 ${category}`} url={`categories/${category}`}>
+    <Layout title={`카테고리 ${category}`} tags={[category]}>
       <Container style={{ alignItems: "flex-start" }}>
         <Title>{`<${category} />`}</Title>
         {React.Children.toArray(

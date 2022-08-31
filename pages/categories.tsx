@@ -6,7 +6,7 @@ import Badge, { BadgeContainer } from "../components/Common/CategoryBadge";
 
 const Categories = () => {
   return (
-    <Layout title="Categories" url="categories">
+    <Layout title="Categories">
       <Container>
         <Title>{`<Categories />`}</Title>
         <BadgeContainer>
