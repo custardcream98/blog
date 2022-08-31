@@ -13,13 +13,16 @@ const Container = styled.footer`
   font-weight: 300;
   margin-top: 0.5rem;
 
-  a {
+  address ul {
+    display: flex;
+  }
+  address ul li {
     color: ${(props) => props.theme.subTextColor};
     font-size: inherit;
     font-weight: inherit;
     padding-left: 0.3rem;
   }
-  a:nth-of-type(1) {
+  address ul li:nth-of-type(1) {
     padding-left: 0rem;
   }
   span {
@@ -35,19 +38,29 @@ const Footer = () => {
         &copy; {new Date().getFullYear()} custardcream98. All rights reserved.
       </span>
       <address>
-        <h2 hidden>Contact</h2>
-        <LinkDecorated href="https://github.com/custardcream98" target="_blank">
-          Github
-        </LinkDecorated>
-        <LinkDecorated
-          href="https://www.linkedin.com/in/shi-woo-park-668b33147/"
-          target="_blank"
-        >
-          LinkedIn
-        </LinkDecorated>
-        <LinkDecorated href="mailto:custardcream@kakao.com" target="_blank">
-          Email
-        </LinkDecorated>
+        <ul>
+          <li>
+            <LinkDecorated
+              href="https://github.com/custardcream98"
+              target="_blank"
+            >
+              Github
+            </LinkDecorated>
+          </li>
+          <li>
+            <LinkDecorated
+              href="https://www.linkedin.com/in/shi-woo-park-668b33147/"
+              target="_blank"
+            >
+              LinkedIn
+            </LinkDecorated>
+          </li>
+          <li>
+            <LinkDecorated href="mailto:custardcream@kakao.com" target="_blank">
+              Email
+            </LinkDecorated>
+          </li>
+        </ul>
       </address>
     </Container>
   );

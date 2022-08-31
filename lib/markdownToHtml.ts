@@ -20,7 +20,7 @@ export default async function markdownToHtml(markdown: string) {
     .use(headingToSementic)
     .use(rehypeStringify)
     .process(markdown);
-  return result.toString();
+  return `<h3 hidden>본문 내용</h3>` + result.toString();
 }
 
 function anchorTargetBlank(): Transformer<Root, Root> {

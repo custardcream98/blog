@@ -23,6 +23,11 @@ const Arrow = styled.button`
   }
 `;
 
+const PagenumList = styled.ol`
+  display: flex;
+  align-items: center;
+`;
+
 const Pagenum = styled(Arrow)`
   color: ${(props) => props.theme.textColor};
   font-weight: 300;
@@ -57,25 +62,29 @@ const Paging = ({ pageScale, currentPage, onPageChange }: Props) => {
   };
 
   return (
-    <Container>
+    <Container as="nav">
       {currentPage !== 0 && (
         <Arrow name="forward" onClick={onClick}>
           <MdOutlineKeyboardArrowLeft color={theme.textColor} size="1.5rem" />
         </Arrow>
       )}
-      {React.Children.toArray(
-        new Array(pageScale).fill(0).map((_, index) =>
-          index === currentPage ? (
-            <Pagenum__selected value={index} onClick={onClick}>
-              {index + 1}
-            </Pagenum__selected>
-          ) : (
-            <Pagenum value={index} onClick={onClick}>
-              {index + 1}
-            </Pagenum>
-          )
-        )
-      )}
+      <PagenumList>
+        {React.Children.toArray(
+          new Array(pageScale).fill(0).map((_, index) => (
+            <li>
+              {index === currentPage ? (
+                <Pagenum__selected value={index} onClick={onClick}>
+                  {index + 1}
+                </Pagenum__selected>
+              ) : (
+                <Pagenum value={index} onClick={onClick}>
+                  {index + 1}
+                </Pagenum>
+              )}
+            </li>
+          ))
+        )}
+      </PagenumList>
       {currentPage !== pageScale - 1 && (
         <Arrow name="backward" onClick={onClick}>
           <MdOutlineKeyboardArrowRight color={theme.textColor} size="1.5rem" />

@@ -8,7 +8,9 @@ const Categories = () => {
   return (
     <Layout title="Categories">
       <Container>
-        <Title>{`<Categories />`}</Title>
+        <header>
+          <Title>{`<Categories />`}</Title>
+        </header>
         <BadgeContainer>
           {React.Children.toArray(
             Object.keys(categoryTheme).map((c) => <Badge category={c} />)

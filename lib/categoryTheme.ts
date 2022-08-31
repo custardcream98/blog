@@ -1,11 +1,11 @@
 interface ICategoryTheme {
-  [category : string]:{
-    color: string
-  }
+  [category: string]: {
+    color: string;
+  };
 }
 
 const categoryTheme: ICategoryTheme = {
-  etc: { color: "#b00035" },
+  etc: { color: "#979797" },
   "React.js": { color: "#3fc7ed" },
   TypeScript: { color: "#0707ff" },
   Python: { color: "#ffc907" },
@@ -15,6 +15,7 @@ const categoryTheme: ICategoryTheme = {
   Firebase: { color: "#dea41f" },
   "styled-components": { color: "#c40ed1" },
   "Express.js": { color: "#2def5b" },
-}
+  HTML: { color: "#b00035" },
+};
 
 export default categoryTheme;

@@ -24,7 +24,7 @@ const Title2 = styled(TitleSpan)`
   letter-spacing: -0.13rem;
 `;
 
-const TitleContainer = styled.div`
+const TitleContainer = styled.h2`
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -105,7 +105,7 @@ const IntroParagraph = styled.p`
 const Intro = () => {
   const stringColor = useRecoilValue(gradientTextColorSelector);
   return (
-    <>
+    <header>
       <TitleContainer>
         <Title1 variants={title1Var(stringColor)} initial="start" animate="end">
           Dedicated to
@@ -120,7 +120,7 @@ const Intro = () => {
           것들, 공유하고 싶은 내용을 올립니다.
         </IntroParagraph>
       </Container>
-    </>
+    </header>
   );
 };
 export default Intro;

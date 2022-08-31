@@ -8,7 +8,7 @@ interface IBadge {
   borderColor: string;
 }
 
-const Badge = styled.div<IBadge>`
+const Badge = styled.li<IBadge>`
   display: block;
   margin: 0.3rem;
   padding: 0.3rem;
@@ -26,7 +26,7 @@ const Badge = styled.div<IBadge>`
   }
 `;
 
-export const BadgeContainer = styled.div`
+export const BadgeContainer = styled.ul`
   display: flex;
   flex-wrap: wrap;
   margin: 0.7rem -0.3rem;

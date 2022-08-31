@@ -8,7 +8,7 @@ const ContentContainer = styled.div`
   display: flex;
   width: 100%;
   align-items: flex-start;
-  p {
+  a {
     flex: 1.5 1.5 0;
     font-size: 1rem;
     font-weight: 300;
@@ -60,7 +60,7 @@ const HeroPost = ({ title, coverImage, date, excerpt, slug }: Props) => {
           <DateSpan date={date} />
         </Title>
         <Link href={`/posts/${slug}`} passHref>
-          <LinkDecorated as="p">
+          <LinkDecorated>
             <p>{excerpt}</p>
           </LinkDecorated>
         </Link>

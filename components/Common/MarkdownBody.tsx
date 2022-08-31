@@ -1,6 +1,6 @@
 import styled from "styled-components";
 
-const MarkdownBody = styled.article`
+const MarkdownBody = styled.section`
   --main-font-size: 1.1rem;
   --main-heading-margin: 4rem;
   @media (max-width: 800px) {
@@ -121,12 +121,6 @@ const MarkdownBody = styled.article`
     vertical-align: text-top;
   }
 
-  div > pre > code {
-    display: grid;
-    background-color: transparent;
-    font-size: calc(var(--main-font-size) * 0.85);
-  }
-
   div[data-rehype-pretty-code-fragment] {
     margin: 1rem 0;
     background-color: #1e2228;
@@ -137,6 +131,9 @@ const MarkdownBody = styled.article`
       padding: 0.75rem 1rem;
       code {
         padding: 0;
+        display: grid;
+        background-color: transparent;
+        font-size: calc(var(--main-font-size) * 0.8);
         > span {
           padding-right: 1rem;
         }

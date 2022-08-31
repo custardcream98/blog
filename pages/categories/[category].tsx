@@ -18,9 +18,11 @@ export default function Post({ category, posts }: Props) {
     <Layout title={`카테고리 ${category}`} tags={[category]}>
       <Container style={{ alignItems: "flex-start" }}>
         <Title>{`<${category} />`}</Title>
-        {React.Children.toArray(
-          posts.map((post) => <CategoryCard post={post} />)
-        )}
+        <ol>
+          {React.Children.toArray(
+            posts.map((post) => <CategoryCard post={post} />)
+          )}
+        </ol>
       </Container>
     </Layout>
   );

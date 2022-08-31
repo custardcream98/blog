@@ -6,7 +6,7 @@ import { LinkDecorated } from "../../components/Common/styledComponents";
 import DateSpan from "../Common/DateSpan";
 import CategoryBadge, { BadgeContainer } from "../Common/CategoryBadge";
 
-const Container = styled.div`
+const Container = styled.li`
   width: 100%;
   display: flex;
   flex-direction: column;

@@ -9,7 +9,11 @@ import { isDarkAtom } from "../../lib/atoms";
 import BlogIcon from "../Common/BlogIcon";
 import { LinkDecorated } from "../Common/styledComponents";
 
-const Container = styled.section`
+const Dummy = styled.div`
+  height: 0.1px;
+`;
+
+const Container = styled.header`
   height: 50px;
   width: 100vw;
   box-shadow: ${(props) => props.theme.navLineShadow};
@@ -40,15 +44,16 @@ const NavMenu = styled.ul`
   align-items: center;
 `;
 
-const DarkmodeSwitch = styled.div`
+const DarkmodeSwitch = styled.button`
   width: 50px;
   height: 30px;
   background-color: rgb(189, 189, 189);
   display: flex;
   justify-content: flex-start;
   border-radius: 50px;
+  border: none;
   padding: 3px;
-  margin-left: 0.25rem;
+  margin: 0 0 0 0.25rem;
   cursor: pointer;
   &[data-ison="true"] {
     justify-content: flex-end;
@@ -77,24 +82,22 @@ const DarkmodeSwitchHandle = styled(motion.div)`
   }
 `;
 
-const Title = styled.h1`
+const Title = styled.span`
   color: ${(props) => props.theme.textColor};
   font: 800 1rem ${(props) => props.theme.codingFont};
   letter-spacing: -0.03rem;
+  margin-left: 7px;
   @media (max-width: 800px) {
     font-size: 0.7rem;
   }
 `;
 
-const LogoTitle = styled.span`
+const LogoTitle = styled.h1`
   display: flex;
   justify-content: flex-start;
   align-items: center;
   &:hover {
     cursor: pointer;
-  }
-  span {
-    margin-left: 7px;
   }
 `;
 
@@ -108,6 +111,10 @@ const NavItemLinkDecorated = styled(LinkDecorated)`
 const NavItemLi = styled.li`
   display: flex;
   align-items: center;
+`;
+
+const NavItemWrapper = styled.div`
+  display: flex;
 `;
 
 const spring = {
@@ -139,16 +146,20 @@ const Navigation = () => {
   return (
     <Container>
       <Nav>
-        <Link href="/">
-          <LogoTitle>
-            <BlogIcon color={theme.textColor} size={1} />
-            <Title>Custardcream</Title>
-          </LogoTitle>
+        <Link href="/" passHref>
+          <a>
+            <LogoTitle>
+              <BlogIcon color={theme.textColor} size={1} />
+              <Title>Custardcream</Title>
+            </LogoTitle>
+          </a>
         </Link>
-        <NavMenu>
-          <NavItem href="/#Posts_Title" content="Posts" />
-          <NavItem href="/categories" content="Category" />
-          <NavItem href="/about" content="About" />
+        <NavItemWrapper>
+          <NavMenu>
+            <NavItem href="/#Posts_Title" content="Posts" />
+            <NavItem href="/categories" content="Category" />
+            <NavItem href="/about" content="About" />
+          </NavMenu>
           <DarkmodeSwitch data-ison={isDark} onClick={toggleSwitch}>
             <DarkmodeSwitchHandle layout transition={spring}>
               {isDark ? (
@@ -158,7 +169,7 @@ const Navigation = () => {
               )}
             </DarkmodeSwitchHandle>
           </DarkmodeSwitch>
-        </NavMenu>
+        </NavItemWrapper>
       </Nav>
     </Container>
   );

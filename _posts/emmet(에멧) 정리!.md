@@ -2,7 +2,7 @@
 title: "emmet(에멧) 정리!"
 excerpt: "emmet(에멧) 사용법을 정리했습니다. 에멧을 잘 사용하면 HTML 작업 능률이 엄청 올라갑니다!"
 date: "2022-08-30"
-category: ["etc"]
+category: ["HTML"]
 ---
 
 > emmet(에멧) 사용법을 정리했습니다. 에멧을 잘 사용하면 HTML 작업 능률이 엄청 올라갑니다!

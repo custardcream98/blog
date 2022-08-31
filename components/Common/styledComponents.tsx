@@ -12,7 +12,7 @@ export const LinkDecorated = styled.a`
   }
 `;
 
-export const Container = styled.section`
+export const Container = styled.div`
   width: 85vw;
   max-width: 800px;
   display: flex;
@@ -25,6 +25,6 @@ export const Title = styled.h2`
   margin: 2rem 0;
   padding-bottom: 0.2rem;
   border-bottom: 3px solid #3a3e43;
-  font-size: 1.25rem;
+  font-size: 1.4rem;
   font-weight: 700;
 `;
