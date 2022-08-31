@@ -32,9 +32,6 @@ const MarkdownBody = styled.article`
   strong {
     font-weight: 700;
   }
-  span {
-    display: block;
-  }
   .h1,
   .h2,
   .h3,
@@ -43,6 +40,7 @@ const MarkdownBody = styled.article`
   .h6 {
     font-weight: 700;
     line-height: 1.25;
+    display: block;
   }
   .h1 tt,
   .h1 code,
