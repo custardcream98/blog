@@ -40,7 +40,7 @@ interface ICommentDocRefProps {
 */
 
 const getPostDocRef = (title: string) =>
-  doc(fireStore, COLLECTION_POSTS, title);
+  doc(fireStore, COLLECTION_POSTS, encodeURI(title));
 
 export const createPostDoc = async (title: string) => {
   const postDocRef = getPostDocRef(title);
