@@ -14,6 +14,7 @@ import Comments from "../../components/Comment/Comments";
 import PrevNextPostBtn from "../../components/Post/PrevNextPostBtn";
 import Layout from "../../components/Layout/Layout";
 import check404 from "../../lib/check404";
+import { createPostDoc } from "../../lib/firebaseSetup/firebaseApps";
 
 type Props = {
   post: PostType;
@@ -26,7 +27,7 @@ export default function Post({ post }: Props) {
       title={post.title}
       description={post.excerpt}
       image={post.coverImage}
-      url={`posts/${post.slug}`}
+      tags={post.category}
     >
       <Container>
         <PostTitle
@@ -65,6 +66,8 @@ export async function getStaticProps({ params }: Params) {
   ]);
 
   const prevNextPosts = getPrevNextPosts(params.slug);
+
+  await createPostDoc(post.title);
 
   const content = await markdownToHtml(post.content || "");
   const coverImage = await getOgImage(post.title);
