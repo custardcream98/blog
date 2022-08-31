@@ -3,7 +3,7 @@ import { LinkDecorated } from "../Common/styledComponents";
 
 const Container = styled.footer`
   height: 100px;
-  width: 100vw;
+  width: 100%;
   display: flex;
   flex-direction: column;
   justify-content: center;

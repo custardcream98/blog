@@ -9,13 +9,9 @@ import { isDarkAtom } from "../../lib/atoms";
 import BlogIcon from "../Common/BlogIcon";
 import { LinkDecorated } from "../Common/styledComponents";
 
-const Dummy = styled.div`
-  height: 0.1px;
-`;
-
 const Container = styled.header`
   height: 50px;
-  width: 100vw;
+  width: 100%;
   box-shadow: ${(props) => props.theme.navLineShadow};
   position: sticky;
   top: -1px;
