@@ -39,8 +39,16 @@ interface ICommentDocRefProps {
   Posts
 */
 
+const UTF8_ENCODER = new TextEncoder();
+
+function percentEncode(str: string) {
+  return Array.from(UTF8_ENCODER.encode(str))
+    .map((i) => "%" + i.toString(16).toUpperCase().padStart(2, "0"))
+    .join("");
+}
+
 const getPostDocRef = (title: string) =>
-  doc(fireStore, COLLECTION_POSTS, encodeURI(title));
+  doc(fireStore, COLLECTION_POSTS, percentEncode(title));
 
 export const createPostDoc = async (title: string) => {
   const postDocRef = getPostDocRef(title);
