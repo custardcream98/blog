@@ -32,10 +32,14 @@ const Layout = ({ children, title, description, image, tags }: Props) => {
     <ThemeProvider theme={isDark ? darkTheme : lightTheme}>
       <GlobalStyle />
       <Head>
-        <title>{title ?? "Custardcream 개발 블로그"}</title>
+        <title>
+          {(title ? title + " " : "") + "FE 개발자 박시우의 기술 블로그"}
+        </title>
         <meta
           property="og:title"
-          content={title ?? "Custardcream 개발 블로그"}
+          content={
+            (title ? title + " " : "") + "FE 개발자 박시우의 기술 블로그"
+          }
         />
         <meta
           name="description"

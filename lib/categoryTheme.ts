@@ -16,6 +16,7 @@ const categoryTheme: ICategoryTheme = {
   "styled-components": { color: "#c40ed1" },
   "Express.js": { color: "#2def5b" },
   HTML: { color: "#b00035" },
+  Git: { color: "#d43e18" },
 };
 
 export default categoryTheme;
