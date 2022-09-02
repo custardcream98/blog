@@ -427,7 +427,7 @@ a {
 ```
 
 <p align='center'>
-<iframe src='../examples/LikeLion/9월2일%20CSS%20특강/no8-2.html' style="width: 100px; height:200px;"></iframe>
+<iframe src='../examples/LikeLion/9월2일%20CSS%20특강/no8-2.html' style="width: 120px; height:200px;"></iframe>
 </p>
 
 `.child`에 `margin: 0px;`를 줬으니 A와 B아래에도 10px씩 공간이 있어야 하는데, 그 공간 없이 H모양이 됩니다. `.parent`의 `margin`과 병합됐기 때문입니다.
