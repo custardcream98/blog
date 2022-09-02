@@ -401,36 +401,14 @@ a {
 ```
 
 <p align='center'>
-<iframe src='../examples/LikeLion/9월2일%20CSS%20특강/no8-1.html' style="width: 60%; height:150px;"></iframe>
+<iframe src='../examples/LikeLion/9월2일%20CSS%20특강/no8.html' style="width: 60%; height:150px;"></iframe>
 </p>
 
-`.child` 코드를 보면 `margin: 10px;`를 줬으므로 A와 B 사이에는 20px의 마진이 생겨야 합니다. 하지만 위의 결과를 보면 10px이 들어간 것을 볼 수 있습니다.
+`.child` 코드를 보면 `margin: 10px;`를 줬으므로 A와 B 사이에는 20px의 마진이 생겨야 합니다. 하지만 위의 결과를 보면 10px이 들어간 것을 볼 수 있습니다. 또한 A와 B아래에도 10px씩 공간이 있어야 하는데, 그 공간 없이 H모양이 됩니다.
 
 이건 Margin Collapsing이 일어났기 때문입니다. 원래는 예쁜 디자인을 위해 의도된 현상입니다.
 
 하지만 Margin Collapsing을 의도하지 않았을 경우를 대비해 어떤 조건에서 이 현상이 발생하는지 알아둘 필요가 있습니다.
-
-똑같은 HTML에 이번에는 아래의 스타일을 줘보겠습니다.
-
-```css
-.parent {
-  width: 90px;
-  background-color: orange;
-}
-.child {
-  width: 50px;
-  height: 50px;
-  margin: 10px;
-  padding: 10px;
-  background-color: tomato;
-}
-```
-
-<p align='center'>
-<iframe src='../examples/LikeLion/9월2일%20CSS%20특강/no8-2.html' style="width: 120px; height:200px;"></iframe>
-</p>
-
-`.child`에 `margin: 0px;`를 줬으니 A와 B아래에도 10px씩 공간이 있어야 하는데, 그 공간 없이 H모양이 됩니다. `.parent`의 `margin`과 병합됐기 때문입니다.
 
 Margin Collapse가 일어나는 정확한 조건이나 그 해결 방법은 생각보다 딥한 내용인 것 같아서, 추후 다른 포스팅으로 자세히 정리하겠습니다.
 
