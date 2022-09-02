@@ -20,7 +20,7 @@ export default async function markdownToHtml(markdown: string) {
     .use(headingToSementic)
     .use(rehypeStringify)
     .process(markdown);
-  return `<h3 hidden>본문 내용</h3>` + result.toString();
+  return result.toString();
 }
 
 function anchorTargetBlank(): Transformer<Root, Root> {
@@ -37,8 +37,11 @@ function headingToSementic(): Transformer<Root, Root> {
   return (tree) => {
     visit(tree, "element", (node) => {
       if (node.tagName[0] === "h") {
-        node.properties = { ...node.properties, className: node.tagName };
-        node.tagName = "span";
+        const newHeadingNum =
+          parseInt(node.tagName[1]) + 2 <= 6
+            ? parseInt(node.tagName[1]) + 2
+            : 6;
+        node.tagName = `h${newHeadingNum}`;
       }
     });
   };

@@ -32,59 +32,58 @@ const MarkdownBody = styled.section`
   strong {
     font-weight: 700;
   }
-  .h1,
-  .h2,
-  .h3,
-  .h4,
-  .h5,
-  .h6 {
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
     font-weight: 700;
     line-height: 1.25;
     display: block;
   }
-  .h1 tt,
-  .h1 code,
-  .h2 tt,
-  .h2 code,
-  .h3 tt,
-  .h3 code,
-  .h4 tt,
-  .h4 code,
-  .h5 tt,
-  .h5 code,
-  .h6 tt,
-  .h6 code {
+  h1 tt,
+  h1 code,
+  h2 tt,
+  h2 code,
+  h3 tt,
+  h3 code,
+  h4 tt,
+  h4 code,
+  h5 tt,
+  h5 code,
+  h6 tt,
+  h6 code {
     padding: 0 0.2em;
     font-size: inherit;
   }
-  .h1 {
+
+  /* 
+    Semantic한 HTML을 위해 h1, h2는 쓰지 않고
+    h3부터만 사용합니다.
+  */
+
+  h3 {
     margin: var(--main-heading-margin) 0 1rem 0;
     padding-bottom: 0.3em;
     font-size: calc(var(--main-font-size) * 2);
     border-bottom: 1px solid #21262d;
   }
-  .h2 {
+  h4 {
     margin: calc(var(--main-heading-margin) * 0.5) 0 1rem 0;
     padding-bottom: 0.3em;
     font-size: calc(var(--main-font-size) * 1.6);
     border-bottom: 1px solid #21262d;
   }
-  .h3 {
+  h5 {
     margin: calc(var(--main-heading-margin) * 0.5) 0 1rem 0;
     font-size: calc(var(--main-font-size) * 1.3);
   }
-  .h4 {
+  h6 {
     margin: calc(var(--main-heading-margin) * 0.5) 0 1rem 0;
     font-size: calc(var(--main-font-size) * 1.2);
   }
-  .h5 {
-    margin: calc(var(--main-heading-margin) * 0.5) 0 1rem 0;
-    font-size: calc(var(--main-font-size) * 1.1);
-  }
-  .h6 {
-    margin: calc(var(--main-heading-margin) * 0.5) 0 1rem 0;
-    font-size: calc(var(--main-font-size) * 1.05);
-  }
+
   p {
     display: block;
     margin-bottom: calc(var(--main-heading-margin) * 0.23);
