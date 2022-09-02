@@ -14,6 +14,7 @@ const Container = styled.header`
   width: 100%;
   box-shadow: ${(props) => props.theme.navLineShadow};
   position: sticky;
+  position: -webkit-sticky;
   top: -1px;
   z-index: 101;
   display: flex;

@@ -116,9 +116,10 @@ const MarkdownBody = styled.section`
     padding: 0.2em 0.4em;
     margin: 0;
     font-size: 85%;
-    background-color: rgba(110, 118, 129, 0.4);
-    border-radius: 6px;
+    /* background-color: rgba(110, 118, 129, 0.4);
+    border-radius: 6px; */
     vertical-align: text-top;
+    color: rgb(203, 155, 34);
   }
 
   div[data-rehype-pretty-code-fragment] {
@@ -222,6 +223,12 @@ const MarkdownBody = styled.section`
 
   span:target {
     scroll-margin-top: 60px;
+  }
+
+  iframe {
+    border: 2px solid ${(props) => props.theme.textColor};
+    border-radius: 10px;
+    margin: 0 auto;
   }
 `;
 
