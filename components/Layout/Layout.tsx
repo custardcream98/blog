@@ -33,12 +33,12 @@ const Layout = ({ children, title, description, image, tags }: Props) => {
       <GlobalStyle />
       <Head>
         <title>
-          {(title ? title + " " : "") + "FE 개발자 박시우의 기술 블로그"}
+          {(title ? title + ": " : "") + "FE 개발자 박시우의 기술 블로그"}
         </title>
         <meta
           property="og:title"
           content={
-            (title ? title + " " : "") + "FE 개발자 박시우의 기술 블로그"
+            (title ? title + ": " : "") + "FE 개발자 박시우의 기술 블로그"
           }
         />
         <meta
