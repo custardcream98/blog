@@ -160,20 +160,6 @@ const MarkdownBody = styled.section`
     align-self: center;
   }
 
-  ul > li::before {
-    content: "•";
-    display: inline-block;
-    vertical-align: bottom;
-    padding: 0 0.4rem 0 0.3rem;
-    font-weight: 900;
-  }
-
-  ul > li {
-    display: block;
-    padding-left: 1rem;
-    margin: 0.25rem 0;
-  }
-
   ol {
     counter-reset: item;
   }
@@ -183,10 +169,26 @@ const MarkdownBody = styled.section`
     margin-bottom: calc(var(--main-heading-margin) * 0.23);
   }
 
+  /* & > ol ol,
+  & > ul ul,
+  & > ul ol,
+  & > ol ul {
+    margin-bottom: calc(var(--main-heading-margin) * 0.15);
+  } */
+
+  ul > li,
   ol > li {
     display: block;
     padding-left: 1rem;
-    margin: 0.25rem 0;
+    margin: calc(var(--main-heading-margin) * 0.19) 0;
+  }
+
+  ul > li::before {
+    content: "•";
+    display: inline-block;
+    vertical-align: bottom;
+    padding: 0 0.4rem 0 0.3rem;
+    font-weight: 900;
   }
 
   ol > li::before {
