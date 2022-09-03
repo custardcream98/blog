@@ -58,6 +58,17 @@ const MarkdownBody = styled.section`
     font-size: inherit;
   }
 
+  /* Scroll Target Margin */
+
+  h1:target,
+  h2:target,
+  h3:target,
+  h4:target,
+  h5:target,
+  h6:target {
+    scroll-margin-top: 60px;
+  }
+
   /* 
     Semantic한 HTML을 위해 h1, h2는 쓰지 않고
     h3부터만 사용합니다.
@@ -169,7 +180,7 @@ const MarkdownBody = styled.section`
 
   & > ol,
   & > ul {
-    margin: 0.5rem 0;
+    margin-bottom: calc(var(--main-heading-margin) * 0.23);
   }
 
   ol > li {
@@ -198,7 +209,15 @@ const MarkdownBody = styled.section`
     font-size: calc(var(--main-font-size) * 0.9);
     border-radius: 4px;
     a {
+      text-decoration: none;
       color: white;
+      transition: linear 0.3s;
+      -webkit-transition: linear 0.3s;
+      -moz-transition: linear 0.3s;
+      &:hover {
+        color: #1e1e1e;
+        background-color: #dedede;
+      }
     }
     ol > li::before {
       content: counters(item, ".") " ";
@@ -218,10 +237,6 @@ const MarkdownBody = styled.section`
       content: "'";
       margin-right: 0.2rem;
     }
-  }
-
-  span:target {
-    scroll-margin-top: 60px;
   }
 
   iframe {
