@@ -226,6 +226,9 @@ const MarkdownBody = styled.section`
       font-weight: 500;
       padding: 0 0.4rem 0.2rem 0rem;
     }
+    ol > li {
+      margin: calc(var(--main-heading-margin) * 0.06) 0;
+    }
   }
   em {
     font-family: "Nanum Myeongjo", serif;
