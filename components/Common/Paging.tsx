@@ -62,7 +62,7 @@ const Paging = ({ pageScale, currentPage, onPageChange }: Props) => {
   };
 
   return (
-    <Container as="nav">
+    <Container>
       {currentPage !== 0 && (
         <Arrow name="forward" onClick={onClick}>
           <MdOutlineKeyboardArrowLeft color={theme.textColor} size="1.5rem" />

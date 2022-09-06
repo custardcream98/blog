@@ -11,24 +11,20 @@ import {
   updateComment,
 } from "../../lib/firebaseSetup/firebaseApps";
 
-const Container = styled.section`
+const Container = styled.li`
   display: flex;
   justify-content: space-between;
   align-items: center;
-  margin: 0.5rem 0;
+  margin: 1rem 0;
 `;
 
 const Comment = styled.p`
+  width: 100%;
+  align-self: flex-start;
   margin-left: 0.2rem;
   text-align: start;
   font-size: 0.9rem;
   line-height: 1.4;
-`;
-
-const CommentContainer = styled.div`
-  display: flex;
-  justify-content: space-between;
-  width: 100%;
 `;
 
 const CommentInfoContainer = styled.div`
@@ -292,7 +288,7 @@ const CommentCard = ({ comment, title }: Props) => {
           </BtnContainer>
         </PasswordForm>
       ) : (
-        <CommentContainer>
+        <>
           <Comment>{comment.comment}</Comment>
           <EditContainer>
             <EditBtn name="edit" onClick={onClick}>
@@ -302,7 +298,7 @@ const CommentCard = ({ comment, title }: Props) => {
               <MdDelete color={theme.textColor} size="0.9rem" />
             </EditBtn>
           </EditContainer>
-        </CommentContainer>
+        </>
       )}
     </Container>
   );

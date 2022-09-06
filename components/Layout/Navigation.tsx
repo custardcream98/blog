@@ -148,7 +148,7 @@ const Navigation = () => {
             <LogoTitle>
               <BlogIcon color={theme.textColor} size={1} />
               <Title>Custardcream</Title>
-              <span hidden>: FE 개발자 박시우의 기술 블로그</span>
+              <span className="blind">: FE 개발자 박시우의 기술 블로그</span>
             </LogoTitle>
           </a>
         </Link>

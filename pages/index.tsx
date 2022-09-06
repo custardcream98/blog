@@ -35,8 +35,10 @@ const Index = ({ allPosts }: Props) => {
   return (
     <Layout>
       <Intro />
-      <Container as="section">
-        <Title id="Posts_Title">{"<Posts />"}</Title>
+      <Container>
+        <Title as="h2" id="Posts_Title">
+          {"<Posts />"}
+        </Title>
         <ol>
           {React.Children.toArray(
             postByPage[currentPage].map((post) => (

@@ -10,14 +10,22 @@ import Footer from "./Footer";
 import getFullURL from "../../lib/url";
 
 export const GlobalStyle = createGlobalStyle`
-body {
-    font-family: "Noto Sans", "Noto Sans KR", -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji";
-    background-color: ${(props) => props.theme.bgColor};
-    color: ${(props) => props.theme.textColor};
-}
-html {
-  scroll-behavior: smooth;
-}
+  body {
+      font-family: "Noto Sans", "Noto Sans KR", -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji";
+      background-color: ${(props) => props.theme.bgColor};
+      color: ${(props) => props.theme.textColor};
+  }
+  html {
+    scroll-behavior: smooth;
+    .blind {
+      position: absolute;
+      clip: rect(0 0 0 0);
+      width: 1px;
+      height: 1px;
+      margin: -1px;
+      overflow: hidden;
+    }
+  }
 `;
 
 type Props = {

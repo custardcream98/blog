@@ -9,7 +9,6 @@ interface IBadge {
 }
 
 const Badge = styled.li<IBadge>`
-  display: block;
   margin: 0.3rem;
   padding: 0.3rem;
   font-weight: 500;

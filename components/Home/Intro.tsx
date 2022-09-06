@@ -24,11 +24,8 @@ const Title2 = styled(TitleSpan)`
   letter-spacing: -0.13rem;
 `;
 
-const TitleContainer = styled.h2`
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
+const TitleContainer = styled.p`
+  text-align: center;
   padding-top: 3rem;
 `;
 
@@ -81,16 +78,11 @@ const title2Var = (stringColor: string) => ({
   },
 });
 
-export const Container = styled.div`
+const IntroParagraph = styled.p`
   width: 70vw;
   max-width: 600px;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
   margin: 0 auto auto;
-`;
 
-const IntroParagraph = styled.p`
   padding: 3rem 0;
   line-height: 1.75;
   font-size: 1rem;
@@ -105,22 +97,21 @@ const IntroParagraph = styled.p`
 const Intro = () => {
   const stringColor = useRecoilValue(gradientTextColorSelector);
   return (
-    <header>
+    <>
       <TitleContainer>
         <Title1 variants={title1Var(stringColor)} initial="start" animate="end">
           Dedicated to
         </Title1>
+        <br />
         <Title2 variants={title2Var(stringColor)} initial="start" animate="end">
           CODING
         </Title2>
       </TitleContainer>
-      <Container>
-        <IntroParagraph>
-          예쁘고 간결한 것을 정말 좋아하는 개발자 박시우의 블로그입니다. 공부한
-          것들, 공유하고 싶은 내용을 올립니다.
-        </IntroParagraph>
-      </Container>
-    </header>
+      <IntroParagraph>
+        예쁘고 간결한 것을 정말 좋아하는 개발자 박시우의 블로그입니다. 공부한
+        것들, 공유하고 싶은 내용을 올립니다.
+      </IntroParagraph>
+    </>
   );
 };
 export default Intro;

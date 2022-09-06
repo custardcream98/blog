@@ -35,11 +35,13 @@ const Comments = ({ title }: Props) => {
     <Container>
       <CommentsTitle>Comments({comments.length})</CommentsTitle>
       <CommentForm title={title} />
-      {React.Children.toArray(
-        comments.map((comment) => (
-          <CommentCard comment={comment} title={title} />
-        ))
-      )}
+      <ol>
+        {React.Children.toArray(
+          comments.map((comment) => (
+            <CommentCard comment={comment} title={title} />
+          ))
+        )}
+      </ol>
     </Container>
   );
 };
