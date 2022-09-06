@@ -41,7 +41,7 @@ const NavMenu = styled.ul`
   align-items: center;
 `;
 
-const DarkmodeSwitch = styled.button`
+const DarkmodeSwitch = styled.div`
   width: 50px;
   height: 30px;
   background-color: rgb(189, 189, 189);
