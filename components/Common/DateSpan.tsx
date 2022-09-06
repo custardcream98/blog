@@ -1,6 +1,6 @@
 import styled from "styled-components";
 
-const DateSpanStyle = styled.span`
+const DateSpanStyle = styled.time`
   margin-top: 0.2rem;
   font-weight: 300;
   font-size: 0.8rem;

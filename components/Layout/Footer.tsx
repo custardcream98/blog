@@ -25,7 +25,7 @@ const Container = styled.footer`
   address ul li:nth-of-type(1) {
     padding-left: 0rem;
   }
-  span {
+  small {
     color: ${(props) => props.theme.subTextColor};
     margin-bottom: 0.4rem;
   }
@@ -34,9 +34,9 @@ const Container = styled.footer`
 const Footer = () => {
   return (
     <Container>
-      <span>
+      <small>
         &copy; {new Date().getFullYear()} custardcream98. All rights reserved.
-      </span>
+      </small>
       <address>
         <ul>
           <li>

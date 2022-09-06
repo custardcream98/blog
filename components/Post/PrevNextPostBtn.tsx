@@ -7,7 +7,7 @@ type StyleProps = {
   isNextOnly: boolean;
 };
 
-const Container = styled.section<StyleProps>`
+const Container = styled.aside<StyleProps>`
   display: flex;
   width: 100%;
   margin: 2rem 0;
@@ -16,7 +16,7 @@ const Container = styled.section<StyleProps>`
   & div {
     width: 50%;
   }
-  & div:nth-child(2) {
+  & div:nth-child(1) {
     border: ${(props) =>
       !props.isNextOnly ? `1px solid ${props.theme.textColor}` : "none"};
     border-radius: 4px 0 0 4px;
@@ -36,7 +36,7 @@ const Container = styled.section<StyleProps>`
       height: 4.5rem;
       justify-content: center;
     }
-    & div:nth-child(2) {
+    & div:nth-child(1) {
       border: ${(props) =>
         !props.isNextOnly ? `1px solid ${props.theme.textColor}` : "none"};
       border-radius: 4px 4px 0 0;
@@ -95,7 +95,6 @@ type Props = {
 
 const PrevNextPostBtn = ({ post }: Props) => (
   <Container isPrevOnly={!post.nextTitle} isNextOnly={!post.prevTitle}>
-    <h3 hidden>이전 글 / 다음 글</h3>
     {post.prevTitle ? (
       <Btn>
         <Link href={`../posts/${post.prevSlug}`}>← 이전글</Link>

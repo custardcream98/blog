@@ -15,6 +15,9 @@ body {
     background-color: ${(props) => props.theme.bgColor};
     color: ${(props) => props.theme.textColor};
 }
+html {
+  scroll-behavior: smooth;
+}
 `;
 
 type Props = {

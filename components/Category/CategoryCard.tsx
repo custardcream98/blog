@@ -7,14 +7,12 @@ import DateSpan from "../Common/DateSpan";
 import CategoryBadge, { BadgeContainer } from "../Common/CategoryBadge";
 
 const Container = styled.li`
-  width: 100%;
-  display: flex;
-  flex-direction: column;
   margin-bottom: 1rem;
   border-bottom: 1px solid ${(props) => props.theme.subTextColor};
 `;
 
 const LinkDecoratedForCate = styled(LinkDecorated)`
+  display: block;
   font-size: 1.2rem;
   font-weight: 700;
   line-height: 1.2;

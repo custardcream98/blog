@@ -2,8 +2,8 @@ import styled from "styled-components";
 
 export const LinkDecorated = styled.a`
   word-break: keep-all;
+  text-decoration: none;
   &:hover {
-    text-decoration: underline;
     color: ${(props) => props.theme.accentColor};
     cursor: pointer;
     -webkit-transition: color 150ms linear;
@@ -25,7 +25,7 @@ export const Container = styled.div`
   }
 `;
 
-export const Title = styled.h2`
+export const Title = styled.strong`
   margin: 2rem 0;
   padding-bottom: 0.2rem;
   border-bottom: 3px solid #3a3e43;
