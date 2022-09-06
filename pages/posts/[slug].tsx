@@ -30,14 +30,16 @@ export default function Post({ post }: Props) {
       tags={post.category}
     >
       <Container>
-        <PostTitle
-          coverImage={post.coverImage}
-          title={post.title}
-          category={post.category}
-          date={post.date}
-          series={post.series}
-        />
-        <PostBody content={post.content} />
+        <section>
+          <PostTitle
+            coverImage={post.coverImage}
+            title={post.title}
+            category={post.category}
+            date={post.date}
+            series={post.series}
+          />
+          <PostBody content={post.content} />
+        </section>
         <PrevNextPostBtn key={post.coverImage} post={post} />
         <Comments
           key={post.title.replaceAll("/", ",")}

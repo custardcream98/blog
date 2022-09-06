@@ -11,7 +11,7 @@ import { ServerStyleSheet } from "styled-components";
 export default class MyDocument extends Document {
   render() {
     return (
-      <Html lang="kr">
+      <Html lang="ko">
         <Head>
           <link rel="icon" type="image/png" href="../static/icon.png" />
           <meta property="og:article:author" content="Custardcream98" />

@@ -8,5 +8,4 @@ type Props = {
 const PostBody = ({ content }: Props) => (
   <MarkdownBody dangerouslySetInnerHTML={{ __html: content }}></MarkdownBody>
 );
-
 export default PostBody;

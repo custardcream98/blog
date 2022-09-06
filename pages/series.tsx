@@ -29,11 +29,9 @@ const Series = ({ series }: Props) => {
           {React.Children.toArray(
             Object.keys(series).map((key) => (
               <SeriesTitle>
-                <LinkDecorated>
-                  <Link
-                    href={`/series/${key}`}
-                  >{`${key} (${series[key]})`}</Link>
-                </LinkDecorated>
+                <Link href={`/series/${key}`}>
+                  <LinkDecorated>{`${key} (${series[key]})`}</LinkDecorated>
+                </Link>
               </SeriesTitle>
             ))
           )}
