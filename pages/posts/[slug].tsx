@@ -35,6 +35,7 @@ export default function Post({ post }: Props) {
           title={post.title}
           category={post.category}
           date={post.date}
+          series={post.series}
         />
         <PostBody content={post.content} />
         <PrevNextPostBtn key={post.coverImage} post={post} />
@@ -63,6 +64,7 @@ export async function getStaticProps({ params }: Params) {
     "ogImage",
     "coverImage",
     "category",
+    "series",
   ]);
 
   const prevNextPosts = getPrevNextPosts(params.slug);

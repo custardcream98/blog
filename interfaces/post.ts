@@ -7,15 +7,16 @@ type PostType = {
   excerpt: string;
   ogImage: {
     url: string;
-  }
+  };
   content: string;
+  series?: string;
   prevTitle?: string;
   prevSlug?: string;
   prevExcerpt?: string;
   nextTitle?: string;
   nextSlug?: string;
   nextExcerpt?: string;
-}
+};
 
 export default PostType;
 

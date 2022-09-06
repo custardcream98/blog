@@ -156,6 +156,7 @@ const Navigation = () => {
           <NavMenu>
             <NavItem href="/#Posts_Title" content="Posts" />
             <NavItem href="/categories" content="Category" />
+            <NavItem href="/series" content="Series" />
             <NavItem href="/about" content="About" />
           </NavMenu>
           <DarkmodeSwitch data-ison={isDark} onClick={toggleSwitch}>

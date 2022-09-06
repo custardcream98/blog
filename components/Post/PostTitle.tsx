@@ -1,12 +1,14 @@
 import React from "react";
 import Image from "next/image";
+import Link from "next/link";
 import styled from "styled-components";
 import imageLoader from "../../lib/imageLoader";
 import CategoryBadge, { BadgeContainer } from "../Common/CategoryBadge";
 import DateSpan from "../Common/DateSpan";
 import ViewsLikesCounter from "./ViewsLikesCounter";
+import { LinkDecorated } from "../Common/styledComponents";
 
-const Container = styled.header`
+const Container = styled.div`
   display: flex;
   flex-direction: column;
   padding-top: 2rem;
@@ -21,6 +23,11 @@ const Title = styled.h2`
   font-weight: 800;
   font-size: 1.8em;
   line-height: 1.25;
+`;
+const SeriesName = styled(LinkDecorated)`
+  margin-bottom: 5px;
+  font-size: 1em;
+  color: ${(props) => props.theme.subTextColor};
 `;
 
 const DateSpanforTitle = styled(DateSpan)`
@@ -43,12 +50,20 @@ type Props = {
   title: string;
   category?: string[];
   date: string;
+  series?: string;
 };
 
-const PostTitle = ({ coverImage, title, category, date }: Props) => {
+const PostTitle = ({ coverImage, title, category, date, series }: Props) => {
+  console.log(series);
+
   return (
     <>
       <Container>
+        {series && (
+          <Link href={`/series/${encodeURI(series)}`}>
+            <SeriesName>{series}</SeriesName>
+          </Link>
+        )}
         <Title>{title}</Title>
         <DateSpanforTitle date={date} />
         <BadgeViewsLikesCounterContainer>
