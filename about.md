@@ -1,6 +1,6 @@
 > 안녕하세요, 삽질 좋아하는 개발자 박시우입니다. 문제가 생기면 밤을 새서라도 알아내고 해결합니다.
 
-## ⛑️ 삽질이야 말로 최선의 공부 아닐까요
+# ⛑️ 삽질이야 말로 최선의 공부 아닐까요
 
 항상 더 좋은 방법, 더 효율적인 코드를 짜기 위해 고민하는 것이야 말로 개발자의 가장 중요한 덕목이라 생각하고 실천하고자 노력합니다.
 
@@ -12,7 +12,7 @@
 
 [Github](https://github.com/custardcream98)
 
-## 🛠️ 이런걸 할줄 알아요
+# 🛠️ 이런걸 할줄 알아요
 
 ![Python](https://img.shields.io/badge/python-3670A0?style=flat-square&logo=python&logoColor=ffdd54)
 ![JavaScript](https://img.shields.io/badge/javascript-%23323330.svg?style=flat-square&logo=javascript&logoColor=%23F7DF1E)
@@ -33,9 +33,9 @@
 ![Adobe Illustrator](https://img.shields.io/badge/adobe%20illustrator-%23FF9A00.svg?style=flat-square&logo=adobe%20illustrator&logoColor=white)
 ![Figma](https://img.shields.io/badge/figma-%23F24E1E.svg?style=flat-square&logo=figma&logoColor=white)
 
-## 🧑‍💻 저는 이런 일을 했어요!
+# 🧑‍💻 저는 이런 일을 했어요!
 
-### 경로 기반 일정 스케줄링 크로스플랫폼 어플리케이션 개발
+## 경로 기반 일정 스케줄링 크로스플랫폼 어플리케이션 개발
 
 [졸업작품 설명 보러가기](https://uos-urbanscience.org/archives/uos_portfolio/%eb%8f%99%ec%84%a0%ec%9d%84-%ea%b3%a0%eb%a0%a4%ed%95%9c-all-in-one-%ec%9d%bc%ec%a0%95-%ec%8a%a4%ec%bc%80%ec%a4%84%eb%a7%81-%ec%84%9c%eb%b9%84%ec%8a%a4)
 
@@ -47,7 +47,7 @@
 
 단 둘뿐인 팀에서 3 ~ 4개월 만에 서비스가 가능한 수준의 어플리케이션을 개발하는 과정이 쉽지는 않았지만, **도시과학대학장 상 수상**이라는 좋은 결과를 얻었어요! 개발자가 되기로 마음먹은 계기가 된 정말 고마운 프로젝트였어요.
 
-### 인천시 생활폐기물 발생량 분석 및 예측 모델 개발
+## 인천시 생활폐기물 발생량 분석 및 예측 모델 개발
 
 서울시립대학교 공간데이터베이스 연구실 학부생 연구원으로 활동하며 진행한 프로젝트입니다.
 
@@ -55,7 +55,7 @@
 
 분석을 하며 가장 힘들었던건 정제되지 않은 데이터를 체계적으로 정리하는 과정이였어요. 전혀 체계가 잡혀있지 않은 체 중구난방으로 생성된 원 데이터들을 보며, 질 좋은 데이터를 만드는 일이 얼마나 중요한건지 배울 수 있었습니다.
 
-### 금연 타이머 Smoquit #노담이면\_좋겠어
+## 금연 타이머 Smoquit #노담이면\_좋겠어
 
 [사용해보기](https://custardcream98.github.io/smoquit/)
 
@@ -67,7 +67,7 @@
 
 Github Pages로 앱을 Deploy하며 '왜 `HashRouter`로 배포하지 않으면 안되는걸까?' 라는 물음을 해결하며 Web Server가 정적인 웹사이트만을 제공하는 경우 SPA의 Routing을 어떻게 하면 좋을지에 대해 연구했고, Hashed Route(Fragment)가 아닌 `BrowserRouter`를 이용해 정상적인 path를 가진 React App을 배포할 수 있었습니다.
 
-### 디스코드, 카카오톡 챗봇
+## 디스코드, 카카오톡 챗봇
 
 [챗봇 기능 구경가기](https://blog.naver.com/sg05098/222596637921)
 
@@ -77,7 +77,7 @@ Github Pages로 앱을 Deploy하며 '왜 `HashRouter`로 배포하지 않으면 
 
 > 재미로 시작했던 프로젝트라 기능을 덕지덕지 붙이다보니 코드가 금새 더러워졌어요. 그래도 잘 돌아가니 크게 고칠 필요성을 못느끼고 있다가, 버그가 발생해 고치려고 달려드니 너무 복합한 구조 때문에 엄청 애를 먹은 일이 있었어요. 그 후 객체지향 프로그래밍, 소프트웨어 아키텍처의 중요성을 깨닫고, 열심히 고쳐나가고 있어요! (물론 서비스에는 지장이 없어요)
 
-### 미니멀리즘 메모 Web App
+## 미니멀리즘 메모 Web App
 
 [Github Repo](https://github.com/custardcream98/block-it)
 
