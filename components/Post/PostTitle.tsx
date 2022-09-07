@@ -54,8 +54,6 @@ type Props = {
 };
 
 const PostTitle = ({ coverImage, title, category, date, series }: Props) => {
-  console.log(series);
-
   return (
     <>
       <Container>
@@ -77,7 +75,7 @@ const PostTitle = ({ coverImage, title, category, date, series }: Props) => {
           <ViewsLikesCounter key={title} title={title} />
         </BadgeViewsLikesCounterContainer>
       </Container>
-      {coverImage && (
+      {coverImage && process.env.NODE_ENV === "production" && (
         <Thumbnail
           src={coverImage}
           alt="thumbnail"

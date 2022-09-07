@@ -74,7 +74,10 @@ export async function getStaticProps({ params }: Params) {
   await createPostDoc(post.title);
 
   const content = await markdownToHtml(post.content || "");
-  const coverImage = await getOgImage(post.title);
+
+  let coverImage = "";
+  if (process.env.NODE_ENV === "production")
+    coverImage = await getOgImage(post.title);
 
   return {
     props: {

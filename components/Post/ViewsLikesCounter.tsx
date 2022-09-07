@@ -89,7 +89,7 @@ const ViewsLikesCounter = ({ title }: Props) => {
     }
   };
 
-  return (
+  return process.env.NODE_ENV === "production" ? (
     <Container>
       <CounterContainer>
         <HiEye size={15} color={theme.subTextColor} />
@@ -111,6 +111,8 @@ const ViewsLikesCounter = ({ title }: Props) => {
         <LikeValue isLiked={isLiked}>{likeCount}</LikeValue>
       </LikeBtn>
     </Container>
+  ) : (
+    <></>
   );
 };
 
