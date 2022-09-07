@@ -7,6 +7,7 @@ import Document, {
   DocumentContext,
 } from "next/document";
 import { ServerStyleSheet } from "styled-components";
+import Script from "next/script";
 
 export default class MyDocument extends Document {
   render() {
@@ -23,6 +24,24 @@ export default class MyDocument extends Document {
           <meta
             name="naver-site-verification"
             content="f97b3212948a936aa8bb8d14b7f84ba8d01f9cc1"
+          />
+          {
+            // 구글 Analytics
+          }
+          <Script
+            strategy="afterInteractive"
+            async
+            src="https://www.googletagmanager.com/gtag/js?id=G-5PJHPZBZEC"
+          ></Script>
+          <Script
+            id="google-analytics"
+            strategy="afterInteractive"
+            dangerouslySetInnerHTML={{
+              __html: `window.dataLayer = window.dataLayer || [];
+            function gtag(){dataLayer.push(arguments);}
+            gtag('js', new Date());
+            gtag('config', 'G-5PJHPZBZEC');`,
+            }}
           />
           {this.props.styles}
         </Head>
