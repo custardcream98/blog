@@ -1,7 +1,7 @@
 ---
 title: "HTML Living Standard: Intro, Document element, Document metadata, Sections, Grouping content"
 excerpt: "HTML Living Standard를 확실히 공부하고 Semantic HTML을 향해 한발짝 더 나가봤습니다!"
-date: "2022-09-04T17:09:00+09:00"
+date: "2022-09-07T12:06:00+09:00"
 category: ["HTML"]
 series: "HTML Living Standard"
 ---
