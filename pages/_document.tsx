@@ -31,18 +31,14 @@ export default class MyDocument extends Document {
           <Script
             strategy="afterInteractive"
             async
-            src="https://www.googletagmanager.com/gtag/js?id=G-5PJHPZBZEC"
+            src={`https://www.googletagmanager.com/gtag/js?id=${process.env.NEXT_PUBLIC_GOOGLE_ANALYTICS_ID}`}
           ></Script>
-          <Script
-            id="google-analytics"
-            strategy="afterInteractive"
-            dangerouslySetInnerHTML={{
-              __html: `window.dataLayer = window.dataLayer || [];
+          <Script id="google-analytics" strategy="afterInteractive">
+            {`window.dataLayer = window.dataLayer || [];
             function gtag(){dataLayer.push(arguments);}
             gtag('js', new Date());
-            gtag('config', 'G-5PJHPZBZEC');`,
-            }}
-          />
+            gtag('config', '${process.env.NEXT_PUBLIC_GOOGLE_ANALYTICS_ID}');`}
+          </Script>
           {this.props.styles}
         </Head>
 
