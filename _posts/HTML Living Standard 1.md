@@ -1,5 +1,5 @@
 ---
-title: "HTML Living Standard: Intro, Document element, Document metadata, Sections, Grouping content"
+title: "HTML Living Standard 1"
 excerpt: "HTML Living Standard를 확실히 공부하고 Semantic HTML을 향해 한발짝 더 나가봤습니다!"
 date: "2022-09-07T12:06:00+09:00"
 category: ["HTML"]
@@ -19,9 +19,9 @@ Serch Engine의 DB를 구축하기 위해 인간을 대신해 정보 자원을 �
 ```html
 <h1>네이버 오픈캐스트</h1>
 <p>블라블라</p>
-<h1>네이버 오픈캐스트</h1>
+<h2>금주의 오픈캐스트</h2>
 <p>블라블라</p>
-<h1>네이버 오픈캐스트</h1>
+<h2>오늘의 오픈캐스트</h3>
 <p>블라블라</p>
 ```
 

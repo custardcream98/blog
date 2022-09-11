@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <title>Page Title</title>
+    <style>
+      table {
+        width: 100%;
+      }
+      table,
+      tr,
+      th,
+      td {
+        border: 1px solid black;
+        border-collapse: collapse;
+      }
+      .구분 {
+        width: 20%;
+      }
+      .이름 {
+        width: 50%;
+      }
+      .판매량 {
+        width: 20%;
+      }
+    </style>
+  </head>
+  <body>
+    <table>
+      <caption>
+        이 table은 영국에서 최초로 시작되어 일년에 한바퀴 돌면서...
+      </caption>
+      <colgroup>
+        <col class="구분" />
+        <col class="이름" />
+        <col class="판매량" />
+      </colgroup>
+      <thead>
+        <tr>
+          <th>구분</th>
+          <th>이름</th>
+          <th>판매량</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>1</td>
+          <td>해리포터</td>
+          <td>100</td>
+        </tr>
+        <tr>
+          <td>2</td>
+          <td>헝거게임</td>
+          <td>200</td>
+        </tr>
+        <tr>
+          <td>3</td>
+          <td>반지의제왕</td>
+          <td>300</td>
+        </tr>
+      </tbody>
+      <tfoot>
+        <tr>
+          <td colspan="2">총 판매량</td>
+          <td>600</td>
+        </tr>
+      </tfoot>
+    </table>
+  </body>
+</html>

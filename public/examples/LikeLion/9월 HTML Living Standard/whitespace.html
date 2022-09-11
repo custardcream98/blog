@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>White Space</title>
+    <style>
+      .normal {
+        white-space: normal;
+      }
+      .nowrap {
+        white-space: nowrap;
+      }
+      .pre {
+        white-space: pre;
+      }
+      .prewrap {
+        white-space: pre-wrap;
+      }
+      .preline {
+        white-space: pre-line;
+      }
+      .break-spaces {
+        white-space: break-spaces;
+      }
+      p {
+        width: 300px;
+        border: 1px solid black;
+      }
+      body {
+        background-color: white;
+      }
+    </style>
+  </head>
+  <body>
+    <ul>
+      <li>
+        <button type="button" onclick="onClick(this.name)" name="normal">
+          normal
+        </button>
+      </li>
+      <li>
+        <button type="button" onclick="onClick(this.name)" name="nowrap">
+          nowrap
+        </button>
+      </li>
+      <li>
+        <button type="button" onclick="onClick(this.name)" name="pre">
+          pre
+        </button>
+      </li>
+      <li>
+        <button type="button" onclick="onClick(this.name)" name="prewrap">
+          pre-wrap
+        </button>
+      </li>
+      <li>
+        <button type="button" onclick="onClick(this.name)" name="preline">
+          pre-line
+        </button>
+      </li>
+      <li>
+        <button type="button" onclick="onClick(this.name)" name="break-spaces">
+          break-spaces
+        </button>
+      </li>
+    </ul>
+    <p>
+      Lorem ipsum dolor sit amet consectetur adipisicing elit. Ex suscipit non
+      ad et nemo voluptatum facere assumenda fugiat soluta sapiente! Non
+      similique nostrum soluta eaque nobis consequuntur expedita, veniam
+      distinctio?
+    </p>
+    <script>
+      const element = document.getElementsByTagName("p")[0];
+      const onClick = (name) => {
+        element.classList = [];
+        element.classList.add(name);
+      };
+    </script>
+  </body>
+</html>
