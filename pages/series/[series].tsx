@@ -13,7 +13,7 @@ type Props = {
 const Series = ({ series, posts }: Props) => {
   return (
     <Layout title={`시리즈 ${series}`}>
-      <Container style={{ alignItems: "flex-start", display: "block" }}>
+      <Container style={{ display: "block" }}>
         <Title style={{ display: "inline-block" }}>{`<${series} />`}</Title>
         <ol>
           {React.Children.toArray(

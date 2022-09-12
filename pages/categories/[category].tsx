@@ -16,8 +16,8 @@ export default function Post({ category, posts }: Props) {
   check404();
   return (
     <Layout title={`카테고리 ${category}`} tags={[category]}>
-      <Container style={{ alignItems: "flex-start" }}>
-        <Title>{`<${category} />`}</Title>
+      <Container style={{ display: "block" }}>
+        <Title style={{ display: "inline-block" }}>{`<${category} />`}</Title>
         <ol>
           {React.Children.toArray(
             posts.map((post) => <CategoryCard post={post} />)
