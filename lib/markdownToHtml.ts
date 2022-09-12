@@ -5,6 +5,7 @@ import rehypeSlug from "rehype-slug";
 import rehypeToc from "@jsdevtools/rehype-toc";
 import rehypeStringify from "rehype-stringify";
 import rehypePrettyCode from "rehype-pretty-code";
+import remarkGfm from "remark-gfm";
 import { visit } from "unist-util-visit";
 import { Root } from "hast";
 import { Transformer } from "unified";
@@ -17,6 +18,7 @@ export default async function markdownToHtml(markdown: string) {
     .use(rehypeSlug)
     .use(rehypeToc)
     .use(rehypePrettyCode)
+    .use(remarkGfm)
     .use(headingToSementic)
     .use(rehypeStringify)
     .process(markdown);

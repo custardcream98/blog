@@ -249,6 +249,30 @@ const MarkdownBody = styled.div`
     border-radius: 10px;
     margin: 0 auto;
   }
+
+  table {
+    margin: auto;
+    max-width: 600px;
+    border-top: 1px solid ${(props) => props.theme.textColor};
+    border-bottom: 1px solid ${(props) => props.theme.textColor};
+    th,
+    td {
+      padding: 0.2rem 3rem;
+    }
+    thead {
+      background-color: #9b9b9b6f;
+      font-weight: 700;
+      th {
+        text-align: center;
+      }
+    }
+    tbody {
+      td {
+        text-align: start;
+        padding-left: 0.5rem;
+      }
+    }
+  }
 `;
 
 export default MarkdownBody;
