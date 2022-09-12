@@ -45,7 +45,7 @@ Text-level 요소는 **요소 안의 컨텐츠의 크기만큼만 영역을 점�
 ```
 
 <p align='center'>
-<iframe src='../examples/LikeLion/9월%20HTML%20Living%20Standard/brwbr.html' style="width: 50%; height:100px;"></iframe>
+<iframe src='../examples/LikeLion/9월%20HTML%20Living%20Standard/brwbr.html' style="width: 50%; height:120px;"></iframe>
 </p>
 
 `<wbr>` 요소는 이렇게 줄바꿈이 필요할 때(text가 overflow될 때) 자동으로 줄을 바꿔줍니다. CJK(Chinese, Japanese, Korean)의 기본적인 `work-break` property 값은 `break-all`로 되어있기 때문에 글자 한 자 한 자씩 끊어서 줄을 바꿉니다.
@@ -148,10 +148,8 @@ p {
 
 `<img>` 요소는 **이미지를 삽입할 때 사용**합니다.
 
-- `src` (source)
-  필수 attribute로, 이미지 파일의 위치와 파일명을 알려줍니다. 이 때 경로는 절대경로 혹은 상대경로입니다.
-- `alt` (alternative text)
-  이미지가 보이지 않을 때 이미지 대신 보여줄 텍스트입니다. 스크린리더같은 접근성을 위한 프로그램에 정보를 제공하기 위한 용도로도 사용되며, 이미지에 대한 정보를 브라우저에게 제공해 SEO에 도움을 주기도 합니다.
+- `src` (source): 필수 attribute로, 이미지 파일의 위치와 파일명을 알려줍니다. 이 때 경로는 절대경로 혹은 상대경로입니다.
+- `alt` (alternative text): 이미지가 보이지 않을 때 이미지 대신 보여줄 텍스트입니다. 스크린리더같은 접근성을 위한 프로그램에 정보를 제공하기 위한 용도로도 사용되며, 이미지에 대한 정보를 브라우저에게 제공해 SEO에 도움을 주기도 합니다.
 
   ```html
   <!-- 스크린 리더가 읽지 않습니다. -->
@@ -166,8 +164,7 @@ p {
 
   > 경우에 따라서는 일부러 비워두기도 합니다.
 
-- `srcset` (source set)
-  여러 해상도에 대응해 브라우저가 최상의 이미지를 로딩하는데 도움을 줄 수 있도록 하는 attribute입니다. 동일 이미지를 최소 2개 이상 가지고 있을 때 사용하며, 브라우저가 이미지를 선택합니다.
+- `srcset` (source set): 여러 해상도에 대응해 브라우저가 최상의 이미지를 로딩하는데 도움을 줄 수 있도록 하는 attribute입니다. 동일 이미지를 최소 2개 이상 가지고 있을 때 사용하며, 브라우저가 이미지를 선택합니다.
 
   아래는 제가 실제로 사용한 샘플 코드입니다.
 
@@ -303,7 +300,7 @@ HTML 안에서 또 다른 HTML 페이지를 보여주고 싶을 때 사용하는
 
 `hidden` 타입은 서버로 넘길 데이터가 추가될 필요가 있을 때 사용합니다. 이 부분을 자바스크립트로 구현하려고 하면 굉장히 번거로우니, 꼭 `hidden` 타입을 잊지 말고 사용합시다!!
 
-> **바퀴를 다시 발명하지 마라(Don't reinvent the wheel)**라는 개발자 격언이 있다고 해요!
+> **바퀴를 다시 발명하지 마라**(Don't reinvent the wheel)라는 개발자 격언이 있다고 해요!
 
 ## `<label>`
 
@@ -348,7 +345,7 @@ HTML 안에서 또 다른 HTML 페이지를 보여주고 싶을 때 사용하는
 **`<option>`의 attribute들**
 
 - `value`: 서버에 전송할 값을 정합니다.
-- `selected`: 페이지가 로딩된 디 기본으로 선택되는 `<option>`을 지정합니다. 이 attribute가 사용되지 않았을 경우엔 기본적으로 첫번째 `<option>`이 선택됩니다.
+- `selected`: 페이지가 로딩된 뒤 기본으로 선택되는 `<option>`을 지정합니다. 이 attribute가 사용되지 않았을 경우엔 기본적으로 첫번째 `<option>`이 선택됩니다.
 
 ## `<fieldset>`
 
