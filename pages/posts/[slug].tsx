@@ -18,7 +18,7 @@ import { createPostDoc } from "../../lib/firebaseSetup/firebaseApps";
 import styled from "styled-components";
 
 const PostSection = styled.section`
-  width: inherit;
+  max-width: 800px;
 `;
 
 type Props = {
