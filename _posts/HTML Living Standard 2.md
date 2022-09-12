@@ -405,7 +405,7 @@ HTML 안에서 또 다른 HTML 페이지를 보여주고 싶을 때 사용하는
 
 설명이 좀 복잡한데, 아래의 예시를 보면 이해됩니다.
 
-```htm
+```html
 <label for="solasystem">원하는 행성을 선택하세요 : </label>
 <input type="text" id="solasystem" list="planets" name="planets" />
 <datalist id="planets">
