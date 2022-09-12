@@ -96,7 +96,6 @@ const MarkdownBody = styled.div`
   }
 
   p {
-    display: block;
     margin-bottom: calc(var(--main-heading-margin) * 0.23);
   }
 
@@ -155,9 +154,8 @@ const MarkdownBody = styled.div`
   img {
     max-width: 100%;
     image-resolution: from-image;
-    display: flex;
+    display: block;
     margin: auto;
-    align-self: center;
   }
 
   ol {
@@ -258,6 +256,9 @@ const MarkdownBody = styled.div`
     th,
     td {
       padding: 0.2rem 3rem;
+      @media (max-width: 800px) {
+        padding: 0.2rem 0.8rem;
+      }
     }
     thead {
       background-color: #9b9b9b6f;

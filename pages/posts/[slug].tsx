@@ -15,6 +15,11 @@ import PrevNextPostBtn from "../../components/Post/PrevNextPostBtn";
 import Layout from "../../components/Layout/Layout";
 import check404 from "../../lib/check404";
 import { createPostDoc } from "../../lib/firebaseSetup/firebaseApps";
+import styled from "styled-components";
+
+const PostSection = styled.section`
+  width: inherit;
+`;
 
 type Props = {
   post: PostType;
@@ -30,7 +35,7 @@ export default function Post({ post }: Props) {
       tags={post.category}
     >
       <Container>
-        <section>
+        <PostSection>
           <PostTitle
             coverImage={post.coverImage}
             title={post.title}
@@ -39,7 +44,7 @@ export default function Post({ post }: Props) {
             series={post.series}
           />
           <PostBody content={post.content} />
-        </section>
+        </PostSection>
         <PrevNextPostBtn key={post.coverImage} post={post} />
         <Comments
           key={post.title.replaceAll("/", ",")}

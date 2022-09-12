@@ -71,7 +71,7 @@ p {
 ```
 
 <p align='center'>
-<iframe src='../examples/LikeLion/9월%20HTML%20Living%20Standard/whitespace.html' style="width: 400px; height:360px;"></iframe>
+<iframe src='../examples/LikeLion/9월%20HTML%20Living%20Standard/whitespace.html' style="width: 350px; height:360px;"></iframe>
 </p>
 
 ## `<a>`

@@ -13,7 +13,7 @@ export const LinkDecorated = styled.a`
 `;
 
 export const Container = styled.div`
-  width: 85vw;
+  width: 90vw;
   max-width: 800px;
   display: flex;
   flex-direction: column;
