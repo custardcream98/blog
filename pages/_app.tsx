@@ -15,6 +15,7 @@ import "@fontsource/source-code-pro/800.css";
 import "@fontsource/poppins/800.css";
 
 import "../styles/reset.css";
+import "../styles/font.css";
 
 function MyApp({ Component, pageProps }: AppProps) {
   return (
