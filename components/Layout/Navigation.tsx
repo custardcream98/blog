@@ -9,12 +9,15 @@ import { isDarkAtom } from "../../lib/atoms";
 import BlogIcon from "../Common/BlogIcon";
 import { LinkDecorated } from "../Common/styledComponents";
 
-const Container = styled.header`
+const Header = styled.header`
   height: 50px;
   width: 100%;
+`;
+
+const Container = styled.div`
+  width: 100%;
   box-shadow: ${(props) => props.theme.navLineShadow};
-  position: sticky;
-  position: -webkit-sticky;
+  position: fixed;
   top: -1px;
   z-index: 101;
   display: flex;
@@ -24,6 +27,7 @@ const Container = styled.header`
 `;
 
 const Nav = styled.nav`
+  height: 50px;
   width: 85vw;
   max-width: 800px;
   display: flex;
@@ -141,36 +145,38 @@ const Navigation = () => {
   const theme = useTheme();
 
   return (
-    <Container>
-      <Nav>
-        <Link href="/" passHref>
-          <a>
-            <LogoTitle>
-              <BlogIcon color={theme.textColor} size={1} />
-              <Title>Custardcream</Title>
-              <span className="blind">: FE 개발자 박시우의 기술 블로그</span>
-            </LogoTitle>
-          </a>
-        </Link>
-        <NavItemWrapper>
-          <NavMenu>
-            <NavItem href="/#Posts_Title" content="Posts" />
-            <NavItem href="/categories" content="Category" />
-            <NavItem href="/series" content="Series" />
-            <NavItem href="/about" content="About" />
-          </NavMenu>
-          <DarkmodeSwitch data-ison={isDark} onClick={toggleSwitch}>
-            <DarkmodeSwitchHandle layout transition={spring}>
-              {isDark ? (
-                <BsFillMoonFill color="#e5c704" />
-              ) : (
-                <ImSun color="#e5c704" />
-              )}
-            </DarkmodeSwitchHandle>
-          </DarkmodeSwitch>
-        </NavItemWrapper>
-      </Nav>
-    </Container>
+    <Header>
+      <Container>
+        <Nav>
+          <Link href="/" passHref>
+            <a>
+              <LogoTitle>
+                <BlogIcon color={theme.textColor} size={1} />
+                <Title>Custardcream</Title>
+                <span className="blind">: FE 개발자 박시우의 기술 블로그</span>
+              </LogoTitle>
+            </a>
+          </Link>
+          <NavItemWrapper>
+            <NavMenu>
+              <NavItem href="/#Posts_Title" content="Posts" />
+              <NavItem href="/categories" content="Category" />
+              <NavItem href="/series" content="Series" />
+              <NavItem href="/about" content="About" />
+            </NavMenu>
+            <DarkmodeSwitch data-ison={isDark} onClick={toggleSwitch}>
+              <DarkmodeSwitchHandle layout transition={spring}>
+                {isDark ? (
+                  <BsFillMoonFill color="#e5c704" />
+                ) : (
+                  <ImSun color="#e5c704" />
+                )}
+              </DarkmodeSwitchHandle>
+            </DarkmodeSwitch>
+          </NavItemWrapper>
+        </Nav>
+      </Container>
+    </Header>
   );
 };
 
