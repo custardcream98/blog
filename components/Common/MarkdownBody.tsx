@@ -111,21 +111,16 @@ const MarkdownBody = styled.div`
     font-size: 93%;
     p {
       margin: 0;
-      code {
-        font-size: 76.5%;
-        vertical-align: middle;
-      }
     }
   }
 
   code,
   tt {
-    font-family: "D2Coding", ui-monospace, SFMono-Regular, SF Mono, Menlo,
-      Consolas, Liberation Mono, monospace;
-    padding: 0.2em 0.4em;
+    font-family: "D2Coding";
+    padding: 0 0.4em;
     margin: 0;
-    font-size: 85%;
-    vertical-align: text-top;
+    font-size: 0.85em;
+    vertical-align: 0.0725em;
     color: rgb(203, 155, 34);
   }
 
@@ -134,8 +129,7 @@ const MarkdownBody = styled.div`
     background-color: #1e2228;
     border-radius: 4px;
     pre {
-      overflow: auto;
-      overflow-y: hidden;
+      overflow: auto hidden;
       padding: 0.75rem 1rem;
       code {
         padding: 0;
