@@ -1,0 +1,293 @@
+---
+title: "CSS 실무 테크닉"
+excerpt: "실무에서 사용되는 여러 CSS 테크닉들을 익혔습니다."
+date: "2022-09-22T16:37:00+09:00"
+category: ["CSS"]
+---
+
+> 실무에서 사용되는 여러 CSS 테크닉들을 익혔습니다.
+
+# `<input>` 요소 체크박스 바꾸기
+
+```html
+<style>
+  .text-hide {
+    position: absolute;
+    clip: rect(0 0 0 0);
+    width: 1px;
+    height: 1px;
+    margin: -1px;
+    overflow: hidden;
+  }
+
+  .labl-hold::before {
+    vertical-align: -5px;
+    content: "";
+    display: inline-block;
+    width: 22px;
+    height: 22px;
+    background-image: url("./images/icon_check_empty.png");
+  }
+
+  .inp-hold:checked + .labl-hold::before {
+    background-image: url("./images/icon_check.png");
+  }
+
+  .inp-hold:focus + .labl-hold::before {
+    outline: 2px solid black;
+    border-radius: 50%;
+    outline-offset: 3px;
+  }
+</style>
+<body>
+  <input type="checkbox" id="inpHold" class="inp-hold text-hide" />
+  <label for="inpHold" class="labl-hold">선택해주세요</label>
+</body>
+```
+
+<p align='center'>
+<iframe src='../examples/LikeLion/9월%2022일/input/index.html' style="width: 50%; height:100px;"></iframe>
+</p>
+
+# `<select>` 요소 커스터마이징
+
+`<select>` 요소는 스타일링이 까다로워 아얘 따로 구현합니다. 다만, 모바일에서는 OS마다 형태가 매우 다르기 때문에 `<select>` 요소를 그대로 사용합니다.
+
+<p align='center'>
+<iframe src='../examples/LikeLion/9월%2022일/select/index.html' style="width: 300px; height:300px;"></iframe>
+</p>
+
+```html
+<article class="cont-select">
+  <h2 class="text-hide">프로그래밍 언어를 선택해주세요.</h2>
+  <button class="btn-select">최애 프로그래밍 언어</button>
+  <ul class="list-selectives">
+    <li><button type="button">Python</button></li>
+    <li><button type="button">Java</button></li>
+    <li><button type="button">JavaScript</button></li>
+    <li><button type="button">C#</button></li>
+    <li><button type="button">C/C++</button></li>
+  </ul>
+</article>
+<script>
+  const btn = document.querySelector(".btn-select");
+  const list = document.querySelector(".list-selectives");
+
+  btn.addEventListener("click", () => {
+    btn.classList.toggle("on");
+  });
+
+  list.addEventListener("click", (event) => {
+    if (event.target.nodeName === "BUTTON") {
+      btn.classList.remove("on");
+    }
+  });
+</script>
+```
+
+스타일중 중요한 부분만 떼서 보겠습니다.
+
+```css
+.btn-select {
+  ...
+  background: url("./img/icon-Triangle-down.png") right 15px center no-repeat;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  overflow: hidden;
+}
+
+.btn-select.on {
+  background-image: url("./img/icon-Triangle-up.png");
+}
+```
+
+`.btn-select`에 이런 property와 value를 부여해서 컨텐츠가 길어지면 `...`으로 줄이도록 합니다. 같은 코드가 `<option>` 역할을 하는 `<button>` 요소에도 들어있습니다.
+
+버튼 옆에 있는 삼각형 이미지는 `background-image`로 넣고, `.on` 클래스가 붙으면 바꿔줍니다.
+
+```css
+.cont-select {
+  position: relative;
+  ...;
+}
+
+.list-selectives {
+  display: none;
+  position: absolute;
+  top: 49px;
+  ...;
+}
+
+.btn-select.on + .list-selectives {
+  display: block;
+}
+```
+
+`<article>` 요소에 `position: relative;`를 주고 `ul.list-selectives`에 `position: absolute;`를 줘서 확실하게 `<article>` 요소에 붙도록 만들어줍니다. `absolute` 부분은 밑에 위치할 요소 위로 올라가게 되므로 활성화돼도 레이아웃이 깨지지 않도록 합니다.
+
+`.btn-select`에 `.on` 클래스가 붙으면 `.list-selectives`의 `display` property를 `block`으로 바꿔 보일 수 있도록 합니다.
+
+# IR(Image Replacement) 테크닉
+
+스크린리더나 브라우저를 위해 정보를 전달하는 텍스트를 넣으면서 디자인적으로는 보이지 않도록 하는 스타일입니다.
+
+[재현님이 추천하신 글](https://mulder21c.github.io/2019/03/22/screen-hide-text/#visibility-%EC%9D%B4%EC%9A%A9)
+
+> 글 내용중 *opacity property를 0으로 주면 스크린리더가 읽지 못한다*는 말이 있는데, 현재는 읽어주는 것으로 확인됩니다. 이렇게 인터넷에서 얻는 정보들은 진위여부를 잘 알아봐야 합니다.
+
+## 카카오
+
+### 이미지 내에서 의미있는 텍스트의 대체 텍스트를 제공할 때
+
+```css
+.ir_pm {
+  display: block;
+  overflow: hidden;
+  font-size: 1px;
+  line-height: 0;
+  text-indent: -9999px;
+  /*
+    모바일용으로는 text-indent가 사라지고
+    color:transparent; 가 추가됩니다.
+    transparent 키워드는 IE9부터 사용 가능하기 때문에 PC에서는 빠져있습니다.
+  */
+}
+```
+
+`text-indent: -9999px;`때문에 브라우저는 어찌됐든 -9999px까지 그려야 한다는 단점이 있습니다. (다만 성능 저하를 실제로 불러오는지에 대해서는 근거가 없다고 합니다.) **현재는 잘 사용하지 않습니다.**
+
+### 스크린리더가 읽을 필요는 없지만 마크업 구조상 필요한 경우
+
+```css
+.screen_out {
+  overflow: hidden;
+  position: absolute;
+  width: 0;
+  height: 0;
+  line-height: 0;
+  text-indent: -9999px;
+}
+```
+
+스크린리더는 `width`와 `height`가 0이라면 읽지 않는다는 점을 이용한 방법입니다.
+
+### 이미지가 나오지 않을 때에도 대체 텍스트를 보여주고자 할 때
+
+```css
+.ir_wa {
+  display: block;
+  overflow: hidden;
+  position: relative;
+  z-index: -1;
+  width: 100%;
+  height: 100%;
+}
+```
+
+현재 카카오가 가장 많이 사용하는 방법입니다.
+
+> 이미지가 나오지 않을 때 대체 텍스트를 보여주고자 하는 때란 언제를 말하는걸까요? **자주 쓰이지 않는 폰트로 구성된 문구** 등이 들어가면 sprite 등의 기법을 써 이미지로 처리하는데, 이 때 이미지가 로드되지 않아도 텍스트가 보일 수 있도록 하기 위해 사용합니다.
+
+## 네이버
+
+```css
+.blind  {
+  position: absolute;
+  clip: rect(0 0 0 0);
+  width: 1px;
+  height: 1px;
+  margin: -1px;
+  overflow: hidden;
+}
+```
+
+IE 구버전에서는 인식하지 못하는 경우가 있기 때문에 `margin: -1px;`을 넣는다고 합니다. `clip` property를 이용해 요소를 잘라내기도 합니다.
+
+`clip`은 `position: absolute;`가 부여된 경우에만 사용할 수 있습니다.
+
+> `clip`은 deprecated property이기 때문에 대체재인 `clip-path: inset(50%);`를 추가로 넣는것도 좋다는 강사님 의견이 있습니다.
+
+## 쿠팡
+
+```css
+.product-search a.search {
+  /* 서치바에 적용된 스타일 */
+  overflow: hidden;
+  position: absolute;
+  right: 0;
+  width: 50px;
+  height: 39px;
+  background-position: -112px -71px;
+  text-indent: -9em;
+}
+```
+
+## 애플
+
+```css
+.visuallyhidden {
+  position: absolute;
+  clip: rect(1px, 1px, 1px, 1px);
+  clip-path: inset(0px 0px 99.9% 99.9%);
+  overflow: hidden;
+  height: 1px;
+  width: 1px;
+  padding: 0;
+  border: 0;
+}
+```
+
+네이버와 비슷한 방법을 사용하고 있습니다. `border`, `padding` property도 지정해줘서 조금 더 범용성있게 사용하고자 한 듯 합니다.
+
+## 에어비엔비
+
+```html
+<button aria-label="필터 보기">필터 아이콘</button>
+```
+
+`aria-label`이라는 웹 접근성을 위한 최신 attribute를 사용하거나,
+
+```css
+.a8jt5op[class][class] {
+  position: absolute;
+  clip: rect(0 0 0 0);
+  clip-path: inset(100%);
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  overflow: clip;
+  white-space: nowrap;
+}
+```
+
+네이버와 비슷한 방법을 사용하고 있는것이 확인됩니다. 레거시 브라우저를 위해 조금 더 철저히 코드를 추가한 것을 볼 수 있습니다.
+
+# CSS Sprite 기법
+
+여러 조그마한 이미지를 하나의 이미지 파일에 모아 이미지 로드 부담을 줄이는 기법입니다.
+
+![네이버의 sprite](../static/img/CSS_실무_테크닉/naver_sprite.png)
+
+이렇게 로드해온 이미지를 가지고 CSS에서 `background-image`로 적당히 잘라(`position`, `width`, `height` 이용) 사용하는 식입니다.
+
+[CSS Sprites Generator](https://www.toptal.com/developers/css/sprite-generator/)
+
+## Sprite 기법을 사용할 때 유의점
+
+Sprite가 너무 크면 '판' 자체의 로드가 부담을 가해 여러 군데의 로드가 늦어질 수 있다는 문제가 있습니다.
+
+변경사항이 있을 경우 수정이 까다롭다는 점도 단점중 하나입니다.
+
+따라서, Sprite가 너무 커지지 않도록 무조건 한 '판'으로 모으기보다는 적절히 나누는것도 필요합니다.
+
+> 추후 Webpack으로 해결이 가능한 문제이기도 합니다. Webpack은 이미지를 data format (base64) 으로 디코딩해 삽입해줍니다.
+
+# 레티나 디스플레이 대응법
+
+레티나 디스플레이는 화소 밀도가 높은 디스플레이(300PPI 이상)를 부르는 애플 LCD 제품의 브랜드 이름입니다.
+
+고해상도 화면으로 기술이 발전하며 논리적 픽셀(CSS에서 표현하는 화소의 기본 단위)과 물리적 픽셀의 차이가 발생하게 됐습니다. 브라우저는 CSS에서 정의한 픽셀만큼 이미지를 렌더링하기에 원래 물리적 픽셀에 맞게 렌더링된 이미지가 논리적 픽셀의 크기만큼 커져버리게 됩니다.
+
+화면에 그리고자 하는 **이미지 사이즈의 두 배 되는 이미지**를 넣으면 해결할 수 있습니다. 대신 이 때는 이미지의 사이즈를 조절하는 과정을 거쳐야 합니다.
+
+> 예전에는 모바일의 경우 레티나 화면과 아닌 화면을 분리해서 개발했지만, 요즘엔 다 좋아져서 굳이 구분하지는 않는다고 합니다.
