@@ -1,0 +1,71 @@
+---
+title: "SVG 사용법 정리"
+excerpt: "Scalable Vector Graphics의 사용법을 간략하게 정리했습니다."
+date: "2022-09-27T18:09:00+09:00"
+category: ["CSS"]
+---
+
+> Scalable Vector Graphics의 사용법을 간략하게 정리했습니다.
+
+# SVG, Scalable Vector Graphics
+
+**XML 기반의 2차원 벡터 그래픽**으로, HTML 요소로 이뤄져 있어 CSS와 JavaScript로 컨트롤 할 수 있습니다. 벡터이기 때문에 확대해도 깨지지 않으며 크기를 키워도 용량이 늘어나지 않습니다.
+
+> 코드로 이뤄진 이미지이기 때문에 복잡할수록 사이즈가 기하급수적으로 커집니다. 단순한 아이콘이나 로고, 도형 등을 구현할 때 많이 사용합니다.
+
+## 사용법
+
+1. `<img>` 요소로 넣기
+2. CSS `background`로 넣기
+3. 인라인으로 구현하기: SVG 코드를 그대로 HTML 안에 넣습니다.
+4. `<object>` 요소 사용하기: 아래처럼 `<object>` 요소로 넣으면 내부 요소에 접근할수도 있습니다.
+
+```html
+<object data="./image.svg" type="image/svg+xml"></object>
+```
+
+> 내부 요소 조작이 필요하면 3, 4번 방법을, 그렇지 않다면 1, 2번 방법을 사용하면 됩니다.
+
+# SVG 컨트롤 하기
+
+SVG 코드를 이루는 요소는 당연히 `class`를 부여할 수 있습니다.
+
+```html
+<svg width="624" height="465" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <path
+    d="m446.529 308.502 79.386-37.479c-37.824-34.863-111.48-58.521-196.146-58.521-123.264 0-223.191 50.142-223.191 112.002 0 61.857 99.927 112.002 223.191 112.002 94.674 0 175.575-29.586 208.011-71.334l-91.251-56.67Z"
+    fill="#00A249"
+  />
+  <!-- 중략 -->
+  <ellipse
+    class="eye-right"
+    cx="353.5"
+    cy="129"
+    rx="12.5"
+    ry="12"
+    fill="#000"
+  />
+</svg>
+```
+
+이렇게 부여한 `class`를 가지고 CSS를 이용해 스타일을 줄 수 있습니다.
+
+```css
+.eye-right {
+  animation-duration: 0.5s;
+  animation-name: blink;
+  animation-direction: alternate;
+  animation-iteration-count: infinite;
+  transform-origin: 353.5px 129px;
+}
+
+@keyframes blink {
+  to {
+    transform: scaleY(0.1);
+  }
+}
+```
+
+<p align='center'>
+<iframe src='../examples/LikeLion/9월27일%20SVG/index.html' style="width: 100%; height:500px;"></iframe>
+</p>
