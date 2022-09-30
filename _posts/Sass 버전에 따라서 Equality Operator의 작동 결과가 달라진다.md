@@ -11,7 +11,7 @@ category: ["CSS"]
 
 ```css
 @debug 1px != 1rem;
-@debug 1 != px;
+@debug 1 != 1px;
 ```
 
 아주 간단한 코드입니다. 전자의 경우 당연히 `true`가 나와야 할 것이고, 후자의 경우에도 `true`가 나오는게 당연할거라고 생각했습니다.
@@ -92,7 +92,7 @@ brew install sass/sass/sass
 
 ```css
 @debug 1px != 1rem;
-@debug 1 != px;
+@debug 1 != 1px;
 ```
 
 ![잘 나와요!](../static/img/Sass_버전에_따라서_Equality_Operator의_작동_결과가_달라진다/최종결과.png)
