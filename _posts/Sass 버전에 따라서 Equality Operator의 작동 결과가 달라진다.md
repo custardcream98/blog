@@ -54,11 +54,11 @@ LibSass는 Sass 코드를 컴파일 할 수 있는 컴파일러로, C와 C++로 
 
 [이슈 넘버 1667](https://github.com/sass/libsass/issues/1667)
 
-# 결론: DartSass를 쓰자
+# 결론: Dart Sass를 쓰자
 
 저같은 초보는 깊게 이해할 수는 없으니 'LibSass 버전 3.6.5에서 Equality Operator 관련 변경사항이 있었구나' 정도만 알고 넘어가도 좋겠습니다.
 
-다만, 이 과정에서 또 알게된 중요한 사실은 **LibSass가 deprecated 됐다는 점**입니다. Sass 공식 문서에서는 **DartSass를 이용할 것**을 권장하고 있습니다.
+다만, 이 과정에서 또 알게된 중요한 사실은 **LibSass가 deprecated 됐다는 점**입니다. Sass 공식 문서에서는 **Dart Sass를 이용할 것**을 권장하고 있습니다.
 
 ![libsass changelog](../static/img/Sass_버전에_따라서_Equality_Operator의_작동_결과가_달라진다/LibSassDeprecated.png)
 
