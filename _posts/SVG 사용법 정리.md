@@ -67,5 +67,5 @@ SVG 코드를 이루는 요소는 당연히 `class`를 부여할 수 있습니�
 ```
 
 <p align='center'>
-<iframe src='../examples/LikeLion/9월27일%20SVG/index.html' style="width: 100%; height:500px;"></iframe>
+<iframe src='../examples/LikeLion/9월27일/svg.html' style="width: 100%; height:500px;"></iframe>
 </p>
