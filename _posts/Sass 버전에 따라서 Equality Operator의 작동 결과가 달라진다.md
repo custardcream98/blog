@@ -106,3 +106,7 @@ brew install sass/sass/sass
 # Sass 공식문서 Contribution도 노려봤습니다
 
 [`sass-site` 레포지토리에 issue 올리고 PR 날려봤습니다.](https://github.com/sass/sass-site/pull/677) 어떻게 될지는 모르겠지만 이렇게 대형 프로젝트에 기여해보려고 한건 처음이라 두근두근 하네요!
+
+**10/4 업데이트: PR 실패ㅠㅠ**
+
+알고보니 해당 내용이 이미 공식 문서에 토글 버튼으로 숨어있더라고요ㅎㅎ 비록 성공하지는 못했지만 좋은 도전이었고 앞으로 오픈 소스 기여에 계속 도전해보겠습니다!!
