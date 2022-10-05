@@ -168,23 +168,36 @@ const MarkdownBody = styled.div`
 
   ul > li,
   ol > li {
+    position: relative;
     display: block;
-    padding-left: 1rem;
     margin: calc(var(--main-heading-margin) * 0.19) 0;
+    padding-left: 1rem;
+  }
+
+  ul > li {
+    margin-left: 1.5rem;
+    padding-left: 1.3rem;
+  }
+
+  ul > li > ul > li {
+    margin-left: 0.3rem;
   }
 
   ul > li::before {
-    content: "•";
-    display: inline-block;
-    vertical-align: bottom;
-    padding: 0 0.4rem 0 0.3rem;
-    font-weight: 900;
+    content: " ";
+    position: absolute;
+    left: 0rem;
+    top: 0.8rem;
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background-color: ${(props) => props.theme.textColor};
   }
 
   ol > li::before {
     content: counters(item, ".") " ";
     font-weight: 500;
-    padding: 0 0.4rem 0.2rem 0.3rem;
+    margin: 0 0.4rem 0.2rem 0.3rem;
     counter-increment: item;
   }
 
@@ -197,7 +210,7 @@ const MarkdownBody = styled.div`
     background-color: #1e1e1e;
     color: white;
     margin-bottom: 2rem;
-    padding: 0.3rem 0.8rem 0.3rem 0;
+    padding: 0.3rem 0.8rem 0.3rem 0.7rem;
     font-size: calc(var(--main-font-size) * 0.9);
     border-radius: 4px;
     a {
@@ -214,10 +227,12 @@ const MarkdownBody = styled.div`
     ol > li::before {
       content: counters(item, ".") " ";
       font-weight: 500;
-      padding: 0 0.4rem 0.2rem 0rem;
     }
     ol > li {
       margin: calc(var(--main-heading-margin) * 0.06) 0;
+    }
+    & > ol > li {
+      padding-left: 0;
     }
   }
   em {
