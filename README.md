@@ -13,3 +13,19 @@ CSS 프레임워크는 사용하지 않도록 하겠습니다. 드가즈아
 ### Next.js 프레임워크 사용해보자
 
 Blog라는 매체 특성상 굳이 CSR이나 SSR로 할 필요 없이 SSG로 하면 되므로 Gatsby를 보통 많이 사용하는 것 같던데 저는 공부 겸 Next.js를 사용하기로 했습니다. 넥스트로도 정적인 웹사이트는 만들 수 있습니다!
+
+## Commit Message Convention
+
+**2022/10/05부터 적용**
+
+- `Post` : 포스팅 업로드
+- `Typo` : 문서 오타 수정
+- `Change` : 문서 내용 수정
+- `Chore` : minor change
+- `Refactor` : 리팩토링
+- `Bugfix` : 버그 수정
+- `Feature` : 기능 추가
+
+* 가능하면 간결한 한글로, Commit Message Prefix와 겹치는 내용 없이
+  - 잘못된 예) `Typo: 자바스크립트의 변수들 오타 수정`
+  - 올바른 예) `Typo: 자바스크립트의 변수들`
