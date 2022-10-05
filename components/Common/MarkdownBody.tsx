@@ -128,16 +128,40 @@ const MarkdownBody = styled.div`
     margin: 1rem 0;
     background-color: #1e2228;
     border-radius: 4px;
+    counter-reset: codeblock;
     pre {
       overflow: auto hidden;
-      padding: 0.75rem 1rem;
+      /* padding: 0.75rem 0; */
       code {
         padding: 0;
         display: grid;
         background-color: transparent;
         font-size: calc(var(--main-font-size) * 0.8);
-        > span {
+        &::before,
+        &::after,
+        .line::before {
+          content: " ";
+          display: inline-block;
+          width: 0.9rem;
+          padding: 0 0.7rem;
+          height: 0.65rem;
+          background-color: #292929;
+        }
+        &::before {
+          border-top-left-radius: 4px;
+        }
+        &::after {
+          border-bottom-left-radius: 4px;
+        }
+        .line {
           padding-right: 1rem;
+          &::before {
+            height: 100%;
+            margin-right: 0.9rem;
+            text-align: right;
+            content: counter(codeblock);
+            counter-increment: codeblock;
+          }
         }
       }
     }
@@ -158,13 +182,6 @@ const MarkdownBody = styled.div`
   & > ul {
     margin-bottom: calc(var(--main-heading-margin) * 0.23);
   }
-
-  /* & > ol ol,
-  & > ul ul,
-  & > ul ol,
-  & > ol ul {
-    margin-bottom: calc(var(--main-heading-margin) * 0.15);
-  } */
 
   ul > li,
   ol > li {
