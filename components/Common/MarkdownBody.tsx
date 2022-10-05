@@ -161,6 +161,7 @@ const MarkdownBody = styled.div`
             text-align: right;
             content: counter(codeblock);
             counter-increment: codeblock;
+            color: #717171;
           }
         }
       }
