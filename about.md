@@ -8,6 +8,8 @@
 
 [LinkedIn](https://www.linkedin.com/in/shi-woo-park-668b33147/)
 
+[이력서 Web](https://custardcream98.github.io/resume/)
+
 [이력서 Notion](https://www.notion.so/custardcream/09b6b86040a545c8849c729eb9745768)
 
 [Github](https://github.com/custardcream98)
