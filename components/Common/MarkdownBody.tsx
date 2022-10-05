@@ -223,6 +223,36 @@ const MarkdownBody = styled.div`
     margin: 2rem 0;
   }
 
+  a {
+    position: relative;
+    color: ${(props) => props.theme.accentColor};
+    transition: linear 0.3s;
+    -webkit-transition: linear 0.3s;
+    -moz-transition: linear 0.3s;
+    z-index: 10;
+    &:hover {
+      text-decoration: none;
+      color: ${(props) => props.theme.bgColor};
+    }
+    &::before {
+      content: " ";
+      position: absolute;
+      width: calc(100% + 0.6rem);
+      height: calc(100% + 0.2rem);
+      top: -0.1rem;
+      left: -0.3rem;
+      border-radius: 4px;
+      background-color: transparent;
+      transition: linear 0.3s;
+      -webkit-transition: linear 0.3s;
+      -moz-transition: linear 0.3s;
+      z-index: -1;
+    }
+    &:hover::before {
+      background-color: ${(props) => props.theme.textColor};
+    }
+  }
+
   .toc {
     width: fit-content;
     background-color: #1e1e1e;
@@ -232,14 +262,12 @@ const MarkdownBody = styled.div`
     font-size: calc(var(--main-font-size) * 0.9);
     border-radius: 4px;
     a {
-      text-decoration: none;
-      color: white;
-      transition: linear 0.3s;
-      -webkit-transition: linear 0.3s;
-      -moz-transition: linear 0.3s;
+      color: inherit;
       &:hover {
         color: #1e1e1e;
-        background-color: #dedede;
+      }
+      &:hover::before {
+        background-color: white;
       }
     }
     ol > li::before {
