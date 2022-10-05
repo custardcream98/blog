@@ -39,7 +39,7 @@ const CommentDateSpan = styled(DateSpan)`
   font-size: 0.6rem;
 `;
 
-const Username = styled.span`
+const Username = styled.strong`
   font-size: 0.9rem;
 `;
 
