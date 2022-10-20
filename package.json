@@ -17,6 +17,7 @@
     "@fontsource/poppins": "^4.5.9",
     "@fontsource/source-code-pro": "^4.5.12",
     "@jsdevtools/rehype-toc": "^3.0.2",
+    "@vercel/og": "^0.0.19",
     "axios": "^0.27.2",
     "dayjs": "^1.11.4",
     "firebase": "^9.9.1",
