@@ -17,14 +17,6 @@ export const GlobalStyle = createGlobalStyle`
   }
   html {
     scroll-behavior: smooth;
-    .blind {
-      position: absolute;
-      clip: rect(0 0 0 0);
-      width: 1px;
-      height: 1px;
-      margin: -1px;
-      overflow: hidden;
-    }
   }
 `;
 
@@ -43,14 +35,10 @@ const Layout = ({ children, title, description, image, tags }: Props) => {
     <ThemeProvider theme={isDark ? darkTheme : lightTheme}>
       <GlobalStyle />
       <Head>
-        <title>
-          {(title ? title + ": " : "") + "FE 개발자 박시우의 기술 블로그"}
-        </title>
+        <title>{(title ? title + ": " : "") + "FE 개발자 박시우의 기술 블로그"}</title>
         <meta
           property="og:title"
-          content={
-            (title ? title + ": " : "") + "FE 개발자 박시우의 기술 블로그"
-          }
+          content={(title ? title + ": " : "") + "FE 개발자 박시우의 기술 블로그"}
         />
         <meta
           name="description"
@@ -67,14 +55,8 @@ const Layout = ({ children, title, description, image, tags }: Props) => {
           }
         />
         <meta property="og:url" content={getFullURL()} />
-        <meta
-          property="og:image"
-          content={image ?? "/static/img/thumbnail.png"}
-        />
-        <meta
-          name="keywords"
-          content={tags?.join(", ") ?? "HTML, CSS, JavaScript"}
-        ></meta>
+        <meta property="og:image" content={image ?? "/static/img/thumbnail.png"} />
+        <meta name="keywords" content={tags?.join(", ") ?? "HTML, CSS, JavaScript"}></meta>
         <meta name="viewport" content="initial-scale=1.0, width=device-width" />
       </Head>
       <Navigation />

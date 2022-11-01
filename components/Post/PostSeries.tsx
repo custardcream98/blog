@@ -21,7 +21,7 @@ const SeriesLink = styled(Link)`
 const PostSeries = () => {
   return (
     <section>
-      <SeriesTitle className="blind">이 시리즈의 글</SeriesTitle>
+      <SeriesTitle className="sr-only">이 시리즈의 글</SeriesTitle>
       <ol>{}</ol>
     </section>
   );

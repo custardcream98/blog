@@ -16,14 +16,12 @@ import "@fontsource/poppins/800.css";
 
 import "../styles/reset.css";
 import "../styles/font.css";
+import "../styles/style.css";
 
 function MyApp({ Component, pageProps }: AppProps) {
   console.clear();
 
-  console.log(
-    "%c안녕하세요👋",
-    "font-family: 'Noto Sans'; font-size: 16px; font-weight: 300"
-  );
+  console.log("%c안녕하세요👋", "font-family: 'Noto Sans'; font-size: 16px; font-weight: 300");
 
   console.log(
     "%c주니어 프론트엔드 개발자",
