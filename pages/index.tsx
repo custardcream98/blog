@@ -1,3 +1,4 @@
+import { useRouter } from "next/router";
 import React, { useState, useEffect } from "react";
 import Paging from "../components/Common/Paging";
 import { Container, Title } from "../components/Common/styledComponents";
@@ -12,10 +13,20 @@ type Props = {
 };
 
 const Index = ({ allPosts }: Props) => {
+  const router = useRouter();
+  const { page } = router.query;
+
   const [currentPage, setCurrentPage] = useState(0);
   const [postByPage, setPostByPage] = useState<[Post[]]>([[]]);
 
-  const onPageChange = (to: number) => setCurrentPage((prev) => to);
+  // const onPageChange = (to: number) => setCurrentPage((prev) => to);
+  const onPageChange = (to: number) =>
+    router.push({
+      pathname: "/",
+      query: {
+        page: to,
+      },
+    });
 
   useEffect(() => {
     let counter = 0;
@@ -32,6 +43,10 @@ const Index = ({ allPosts }: Props) => {
     setPostByPage((_) => [...postByPageArr]);
   }, []);
 
+  useEffect(() => {
+    setCurrentPage((_) => parseInt(page as string) - 1 || 0);
+  }, [page]);
+
   return (
     <Layout>
       <Intro />
@@ -44,6 +59,7 @@ const Index = ({ allPosts }: Props) => {
             postByPage[currentPage].map((post, i) => (
               <HeroPost
                 index={i}
+                maxPostCount={postByPage[currentPage].length}
                 title={post.title}
                 coverImage={post.coverImage}
                 date={post.date}

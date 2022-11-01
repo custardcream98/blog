@@ -1,8 +1,5 @@
 import styled, { useTheme } from "styled-components";
-import {
-  MdOutlineKeyboardArrowLeft,
-  MdOutlineKeyboardArrowRight,
-} from "react-icons/md";
+import { MdOutlineKeyboardArrowLeft, MdOutlineKeyboardArrowRight } from "react-icons/md";
 import React from "react";
 
 const Container = styled.div`
@@ -73,11 +70,11 @@ const Paging = ({ pageScale, currentPage, onPageChange }: Props) => {
           new Array(pageScale).fill(0).map((_, index) => (
             <li>
               {index === currentPage ? (
-                <Pagenum__selected value={index} onClick={onClick}>
+                <Pagenum__selected value={index + 1} onClick={onClick}>
                   {index + 1}
                 </Pagenum__selected>
               ) : (
-                <Pagenum value={index} onClick={onClick}>
+                <Pagenum value={index + 1} onClick={onClick}>
                   {index + 1}
                 </Pagenum>
               )}

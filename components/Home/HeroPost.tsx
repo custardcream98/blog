@@ -4,9 +4,11 @@ import styled from "styled-components";
 import { LinkDecorated } from "../Common/styledComponents";
 import DateSpan from "../Common/DateSpan";
 
-const ContentContainer = styled.li<{ index: number }>`
+type PagenationInfo = { index: number; maxPostCount: number };
+
+const ContentContainer = styled.li<PagenationInfo>`
   width: 100%;
-  margin-bottom: ${(props) => (props.index === 4 ? "20px" : "0")};
+  margin-bottom: ${(props) => (props.index === props.maxPostCount - 1 ? "20px" : "0")};
 `;
 
 const Title = styled.h3`
@@ -17,7 +19,7 @@ const Title = styled.h3`
   margin-right: 1rem;
 `;
 
-const ExcerptLink = styled(LinkDecorated)<{ index: number }>`
+const ExcerptLink = styled(LinkDecorated)<PagenationInfo>`
   display: inline-block;
   width: calc(60% - 1rem);
   height: 100%;
@@ -26,7 +28,8 @@ const ExcerptLink = styled(LinkDecorated)<{ index: number }>`
   font-size: 1rem;
   font-weight: 300;
   line-height: 1.5;
-  border-bottom: ${(props) => (props.index === 4 ? "none" : "3px solid #25282c")};
+  border-bottom: ${(props) =>
+    props.index === props.maxPostCount - 1 ? "none" : "3px solid #25282c"};
 `;
 
 const Excerpt = styled.p`
@@ -65,6 +68,7 @@ const TitleLink = styled(LinkDecorated)`
 
 type Props = {
   index: number;
+  maxPostCount: number;
   title: string;
   coverImage: string;
   date: string;
@@ -72,9 +76,9 @@ type Props = {
   slug: string;
 };
 
-const HeroPost = ({ index, title, coverImage, date, excerpt, slug }: Props) => {
+const HeroPost = ({ index, maxPostCount, title, coverImage, date, excerpt, slug }: Props) => {
   return (
-    <ContentContainer index={index}>
+    <ContentContainer index={index} maxPostCount={maxPostCount}>
       <Title>
         <Link href={`/posts/${slug}`} passHref>
           <TitleLink>{title}</TitleLink>
@@ -82,7 +86,7 @@ const HeroPost = ({ index, title, coverImage, date, excerpt, slug }: Props) => {
         <DateSpanForHeroPost date={date} />
       </Title>
       <Link href={`/posts/${slug}`} passHref>
-        <ExcerptLink index={index}>
+        <ExcerptLink index={index} maxPostCount={maxPostCount}>
           <Excerpt>{excerpt}</Excerpt>
         </ExcerptLink>
       </Link>
