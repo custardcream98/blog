@@ -3,6 +3,7 @@ title: "Next.js에서 Mixed Content 에러 해결하기 (feat. Proxy)"
 excerpt: "Mixed Content 에러를 알아보고 해결했습니다."
 date: "2022-10-31"
 category: ["Next.js", "JavaScript"]
+series: "Troubleshooting"
 ---
 
 > `Mixed Content` 에러를 알아보고 해결했습니다.
