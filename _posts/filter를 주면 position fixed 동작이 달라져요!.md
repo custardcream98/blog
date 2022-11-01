@@ -1,16 +1,16 @@
 ---
 title: "filter를 주면 position fixed 동작이 달라져요!"
-excerpt: "블로그의 네비바를 리뉴얼하는 과정에서 다크모드 스위치에 부여한 position fixed가 네비바 기준으로만 동작하는 문제를 해결하고자 했습니다."
+excerpt: "블로그의 navbar를 리뉴얼하는 과정에서 다크모드 스위치에 부여한 position fixed가 navbar 기준으로만 동작하는 문제를 해결하고자 했습니다."
 date: "2022-11-01"
 category: ["HTML", "CSS"]
 series: "Troubleshooting"
 ---
 
-> 블로그의 네비바를 리뉴얼하는 과정에서 다크모드 스위치에 부여한 position fixed가 네비바 기준으로만 동작하는 문제를 해결하고자 했습니다.
+> 블로그의 navbar를 리뉴얼하는 과정에서 다크모드 스위치에 부여한 position fixed가 navbar 기준으로만 동작하는 문제를 해결하고자 했습니다.
 
 # 문제상황
 
-블로그의 네비바 디자인을 아주 살짝 바꾸고 있었는데, 화면이 작아질 경우 다크모드 스위치의 위치를 뷰포트 우하단으로 옮기고자 아래의 스타일을 추가했습니다.
+블로그의 navbar 디자인을 아주 살짝 바꾸고 있었는데, 화면이 작아질 경우 다크모드 스위치의 위치를 뷰포트 우하단으로 옮기고자 아래의 스타일을 추가했습니다.
 
 ```css
 .darkmode-switch {
@@ -24,9 +24,9 @@ series: "Troubleshooting"
 
 그런데 이상하게도 아래처럼 동작했습니다.
 
-![네비바 안의 다크모드 스위치 위치가 마음대로 동작하지 않는 모습](../static/img/filter를_주면_position_fixed_동작이_달라져요!/다크모드_스위치_위치이상.gif)
+![navbar 안의 다크모드 스위치 위치가 마음대로 동작하지 않는 모습](../static/img/filter를_주면_position_fixed_동작이_달라져요!/다크모드_스위치_위치이상.gif)
 
-`.darkmode-switch` 요소가 뷰포트 기준이 아닌 네비바 기준으로 위치하고 있는 상황으로 보였습니다. `.darkmode-switch` 요소는 네비바의 자식 요소긴 하나, `position: fixed;` 를 부여하면 뷰포트 전체를 기준으로 위치하도록 할 수 있을 거라고 생각했는데, 왜 이런 일이 벌어진걸까요?
+`.darkmode-switch` 요소가 뷰포트 기준이 아닌 navbar 기준으로 위치하고 있는 상황으로 보였습니다. `.darkmode-switch` 요소는 navbar의 자식 요소긴 하나, `position: fixed;` 를 부여하면 뷰포트 전체를 기준으로 위치하도록 할 수 있을 거라고 생각했는데, 왜 이런 일이 벌어진걸까요?
 
 ## MDN 문서를 확인해보자
 
@@ -36,7 +36,7 @@ MDN 문서에 따르면 `fixed`는 뷰포트의 초기 컨테이닝 블록, 즉 
 
 > 요소의 조상 중 하나가 `transform`, `perspective`, `filter` 속성 중 어느 하나라도 `none`이 아니라면 뷰포트 대신 그 조상을 컨테이닝 블록으로 삼습니다. (`perspective`와 `filter`의 경우 **브라우저별로 결과가 다름에 유의**)
 
-블로그의 네비바에는 `backdrop-filter: blur(15px)` 가 부여돼 있었는데 이로 인해 원치 않은 동작을 일으킨 것입니다. 즉 아래같은 상황인거죠.
+블로그의 navbar에는 `backdrop-filter: blur(15px)` 가 부여돼 있었는데 이로 인해 원치 않은 동작을 일으킨 것입니다. 즉 아래같은 상황인거죠.
 
 ```html
 <body>
@@ -98,7 +98,7 @@ Webkit 엔진에서는 문제가 없겠지만 Blink 엔진에서도 제대로 �
 }
 ```
 
-새로 만든 가상 요소에 `z-index: -1;` 을 줘서 `.navbar-container`가 생성하고 있는 stacking context(쌓임 맥락) 기준으로 가장 밑에 위치하도록 했습니다. 네비바 안의 다른 요소들과 가상 요소는 형제 관계에 놓이기 때문에 문제가 해결됩니다.
+새로 만든 가상 요소에 `z-index: -1;` 을 줘서 `.navbar-container`가 생성하고 있는 stacking context(쌓임 맥락) 기준으로 가장 밑에 위치하도록 했습니다. navbar 안의 다른 요소들과 가상 요소는 형제 관계에 놓이기 때문에 문제가 해결됩니다.
 
 앞선 예제로 예를 들면 아래와 같은 코드가 될 것입니다.
 
@@ -129,6 +129,6 @@ Webkit 엔진에서는 문제가 없겠지만 Blink 엔진에서도 제대로 �
 
 ## 결과
 
-![네비바 안의 다크모드 스위치 위치가 마음대로 동작하지 않는 모습](../static/img/filter를_주면_position_fixed_동작이_달라져요!/해결.gif)
+![navbar 안의 다크모드 스위치 위치가 마음대로 동작하지 않는 모습](../static/img/filter를_주면_position_fixed_동작이_달라져요!/해결.gif)
 
 이제 원하던대로 잘 동작하네요!
