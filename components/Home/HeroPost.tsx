@@ -4,44 +4,49 @@ import styled from "styled-components";
 import { LinkDecorated } from "../Common/styledComponents";
 import DateSpan from "../Common/DateSpan";
 
-const ContentContainer = styled.div`
-  display: flex;
+const ContentContainer = styled.li<{ index: number }>`
   width: 100%;
-  align-items: flex-start;
-  a {
-    flex: 1.5 1.5 0;
-    font-size: 1rem;
-    font-weight: 300;
-    line-height: 1.5;
-  }
+  height: 120px;
+  margin-bottom: ${(props) => (props.index === 4 ? "20px" : "0")};
 `;
 
 const Title = styled.h3`
-  display: flex;
-  flex-direction: column;
+  display: inline-block;
+  width: 40%;
+  height: 100%;
+  padding: 20px 0;
   font-size: 1.1rem;
-  line-height: 1.3;
+  line-height: 1.5;
   margin-right: 1rem;
-  font-weight: 700;
-  flex: 1 1 0;
+  font-weight: 500;
 `;
 
-const Separator = styled.div`
-  height: 1.3rem;
-  width: 60%;
+const ExcerptLink = styled(LinkDecorated)`
+  display: inline-block;
+  width: calc(60% - 1rem);
+  height: 100%;
+  vertical-align: top;
+  padding: 20px 0;
+  font-size: 1rem;
+  font-weight: 300;
+  line-height: 1.5;
   border-bottom: 3px solid #25282c;
-  margin-bottom: 1.3rem;
-  align-self: flex-end;
 `;
 
-const Container = styled.div`
-  display: flex;
+const Excerpt = styled.p`
+  /* max-width: 300px; */
   width: 100%;
-  flex-direction: column;
-  align-items: center;
+  height: 77px;
+  word-break: initial;
+  /* overflow: hidden; */
+`;
+
+const DateSpanForHeroPost = styled(DateSpan)`
+  display: block;
 `;
 
 type Props = {
+  index: number;
   title: string;
   coverImage: string;
   date: string;
@@ -49,10 +54,10 @@ type Props = {
   slug: string;
 };
 
-const HeroPost = ({ title, coverImage, date, excerpt, slug }: Props) => {
+const HeroPost = ({ index, title, coverImage, date, excerpt, slug }: Props) => {
   return (
-    <Container>
-      <ContentContainer>
+    <ContentContainer index={index}>
+      {/* <ContentContainer>
         <Title>
           <Link href={`/posts/${slug}`} passHref>
             <LinkDecorated>{title}</LinkDecorated>
@@ -65,8 +70,19 @@ const HeroPost = ({ title, coverImage, date, excerpt, slug }: Props) => {
           </LinkDecorated>
         </Link>
       </ContentContainer>
-      <Separator />
-    </Container>
+      <Separator /> */}
+      <Title>
+        <Link href={`/posts/${slug}`} passHref>
+          <LinkDecorated>{title}</LinkDecorated>
+        </Link>
+        <DateSpanForHeroPost date={date} />
+      </Title>
+      <Link href={`/posts/${slug}`} passHref>
+        <ExcerptLink>
+          <Excerpt>{excerpt}</Excerpt>
+        </ExcerptLink>
+      </Link>
+    </ContentContainer>
   );
 };
 

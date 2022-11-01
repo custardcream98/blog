@@ -41,16 +41,15 @@ const Index = ({ allPosts }: Props) => {
         </Title>
         <ol>
           {React.Children.toArray(
-            postByPage[currentPage].map((post) => (
-              <li>
-                <HeroPost
-                  title={post.title}
-                  coverImage={post.coverImage}
-                  date={post.date}
-                  excerpt={post.excerpt}
-                  slug={post.slug}
-                />
-              </li>
+            postByPage[currentPage].map((post, i) => (
+              <HeroPost
+                index={i}
+                title={post.title}
+                coverImage={post.coverImage}
+                date={post.date}
+                excerpt={post.excerpt}
+                slug={post.slug}
+              />
             ))
           )}
         </ol>
@@ -67,14 +66,7 @@ const Index = ({ allPosts }: Props) => {
 export default Index;
 
 export const getStaticProps = async () => {
-  const allPosts = getAllPosts([
-    "title",
-    "date",
-    "slug",
-    "author",
-    "coverImage",
-    "excerpt",
-  ]);
+  const allPosts = getAllPosts(["title", "date", "slug", "author", "coverImage", "excerpt"]);
 
   return {
     props: { allPosts },
