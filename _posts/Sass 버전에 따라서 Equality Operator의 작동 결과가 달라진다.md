@@ -3,6 +3,7 @@ title: "Sass 버전에 따라서 Equality Operator의 작동 결과가 달라진
 excerpt: "Sass를 공부하던중 저 혼자 Equality Operator의 작동 결과가 다른것을 알게 됐습니다."
 date: "2022-09-29T18:09:00+09:00"
 category: ["CSS"]
+series: "Troubleshooting"
 ---
 
 > Sass를 공부하던중 저 혼자 Equality Operator의 작동 결과가 다른것을 알게 됐습니다.
