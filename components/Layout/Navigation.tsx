@@ -154,7 +154,7 @@ const Navigation = () => {
           <NavItemWrapper>
             <NavMenu>
               <NavItem href="/#Posts_Title" content="Posts" />
-              <NavItem href="/categories" content="Category" />
+              <NavItem href="/categories" content="Categories" />
               <NavItem href="/series" content="Series" />
               <NavItem href="/about" content="About" />
             </NavMenu>
