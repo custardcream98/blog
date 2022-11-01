@@ -6,7 +6,6 @@ import DateSpan from "../Common/DateSpan";
 
 const ContentContainer = styled.li<{ index: number }>`
   width: 100%;
-  height: 120px;
   margin-bottom: ${(props) => (props.index === 4 ? "20px" : "0")};
 `;
 
@@ -15,10 +14,7 @@ const Title = styled.h3`
   width: 40%;
   height: 100%;
   padding: 20px 0;
-  font-size: 1.1rem;
-  line-height: 1.5;
   margin-right: 1rem;
-  font-weight: 500;
 `;
 
 const ExcerptLink = styled(LinkDecorated)`
@@ -34,15 +30,37 @@ const ExcerptLink = styled(LinkDecorated)`
 `;
 
 const Excerpt = styled.p`
-  /* max-width: 300px; */
   width: 100%;
-  height: 77px;
-  word-break: initial;
-  /* overflow: hidden; */
+
+  /*
+    Multi Line truncate
+  */
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  -webkit-line-clamp: 3;
+  font-size: 16px;
+  line-height: 1.5;
+  height: 72px;
 `;
 
 const DateSpanForHeroPost = styled(DateSpan)`
   display: block;
+`;
+
+const TitleLink = styled(LinkDecorated)`
+  /*
+    Multi Line truncate
+  */
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  -webkit-line-clamp: 2;
+  font-size: 18px;
+  line-height: 1.5;
+  max-height: 54px;
 `;
 
 type Props = {
@@ -57,23 +75,9 @@ type Props = {
 const HeroPost = ({ index, title, coverImage, date, excerpt, slug }: Props) => {
   return (
     <ContentContainer index={index}>
-      {/* <ContentContainer>
-        <Title>
-          <Link href={`/posts/${slug}`} passHref>
-            <LinkDecorated>{title}</LinkDecorated>
-          </Link>
-          <DateSpan date={date} />
-        </Title>
-        <Link href={`/posts/${slug}`} passHref>
-          <LinkDecorated>
-            <p>{excerpt}</p>
-          </LinkDecorated>
-        </Link>
-      </ContentContainer>
-      <Separator /> */}
       <Title>
         <Link href={`/posts/${slug}`} passHref>
-          <LinkDecorated>{title}</LinkDecorated>
+          <TitleLink>{title}</TitleLink>
         </Link>
         <DateSpanForHeroPost date={date} />
       </Title>
