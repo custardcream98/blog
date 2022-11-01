@@ -5,6 +5,8 @@ export const lightTheme: DefaultTheme = {
   textColor: "#121212",
   subTextColor: "rgb(177, 177, 177)",
   navLineShadow: "rgba(17, 17, 26, 0.1) 0px 1px 0px",
+  navBackgroundColor: "#e7e7e767",
+  darkmodeShadow: "rgba(50, 50, 93, 0.25) 0px 2px 5px -1px, rgba(0, 0, 0, 0.3) 0px 1px 3px -1px",
   footerShadow: "rgba(17, 17, 26, 0.1) 1px 0px 0px",
   accentColor: "#0070f3",
   mainColor: "#d7a306",
@@ -20,6 +22,9 @@ export const darkTheme: DefaultTheme = {
   textColor: "#efefef",
   subTextColor: "rgb(177, 177, 177)",
   navLineShadow: "rgba(200, 200, 200, 0.25) 0px 1px 0px",
+  navBackgroundColor: "#6a6a6a14",
+  darkmodeShadow:
+    "rgba(220, 205, 205, 0.25) 0px 2px 5px -1px, rgba(255, 255, 255, 0.3) 0px 1px 3px -1px",
   footerShadow: "rgba(17, 17, 26, 0.1) 1px 0px 0px",
   accentColor: "#0070f3",
   mainColor: "#d7a306",

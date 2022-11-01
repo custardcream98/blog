@@ -1,10 +1,10 @@
 import React from "react";
+import { IconContext } from "react-icons";
 import { BsFillMoonFill } from "react-icons/bs";
 import { ImSun } from "react-icons/im";
 import Link from "next/link";
 import styled, { useTheme } from "styled-components";
 import { useSetRecoilState, useRecoilValue } from "recoil";
-import { motion } from "framer-motion";
 import { isDarkAtom } from "../../lib/atoms";
 import BlogIcon from "../Common/BlogIcon";
 import { LinkDecorated } from "../Common/styledComponents";
@@ -23,7 +23,14 @@ const Container = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
-  background-color: ${(props) => props.theme.bgColor};
+  ::before {
+    content: " ";
+    position: absolute;
+    inset: 0;
+    background-color: ${(props) => props.theme.navBackgroundColor};
+    backdrop-filter: blur(13px);
+    z-index: -1;
+  }
 `;
 
 const Nav = styled.nav`
@@ -45,41 +52,35 @@ const NavMenu = styled.ul`
   align-items: center;
 `;
 
-const DarkmodeSwitch = styled.div`
-  width: 50px;
-  height: 30px;
-  background-color: rgb(189, 189, 189);
-  display: flex;
-  justify-content: flex-start;
-  border-radius: 50px;
-  border: none;
-  padding: 3px;
-  margin: 0 0 0 0.25rem;
-  cursor: pointer;
-  &[data-ison="true"] {
-    justify-content: flex-end;
-  }
-
-  @media (max-width: 800px) {
-    width: 1.4rem;
-    height: 1rem;
-    padding: 0.09rem;
-  }
-`;
-
-const DarkmodeSwitchHandle = styled(motion.div)`
-  width: 24px;
-  height: 24px;
-  background-color: white;
-  border-radius: 40px;
+const DarkmodeSwitch = styled.button`
   display: flex;
   justify-content: center;
   align-items: center;
-  padding: 4px;
-
+  width: 26px;
+  height: 26px;
+  margin: 0 0 0 0.25rem;
+  padding: 3px;
+  background-color: transparent;
+  border-radius: 50px;
+  border: none;
+  cursor: pointer;
+  transition: scale 0.2s ease;
+  :hover {
+    scale: 1.1;
+  }
+  :active {
+    scale: 0.8;
+  }
   @media (max-width: 800px) {
-    width: 0.82rem;
-    height: 0.82rem;
+    position: fixed;
+    width: 35px;
+    height: 35px;
+    bottom: 20px;
+    right: 20px;
+    padding: 6px;
+    box-shadow: ${(props) => props.theme.darkmodeShadow};
+    background-color: ${(props) => props.theme.navBackgroundColor};
+    backdrop-filter: blur(13px);
   }
 `;
 
@@ -89,7 +90,7 @@ const Title = styled.span`
   letter-spacing: -0.03rem;
   margin-left: 7px;
   @media (max-width: 800px) {
-    font-size: 0.7rem;
+    font-size: 0.9rem;
   }
 `;
 
@@ -106,7 +107,7 @@ const NavItemLinkDecorated = styled(LinkDecorated)`
   font-size: 1rem;
   margin: 0 0.25rem;
   @media (max-width: 800px) {
-    font-size: 0.75rem;
+    font-size: 0.8rem;
   }
 `;
 const NavItemLi = styled.li`
@@ -117,12 +118,6 @@ const NavItemLi = styled.li`
 const NavItemWrapper = styled.div`
   display: flex;
 `;
-
-const spring = {
-  type: "spring",
-  stiffness: 700,
-  damping: 30,
-};
 
 type NavItemProps = {
   href: string;
@@ -141,7 +136,6 @@ const Navigation = () => {
   const isDark = useRecoilValue(isDarkAtom);
   const setDarkAtom = useSetRecoilState(isDarkAtom);
   const toggleSwitch = () => setDarkAtom((prev) => !prev);
-
   const theme = useTheme();
 
   return (
@@ -153,7 +147,7 @@ const Navigation = () => {
               <LogoTitle>
                 <BlogIcon color={theme.textColor} size={1} />
                 <Title>Custardcream</Title>
-                <span className="blind">: FE 개발자 박시우의 기술 블로그</span>
+                <span className="sr-only">: FE 개발자 박시우의 기술 블로그</span>
               </LogoTitle>
             </a>
           </Link>
@@ -164,15 +158,13 @@ const Navigation = () => {
               <NavItem href="/series" content="Series" />
               <NavItem href="/about" content="About" />
             </NavMenu>
-            <DarkmodeSwitch data-ison={isDark} onClick={toggleSwitch}>
-              <DarkmodeSwitchHandle layout transition={spring}>
-                {isDark ? (
-                  <BsFillMoonFill color="#e5c704" />
-                ) : (
-                  <ImSun color="#e5c704" />
-                )}
-              </DarkmodeSwitchHandle>
-            </DarkmodeSwitch>
+            <article>
+              <DarkmodeSwitch onClick={toggleSwitch}>
+                <IconContext.Provider value={{ size: "100%" }}>
+                  {isDark ? <BsFillMoonFill color="#e5c704" /> : <ImSun color="#e5c704" />}
+                </IconContext.Provider>
+              </DarkmodeSwitch>
+            </article>
           </NavItemWrapper>
         </Nav>
       </Container>
