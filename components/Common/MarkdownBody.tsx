@@ -299,6 +299,11 @@ const MarkdownBody = styled.div`
     margin: 0 auto;
   }
 
+  p[class="iframe-container"] {
+    width: 100%;
+    overflow: auto;
+  }
+
   table {
     margin: auto;
     max-width: 600px;

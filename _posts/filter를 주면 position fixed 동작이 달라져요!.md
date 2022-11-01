@@ -64,8 +64,8 @@ MDN 문서에 따르면 `fixed`는 뷰포트의 초기 컨테이닝 블록, 즉 
 </body>
 ```
 
-<p align='center'>
-<iframe src='../examples/posts/filter를_주면_position_fixed_동작이_달라져요!/test.html' style="width: 400px; height:400px;"></iframe>
+<p class="iframe-container" align='center'>
+<iframe src='../examples/posts/filter를_주면_position_fixed_동작이_달라져요!/test.html' style="width: 350px; height:400px;"></iframe>
 </p>
 
 부모 요소에 `filter` property를 지정한 상황입니다.
@@ -121,8 +121,8 @@ Webkit 엔진에서는 문제가 없겠지만 Blink 엔진에서도 제대로 �
 /* 이후 코드 동일 */
 ```
 
-<p align='center'>
-<iframe src='../examples/posts/filter를_주면_position_fixed_동작이_달라져요!/test_fixed.html' style="width: 400px; height:400px;"></iframe>
+<p class="iframe-container" align='center'>
+<iframe src='../examples/posts/filter를_주면_position_fixed_동작이_달라져요!/test_fixed.html' style="width: 350px; height:400px;"></iframe>
 </p>
 
 이제 Blink 엔진에서도 `.child` 요소의 위치가 원하던대로 뷰포트 기준 우하단에 위치하고 있습니다.
