@@ -14,6 +14,11 @@ export const GlobalStyle = createGlobalStyle`
       font-family: "Noto Sans", "Noto Sans KR", -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji";
       background-color: ${(props) => props.theme.bgColor};
       color: ${(props) => props.theme.textColor};
+
+      /*
+        다크모드 transition
+      */
+      transition: all 0.1s linear;
   }
   html {
     scroll-behavior: smooth;

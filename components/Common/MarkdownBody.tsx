@@ -11,8 +11,6 @@ const MarkdownBody = styled.div`
   -webkit-text-size-adjust: 100%;
   width: 100%;
   margin-top: 2rem;
-  color: ${(props) => props.theme.textColor};
-  background-color: ${(props) => props.theme.bgColor};
   font-size: var(--main-font-size);
   font-weight: 300;
   line-height: 1.8;
