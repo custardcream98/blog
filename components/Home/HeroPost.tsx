@@ -17,7 +17,7 @@ const Title = styled.h3`
   margin-right: 1rem;
 `;
 
-const ExcerptLink = styled(LinkDecorated)`
+const ExcerptLink = styled(LinkDecorated)<{ index: number }>`
   display: inline-block;
   width: calc(60% - 1rem);
   height: 100%;
@@ -26,7 +26,7 @@ const ExcerptLink = styled(LinkDecorated)`
   font-size: 1rem;
   font-weight: 300;
   line-height: 1.5;
-  border-bottom: 3px solid #25282c;
+  border-bottom: ${(props) => (props.index === 4 ? "none" : "3px solid #25282c")};
 `;
 
 const Excerpt = styled.p`
@@ -82,7 +82,7 @@ const HeroPost = ({ index, title, coverImage, date, excerpt, slug }: Props) => {
         <DateSpanForHeroPost date={date} />
       </Title>
       <Link href={`/posts/${slug}`} passHref>
-        <ExcerptLink>
+        <ExcerptLink index={index}>
           <Excerpt>{excerpt}</Excerpt>
         </ExcerptLink>
       </Link>
