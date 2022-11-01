@@ -1,6 +1,6 @@
 import React from "react";
 import Head from "next/head";
-import { ThemeProvider } from "styled-components";
+import styled, { ThemeProvider } from "styled-components";
 import { useRecoilValue } from "recoil";
 import { isDarkAtom } from "../../lib/atoms";
 import { darkTheme, lightTheme } from "../../lib/theme";
@@ -23,6 +23,16 @@ export const GlobalStyle = createGlobalStyle`
   html {
     scroll-behavior: smooth;
   }
+`;
+
+const Wrapper = styled.div`
+  display: flex;
+  flex-direction: column;
+  min-height: calc(100vh - 50px); // 뷰포트 높이 - Navbar 높이
+`;
+
+const Main = styled.main`
+  flex-grow: 1;
 `;
 
 type Props = {
@@ -65,8 +75,10 @@ const Layout = ({ children, title, description, image, tags }: Props) => {
         <meta name="viewport" content="initial-scale=1.0, width=device-width" />
       </Head>
       <Navigation />
-      <main>{children}</main>
-      <Footer />
+      <Wrapper>
+        <Main>{children}</Main>
+        <Footer />
+      </Wrapper>
     </ThemeProvider>
   );
 };
