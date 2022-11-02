@@ -1,6 +1,12 @@
+import { useRecoilValue } from "recoil";
 import styled from "styled-components";
+import { isDarkAtom } from "../../lib/atoms";
 
-const MarkdownBody = styled.div`
+type StyleProps = {
+  isDark: boolean;
+};
+
+const MarkdownBodyStyle = styled.div<StyleProps>`
   --main-font-size: 1.1rem;
   --main-heading-margin: 4rem;
   @media (max-width: 800px) {
@@ -100,12 +106,11 @@ const MarkdownBody = styled.div`
   blockquote {
     margin: 0 0 1rem 0;
     padding: 0.6rem 0.6rem 0.6rem 0.9rem;
-    color: ${(props) => props.theme.textColor};
     border-left: 0.2rem solid #f9bf00;
     font-style: italic;
     border-radius: 4px;
-    background-color: #1e1e1e;
-    color: white;
+    background-color: ${(props) => props.theme.postElementBackgroundColor};
+    color: ${(props) => props.theme.textColor};
     font-size: 93%;
     p {
       margin: 0;
@@ -124,7 +129,7 @@ const MarkdownBody = styled.div`
 
   div[data-rehype-pretty-code-fragment] {
     margin: 1rem 0;
-    background-color: #1e2228;
+    background-color: ${(props) => props.theme.postElementBackgroundColor};
     border-radius: 4px;
     counter-reset: codeblock;
     pre {
@@ -143,7 +148,7 @@ const MarkdownBody = styled.div`
           width: 0.9rem;
           padding: 0 0.7rem;
           height: 0.65rem;
-          background-color: #292929;
+          background-color: ${(props) => (props.isDark ? "#292929" : "#dfdfdf")};
         }
         &::before {
           border-top-left-radius: 4px;
@@ -165,6 +170,22 @@ const MarkdownBody = styled.div`
       }
     }
   }
+
+  /* 
+    코드블록 다크모드 조정
+  */
+  ${(props) =>
+    props.isDark
+      ? `
+          pre[data-theme='light'], code[data-theme='light'] {
+            display: none;
+          }
+        `
+      : `
+          pre[data-theme='dark'], code[data-theme='dark'] {
+            display: none;
+          }
+      `}
 
   img {
     max-width: 100%;
@@ -253,8 +274,8 @@ const MarkdownBody = styled.div`
 
   .toc {
     width: fit-content;
-    background-color: #1e1e1e;
-    color: white;
+    background-color: ${(props) => props.theme.postElementBackgroundColor};
+    color: ${(props) => props.theme.textColor};
     margin-bottom: 2rem;
     padding: 0.3rem 0.8rem 0.3rem 0.7rem;
     font-size: calc(var(--main-font-size) * 0.9);
@@ -331,5 +352,16 @@ const MarkdownBody = styled.div`
     }
   }
 `;
+
+const MarkdownBody = ({ content, className }: { content: string; className?: string }) => {
+  const isDark = useRecoilValue(isDarkAtom);
+  return (
+    <MarkdownBodyStyle
+      isDark={isDark}
+      dangerouslySetInnerHTML={{ __html: content }}
+      className={className}
+    />
+  );
+};
 
 export default MarkdownBody;

@@ -10,7 +10,7 @@ import markdownToHtml from "../lib/markdownToHtml";
 import check404 from "../lib/check404";
 
 const AboutBody = styled(MarkdownBody)`
-  img {
+  & img {
     display: inline;
   }
 `;
@@ -35,7 +35,7 @@ const About = ({ content }: Props) => {
       />
       <Container style={{ alignItems: "flex-start" }}>
         <Name as="h2">{"<개발자 박시우 />"}</Name>
-        <AboutBody dangerouslySetInnerHTML={{ __html: content }} />
+        <AboutBody content={content} />
       </Container>
     </>
   );

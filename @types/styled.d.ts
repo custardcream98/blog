@@ -6,6 +6,9 @@ declare module "styled-components" {
     subTextColor: string;
     navLineShadow: string;
     navBackgroundColor: string;
+
+    postElementBackgroundColor: string;
+
     darkmodeShadow: string;
     footerShadow: string;
     bgColor: string;

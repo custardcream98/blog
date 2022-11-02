@@ -3,7 +3,6 @@ import styled from "styled-components";
 
 import Meta from "../../components/Layout/Meta";
 import { Container } from "../../components/Common/styledComponents";
-import PostBody from "../../components/Post/PostBody";
 import PostTitle from "../../components/Post/PostTitle";
 import Comments from "../../components/Comment/Comments";
 import PrevNextPostBtn from "../../components/Post/PrevNextPostBtn";
@@ -14,6 +13,7 @@ import { createPostDoc } from "../../lib/firebaseSetup/firebaseApps";
 import check404 from "../../lib/check404";
 
 import type PostType from "../../interfaces/post";
+import MarkdownBody from "../../components/Common/MarkdownBody";
 
 const PostSection = styled.section`
   width: 100%;
@@ -43,7 +43,7 @@ export default function Post({ post }: Props) {
             date={post.date}
             series={post.series}
           />
-          <PostBody content={post.content} />
+          <MarkdownBody content={post.content} />
         </PostSection>
         <PrevNextPostBtn key={post.coverImage} post={post} />
         <Comments key={post.title.replaceAll("/", ",")} title={post.title.replaceAll("/", ",")} />

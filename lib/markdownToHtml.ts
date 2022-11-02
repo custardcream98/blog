@@ -17,7 +17,19 @@ export default async function markdownToHtml(markdown: string) {
     .use(rehypeRaw)
     .use(rehypeSlug)
     .use(rehypeToc)
-    .use(rehypePrettyCode)
+    .use(rehypePrettyCode, {
+      onVisitLine(node) {
+        // Prevent lines from collapsing in `display: grid` mode, and
+        // allow empty lines to be copy/pasted
+        if (node.children.length === 0) {
+          node.children = [{ type: "text", value: " " }];
+        }
+      },
+      theme: {
+        dark: "material-default",
+        light: "material-palenight",
+      },
+    })
     .use(remarkGfm)
     .use(headingToSementic)
     .use(rehypeStringify)
@@ -40,9 +52,7 @@ function headingToSementic(): Transformer<Root, Root> {
     visit(tree, "element", (node) => {
       if (node.tagName[0] === "h") {
         const newHeadingNum =
-          parseInt(node.tagName[1]) + 2 <= 6
-            ? parseInt(node.tagName[1]) + 2
-            : 6;
+          parseInt(node.tagName[1]) + 2 <= 6 ? parseInt(node.tagName[1]) + 2 : 6;
         node.tagName = `h${newHeadingNum}`;
       }
     });
