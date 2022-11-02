@@ -1,9 +1,11 @@
 import React from "react";
-import { getSeries, getPostBySeries } from "../../lib/api";
+
 import { Container, Title } from "../../components/Common/styledComponents";
 import type PostType from "../../interfaces/post";
-import Layout from "../../components/Layout/Layout";
 import CategoryCard from "../../components/Category/CategoryCard";
+import Meta from "../../components/Layout/Meta";
+
+import { getSeries, getPostBySeries } from "../../lib/api";
 
 type Props = {
   series: string;
@@ -12,16 +14,13 @@ type Props = {
 
 const Series = ({ series, posts }: Props) => {
   return (
-    <Layout title={`시리즈 ${series}`}>
+    <>
+      <Meta title={`시리즈 ${series}`} />
       <Container style={{ display: "block" }}>
         <Title style={{ display: "inline-block" }}>{`<${series} />`}</Title>
-        <ol>
-          {React.Children.toArray(
-            posts.map((post) => <CategoryCard post={post} />)
-          )}
-        </ol>
+        <ol>{React.Children.toArray(posts.map((post) => <CategoryCard post={post} />))}</ol>
       </Container>
-    </Layout>
+    </>
   );
 };
 
