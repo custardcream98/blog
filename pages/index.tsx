@@ -9,43 +9,21 @@ import Post from "../interfaces/post";
 import { getAllPosts } from "../lib/api";
 
 type Props = {
-  allPosts: Post[];
+  postByPageArr: [Post[]];
 };
 
-const Index = ({ allPosts }: Props) => {
+const Index = ({ postByPageArr }: Props) => {
   const router = useRouter();
-  const { page } = router.query;
+  const page = parseInt(router.query.page as string) - 1 || 0;
 
-  const [currentPage, setCurrentPage] = useState(0);
-  const [postByPage, setPostByPage] = useState<[Post[]]>([[]]);
-
-  // const onPageChange = (to: number) => setCurrentPage((prev) => to);
-  const onPageChange = (to: number) =>
+  const onPageChange = (to: number) => {
     router.push({
       pathname: "/",
       query: {
-        page: to,
+        page: to + 1,
       },
     });
-
-  useEffect(() => {
-    let counter = 0;
-    let postByPageArr: [Post[]] = [[]];
-    allPosts.forEach((post, index) => {
-      if (index % 5 === 0 && index !== 0) {
-        counter++;
-        postByPageArr.push([]);
-      }
-
-      postByPageArr[counter].push(post);
-    });
-
-    setPostByPage((_) => [...postByPageArr]);
-  }, []);
-
-  useEffect(() => {
-    setCurrentPage((_) => parseInt(page as string) - 1 || 0);
-  }, [page]);
+  };
 
   return (
     <Layout>
@@ -56,10 +34,10 @@ const Index = ({ allPosts }: Props) => {
         </Title>
         <ol>
           {React.Children.toArray(
-            postByPage[currentPage].map((post, i) => (
+            postByPageArr[page].map((post, i) => (
               <HeroPost
                 index={i}
-                maxPostCount={postByPage[currentPage].length}
+                maxPostCount={postByPageArr[page].length}
                 title={post.title}
                 coverImage={post.coverImage}
                 date={post.date}
@@ -69,11 +47,7 @@ const Index = ({ allPosts }: Props) => {
             ))
           )}
         </ol>
-        <Paging
-          pageScale={Math.ceil(allPosts.length / 5)}
-          currentPage={currentPage}
-          onPageChange={onPageChange}
-        />
+        <Paging pageScale={postByPageArr.length} currentPage={page} onPageChange={onPageChange} />
       </Container>
     </Layout>
   );
@@ -85,6 +59,15 @@ export const getStaticProps = async () => {
   const allPosts = getAllPosts(["title", "date", "slug", "author", "coverImage", "excerpt"]);
 
   return {
-    props: { allPosts },
+    props: {
+      postByPageArr: allPosts.reduce<[Post[]]>(
+        (acc, post, i) => {
+          if (i % 5 === 0 && i !== 0) acc.push([]);
+          acc[Math.floor(i / 5)].push(post);
+          return acc;
+        },
+        [[]]
+      ),
+    },
   };
 };

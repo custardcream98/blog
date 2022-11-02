@@ -46,7 +46,8 @@ const Paging = ({ pageScale, currentPage, onPageChange }: Props) => {
   const theme = useTheme();
 
   const onClick = (event: React.MouseEvent<HTMLButtonElement>) => {
-    switch (event.currentTarget.name) {
+    const { value, name } = event.currentTarget;
+    switch (name) {
       case "forward":
         onPageChange(currentPage - 1);
         break;
@@ -54,7 +55,7 @@ const Paging = ({ pageScale, currentPage, onPageChange }: Props) => {
         onPageChange(currentPage + 1);
         break;
       default:
-        onPageChange(parseInt(event.currentTarget.value));
+        onPageChange(parseInt(value));
     }
   };
 
@@ -70,11 +71,11 @@ const Paging = ({ pageScale, currentPage, onPageChange }: Props) => {
           new Array(pageScale).fill(0).map((_, index) => (
             <li>
               {index === currentPage ? (
-                <Pagenum__selected value={index + 1} onClick={onClick}>
+                <Pagenum__selected value={index} onClick={onClick}>
                   {index + 1}
                 </Pagenum__selected>
               ) : (
-                <Pagenum value={index + 1} onClick={onClick}>
+                <Pagenum value={index} onClick={onClick}>
                   {index + 1}
                 </Pagenum>
               )}
