@@ -17,7 +17,7 @@ export const GlobalStyle = createGlobalStyle`
       /*
         다크모드 transition
       */
-        // ToDo: 화면 깜빡임 이슈 해결 필요
+        // TODO: 화면 깜빡임 이슈 해결 필요
       /* transition: all 0.1s linear; */
   }
   html {

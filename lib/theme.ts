@@ -1,5 +1,7 @@
 import { DefaultTheme } from "styled-components";
 
+// TODO: 테마 관리 방법 리팩토링
+
 export const lightTheme: DefaultTheme = {
   bgColor: "#efefef",
   textColor: "#121212",

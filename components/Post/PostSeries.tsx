@@ -1,4 +1,4 @@
-// ToDo: PostSeries 개발
+// TODO: PostSeries 개발
 
 import Link from "next/link";
 import styled from "styled-components";

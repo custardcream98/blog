@@ -25,6 +25,7 @@ Blog라는 매체 특성상 굳이 CSR이나 SSR로 할 필요 없이 SSG로 하
 - `Refactor` : 리팩토링
 - `Bugfix` : 버그 수정
 - `Feature` : 기능 추가
+- `Todo` : Todo 추가, Fixme 추가 등
 
 * 가능하면 간결한 한글로, Commit Message Prefix와 겹치는 내용 없이
   - 잘못된 예) `Typo: 자바스크립트의 변수들 오타 수정`

@@ -22,6 +22,7 @@ type Props = {
 const Series = ({ series }: Props) => {
   check404();
 
+  // TODO: 시리즈 토글로 만들기
   return (
     <>
       <Meta title="Series" />
