@@ -1,21 +1,19 @@
 import React from "react";
-import {
-  getPostBySlug,
-  getAllPosts,
-  getOgImage,
-  getPrevNextPosts,
-} from "../../lib/api";
+import styled from "styled-components";
+
+import Meta from "../../components/Layout/Meta";
 import { Container } from "../../components/Common/styledComponents";
-import markdownToHtml from "../../lib/markdownToHtml";
-import type PostType from "../../interfaces/post";
 import PostBody from "../../components/Post/PostBody";
 import PostTitle from "../../components/Post/PostTitle";
 import Comments from "../../components/Comment/Comments";
 import PrevNextPostBtn from "../../components/Post/PrevNextPostBtn";
-import Layout from "../../components/Layout/Layout";
-import check404 from "../../lib/check404";
+
+import { getPostBySlug, getAllPosts, getOgImage, getPrevNextPosts } from "../../lib/api";
+import markdownToHtml from "../../lib/markdownToHtml";
 import { createPostDoc } from "../../lib/firebaseSetup/firebaseApps";
-import styled from "styled-components";
+import check404 from "../../lib/check404";
+
+import type PostType from "../../interfaces/post";
 
 const PostSection = styled.section`
   width: 100%;
@@ -27,13 +25,15 @@ type Props = {
 
 export default function Post({ post }: Props) {
   check404();
+
   return (
-    <Layout
-      title={post.title}
-      description={post.excerpt}
-      image={post.coverImage}
-      tags={post.category}
-    >
+    <>
+      <Meta
+        title={post.title}
+        description={post.excerpt}
+        image={post.coverImage}
+        tags={post.category}
+      />
       <Container>
         <PostSection>
           <PostTitle
@@ -46,12 +46,9 @@ export default function Post({ post }: Props) {
           <PostBody content={post.content} />
         </PostSection>
         <PrevNextPostBtn key={post.coverImage} post={post} />
-        <Comments
-          key={post.title.replaceAll("/", ",")}
-          title={post.title.replaceAll("/", ",")}
-        />
+        <Comments key={post.title.replaceAll("/", ",")} title={post.title.replaceAll("/", ",")} />
       </Container>
-    </Layout>
+    </>
   );
 }
 
@@ -81,8 +78,7 @@ export async function getStaticProps({ params }: Params) {
   const content = await markdownToHtml(post.content || "");
 
   let coverImage = "";
-  if (process.env.NODE_ENV === "production")
-    coverImage = await getOgImage(post.title);
+  if (process.env.NODE_ENV === "production") coverImage = await getOgImage(post.title);
 
   return {
     props: {

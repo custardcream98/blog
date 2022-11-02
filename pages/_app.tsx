@@ -2,6 +2,8 @@ import React from "react";
 import { RecoilRoot } from "recoil";
 import type { AppProps } from "next/app";
 
+import Layout from "../components/Layout/Layout";
+
 import "@fontsource/noto-sans/300.css";
 import "@fontsource/noto-sans/500.css";
 import "@fontsource/noto-sans/700.css";
@@ -40,7 +42,9 @@ function MyApp({ Component, pageProps }: AppProps) {
 
   return (
     <RecoilRoot>
-      <Component {...pageProps} />
+      <Layout>
+        <Component {...pageProps} />
+      </Layout>
     </RecoilRoot>
   );
 }

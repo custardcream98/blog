@@ -1,12 +1,15 @@
+import React from "react";
 import { useRouter } from "next/router";
-import React, { useState, useEffect } from "react";
+
+import HeroPost from "../components/Home/HeroPost";
+import Meta from "../components/Layout/Meta";
+import Intro from "../components/Home/Intro";
+import Post from "../interfaces/post";
 import Paging from "../components/Common/Paging";
 import { Container, Title } from "../components/Common/styledComponents";
-import HeroPost from "../components/Home/HeroPost";
-import Intro from "../components/Home/Intro";
-import Layout from "../components/Layout/Layout";
-import Post from "../interfaces/post";
+
 import { getAllPosts } from "../lib/api";
+import check404 from "../lib/check404";
 
 type Props = {
   postByPageArr: [Post[]];
@@ -25,8 +28,11 @@ const Index = ({ postByPageArr }: Props) => {
     });
   };
 
+  check404();
+
   return (
-    <Layout>
+    <>
+      <Meta />
       <Intro />
       <Container>
         <Title as="h2" id="Posts_Title">
@@ -49,7 +55,7 @@ const Index = ({ postByPageArr }: Props) => {
         </ol>
         <Paging pageScale={postByPageArr.length} currentPage={page} onPageChange={onPageChange} />
       </Container>
-    </Layout>
+    </>
   );
 };
 

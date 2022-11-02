@@ -1,11 +1,5 @@
 import React from "react";
-import Document, {
-  Html,
-  Head,
-  Main,
-  NextScript,
-  DocumentContext,
-} from "next/document";
+import Document, { Html, Head, Main, NextScript, DocumentContext } from "next/document";
 import { ServerStyleSheet } from "styled-components";
 import Script from "next/script";
 
@@ -15,16 +9,11 @@ export default class MyDocument extends Document {
       <Html lang="ko">
         <Head>
           <link rel="icon" type="image/png" href="../static/icon.png" />
-          <meta property="og:article:author" content="Custardcream98" />
-          <meta property="og:type" content="website" />
           <meta
             name="google-site-verification"
             content="uEQH_kf2TBUnEK9r0_FjuR-nICr97lyWeNkTlQJt1XI"
           />
-          <meta
-            name="naver-site-verification"
-            content="f97b3212948a936aa8bb8d14b7f84ba8d01f9cc1"
-          />
+          <meta name="naver-site-verification" content="f97b3212948a936aa8bb8d14b7f84ba8d01f9cc1" />
           {
             // 구글 Analytics
           }

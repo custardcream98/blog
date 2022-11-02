@@ -1,11 +1,14 @@
 import React from "react";
+
+import Meta from "../../components/Layout/Meta";
+import CategoryCard from "../../components/Category/CategoryCard";
+import { Container, Title } from "../../components/Common/styledComponents";
+
 import { getPostByCategory } from "../../lib/api";
 import categoryTheme from "../../lib/categoryTheme";
-import { Container, Title } from "../../components/Common/styledComponents";
-import type PostType from "../../interfaces/post";
-import Layout from "../../components/Layout/Layout";
 import check404 from "../../lib/check404";
-import CategoryCard from "../../components/Category/CategoryCard";
+
+import type PostType from "../../interfaces/post";
 
 type Props = {
   category: string;
@@ -14,17 +17,15 @@ type Props = {
 
 export default function Post({ category, posts }: Props) {
   check404();
+
   return (
-    <Layout title={`카테고리 ${category}`} tags={[category]}>
+    <>
+      <Meta title={`카테고리 ${category}`} tags={[category]} />
       <Container style={{ display: "block" }}>
         <Title style={{ display: "inline-block" }}>{`<${category} />`}</Title>
-        <ol>
-          {React.Children.toArray(
-            posts.map((post) => <CategoryCard post={post} />)
-          )}
-        </ol>
+        <ol>{React.Children.toArray(posts.map((post) => <CategoryCard post={post} />))}</ol>
       </Container>
-    </Layout>
+    </>
   );
 }
 

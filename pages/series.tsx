@@ -1,13 +1,12 @@
 import React from "react";
 import Link from "next/link";
 import styled from "styled-components";
+
+import Meta from "../components/Layout/Meta";
+import { Container, LinkDecorated, Title } from "../components/Common/styledComponents";
+
 import { getSeries } from "../lib/api";
-import Layout from "../components/Layout/Layout";
-import {
-  Container,
-  LinkDecorated,
-  Title,
-} from "../components/Common/styledComponents";
+import check404 from "../lib/check404";
 
 const SeriesTitle = styled.li`
   margin: 2px;
@@ -21,8 +20,11 @@ type Props = {
 };
 
 const Series = ({ series }: Props) => {
+  check404();
+
   return (
-    <Layout title="Series">
+    <>
+      <Meta title="Series" />
       <Container>
         <Title>{`<Series />`}</Title>
         <ul style={{ width: "100%" }}>
@@ -37,7 +39,7 @@ const Series = ({ series }: Props) => {
           )}
         </ul>
       </Container>
-    </Layout>
+    </>
   );
 };
 
