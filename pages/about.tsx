@@ -15,9 +15,13 @@ const AboutBody = styled(MarkdownBody)`
   }
 `;
 
-const Name = styled(Title)`
+const AboutTitle = styled(Title)`
   font-size: 2rem;
   margin-bottom: 0;
+`;
+
+const AboutContainer = styled(Container)`
+  align-items: flex-start;
 `;
 
 type Props = {
@@ -33,10 +37,10 @@ const About = ({ content }: Props) => {
         title="About 개발자 박시우"
         description="안녕하세요, 삽질 좋아하는 개발자 박시우입니다. 문제가 생기면 밤을 새서라도 알아내고 해결합니다."
       />
-      <Container style={{ alignItems: "flex-start" }}>
-        <Name as="h2">{"<개발자 박시우 />"}</Name>
+      <AboutContainer>
+        <AboutTitle as="h2">{"<개발자 박시우 />"}</AboutTitle>
         <AboutBody content={content} />
-      </Container>
+      </AboutContainer>
     </>
   );
 };

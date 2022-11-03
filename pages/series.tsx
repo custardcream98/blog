@@ -15,6 +15,10 @@ const SeriesTitle = styled.li`
   color: ${(props) => props.theme.textColor};
 `;
 
+const SeriesList = styled.ul`
+  width: 100%;
+`;
+
 type Props = {
   series: { [key: string]: number };
 };
@@ -28,7 +32,7 @@ const Series = ({ series }: Props) => {
       <Meta title="Series" />
       <Container>
         <Title>{`<Series />`}</Title>
-        <ul style={{ width: "100%" }}>
+        <SeriesList>
           {React.Children.toArray(
             Object.keys(series).map((key) => (
               <SeriesTitle>
@@ -38,7 +42,7 @@ const Series = ({ series }: Props) => {
               </SeriesTitle>
             ))
           )}
-        </ul>
+        </SeriesList>
       </Container>
     </>
   );

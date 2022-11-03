@@ -1,4 +1,5 @@
 import React from "react";
+import styled from "styled-components";
 
 import Meta from "../../components/Layout/Meta";
 import CategoryCard from "../../components/Category/CategoryCard";
@@ -9,6 +10,14 @@ import categoryTheme from "../../lib/categoryTheme";
 import check404 from "../../lib/check404";
 
 import type PostType from "../../interfaces/post";
+
+const PostContainer = styled(Container)`
+  display: block;
+`;
+
+const PostTitle = styled(Title)`
+  display: inline-block;
+`;
 
 type Props = {
   category: string;
@@ -21,10 +30,10 @@ export default function Post({ category, posts }: Props) {
   return (
     <>
       <Meta title={`카테고리 ${category}`} tags={[category]} />
-      <Container style={{ display: "block" }}>
-        <Title style={{ display: "inline-block" }}>{`<${category} />`}</Title>
+      <PostContainer>
+        <PostTitle>{`<${category} />`}</PostTitle>
         <ol>{React.Children.toArray(posts.map((post) => <CategoryCard post={post} />))}</ol>
-      </Container>
+      </PostContainer>
     </>
   );
 }
