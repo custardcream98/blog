@@ -11,6 +11,7 @@ import BlogIcon from "../Common/BlogIcon";
 
 import { isDarkAtom } from "../../lib/atoms";
 import { useWindowSize } from "../../lib/hook/useWindowSize";
+import { useRouter } from "next/router";
 
 const Header = styled.header`
   height: 50px;
@@ -144,6 +145,8 @@ const Navigation = () => {
   const theme = useTheme();
   const windowSize = useWindowSize();
 
+  const router = useRouter();
+
   const navRef = useRef<HTMLDivElement>(null);
 
   let lastScrollTop = 0;
@@ -162,8 +165,11 @@ const Navigation = () => {
   };
 
   useEffect(() => {
-    window.addEventListener("touchmove", onScroll);
-  }, []);
+    if (/post/g.test(router.route)) {
+      window.addEventListener("touchmove", onScroll);
+      return () => window.removeEventListener("touchmove", onScroll);
+    }
+  }, [router.route]);
 
   return (
     <Header>
