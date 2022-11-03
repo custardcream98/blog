@@ -35,7 +35,7 @@ const Container = styled.div`
     position: absolute;
     inset: 0;
     background-color: ${(props) => props.theme.navBackgroundColor};
-    backdrop-filter: blur(13px);
+    backdrop-filter: blur(8px);
     z-index: -1;
   }
 `;
