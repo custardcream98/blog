@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import Link from "next/link";
 import styled, { useTheme } from "styled-components";
-import { useSetRecoilState, useRecoilValue } from "recoil";
+import { useRecoilState } from "recoil";
 import { IconContext } from "react-icons";
 import { BsFillMoonFill } from "react-icons/bs";
 import { ImSun } from "react-icons/im";
@@ -96,7 +96,7 @@ const Title = styled.span`
   }
 `;
 
-const LogoTitle = styled.h1`
+const LogoTitleH1 = styled.h1`
   display: flex;
   justify-content: flex-start;
   align-items: center;
@@ -134,10 +134,7 @@ const NavItem = ({ href, content }: NavItemProps) => (
   </NavItemLi>
 );
 
-const Navigation = () => {
-  const isDark = useRecoilValue(isDarkAtom);
-  const setDarkAtom = useSetRecoilState(isDarkAtom);
-  const toggleSwitch = () => setDarkAtom((prev) => !prev);
+const LogoTitle = () => {
   const theme = useTheme();
 
   /* 화면 크기 확인 후 모바일에서는 Title을 숨깁니다. */
@@ -164,16 +161,25 @@ const Navigation = () => {
   }, [isMobile, mediaQueryMatch]);
 
   return (
+    <LogoTitleH1>
+      <BlogIcon color={theme.textColor} size={1} />
+      <Title className={isMobile ? "sr-only" : ""}>Custardcream</Title>
+      <span className="sr-only">: FE 개발자 박시우의 기술 블로그</span>
+    </LogoTitleH1>
+  );
+};
+
+const Navigation = () => {
+  const [isDark, setIsDark] = useRecoilState(isDarkAtom);
+  const toggleSwitch = () => setIsDark((prev) => !prev);
+
+  return (
     <Header>
       <Container>
         <Nav>
           <Link href="/" passHref>
             <a>
-              <LogoTitle>
-                <BlogIcon color={theme.textColor} size={1} />
-                <Title className={isMobile ? "sr-only" : ""}>Custardcream</Title>
-                <span className="sr-only">: FE 개발자 박시우의 기술 블로그</span>
-              </LogoTitle>
+              <LogoTitle />
             </a>
           </Link>
           <NavItemWrapper>
