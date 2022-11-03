@@ -1,13 +1,15 @@
-import React from "react";
-import { IconContext } from "react-icons";
-import { BsFillMoonFill } from "react-icons/bs";
-import { ImSun } from "react-icons/im";
+import React, { useEffect, useState } from "react";
 import Link from "next/link";
 import styled, { useTheme } from "styled-components";
 import { useSetRecoilState, useRecoilValue } from "recoil";
-import { isDarkAtom } from "../../lib/atoms";
-import BlogIcon from "../Common/BlogIcon";
+import { IconContext } from "react-icons";
+import { BsFillMoonFill } from "react-icons/bs";
+import { ImSun } from "react-icons/im";
+
 import { LinkDecorated } from "../Common/styledComponents";
+import BlogIcon from "../Common/BlogIcon";
+
+import { isDarkAtom } from "../../lib/atoms";
 
 const Header = styled.header`
   height: 50px;
@@ -138,6 +140,29 @@ const Navigation = () => {
   const toggleSwitch = () => setDarkAtom((prev) => !prev);
   const theme = useTheme();
 
+  /* 화면 크기 확인 후 모바일에서는 Title을 숨깁니다. */
+  const mediaQuery = "(max-width: 400px)";
+  const [mediaQueryMatch, setMediaQueryMatch] = useState<MediaQueryList | null>(null);
+  const [isMobile, setIsMobile] = useState(false);
+
+  useEffect(() => {
+    setMediaQueryMatch((_) => window.matchMedia(mediaQuery));
+  }, []);
+
+  useEffect(() => {
+    const insertSrOnlyClassByMediaQuery = (event: MediaQueryListEvent) => {
+      const isMobile = event.matches;
+
+      return setIsMobile((_) => isMobile);
+    };
+
+    if (!!mediaQueryMatch) {
+      mediaQueryMatch.addEventListener("change", insertSrOnlyClassByMediaQuery);
+
+      return () => mediaQueryMatch?.removeEventListener("change", insertSrOnlyClassByMediaQuery);
+    }
+  }, [isMobile, mediaQueryMatch]);
+
   return (
     <Header>
       <Container>
@@ -146,7 +171,7 @@ const Navigation = () => {
             <a>
               <LogoTitle>
                 <BlogIcon color={theme.textColor} size={1} />
-                <Title>Custardcream</Title>
+                <Title className={isMobile ? "sr-only" : ""}>Custardcream</Title>
                 <span className="sr-only">: FE 개발자 박시우의 기술 블로그</span>
               </LogoTitle>
             </a>

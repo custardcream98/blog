@@ -8,10 +8,7 @@ import {
   setLikeCountDown,
   setLikeCountUp,
 } from "../../lib/firebaseSetup/firebaseApps";
-import {
-  toggleIsLikedOnLocal,
-  getIsLikedOnLocal,
-} from "../../lib/localStorage";
+import { toggleIsLikedOnLocal, getIsLikedOnLocal } from "../../lib/localStorage";
 import { IconContext } from "react-icons";
 
 const HEART_COLOR = "#c33434";
@@ -102,11 +99,7 @@ const ViewsLikesCounter = ({ title }: Props) => {
             style: { verticalAlign: "middle", strokeWidth: "0.7px" },
           }}
         >
-          {isLiked ? (
-            <BsHeartFill color={HEART_COLOR} />
-          ) : (
-            <BsHeart color={theme.subTextColor} />
-          )}
+          {isLiked ? <BsHeartFill color={HEART_COLOR} /> : <BsHeart color={theme.subTextColor} />}
         </IconContext.Provider>
         <LikeValue isLiked={isLiked}>{likeCount}</LikeValue>
       </LikeBtn>
