@@ -162,7 +162,7 @@ const Navigation = () => {
   };
 
   useEffect(() => {
-    window.addEventListener("scroll", onScroll);
+    window.addEventListener("touchmove", onScroll);
   }, []);
 
   return (
