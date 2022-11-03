@@ -45,8 +45,8 @@ export default function Post({ post }: Props) {
           />
           <MarkdownBody content={post.content} />
         </PostSection>
-        <PrevNextPostBtn key={post.coverImage} post={post} />
-        <Comments key={post.title.replaceAll("/", ",")} title={post.title.replaceAll("/", ",")} />
+        <PrevNextPostBtn post={post} />
+        <Comments title={post.title.replaceAll("/", ",")} />
       </Container>
     </>
   );
