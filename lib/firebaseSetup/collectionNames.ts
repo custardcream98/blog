@@ -1,4 +1,9 @@
-export const COLLECTION_POSTS = "posts";
-export const COLLECTION_COMMENTS = "comments";
-export const KEY_VIEWS = "views";
-export const KEY_LIKES = "likes";
+export enum CollectionNames {
+  COLLECTION_POSTS = "posts",
+  COLLECTION_COMMENTS = "comments",
+}
+
+export enum DocumentKeys {
+  KEY_VIEWS = "views",
+  KEY_LIKES = "likes",
+}

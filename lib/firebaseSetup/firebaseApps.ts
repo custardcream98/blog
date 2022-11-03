@@ -16,12 +16,7 @@ import {
 import ICommentData from "../../interfaces/comment";
 import { getViewedTimeOnLocal, setViewedTimeOnLocal } from "../localStorage";
 import { fireStore } from "./";
-import {
-  COLLECTION_COMMENTS,
-  COLLECTION_POSTS,
-  KEY_LIKES,
-  KEY_VIEWS,
-} from "./collectionNames";
+import { CollectionNames, DocumentKeys } from "./collectionNames";
 
 interface IAddCommentProps {
   title: string;
@@ -48,13 +43,13 @@ function percentEncode(str: string) {
 }
 
 const getPostDocRef = (title: string) =>
-  doc(fireStore, COLLECTION_POSTS, percentEncode(title));
+  doc(fireStore, CollectionNames.COLLECTION_POSTS, percentEncode(title));
 
 export const createPostDoc = async (title: string) => {
   const postDocRef = getPostDocRef(title);
 
   try {
-    const _ = await (await getDoc(postDocRef)).data()![KEY_VIEWS];
+    const _ = await (await getDoc(postDocRef)).data()![DocumentKeys.KEY_VIEWS];
   } catch (e) {
     if (e instanceof FirebaseError) {
       if (e.code === "not-found") {
@@ -71,7 +66,7 @@ export const createPostDoc = async (title: string) => {
 */
 
 const getCommentCollectionRef = (title: string) =>
-  collection(getPostDocRef(title), COLLECTION_COMMENTS);
+  collection(getPostDocRef(title), CollectionNames.COLLECTION_COMMENTS);
 
 export const getCommentDocRef = ({ title, commentId }: ICommentDocRefProps) =>
   doc(getCommentCollectionRef(title), commentId);
@@ -79,17 +74,10 @@ export const getCommentDocRef = ({ title, commentId }: ICommentDocRefProps) =>
 export const deleteComment = async (docRef: DocumentReference<DocumentData>) =>
   await deleteDoc(docRef);
 
-export const updateComment = async (
-  docRef: DocumentReference<DocumentData>,
-  commentText: string
-) => await updateDoc(docRef, { comment: commentText });
+export const updateComment = async (docRef: DocumentReference<DocumentData>, commentText: string) =>
+  await updateDoc(docRef, { comment: commentText });
 
-export const addComment = async ({
-  title,
-  password,
-  comment,
-  username,
-}: IAddCommentProps) => {
+export const addComment = async ({ title, password, comment, username }: IAddCommentProps) => {
   const commentCollectionRef = getCommentCollectionRef(title);
   await addDoc(commentCollectionRef, {
     createdAt: Date.now(),
@@ -108,12 +96,8 @@ export const getComments = (
   onSnapshot(commentCollectionRef, (snapshot) => {
     const commentsArr: ICommentData[] = [];
     snapshot.docs
-      .sort((post1, post2) =>
-        post1.data().createdAt > post2.data().createdAt ? -1 : 1
-      )
-      .map((doc) =>
-        commentsArr.push({ ...(doc.data() as ICommentData), id: doc.id })
-      );
+      .sort((post1, post2) => (post1.data().createdAt > post2.data().createdAt ? -1 : 1))
+      .map((doc) => commentsArr.push({ ...(doc.data() as ICommentData), id: doc.id }));
     setComments((_) => [...commentsArr]);
   });
 };
@@ -135,9 +119,7 @@ export const getViewCount = async (
     setViewedTimeOnLocal(title, time);
   }
 
-  onSnapshot(postDocRef, (post) =>
-    setViewCount(post.data()![KEY_VIEWS].length)
-  );
+  onSnapshot(postDocRef, (post) => setViewCount(post.data()![DocumentKeys.KEY_VIEWS].length));
 };
 
 /*
@@ -149,7 +131,7 @@ export const getLikeCount = async (
   setLikeCount: React.Dispatch<React.SetStateAction<number>>
 ) => {
   const postDocRef = getPostDocRef(title);
-  onSnapshot(postDocRef, (post) => setLikeCount(post.data()![KEY_LIKES]));
+  onSnapshot(postDocRef, (post) => setLikeCount(post.data()![DocumentKeys.KEY_LIKES]));
 };
 
 export const setLikeCountUp = async (title: string) => {
