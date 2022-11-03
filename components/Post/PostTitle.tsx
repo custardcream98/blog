@@ -73,7 +73,7 @@ const PostTitle = ({ coverImage, title, category, date, series }: Props) => {
               )}
             </BadgeContainer>
           )}
-          <ViewsLikesCounter key={title} title={title} />
+          {process.env.NODE_ENV === "production" && <ViewsLikesCounter key={title} title={title} />}
         </BadgeViewsLikesCounterContainer>
       </Container>
       {coverImage && process.env.NODE_ENV === "production" && (

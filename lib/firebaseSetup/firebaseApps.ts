@@ -93,20 +93,22 @@ export const getComments = (
 ) => {
   const commentCollectionRef = getCommentCollectionRef(title);
 
-  onSnapshot(commentCollectionRef, (snapshot) => {
+  const unSubscribe = onSnapshot(commentCollectionRef, (snapshot) => {
     const commentsArr: ICommentData[] = [];
     snapshot.docs
       .sort((post1, post2) => (post1.data().createdAt > post2.data().createdAt ? -1 : 1))
       .map((doc) => commentsArr.push({ ...(doc.data() as ICommentData), id: doc.id }));
     setComments((_) => [...commentsArr]);
   });
+
+  return unSubscribe;
 };
 
 /*
   Views
 */
 
-export const getViewCount = async (
+export const getViewCount = (
   title: string,
   setViewCount: React.Dispatch<React.SetStateAction<number>>
 ) => {
@@ -115,23 +117,33 @@ export const getViewCount = async (
 
   if (isViewAble) {
     const time = Date.now();
-    await updateDoc(postDocRef, { views: arrayUnion(time) });
-    setViewedTimeOnLocal(title, time);
+    updateDoc(postDocRef, { views: arrayUnion(time) }).then((_) =>
+      setViewedTimeOnLocal(title, time)
+    );
   }
 
-  onSnapshot(postDocRef, (post) => setViewCount(post.data()![DocumentKeys.KEY_VIEWS].length));
+  const unSubscribe = onSnapshot(postDocRef, (post) =>
+    setViewCount(post.data()![DocumentKeys.KEY_VIEWS].length)
+  );
+
+  return unSubscribe;
 };
 
 /*
   Likes
 */
 
-export const getLikeCount = async (
+export const getLikeCount = (
   title: string,
   setLikeCount: React.Dispatch<React.SetStateAction<number>>
 ) => {
   const postDocRef = getPostDocRef(title);
-  onSnapshot(postDocRef, (post) => setLikeCount(post.data()![DocumentKeys.KEY_LIKES]));
+
+  const unSubscribe = onSnapshot(postDocRef, (post) =>
+    setLikeCount(post.data()![DocumentKeys.KEY_LIKES])
+  );
+
+  return unSubscribe;
 };
 
 export const setLikeCountUp = async (title: string) => {

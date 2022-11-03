@@ -67,9 +67,15 @@ const ViewsLikesCounter = ({ title }: Props) => {
 
   useEffect(() => {
     setIsLiked((_) => getIsLikedOnLocal(title));
-    getViewCount(title, setViewCount);
-    getLikeCount(title, setLikeCount);
-  }, []);
+
+    const unSubscribeViewCount = getViewCount(title, setViewCount);
+    const unSubscribeLikeCount = getLikeCount(title, setLikeCount);
+
+    return () => {
+      unSubscribeViewCount();
+      unSubscribeLikeCount();
+    };
+  }, [title]);
 
   const toggleIsLiked = () => setIsLiked((prev) => !prev);
 
@@ -86,7 +92,7 @@ const ViewsLikesCounter = ({ title }: Props) => {
     }
   };
 
-  return process.env.NODE_ENV === "production" ? (
+  return (
     <Container>
       <CounterContainer>
         <HiEye size={15} color={theme.subTextColor} />
@@ -104,8 +110,6 @@ const ViewsLikesCounter = ({ title }: Props) => {
         <LikeValue isLiked={isLiked}>{likeCount}</LikeValue>
       </LikeBtn>
     </Container>
-  ) : (
-    <></>
   );
 };
 

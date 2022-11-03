@@ -28,8 +28,10 @@ const Comments = ({ title }: Props) => {
   const [comments, setComments] = useState<ICommentData[]>([]);
 
   useEffect(() => {
-    getComments(title, setComments);
-  }, []);
+    const unSubscribeComments = getComments(title, setComments);
+
+    return () => unSubscribeComments();
+  }, [title]);
 
   return (
     <Container>
@@ -37,9 +39,7 @@ const Comments = ({ title }: Props) => {
       <CommentForm title={title} />
       <ol>
         {React.Children.toArray(
-          comments.map((comment) => (
-            <CommentCard comment={comment} title={title} />
-          ))
+          comments.map((comment) => <CommentCard comment={comment} title={title} />)
         )}
       </ol>
     </Container>
