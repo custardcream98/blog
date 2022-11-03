@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import Link from "next/link";
 import styled, { useTheme } from "styled-components";
 import { useRecoilState } from "recoil";
@@ -10,6 +10,7 @@ import { LinkDecorated } from "../Common/styledComponents";
 import BlogIcon from "../Common/BlogIcon";
 
 import { isDarkAtom } from "../../lib/atoms";
+import { useWindowSize } from "../../lib/hook/useWindowSize";
 
 const Header = styled.header`
   height: 50px;
@@ -20,11 +21,14 @@ const Container = styled.div`
   width: 100%;
   box-shadow: ${(props) => props.theme.navLineShadow};
   position: fixed;
-  top: -1px;
+
   z-index: 101;
   display: flex;
   justify-content: center;
   align-items: center;
+
+  transition: top ease 0.3s;
+
   ::before {
     content: " ";
     position: absolute;
@@ -96,7 +100,7 @@ const Title = styled.span`
   }
 `;
 
-const LogoTitleH1 = styled.h1`
+const LogoTitle = styled.h1`
   display: flex;
   justify-content: flex-start;
   align-items: center;
@@ -134,52 +138,44 @@ const NavItem = ({ href, content }: NavItemProps) => (
   </NavItemLi>
 );
 
-const LogoTitle = () => {
-  const theme = useTheme();
-
-  /* 화면 크기 확인 후 모바일에서는 Title을 숨깁니다. */
-  const mediaQuery = "(max-width: 400px)";
-  const [mediaQueryMatch, setMediaQueryMatch] = useState<MediaQueryList | null>(null);
-  const [isMobile, setIsMobile] = useState(false);
-
-  useEffect(() => {
-    setMediaQueryMatch((_) => window.matchMedia(mediaQuery));
-  }, []);
-
-  useEffect(() => {
-    const insertSrOnlyClassByMediaQuery = (event: MediaQueryListEvent) => {
-      const isMobile = event.matches;
-
-      return setIsMobile((_) => isMobile);
-    };
-
-    if (!!mediaQueryMatch) {
-      mediaQueryMatch.addEventListener("change", insertSrOnlyClassByMediaQuery);
-
-      return () => mediaQueryMatch?.removeEventListener("change", insertSrOnlyClassByMediaQuery);
-    }
-  }, [isMobile, mediaQueryMatch]);
-
-  return (
-    <LogoTitleH1>
-      <BlogIcon color={theme.textColor} size={1} />
-      <Title className={isMobile ? "sr-only" : ""}>Custardcream</Title>
-      <span className="sr-only">: FE 개발자 박시우의 기술 블로그</span>
-    </LogoTitleH1>
-  );
-};
-
 const Navigation = () => {
   const [isDark, setIsDark] = useRecoilState(isDarkAtom);
   const toggleSwitch = () => setIsDark((prev) => !prev);
+  const theme = useTheme();
+  const windowSize = useWindowSize();
+
+  const navRef = useRef<HTMLDivElement>(null);
+
+  let lastScrollTop = 0;
+  const onScroll = () => {
+    const currentScrollTop = document.documentElement.scrollTop;
+
+    if (windowSize.width! <= 400) {
+      if (lastScrollTop < currentScrollTop) {
+        navRef.current!.style.top = "-51px";
+      } else {
+        navRef.current!.style.top = "-1px";
+      }
+    }
+
+    lastScrollTop = currentScrollTop;
+  };
+
+  useEffect(() => {
+    window.addEventListener("scroll", onScroll);
+  }, []);
 
   return (
     <Header>
-      <Container>
+      <Container ref={navRef} style={{ top: "-1px" }}>
         <Nav>
           <Link href="/" passHref>
             <a>
-              <LogoTitle />
+              <LogoTitle>
+                <BlogIcon color={theme.textColor} size={1} />
+                <Title className={windowSize.width! <= 400 ? "sr-only" : ""}>Custardcream</Title>
+                <span className="sr-only">: FE 개발자 박시우의 기술 블로그</span>
+              </LogoTitle>
             </a>
           </Link>
           <NavItemWrapper>
