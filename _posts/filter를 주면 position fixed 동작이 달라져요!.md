@@ -32,7 +32,7 @@ series: "Troubleshooting"
 
 [MDN 문서 (`position: fixed;`)](https://developer.mozilla.org/ko/docs/Web/CSS/position#fixed)
 
-MDN 문서에 따르면 `fixed`는 뷰포트의 초기 컨테이닝 블록, 즉 루트 요소를 기준으로 배치되도록 하는 proprty가 맞습니다. 그러나, 이런 내용이 있습니다.
+MDN 문서에 따르면 `fixed`는 뷰포트의 초기 컨테이닝 블록, 즉 루트 요소를 기준으로 배치되도록 하는 property가 맞습니다. 그러나, 이런 내용이 있습니다.
 
 > 요소의 조상 중 하나가 `transform`, `perspective`, `filter` 속성 중 어느 하나라도 `none`이 아니라면 뷰포트 대신 그 조상을 컨테이닝 블록으로 삼습니다. (`perspective`와 `filter`의 경우 **브라우저별로 결과가 다름에 유의**)
 

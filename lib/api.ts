@@ -52,10 +52,7 @@ export function getAllPosts(fields: string[] = []) {
   const slugs = getPostSlugs();
   const posts = slugs
     .map((slug) => getPostBySlug(slug, fields))
-    .sort(
-      (post1, post2) =>
-        new Date(post2.date).getTime() - new Date(post1.date).getTime()
-    );
+    .sort((post1, post2) => new Date(post2.date).getTime() - new Date(post1.date).getTime());
 
   return posts;
 }
@@ -64,10 +61,7 @@ export function getSeries() {
   const slugs = getPostSlugs();
   const posts = slugs
     .map((slug) => getPostBySlug(slug, ["series"]))
-    .sort(
-      (post1, post2) =>
-        new Date(post2.date).getTime() - new Date(post1.date).getTime()
-    );
+    .sort((post1, post2) => new Date(post2.date).getTime() - new Date(post1.date).getTime());
   let series: { [key: string]: number } = {};
   posts.forEach((post) => {
     if (post.series) {
@@ -110,12 +104,12 @@ export function getPrevNextPosts(slug: string): PrevNextPosts {
   };
 }
 
-export const getAboutContent = () =>
-  fs.readFileSync(aboutPageDirectory, "utf8");
+export const getAboutContent = () => fs.readFileSync(aboutPageDirectory, "utf8");
 
 export async function getOgImage(title: string) {
-  const delay = (ms: number) =>
-    new Promise((resolve) => setTimeout(resolve, ms));
+  const delay = (ms: number) => new Promise((resolve) => setTimeout(resolve, ms));
+  console.log(`Currently Deploying Thumbnail: ${title}`);
+
   while (true) {
     try {
       const { created: fileName } = await axios
@@ -131,20 +125,14 @@ export async function getOgImage(title: string) {
       return fileName;
     } catch (e) {
       console.log("retry getting img");
+
       await delay(10000);
     }
   }
 }
 
 export function getPostByCategory(category: string) {
-  const posts = getAllPosts([
-    "title",
-    "slug",
-    "excerpt",
-    "date",
-    "category",
-    "series",
-  ]);
+  const posts = getAllPosts(["title", "slug", "excerpt", "date", "category", "series"]);
   let categoryPosts: Items[] = [];
 
   posts.forEach((post) => {
@@ -157,14 +145,7 @@ export function getPostByCategory(category: string) {
 }
 
 export function getPostBySeries(series: string) {
-  const posts = getAllPosts([
-    "title",
-    "slug",
-    "excerpt",
-    "date",
-    "category",
-    "series",
-  ]);
+  const posts = getAllPosts(["title", "slug", "excerpt", "date", "category", "series"]);
   let seriesPosts: Items[] = [];
 
   posts.forEach((post) => {
