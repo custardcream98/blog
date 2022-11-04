@@ -162,6 +162,7 @@ const Navigation = () => {
 
   useEffect(() => {
     if (/post/g.test(router.route)) {
+      navRef.current!.style.top = "-1px";
       window.addEventListener("touchmove", onScroll);
       return () => window.removeEventListener("touchmove", onScroll);
     }
