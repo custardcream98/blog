@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from "react";
+import React, { useEffect, useRef } from "react";
 import Link from "next/link";
 import styled, { useTheme } from "styled-components";
 import { useRecoilState } from "recoil";
@@ -154,11 +154,7 @@ const Navigation = () => {
     const currentScrollTop = document.documentElement.scrollTop;
 
     if (windowSize.width! <= 400) {
-      if (lastScrollTop < currentScrollTop) {
-        navRef.current!.style.top = "-51px";
-      } else {
-        navRef.current!.style.top = "-1px";
-      }
+      navRef.current!.style.top = lastScrollTop < currentScrollTop ? "-51px" : "-1px";
     }
 
     lastScrollTop = currentScrollTop;
@@ -169,7 +165,7 @@ const Navigation = () => {
       window.addEventListener("touchmove", onScroll);
       return () => window.removeEventListener("touchmove", onScroll);
     }
-  }, [router.route]);
+  }, [router, windowSize]);
 
   return (
     <Header>

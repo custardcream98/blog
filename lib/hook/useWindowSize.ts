@@ -10,10 +10,11 @@ export const useWindowSize = () => {
     height: undefined,
   });
 
-  useEffect(() => {
-    const handleResize = () =>
-      setWindowSize((_) => ({ width: window.innerWidth, height: window.innerHeight }));
+  const handleResize = () => {
+    setWindowSize({ width: window.innerWidth, height: window.innerHeight });
+  };
 
+  useEffect(() => {
     window.addEventListener("resize", handleResize);
 
     handleResize(); // useEffect 첫 동작시 바로 확인
