@@ -153,7 +153,7 @@ applyDiscount = itemsInCart && (totalCost > 100 || userIsGoldMember);
 
 ```js
 // 아래의 조건문은 복잡한 시간 계산식이 들어가있다.
-if (Date.now() >= (new Date(2022, 10, 5).getTime() + 24 * 60 * 60 * 1000)) {
+if (Date.now() >= new Date(2022, 10, 5).getTime() + 24 * 60 * 60 * 1000) {
   // ...code
 }
 
@@ -162,13 +162,13 @@ if (Date.now() >= (new Date(2022, 10, 5).getTime() + 24 * 60 * 60 * 1000)) {
 // 함수의 이름으로 어떤 조건을 확인하는 것인지 설명하는 것이 좋다.
 const isNowLaterThan24HoursAfter = (datetime) => {
   const twentyFourHours = 24 * 60 * 60 * 1000;
-  return (Date.now() >= (datetime + twentyFourHours))
+  return Date.now() >= datetime + twentyFourHours;
 };
 
 const deadline = new Date(2022, 10, 5).getTime();
 
 if (isNowLaterThan24HoursAfter(deadline)) {
-  ...code
+  // ...code
 }
 ```
 
@@ -235,6 +235,8 @@ if (numToChange === 1) {
 
 **클린코드 1단계 후**
 
+*단순한 조건문이라면 삼항 연산자를 사용하자!*는 법칙에 따라 아래처럼 바꿨습니다.
+
 ```js
 let increasedElement = numToChange,
   decreasedElement = numToChange;
@@ -253,11 +255,13 @@ if (numToChange === 1) {
 }
 ```
 
+여전히 부족한 부분이 보입니다. 한번 더 리팩토링해보겠습니다.
+
 **클린코드 2단계 후**
 
 필요없는 변수(`increasedElement`, `decreasedElement`) 제거하고, 범위를 판단하는 부분을 배열로 변경해 연속적인 범위에 대한 판단을 직관적으로 볼 수 있도록 했습니다.
 
-이 때, 배열 안에 수식이 위치하면 가독성에 문제가 생길것을 감안해 `numToChange`의 증감 값을 나타내는 `increased`, `decreased` 상수를 추가 선언했습니다.
+이 때, 배열 안에 수식이 위치하면 가독성에 문제가 생길것을 감안해 `numToChange`의 증감 값을 나타내는 `increasedNum`, `decreasedNum` 상수를 추가 선언했습니다.
 
 또한, `numToChange === 1`인 경우 빠르게 결과를 리턴해 이후 이 경우의 수는 생각하지 않아도 되게끔 했습니다.
 
@@ -273,6 +277,7 @@ if (numToChange === 1) {
 } // early return
 
 const numInRange = [numToChange >= 8, numToChange < 8 && numToChange > 2, numToChange <= 2];
+// 0, 1, 2번째 구간으로 나눠 직관적으로 판단
 const rangeIndex = numInRange.indexOf(true);
 
 // 범위별로 증감, 값 부여 판단에 사용되는 배열
