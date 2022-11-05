@@ -259,7 +259,7 @@ if (numToChange === 1) {
 
 **클린코드 2단계 후**
 
-필요없는 변수(`increasedElement`, `decreasedElement`) 제거하고, 범위를 판단하는 부분을 배열로 변경해 연속적인 범위에 대한 판단을 직관적으로 볼 수 있도록 했습니다.
+필요없는 변수(`increasedElement`, `decreasedElement`) 제거하고, 범위를 판단하는 부분을 배열로 변경해 구간 순서대로 직관적으로 볼 수 있도록 했습니다.
 
 이 때, 배열 안에 수식이 위치하면 가독성에 문제가 생길것을 감안해 `numToChange`의 증감 값을 나타내는 `increasedNum`, `decreasedNum` 상수를 추가 선언했습니다.
 
@@ -324,7 +324,7 @@ return {
 
 `numToChange`에 따라 숫자 범위마다 인덱스를 부여하고 `incrementArr`, `decrementArr`에 인덱스와 매치해 결과값을 얻고자 한 부분입니다.
 
-하지만 잘 생각해보면 `incrementArr`를 얻기 위해 필요한 판단은 `numToChange >= 8` 뿐입니다. 마찬가지로 `decrementArr`를 얻기 위해 필요한 판단은 `numToChange <= 8` 뿐이고요.
+하지만 잘 생각해보면 리턴의 `increasedElement`를 얻기 위해 필요한 판단은 `numToChange >= 8` 뿐입니다. 마찬가지로 `decreasedElement`를 얻기 위해 필요한 판단은 `numToChange <= 2` 뿐이고요.
 
 이런 아이디어에 기반해 최종적으로 아래의 코드가 됐습니다.
 
