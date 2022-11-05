@@ -27,7 +27,7 @@ export default async function markdownToHtml(markdown: string) {
       },
       theme: {
         dark: "material-default",
-        light: "material-palenight",
+        light: "rose-pine-dawn",
       },
     })
     .use(remarkGfm)
