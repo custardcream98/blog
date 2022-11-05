@@ -25,6 +25,7 @@ const Index = ({ postByPageArr }: Props) => {
       query: {
         page: to + 1,
       },
+      hash: "Posts_Title",
     });
   };
 
