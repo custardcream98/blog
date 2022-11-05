@@ -13,8 +13,8 @@ series: "Troubleshooting"
 블로그의 navbar 디자인을 아주 살짝 바꾸고 있었는데, 화면이 작아질 경우 다크모드 스위치의 위치를 뷰포트 우하단으로 옮기고자 아래의 스타일을 추가했습니다.
 
 ```css
-.darkmode-switch {
-  @media (max-width: 800px) {
+@media (max-width: 800px) {
+  .darkmode-switch {
     position: fixed;
     bottom: 20px;
     right: 20px;
