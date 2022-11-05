@@ -3,15 +3,17 @@ import { MdOutlineKeyboardArrowLeft, MdOutlineKeyboardArrowRight } from "react-i
 import React from "react";
 
 const Container = styled.div`
+  position: relative;
   display: flex;
   justify-content: center;
   align-items: center;
 `;
 
-const Arrow = styled.button`
+const Btn = styled.button`
   display: flex;
   justify-content: center;
   align-items: center;
+
   background-color: transparent;
   border: none;
   &:hover {
@@ -25,7 +27,17 @@ const PagenumList = styled.ol`
   align-items: center;
 `;
 
-const Pagenum = styled(Arrow)`
+const LeftArrow = styled(Btn)`
+  position: absolute;
+  left: -30px;
+`;
+
+const RightArrow = styled(Btn)`
+  position: absolute;
+  right: -30px;
+`;
+
+const Pagenum = styled(Btn)`
   color: ${(props) => props.theme.textColor};
   font-weight: 300;
   font-size: 1rem;
@@ -33,7 +45,7 @@ const Pagenum = styled(Arrow)`
 
 const Pagenum__selected = styled(Pagenum)`
   font-weight: 900;
-  font-size: 1.5rem;
+  scale: 1.5;
 `;
 
 type Props = {
@@ -62,9 +74,9 @@ const Paging = ({ pageScale, currentPage, onPageChange }: Props) => {
   return (
     <Container>
       {currentPage !== 0 && (
-        <Arrow name="forward" onClick={onClick}>
+        <LeftArrow name="forward" onClick={onClick}>
           <MdOutlineKeyboardArrowLeft color={theme.textColor} size="1.5rem" />
-        </Arrow>
+        </LeftArrow>
       )}
       <PagenumList>
         {React.Children.toArray(
@@ -84,9 +96,9 @@ const Paging = ({ pageScale, currentPage, onPageChange }: Props) => {
         )}
       </PagenumList>
       {currentPage !== pageScale - 1 && (
-        <Arrow name="backward" onClick={onClick}>
+        <RightArrow name="backward" onClick={onClick}>
           <MdOutlineKeyboardArrowRight color={theme.textColor} size="1.5rem" />
-        </Arrow>
+        </RightArrow>
       )}
     </Container>
   );
