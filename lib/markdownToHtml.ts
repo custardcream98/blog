@@ -41,7 +41,11 @@ function anchorTargetBlank(): Transformer<Root, Root> {
   return (tree) => {
     visit(tree, "element", (node) => {
       if (node.tagName === "a") {
-        node.properties = { ...node.properties, target: "_blank" };
+        if ("href" in node.properties!) {
+          if (!/^\#/.test(node.properties.href as string)) {
+            node.properties = { ...node.properties, target: "_blank" };
+          }
+        }
       }
     });
   };

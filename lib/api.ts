@@ -13,7 +13,7 @@ interface Items extends PostType {
 }
 
 export function getPostSlugs() {
-  return fs.readdirSync(postsDirectory);
+  return fs.readdirSync(postsDirectory).filter((dir) => /\.md$/.test(dir));
 }
 
 export function getPostBySlug(slug: string, fields: string[] = []) {
@@ -124,7 +124,7 @@ export async function getOgImage(title: string) {
         .then((res) => res.data);
       return fileName;
     } catch (e) {
-      console.log("retry getting img");
+      console.log("retry getting img of " + title);
 
       await delay(10000);
     }
