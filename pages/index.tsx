@@ -41,7 +41,7 @@ const Index = ({ postByPageArr }: Props) => {
     if (router.query.page) {
       heroPostsRef.current?.scrollIntoView({
         behavior: "auto",
-        block: "end",
+        block: "center",
       });
     }
   }, [page]);
