@@ -46,6 +46,11 @@ const Excerpt = styled.p`
   font-size: 16px;
   line-height: 1.5;
   height: 72px;
+
+  @media (max-width: 780px) {
+    font-size: 13px;
+    height: 59px;
+  }
 `;
 
 const DateSpanForHeroPost = styled(DateSpan)`
@@ -64,6 +69,10 @@ const TitleLink = styled(LinkDecorated)`
   font-size: 18px;
   line-height: 1.5;
   max-height: 54px;
+
+  @media (max-width: 780px) {
+    font-size: 15px;
+  }
 `;
 
 type Props = {
