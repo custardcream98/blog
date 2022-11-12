@@ -13,6 +13,10 @@ const Container = styled.footer`
   font-weight: 300;
   margin-top: 0.5rem;
 
+  @media (max-width: 780px) {
+    font-size: 11px;
+  }
+
   address ul {
     display: flex;
   }
@@ -34,16 +38,11 @@ const Container = styled.footer`
 const Footer = () => {
   return (
     <Container>
-      <small>
-        &copy; {new Date().getFullYear()} custardcream98. All rights reserved.
-      </small>
+      <small>&copy; {new Date().getFullYear()} custardcream98. All rights reserved.</small>
       <address>
         <ul>
           <li>
-            <LinkDecorated
-              href="https://github.com/custardcream98"
-              target="_blank"
-            >
+            <LinkDecorated href="https://github.com/custardcream98" target="_blank">
               Github
             </LinkDecorated>
           </li>
