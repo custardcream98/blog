@@ -83,9 +83,7 @@ const CommentForm = ({ title }: Props) => {
   const [isLoading, setIsLoading] = useState(false);
   const theme = useTheme();
 
-  const onChange = (
-    event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
-  ) => {
+  const onChange = (event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     switch (event.target.name) {
       case "username":
         setUsername(event.target.value);
@@ -106,6 +104,23 @@ const CommentForm = ({ title }: Props) => {
     setIsLoading(true);
 
     await addComment({ title, password, comment, username });
+    await fetch(`http://${process.env.NEXT_PUBLIC_HOST}/api/alert-sw`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        postTitle: title,
+        username,
+        comment,
+      }),
+    })
+      .then(async (response) => {
+        if (!response.ok) throw Error();
+      })
+      .catch((error) => {
+        // ignore
+      });
 
     setComment("");
     setPassword("");
