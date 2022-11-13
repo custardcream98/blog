@@ -113,6 +113,7 @@ const CommentForm = ({ title }: Props) => {
         postTitle: title,
         username,
         comment,
+        linkToPost: window.location.href,
       }),
     })
       .then(async (response) => {
