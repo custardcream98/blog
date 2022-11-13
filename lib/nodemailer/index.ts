@@ -18,12 +18,16 @@ async function mailer({ receiverEmailAddress, title, content }: Email) {
     },
   });
 
-  transporter.verify((error, _) => {
-    if (error) {
-      console.log(error);
-    } else {
-      // console.log("로그인 성공");
-    }
+  await new Promise((resolve, reject) => {
+    transporter.verify((error, success) => {
+      if (error) {
+        console.log(error);
+        reject(error);
+      } else {
+        console.log("nodemailer transporter 유효함");
+        resolve(success);
+      }
+    });
   });
 
   const message = {
@@ -33,12 +37,16 @@ async function mailer({ receiverEmailAddress, title, content }: Email) {
     html: content,
   };
 
-  transporter.sendMail(message, function (error, info) {
-    if (error) {
-      console.log(error);
-    } else {
-      // console.log("Email sent: " + info.response);
-    }
+  await new Promise((resolve, reject) => {
+    transporter.sendMail(message, function (error, info) {
+      if (error) {
+        console.log(error);
+        reject(error);
+      } else {
+        console.log("Email sent: " + info.response);
+        resolve(info);
+      }
+    });
   });
 }
 
