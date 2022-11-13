@@ -104,7 +104,7 @@ const CommentForm = ({ title }: Props) => {
     setIsLoading(true);
 
     await addComment({ title, password, comment, username });
-    await fetch(`http://${process.env.NEXT_PUBLIC_HOST}/api/alert-sw`, {
+    await fetch(`https://${process.env.NEXT_PUBLIC_HOST}/api/alert-sw`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
