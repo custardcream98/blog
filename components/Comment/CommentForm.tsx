@@ -33,7 +33,7 @@ const Input = styled.input`
   }
 `;
 
-const SubmitBtn = styled.input`
+const SubmitBtn = styled.button`
   width: 3rem;
   text-align: center;
   color: ${(props) => props.theme.bgColor};
@@ -116,8 +116,8 @@ const CommentForm = ({ title }: Props) => {
         linkToPost: window.location.href,
       }),
     })
-      .then(async (response) => {
-        if (!response.ok) throw Error();
+      .then((response) => {
+        if (!response.ok) throw Error("Failed to send alert to Shioo");
       })
       .catch((error) => {
         // ignore
@@ -157,7 +157,7 @@ const CommentForm = ({ title }: Props) => {
             <Rings color={theme.bgColor} width="2rem" />
           </LoadingBtn>
         ) : (
-          <SubmitBtn type="submit" value="입력" />
+          <SubmitBtn>입력</SubmitBtn>
         )}
       </SubmitContainer>
     </Form>
