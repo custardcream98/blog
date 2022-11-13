@@ -181,9 +181,7 @@ const CommentCard = ({ comment, title }: Props) => {
     }
   };
 
-  const onChange = (
-    event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
-  ) => {
+  const onChange = (event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     switch (event.target.name) {
       case "comment":
         setCommentText(event.target.value);
@@ -208,10 +206,10 @@ const CommentCard = ({ comment, title }: Props) => {
             setIsEditing(false);
           }
         } else {
+          setIsDeleting(false);
           if (password === comment.password) {
             await deleteComment(commentDocRef);
           }
-          setIsDeleting(false);
         }
         setPassword("");
         break;
@@ -236,11 +234,7 @@ const CommentCard = ({ comment, title }: Props) => {
       {isEditing ? (
         isPasswordCorrect ? (
           <EditForm onSubmit={onSubmit} name="comment">
-            <EditTextarea
-              name="comment"
-              value={commentText}
-              onChange={onChange}
-            />
+            <EditTextarea name="comment" value={commentText} onChange={onChange} />
             <BtnContainer>
               {isLoading ? (
                 <LoadingBtn>
