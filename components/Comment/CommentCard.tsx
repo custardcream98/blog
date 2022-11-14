@@ -1,4 +1,4 @@
-import React, { useCallback, useState } from "react";
+import React, { memo, useCallback, useState } from "react";
 import { Rings } from "react-loader-spinner";
 import { AiFillEdit } from "react-icons/ai";
 import { MdDelete } from "react-icons/md";
@@ -25,6 +25,11 @@ const Comment = styled.p`
   text-align: start;
   font-size: 0.9rem;
   line-height: 1.4;
+  font-weight: 300;
+
+  @media (max-width: 780px) {
+    font-size: 0.8rem;
+  }
 `;
 
 const CommentInfoContainer = styled.div`
@@ -37,10 +42,20 @@ const CommentInfoContainer = styled.div`
 
 const CommentDateSpan = styled(DateSpan)`
   font-size: 0.6rem;
+  @media (max-width: 780px) {
+    font-size: 0.5rem;
+  }
 `;
 
 const Username = styled.strong`
+  width: 5rem;
   font-size: 0.9rem;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  @media (max-width: 780px) {
+    font-size: 0.8rem;
+  }
 `;
 
 const EditContainer = styled.div`
@@ -275,7 +290,15 @@ const CommentCard = ({ comment, title }: Props) => {
   );
 };
 
-export default CommentCard;
+const commentPropsAreEqual = (prevProps: Props, nextProps: Props) =>
+  prevProps.title === nextProps.title &&
+  prevProps.comment.id === nextProps.comment.id &&
+  prevProps.comment.password === nextProps.comment.password &&
+  prevProps.comment.username === nextProps.comment.username &&
+  prevProps.comment.comment === nextProps.comment.comment &&
+  prevProps.comment.createdAt === nextProps.comment.createdAt;
+
+export default memo(CommentCard, commentPropsAreEqual);
 
 const UserInfo = ({ username, createdAt }: { username: string; createdAt: number }) => (
   <CommentInfoContainer>

@@ -1,4 +1,4 @@
-import React, { useRef, useState } from "react";
+import React, { memo, useRef, useState } from "react";
 import { Rings } from "react-loader-spinner";
 import styled, { useTheme } from "styled-components";
 import { addComment } from "../../lib/firebaseSetup/firebaseApps";
@@ -152,4 +152,4 @@ const CommentForm = ({ title }: Props) => {
   );
 };
 
-export default CommentForm;
+export default memo(CommentForm);
