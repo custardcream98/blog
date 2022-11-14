@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useCallback, useState } from "react";
 import { Rings } from "react-loader-spinner";
 import { AiFillEdit } from "react-icons/ai";
 import { MdDelete } from "react-icons/md";
@@ -75,7 +75,7 @@ const EditTextarea = styled.textarea`
   font-size: 0.9rem;
 `;
 
-const SubmitEditBtn = styled.input`
+const SubmitEditBtn = styled.button`
   width: 3rem;
   height: 100%;
   text-align: center;
@@ -162,7 +162,7 @@ const CommentCard = ({ comment, title }: Props) => {
 
   const commentDocRef = getCommentDocRef({ title, commentId: comment.id });
 
-  const onClick = async (event: React.MouseEvent<HTMLButtonElement>) => {
+  const onClick = useCallback(async (event: React.MouseEvent<HTMLButtonElement>) => {
     event.preventDefault();
     event.stopPropagation();
 
@@ -179,58 +179,61 @@ const CommentCard = ({ comment, title }: Props) => {
         setIsDeleting(false);
         setPassword("");
     }
-  };
+  }, []);
 
-  const onChange = (event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
-    switch (event.target.name) {
-      case "comment":
-        setCommentText(event.target.value);
-        break;
-      case "password":
-        setPassword(event.target.value);
-        break;
-    }
-  };
+  const onChange = useCallback(
+    (event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+      switch (event.target.name) {
+        case "comment":
+          setCommentText(event.target.value);
+          break;
+        case "password":
+          setPassword(event.target.value);
+          break;
+      }
+    },
+    []
+  );
 
-  const onSubmit = async (event: React.ChangeEvent<HTMLFormElement>) => {
-    event.preventDefault();
-    event.stopPropagation();
+  const onSubmit = useCallback(
+    async (event: React.ChangeEvent<HTMLFormElement>) => {
+      event.preventDefault();
+      event.stopPropagation();
 
-    switch (event.target.name) {
-      case "password":
-        if (isEditing) {
-          if (password === comment.password) {
-            setIsPasswordCorrect(true);
+      switch (event.target.name) {
+        case "password":
+          if (isEditing) {
+            if (password === comment.password) {
+              setIsPasswordCorrect(true);
+            } else {
+              setIsPasswordCorrect(false);
+              setIsEditing(false);
+            }
           } else {
-            setIsPasswordCorrect(false);
-            setIsEditing(false);
+            setIsDeleting(false);
+            if (password === comment.password) {
+              await deleteComment(commentDocRef);
+            }
           }
-        } else {
-          setIsDeleting(false);
-          if (password === comment.password) {
-            await deleteComment(commentDocRef);
+          setPassword("");
+          break;
+        case "comment":
+          setIsLoading(true);
+          if (comment.comment !== commentText) {
+            await updateComment(commentDocRef, commentText);
           }
-        }
-        setPassword("");
-        break;
-      case "comment":
-        setIsLoading(true);
-        if (comment.comment !== commentText) {
-          await updateComment(commentDocRef, commentText);
-        }
-        setIsPasswordCorrect(false);
-        setIsEditing(false);
-        setIsLoading(true);
-        break;
-    }
-  };
+          setIsPasswordCorrect(false);
+          setIsEditing(false);
+          setIsLoading(true);
+          break;
+      }
+    },
+    [comment, isEditing, password, commentText]
+  );
 
   return (
     <Container>
-      <CommentInfoContainer>
-        <Username>{comment.username}</Username>
-        <CommentDateSpan date={comment.createdAt} />
-      </CommentInfoContainer>
+      <MemoizedUserInfo username={comment.username} createdAt={comment.createdAt} />
       {isEditing ? (
         isPasswordCorrect ? (
           <EditForm onSubmit={onSubmit} name="comment">
@@ -245,42 +248,16 @@ const CommentCard = ({ comment, title }: Props) => {
                   <CancelEditBtn name="cancel" onClick={onClick}>
                     취소
                   </CancelEditBtn>
-                  <SubmitEditBtn name="submit" value="수정" type="submit" />
+                  <SubmitEditBtn name="submit">수정</SubmitEditBtn>
                 </>
               )}
             </BtnContainer>
           </EditForm>
         ) : (
-          <PasswordForm onSubmit={onSubmit} name="password">
-            <PasswordInput
-              name="password"
-              type="password"
-              placeholder="비밀번호"
-              onChange={onChange}
-            />
-            <BtnContainer>
-              <CancelEditBtn name="cancel" onClick={onClick}>
-                취소
-              </CancelEditBtn>
-              <SubmitEditBtn name="password" value="입력" type="submit" />
-            </BtnContainer>
-          </PasswordForm>
+          <PasswordFormBundle onSubmit={onSubmit} onChange={onChange} onClick={onClick} />
         )
       ) : isDeleting ? (
-        <PasswordForm onSubmit={onSubmit} name="password">
-          <PasswordInput
-            name="password"
-            type="password"
-            placeholder="비밀번호"
-            onChange={onChange}
-          />
-          <BtnContainer>
-            <CancelEditBtn name="cancel" onClick={onClick}>
-              취소
-            </CancelEditBtn>
-            <SubmitEditBtn name="password" value="입력" type="submit" />
-          </BtnContainer>
-        </PasswordForm>
+        <PasswordFormBundle onSubmit={onSubmit} onChange={onChange} onClick={onClick} />
       ) : (
         <>
           <Comment>{comment.comment}</Comment>
@@ -299,3 +276,38 @@ const CommentCard = ({ comment, title }: Props) => {
 };
 
 export default CommentCard;
+
+const UserInfo = ({ username, createdAt }: { username: string; createdAt: number }) => (
+  <CommentInfoContainer>
+    <Username>{username}</Username>
+    <CommentDateSpan date={createdAt} />
+  </CommentInfoContainer>
+);
+
+const MemoizedUserInfo = React.memo(UserInfo);
+
+const PasswordFormBundle = ({
+  onSubmit,
+  onChange,
+  onClick,
+}: {
+  onSubmit: React.FormEventHandler<HTMLFormElement>;
+  onChange: React.ChangeEventHandler<HTMLInputElement>;
+  onClick: React.MouseEventHandler<HTMLButtonElement>;
+}) => (
+  <PasswordForm onSubmit={onSubmit} name="password">
+    <PasswordInput name="password" type="password" placeholder="비밀번호" onChange={onChange} />
+    <MemoizedButtonsBundle onClick={onClick} />
+  </PasswordForm>
+);
+
+const ButtonsBundle = ({ onClick }: { onClick: React.MouseEventHandler<HTMLButtonElement> }) => (
+  <BtnContainer>
+    <CancelEditBtn name="cancel" onClick={onClick}>
+      취소
+    </CancelEditBtn>
+    <SubmitEditBtn name="password">입력</SubmitEditBtn>
+  </BtnContainer>
+);
+
+const MemoizedButtonsBundle = React.memo(ButtonsBundle);
