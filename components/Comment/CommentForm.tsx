@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useRef, useState } from "react";
 import { Rings } from "react-loader-spinner";
 import styled, { useTheme } from "styled-components";
 import { addComment } from "../../lib/firebaseSetup/firebaseApps";
@@ -77,31 +77,27 @@ type Props = {
 };
 
 const CommentForm = ({ title }: Props) => {
-  const [username, setUsername] = useState("");
-  const [password, setPassword] = useState("");
-  const [comment, setComment] = useState("");
+  const inpUsernameRef = useRef<HTMLInputElement>(null);
+  const inpPasswordRef = useRef<HTMLInputElement>(null);
+  const textAreaCommentRef = useRef<HTMLTextAreaElement>(null);
+
   const [isLoading, setIsLoading] = useState(false);
   const theme = useTheme();
-
-  const onChange = (event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
-    switch (event.target.name) {
-      case "username":
-        setUsername(event.target.value);
-        break;
-      case "password":
-        setPassword(event.target.value);
-        break;
-      case "comment":
-        setComment(event.target.value);
-        break;
-    }
-  };
 
   const onSubmit = async (event: React.ChangeEvent<HTMLFormElement>) => {
     event.preventDefault();
     event.stopPropagation();
 
     setIsLoading(true);
+
+    const username = inpUsernameRef.current?.value;
+    const password = inpPasswordRef.current?.value;
+    const comment = textAreaCommentRef.current?.value;
+
+    if (!username || !password || !comment || (password && password.length <= 4)) {
+      setIsLoading(false);
+      return;
+    }
 
     await addComment({ title, password, comment, username });
     await fetch(`https://${process.env.NEXT_PUBLIC_HOST}/api/alert-sw`, {
@@ -123,35 +119,27 @@ const CommentForm = ({ title }: Props) => {
         // ignore
       });
 
-    setComment("");
-    setPassword("");
-    setUsername("");
+    inpUsernameRef.current.value = "";
+    inpPasswordRef.current.value = "";
+    textAreaCommentRef.current.value = "";
     setIsLoading(false);
   };
 
   return (
     <Form onSubmit={onSubmit}>
       <NamePasswordContainer>
+        <Input ref={inpUsernameRef} type="text" name="username" placeholder="닉네임" required />
         <Input
-          type="text"
-          name="username"
-          placeholder="닉네임"
-          required
-          onChange={onChange}
-          value={username}
-        />
-        <Input
+          ref={inpPasswordRef}
           type="password"
           name="password"
           placeholder="비밀번호"
           required
           minLength={4}
-          onChange={onChange}
-          value={password}
         />
       </NamePasswordContainer>
       <SubmitContainer>
-        <Textarea name="comment" onChange={onChange} value={comment} required />
+        <Textarea ref={textAreaCommentRef} name="comment" required />
         {isLoading ? (
           <LoadingBtn>
             <Rings color={theme.bgColor} width="2rem" />
