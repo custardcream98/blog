@@ -23,6 +23,7 @@ Blog라는 매체 특성상 굳이 CSR이나 SSR로 할 필요 없이 SSG로 하
 - `Change` : 문서 내용 수정
 - `Chore` : minor change
 - `Refactor` : 리팩토링
+- `Optimize` : 최적화
 - `Bugfix` : 버그 수정
 - `Feature` : 기능 추가
 - `Todo` : Todo 추가, Fixme 추가 등
