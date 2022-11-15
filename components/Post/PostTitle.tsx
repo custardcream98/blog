@@ -79,11 +79,12 @@ const PostTitle = ({ coverImage, title, category, date, series }: Props) => {
       {coverImage && process.env.NODE_ENV === "production" && (
         <Thumbnail
           src={coverImage}
-          alt="thumbnail"
+          alt="썸네일"
           priority={true}
-          width="1200px"
-          height="630px"
-          loader={imageLoader}
+          width={1200}
+          height={630}
+          layout={"responsive"}
+          sizes={"100vw"}
         />
       )}
     </>

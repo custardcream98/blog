@@ -4,7 +4,7 @@ module.exports = {
     styledComponents: true,
   },
   images: {
-    loader: "custom",
+    domains: ["firebasestorage.googleapis.com"],
   },
   staticPageGenerationTimeout: 100000,
 };
