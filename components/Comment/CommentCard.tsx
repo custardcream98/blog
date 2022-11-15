@@ -278,9 +278,11 @@ const CommentCard = ({ comment, title }: Props) => {
           <Comment>{comment.comment}</Comment>
           <EditContainer>
             <EditBtn name="edit" onClick={onClick}>
+              <span className="sr-only">댓글 수정하기 버튼</span>
               <AiFillEdit color={theme.textColor} size="0.9rem" />
             </EditBtn>
             <EditBtn name="delete" onClick={onClick}>
+              <span className="sr-only">댓글 삭제하기 버튼</span>
               <MdDelete color={theme.textColor} size="0.9rem" />
             </EditBtn>
           </EditContainer>
