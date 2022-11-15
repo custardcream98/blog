@@ -8,7 +8,9 @@ interface IBadge {
   borderColor: string;
 }
 
-const Badge = styled.li<IBadge>`
+const Badge = styled.a<IBadge>`
+  display: block;
+
   margin: 0.3rem;
   padding: 0.3rem;
   font-weight: 500;
@@ -39,11 +41,13 @@ const CategoryBadge = ({ category }: Props) => {
   const { color } = categoryTheme[category];
 
   return (
-    <Link href={`/categories/${category}`}>
-      <Badge backgroundColor={`${color}4e`} borderColor={color}>
-        {category}
-      </Badge>
-    </Link>
+    <li>
+      <Link href={`/categories/${category}`} passHref>
+        <Badge backgroundColor={`${color}4e`} borderColor={color}>
+          {category}
+        </Badge>
+      </Link>
+    </li>
   );
 };
 

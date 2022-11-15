@@ -59,7 +59,7 @@ const PostTitle = ({ coverImage, title, category, date, series }: Props) => {
     <>
       <Container>
         {series && (
-          <Link href={`/series/${encodeURI(series)}`}>
+          <Link href={`/series/${encodeURI(series)}`} passHref>
             <SeriesName>{series}</SeriesName>
           </Link>
         )}
