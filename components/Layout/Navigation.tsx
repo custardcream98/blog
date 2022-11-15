@@ -190,6 +190,7 @@ const Navigation = () => {
             </NavMenu>
             <article>
               <DarkmodeSwitch onClick={toggleSwitch}>
+                <span className="sr-only">다크모드 스위치</span>
                 <IconContext.Provider value={{ size: "100%" }}>
                   {isDark ? <BsFillMoonFill color="#e5c704" /> : <ImSun color="#e5c704" />}
                 </IconContext.Provider>

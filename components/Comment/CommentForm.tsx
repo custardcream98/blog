@@ -49,14 +49,15 @@ const Textarea = styled.textarea`
   resize: none;
   width: 100%;
   height: 4rem;
-  font-size: 0.9rem;
   padding: 0.5rem;
   color: ${(props) => props.theme.textColor};
   background-color: transparent;
   border: 1px solid ${(props) => props.theme.textColor};
-  outline-width: 0;
-  font-family: ${(props) => props.theme.mainFont};
   border-bottom-left-radius: 4px;
+  outline-width: 0;
+  font-size: 0.9rem;
+  font-weight: 300;
+  font-family: ${(props) => props.theme.mainFont};
 `;
 
 const LoadingBtn = styled.div`
@@ -128,18 +129,35 @@ const CommentForm = ({ title }: Props) => {
   return (
     <Form onSubmit={onSubmit}>
       <NamePasswordContainer>
-        <Input ref={inpUsernameRef} type="text" name="username" placeholder="닉네임" required />
+        <label className="sr-only" htmlFor="username">
+          닉네임
+        </label>
+        <Input
+          ref={inpUsernameRef}
+          type="text"
+          name="username"
+          placeholder="닉네임"
+          id="username"
+          required
+        />
+        <label className="sr-only" htmlFor="password">
+          비밀번호
+        </label>
         <Input
           ref={inpPasswordRef}
           type="password"
           name="password"
           placeholder="비밀번호"
+          id="password"
           required
           minLength={4}
         />
       </NamePasswordContainer>
       <SubmitContainer>
-        <Textarea ref={textAreaCommentRef} name="comment" required />
+        <label className="sr-only" htmlFor="comment">
+          댓글 내용
+        </label>
+        <Textarea ref={textAreaCommentRef} name="comment" id="comment" required />
         {isLoading ? (
           <LoadingBtn>
             <Rings color={theme.bgColor} width="2rem" />
