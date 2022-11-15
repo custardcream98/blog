@@ -77,15 +77,7 @@ const PostTitle = ({ coverImage, title, category, date, series }: Props) => {
         </BadgeViewsLikesCounterContainer>
       </Container>
       {coverImage && process.env.NODE_ENV === "production" && (
-        <Thumbnail
-          src={coverImage}
-          alt="썸네일"
-          priority={true}
-          width={1200}
-          height={630}
-          layout={"responsive"}
-          sizes={"100vw"}
-        />
+        <Thumbnail src={coverImage} alt="썸네일" priority={true} width={1200} height={630} />
       )}
     </>
   );
