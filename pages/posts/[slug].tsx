@@ -7,7 +7,12 @@ import PostTitle from "../../components/Post/PostTitle";
 import Comments from "../../components/Comment/Comments";
 import PrevNextPostBtn from "../../components/Post/PrevNextPostBtn";
 
-import { getPostBySlug, getAllPosts, getOgImage, getPrevNextPosts } from "../../lib/api";
+import {
+  getPostBySlug,
+  getAllPosts,
+  getOgImage,
+  getPrevNextPosts,
+} from "../../lib/api";
 import markdownToHtml from "../../lib/markdownToHtml";
 import { createPostDoc } from "../../lib/firebaseSetup/firebaseApps";
 import check404 from "../../lib/check404";
@@ -78,7 +83,8 @@ export async function getStaticProps({ params }: Params) {
   const content = await markdownToHtml(post.content || "");
 
   let coverImage = "";
-  if (process.env.NODE_ENV === "production") coverImage = await getOgImage(post.title);
+  if (process.env.NODE_ENV === "production")
+    coverImage = await getOgImage(post.title);
 
   return {
     props: {

@@ -1,9 +1,10 @@
-import React from "react";
+import React, { useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
-import styled from "styled-components";
-import imageLoader from "../../lib/imageLoader";
-import CategoryBadge, { BadgeContainer } from "../Common/CategoryBadge";
+import styled, { useTheme } from "styled-components";
+import CategoryBadge, {
+  BadgeContainer,
+} from "../Common/CategoryBadge";
 import DateSpan from "../Common/DateSpan";
 import ViewsLikesCounter from "./ViewsLikesCounter";
 import { LinkDecorated } from "../Common/styledComponents";
@@ -54,12 +55,25 @@ type Props = {
   series?: string;
 };
 
-const PostTitle = ({ coverImage, title, category, date, series }: Props) => {
+const PostTitle = ({
+  coverImage,
+  title,
+  category,
+  date,
+  series,
+}: Props) => {
+  const theme = useTheme();
+  const [isThumbnailLoaded, setIsThumbnailLoaded] =
+    useState(false);
+
   return (
     <>
       <Container>
         {series && (
-          <Link href={`/series/${encodeURI(series)}`} passHref>
+          <Link
+            href={`/series/${encodeURI(series)}`}
+            passHref
+          >
             <SeriesName>{series}</SeriesName>
           </Link>
         )}
@@ -69,16 +83,30 @@ const PostTitle = ({ coverImage, title, category, date, series }: Props) => {
           {category && (
             <BadgeContainer>
               {React.Children.toArray(
-                category.map((keyword) => <CategoryBadge category={keyword} />)
+                category.map((keyword) => (
+                  <CategoryBadge category={keyword} />
+                ))
               )}
             </BadgeContainer>
           )}
-          {process.env.NODE_ENV === "production" && <ViewsLikesCounter key={title} title={title} />}
+          {process.env.NODE_ENV === "production" && (
+            <ViewsLikesCounter key={title} title={title} />
+          )}
         </BadgeViewsLikesCounterContainer>
       </Container>
-      {coverImage && process.env.NODE_ENV === "production" && (
-        <Thumbnail src={coverImage} alt="썸네일" priority={true} width={1200} height={630} />
-      )}
+      {coverImage &&
+        process.env.NODE_ENV === "production" && (
+          <Thumbnail
+            key={coverImage}
+            src={coverImage}
+            alt="썸네일"
+            priority={true}
+            width={1200}
+            height={630}
+            placeholder="blur"
+            blurDataURL="/static/img/thumbnail_placeholder.png"
+          />
+        )}
     </>
   );
 };
