@@ -4,11 +4,15 @@ import styled from "styled-components";
 import { LinkDecorated } from "../Common/styledComponents";
 import DateSpan from "../Common/DateSpan";
 
-type PagenationInfo = { index: number; maxPostCount: number };
+type PagenationInfo = {
+  index: number;
+  maxPostCount: number;
+};
 
 const ContentContainer = styled.li<PagenationInfo>`
   width: 100%;
-  margin-bottom: ${(props) => (props.index === props.maxPostCount - 1 ? "20px" : "0")};
+  margin-bottom: ${(props) =>
+    props.index === props.maxPostCount - 1 ? "20px" : "0"};
 `;
 
 const Title = styled.h3`
@@ -29,7 +33,9 @@ const ExcerptLink = styled(LinkDecorated)<PagenationInfo>`
   font-weight: 300;
   line-height: 1.5;
   border-bottom: ${(props) =>
-    props.index === props.maxPostCount - 1 ? "none" : "3px solid #25282c"};
+    props.index === props.maxPostCount - 1
+      ? "none"
+      : "1px solid " + props.theme.subTextColor};
 `;
 
 const Excerpt = styled.p`
@@ -85,9 +91,20 @@ type Props = {
   slug: string;
 };
 
-const HeroPost = ({ index, maxPostCount, title, coverImage, date, excerpt, slug }: Props) => {
+const HeroPost = ({
+  index,
+  maxPostCount,
+  title,
+  coverImage,
+  date,
+  excerpt,
+  slug,
+}: Props) => {
   return (
-    <ContentContainer index={index} maxPostCount={maxPostCount}>
+    <ContentContainer
+      index={index}
+      maxPostCount={maxPostCount}
+    >
       <Title>
         <Link href={`/posts/${slug}`} passHref>
           <TitleLink>{title}</TitleLink>
@@ -95,7 +112,10 @@ const HeroPost = ({ index, maxPostCount, title, coverImage, date, excerpt, slug 
         <DateSpanForHeroPost date={date} />
       </Title>
       <Link href={`/posts/${slug}`} passHref>
-        <ExcerptLink index={index} maxPostCount={maxPostCount}>
+        <ExcerptLink
+          index={index}
+          maxPostCount={maxPostCount}
+        >
           <Excerpt>{excerpt}</Excerpt>
         </ExcerptLink>
       </Link>

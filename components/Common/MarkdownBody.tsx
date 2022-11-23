@@ -19,8 +19,9 @@ const MarkdownBodyStyle = styled.div<StyleProps>`
   margin-top: 2rem;
   font-size: var(--main-font-size);
   font-weight: 300;
-  line-height: 1.8;
+  line-height: 1.9;
   word-wrap: break-word;
+  letter-spacing: 0.03rem;
 
   a {
     background-color: transparent;
@@ -85,31 +86,33 @@ const MarkdownBodyStyle = styled.div<StyleProps>`
     border-bottom: 1px solid #21262d;
   }
   h4 {
-    margin: calc(var(--main-heading-margin) * 0.5) 0 1rem 0;
+    margin: calc(var(--main-heading-margin) * 0.8) 0 1rem 0;
     padding-bottom: 0.3em;
     font-size: calc(var(--main-font-size) * 1.6);
     border-bottom: 1px solid #21262d;
   }
   h5 {
-    margin: calc(var(--main-heading-margin) * 0.5) 0 1rem 0;
+    margin: calc(var(--main-heading-margin) * 0.8) 0 1rem 0;
     font-size: calc(var(--main-font-size) * 1.3);
   }
   h6 {
-    margin: calc(var(--main-heading-margin) * 0.5) 0 1rem 0;
+    margin: calc(var(--main-heading-margin) * 0.8) 0 1rem 0;
     font-size: calc(var(--main-font-size) * 1.2);
   }
 
   p {
-    margin-bottom: calc(var(--main-heading-margin) * 0.23);
+    margin-bottom: calc(var(--main-heading-margin) * 0.5);
   }
 
   blockquote {
     margin: 0 0 1rem 0;
-    padding: 0.6rem 0.6rem 0.6rem 0.9rem;
+    padding: 1.5rem;
     border-left: 0.2rem solid #f9bf00;
     font-style: italic;
+    letter-spacing: 0.04rem;
     border-radius: 4px;
-    background-color: ${(props) => props.theme.postElementBackgroundColor};
+    background-color: ${(props) =>
+      props.theme.postElementBackgroundColor};
     color: ${(props) => props.theme.textColor};
     font-size: 93%;
     p {
@@ -129,7 +132,8 @@ const MarkdownBodyStyle = styled.div<StyleProps>`
 
   div[data-rehype-pretty-code-fragment] {
     margin: 1rem 0;
-    background-color: ${(props) => props.theme.postElementBackgroundColor};
+    background-color: ${(props) =>
+      props.theme.postElementBackgroundColor};
     border-radius: 4px;
     counter-reset: codeblock;
     pre {
@@ -148,7 +152,8 @@ const MarkdownBodyStyle = styled.div<StyleProps>`
           width: 0.9rem;
           padding: 0 0.7rem;
           height: 0.65rem;
-          background-color: ${(props) => (props.isDark ? "#292929" : "#dfdfdf")};
+          background-color: ${(props) =>
+            props.isDark ? "#292929" : "#dfdfdf"};
         }
         &::before {
           border-top-left-radius: 4px;
@@ -200,14 +205,13 @@ const MarkdownBodyStyle = styled.div<StyleProps>`
 
   & > ol,
   & > ul {
-    margin-bottom: calc(var(--main-heading-margin) * 0.23);
+    margin-bottom: calc(var(--main-heading-margin) * 0.4);
   }
 
-  ul > li,
-  ol > li {
+  li {
     position: relative;
     display: block;
-    margin: calc(var(--main-heading-margin) * 0.19) 0;
+    margin: calc(var(--main-heading-margin) * 0.1) 0;
     padding-left: 1rem;
   }
 
@@ -274,7 +278,8 @@ const MarkdownBodyStyle = styled.div<StyleProps>`
 
   .toc {
     width: fit-content;
-    background-color: ${(props) => props.theme.postElementBackgroundColor};
+    background-color: ${(props) =>
+      props.theme.postElementBackgroundColor};
     color: ${(props) => props.theme.textColor};
     margin-bottom: 2rem;
     padding: 0.3rem 0.8rem 0.3rem 0.7rem;
@@ -303,7 +308,7 @@ const MarkdownBodyStyle = styled.div<StyleProps>`
   em {
     font-family: "Nanum Myeongjo", serif;
     font-style: italic;
-    letter-spacing: -0.05rem;
+
     &::before {
       content: "'";
       margin-left: 0.2rem;
@@ -328,8 +333,10 @@ const MarkdownBodyStyle = styled.div<StyleProps>`
   table {
     margin: auto;
     max-width: 600px;
-    border-top: 1px solid ${(props) => props.theme.textColor};
-    border-bottom: 1px solid ${(props) => props.theme.textColor};
+    border-top: 1px solid
+      ${(props) => props.theme.textColor};
+    border-bottom: 1px solid
+      ${(props) => props.theme.textColor};
     th,
     td {
       padding: 0.2rem 3rem;
@@ -351,9 +358,32 @@ const MarkdownBodyStyle = styled.div<StyleProps>`
       }
     }
   }
+
+  figure {
+    margin: 15px 0;
+    figcaption {
+      font-weight: 300;
+      font-size: calc(var(--main-font-size) * 0.8);
+      font-style: italic;
+    }
+  }
+
+  .half {
+    display: inline-block;
+    width: calc(50% - 5px);
+  }
+  .half + .half {
+    margin-left: 10px;
+  }
 `;
 
-const MarkdownBody = ({ content, className }: { content: string; className?: string }) => {
+const MarkdownBody = ({
+  content,
+  className,
+}: {
+  content: string;
+  className?: string;
+}) => {
   const isDark = useRecoilValue(isDarkAtom);
   return (
     <MarkdownBodyStyle
