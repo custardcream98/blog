@@ -19,6 +19,7 @@
 _1인, `TypeScript`, `React`, `styled-components`, `React Helmet`, `Firebase`, `Express.js`_
 
 [커뮤니티 링크](https://share-it-rust.vercel.app/)
+
 [Github Repo](https://github.com/custardcream98/share-it)
 
 '코드를 자유롭게 나누고 피드백을 주고받는 공간이 있었으면 좋겠다'는 생각으로 개발을 시작한 작은 커뮤니티입니다. `Firebase`를 통해 얻은 Auth를 철저히 확인하는 라우팅 및 커스텀 훅을 설계한 부분이 재밌었습니다. 백엔드 사이드에서도 `Firebase`와 `Express.js`를 활용해 사용자가 댓글을 남길 때 프론트로부터 받은 Auth Token을 검증 후 통과한다면 글 작성자에게 댓글 알람 메일을 보내는 엔드포인트를 하나 개발하기도 했습니다.
