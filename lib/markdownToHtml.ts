@@ -10,7 +10,9 @@ import { visit } from "unist-util-visit";
 import { Root } from "hast";
 import { Transformer } from "unified";
 
-export default async function markdownToHtml(markdown: string) {
+export default async function markdownToHtml(
+  markdown: string
+) {
   const result = await remark()
     .use(remarkRehype, { allowDangerousHtml: true })
     .use(anchorTargetBlank)
@@ -43,7 +45,10 @@ function anchorTargetBlank(): Transformer<Root, Root> {
       if (node.tagName === "a") {
         if ("href" in node.properties!) {
           if (!/^\#/.test(node.properties.href as string)) {
-            node.properties = { ...node.properties, target: "_blank" };
+            node.properties = {
+              ...node.properties,
+              target: "_blank",
+            };
           }
         }
       }
@@ -56,7 +61,9 @@ function headingToSementic(): Transformer<Root, Root> {
     visit(tree, "element", (node) => {
       if (node.tagName[0] === "h") {
         const newHeadingNum =
-          parseInt(node.tagName[1]) + 2 <= 6 ? parseInt(node.tagName[1]) + 2 : 6;
+          parseInt(node.tagName[1]) + 2 <= 6
+            ? parseInt(node.tagName[1]) + 2
+            : 6;
         node.tagName = `h${newHeadingNum}`;
       }
     });

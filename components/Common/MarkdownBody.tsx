@@ -1,13 +1,18 @@
+import { useRef } from "react";
+import { useLayoutEffect, useState } from "react";
+import { forwardRef, RefObject } from "react";
 import { useRecoilValue } from "recoil";
 import styled from "styled-components";
 import { isDarkAtom } from "../../lib/atoms";
+
+const MOBILE_BREAKPOINT = "600px";
 
 type StyleProps = {
   isDark: boolean;
 };
 
 const MarkdownBodyStyle = styled.div<StyleProps>`
-  --main-font-size: 1.1rem;
+  --main-font-size: 1rem;
   --main-heading-margin: 4rem;
   @media (max-width: 800px) {
     --main-font-size: 0.95rem;
@@ -111,9 +116,9 @@ const MarkdownBodyStyle = styled.div<StyleProps>`
     font-style: italic;
     letter-spacing: 0.04rem;
     border-radius: 4px;
-    background-color: ${(props) =>
-      props.theme.postElementBackgroundColor};
-    color: ${(props) => props.theme.textColor};
+    background-color: ${({ theme }) =>
+      theme.postElementBackgroundColor};
+    color: ${({ theme }) => theme.textColor};
     font-size: 93%;
     p {
       margin: 0;
@@ -132,8 +137,8 @@ const MarkdownBodyStyle = styled.div<StyleProps>`
 
   div[data-rehype-pretty-code-fragment] {
     margin: 1rem 0;
-    background-color: ${(props) =>
-      props.theme.postElementBackgroundColor};
+    background-color: ${({ theme }) =>
+      theme.postElementBackgroundColor};
     border-radius: 4px;
     counter-reset: codeblock;
     pre {
@@ -152,8 +157,8 @@ const MarkdownBodyStyle = styled.div<StyleProps>`
           width: 0.9rem;
           padding: 0 0.7rem;
           height: 0.65rem;
-          background-color: ${(props) =>
-            props.isDark ? "#292929" : "#dfdfdf"};
+          background-color: ${({ isDark }) =>
+            isDark ? "#292929" : "#dfdfdf"};
         }
         &::before {
           border-top-left-radius: 4px;
@@ -232,7 +237,7 @@ const MarkdownBodyStyle = styled.div<StyleProps>`
     width: 6px;
     height: 6px;
     border-radius: 50%;
-    background-color: ${(props) => props.theme.textColor};
+    background-color: ${({ theme }) => theme.textColor};
   }
 
   ol > li::before {
@@ -248,14 +253,14 @@ const MarkdownBodyStyle = styled.div<StyleProps>`
 
   a {
     position: relative;
-    color: ${(props) => props.theme.accentColor};
+    color: ${({ theme }) => theme.accentColor};
     transition: linear 0.3s;
     -webkit-transition: linear 0.3s;
     -moz-transition: linear 0.3s;
     z-index: 10;
     &:hover {
       text-decoration: none;
-      color: ${(props) => props.theme.bgColor};
+      color: ${({ theme }) => theme.bgColor};
     }
     &::before {
       content: " ";
@@ -272,20 +277,22 @@ const MarkdownBodyStyle = styled.div<StyleProps>`
       z-index: -1;
     }
     &:hover::before {
-      background-color: ${(props) => props.theme.textColor};
+      background-color: ${({ theme }) => theme.textColor};
     }
   }
 
   .toc {
-    width: fit-content;
-    background-color: ${(props) =>
-      props.theme.postElementBackgroundColor};
-    color: ${(props) => props.theme.textColor};
+    width: 280px;
+    /* background-color: ${(props) =>
+      props.theme.postElementBackgroundColor}; */
+    border-left: 2px solid
+      ${({ theme }) => theme.subTextColor};
+    color: ${({ theme }) => theme.textColor};
     margin-bottom: 2rem;
     padding: 0.3rem 0.8rem 0.3rem 0.7rem;
     font-size: calc(var(--main-font-size) * 0.9);
-    border-radius: 4px;
-    a {
+
+    .toc-link {
       color: inherit;
       &:hover {
         color: #1e1e1e;
@@ -294,17 +301,18 @@ const MarkdownBodyStyle = styled.div<StyleProps>`
         background-color: white;
       }
     }
-    ol > li::before {
+    .toc-level > .toc-item::before {
       content: counters(item, ".") " ";
       font-weight: 500;
     }
-    ol > li {
+    .toc-level > .toc-item {
       margin: calc(var(--main-heading-margin) * 0.06) 0;
     }
-    & > ol > li {
+    > .toc-level > .toc-item {
       padding-left: 0;
     }
   }
+
   em {
     font-family: "Nanum Myeongjo", serif;
     font-style: italic;
@@ -320,7 +328,7 @@ const MarkdownBodyStyle = styled.div<StyleProps>`
   }
 
   iframe {
-    border: 2px solid ${(props) => props.theme.textColor};
+    border: 2px solid ${({ theme }) => theme.textColor};
     border-radius: 10px;
     margin: 0 auto;
   }
@@ -333,10 +341,9 @@ const MarkdownBodyStyle = styled.div<StyleProps>`
   table {
     margin: auto;
     max-width: 600px;
-    border-top: 1px solid
-      ${(props) => props.theme.textColor};
+    border-top: 1px solid ${({ theme }) => theme.textColor};
     border-bottom: 1px solid
-      ${(props) => props.theme.textColor};
+      ${({ theme }) => theme.textColor};
     th,
     td {
       padding: 0.2rem 3rem;
@@ -375,20 +382,31 @@ const MarkdownBodyStyle = styled.div<StyleProps>`
   .half + .half {
     margin-left: 10px;
   }
+
+  blockquote,
+  div[data-rehype-pretty-code-fragment] {
+    @media (max-width: ${MOBILE_BREAKPOINT}) {
+      margin-left: -5vw;
+      margin-right: -5vw;
+      border-radius: 0;
+    }
+  }
 `;
 
-const MarkdownBody = ({
-  content,
-  className,
-}: {
+type Props = {
   content: string;
   className?: string;
-}) => {
+};
+
+const MarkdownBody = ({ content, className }: Props) => {
   const isDark = useRecoilValue(isDarkAtom);
+
   return (
     <MarkdownBodyStyle
       isDark={isDark}
-      dangerouslySetInnerHTML={{ __html: content }}
+      dangerouslySetInnerHTML={{
+        __html: content,
+      }}
       className={className}
     />
   );

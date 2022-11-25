@@ -1,4 +1,3 @@
-import React from "react";
 import styled from "styled-components";
 
 import Meta from "../../components/Layout/Meta";
@@ -24,6 +23,10 @@ const PostSection = styled.section`
   width: 100%;
 `;
 
+const PostContainer = styled(Container)`
+  max-width: 680px;
+`;
+
 type Props = {
   post: PostType;
 };
@@ -39,7 +42,7 @@ export default function Post({ post }: Props) {
         image={post.coverImage}
         tags={post.category}
       />
-      <Container>
+      <PostContainer>
         <PostSection>
           <PostTitle
             coverImage={post.coverImage}
@@ -52,7 +55,7 @@ export default function Post({ post }: Props) {
         </PostSection>
         <PrevNextPostBtn post={post} />
         <Comments title={post.title.replaceAll("/", ",")} />
-      </Container>
+      </PostContainer>
     </>
   );
 }
