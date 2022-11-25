@@ -69,3 +69,14 @@ function headingToSementic(): Transformer<Root, Root> {
     });
   };
 }
+
+export async function markdownToHtmlForCache(
+  markdown: string
+) {
+  const result = await remark()
+    .use(remarkRehype, { allowDangerousHtml: true })
+    .use(remarkGfm)
+    .use(rehypeStringify)
+    .process(markdown);
+  return result.toString();
+}

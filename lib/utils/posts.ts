@@ -18,9 +18,20 @@ export function getPostSlugs() {
     .filter((dir) => /\.md$/.test(dir));
 }
 
+type PostMeta =
+  | "slug"
+  | "title"
+  | "date"
+  | "category"
+  | "coverImage"
+  | "excerpt"
+  | "ogImage"
+  | "content"
+  | "series";
+
 export function getPostBySlug(
   slug: string,
-  fields: string[] = []
+  fields: PostMeta[] = []
 ) {
   const realSlug = slug.replace(/\.md$/, "");
   const fullPath = join(postsDirectory, `${realSlug}.md`);
@@ -38,6 +49,7 @@ export function getPostBySlug(
       url: "",
     },
     content: "",
+    series: "",
   };
 
   fields.forEach((field) => {
@@ -53,7 +65,7 @@ export function getPostBySlug(
   return items;
 }
 
-export function getAllPosts(fields: string[] = []) {
+export function getAllPosts(fields: PostMeta[] = []) {
   const slugs = getPostSlugs();
   const posts = slugs
     .map((slug) => getPostBySlug(slug, fields))
