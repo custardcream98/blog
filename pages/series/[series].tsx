@@ -1,12 +1,18 @@
 import React from "react";
 import styled from "styled-components";
 
-import { Container, Title } from "../../components/Common/styledComponents";
+import {
+  Container,
+  Title,
+} from "../../components/Common/styledComponents";
 import type PostType from "../../interfaces/post";
 import CategoryCard from "../../components/Category/CategoryCard";
 import Meta from "../../components/Layout/Meta";
 
-import { getSeries, getPostBySeries } from "../../lib/api";
+import {
+  getSeries,
+  getPostBySeries,
+} from "../../lib/utils/posts";
 
 const SeriesContainer = styled(Container)`
   display: block;
@@ -27,7 +33,13 @@ const Series = ({ series, posts }: Props) => {
       <Meta title={`시리즈 ${series}`} />
       <SeriesContainer>
         <SeriesTitle>{`<${series} />`}</SeriesTitle>
-        <ol>{React.Children.toArray(posts.map((post) => <CategoryCard post={post} />))}</ol>
+        <ol>
+          {React.Children.toArray(
+            posts.map((post) => (
+              <CategoryCard post={post} />
+            ))
+          )}
+        </ol>
       </SeriesContainer>
     </>
   );

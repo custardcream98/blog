@@ -11,8 +11,8 @@ import {
   getAllPosts,
   getOgImage,
   getPrevNextPosts,
-} from "../../lib/api";
-import markdownToHtml from "../../lib/markdownToHtml";
+} from "../../lib/utils/posts";
+import markdownToHtml from "../../lib/utils/markdownToHtml";
 import { createPostDoc } from "../../lib/firebaseSetup/firebaseApps";
 import check404 from "../../lib/check404";
 

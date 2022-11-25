@@ -3,10 +3,13 @@ import styled from "styled-components";
 
 import Meta from "../components/Layout/Meta";
 import MarkdownBody from "../components/Common/MarkdownBody";
-import { Container, Title } from "../components/Common/styledComponents";
-import { getAboutContent } from "../lib/api";
+import {
+  Container,
+  Title,
+} from "../components/Common/styledComponents";
+import { getAboutContent } from "../lib/utils/posts";
 
-import markdownToHtml from "../lib/markdownToHtml";
+import markdownToHtml from "../lib/utils/markdownToHtml";
 import check404 from "../lib/check404";
 
 const AboutBody = styled(MarkdownBody)`
@@ -38,7 +41,9 @@ const About = ({ content }: Props) => {
         description="안녕하세요, 삽질 좋아하는 개발자 박시우입니다. 문제가 생기면 밤을 새서라도 알아내고 해결합니다."
       />
       <AboutContainer>
-        <AboutTitle as="h2">{"<개발자 박시우 />"}</AboutTitle>
+        <AboutTitle as="h2">
+          {"<개발자 박시우 />"}
+        </AboutTitle>
         <AboutBody content={content} />
       </AboutContainer>
     </>

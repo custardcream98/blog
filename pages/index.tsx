@@ -7,9 +7,12 @@ import Meta from "../components/Layout/Meta";
 import Intro from "../components/Home/Intro";
 import Post from "../interfaces/post";
 import Paging from "../components/Common/Paging";
-import { Container, Title } from "../components/Common/styledComponents";
+import {
+  Container,
+  Title,
+} from "../components/Common/styledComponents";
 
-import { getAllPosts } from "../lib/api";
+import { getAllPosts } from "../lib/utils/posts";
 import check404 from "../lib/check404";
 
 const HeroPostList = styled.ol`
@@ -25,7 +28,8 @@ type Props = {
 
 const Index = ({ postByPageArr }: Props) => {
   const router = useRouter();
-  const page = parseInt(router.query.page as string) - 1 || 0;
+  const page =
+    parseInt(router.query.page as string) - 1 || 0;
   const heroPostsRef = useRef<HTMLDivElement>(null);
 
   const onPageChange = (to: number) => {
@@ -71,7 +75,11 @@ const Index = ({ postByPageArr }: Props) => {
             ))
           )}
         </HeroPostList>
-        <Paging pageScale={postByPageArr.length} currentPage={page} onPageChange={onPageChange} />
+        <Paging
+          pageScale={postByPageArr.length}
+          currentPage={page}
+          onPageChange={onPageChange}
+        />
       </Container>
     </>
   );
@@ -80,7 +88,14 @@ const Index = ({ postByPageArr }: Props) => {
 export default Index;
 
 export const getStaticProps = async () => {
-  const allPosts = getAllPosts(["title", "date", "slug", "author", "coverImage", "excerpt"]);
+  const allPosts = getAllPosts([
+    "title",
+    "date",
+    "slug",
+    "author",
+    "coverImage",
+    "excerpt",
+  ]);
 
   return {
     props: {

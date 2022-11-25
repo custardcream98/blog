@@ -3,9 +3,13 @@ import Link from "next/link";
 import styled from "styled-components";
 
 import Meta from "../components/Layout/Meta";
-import { Container, LinkDecorated, Title } from "../components/Common/styledComponents";
+import {
+  Container,
+  LinkDecorated,
+  Title,
+} from "../components/Common/styledComponents";
 
-import { getSeries } from "../lib/api";
+import { getSeries } from "../lib/utils/posts";
 import check404 from "../lib/check404";
 
 const SeriesTitle = styled.li`

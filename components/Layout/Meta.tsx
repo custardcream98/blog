@@ -1,5 +1,5 @@
 import Head from "next/head";
-import getFullURL from "../../lib/url";
+import getFullURL from "../../lib/utils/url";
 
 type Props = {
   title?: string;
@@ -8,13 +8,24 @@ type Props = {
   tags?: string[];
 };
 
-const Meta = ({ title, description, image, tags }: Props) => {
+const Meta = ({
+  title,
+  description,
+  image,
+  tags,
+}: Props) => {
   return (
     <Head>
-      <title>{(title ? title + ": " : "") + "FE 개발자 박시우의 기술 블로그"}</title>
+      <title>
+        {(title ? title + ": " : "") +
+          "FE 개발자 박시우의 기술 블로그"}
+      </title>
       <meta
         property="og:title"
-        content={(title ? title + ": " : "") + "FE 개발자 박시우의 기술 블로그"}
+        content={
+          (title ? title + ": " : "") +
+          "FE 개발자 박시우의 기술 블로그"
+        }
       />
       <meta
         name="description"
@@ -31,10 +42,21 @@ const Meta = ({ title, description, image, tags }: Props) => {
         }
       />
       <meta property="og:url" content={getFullURL()} />
-      <meta property="og:image" content={image ?? "/static/img/thumbnail.png"} />
-      <meta name="keywords" content={tags?.join(", ") ?? "HTML, CSS, JavaScript"}></meta>
+      <meta
+        property="og:image"
+        content={image ?? "/static/img/thumbnail.png"}
+      />
+      <meta
+        name="keywords"
+        content={
+          tags?.join(", ") ?? "HTML, CSS, JavaScript"
+        }
+      ></meta>
 
-      <meta property="og:article:author" content="개발자 박시우" />
+      <meta
+        property="og:article:author"
+        content="개발자 박시우"
+      />
       <meta property="og:type" content="website" />
     </Head>
   );

@@ -2,8 +2,8 @@ import fs from "fs";
 import { join } from "path";
 import matter from "gray-matter";
 import axios from "axios";
-import PostType from "../interfaces/post";
-import { PrevNextPosts } from "../interfaces/post";
+import PostType from "../../interfaces/post";
+import { PrevNextPosts } from "../../interfaces/post";
 
 const postsDirectory = join(process.cwd(), "_posts");
 const aboutPageDirectory = join(process.cwd(), "about.md");
@@ -13,10 +13,15 @@ interface Items extends PostType {
 }
 
 export function getPostSlugs() {
-  return fs.readdirSync(postsDirectory).filter((dir) => /\.md$/.test(dir));
+  return fs
+    .readdirSync(postsDirectory)
+    .filter((dir) => /\.md$/.test(dir));
 }
 
-export function getPostBySlug(slug: string, fields: string[] = []) {
+export function getPostBySlug(
+  slug: string,
+  fields: string[] = []
+) {
   const realSlug = slug.replace(/\.md$/, "");
   const fullPath = join(postsDirectory, `${realSlug}.md`);
   const fileContents = fs.readFileSync(fullPath, "utf8");
@@ -52,7 +57,11 @@ export function getAllPosts(fields: string[] = []) {
   const slugs = getPostSlugs();
   const posts = slugs
     .map((slug) => getPostBySlug(slug, fields))
-    .sort((post1, post2) => new Date(post2.date).getTime() - new Date(post1.date).getTime());
+    .sort(
+      (post1, post2) =>
+        new Date(post2.date).getTime() -
+        new Date(post1.date).getTime()
+    );
 
   return posts;
 }
@@ -61,19 +70,31 @@ export function getSeries() {
   const slugs = getPostSlugs();
   const posts = slugs
     .map((slug) => getPostBySlug(slug, ["series"]))
-    .sort((post1, post2) => new Date(post2.date).getTime() - new Date(post1.date).getTime());
+    .sort(
+      (post1, post2) =>
+        new Date(post2.date).getTime() -
+        new Date(post1.date).getTime()
+    );
   let series: { [key: string]: number } = {};
   posts.forEach((post) => {
     if (post.series) {
-      if (!Object.hasOwn(series, post.series)) series[post.series] = 1;
+      if (!Object.hasOwn(series, post.series))
+        series[post.series] = 1;
       else series[post.series] += 1;
     }
   });
   return series;
 }
 
-export function getPrevNextPosts(slug: string): PrevNextPosts {
-  const posts = getAllPosts(["title", "slug", "excerpt", "date"]);
+export function getPrevNextPosts(
+  slug: string
+): PrevNextPosts {
+  const posts = getAllPosts([
+    "title",
+    "slug",
+    "excerpt",
+    "date",
+  ]);
 
   const index = posts.findIndex((p) => p.slug === slug);
 
@@ -104,10 +125,12 @@ export function getPrevNextPosts(slug: string): PrevNextPosts {
   };
 }
 
-export const getAboutContent = () => fs.readFileSync(aboutPageDirectory, "utf8");
+export const getAboutContent = () =>
+  fs.readFileSync(aboutPageDirectory, "utf8");
 
 export async function getOgImage(title: string) {
-  const delay = (ms: number) => new Promise((resolve) => setTimeout(resolve, ms));
+  const delay = (ms: number) =>
+    new Promise((resolve) => setTimeout(resolve, ms));
   console.log(`Currently Deploying Thumbnail: ${title}`);
 
   while (true) {
@@ -132,7 +155,14 @@ export async function getOgImage(title: string) {
 }
 
 export function getPostByCategory(category: string) {
-  const posts = getAllPosts(["title", "slug", "excerpt", "date", "category", "series"]);
+  const posts = getAllPosts([
+    "title",
+    "slug",
+    "excerpt",
+    "date",
+    "category",
+    "series",
+  ]);
   let categoryPosts: Items[] = [];
 
   posts.forEach((post) => {
@@ -145,7 +175,14 @@ export function getPostByCategory(category: string) {
 }
 
 export function getPostBySeries(series: string) {
-  const posts = getAllPosts(["title", "slug", "excerpt", "date", "category", "series"]);
+  const posts = getAllPosts([
+    "title",
+    "slug",
+    "excerpt",
+    "date",
+    "category",
+    "series",
+  ]);
   let seriesPosts: Items[] = [];
 
   posts.forEach((post) => {
