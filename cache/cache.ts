@@ -5,35 +5,43 @@ import { markdownToHtmlForCache } from "../lib/utils/markdownToHtml";
 import { getAllPosts } from "../lib/utils/posts";
 import { CachePost } from "./type";
 
-const postsData = getAllPosts(["slug", "title", "content"]);
+const postsData = getAllPosts([
+  "slug",
+  "title",
+  "content",
+  "date",
+]);
 
 (async () => {
   const postsCache: CachePost[] = await Promise.all(
-    postsData.map(async (data) => {
-      const cacheHTML = await markdownToHtmlForCache(
-        data.content
-      );
-      const { document: cacheDocument } = new JSDOM(
-        cacheHTML
-      ).window;
-      const elements = cacheDocument.querySelectorAll(
-        "h1, h2, h3, h4, h5, h6, p, ol, ul"
-      );
+    postsData.map(
+      async ({ slug, title, content, date }) => {
+        const cacheHTML = await markdownToHtmlForCache(
+          content
+        );
+        const { document: cacheDocument } = new JSDOM(
+          cacheHTML
+        ).window;
+        const elements = cacheDocument.querySelectorAll(
+          "h1, h2, h3, h4, h5, h6, p, ol, ul"
+        );
 
-      let content = "";
+        let extractedContent = "";
 
-      elements.forEach(
-        (ele) =>
-          (content +=
-            ele.textContent?.replaceAll("\n", "") + " ")
-      );
+        elements.forEach(
+          (ele) =>
+            (extractedContent +=
+              ele.textContent?.replaceAll("\n", "") + " ")
+        );
 
-      return {
-        slug: data.slug,
-        title: data.title,
-        content: content,
-      };
-    })
+        return {
+          slug,
+          title,
+          date,
+          content: extractedContent,
+        };
+      }
+    )
   );
 
   fs.writeFile(

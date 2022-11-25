@@ -12,6 +12,9 @@ interface Items extends PostType {
   [key: string]: string | string[] | object | undefined;
 }
 
+const getTimeOfPost = (post: Items) =>
+  new Date(post.date).getTime();
+
 export function getPostSlugs() {
   return fs
     .readdirSync(postsDirectory)
@@ -71,8 +74,7 @@ export function getAllPosts(fields: PostMeta[] = []) {
     .map((slug) => getPostBySlug(slug, fields))
     .sort(
       (post1, post2) =>
-        new Date(post2.date).getTime() -
-        new Date(post1.date).getTime()
+        getTimeOfPost(post2) - getTimeOfPost(post1)
     );
 
   return posts;
@@ -84,8 +86,7 @@ export function getSeries() {
     .map((slug) => getPostBySlug(slug, ["series"]))
     .sort(
       (post1, post2) =>
-        new Date(post2.date).getTime() -
-        new Date(post1.date).getTime()
+        getTimeOfPost(post2) - getTimeOfPost(post1)
     );
   let series: { [key: string]: number } = {};
   posts.forEach((post) => {
