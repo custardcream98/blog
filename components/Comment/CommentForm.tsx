@@ -1,3 +1,5 @@
+import axios from "axios";
+import https from "https";
 import React, { memo, useRef, useState } from "react";
 import { Rings } from "react-loader-spinner";
 import styled, { useTheme } from "styled-components";
@@ -80,12 +82,15 @@ type Props = {
 const CommentForm = ({ title }: Props) => {
   const inpUsernameRef = useRef<HTMLInputElement>(null);
   const inpPasswordRef = useRef<HTMLInputElement>(null);
-  const textAreaCommentRef = useRef<HTMLTextAreaElement>(null);
+  const textAreaCommentRef =
+    useRef<HTMLTextAreaElement>(null);
 
   const [isLoading, setIsLoading] = useState(false);
   const theme = useTheme();
 
-  const onSubmit = async (event: React.ChangeEvent<HTMLFormElement>) => {
+  const onSubmit = async (
+    event: React.ChangeEvent<HTMLFormElement>
+  ) => {
     event.preventDefault();
     event.stopPropagation();
 
@@ -95,29 +100,38 @@ const CommentForm = ({ title }: Props) => {
     const password = inpPasswordRef.current?.value;
     const comment = textAreaCommentRef.current?.value;
 
-    if (!username || !password || !comment || (password && password.length <= 4)) {
+    if (
+      !username ||
+      !password ||
+      !comment ||
+      (password && password.length <= 4)
+    ) {
       setIsLoading(false);
       return;
     }
 
-    await addComment({ title, password, comment, username });
-    await fetch(`https://${process.env.NEXT_PUBLIC_HOST}/api/alert-sw`, {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({
-        postTitle: title,
-        username,
-        comment,
-        linkToPost: window.location.href,
-      }),
-    })
-      .then((response) => {
-        if (!response.ok) throw Error("Failed to send alert to Shioo");
-      })
+    await addComment({
+      title,
+      password,
+      comment,
+      username,
+    });
+    axios
+      .post(
+        `https://${process.env.NEXT_PUBLIC_HOST}/api/alert-sw`,
+        {
+          postTitle: title,
+          username,
+          comment,
+          linkToPost: window.location.href,
+        },
+        {
+          headers: { "Content-Type": "application/json" },
+          httpsAgent: new https.Agent({ keepAlive: true }),
+        }
+      )
       .catch((error) => {
-        // ignore
+        throw Error("Failed to send alert to Shioo", error);
       });
 
     inpUsernameRef.current.value = "";
@@ -157,7 +171,12 @@ const CommentForm = ({ title }: Props) => {
         <label className="sr-only" htmlFor="comment">
           댓글 내용
         </label>
-        <Textarea ref={textAreaCommentRef} name="comment" id="comment" required />
+        <Textarea
+          ref={textAreaCommentRef}
+          name="comment"
+          id="comment"
+          required
+        />
         {isLoading ? (
           <LoadingBtn>
             <Rings color={theme.bgColor} width="2rem" />
