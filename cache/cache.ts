@@ -44,6 +44,11 @@ const postsData = getAllPosts([
     )
   );
 
+  postsCache.sort(
+    (post1, post2) =>
+      post1.content.length - post2.content.length
+  );
+
   fs.writeFile(
     `./cache/cache.json`,
     JSON.stringify(postsCache),
