@@ -1,9 +1,8 @@
-import axios from "axios";
-import https from "https";
 import React, { memo, useRef, useState } from "react";
 import { Rings } from "react-loader-spinner";
 import styled, { useTheme } from "styled-components";
 import { addComment } from "../../lib/firebaseSetup/firebaseApps";
+import { postMail } from "../../lib/axios";
 
 const Form = styled.form`
   width: 100%;
@@ -116,23 +115,8 @@ const CommentForm = ({ title }: Props) => {
       comment,
       username,
     });
-    axios
-      .post(
-        `https://${process.env.NEXT_PUBLIC_HOST}/api/alert-sw`,
-        {
-          postTitle: title,
-          username,
-          comment,
-          linkToPost: window.location.href,
-        },
-        {
-          headers: { "Content-Type": "application/json" },
-          httpsAgent: new https.Agent({ keepAlive: true }),
-        }
-      )
-      .catch((error) => {
-        throw Error("Failed to send alert to Shioo", error);
-      });
+
+    postMail(title, username, comment);
 
     inpUsernameRef.current.value = "";
     inpPasswordRef.current.value = "";
