@@ -40,6 +40,10 @@ function ch2pattern(ch: string) {
     )}-\\u${end.toString(16)}]`;
   }
 
+  if (/0-9/.test(ch)) {
+    return ch;
+  }
+
   return `[${ch.toUpperCase()}|${ch.toLowerCase()}]`;
 }
 function createFuzzyMatcher(input: string) {
@@ -47,7 +51,7 @@ function createFuzzyMatcher(input: string) {
     .split("")
     .filter((c) => c !== " ")
     .map((c) => `(${ch2pattern(c)})`)
-    .join(".*?");
+    .join(".{0,3}?");
   return new RegExp(pattern);
 }
 

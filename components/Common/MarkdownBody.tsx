@@ -282,9 +282,6 @@ const MarkdownBodyStyle = styled.div<StyleProps>`
   }
 
   .toc {
-    width: 280px;
-    /* background-color: ${(props) =>
-      props.theme.postElementBackgroundColor}; */
     border-left: 2px solid
       ${({ theme }) => theme.subTextColor};
     color: ${({ theme }) => theme.textColor};

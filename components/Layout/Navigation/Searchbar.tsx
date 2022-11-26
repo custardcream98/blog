@@ -114,7 +114,7 @@ export default function Searchbar({
       const searchedData = await searchPosts(searchInput);
 
       setSearchResults(searchedData);
-    }, 600);
+    }, 300);
 
     return () => clearTimeout(inputTimeout);
   }, [searchInput]);
