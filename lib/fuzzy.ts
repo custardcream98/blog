@@ -113,16 +113,28 @@ export default function getFuzzyPostData(
       new Set(fuzzyByTitle.map((data) => data.slug))
     );
 
-    return [...fuzzyByTitle, ...fuzzyByContent].sort(
-      (post1, post2) =>
-        post1.matchLength - post2.matchLength
-    );
+    return [...fuzzyByTitle, ...fuzzyByContent]
+      .sort(
+        (post1, post2) =>
+          new Date(post2.date).getTime() -
+          new Date(post1.date).getTime()
+      )
+      .sort(
+        (post1, post2) =>
+          post1.matchLength - post2.matchLength
+      );
   } catch (error) {
     console.log("Timeout! title 탐색 결과만 리턴합니다.");
 
-    return fuzzyByTitle.sort(
-      (post1, post2) =>
-        post1.matchLength - post2.matchLength
-    );
+    return fuzzyByTitle
+      .sort(
+        (post1, post2) =>
+          new Date(post2.date).getTime() -
+          new Date(post1.date).getTime()
+      )
+      .sort(
+        (post1, post2) =>
+          post1.matchLength - post2.matchLength
+      );
   }
 }

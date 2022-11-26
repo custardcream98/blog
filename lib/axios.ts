@@ -9,7 +9,7 @@ export const postMail = (
 ) =>
   axios
     .post(
-      `https://${process.env.NEXT_PUBLIC_HOST}/api/alert-sw`,
+      `${process.env.NEXT_PUBLIC_HOST}/api/alert-sw`,
       {
         postTitle: title,
         username,
@@ -29,10 +29,7 @@ export const searchPosts = (
   query: string
 ): Promise<SearchedPost[]> =>
   axios
-    .get(
-      `https://${process.env.NEXT_PUBLIC_HOST}/api/search`,
-      {
-        params: { q: query },
-      }
-    )
+    .get(`${process.env.NEXT_PUBLIC_HOST}/api/search`, {
+      params: { q: query },
+    })
     .then((res) => res.data);
