@@ -136,10 +136,10 @@ const ResultCardResolver = ({
           {koDtf.format(new Date(searchResult.date))}
         </time>
       </div>
-      <p className="result-content-wrapper">
+      <div className="result-content-wrapper">
         {Content}
         <LinkToPost slug={searchResult.slug} />
-      </p>
+      </div>
     </ResultCard>
   );
 };
