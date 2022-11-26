@@ -12,9 +12,12 @@ export default async function searchAPI(
       .status(400)
       .json({ message: "잘못된 요청입니다." });
   }
-  console.log(q);
 
-  const results = q ? getFuzzyPostData(q) : [];
+  // console.log("요청 query: " + q);
+
+  const results = q ? getFuzzyPostData(q).slice(0, 5) : [];
+
+  // console.log("탐색 끝, 응답합니다.");
 
   return res
     .status(200)

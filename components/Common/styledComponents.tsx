@@ -32,3 +32,27 @@ export const Title = styled.strong`
   font-size: 1.4rem;
   font-weight: 700;
 `;
+
+export const SearchButton = styled.button`
+  width: 26px;
+  height: 26px;
+  margin-left: 0.25rem;
+  padding: 0;
+
+  border: none;
+  cursor: pointer;
+
+  transition: scale 0.2s ease;
+  background: none;
+
+  :hover {
+    scale: 1.1;
+  }
+  :active {
+    scale: 0.8;
+  }
+  @media (max-width: 800px) {
+    width: 22px;
+    height: 22px;
+  }
+`;

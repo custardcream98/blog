@@ -1,13 +1,15 @@
 import React from "react";
 import Head from "next/head";
 import styled from "styled-components";
-import Navigation from "./Navigation";
+import Navigation from "./Navigation/Navigation";
 import Footer from "./Footer";
 
 const Wrapper = styled.div`
   display: flex;
   flex-direction: column;
-  min-height: calc(100vh - 50px); // 뷰포트 높이 - Navbar 높이
+  min-height: calc(
+    100vh - 50px
+  ); // 뷰포트 높이 - Navbar 높이
 `;
 
 const Main = styled.main`
@@ -22,7 +24,10 @@ const Layout = ({ children }: Props) => {
   return (
     <>
       <Head>
-        <meta name="viewport" content="initial-scale=1.0, width=device-width" />
+        <meta
+          name="viewport"
+          content="initial-scale=1.0, width=device-width"
+        />
       </Head>
       <Navigation />
       <Wrapper>

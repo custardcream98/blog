@@ -1,4 +1,5 @@
 import CacheDB from "../cache/cache.json";
+import { SearchedPost } from "../interfaces/searchedPosts";
 
 const con2syl: { [cho: string]: number } = {
   ㄱ: "가".charCodeAt(0),
@@ -44,18 +45,31 @@ function ch2pattern(ch: string) {
 function createFuzzyMatcher(input: string) {
   const pattern = input
     .split("")
+    .filter((c) => c !== " ")
     .map((c) => `(${ch2pattern(c)})`)
     .join(".*?");
   return new RegExp(pattern);
 }
 
+const TIMEOUT = 500;
+
 const findFuzzyPostData = (
   option: "title" | "content",
-  regex: RegExp
+  regex: RegExp,
+  exclude?: Set<string>
 ) => {
+  const searchStarted = Date.now();
+
   let results = [];
   for (const postData of CacheDB) {
+    if (exclude?.has(postData.slug)) {
+      continue;
+    }
     const match = postData[option].match(regex);
+
+    if (Date.now() - searchStarted > TIMEOUT) {
+      throw Error("Timeout!");
+    }
 
     if (
       !match ||
@@ -82,14 +96,29 @@ const findFuzzyPostData = (
   return results;
 };
 
-export default function getFuzzyPostData(query: string) {
+export default function getFuzzyPostData(
+  query: string
+): SearchedPost[] {
   const regex = createFuzzyMatcher(query);
-  const result = [
-    ...findFuzzyPostData("title", regex),
-    ...findFuzzyPostData("content", regex),
-  ].sort(
-    (post1, post2) => post1.matchLength - post2.matchLength
-  );
+  const fuzzyByTitle = findFuzzyPostData("title", regex);
 
-  return result;
+  try {
+    const fuzzyByContent = findFuzzyPostData(
+      "content",
+      regex,
+      new Set(fuzzyByTitle.map((data) => data.slug))
+    );
+
+    return [...fuzzyByTitle, ...fuzzyByContent].sort(
+      (post1, post2) =>
+        post1.matchLength - post2.matchLength
+    );
+  } catch (error) {
+    console.log("Timeout! title 탐색 결과만 리턴합니다.");
+
+    return fuzzyByTitle.sort(
+      (post1, post2) =>
+        post1.matchLength - post2.matchLength
+    );
+  }
 }
