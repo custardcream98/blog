@@ -1,4 +1,4 @@
 #!/usr/bin/env sh
 . "$(dirname -- "$0")/_/husky.sh"
 
-npm run cache && git add ./cache/cache.json
+npm run cache && git add ./cache/cache.json && git commit -m"Chore: 포스트 검색용 cache 갱신"
