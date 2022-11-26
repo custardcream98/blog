@@ -11,7 +11,8 @@ import LinkToPost from "./LinkToPost";
 const ResultsWrapper = styled.div`
   position: absolute;
   width: 100%;
-  height: fit-content;
+  max-height: calc(100vh - 80px);
+  overflow-y: scroll;
   top: 60px;
   background: ${({ theme }) =>
     theme.postElementBackgroundColor};
@@ -33,7 +34,6 @@ type ResultCardProps = {
   isLast: boolean;
 };
 const ResultCard = styled.div<ResultCardProps>`
-  /* margin-bottom: 15px; */
   padding: 20px 0;
 
   ${({ isLast, theme }) =>
@@ -52,15 +52,36 @@ const ResultCard = styled.div<ResultCardProps>`
     display: block;
     font-size: 1.1rem;
     margin-bottom: 10px;
+    line-height: 1.5;
   }
   .result-content {
     line-height: 1.4;
     font-size: 0.9rem;
     font-weight: 300;
+    flex: 1;
   }
   .result-date {
     font-size: 0.8rem;
     font-weight: 300;
+    white-space: nowrap;
+  }
+
+  @media (max-width: 400px) {
+    .result-title-wrapper {
+      flex-direction: column;
+      margin-bottom: 10px;
+    }
+    .result-title {
+      font-size: 0.9rem;
+      margin-bottom: 5px;
+    }
+    .result-content {
+      font-size: 0.8rem;
+      line-height: 1.5;
+    }
+    .result-date {
+      font-size: 0.7rem;
+    }
   }
 `;
 

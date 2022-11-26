@@ -2,11 +2,14 @@ import Link from "next/link";
 import styled from "styled-components";
 
 const StyledLink = styled.a`
-  display: inline-block;
+  display: block;
   align-self: end;
 
-  width: 28px;
-  height: 28px;
+  width: 20px;
+  height: 20px;
+
+  margin: 0 10px;
+
   #link-icon {
     width: 100%;
     height: 100%;
