@@ -158,11 +158,11 @@ const AppRouter = () => {
 
 개선할 점이 아직 남았습니다.
 
-Largest Contentful Paint가 3초를 기록했습니다. LCP는 Lighthouse에서 [25%라는 큰 가중치를 주는 항목](https://web.dev/performance-scoring/?utm_source=lighthouse&utm_medium=devtools)인데, 로드 시작 시점부터 페이지의 메인 콘텐츠가 로드됐을 가능성이 있을 때까지 걸린 시간을 말합니다.
+Largest Contentful Paint가 3초를 기록했습니다. LCP는 Lighthouse에서 점수를 계산할 때 [25%라는 큰 가중치를 주는 항목](https://web.dev/performance-scoring/?utm_source=lighthouse&utm_medium=devtools)인데, 로드 시작 시점부터 페이지의 메인 콘텐츠가 로드됐을 가능성이 있을 때까지 걸린 시간을 말합니다.
 
 즉 LCP는 **사용자가 실질적으로 페이지를 사용할 수 있는 시점**까지 얼마나 걸리는지를 측정하는 요소입니다. [Lighthouse의 연구](https://web.dev/defining-core-web-vitals-thresholds/)에 따르면 2.5초 ~ 4초는 중간 등급인 '개선 필요함'에 해당합니다.
 
-Share it!은 그럼 어디에서 페이지의 로드를 방해하고 있을까요? 보고서를 보니 이 부분들이 눈에 띄었습니다.
+Share it!은 그럼 어떤 요소가 페이지의 로드를 방해하고 있을까요? 보고서를 보니 이 부분들이 눈에 띄었습니다.
 
 ![렌더링 차단 리소스](/static/img/개인_프로젝트_Share_it!의_성능_최적화하기/font_problem1.png)
 
@@ -230,7 +230,7 @@ CSS는 Render Blocking Resource입니다. Share it!은 Pretendard라는 웹 폰�
 
 **Tradeoff**
 
-- 폰트를 불러오는 Request Chain에서 Maximum Critical Path Laytency가 검사 할 때마다 널뛰기를 합니다. Vercel에서 제공하는 무료 웹서버의 한계인 것 같은데, 추후 CDN을 통해 배포하는 방식 등으로 개선할 필요가 있습니다.
+- 폰트를 불러오는 Request Chain에서 Maximum Critical Path Latency가 검사 할 때마다 널뛰기를 합니다. Vercel에서 제공하는 무료 웹서버의 한계인 것 같은데, 추후 CDN을 통해 배포하는 방식 등으로 개선할 필요가 있습니다.
 
 # 결론
 
