@@ -2,6 +2,8 @@ import {
   Children,
   MouseEventHandler,
   ReactNode,
+  useLayoutEffect,
+  useState,
 } from "react";
 import styled from "styled-components";
 
@@ -149,13 +151,19 @@ const ResultCardResolver = ({
     );
   }
 
+  const [dateString, setDateString] = useState("");
+
+  useLayoutEffect(() => {
+    setDateString(
+      koDtf.format(new Date(searchResult.date))
+    );
+  }, []);
+
   return (
     <ResultCard isLast={isLast}>
       <div className="result-title-wrapper">
         {Title}
-        <time className="result-date">
-          {koDtf.format(new Date(searchResult.date))}
-        </time>
+        <time className="result-date">{dateString}</time>
       </div>
       <div className="result-content-wrapper">
         {Content}

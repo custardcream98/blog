@@ -1,3 +1,4 @@
+import { useLayoutEffect, useState } from "react";
 import styled from "styled-components";
 import { LinkDecorated } from "../Common/styledComponents";
 
@@ -36,13 +37,25 @@ const Container = styled.footer`
 `;
 
 const Footer = () => {
+  const [yearString, setYearString] = useState(2022);
+
+  useLayoutEffect(() => {
+    setYearString(new Date().getFullYear());
+  }, []);
+
   return (
     <Container>
-      <small>&copy; {new Date().getFullYear()} custardcream98. All rights reserved.</small>
+      <small>
+        &copy; {yearString} custardcream98. All rights
+        reserved.
+      </small>
       <address>
         <ul>
           <li>
-            <LinkDecorated href="https://github.com/custardcream98" target="_blank">
+            <LinkDecorated
+              href="https://github.com/custardcream98"
+              target="_blank"
+            >
               Github
             </LinkDecorated>
           </li>
@@ -55,7 +68,10 @@ const Footer = () => {
             </LinkDecorated>
           </li>
           <li>
-            <LinkDecorated href="mailto:custardcream@kakao.com" target="_blank">
+            <LinkDecorated
+              href="mailto:custardcream@kakao.com"
+              target="_blank"
+            >
               Email
             </LinkDecorated>
           </li>

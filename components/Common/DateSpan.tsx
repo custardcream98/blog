@@ -1,3 +1,4 @@
+import { useLayoutEffect, useState } from "react";
 import styled from "styled-components";
 
 const DateSpanStyle = styled.time`
@@ -10,14 +11,25 @@ const DateSpanStyle = styled.time`
 const dateToString = (date: Date) =>
   `${date.getFullYear()}-${(date.getMonth() + 1)
     .toString()
-    .padStart(2, "0")}-${date.getDate().toString().padStart(2, "0")}`;
+    .padStart(2, "0")}-${date
+    .getDate()
+    .toString()
+    .padStart(2, "0")}`;
 
 type Props = {
   date: string | number;
 };
 
-const DateSpan = ({ date, ...props }: Props) => (
-  <DateSpanStyle {...props}>{dateToString(new Date(date))}</DateSpanStyle>
-);
+const DateSpan = ({ date, ...props }: Props) => {
+  const [dateString, setDateString] = useState("");
+
+  useLayoutEffect(() => {
+    setDateString(dateToString(new Date(date)));
+  }, []);
+
+  return (
+    <DateSpanStyle {...props}>{dateString}</DateSpanStyle>
+  );
+};
 
 export default DateSpan;
