@@ -292,10 +292,10 @@ const MarkdownBodyStyle = styled.div<StyleProps>`
     .toc-link {
       color: inherit;
       &:hover {
-        color: #1e1e1e;
+        color: ${({ theme }) => theme.bgColor};
       }
       &:hover::before {
-        background-color: white;
+        background-color: ${({ theme }) => theme.textColor};
       }
     }
     .toc-level > .toc-item::before {
