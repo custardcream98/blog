@@ -17,6 +17,7 @@ import BlogIcon from "../../Common/BlogIcon";
 import { isDarkAtom } from "../../../lib/atoms";
 import { useWindowSize } from "../../../lib/hook/useWindowSize";
 import Searchbar from "./Searchbar";
+import { toggleIsDarkmodeActivatedOnLocal } from "../../../lib/localStorage";
 
 const Header = styled.header`
   height: 50px;
@@ -154,7 +155,10 @@ const NavItem = ({ href, content }: NavItemProps) => (
 const Navigation = () => {
   const [isDark, setIsDark] = useRecoilState(isDarkAtom);
   const [isSearchbarOn, setIsSearchbarOn] = useState(false);
-  const toggleSwitch = () => setIsDark((prev) => !prev);
+  const toggleSwitch = () => {
+    setIsDark((prev) => !prev);
+    toggleIsDarkmodeActivatedOnLocal();
+  };
   const theme = useTheme();
   const windowSize = useWindowSize();
 

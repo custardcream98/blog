@@ -1,8 +1,12 @@
-import { ReactNode } from "react";
-import { useRecoilValue } from "recoil";
-import { createGlobalStyle, ThemeProvider } from "styled-components";
+import { ReactNode, useLayoutEffect } from "react";
+import { useRecoilState } from "recoil";
+import {
+  createGlobalStyle,
+  ThemeProvider,
+} from "styled-components";
 import { isDarkAtom } from "../../lib/atoms";
 import useIsMounted from "../../lib/hook/useIsMounted";
+import { getIsDarkmodeActivatedOnLocal } from "../../lib/localStorage";
 import { darkTheme, lightTheme } from "../../lib/theme";
 
 export const GlobalStyle = createGlobalStyle`
@@ -26,8 +30,12 @@ type Props = {
 };
 
 const ThemeProviderLayer = ({ children }: Props) => {
-  const isDark = useRecoilValue(isDarkAtom);
+  const [isDark, setIsDark] = useRecoilState(isDarkAtom);
   const isMounted = useIsMounted();
+
+  useLayoutEffect(() => {
+    setIsDark(getIsDarkmodeActivatedOnLocal());
+  }, []);
 
   const body = (
     <ThemeProvider theme={isDark ? darkTheme : lightTheme}>
@@ -37,7 +45,9 @@ const ThemeProviderLayer = ({ children }: Props) => {
   );
 
   if (!isMounted) {
-    return <div style={{ visibility: "hidden" }}>{body}</div>;
+    return (
+      <div style={{ visibility: "hidden" }}>{body}</div>
+    );
   }
 
   return body;
