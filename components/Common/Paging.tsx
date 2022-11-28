@@ -1,5 +1,8 @@
 import styled, { useTheme } from "styled-components";
-import { MdOutlineKeyboardArrowLeft, MdOutlineKeyboardArrowRight } from "react-icons/md";
+import {
+  MdOutlineKeyboardArrowLeft,
+  MdOutlineKeyboardArrowRight,
+} from "react-icons/md";
 import React from "react";
 
 const Container = styled.div`
@@ -54,10 +57,16 @@ type Props = {
   onPageChange: (to: number) => void;
 };
 
-const Paging = ({ pageScale, currentPage, onPageChange }: Props) => {
+const Paging = ({
+  pageScale,
+  currentPage,
+  onPageChange,
+}: Props) => {
   const theme = useTheme();
 
-  const onClick = (event: React.MouseEvent<HTMLButtonElement>) => {
+  const onClick = (
+    event: React.MouseEvent<HTMLButtonElement>
+  ) => {
     const { value, name } = event.currentTarget;
     switch (name) {
       case "forward":
@@ -75,7 +84,11 @@ const Paging = ({ pageScale, currentPage, onPageChange }: Props) => {
     <Container>
       {currentPage !== 0 && (
         <LeftArrow name="forward" onClick={onClick}>
-          <MdOutlineKeyboardArrowLeft color={theme.textColor} size="1.5rem" />
+          <span className="sr-only">이전 글</span>
+          <MdOutlineKeyboardArrowLeft
+            color={theme.textColor}
+            size="1.5rem"
+          />
         </LeftArrow>
       )}
       <PagenumList>
@@ -83,7 +96,10 @@ const Paging = ({ pageScale, currentPage, onPageChange }: Props) => {
           new Array(pageScale).fill(0).map((_, index) => (
             <li>
               {index === currentPage ? (
-                <Pagenum__selected value={index} onClick={onClick}>
+                <Pagenum__selected
+                  value={index}
+                  onClick={onClick}
+                >
                   {index + 1}
                 </Pagenum__selected>
               ) : (
@@ -97,7 +113,11 @@ const Paging = ({ pageScale, currentPage, onPageChange }: Props) => {
       </PagenumList>
       {currentPage !== pageScale - 1 && (
         <RightArrow name="backward" onClick={onClick}>
-          <MdOutlineKeyboardArrowRight color={theme.textColor} size="1.5rem" />
+          <span className="sr-only">다음 글</span>
+          <MdOutlineKeyboardArrowRight
+            color={theme.textColor}
+            size="1.5rem"
+          />
         </RightArrow>
       )}
     </Container>
