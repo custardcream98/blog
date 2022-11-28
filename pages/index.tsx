@@ -1,4 +1,4 @@
-import React, { useEffect, useRef } from "react";
+import { Children, useEffect, useRef } from "react";
 import { useRouter } from "next/router";
 import styled from "styled-components";
 
@@ -61,7 +61,7 @@ const Index = ({ postByPageArr }: Props) => {
           {"<Posts />"}
         </Title>
         <HeroPostList>
-          {React.Children.toArray(
+          {Children.toArray(
             postByPageArr[page].map((post, i) => (
               <HeroPost
                 index={i}
