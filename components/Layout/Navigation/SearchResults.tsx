@@ -2,8 +2,6 @@ import {
   Children,
   MouseEventHandler,
   ReactNode,
-  useLayoutEffect,
-  useState,
 } from "react";
 import styled from "styled-components";
 
@@ -87,12 +85,6 @@ const ResultCard = styled.div<ResultCardProps>`
   }
 `;
 
-const koDtf = new Intl.DateTimeFormat("ko", {
-  dateStyle: "short",
-});
-
-const MAX_CONTENT_LENGTH = 100;
-
 type ResultCardResolverProps = {
   searchResult: SearchedPost;
   isLast: boolean;
@@ -114,21 +106,10 @@ const ResultCardResolver = ({
     );
     Content = (
       <p className="result-content">
-        {searchResult.content.slice(0, MAX_CONTENT_LENGTH)}
-        ...
+        {searchResult.content}
       </p>
     );
   } else {
-    let leftContentLength =
-      MAX_CONTENT_LENGTH - searchResult.content[1].length;
-    const beforeMatchContentLength =
-      Math.round(leftContentLength / 2) <=
-      searchResult.content[0].length
-        ? Math.round(leftContentLength / 2)
-        : searchResult.content[0].length;
-    const afterMatchContentLength =
-      leftContentLength - beforeMatchContentLength;
-
     Title = (
       <strong className="result-title">
         {searchResult.title}
@@ -136,34 +117,20 @@ const ResultCardResolver = ({
     );
     Content = (
       <p className="result-content">
-        {beforeMatchContentLength && "..."}
-        {searchResult.content[0].slice(
-          searchResult.content[0].length -
-            beforeMatchContentLength
-        )}
+        {searchResult.content[0]}
         <ResultsMark>{searchResult.content[1]}</ResultsMark>
-        {searchResult.content[2].slice(
-          0,
-          afterMatchContentLength
-        )}
-        {afterMatchContentLength && "..."}
+        {searchResult.content[2]}
       </p>
     );
   }
-
-  const [dateString, setDateString] = useState("");
-
-  useLayoutEffect(() => {
-    setDateString(
-      koDtf.format(new Date(searchResult.date))
-    );
-  }, []);
 
   return (
     <ResultCard isLast={isLast}>
       <div className="result-title-wrapper">
         {Title}
-        <time className="result-date">{dateString}</time>
+        <time className="result-date">
+          {searchResult.date}
+        </time>
       </div>
       <div className="result-content-wrapper">
         {Content}
