@@ -8,7 +8,7 @@ import styled from "styled-components";
 import { SearchedPost } from "../../../interfaces/searchedPosts";
 import LinkToPost from "./LinkToPost";
 
-const ResultsWrapper = styled.div`
+const ResultsWrapper = styled.ol`
   position: absolute;
   width: 100%;
   max-height: calc(100vh - 80px);
@@ -33,7 +33,7 @@ const ResultsMark = styled.mark`
 type ResultCardProps = {
   isLast: boolean;
 };
-const ResultCard = styled.div<ResultCardProps>`
+const ResultCard = styled.li<ResultCardProps>`
   padding: 20px 0;
 
   ${({ isLast, theme }) =>
@@ -134,7 +134,15 @@ const ResultCardResolver = ({
       </div>
       <div className="result-content-wrapper">
         {Content}
-        <LinkToPost slug={searchResult.slug} />
+        <LinkToPost
+          slug={searchResult.slug}
+          title={
+            typeof searchResult.title === "string"
+              ? searchResult.title
+              : searchResult.title.join("")
+          }
+          isLast={isLast}
+        />
       </div>
     </ResultCard>
   );
