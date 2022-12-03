@@ -1,10 +1,13 @@
 import Link from "next/link";
 import {
+  KeyboardEvent,
   useCallback,
+  useContext,
   useLayoutEffect,
   useRef,
 } from "react";
 import styled from "styled-components";
+import SearchbarStore from "./SearchbarStore";
 
 const StyledLink = styled.a`
   display: block;
@@ -36,6 +39,7 @@ export default function LinkToPost({
 }) {
   const id = "link-icon_" + title.replaceAll(" ", "_");
   const linkRef = useRef<HTMLAnchorElement>(null);
+  const { closeResults } = useContext(SearchbarStore);
 
   const blurLastItemCallback = useCallback(() => {
     const searchInputEle = document.querySelector(
@@ -44,6 +48,16 @@ export default function LinkToPost({
 
     searchInputEle.focus();
   }, []);
+
+  const onEnterKeyDownCallback = useCallback(
+    (event: KeyboardEvent) => {
+      if (event.code !== "Enter") {
+        return;
+      }
+      return closeResults;
+    },
+    []
+  );
 
   useLayoutEffect(() => {
     if (isLast) {
@@ -62,7 +76,11 @@ export default function LinkToPost({
 
   return (
     <Link href={`/posts/${slug}`} passHref>
-      <StyledLink ref={linkRef}>
+      <StyledLink
+        ref={linkRef}
+        onClick={closeResults}
+        onKeyDown={onEnterKeyDownCallback}
+      >
         <svg
           className="link-icon"
           xmlns="http://www.w3.org/2000/svg"

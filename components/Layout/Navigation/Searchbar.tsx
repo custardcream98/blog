@@ -1,8 +1,7 @@
 import {
   ChangeEvent,
   FormEvent,
-  MouseEvent,
-  MouseEventHandler,
+  useCallback,
   useEffect,
   useRef,
   useState,
@@ -15,6 +14,7 @@ import { SearchButton } from "../../Common/styledComponents";
 import { SearchedPost } from "../../../interfaces/searchedPosts";
 import { searchPosts } from "../../../lib/axios";
 import SearchResults from "./SearchResults";
+import SearchbarStore from "./SearchbarStore";
 
 const CloseSearchButton = styled(SearchButton)`
   position: absolute;
@@ -80,7 +80,7 @@ const SearchbarWrapper = styled.div`
 
 type Props = {
   isSearchbarOn: boolean;
-  onSearchbarClose: MouseEventHandler;
+  onSearchbarClose: () => void;
 };
 
 export default function Searchbar({
@@ -119,6 +119,12 @@ export default function Searchbar({
     return () => clearTimeout(inputTimeout);
   }, [searchInput]);
 
+  const closeResults = useCallback(() => {
+    setSearchInput("");
+    setSearchResults([]);
+    onSearchbarClose();
+  }, []);
+
   const onSearchFormSubmit = (
     event: FormEvent<HTMLFormElement>
   ) => {
@@ -154,11 +160,7 @@ export default function Searchbar({
         />
         <CloseSearchButton
           type="button"
-          onClick={(event: MouseEvent) => {
-            setSearchInput("");
-            setSearchResults([]);
-            onSearchbarClose(event);
-          }}
+          onClick={closeResults}
         >
           <span className="sr-only">검색바 닫기</span>
           <IconContext.Provider
@@ -170,20 +172,16 @@ export default function Searchbar({
           </IconContext.Provider>
         </CloseSearchButton>
         {searchResults && (
-          <SearchResults
-            visible={isSearchbarOn}
-            searchResults={searchResults}
-            onClickForCloseResults={(event: MouseEvent) => {
-              if (
-                (event.target as HTMLOrSVGImageElement)
-                  .id === "link-icon"
-              ) {
-                setSearchInput("");
-                setSearchResults([]);
-                onSearchbarClose(event);
-              }
+          <SearchbarStore.Provider
+            value={{
+              closeResults,
             }}
-          />
+          >
+            <SearchResults
+              visible={isSearchbarOn}
+              searchResults={searchResults}
+            />
+          </SearchbarStore.Provider>
         )}
       </SearchbarWrapper>
     </SearchbarContainer>

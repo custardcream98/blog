@@ -1,8 +1,4 @@
-import {
-  Children,
-  MouseEventHandler,
-  ReactNode,
-} from "react";
+import { Children, ReactNode } from "react";
 import styled from "styled-components";
 
 import { SearchedPost } from "../../../interfaces/searchedPosts";
@@ -151,19 +147,14 @@ const ResultCardResolver = ({
 type Props = {
   searchResults: SearchedPost[];
   visible: boolean;
-  onClickForCloseResults: MouseEventHandler;
 };
 
 export default function SearchResults({
   searchResults,
   visible,
-  onClickForCloseResults,
 }: Props) {
   return (
-    <ResultsWrapper
-      hidden={!visible}
-      onClick={onClickForCloseResults}
-    >
+    <ResultsWrapper hidden={!visible}>
       {Children.toArray(
         searchResults.map((searchResult, i) => (
           <ResultCardResolver
