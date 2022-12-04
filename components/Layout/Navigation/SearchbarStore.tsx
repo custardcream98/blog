@@ -1,6 +1,21 @@
-import { createContext, MouseEvent } from "react";
+import { createContext } from "react";
+import { SearchedPost } from "../../../interfaces/searchedPosts";
 
-const SearchbarStore = createContext<{
+export const SearchbarStore = createContext<{
   closeResults: () => void;
 }>({ closeResults: () => {} });
-export default SearchbarStore;
+
+export const SearchResultStore = createContext<{
+  searchResult: SearchedPost;
+  isLast: boolean;
+}>({
+  searchResult: {
+    slug: "",
+    title: "",
+    date: "",
+    content: "",
+    matchedOne: "title",
+    matchLength: 0,
+  },
+  isLast: false,
+});

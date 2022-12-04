@@ -7,7 +7,10 @@ import {
   useRef,
 } from "react";
 import styled from "styled-components";
-import SearchbarStore from "./SearchbarStore";
+import {
+  SearchbarStore,
+  SearchResultStore,
+} from "./SearchbarStore";
 
 const StyledLink = styled.a`
   display: block;
@@ -28,18 +31,17 @@ const StyledLink = styled.a`
   }
 `;
 
-export default function LinkToPost({
-  slug,
-  title,
-  isLast,
-}: {
-  slug: string;
-  title: string;
-  isLast: boolean;
-}) {
+export default function LinkToPost() {
+  const { closeResults } = useContext(SearchbarStore);
+  let {
+    searchResult: { slug, title },
+    isLast,
+  } = useContext(SearchResultStore);
+  title =
+    typeof title === "string" ? title : title.join("");
+
   const id = "link-icon_" + title.replaceAll(" ", "_");
   const linkRef = useRef<HTMLAnchorElement>(null);
-  const { closeResults } = useContext(SearchbarStore);
 
   const blurLastItemCallback = useCallback(() => {
     const searchInputEle = document.querySelector(

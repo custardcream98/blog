@@ -14,7 +14,10 @@ import { SearchButton } from "../../Common/styledComponents";
 import { SearchedPost } from "../../../interfaces/searchedPosts";
 import { searchPosts } from "../../../lib/axios";
 import SearchResults from "./SearchResults";
-import SearchbarStore from "./SearchbarStore";
+import { SearchbarStore } from "./SearchbarStore";
+
+const TRANSITION_DURATION = 500;
+const FETCH_DEBOUNCE_COOLTIME = 300;
 
 const CloseSearchButton = styled(SearchButton)`
   position: absolute;
@@ -38,7 +41,7 @@ const SearchbarContainer = styled.form<SearchbarStyleProps>`
 
   z-index: 101;
 
-  transition: all linear 0.5s;
+  transition: all linear ${TRANSITION_DURATION}ms;
 
   background-color: ${({ theme }) => theme.bgColor};
 `;
@@ -94,16 +97,21 @@ export default function Searchbar({
   >([]);
   const inputRef = useRef<HTMLInputElement>(null);
 
-  useEffect(() => {
+  const openSearchbarCallback = useCallback(() => {
     if (!isSearchbarOn) {
       return;
     }
     const focusTimeout = setTimeout(
       () => inputRef.current?.focus(),
-      500
+      TRANSITION_DURATION
     );
     return () => clearTimeout(focusTimeout);
-  }, [isSearchbarOn]);
+  }, [isSearchbarOn, inputRef.current]);
+
+  useEffect(openSearchbarCallback, [
+    isSearchbarOn,
+    inputRef.current,
+  ]);
 
   useEffect(() => {
     if (!searchInput) {
@@ -114,7 +122,7 @@ export default function Searchbar({
       const searchedData = await searchPosts(searchInput);
 
       setSearchResults(searchedData);
-    }, 300);
+    }, FETCH_DEBOUNCE_COOLTIME);
 
     return () => clearTimeout(inputTimeout);
   }, [searchInput]);
@@ -131,12 +139,13 @@ export default function Searchbar({
     event.preventDefault();
   };
 
-  const onInputChange = (
-    event: ChangeEvent<HTMLInputElement>
-  ) => {
-    setSearchInput(event.currentTarget.value);
-    setSearchResults([]);
-  };
+  const onInputChange = useCallback(
+    (event: ChangeEvent<HTMLInputElement>) => {
+      setSearchInput(event.currentTarget.value);
+      setSearchResults([]);
+    },
+    []
+  );
 
   return (
     <SearchbarContainer
