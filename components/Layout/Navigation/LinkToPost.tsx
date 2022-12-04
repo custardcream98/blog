@@ -1,16 +1,11 @@
 import Link from "next/link";
-import {
-  KeyboardEvent,
-  useCallback,
-  useContext,
-  useLayoutEffect,
-  useRef,
-} from "react";
+import { useContext, useRef } from "react";
 import styled from "styled-components";
 import {
   SearchbarStore,
   SearchResultStore,
 } from "./SearchbarStore";
+import { cssOutlineOnFocus } from "./styles";
 
 const StyledLink = styled.a`
   display: block;
@@ -29,13 +24,14 @@ const StyledLink = styled.a`
       stroke: ${({ theme }) => theme.accentColor};
     }
   }
+
+  ${cssOutlineOnFocus}
 `;
 
 export default function LinkToPost() {
   const { closeResults } = useContext(SearchbarStore);
   let {
     searchResult: { slug, title },
-    isLast,
   } = useContext(SearchResultStore);
   title =
     typeof title === "string" ? title : title.join("");
@@ -43,45 +39,12 @@ export default function LinkToPost() {
   const id = "link-icon_" + title.replaceAll(" ", "_");
   const linkRef = useRef<HTMLAnchorElement>(null);
 
-  const blurLastItemCallback = useCallback(() => {
-    const searchInputEle = document.querySelector(
-      "#search"
-    ) as HTMLInputElement;
-
-    searchInputEle.focus();
-  }, []);
-
-  const onEnterKeyDownCallback = useCallback(
-    (event: KeyboardEvent) => {
-      if (event.code !== "Enter") {
-        return;
-      }
-      return closeResults;
-    },
-    []
-  );
-
-  useLayoutEffect(() => {
-    if (isLast) {
-      linkRef.current?.addEventListener(
-        "blur",
-        blurLastItemCallback
-      );
-
-      return () =>
-        linkRef.current?.removeEventListener(
-          "blur",
-          blurLastItemCallback
-        );
-    }
-  }, [isLast]);
-
   return (
     <Link href={`/posts/${slug}`} passHref>
       <StyledLink
         ref={linkRef}
+        className="result-link"
         onClick={closeResults}
-        onKeyDown={onEnterKeyDownCallback}
       >
         <svg
           className="link-icon"

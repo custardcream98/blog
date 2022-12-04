@@ -98,7 +98,10 @@ const SearchResultCard = () => {
   }
 
   return (
-    <ResultCardWrapper isLast={isLast}>
+    <ResultCardWrapper
+      isLast={isLast}
+      className="result-card-wrapper"
+    >
       <div className="result-title-wrapper">
         {Title}
         <time className="result-date">{date}</time>

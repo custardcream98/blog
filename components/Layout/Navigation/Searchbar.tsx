@@ -1,6 +1,7 @@
 import {
   ChangeEvent,
   FormEvent,
+  KeyboardEvent,
   useCallback,
   useEffect,
   useRef,
@@ -15,6 +16,7 @@ import { SearchedPost } from "../../../interfaces/searchedPosts";
 import { searchPosts } from "../../../lib/axios";
 import SearchResults from "./SearchResults";
 import { SearchbarStore } from "./SearchbarStore";
+import { cssOutlineOnFocus } from "./styles";
 
 const TRANSITION_DURATION = 500;
 const FETCH_DEBOUNCE_COOLTIME = 300;
@@ -23,6 +25,8 @@ const CloseSearchButton = styled(SearchButton)`
   position: absolute;
   margin-left: 0;
   right: 0;
+
+  ${cssOutlineOnFocus}
 `;
 
 type SearchbarStyleProps = {
@@ -96,6 +100,8 @@ export default function Searchbar({
     SearchedPost[]
   >([]);
   const inputRef = useRef<HTMLInputElement>(null);
+  const buttonCloseSearchbarRef =
+    useRef<HTMLButtonElement>(null);
 
   const openSearchbarCallback = useCallback(() => {
     if (!isSearchbarOn) {
@@ -147,11 +153,59 @@ export default function Searchbar({
     []
   );
 
+  const handleTabArrow = useCallback(
+    (event: KeyboardEvent) => {
+      const { key } = event;
+      if (
+        key !== "Tab" &&
+        key !== "ArrowUp" &&
+        key !== "ArrowDown"
+      ) {
+        return;
+      }
+      event.preventDefault();
+
+      const tabIterables = [
+        inputRef.current,
+        buttonCloseSearchbarRef.current,
+        ...Array.from<HTMLAnchorElement>(
+          document.querySelectorAll(
+            ".result-link"
+          ) as NodeListOf<HTMLAnchorElement>
+        ),
+      ];
+
+      const currentFocusIndex = tabIterables.indexOf(
+        document.activeElement as HTMLInputElement
+      );
+
+      if (currentFocusIndex === -1) {
+        return;
+      }
+
+      if (key === "ArrowUp") {
+        tabIterables[
+          currentFocusIndex === 0
+            ? tabIterables.length - 1
+            : currentFocusIndex - 1
+        ]?.focus();
+      } else {
+        tabIterables[
+          currentFocusIndex === tabIterables.length - 1
+            ? 0
+            : currentFocusIndex + 1
+        ]?.focus();
+      }
+    },
+    [inputRef.current, buttonCloseSearchbarRef.current]
+  );
+
   return (
     <SearchbarContainer
       containerWidth={isSearchbarOn ? 100 : 0}
       onSubmit={onSearchFormSubmit}
       autoComplete="off"
+      onKeyDown={handleTabArrow}
     >
       <label className="sr-only" htmlFor="search">
         검색어 입력란
@@ -163,11 +217,13 @@ export default function Searchbar({
           type="text"
           placeholder="검색어를 입력해주세요."
           required
-          spellCheck={false}
+          spellCheck="false"
+          autoComplete="off"
           onChange={onInputChange}
           value={searchInput}
         />
         <CloseSearchButton
+          ref={buttonCloseSearchbarRef}
           type="button"
           onClick={closeResults}
         >
