@@ -1,14 +1,16 @@
-import React from "react";
+import { Children } from "react";
 import styled from "styled-components";
 import Link from "next/link";
+
 import PostType from "../../interfaces/post";
 import { LinkDecorated } from "../../components/Common/styledComponents";
 import DateSpan from "../Common/DateSpan";
-import CategoryBadge, { BadgeContainer } from "../Common/CategoryBadge";
+import CategoryBadges from "../Common/CategoryBadges";
 
 const Container = styled.li`
   margin-bottom: 1rem;
-  border-bottom: 1px solid ${(props) => props.theme.subTextColor};
+  border-bottom: 1px solid
+    ${(props) => props.theme.subTextColor};
 `;
 
 const LinkDecoratedForCate = styled(LinkDecorated)`
@@ -26,14 +28,18 @@ type Props = {
 const CategoryCard = ({ post }: Props) => (
   <Container>
     <Link href={`/posts/${post.slug}`} passHref>
-      <LinkDecoratedForCate>{post.title}</LinkDecoratedForCate>
+      <LinkDecoratedForCate>
+        {post.title}
+      </LinkDecoratedForCate>
     </Link>
     <DateSpan date={post.date} />
-    <BadgeContainer>
-      {React.Children.toArray(
-        post.category.map((c) => <CategoryBadge category={c} />)
+    <CategoryBadges>
+      {Children.toArray(
+        post.category.map((category) => (
+          <CategoryBadges.Badge category={category} />
+        ))
       )}
-    </BadgeContainer>
+    </CategoryBadges>
   </Container>
 );
 

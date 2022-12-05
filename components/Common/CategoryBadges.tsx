@@ -1,4 +1,4 @@
-import React from "react";
+import React, { ReactNode } from "react";
 import styled from "styled-components";
 import Link from "next/link";
 import categoryTheme from "../../lib/categoryTheme";
@@ -8,7 +8,7 @@ interface IBadge {
   borderColor: string;
 }
 
-const Badge = styled.a<IBadge>`
+const StyledAnchor = styled.a<IBadge>`
   display: block;
 
   margin: 0.3rem;
@@ -27,7 +27,7 @@ const Badge = styled.a<IBadge>`
   }
 `;
 
-export const BadgeContainer = styled.ul`
+const CategoryBadgesWrapper = styled.ul`
   display: flex;
   flex-wrap: wrap;
   margin: 0.7rem -0.3rem;
@@ -37,18 +37,31 @@ type Props = {
   category: string;
 };
 
-const CategoryBadge = ({ category }: Props) => {
+const CategoryBadges = ({
+  children,
+}: {
+  children: ReactNode;
+}) => (
+  <CategoryBadgesWrapper>{children}</CategoryBadgesWrapper>
+);
+
+const Badge = ({ category }: Props) => {
   const { color } = categoryTheme[category];
 
   return (
     <li>
       <Link href={`/categories/${category}`} passHref>
-        <Badge backgroundColor={`${color}4e`} borderColor={color}>
+        <StyledAnchor
+          backgroundColor={`${color}4e`}
+          borderColor={color}
+        >
           {category}
-        </Badge>
+        </StyledAnchor>
       </Link>
     </li>
   );
 };
 
-export default CategoryBadge;
+CategoryBadges.Badge = Badge;
+
+export default CategoryBadges;

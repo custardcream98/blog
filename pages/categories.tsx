@@ -1,8 +1,11 @@
 import React from "react";
 
 import Meta from "../components/Layout/Meta";
-import { Container, Title } from "../components/Common/styledComponents";
-import Badge, { BadgeContainer } from "../components/Common/CategoryBadge";
+import {
+  Container,
+  Title,
+} from "../components/Common/styledComponents";
+import CategoryBadges from "../components/Common/CategoryBadges";
 
 import categoryTheme from "../lib/categoryTheme";
 import check404 from "../lib/check404";
@@ -15,9 +18,13 @@ const Categories = () => {
       <Meta title="Categories" />
       <Container>
         <Title>{`<Categories />`}</Title>
-        <BadgeContainer>
-          {React.Children.toArray(Object.keys(categoryTheme).map((c) => <Badge category={c} />))}
-        </BadgeContainer>
+        <CategoryBadges>
+          {React.Children.toArray(
+            Object.keys(categoryTheme).map((category) => (
+              <CategoryBadges.Badge category={category} />
+            ))
+          )}
+        </CategoryBadges>
       </Container>
     </>
   );

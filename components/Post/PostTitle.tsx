@@ -1,10 +1,8 @@
-import React, { useState } from "react";
+import React from "react";
 import Image from "next/image";
 import Link from "next/link";
-import styled, { useTheme } from "styled-components";
-import CategoryBadge, {
-  BadgeContainer,
-} from "../Common/CategoryBadge";
+import styled from "styled-components";
+import CategoryBadges from "../Common/CategoryBadges";
 import DateSpan from "../Common/DateSpan";
 import ViewsLikesCounter from "./ViewsLikesCounter";
 import { LinkDecorated } from "../Common/styledComponents";
@@ -62,10 +60,6 @@ const PostTitle = ({
   date,
   series,
 }: Props) => {
-  const theme = useTheme();
-  const [isThumbnailLoaded, setIsThumbnailLoaded] =
-    useState(false);
-
   return (
     <>
       <Container>
@@ -81,13 +75,15 @@ const PostTitle = ({
         <DateSpanforTitle date={date} />
         <BadgeViewsLikesCounterContainer>
           {category && (
-            <BadgeContainer>
+            <CategoryBadges>
               {React.Children.toArray(
                 category.map((keyword) => (
-                  <CategoryBadge category={keyword} />
+                  <CategoryBadges.Badge
+                    category={keyword}
+                  />
                 ))
               )}
-            </BadgeContainer>
+            </CategoryBadges>
           )}
           {process.env.NODE_ENV === "production" && (
             <ViewsLikesCounter key={title} title={title} />
