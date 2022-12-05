@@ -1,9 +1,10 @@
+import { Children } from "react";
 import styled from "styled-components";
 
 import Meta from "../../components/Layout/Meta";
 import { Container } from "../../components/Common/styledComponents";
 import PostTitle from "../../components/Post/PostTitle";
-import Comments from "../../components/Comment/Comments";
+import Comments from "../../components/Comments";
 import PrevNextPostBtn from "../../components/Post/PrevNextPostBtn";
 
 import {
@@ -18,6 +19,7 @@ import check404 from "../../lib/check404";
 
 import type PostType from "../../interfaces/post";
 import MarkdownBody from "../../components/Common/MarkdownBody";
+import useComments from "../../components/Comments/useComments";
 
 const PostSection = styled.section`
   width: 100%;
@@ -33,6 +35,8 @@ type Props = {
 
 export default function Post({ post }: Props) {
   check404();
+  const titleForComment = post.title.replaceAll("/", ",");
+  const comments = useComments({ title: titleForComment });
 
   return (
     <>
@@ -54,7 +58,22 @@ export default function Post({ post }: Props) {
           <MarkdownBody content={post.content} />
         </PostSection>
         <PrevNextPostBtn post={post} />
-        <Comments title={post.title.replaceAll("/", ",")} />
+        <Comments>
+          <Comments.Title>
+            Comments({comments.length})
+          </Comments.Title>
+          <Comments.Form title={titleForComment} />
+          <Comments.List>
+            {Children.toArray(
+              comments.map((comment) => (
+                <Comments.Item
+                  title={titleForComment}
+                  comment={comment}
+                />
+              ))
+            )}
+          </Comments.List>
+        </Comments>
       </PostContainer>
     </>
   );

@@ -4,7 +4,7 @@ import styled, { useTheme } from "styled-components";
 import { addComment } from "../../lib/firebaseSetup/firebaseApps";
 import { postMail } from "../../lib/axios";
 
-const Form = styled.form`
+const StyledForm = styled.form`
   width: 100%;
   margin-bottom: 1rem;
 `;
@@ -78,7 +78,7 @@ type Props = {
   title: string;
 };
 
-const CommentForm = ({ title }: Props) => {
+const Form = ({ title }: Props) => {
   const inpUsernameRef = useRef<HTMLInputElement>(null);
   const inpPasswordRef = useRef<HTMLInputElement>(null);
   const textAreaCommentRef =
@@ -125,7 +125,7 @@ const CommentForm = ({ title }: Props) => {
   };
 
   return (
-    <Form onSubmit={onSubmit}>
+    <StyledForm onSubmit={onSubmit}>
       <NamePasswordContainer>
         <label className="sr-only" htmlFor="username">
           닉네임
@@ -136,6 +136,7 @@ const CommentForm = ({ title }: Props) => {
           name="username"
           placeholder="닉네임"
           id="username"
+          autoComplete="off"
           required
         />
         <label className="sr-only" htmlFor="password">
@@ -148,6 +149,7 @@ const CommentForm = ({ title }: Props) => {
           placeholder="비밀번호"
           id="password"
           required
+          autoComplete="off"
           minLength={4}
         />
       </NamePasswordContainer>
@@ -169,8 +171,8 @@ const CommentForm = ({ title }: Props) => {
           <SubmitBtn>입력</SubmitBtn>
         )}
       </SubmitContainer>
-    </Form>
+    </StyledForm>
   );
 };
 
-export default memo(CommentForm);
+export default memo(Form);
