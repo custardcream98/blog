@@ -52,6 +52,8 @@ _1인, `TypeScript`, `Next.js`, `Express.js`, `styled-components`_
 
 `Next.js` 프레임워크를 사용해 개발 중이고, Vercel로 deploy 됐어요. 블로그에 간단하게 댓글 하나 남길 때에도 로그인을 하게 만들고 싶지 않아 `Firebase`를 이용해 댓글 기능을 직접 구현했어요. 댓글이 달리면 제 메일로 알람도 오게(`nodemailer`) 만들었고, Open Graph Image / Thumbnail을 자동 생성하는 간단한 Express 서버도 개발해 사용중입니다.
 
+최근에는 블로그 내에서 포스트 검색 기능을 개발하기도 했습니다. ([개발 기록 1](https://custardcream.vercel.app/posts/%EB%B8%94%EB%A1%9C%EA%B7%B8%EC%97%90%20%EA%B2%80%EC%83%89%20%EA%B8%B0%EB%8A%A5%EC%9D%84%20%EA%B5%AC%ED%98%84%ED%95%B4%EB%B3%B4%EC%9E%90%201), [개발 기록 2](https://custardcream.vercel.app/posts/%EB%B8%94%EB%A1%9C%EA%B7%B8%EC%97%90%20%EA%B2%80%EC%83%89%20%EA%B8%B0%EB%8A%A5%EC%9D%84%20%EA%B5%AC%ED%98%84%ED%95%B4%EB%B3%B4%EC%9E%90%202)) Debouncing / Throttling 기법을 비교해보고 Debouncing 기법을 활용, API Call을 최소화했습니다.
+
 ## 금연 타이머 Smoquit #노담이면\_좋겠어
 
 _1인, `React`, `Redux Toolkit`, `Firebase`_
