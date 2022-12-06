@@ -18,13 +18,18 @@ const Container = styled.aside<StyleProps>`
   }
   & div:nth-child(1) {
     border: ${(props) =>
-      !props.isNextOnly ? `1px solid ${props.theme.textColor}` : "none"};
+      !props.isNextOnly
+        ? `1px solid ${props.theme.textColor}`
+        : "none"};
     border-radius: 4px 0 0 4px;
   }
   & div:last-child {
     border: ${(props) =>
-      !props.isPrevOnly ? `1px solid ${props.theme.textColor}` : "none"};
-    border-left: ${(props) => (props.isNextOnly ? "" : "none")};
+      !props.isPrevOnly
+        ? `1px solid ${props.theme.textColor}`
+        : "none"};
+    border-left: ${(props) =>
+      props.isNextOnly ? "" : "none"};
     border-radius: 0 4px 4px 0;
     text-align: end;
   }
@@ -38,20 +43,25 @@ const Container = styled.aside<StyleProps>`
     }
     & div:nth-child(1) {
       border: ${(props) =>
-        !props.isNextOnly ? `1px solid ${props.theme.textColor}` : "none"};
+        !props.isNextOnly
+          ? `1px solid ${props.theme.textColor}`
+          : "none"};
       border-radius: 4px 4px 0 0;
     }
     & div:last-child {
       border: ${(props) =>
-        !props.isPrevOnly ? `1px solid ${props.theme.textColor}` : "none"};
-      border-top: ${(props) => (props.isNextOnly ? "" : "none")};
+        !props.isPrevOnly
+          ? `1px solid ${props.theme.textColor}`
+          : "none"};
+      border-top: ${(props) =>
+        props.isNextOnly ? "" : "none"};
       border-radius: 0 0 4px 4px;
       text-align: end;
     }
   }
 `;
 
-const Btn = styled.div`
+const LinkWrapper = styled.div`
   display: flex;
   flex-direction: column;
   padding: 1rem;
@@ -70,9 +80,8 @@ const Btn = styled.div`
   &:hover {
     cursor: pointer;
     color: ${(props) => props.theme.accentColor};
-    background-color: ${(props) => props.theme.subTextColor};
-    -webkit-transition: all 150ms linear;
-    -ms-transition: all 150ms linear;
+    background-color: ${(props) =>
+      props.theme.subTextColor};
     transition: all 150ms linear;
   }
   @media (max-width: 800px) {
@@ -93,25 +102,36 @@ type Props = {
   post: PostType;
 };
 
-const PrevNextPostBtn = ({ post }: Props) => (
-  <Container isPrevOnly={!post.nextTitle} isNextOnly={!post.prevTitle}>
+const PrevNextPost = ({ post }: Props) => (
+  <Container
+    isPrevOnly={!post.nextTitle}
+    isNextOnly={!post.prevTitle}
+  >
     {post.prevTitle ? (
-      <Btn>
-        <Link href={`../posts/${post.prevSlug}`}>← 이전글</Link>
-        <Link href={`../posts/${post.prevSlug}`}>{post.prevTitle}</Link>
-      </Btn>
+      <LinkWrapper>
+        <Link href={`../posts/${post.prevSlug}`}>
+          ← 이전글
+        </Link>
+        <Link href={`../posts/${post.prevSlug}`}>
+          {post.prevTitle}
+        </Link>
+      </LinkWrapper>
     ) : (
       <div></div>
     )}
     {post.nextTitle ? (
-      <Btn>
-        <Link href={`../posts/${post.nextSlug}`}>다음글 →</Link>
-        <Link href={`../posts/${post.nextSlug}`}>{post.nextTitle}</Link>
-      </Btn>
+      <LinkWrapper>
+        <Link href={`../posts/${post.nextSlug}`}>
+          다음글 →
+        </Link>
+        <Link href={`../posts/${post.nextSlug}`}>
+          {post.nextTitle}
+        </Link>
+      </LinkWrapper>
     ) : (
       <div></div>
     )}
   </Container>
 );
 
-export default PrevNextPostBtn;
+export default PrevNextPost;

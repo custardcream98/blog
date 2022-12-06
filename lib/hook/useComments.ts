@@ -1,24 +1,20 @@
 import { useLayoutEffect, useState } from "react";
 import ICommentData from "../../interfaces/comment";
-import { getComments } from "../../lib/firebaseSetup/firebaseApps";
+import { getComments } from "../firebaseSetup/firebaseApps";
 
-type Props = {
-  title: string;
-};
-
-export default ({ title }: Props) => {
+export default (postTitle: string) => {
   const [comments, setComments] = useState<ICommentData[]>(
     []
   );
 
   useLayoutEffect(() => {
     const unSubscribeComments = getComments(
-      title,
+      postTitle,
       setComments
     );
 
     return () => unSubscribeComments();
-  }, [title]);
+  }, [postTitle]);
 
   return comments;
 };

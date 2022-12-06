@@ -14,9 +14,15 @@ import {
   increment,
 } from "firebase/firestore";
 import ICommentData from "../../interfaces/comment";
-import { getViewedTimeOnLocal, setViewedTimeOnLocal } from "../localStorage";
+import {
+  getViewedTimeOnLocal,
+  setViewedTimeOnLocal,
+} from "../localStorage";
 import { fireStore } from "./";
-import { CollectionNames, DocumentKeys } from "./collectionNames";
+import {
+  CollectionNames,
+  DocumentKeys,
+} from "./collectionNames";
 
 interface IAddCommentProps {
   title: string;
@@ -38,18 +44,27 @@ const UTF8_ENCODER = new TextEncoder();
 
 function percentEncode(str: string) {
   return Array.from(UTF8_ENCODER.encode(str))
-    .map((i) => "%" + i.toString(16).toUpperCase().padStart(2, "0"))
+    .map(
+      (i) =>
+        "%" + i.toString(16).toUpperCase().padStart(2, "0")
+    )
     .join("");
 }
 
 const getPostDocRef = (title: string) =>
-  doc(fireStore, CollectionNames.COLLECTION_POSTS, percentEncode(title));
+  doc(
+    fireStore,
+    CollectionNames.COLLECTION_POSTS,
+    percentEncode(title)
+  );
 
 export const createPostDoc = async (title: string) => {
   const postDocRef = getPostDocRef(title);
 
   try {
-    const _ = await (await getDoc(postDocRef)).data()![DocumentKeys.KEY_VIEWS];
+    const _ = await (await getDoc(postDocRef)).data()![
+      DocumentKeys.KEY_VIEWS
+    ];
   } catch (e) {
     if (e instanceof FirebaseError) {
       if (e.code === "not-found") {
@@ -66,19 +81,34 @@ export const createPostDoc = async (title: string) => {
 */
 
 const getCommentCollectionRef = (title: string) =>
-  collection(getPostDocRef(title), CollectionNames.COLLECTION_COMMENTS);
+  collection(
+    getPostDocRef(title),
+    CollectionNames.COLLECTION_COMMENTS
+  );
 
-export const getCommentDocRef = ({ title, commentId }: ICommentDocRefProps) =>
+export const getCommentDocRef = ({
+  title,
+  commentId,
+}: ICommentDocRefProps) =>
   doc(getCommentCollectionRef(title), commentId);
 
-export const deleteComment = async (docRef: DocumentReference<DocumentData>) =>
-  await deleteDoc(docRef);
+export const deleteComment = async (
+  docRef: DocumentReference<DocumentData>
+) => await deleteDoc(docRef);
 
-export const updateComment = async (docRef: DocumentReference<DocumentData>, commentText: string) =>
-  await updateDoc(docRef, { comment: commentText });
+export const updateComment = async (
+  docRef: DocumentReference<DocumentData>,
+  commentText: string
+) => await updateDoc(docRef, { comment: commentText });
 
-export const addComment = async ({ title, password, comment, username }: IAddCommentProps) => {
-  const commentCollectionRef = getCommentCollectionRef(title);
+export const addComment = async ({
+  title,
+  password,
+  comment,
+  username,
+}: IAddCommentProps) => {
+  const commentCollectionRef =
+    getCommentCollectionRef(title);
   await addDoc(commentCollectionRef, {
     createdAt: Date.now(),
     password,
@@ -89,17 +119,32 @@ export const addComment = async ({ title, password, comment, username }: IAddCom
 
 export const getComments = (
   title: string,
-  setComments: React.Dispatch<React.SetStateAction<ICommentData[]>>
+  setComments: React.Dispatch<
+    React.SetStateAction<ICommentData[]>
+  >
 ) => {
-  const commentCollectionRef = getCommentCollectionRef(title);
+  const commentCollectionRef =
+    getCommentCollectionRef(title);
 
-  const unSubscribe = onSnapshot(commentCollectionRef, (snapshot) => {
-    const commentsArr: ICommentData[] = [];
-    snapshot.docs
-      .sort((post1, post2) => (post1.data().createdAt > post2.data().createdAt ? -1 : 1))
-      .map((doc) => commentsArr.push({ ...(doc.data() as ICommentData), id: doc.id }));
-    setComments((_) => [...commentsArr]);
-  });
+  const unSubscribe = onSnapshot(
+    commentCollectionRef,
+    (snapshot) => {
+      const commentsArr: ICommentData[] = [];
+      snapshot.docs
+        .sort((post1, post2) =>
+          post1.data().createdAt > post2.data().createdAt
+            ? -1
+            : 1
+        )
+        .map((doc) =>
+          commentsArr.push({
+            ...(doc.data() as ICommentData),
+            id: doc.id,
+          })
+        );
+      setComments((_) => [...commentsArr]);
+    }
+  );
 
   return unSubscribe;
 };
@@ -113,17 +158,20 @@ export const getViewCount = (
   setViewCount: React.Dispatch<React.SetStateAction<number>>
 ) => {
   const postDocRef = getPostDocRef(title);
-  const isViewAble = Date.now() - getViewedTimeOnLocal(title) > 1200000;
+  const isViewAble =
+    Date.now() - getViewedTimeOnLocal(title) > 1200000;
 
   if (isViewAble) {
     const time = Date.now();
-    updateDoc(postDocRef, { views: arrayUnion(time) }).then((_) =>
-      setViewedTimeOnLocal(title, time)
+    updateDoc(postDocRef, { views: arrayUnion(time) }).then(
+      (_) => setViewedTimeOnLocal(title, time)
     );
   }
 
   const unSubscribe = onSnapshot(postDocRef, (post) =>
-    setViewCount(post.data()![DocumentKeys.KEY_VIEWS].length)
+    setViewCount(
+      post.data()![DocumentKeys.KEY_VIEWS].length
+    )
   );
 
   return unSubscribe;

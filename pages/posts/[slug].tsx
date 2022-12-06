@@ -5,7 +5,7 @@ import Meta from "../../components/Layout/Meta";
 import { Container } from "../../components/Common/styledComponents";
 import PostTitle from "../../components/Post/PostTitle";
 import Comments from "../../components/Comments";
-import PrevNextPostBtn from "../../components/Post/PrevNextPostBtn";
+import PrevNextPost from "../../components/Post/PrevNextPost";
 
 import {
   getPostBySlug,
@@ -19,7 +19,7 @@ import check404 from "../../lib/check404";
 
 import type PostType from "../../interfaces/post";
 import MarkdownBody from "../../components/Common/MarkdownBody";
-import useComments from "../../components/Comments/useComments";
+import useComments from "../../lib/hook/useComments";
 
 const PostSection = styled.section`
   width: 100%;
@@ -36,7 +36,7 @@ type Props = {
 export default function Post({ post }: Props) {
   check404();
   const titleForComment = post.title.replaceAll("/", ",");
-  const comments = useComments({ title: titleForComment });
+  const comments = useComments(titleForComment);
 
   return (
     <>
@@ -57,7 +57,7 @@ export default function Post({ post }: Props) {
           />
           <MarkdownBody content={post.content} />
         </PostSection>
-        <PrevNextPostBtn post={post} />
+        <PrevNextPost post={post} />
         <Comments>
           <Comments.Title>
             Comments({comments.length})

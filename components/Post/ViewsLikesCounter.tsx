@@ -1,15 +1,9 @@
-import { useEffect, useState } from "react";
 import styled, { useTheme } from "styled-components";
 import { HiEye } from "react-icons/hi";
 import { BsHeart, BsHeartFill } from "react-icons/bs";
-import {
-  getLikeCount,
-  getViewCount,
-  setLikeCountDown,
-  setLikeCountUp,
-} from "../../lib/firebaseSetup/firebaseApps";
-import { toggleIsLikedOnLocal, getIsLikedOnLocal } from "../../lib/localStorage";
 import { IconContext } from "react-icons";
+import useViewCount from "../../lib/hook/useViewCount";
+import useLikeCount from "../../lib/hook/useLikeCount";
 
 const HEART_COLOR = "#c33434";
 
@@ -36,7 +30,8 @@ const LikeBtn = styled.button<LikeValueProps>`
   align-items: center;
   background-color: transparent;
   border: none;
-  color: ${(props) => (props.isLiked ? HEART_COLOR : props.theme.subTextColor)};
+  color: ${(props) =>
+    props.isLiked ? HEART_COLOR : props.theme.subTextColor};
   cursor: pointer;
 `;
 
@@ -52,7 +47,8 @@ const CounterValue = styled(Value)`
 `;
 
 const LikeValue = styled(Value)<LikeValueProps>`
-  color: ${(props) => (props.isLiked ? HEART_COLOR : props.theme.subTextColor)};
+  color: ${(props) =>
+    props.isLiked ? HEART_COLOR : props.theme.subTextColor};
 `;
 
 type Props = {
@@ -60,37 +56,10 @@ type Props = {
 };
 
 const ViewsLikesCounter = ({ title }: Props) => {
-  const [viewCount, setViewCount] = useState(0);
-  const [likeCount, setLikeCount] = useState(0);
-  const [isLiked, setIsLiked] = useState(false);
+  const viewCount = useViewCount(title);
+  const { likeCount, isLiked, onLikeClick } =
+    useLikeCount(title);
   const theme = useTheme();
-
-  useEffect(() => {
-    setIsLiked((_) => getIsLikedOnLocal(title));
-
-    const unSubscribeViewCount = getViewCount(title, setViewCount);
-    const unSubscribeLikeCount = getLikeCount(title, setLikeCount);
-
-    return () => {
-      unSubscribeViewCount();
-      unSubscribeLikeCount();
-    };
-  }, [title]);
-
-  const toggleIsLiked = () => setIsLiked((prev) => !prev);
-
-  const onLikeClick = async () => {
-    toggleIsLikedOnLocal(title);
-    toggleIsLiked();
-    switch (isLiked) {
-      case true:
-        await setLikeCountDown(title);
-        break;
-      case false:
-        await setLikeCountUp(title);
-        break;
-    }
-  };
 
   return (
     <Container>
@@ -102,10 +71,17 @@ const ViewsLikesCounter = ({ title }: Props) => {
         <IconContext.Provider
           value={{
             size: "1em",
-            style: { verticalAlign: "middle", strokeWidth: "0.7px" },
+            style: {
+              verticalAlign: "middle",
+              strokeWidth: "0.7px",
+            },
           }}
         >
-          {isLiked ? <BsHeartFill color={HEART_COLOR} /> : <BsHeart color={theme.subTextColor} />}
+          {isLiked ? (
+            <BsHeartFill color={HEART_COLOR} />
+          ) : (
+            <BsHeart color={theme.subTextColor} />
+          )}
         </IconContext.Provider>
         <LikeValue isLiked={isLiked}>{likeCount}</LikeValue>
       </LikeBtn>
