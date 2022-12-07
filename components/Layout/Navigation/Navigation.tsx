@@ -1,4 +1,10 @@
-import React, { useEffect, useRef, useState } from "react";
+import React, {
+  useCallback,
+  useEffect,
+  useMemo,
+  useRef,
+  useState,
+} from "react";
 import Link from "next/link";
 import styled, { useTheme } from "styled-components";
 import { useRecoilState } from "recoil";
@@ -16,7 +22,7 @@ import BlogIcon from "../../Common/BlogIcon";
 
 import { isDarkAtom } from "../../../lib/atoms";
 import { useWindowSize } from "../../../lib/hook/useWindowSize";
-import Searchbar from "./Searchbar";
+import Searchbar from "../../Searchbar";
 import { toggleIsDarkmodeActivatedOnLocal } from "../../../lib/localStorage";
 
 const Header = styled.header`
@@ -167,20 +173,21 @@ const Navigation = () => {
   const navRef = useRef<HTMLDivElement>(null);
 
   let lastScrollTop = 0;
-  const onScroll = () => {
+  const onScroll = useCallback(() => {
     const currentScrollTop =
       document.documentElement.scrollTop;
 
-    if (windowSize.width! <= 400) {
-      navRef.current!.style.top =
-        lastScrollTop < currentScrollTop ? "-51px" : "-1px";
-    }
+    navRef.current!.style.top =
+      lastScrollTop < currentScrollTop ? "-51px" : "-1px";
 
     lastScrollTop = currentScrollTop;
-  };
+  }, [navRef]);
 
   useEffect(() => {
-    if (/post/g.test(router.route)) {
+    if (
+      /post/g.test(router.route) &&
+      windowSize.width! <= 400
+    ) {
       navRef.current!.style.top = "-1px";
       window.addEventListener("touchmove", onScroll);
       return () =>
@@ -188,74 +195,69 @@ const Navigation = () => {
     }
   }, [router, windowSize]);
 
+  const nav = useMemo(
+    () => (
+      <Nav>
+        <Link href="/" passHref>
+          <a>
+            <LogoTitle>
+              <BlogIcon color={theme.textColor} size={1} />
+              <Title
+                className={
+                  windowSize.width! <= 400 ? "sr-only" : ""
+                }
+              >
+                Custardcream
+              </Title>
+              <span className="sr-only">
+                : FE 개발자 박시우의 기술 블로그
+              </span>
+            </LogoTitle>
+          </a>
+        </Link>
+        <NavItemWrapper>
+          <NavMenu>
+            <NavItem href="/#Posts_Title" content="Posts" />
+            <NavItem
+              href="/categories"
+              content="Categories"
+            />
+            <NavItem href="/series" content="Series" />
+            <NavItem href="/about" content="About" />
+          </NavMenu>
+          <SearchButton
+            type="button"
+            onClick={() => setIsSearchbarOn(true)}
+          >
+            <span className="sr-only">검색</span>
+            <IconContext.Provider value={{ size: "100%" }}>
+              <HiSearch color={theme.textColor} />
+            </IconContext.Provider>
+          </SearchButton>
+          <article>
+            <DarkmodeSwitch onClick={toggleSwitch}>
+              <span className="sr-only">
+                다크모드 스위치
+              </span>
+              <IconContext.Provider value={{ size: "90%" }}>
+                {isDark ? (
+                  <BsFillMoonFill color="#e5c704" />
+                ) : (
+                  <ImSun color="#e5c704" />
+                )}
+              </IconContext.Provider>
+            </DarkmodeSwitch>
+          </article>
+        </NavItemWrapper>
+      </Nav>
+    ),
+    [theme, windowSize, isDark]
+  );
+
   return (
     <Header>
       <Container ref={navRef} style={{ top: "-1px" }}>
-        <Nav>
-          <Link href="/" passHref>
-            <a>
-              <LogoTitle>
-                <BlogIcon
-                  color={theme.textColor}
-                  size={1}
-                />
-                <Title
-                  className={
-                    windowSize.width! <= 400
-                      ? "sr-only"
-                      : ""
-                  }
-                >
-                  Custardcream
-                </Title>
-                <span className="sr-only">
-                  : FE 개발자 박시우의 기술 블로그
-                </span>
-              </LogoTitle>
-            </a>
-          </Link>
-          <NavItemWrapper>
-            <NavMenu>
-              <NavItem
-                href="/#Posts_Title"
-                content="Posts"
-              />
-              <NavItem
-                href="/categories"
-                content="Categories"
-              />
-              <NavItem href="/series" content="Series" />
-              <NavItem href="/about" content="About" />
-            </NavMenu>
-            <SearchButton
-              type="button"
-              onClick={() => setIsSearchbarOn(true)}
-            >
-              <span className="sr-only">검색</span>
-              <IconContext.Provider
-                value={{ size: "100%" }}
-              >
-                <HiSearch color={theme.textColor} />
-              </IconContext.Provider>
-            </SearchButton>
-            <article>
-              <DarkmodeSwitch onClick={toggleSwitch}>
-                <span className="sr-only">
-                  다크모드 스위치
-                </span>
-                <IconContext.Provider
-                  value={{ size: "90%" }}
-                >
-                  {isDark ? (
-                    <BsFillMoonFill color="#e5c704" />
-                  ) : (
-                    <ImSun color="#e5c704" />
-                  )}
-                </IconContext.Provider>
-              </DarkmodeSwitch>
-            </article>
-          </NavItemWrapper>
-        </Nav>
+        {nav}
         <Searchbar
           isSearchbarOn={isSearchbarOn}
           onSearchbarClose={() => setIsSearchbarOn(false)}

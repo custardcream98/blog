@@ -93,7 +93,6 @@ const findFuzzyPostData = (
         postData[option].slice(index + match[0].length),
       ],
       matchLength: match[0].length,
-      matchedOne: option,
     });
   }
 

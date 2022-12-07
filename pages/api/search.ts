@@ -26,7 +26,7 @@ export default async function searchAPI(
   let slicedResults: SearchedPost[] = [];
 
   results.forEach((result) => {
-    if (result.matchedOne === "title") {
+    if (typeof result.title === "object") {
       slicedResults.push({
         ...result,
         date: koDtf.format(new Date(result.date)),

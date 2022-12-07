@@ -1,11 +1,6 @@
 import Link from "next/link";
-import { useContext, useRef } from "react";
 import styled from "styled-components";
-import {
-  SearchbarStore,
-  SearchResultStore,
-} from "./SearchbarStore";
-import { cssOutlineOnFocus } from "./styles";
+import { cssOutlineOnFocus } from "../Layout/Navigation/styles";
 
 const StyledLink = styled.a`
   display: block;
@@ -28,21 +23,25 @@ const StyledLink = styled.a`
   ${cssOutlineOnFocus}
 `;
 
-export default function LinkToPost() {
-  const { closeResults } = useContext(SearchbarStore);
-  let {
-    searchResult: { slug, title },
-  } = useContext(SearchResultStore);
+type Props = {
+  slug: string;
+  title: string | string[];
+  closeResults: () => void;
+};
+
+export default function LinkToPost({
+  slug,
+  title,
+  closeResults,
+}: Props) {
   title =
     typeof title === "string" ? title : title.join("");
 
   const id = "link-icon_" + title.replaceAll(" ", "_");
-  const linkRef = useRef<HTMLAnchorElement>(null);
 
   return (
     <Link href={`/posts/${slug}`} passHref>
       <StyledLink
-        ref={linkRef}
         className="result-link"
         onClick={closeResults}
       >

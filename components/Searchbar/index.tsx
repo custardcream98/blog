@@ -1,5 +1,6 @@
 import {
   ChangeEvent,
+  Children,
   FormEvent,
   KeyboardEvent,
   useCallback,
@@ -7,27 +8,13 @@ import {
   useRef,
   useState,
 } from "react";
-import styled, { useTheme } from "styled-components";
-import { RiCloseFill } from "react-icons/ri";
-import { IconContext } from "react-icons";
+import styled from "styled-components";
 
-import { SearchButton } from "../../Common/styledComponents";
-import { SearchedPost } from "../../../interfaces/searchedPosts";
-import { searchPosts } from "../../../lib/axios";
 import SearchResults from "./SearchResults";
-import { SearchbarStore } from "./SearchbarStore";
-import { cssOutlineOnFocus } from "./styles";
+import useSearchResults from "../../lib/hook/useSearchResults";
+import SearchbarCloseButton from "./SearchbarCloseButton";
 
 const TRANSITION_DURATION = 500;
-const FETCH_DEBOUNCE_COOLTIME = 300;
-
-const CloseSearchButton = styled(SearchButton)`
-  position: absolute;
-  margin-left: 0;
-  right: 0;
-
-  ${cssOutlineOnFocus}
-`;
 
 type SearchbarStyleProps = {
   containerWidth: number;
@@ -94,12 +81,12 @@ export default function Searchbar({
   isSearchbarOn,
   onSearchbarClose,
 }: Props) {
-  const theme = useTheme();
   const [searchInput, setSearchInput] = useState("");
-  const [searchResults, setSearchResults] = useState<
-    SearchedPost[]
-  >([]);
+  const { searchResults, clearSearchedResults } =
+    useSearchResults(searchInput);
   const inputRef = useRef<HTMLInputElement>(null);
+  const searchbarContainerRef =
+    useRef<HTMLFormElement>(null);
   const buttonCloseSearchbarRef =
     useRef<HTMLButtonElement>(null);
 
@@ -119,23 +106,9 @@ export default function Searchbar({
     inputRef.current,
   ]);
 
-  useEffect(() => {
-    if (!searchInput) {
-      return;
-    }
-
-    const inputTimeout = setTimeout(async () => {
-      const searchedData = await searchPosts(searchInput);
-
-      setSearchResults(searchedData);
-    }, FETCH_DEBOUNCE_COOLTIME);
-
-    return () => clearTimeout(inputTimeout);
-  }, [searchInput]);
-
   const closeResults = useCallback(() => {
     setSearchInput("");
-    setSearchResults([]);
+    clearSearchedResults();
     onSearchbarClose();
   }, []);
 
@@ -147,8 +120,8 @@ export default function Searchbar({
 
   const onInputChange = useCallback(
     (event: ChangeEvent<HTMLInputElement>) => {
+      clearSearchedResults();
       setSearchInput(event.currentTarget.value);
-      setSearchResults([]);
     },
     []
   );
@@ -169,7 +142,7 @@ export default function Searchbar({
         inputRef.current,
         buttonCloseSearchbarRef.current,
         ...Array.from<HTMLAnchorElement>(
-          document.querySelectorAll(
+          searchbarContainerRef.current?.querySelectorAll(
             ".result-link"
           ) as NodeListOf<HTMLAnchorElement>
         ),
@@ -202,10 +175,11 @@ export default function Searchbar({
 
   return (
     <SearchbarContainer
-      containerWidth={isSearchbarOn ? 100 : 0}
-      onSubmit={onSearchFormSubmit}
+      ref={searchbarContainerRef}
       autoComplete="off"
+      onSubmit={onSearchFormSubmit}
       onKeyDown={handleTabArrow}
+      containerWidth={isSearchbarOn ? 100 : 0}
     >
       <label className="sr-only" htmlFor="search">
         검색어 입력란
@@ -222,31 +196,43 @@ export default function Searchbar({
           onChange={onInputChange}
           value={searchInput}
         />
-        <CloseSearchButton
+        <SearchbarCloseButton
           ref={buttonCloseSearchbarRef}
-          type="button"
           onClick={closeResults}
-        >
-          <span className="sr-only">검색바 닫기</span>
-          <IconContext.Provider
-            value={{
-              size: isSearchbarOn ? "100%" : "0%",
-            }}
-          >
-            <RiCloseFill color={theme.textColor} />
-          </IconContext.Provider>
-        </CloseSearchButton>
-        {searchResults && (
-          <SearchbarStore.Provider
-            value={{
-              closeResults,
-            }}
-          >
-            <SearchResults
-              visible={isSearchbarOn}
-              searchResults={searchResults}
-            />
-          </SearchbarStore.Provider>
+          hidden={!isSearchbarOn}
+        />
+        {searchResults.length !== 0 && (
+          <SearchResults>
+            {Children.toArray(
+              searchResults.map((data, i) => (
+                <SearchResults.Item
+                  title={
+                    <SearchResults.ItemTitle>
+                      {data.titleNode}
+                    </SearchResults.ItemTitle>
+                  }
+                  content={
+                    <SearchResults.ItemContent>
+                      {data.contentNode}
+                    </SearchResults.ItemContent>
+                  }
+                  date={
+                    <SearchResults.ItemDate>
+                      {data.date}
+                    </SearchResults.ItemDate>
+                  }
+                  link={
+                    <SearchResults.ItemLink
+                      slug={data.slug}
+                      title={data.title}
+                      closeResults={closeResults}
+                    />
+                  }
+                  isLast={i === searchResults.length - 1}
+                />
+              ))
+            )}
+          </SearchResults>
         )}
       </SearchbarWrapper>
     </SearchbarContainer>

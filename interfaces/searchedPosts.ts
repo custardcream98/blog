@@ -1,8 +1,19 @@
-export interface SearchedPost {
+import { ReactNode } from "react";
+
+interface SearchedPostData {
   slug: string;
-  title: string | string[];
   date: string;
+}
+
+export interface SearchedPost extends SearchedPostData {
+  title: string | string[];
   content: string | string[];
   matchLength: number;
-  matchedOne: "title" | "content";
+}
+
+export interface SearchedPostCardData
+  extends SearchedPostData {
+  title: string;
+  titleNode: ReactNode;
+  contentNode: ReactNode;
 }
