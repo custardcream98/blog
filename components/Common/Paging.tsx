@@ -4,24 +4,24 @@ import {
   MdOutlineKeyboardArrowRight,
 } from "react-icons/md";
 import React from "react";
+import Link from "next/link";
 
-const Container = styled.div`
+const Container = styled.nav`
   position: relative;
   display: flex;
   justify-content: center;
-  align-items: center;
 `;
 
-const Btn = styled.button`
-  display: flex;
-  justify-content: center;
-  align-items: center;
-
-  background-color: transparent;
-  border: none;
+const StyledLink = styled.a`
+  display: inline-block;
+  margin: 0 7px;
+  line-height: 24px;
   &:hover {
     text-decoration: underline;
     cursor: pointer;
+  }
+  @media (max-width: 600px) {
+    font-size: 0.9rem;
   }
 `;
 
@@ -30,95 +30,81 @@ const PagenumList = styled.ol`
   align-items: center;
 `;
 
-const LeftArrow = styled(Btn)`
+const LeftArrow = styled(StyledLink)`
   position: absolute;
   left: -30px;
 `;
 
-const RightArrow = styled(Btn)`
+const RightArrow = styled(StyledLink)`
   position: absolute;
   right: -30px;
 `;
 
-const Pagenum = styled(Btn)`
+const Pagenum = styled(StyledLink)`
   color: ${(props) => props.theme.textColor};
   font-weight: 300;
-  font-size: 1rem;
 `;
 
 const Pagenum__selected = styled(Pagenum)`
-  font-weight: 900;
-  scale: 1.5;
+  font-weight: 500;
+  scale: 1.4;
 `;
 
 type Props = {
   pageScale: number;
   currentPage: number;
-  onPageChange: (to: number) => void;
 };
 
-const Paging = ({
-  pageScale,
-  currentPage,
-  onPageChange,
-}: Props) => {
-  const theme = useTheme();
+const basePath = new URL(process.env.NEXT_PUBLIC_HOST!);
 
-  const onClick = (
-    event: React.MouseEvent<HTMLButtonElement>
-  ) => {
-    const { value, name } = event.currentTarget;
-    switch (name) {
-      case "forward":
-        onPageChange(currentPage - 1);
-        break;
-      case "backward":
-        onPageChange(currentPage + 1);
-        break;
-      default:
-        onPageChange(parseInt(value));
-    }
-  };
+const getPath = (page: number) => {
+  basePath.searchParams.set("page", page.toString());
+  return basePath.href;
+};
+
+const Paging = ({ pageScale, currentPage }: Props) => {
+  const theme = useTheme();
 
   return (
     <Container>
-      {currentPage !== 0 && (
-        <LeftArrow name="forward" onClick={onClick}>
-          <span className="sr-only">이전 글</span>
-          <MdOutlineKeyboardArrowLeft
-            color={theme.textColor}
-            size="1.5rem"
-          />
-        </LeftArrow>
+      {currentPage !== 1 && (
+        <Link href={getPath(currentPage - 1)} passHref>
+          <LeftArrow>
+            <span className="sr-only">이전 글</span>
+            <MdOutlineKeyboardArrowLeft
+              color={theme.textColor}
+              size="1.5rem"
+            />
+          </LeftArrow>
+        </Link>
       )}
       <PagenumList>
         {React.Children.toArray(
           new Array(pageScale).fill(0).map((_, index) => (
             <li>
-              {index === currentPage ? (
-                <Pagenum__selected
-                  value={index}
-                  onClick={onClick}
-                >
-                  {index + 1}
-                </Pagenum__selected>
-              ) : (
-                <Pagenum value={index} onClick={onClick}>
-                  {index + 1}
-                </Pagenum>
-              )}
+              <Link href={getPath(index + 1)} passHref>
+                {index + 1 === currentPage ? (
+                  <Pagenum__selected>
+                    {index + 1}
+                  </Pagenum__selected>
+                ) : (
+                  <Pagenum>{index + 1}</Pagenum>
+                )}
+              </Link>
             </li>
           ))
         )}
       </PagenumList>
-      {currentPage !== pageScale - 1 && (
-        <RightArrow name="backward" onClick={onClick}>
-          <span className="sr-only">다음 글</span>
-          <MdOutlineKeyboardArrowRight
-            color={theme.textColor}
-            size="1.5rem"
-          />
-        </RightArrow>
+      {currentPage !== pageScale && (
+        <Link href={getPath(currentPage + 1)} passHref>
+          <RightArrow>
+            <span className="sr-only">다음 글</span>
+            <MdOutlineKeyboardArrowRight
+              color={theme.textColor}
+              size="1.5rem"
+            />
+          </RightArrow>
+        </Link>
       )}
     </Container>
   );

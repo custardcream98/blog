@@ -28,18 +28,14 @@ type Props = {
 
 const Index = ({ postByPageArr }: Props) => {
   const router = useRouter();
-  const page =
-    parseInt(router.query.page as string) - 1 || 0;
-  const heroPostsRef = useRef<HTMLDivElement>(null);
+  const page = parseInt(router.query.page as string) || 1;
 
-  const onPageChange = (to: number) => {
-    router.push({
-      pathname: "/",
-      query: {
-        page: to + 1,
-      },
-    });
-  };
+  if (page > postByPageArr.length) {
+    router.push({ pathname: "/" });
+    return <></>;
+  }
+
+  const heroPostsRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     if (router.query.page) {
@@ -62,10 +58,12 @@ const Index = ({ postByPageArr }: Props) => {
         </Title>
         <HeroPostList>
           {Children.toArray(
-            postByPageArr[page].map((post, i) => (
+            postByPageArr[page - 1].map((post, i) => (
               <HeroPost
                 index={i}
-                maxPostCount={postByPageArr[page].length}
+                maxPostCount={
+                  postByPageArr[page - 1].length
+                }
                 title={post.title}
                 coverImage={post.coverImage}
                 date={post.date}
@@ -78,7 +76,6 @@ const Index = ({ postByPageArr }: Props) => {
         <Paging
           pageScale={postByPageArr.length}
           currentPage={page}
-          onPageChange={onPageChange}
         />
       </Container>
     </>
