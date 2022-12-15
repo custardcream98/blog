@@ -24,7 +24,7 @@ const DateSpan = ({ date, ...props }: Props) => {
 
   useLayoutEffect(() => {
     setDateString(dateToString(new Date(date)));
-  }, []);
+  }, [date]);
 
   return (
     <DateSpanStyle {...props}>{dateString}</DateSpanStyle>
