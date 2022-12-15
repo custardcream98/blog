@@ -1,8 +1,4 @@
-import {
-  useEffect,
-  useLayoutEffect,
-  useState,
-} from "react";
+import { useEffect, useState } from "react";
 import {
   getLikeCount,
   setLikeCountDown,
@@ -19,11 +15,9 @@ export default (postTitle: string) => {
 
   const toggleIsLiked = () => setIsLiked((prev) => !prev);
 
-  useLayoutEffect(() => {
-    setIsLiked((_) => getIsLikedOnLocal(postTitle));
-  }, [postTitle]);
-
   useEffect(() => {
+    setIsLiked((_) => getIsLikedOnLocal(postTitle));
+
     const unSubscribeLikeCount = getLikeCount(
       postTitle,
       setLikeCount

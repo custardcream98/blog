@@ -1,4 +1,4 @@
-import { useLayoutEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import ICommentData from "../../interfaces/comment";
 import { getComments } from "../firebaseSetup/firebaseApps";
 
@@ -7,7 +7,7 @@ export default (postTitle: string) => {
     []
   );
 
-  useLayoutEffect(() => {
+  useEffect(() => {
     const unSubscribeComments = getComments(
       postTitle,
       setComments
