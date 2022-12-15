@@ -8,13 +8,12 @@ const DateSpanStyle = styled.time`
   color: ${(props) => props.theme.subTextColor};
 `;
 
+const padZero = (str: string) => str.padStart(2, "0");
+
 const dateToString = (date: Date) =>
-  `${date.getFullYear()}-${(date.getMonth() + 1)
-    .toString()
-    .padStart(2, "0")}-${date
-    .getDate()
-    .toString()
-    .padStart(2, "0")}`;
+  `${date.getFullYear()}-${padZero(
+    (date.getMonth() + 1).toString()
+  )}-${padZero(date.getDate().toString())}`;
 
 type Props = {
   date: string | number;
