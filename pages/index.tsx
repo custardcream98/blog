@@ -1,4 +1,5 @@
 import { Children, useEffect, useRef } from "react";
+import { GetStaticProps } from "next";
 import { useRouter } from "next/router";
 import styled from "styled-components";
 
@@ -84,7 +85,11 @@ const Index = ({ postByPageArr }: Props) => {
 
 export default Index;
 
-export const getStaticProps = async () => {
+export const getStaticProps: GetStaticProps = async (
+  context
+) => {
+  console.log(context);
+
   const allPosts = getAllPosts([
     "title",
     "date",

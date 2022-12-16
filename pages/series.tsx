@@ -1,4 +1,5 @@
 import React from "react";
+import { GetStaticPropsResult } from "next";
 import Link from "next/link";
 import styled from "styled-components";
 
@@ -54,7 +55,11 @@ const Series = ({ series }: Props) => {
 
 export default Series;
 
-export async function getStaticProps() {
+export async function getStaticProps(): Promise<
+  GetStaticPropsResult<{
+    series: { [key: string]: number };
+  }>
+> {
   const series = getSeries();
 
   return {

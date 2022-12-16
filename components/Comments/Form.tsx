@@ -1,8 +1,8 @@
-import React, { memo, useRef, useState } from "react";
+import React, { memo } from "react";
 import { Rings } from "react-loader-spinner";
 import styled, { useTheme } from "styled-components";
-import { addComment } from "../../lib/firebaseSetup/firebaseApps";
-import { postMail } from "../../lib/axios";
+
+import useCommentForm from "../../lib/hook/useCommentForm";
 
 const StyledForm = styled.form`
   width: 100%;
@@ -79,59 +79,23 @@ type Props = {
 };
 
 const Form = ({ title }: Props) => {
-  const inpUsernameRef = useRef<HTMLInputElement>(null);
-  const inpPasswordRef = useRef<HTMLInputElement>(null);
-  const textAreaCommentRef =
-    useRef<HTMLTextAreaElement>(null);
-
-  const [isLoading, setIsLoading] = useState(false);
+  const {
+    usernameRef,
+    passwordRef,
+    commentRef,
+    isLoading,
+    handleCommentSubmit,
+  } = useCommentForm(title);
   const theme = useTheme();
 
-  const onSubmit = async (
-    event: React.ChangeEvent<HTMLFormElement>
-  ) => {
-    event.preventDefault();
-    event.stopPropagation();
-
-    setIsLoading(true);
-
-    const username = inpUsernameRef.current?.value;
-    const password = inpPasswordRef.current?.value;
-    const comment = textAreaCommentRef.current?.value;
-
-    if (
-      !username ||
-      !password ||
-      !comment ||
-      (password && password.length <= 4)
-    ) {
-      setIsLoading(false);
-      return;
-    }
-
-    await addComment({
-      title,
-      password,
-      comment,
-      username,
-    });
-
-    postMail(title, username, comment);
-
-    inpUsernameRef.current.value = "";
-    inpPasswordRef.current.value = "";
-    textAreaCommentRef.current.value = "";
-    setIsLoading(false);
-  };
-
   return (
-    <StyledForm onSubmit={onSubmit}>
+    <StyledForm onSubmit={handleCommentSubmit}>
       <NamePasswordContainer>
         <label className="sr-only" htmlFor="username">
           닉네임
         </label>
         <Input
-          ref={inpUsernameRef}
+          ref={usernameRef}
           type="text"
           name="username"
           placeholder="닉네임"
@@ -143,7 +107,7 @@ const Form = ({ title }: Props) => {
           비밀번호
         </label>
         <Input
-          ref={inpPasswordRef}
+          ref={passwordRef}
           type="password"
           name="password"
           placeholder="비밀번호"
@@ -158,7 +122,7 @@ const Form = ({ title }: Props) => {
           댓글 내용
         </label>
         <Textarea
-          ref={textAreaCommentRef}
+          ref={commentRef}
           name="comment"
           id="comment"
           required
