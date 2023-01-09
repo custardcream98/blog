@@ -131,10 +131,9 @@ export const getComments = (
     (snapshot) => {
       const commentsArr: ICommentData[] = [];
       snapshot.docs
-        .sort((post1, post2) =>
-          post1.data().createdAt > post2.data().createdAt
-            ? -1
-            : 1
+        .sort(
+          (post1, post2) =>
+            post1.data().createdAt - post2.data().createdAt
         )
         .map((doc) =>
           commentsArr.push({
