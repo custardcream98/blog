@@ -4,15 +4,25 @@
 
 항상 더 좋은 방법, 더 효율적인 코드를 짜기 위해 고민하는 것이야 말로 개발자의 가장 중요한 덕목이라 생각하고 실천하고자 노력합니다.
 
-[LinkedIn](https://www.linkedin.com/in/shi-woo-park-668b33147/)
-
 [이력서 Web](https://custardcream98.github.io/resume/)
-
-[이력서 Notion](https://www.notion.so/custardcream/09b6b86040a545c8849c729eb9745768)
 
 [Blog](https://custardcream.vercel.app/)
 
 # 🧑‍💻 저는 이런 일을 했어요!
+
+## 스냅 사진사 SNS, Snappy
+
+_4인, `JavaScript`, `React`, `styled-components`, `eslint`_
+
+[서비스 링크](https://devone-snappy.vercel.app/)
+[발표 자료 링크](https://www.icloud.com/keynote/010JUfnE6aCei9AuFDNTjTmvw)
+[Github Repo](https://github.com/likelion-devone/snappy)
+
+스냅 사진사와 일반 사용자를 매칭하는 SNS 서비스입니다. FE 4인이 모여 개발한 프로젝트로, 감사하게도 제가 팀장을 맡아 프로젝트를 진행했습니다.
+
+서버와의 비동기 통신시 반복되는 복잡한 패턴을 공통 훅으로 분리한 `useAPI` 커스텀 훅이나, 유연한 컴포넌트 설계 및 props-drilling을 줄이기 위해 사용한 컴파운드 컴포넌트 패턴 등 React 프로젝트의 설계 측면에서 여러모로 고민하는 시간을 가졌습니다. 컴포넌트의 UI와 로직을 분리하는 일이 얼마나 큰 효율성을 가져오는지를 느낄 수 있었고, JSDoc이 자동완성이라는 장점을 가져옴과 동시에 타 팀원에게 내가 작성한 코드를 이해하고 사용하는 데 큰 도움이 될 수 있다는걸 몸소 체험했습니다. (그래서 타입스크립트가 더 좋아졌습니다)
+
+더불어 팀 프로젝트를 리드하는 경험은 제 Soft Skill을 향상시키는 데에도 큰 도움이 되었으며, 마지막 동료평가때 감사하게도 높은 점수를 받을 수 있었습니다.
 
 ## 코드를 나누는 공간: Share it!
 
