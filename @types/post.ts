@@ -18,6 +18,11 @@ type PostType = {
   nextExcerpt?: string;
 };
 
+export type PostTypeWithoutContent = Omit<
+  PostType,
+  "content"
+>;
+
 export default PostType;
 
 export interface PrevNextPosts {

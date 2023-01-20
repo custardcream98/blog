@@ -41,6 +41,7 @@ const RightArrow = styled(StyledLink)`
 `;
 
 const Pagenum = styled(StyledLink)`
+  display: inline-block;
   color: ${(props) => props.theme.textColor};
   font-weight: 300;
 `;

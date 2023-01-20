@@ -4,12 +4,19 @@ import fs from "fs";
 import { markdownToHtmlForCache } from "../lib/utils/markdownToHtml";
 import { getAllPosts } from "../lib/utils/posts";
 import { CachePost } from "./type";
+import { PostTypeWithoutContent } from "../@types/post";
+
+const POST_PER_PAGE = 5;
 
 const postsData = getAllPosts([
   "slug",
   "title",
   "content",
+  "excerpt",
   "date",
+  "coverImage",
+  "category",
+  "ogImage",
 ]);
 
 (async () => {
@@ -57,6 +64,40 @@ const postsData = getAllPosts([
         console.error(error);
       }
       console.log("캐시 생성 완료");
+    }
+  );
+
+  const postByPageArr = postsData
+    .sort(
+      (post1, post2) =>
+        Date.parse(post2.date) - Date.parse(post1.date)
+    )
+    .reduce<[PostTypeWithoutContent[]]>(
+      (acc, post, i) => {
+        if (i % POST_PER_PAGE === 0 && i !== 0)
+          acc.push([]);
+        acc[Math.floor(i / POST_PER_PAGE)].push({
+          slug: post.slug,
+          title: post.title,
+          date: post.date,
+          category: post.category,
+          coverImage: post.coverImage,
+          excerpt: post.excerpt,
+          ogImage: post.ogImage,
+        });
+        return acc;
+      },
+      [[]]
+    );
+
+  fs.writeFile(
+    `./cache/postByPageArr.json`,
+    JSON.stringify(postByPageArr),
+    (error) => {
+      if (error) {
+        console.error(error);
+      }
+      console.log("postByPageArr 캐시 생성 완료");
     }
   );
 })();

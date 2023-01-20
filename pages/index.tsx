@@ -1,9 +1,5 @@
 import { Children, useEffect, useRef } from "react";
-import {
-  GetServerSideProps,
-  GetStaticProps,
-  GetStaticPropsContext,
-} from "next";
+import { GetServerSideProps } from "next";
 import { useRouter } from "next/router";
 import styled from "styled-components";
 
@@ -16,9 +12,12 @@ import {
   Title,
 } from "../components/Common/styledComponents";
 
-import { getAllPosts } from "../lib/utils/posts";
 import check404 from "../lib/check404";
 import PostType from "../@types/post";
+
+import PostByPageArr from "../cache/postByPageArr.json";
+
+const PAGE_SCALE = PostByPageArr.length;
 
 const HeroPostList = styled.ol`
   min-height: 592px;
@@ -90,30 +89,13 @@ export const getServerSideProps: GetServerSideProps =
   async (context) => {
     const { page } = context.query;
 
-    const allPosts = getAllPosts([
-      "title",
-      "date",
-      "slug",
-      "coverImage",
-      "excerpt",
-    ]);
-
-    const postByPageArr = allPosts.reduce<[PostType[]]>(
-      (acc, post, i) => {
-        if (i % 5 === 0 && i !== 0) acc.push([]);
-        acc[Math.floor(i / 5)].push(post);
-        return acc;
-      },
-      [[]]
-    );
-
     return {
       props: {
-        pageLength: postByPageArr.length,
+        pageLength: PAGE_SCALE,
         posts:
           typeof page === "string"
-            ? postByPageArr[parseInt(page) - 1]
-            : postByPageArr[0],
+            ? PostByPageArr[parseInt(page) - 1]
+            : PostByPageArr[0],
       },
     };
   };
