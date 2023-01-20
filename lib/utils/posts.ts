@@ -2,8 +2,7 @@ import fs from "fs";
 import { join } from "path";
 import matter from "gray-matter";
 import axios from "axios";
-import PostType from "../../interfaces/post";
-import { PrevNextPosts } from "../../interfaces/post";
+import PostType, { PrevNextPosts } from "../../@types/post";
 
 const postsDirectory = join(process.cwd(), "_posts");
 const aboutPageDirectory = join(process.cwd(), "about.md");

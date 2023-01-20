@@ -6,8 +6,9 @@ export default interface ICommentData {
   username: string;
 }
 
-interface ICommentDataWithoutId
-  extends Omit<ICommentData, "id"> {}
+type ICommentDataProps = Omit<ICommentData, "id"> & {
+  commentId: string;
+};
 
 enum CommentEditState {
   DEFAULT,
@@ -20,11 +21,11 @@ enum CommentEditState {
 
 interface ICommentEditorStateContext {
   editState: CommentEditState;
-  changeStateTo: (state: CommentEditState) => VoidFunction;
+  changeStateTo: (state: CommentEditState) => void;
 }
 
 export { CommentEditState };
 export type {
-  ICommentDataWithoutId,
+  ICommentDataProps,
   ICommentEditorStateContext,
 };

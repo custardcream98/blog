@@ -13,7 +13,7 @@ import {
   arrayUnion,
   increment,
 } from "firebase/firestore";
-import ICommentData from "../../interfaces/comment";
+import ICommentData from "../../@types/comment";
 import {
   getViewedTimeOnLocal,
   setViewedTimeOnLocal,
@@ -92,14 +92,39 @@ export const getCommentDocRef = ({
 }: ICommentDocRefProps) =>
   doc(getCommentCollectionRef(title), commentId);
 
-export const deleteComment = async (
-  docRef: DocumentReference<DocumentData>
-) => await deleteDoc(docRef);
+export const deleteComment = async ({
+  title,
+  commentId,
+}: ICommentDocRefProps) => {
+  const commentDocRef = getCommentDocRef({
+    title,
+    commentId,
+  });
+  await deleteDoc(commentDocRef);
+};
 
-export const updateComment = async (
-  docRef: DocumentReference<DocumentData>,
-  commentText: string
-) => await updateDoc(docRef, { comment: commentText });
+type UpdateCommentProps = ICommentDocRefProps & {
+  username: string;
+  password: string;
+  comment: string;
+};
+export const updateComment = async ({
+  title,
+  commentId,
+  username,
+  password,
+  comment,
+}: UpdateCommentProps) => {
+  const commentDocRef = getCommentDocRef({
+    title,
+    commentId,
+  });
+  await updateDoc(commentDocRef, {
+    password,
+    comment,
+    username,
+  });
+};
 
 export const addComment = async ({
   title,

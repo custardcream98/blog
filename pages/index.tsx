@@ -6,7 +6,6 @@ import styled from "styled-components";
 import HeroPost from "../components/Home/HeroPost";
 import Meta from "../components/Layout/Meta";
 import Intro from "../components/Home/Intro";
-import Post from "../interfaces/post";
 import Paging from "../components/Common/Paging";
 import {
   Container,
@@ -15,6 +14,7 @@ import {
 
 import { getAllPosts } from "../lib/utils/posts";
 import check404 from "../lib/check404";
+import PostType from "../@types/post";
 
 const HeroPostList = styled.ol`
   min-height: 592px;
@@ -24,7 +24,7 @@ const HeroPostList = styled.ol`
 `;
 
 type Props = {
-  postByPageArr: [Post[]];
+  postByPageArr: [PostType[]];
 };
 
 const Index = ({ postByPageArr }: Props) => {
@@ -100,7 +100,7 @@ export const getStaticProps: GetStaticProps = async (
 
   return {
     props: {
-      postByPageArr: allPosts.reduce<[Post[]]>(
+      postByPageArr: allPosts.reduce<[PostType[]]>(
         (acc, post, i) => {
           if (i % 5 === 0 && i !== 0) acc.push([]);
           acc[Math.floor(i / 5)].push(post);
