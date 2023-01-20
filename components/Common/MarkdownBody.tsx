@@ -1,5 +1,5 @@
 import { useRecoilValue } from "recoil";
-import styled from "styled-components";
+import styled, { css } from "styled-components";
 import { isDarkAtom } from "../../lib/atoms";
 
 const MOBILE_BREAKPOINT = "600px";
@@ -181,18 +181,20 @@ const MarkdownBodyStyle = styled.div<StyleProps>`
   /* 
     코드블록 다크모드 조정
   */
-  ${(props) =>
-    props.isDark
-      ? `
-          pre[data-theme='light'], code[data-theme='light'] {
+  ${({ isDark }) =>
+    isDark
+      ? css`
+          pre[data-theme="light"],
+          code[data-theme="light"] {
             display: none;
           }
         `
-      : `
-          pre[data-theme='dark'], code[data-theme='dark'] {
+      : css`
+          pre[data-theme="dark"],
+          code[data-theme="dark"] {
             display: none;
           }
-      `}
+        `}
 
   img {
     max-width: 100%;
@@ -249,32 +251,19 @@ const MarkdownBodyStyle = styled.div<StyleProps>`
   }
 
   a {
-    position: relative;
     color: ${({ theme }) => theme.accentColor};
-    transition: linear 0.3s;
-    -webkit-transition: linear 0.3s;
-    -moz-transition: linear 0.3s;
-    z-index: 10;
+    transition: all 0.3s ease;
+    border-radius: 4px;
+
     &:hover {
       text-decoration: none;
-      color: ${({ theme }) => theme.bgColor};
-    }
-    &::before {
-      content: " ";
-      position: absolute;
-      width: calc(100% + 0.6rem);
-      height: calc(100% + 0.2rem);
-      top: -0.1rem;
-      left: -0.3rem;
-      border-radius: 4px;
-      background-color: transparent;
-      transition: linear 0.3s;
-      -webkit-transition: linear 0.3s;
-      -moz-transition: linear 0.3s;
-      z-index: -1;
-    }
-    &:hover::before {
-      background-color: ${({ theme }) => theme.textColor};
+      padding: 0.1rem 0.3rem;
+      margin: -0.1rem -0.3rem;
+
+      ${({ theme }) => css`
+        color: ${theme.bgColor};
+        background-color: ${theme.textColor};
+      `}
     }
   }
 
