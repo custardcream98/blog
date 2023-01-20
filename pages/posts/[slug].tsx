@@ -61,7 +61,7 @@ export default function Posts({ post }: Props) {
           <Comments.Title>
             Comments({comments.length})
           </Comments.Title>
-          <Comments.Form />
+          <Comments.Form key={postTitle} />
           <Comments.List>
             {comments.map((commentData) => (
               <Comments.Item
