@@ -2,10 +2,10 @@ import { Children } from "react";
 import styled from "styled-components";
 import Link from "next/link";
 
-import PostType from "../../interfaces/post";
 import { LinkDecorated } from "../../components/Common/styledComponents";
 import DateSpan from "../Common/DateSpan";
 import CategoryBadges from "../Common/CategoryBadges";
+import PostType from "../../@types/post";
 
 const Container = styled.li`
   margin-bottom: 1rem;

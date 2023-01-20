@@ -1,5 +1,5 @@
+import { SearchedPost } from "../@types/searchedPosts";
 import CacheDB from "../cache/cache.json";
-import { SearchedPost } from "../interfaces/searchedPosts";
 
 const con2syl: { [cho: string]: number } = {
   ㄱ: "가".charCodeAt(0),

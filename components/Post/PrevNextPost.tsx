@@ -1,6 +1,7 @@
 import Link from "next/link";
 import styled from "styled-components";
-import PostType from "../../interfaces/post";
+
+import PostType from "../../@types/post";
 
 type StyleProps = {
   isPrevOnly: boolean;

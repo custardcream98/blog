@@ -1,6 +1,7 @@
 import { useCallback, useEffect, useState } from "react";
 import styled from "styled-components";
-import { SearchedPostCardData } from "../../interfaces/searchedPosts";
+
+import { SearchedPostCardData } from "../../@types/searchedPosts";
 import { searchPosts } from "../axios";
 
 const FETCH_DEBOUNCE_COOLTIME = 300;

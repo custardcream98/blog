@@ -11,8 +11,7 @@ import {
 import { getPostByCategory } from "../../lib/utils/posts";
 import categoryTheme from "../../lib/categoryTheme";
 import check404 from "../../lib/check404";
-
-import type PostType from "../../interfaces/post";
+import PostType from "../../@types/post";
 
 const PostContainer = styled(Container)`
   display: block;
