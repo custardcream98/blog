@@ -1,4 +1,3 @@
-import { Children } from "react";
 import styled from "styled-components";
 
 import Meta from "../../components/Layout/Meta";
@@ -17,9 +16,9 @@ import markdownToHtml from "../../lib/utils/markdownToHtml";
 import { createPostDoc } from "../../lib/firebaseSetup/firebaseApps";
 import check404 from "../../lib/check404";
 
-import type PostType from "../../interfaces/post";
 import MarkdownBody from "../../components/Common/MarkdownBody";
 import useComments from "../../lib/hook/useComments";
+import PostType from "../../@types/post";
 
 const PostSection = styled.section`
   width: 100%;
@@ -33,10 +32,10 @@ type Props = {
   post: PostType;
 };
 
-export default function Post({ post }: Props) {
+export default function Posts({ post }: Props) {
   check404();
-  const titleForComment = post.title.replaceAll("/", ",");
-  const comments = useComments(titleForComment);
+  const postTitle = post.title.replaceAll("/", ",");
+  const comments = useComments(postTitle);
 
   return (
     <>
@@ -58,20 +57,19 @@ export default function Post({ post }: Props) {
           <MarkdownBody content={post.content} />
         </PostSection>
         <PrevNextPost post={post} />
-        <Comments>
+        <Comments postTitle={postTitle}>
           <Comments.Title>
             Comments({comments.length})
           </Comments.Title>
-          <Comments.Form title={titleForComment} />
+          <Comments.Form />
           <Comments.List>
-            {Children.toArray(
-              comments.map((comment) => (
-                <Comments.Item
-                  title={titleForComment}
-                  comment={comment}
-                />
-              ))
-            )}
+            {comments.map((commentData) => (
+              <Comments.Item
+                key={commentData.id}
+                commentId={commentData.id}
+                {...commentData}
+              />
+            ))}
           </Comments.List>
         </Comments>
       </PostContainer>

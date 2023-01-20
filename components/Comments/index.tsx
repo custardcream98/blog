@@ -1,21 +1,26 @@
-import { ReactNode } from "react";
+import { PropsWithChildren } from "react";
 import styled from "styled-components";
-import Form from "./Form";
-import Item from "./Item";
 
-const Container = styled.section`
+import { CommentFormWithOpenButton } from "./CommentForm";
+import CommentCard from "./CommentCard";
+import CommentPostTitleContextProvider from "./context";
+
+type Props = PropsWithChildren<{
+  postTitle: string;
+}>;
+const Comments = ({ children, postTitle }: Props) => {
+  return (
+    <CommentPostTitleContextProvider postTitle={postTitle}>
+      <Wrapper>{children}</Wrapper>
+    </CommentPostTitleContextProvider>
+  );
+};
+
+const Wrapper = styled.section`
   display: flex;
   flex-direction: column;
   width: 100%;
 `;
-
-type Props = {
-  children: ReactNode;
-};
-
-const Comments = ({ children }: Props) => {
-  return <Container>{children}</Container>;
-};
 
 const Title = styled.h3`
   width: 100%;
@@ -27,10 +32,10 @@ const Title = styled.h3`
 `;
 
 Comments.Title = Title;
-Comments.Form = Form;
-Comments.List = ({ children }: { children: ReactNode }) => (
+Comments.Form = CommentFormWithOpenButton;
+Comments.List = ({ children }: PropsWithChildren) => (
   <ol>{children}</ol>
 );
-Comments.Item = Item;
+Comments.Item = CommentCard;
 
 export default Comments;
