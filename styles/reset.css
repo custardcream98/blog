@@ -161,6 +161,8 @@ button {
   -webkit-appearance: none;
   -moz-border-radius: 0;
   -webkit-border-radius: 0;
+  background-color: transparent;
+  border: none;
 }
 
 input[type="radio"] {
