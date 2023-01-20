@@ -1,5 +1,9 @@
 import { Children, useEffect, useRef } from "react";
-import { GetStaticProps } from "next";
+import {
+  GetServerSideProps,
+  GetStaticProps,
+  GetStaticPropsContext,
+} from "next";
 import { useRouter } from "next/router";
 import styled from "styled-components";
 
@@ -24,14 +28,16 @@ const HeroPostList = styled.ol`
 `;
 
 type Props = {
-  postByPageArr: [PostType[]];
+  pageLength: number;
+  posts: PostType[];
 };
 
-const Index = ({ postByPageArr }: Props) => {
+const Index = ({ pageLength, posts }: Props) => {
   const router = useRouter();
-  const page = parseInt(router.query.page as string) || 1;
+  const { page: queryPage } = router.query;
+  const page = parseInt(queryPage as string) || 1;
 
-  if (page > postByPageArr.length) {
+  if (page > pageLength) {
     router.push({ pathname: "/" });
     return <></>;
   }
@@ -39,13 +45,13 @@ const Index = ({ postByPageArr }: Props) => {
   const heroPostsRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
-    if (router.query.page) {
+    if (queryPage) {
       heroPostsRef.current?.scrollIntoView({
         behavior: "auto",
         block: "center",
       });
     }
-  }, [page]);
+  }, [queryPage]);
 
   check404();
 
@@ -59,12 +65,10 @@ const Index = ({ postByPageArr }: Props) => {
         </Title>
         <HeroPostList>
           {Children.toArray(
-            postByPageArr[page - 1].map((post, i) => (
+            posts.map((post, i) => (
               <HeroPost
                 index={i}
-                maxPostCount={
-                  postByPageArr[page - 1].length
-                }
+                maxPostCount={posts.length}
                 title={post.title}
                 coverImage={post.coverImage}
                 date={post.date}
@@ -74,10 +78,7 @@ const Index = ({ postByPageArr }: Props) => {
             ))
           )}
         </HeroPostList>
-        <Paging
-          pageScale={postByPageArr.length}
-          currentPage={page}
-        />
+        <Paging pageScale={pageLength} currentPage={page} />
       </Container>
     </>
   );
@@ -85,29 +86,34 @@ const Index = ({ postByPageArr }: Props) => {
 
 export default Index;
 
-export const getStaticProps: GetStaticProps = async (
-  context
-) => {
-  console.log(context);
+export const getServerSideProps: GetServerSideProps =
+  async (context) => {
+    const { page } = context.query;
 
-  const allPosts = getAllPosts([
-    "title",
-    "date",
-    "slug",
-    "coverImage",
-    "excerpt",
-  ]);
+    const allPosts = getAllPosts([
+      "title",
+      "date",
+      "slug",
+      "coverImage",
+      "excerpt",
+    ]);
 
-  return {
-    props: {
-      postByPageArr: allPosts.reduce<[PostType[]]>(
-        (acc, post, i) => {
-          if (i % 5 === 0 && i !== 0) acc.push([]);
-          acc[Math.floor(i / 5)].push(post);
-          return acc;
-        },
-        [[]]
-      ),
-    },
+    const postByPageArr = allPosts.reduce<[PostType[]]>(
+      (acc, post, i) => {
+        if (i % 5 === 0 && i !== 0) acc.push([]);
+        acc[Math.floor(i / 5)].push(post);
+        return acc;
+      },
+      [[]]
+    );
+
+    return {
+      props: {
+        pageLength: postByPageArr.length,
+        posts:
+          typeof page === "string"
+            ? postByPageArr[parseInt(page) - 1]
+            : postByPageArr[0],
+      },
+    };
   };
-};
