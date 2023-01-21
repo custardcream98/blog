@@ -14,16 +14,14 @@ import { ImSun } from "react-icons/im";
 import { useRouter } from "next/router";
 import { HiSearch } from "react-icons/hi";
 
-import {
-  LinkDecorated,
-  SearchButton,
-} from "../../Common/styledComponents";
+import { LinkDecorated } from "../../Common/styledComponents";
 import BlogIcon from "../../Common/BlogIcon";
 
 import { isDarkAtom } from "../../../lib/atoms";
 import { useWindowSize } from "../../../lib/hook/useWindowSize";
 import Searchbar from "../../Searchbar";
 import { toggleIsDarkmodeActivatedOnLocal } from "../../../lib/localStorage";
+import { ResponsiveIconButton } from "../../Common/IconButton";
 
 const Header = styled.header`
   height: 50px;
@@ -166,7 +164,7 @@ const Navigation = () => {
     toggleIsDarkmodeActivatedOnLocal();
   };
   const theme = useTheme();
-  const windowSize = useWindowSize();
+  const { width } = useWindowSize();
 
   const router = useRouter();
 
@@ -184,16 +182,13 @@ const Navigation = () => {
   }, [navRef]);
 
   useEffect(() => {
-    if (
-      /post/g.test(router.route) &&
-      windowSize.width! <= 400
-    ) {
+    if (/post/g.test(router.route) && width! <= 400) {
       navRef.current!.style.top = "-1px";
       window.addEventListener("touchmove", onScroll);
       return () =>
         window.removeEventListener("touchmove", onScroll);
     }
-  }, [router, windowSize]);
+  }, [router, width]);
 
   const nav = useMemo(
     () => (
@@ -203,9 +198,7 @@ const Navigation = () => {
             <LogoTitle>
               <BlogIcon color={theme.textColor} size={1} />
               <Title
-                className={
-                  windowSize.width! <= 400 ? "sr-only" : ""
-                }
+                className={width! <= 400 ? "sr-only" : ""}
               >
                 Custardcream
               </Title>
@@ -225,15 +218,14 @@ const Navigation = () => {
             <NavItem href="/series" content="Series" />
             <NavItem href="/about" content="About" />
           </NavMenu>
-          <SearchButton
+          <StyledResponsiveIconButton
+            title="검색 버튼입니다."
             type="button"
+            mobileSize="22px"
+            desktopSize="25px"
+            icon={HiSearch}
             onClick={() => setIsSearchbarOn(true)}
-          >
-            <span className="sr-only">검색</span>
-            <IconContext.Provider value={{ size: "100%" }}>
-              <HiSearch color={theme.textColor} />
-            </IconContext.Provider>
-          </SearchButton>
+          />
           <article>
             <DarkmodeSwitch onClick={toggleSwitch}>
               <span className="sr-only">
@@ -251,7 +243,7 @@ const Navigation = () => {
         </NavItemWrapper>
       </Nav>
     ),
-    [theme, windowSize, isDark]
+    [theme, width, isDark]
   );
 
   return (
@@ -266,5 +258,11 @@ const Navigation = () => {
     </Header>
   );
 };
+
+const StyledResponsiveIconButton = styled(
+  ResponsiveIconButton
+)`
+  margin-left: 0.25rem;
+`;
 
 export default Navigation;

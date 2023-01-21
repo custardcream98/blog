@@ -9,6 +9,7 @@ import {
   useState,
 } from "react";
 import styled from "styled-components";
+import { RiCloseFill } from "react-icons/ri";
 
 import SearchResults from "./SearchResults";
 import useSearchResults from "../../lib/hook/useSearchResults";
@@ -198,6 +199,10 @@ export default function Searchbar({
         />
         <SearchbarCloseButton
           ref={buttonCloseSearchbarRef}
+          title="검색바 닫기"
+          icon={RiCloseFill}
+          mobileSize="22px"
+          desktopSize="26px"
           onClick={closeResults}
           hidden={!isSearchbarOn}
         />
