@@ -1,4 +1,4 @@
-import { IoIosMore } from "react-icons/io";
+import { FiMoreVertical } from "react-icons/fi";
 
 import { CommentEditState } from "../../../../../@types/comment";
 import IconButton from "../../../../Common/IconButton";
@@ -9,7 +9,7 @@ const DefaultState = () => {
 
   return (
     <IconButton
-      icon={IoIosMore}
+      icon={FiMoreVertical}
       title="댓글 옵션 보기 버튼입니다."
       onClick={getStateSetter(
         CommentEditState.OPTION_OPENED
