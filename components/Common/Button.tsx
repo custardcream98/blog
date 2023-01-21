@@ -1,4 +1,7 @@
-import { ComponentPropsWithoutRef } from "react";
+import {
+  ComponentPropsWithoutRef,
+  MouseEventHandler,
+} from "react";
 import { Rings } from "react-loader-spinner";
 import styled, { css, useTheme } from "styled-components";
 
@@ -9,12 +12,29 @@ const Button = ({
   width,
   height,
   isLoading,
+  onClick,
   ...props
 }: Props) => {
   const { subTextColor } = useTheme();
+  const handleClick: MouseEventHandler<
+    HTMLButtonElement
+  > = (event) => {
+    if (isLoading) {
+      event.preventDefault();
+      return;
+    }
+
+    onClick?.(event);
+  };
 
   return (
-    <StyledButton width={width} height={height} {...props}>
+    <StyledButton
+      width={width}
+      height={height}
+      isLoading={isLoading}
+      onClick={handleClick}
+      {...props}
+    >
       {isLoading ? (
         <Rings
           color={subTextColor}
@@ -31,6 +51,7 @@ const Button = ({
 type StyledProps = {
   width: string;
   height: string;
+  isLoading: boolean;
 };
 const StyledButton = styled.button<StyledProps>`
   height: ${({ height }) => height};
@@ -46,6 +67,12 @@ const StyledButton = styled.button<StyledProps>`
 
   transition: all 0.2s ease;
   cursor: pointer;
+
+  ${({ isLoading }) =>
+    isLoading &&
+    css`
+      pointer-events: none;
+    `}
 
   ${({ theme }) => css`
     font-family: ${theme.mainFont};
