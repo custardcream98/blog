@@ -13,6 +13,7 @@ const CloseButton = () => {
     <StyledButton
       width="40px"
       height="30px"
+      isLoading={false}
       onClick={getStateSetter(CommentEditState.DEFAULT)}
     >
       취소
