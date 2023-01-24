@@ -1,7 +1,7 @@
 #!/usr/bin/env sh
 . "$(dirname -- "$0")/_/husky.sh"
 
-npm run cache && git add ./cache/cache.json
+npm run cache && git add ./cache/cache.json && git add ./cache/postByPageArr.json
 
 if [[ `git diff --name-only --cached` ]]
 then
