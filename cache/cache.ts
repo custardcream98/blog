@@ -3,8 +3,8 @@ import fs from "fs";
 
 import { markdownToHtmlForCache } from "../lib/utils/markdownToHtml";
 import { getAllPosts } from "../lib/utils/posts";
-import { CachePost } from "./type";
 import { PostTypeWithoutContent } from "../@types/post";
+import { CachePost } from "../@types/cache";
 
 const POST_PER_PAGE = 5;
 
