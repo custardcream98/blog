@@ -1,4 +1,3 @@
-import React from "react";
 import styled from "styled-components";
 
 import Meta from "../../components/Layout/Meta";
@@ -11,7 +10,7 @@ import {
 import { getPostByCategory } from "../../lib/utils/posts";
 import categoryTheme from "../../lib/categoryTheme";
 import check404 from "../../lib/check404";
-import PostType from "../../@types/post";
+import type PostType from "../../@types/post";
 
 const PostContainer = styled(Container)`
   display: block;
@@ -38,11 +37,9 @@ export default function Post({ category, posts }: Props) {
       <PostContainer>
         <PostTitle>{`<${category} />`}</PostTitle>
         <ol>
-          {React.Children.toArray(
-            posts.map((post) => (
-              <CategoryCard post={post} />
-            ))
-          )}
+          {posts.map((post) => (
+            <CategoryCard key={post.slug} post={post} />
+          ))}
         </ol>
       </PostContainer>
     </>

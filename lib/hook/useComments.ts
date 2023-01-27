@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import ICommentData from "../../@types/comment";
+import type ICommentData from "../../@types/comment";
 import { getComments } from "../firebaseSetup/firebaseApps";
 
 export default (postTitle: string) => {

@@ -1,9 +1,9 @@
+import { Children } from "react";
 import styled, { useTheme } from "styled-components";
 import {
   MdOutlineKeyboardArrowLeft,
   MdOutlineKeyboardArrowRight,
 } from "react-icons/md";
-import React from "react";
 import Link from "next/link";
 
 const Container = styled.nav`
@@ -56,12 +56,7 @@ type Props = {
   currentPage: number;
 };
 
-const basePath = new URL(process.env.NEXT_PUBLIC_HOST!);
-
-const getPath = (page: number) => {
-  basePath.searchParams.set("page", page.toString());
-  return basePath.href;
-};
+const getPath = (page: number) => `?page=${page}`;
 
 const Paging = ({ pageScale, currentPage }: Props) => {
   const theme = useTheme();
@@ -80,7 +75,7 @@ const Paging = ({ pageScale, currentPage }: Props) => {
         </Link>
       )}
       <PagenumList>
-        {React.Children.toArray(
+        {Children.toArray(
           new Array(pageScale).fill(0).map((_, index) => (
             <li>
               <Link href={getPath(index + 1)} passHref>

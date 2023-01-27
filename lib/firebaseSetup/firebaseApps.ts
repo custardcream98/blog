@@ -8,8 +8,6 @@ import {
   updateDoc,
   collection,
   onSnapshot,
-  DocumentData,
-  DocumentReference,
   arrayUnion,
   increment,
 } from "firebase/firestore";

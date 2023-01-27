@@ -1,4 +1,4 @@
-import { DefaultTheme } from "styled-components";
+import type { DefaultTheme } from "styled-components";
 
 // TODO: 테마 관리 방법 리팩토링
 

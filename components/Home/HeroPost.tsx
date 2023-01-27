@@ -85,7 +85,6 @@ type Props = {
   index: number;
   maxPostCount: number;
   title: string;
-  coverImage: string;
   date: string;
   excerpt: string;
   slug: string;
@@ -95,7 +94,6 @@ const HeroPost = ({
   index,
   maxPostCount,
   title,
-  coverImage,
   date,
   excerpt,
   slug,

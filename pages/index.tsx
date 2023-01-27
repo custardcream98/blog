@@ -1,4 +1,4 @@
-import { Children, useEffect, useRef } from "react";
+import { useEffect, useRef } from "react";
 import { GetServerSideProps } from "next";
 import { useRouter } from "next/router";
 import styled from "styled-components";
@@ -63,19 +63,17 @@ const Index = ({ pageLength, posts }: Props) => {
           {"<Posts />"}
         </Title>
         <HeroPostList>
-          {Children.toArray(
-            posts.map((post, i) => (
-              <HeroPost
-                index={i}
-                maxPostCount={posts.length}
-                title={post.title}
-                coverImage={post.coverImage}
-                date={post.date}
-                excerpt={post.excerpt}
-                slug={post.slug}
-              />
-            ))
-          )}
+          {posts.map((post, i) => (
+            <HeroPost
+              key={post.slug}
+              index={i}
+              maxPostCount={posts.length}
+              title={post.title}
+              date={post.date}
+              excerpt={post.excerpt}
+              slug={post.slug}
+            />
+          ))}
         </HeroPostList>
         <Paging pageScale={pageLength} currentPage={page} />
       </Container>

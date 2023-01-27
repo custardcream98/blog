@@ -1,4 +1,4 @@
-import { SearchedPost } from "../@types/searchedPosts";
+import type { SearchedPost } from "../@types/searchedPosts";
 import CacheDB from "../cache/cache.json";
 
 const con2syl: { [cho: string]: number } = {

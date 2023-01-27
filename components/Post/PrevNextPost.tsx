@@ -1,7 +1,7 @@
 import Link from "next/link";
-import styled from "styled-components";
+import styled, { css } from "styled-components";
 
-import PostType from "../../@types/post";
+import type PostType from "../../@types/post";
 
 type StyleProps = {
   isPrevOnly: boolean;
@@ -17,20 +17,32 @@ const Container = styled.aside<StyleProps>`
   & div {
     width: 50%;
   }
-  & div:nth-child(1) {
-    border: ${(props) =>
-      !props.isNextOnly
-        ? `1px solid ${props.theme.textColor}`
-        : "none"};
+
+  & div:first-child {
+    ${({ isNextOnly, theme }) =>
+      !isNextOnly
+        ? css`
+            border: 1px solid ${theme.textColor};
+          `
+        : css`
+            border: none;
+          `}
     border-radius: 4px 0 0 4px;
   }
   & div:last-child {
-    border: ${(props) =>
-      !props.isPrevOnly
-        ? `1px solid ${props.theme.textColor}`
-        : "none"};
-    border-left: ${(props) =>
-      props.isNextOnly ? "" : "none"};
+    ${({ isPrevOnly, theme }) =>
+      !isPrevOnly
+        ? css`
+            border: 1px solid ${theme.textColor};
+          `
+        : css`
+            border: none;
+          `}
+    ${({ isNextOnly }) =>
+      !isNextOnly &&
+      css`
+        border-left: none;
+      `};
     border-radius: 0 4px 4px 0;
     text-align: end;
   }
@@ -42,20 +54,24 @@ const Container = styled.aside<StyleProps>`
       height: 4.5rem;
       justify-content: center;
     }
-    & div:nth-child(1) {
-      border: ${(props) =>
-        !props.isNextOnly
-          ? `1px solid ${props.theme.textColor}`
-          : "none"};
+    & div:first-child {
       border-radius: 4px 4px 0 0;
     }
     & div:last-child {
-      border: ${(props) =>
-        !props.isPrevOnly
-          ? `1px solid ${props.theme.textColor}`
-          : "none"};
-      border-top: ${(props) =>
-        props.isNextOnly ? "" : "none"};
+      ${({ isPrevOnly, theme }) =>
+        !isPrevOnly
+          ? css`
+              border: 1px solid ${theme.textColor};
+            `
+          : css`
+              border: none;
+            `}
+      ${({ isNextOnly }) =>
+        !isNextOnly &&
+        css`
+          border-top: none;
+        `};
+
       border-radius: 0 0 4px 4px;
       text-align: end;
     }

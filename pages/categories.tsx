@@ -1,4 +1,4 @@
-import React from "react";
+import { Children } from "react";
 
 import Meta from "../components/Layout/Meta";
 import {
@@ -19,11 +19,12 @@ const Categories = () => {
       <Container>
         <Title>{`<Categories />`}</Title>
         <CategoryBadges>
-          {React.Children.toArray(
-            Object.keys(categoryTheme).map((category) => (
-              <CategoryBadges.Badge category={category} />
-            ))
-          )}
+          {Object.keys(categoryTheme).map((category) => (
+            <CategoryBadges.Badge
+              key={category}
+              category={category}
+            />
+          ))}
         </CategoryBadges>
       </Container>
     </>

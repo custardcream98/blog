@@ -1,7 +1,8 @@
-import React from "react";
+import { Children } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import styled from "styled-components";
+
 import CategoryBadges from "../Common/CategoryBadges";
 import DateSpan from "../Common/DateSpan";
 import ViewsLikesCounter from "./ViewsLikesCounter";
@@ -17,7 +18,7 @@ const Container = styled.div`
 `;
 
 const Title = styled.h2`
-  color: ${(props) => props.theme.textColor};
+  color: ${({ theme }) => theme.textColor};
   word-break: keep-all;
   font-weight: 800;
   font-size: 1.8em;
@@ -26,7 +27,7 @@ const Title = styled.h2`
 const SeriesName = styled(LinkDecorated)`
   margin-bottom: 5px;
   font-size: 1em;
-  color: ${(props) => props.theme.subTextColor};
+  color: ${({ theme }) => theme.subTextColor};
 `;
 
 const DateSpanforTitle = styled(DateSpan)`
@@ -76,7 +77,7 @@ const PostTitle = ({
         <BadgeViewsLikesCounterContainer>
           {category && (
             <CategoryBadges>
-              {React.Children.toArray(
+              {Children.toArray(
                 category.map((keyword) => (
                   <CategoryBadges.Badge
                     category={keyword}

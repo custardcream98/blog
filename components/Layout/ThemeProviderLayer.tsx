@@ -1,4 +1,5 @@
-import { ReactNode, useLayoutEffect } from "react";
+import { useLayoutEffect } from "react";
+import type { PropsWithChildren } from "react";
 import { useRecoilState } from "recoil";
 import {
   createGlobalStyle,
@@ -25,11 +26,9 @@ export const GlobalStyle = createGlobalStyle`
   }
 `;
 
-type Props = {
-  children: ReactNode;
-};
-
-const ThemeProviderLayer = ({ children }: Props) => {
+const ThemeProviderLayer = ({
+  children,
+}: PropsWithChildren) => {
   const [isDark, setIsDark] = useRecoilState(isDarkAtom);
   const isMounted = useIsMounted();
 

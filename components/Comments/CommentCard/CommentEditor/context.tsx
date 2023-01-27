@@ -5,10 +5,8 @@ import {
   useContext,
   useState,
 } from "react";
-import {
-  CommentEditState,
-  ICommentEditorStateContext,
-} from "../../../../@types/comment";
+import { CommentEditState } from "../../../../@types/comment";
+import type { ICommentEditorStateContext } from "../../../../@types/comment";
 
 const CommentEditorStateContext =
   createContext<ICommentEditorStateContext>({

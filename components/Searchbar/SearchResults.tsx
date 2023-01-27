@@ -1,4 +1,4 @@
-import { ReactNode } from "react";
+import type { PropsWithChildren } from "react";
 import styled from "styled-components";
 
 import LinkToPost from "./LinkToPost";
@@ -23,11 +23,10 @@ const ResultsWrapper = styled.ol`
   border-radius: 10px;
 `;
 
-type Props = {
-  children: ReactNode;
-};
-
-function SearchResults({ children, ...props }: Props) {
+function SearchResults({
+  children,
+  ...props
+}: PropsWithChildren) {
   return (
     <ResultsWrapper {...props}>{children}</ResultsWrapper>
   );

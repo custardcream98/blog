@@ -1,7 +1,9 @@
 import styled, { useTheme } from "styled-components";
+
+import { IconContext } from "react-icons";
 import { HiEye } from "react-icons/hi";
 import { BsHeart, BsHeartFill } from "react-icons/bs";
-import { IconContext } from "react-icons";
+
 import useViewCount from "../../lib/hook/useViewCount";
 import useLikeCount from "../../lib/hook/useLikeCount";
 
@@ -13,7 +15,7 @@ const Container = styled.div`
   height: 3.643rem;
 `;
 
-const CounterContainer = styled.div`
+const CounterContainer = styled.em`
   margin-left: 0.5rem;
   display: flex;
   align-items: center;
@@ -30,8 +32,8 @@ const LikeBtn = styled.button<LikeValueProps>`
   align-items: center;
   background-color: transparent;
   border: none;
-  color: ${(props) =>
-    props.isLiked ? HEART_COLOR : props.theme.subTextColor};
+  color: ${({ isLiked, theme }) =>
+    isLiked ? HEART_COLOR : theme.subTextColor};
   cursor: pointer;
 `;
 
@@ -43,12 +45,12 @@ const Value = styled.span`
 `;
 
 const CounterValue = styled(Value)`
-  color: ${(props) => props.theme.subTextColor};
+  color: ${({ theme }) => theme.subTextColor};
 `;
 
 const LikeValue = styled(Value)<LikeValueProps>`
-  color: ${(props) =>
-    props.isLiked ? HEART_COLOR : props.theme.subTextColor};
+  color: ${({ isLiked, theme }) =>
+    isLiked ? HEART_COLOR : theme.subTextColor};
 `;
 
 type Props = {
@@ -64,10 +66,18 @@ const ViewsLikesCounter = ({ title }: Props) => {
   return (
     <Container>
       <CounterContainer>
-        <HiEye size={15} color={theme.subTextColor} />
+        <HiEye
+          title="조회수"
+          size={15}
+          color={theme.subTextColor}
+        />
         <CounterValue>{viewCount}</CounterValue>
       </CounterContainer>
-      <LikeBtn onClick={onLikeClick} isLiked={isLiked}>
+      <LikeBtn
+        type="button"
+        onClick={onLikeClick}
+        isLiked={isLiked}
+      >
         <IconContext.Provider
           value={{
             size: "1em",
@@ -78,9 +88,15 @@ const ViewsLikesCounter = ({ title }: Props) => {
           }}
         >
           {isLiked ? (
-            <BsHeartFill color={HEART_COLOR} />
+            <BsHeartFill
+              title="좋아요 버튼"
+              color={HEART_COLOR}
+            />
           ) : (
-            <BsHeart color={theme.subTextColor} />
+            <BsHeart
+              title="좋아요 버튼"
+              color={theme.subTextColor}
+            />
           )}
         </IconContext.Provider>
         <LikeValue isLiked={isLiked}>{likeCount}</LikeValue>

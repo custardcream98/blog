@@ -1,11 +1,11 @@
 import {
   createContext,
-  PropsWithChildren,
   useCallback,
   useContext,
   useState,
 } from "react";
-import { ICommentDataProps } from "../../../@types/comment";
+import type { PropsWithChildren } from "react";
+import type { ICommentDataProps } from "../../../@types/comment";
 
 interface ICommentDataContext extends ICommentDataProps {
   updateCommentData: ({

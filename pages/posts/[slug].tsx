@@ -18,7 +18,7 @@ import check404 from "../../lib/check404";
 
 import MarkdownBody from "../../components/Common/MarkdownBody";
 import useComments from "../../lib/hook/useComments";
-import PostType from "../../@types/post";
+import type PostType from "../../@types/post";
 
 const PostSection = styled.section`
   width: 100%;

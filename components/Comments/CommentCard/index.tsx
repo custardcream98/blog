@@ -4,7 +4,7 @@ import CommentEditor from "./CommentEditor";
 import DateSpan from "../../Common/DateSpan";
 import { CommentDataContextProvider } from "./context";
 import CommentEditorStateContextProvider from "./CommentEditor/context";
-import { ICommentDataProps } from "../../../@types/comment";
+import type { ICommentDataProps } from "../../../@types/comment";
 
 type UserInfoProps = {
   username: string;

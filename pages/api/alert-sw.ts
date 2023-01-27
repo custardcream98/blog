@@ -1,4 +1,4 @@
-import { NextApiRequest, NextApiResponse } from "next";
+import type { NextApiRequest, NextApiResponse } from "next";
 import mailer from "../../lib/utils/nodemailer";
 
 export default async function sendMailToSwAPI(

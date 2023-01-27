@@ -1,8 +1,5 @@
-import {
-  createContext,
-  PropsWithChildren,
-  useContext,
-} from "react";
+import { createContext, useContext } from "react";
+import type { PropsWithChildren } from "react";
 
 const CommentPostTitleContext = createContext({
   postTitle: "",

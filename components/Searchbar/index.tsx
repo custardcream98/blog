@@ -1,12 +1,14 @@
 import {
-  ChangeEvent,
   Children,
-  FormEvent,
-  KeyboardEvent,
   useCallback,
   useEffect,
   useRef,
   useState,
+} from "react";
+import type {
+  ChangeEvent,
+  FormEvent,
+  KeyboardEvent,
 } from "react";
 import styled from "styled-components";
 import { RiCloseFill } from "react-icons/ri";
@@ -91,7 +93,7 @@ export default function Searchbar({
   const buttonCloseSearchbarRef =
     useRef<HTMLButtonElement>(null);
 
-  const openSearchbarCallback = useCallback(() => {
+  const openSearchbarCallback = () => {
     if (!isSearchbarOn) {
       return;
     }
@@ -100,12 +102,9 @@ export default function Searchbar({
       TRANSITION_DURATION
     );
     return () => clearTimeout(focusTimeout);
-  }, [isSearchbarOn, inputRef.current]);
+  };
 
-  useEffect(openSearchbarCallback, [
-    isSearchbarOn,
-    inputRef.current,
-  ]);
+  useEffect(openSearchbarCallback, [isSearchbarOn]);
 
   const closeResults = useCallback(() => {
     setSearchInput("");
@@ -171,7 +170,7 @@ export default function Searchbar({
         ]?.focus();
       }
     },
-    [inputRef.current, buttonCloseSearchbarRef.current]
+    []
   );
 
   return (

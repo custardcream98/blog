@@ -1,6 +1,6 @@
-import { NextApiRequest, NextApiResponse } from "next";
+import type { NextApiRequest, NextApiResponse } from "next";
 
-import { SearchedPost } from "../../@types/searchedPosts";
+import type { SearchedPost } from "../../@types/searchedPosts";
 import getFuzzyPostData from "../../lib/fuzzy";
 
 const MAX_CONTENT_LENGTH = 100;

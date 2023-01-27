@@ -1,5 +1,4 @@
-import React from "react";
-import { GetStaticPropsResult } from "next";
+import type { GetStaticPropsResult } from "next";
 import Link from "next/link";
 import styled from "styled-components";
 
@@ -38,15 +37,13 @@ const Series = ({ series }: Props) => {
       <Container>
         <Title>{`<Series />`}</Title>
         <SeriesList>
-          {React.Children.toArray(
-            Object.keys(series).map((key) => (
-              <SeriesTitle>
-                <Link href={`/series/${key}`} passHref>
-                  <LinkDecorated>{`${key} (${series[key]})`}</LinkDecorated>
-                </Link>
-              </SeriesTitle>
-            ))
-          )}
+          {Object.keys(series).map((key) => (
+            <SeriesTitle key={key}>
+              <Link href={`/series/${key}`} passHref>
+                <LinkDecorated>{`${key} (${series[key]})`}</LinkDecorated>
+              </Link>
+            </SeriesTitle>
+          ))}
         </SeriesList>
       </Container>
     </>

@@ -1,6 +1,7 @@
-import React from "react";
+import type { PropsWithChildren } from "react";
 import Head from "next/head";
 import styled from "styled-components";
+
 import Navigation from "./Navigation/Navigation";
 import Footer from "./Footer";
 
@@ -16,11 +17,7 @@ const Main = styled.main`
   flex-grow: 1;
 `;
 
-type Props = {
-  children: string | JSX.Element | JSX.Element[] | null;
-};
-
-const Layout = ({ children }: Props) => {
+const Layout = ({ children }: PropsWithChildren) => {
   return (
     <>
       <Head>

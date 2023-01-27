@@ -1,4 +1,4 @@
-import React, {
+import {
   useCallback,
   useEffect,
   useMemo,
@@ -8,11 +8,12 @@ import React, {
 import Link from "next/link";
 import styled, { useTheme } from "styled-components";
 import { useRecoilState } from "recoil";
+
 import { IconContext } from "react-icons";
-import { BsFillMoonFill } from "react-icons/bs";
 import { ImSun } from "react-icons/im";
-import { useRouter } from "next/router";
+import { BsFillMoonFill } from "react-icons/bs";
 import { HiSearch } from "react-icons/hi";
+import { useRouter } from "next/router";
 
 import { LinkDecorated } from "../../Common/styledComponents";
 import BlogIcon from "../../Common/BlogIcon";

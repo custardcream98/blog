@@ -1,7 +1,7 @@
 import { useCallback, useEffect, useState } from "react";
 import styled from "styled-components";
 
-import { SearchedPostCardData } from "../../@types/searchedPosts";
+import type { SearchedPostCardData } from "../../@types/searchedPosts";
 import { searchPosts } from "../axios";
 
 const FETCH_DEBOUNCE_COOLTIME = 300;
@@ -18,7 +18,7 @@ export default (query: string) => {
     SearchedPostCardData[]
   >([]);
 
-  const queryCallback = useCallback(() => {
+  const queryCallback = () => {
     if (!query) {
       return;
     }
@@ -66,11 +66,14 @@ export default (query: string) => {
     }, FETCH_DEBOUNCE_COOLTIME);
 
     return () => clearTimeout(inputTimeout);
-  }, [query]);
+  };
 
   useEffect(queryCallback, [query]);
 
-  const clearSearchedResults = () => setSearchResults([]);
+  const clearSearchedResults = useCallback(
+    () => setSearchResults([]),
+    []
+  );
 
   return { searchResults, clearSearchedResults };
 };

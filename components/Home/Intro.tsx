@@ -1,4 +1,3 @@
-import React from "react";
 import styled from "styled-components";
 import { motion } from "framer-motion";
 import { useRecoilValue } from "recoil";
@@ -95,21 +94,32 @@ const IntroParagraph = styled.p`
 `;
 
 const Intro = () => {
-  const stringColor = useRecoilValue(gradientTextColorSelector);
+  const stringColor = useRecoilValue(
+    gradientTextColorSelector
+  );
   return (
     <>
       <TitleContainer>
-        <Title1 variants={title1Var(stringColor)} initial="start" animate="end">
+        <Title1
+          variants={title1Var(stringColor)}
+          initial="start"
+          animate="end"
+        >
           Dedicated to
         </Title1>
         <br />
-        <Title2 variants={title2Var(stringColor)} initial="start" animate="end">
+        <Title2
+          variants={title2Var(stringColor)}
+          initial="start"
+          animate="end"
+        >
           CODING
         </Title2>
       </TitleContainer>
       <IntroParagraph>
-        예쁘고 간결한 것을 정말 좋아하는 개발자 박시우의 블로그입니다. 공부한
-        것들, 공유하고 싶은 내용을 올립니다.
+        예쁘고 간결한 것을 정말 좋아하는 개발자 박시우의
+        블로그입니다. 공부한 것들, 공유하고 싶은 내용을
+        올립니다.
       </IntroParagraph>
     </>
   );

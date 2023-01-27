@@ -1,4 +1,3 @@
-import { Children } from "react";
 import styled from "styled-components";
 import Link from "next/link";
 
@@ -34,11 +33,12 @@ const CategoryCard = ({ post }: Props) => (
     </Link>
     <DateSpan date={post.date} />
     <CategoryBadges>
-      {Children.toArray(
-        post.category.map((category) => (
-          <CategoryBadges.Badge category={category} />
-        ))
-      )}
+      {post.category.map((category) => (
+        <CategoryBadges.Badge
+          key={category}
+          category={category}
+        />
+      ))}
     </CategoryBadges>
   </Container>
 );

@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import {
   getLikeCount,
   setLikeCountDown,
@@ -16,7 +16,7 @@ export default (postTitle: string) => {
   const toggleIsLiked = () => setIsLiked((prev) => !prev);
 
   useEffect(() => {
-    setIsLiked((_) => getIsLikedOnLocal(postTitle));
+    setIsLiked(getIsLikedOnLocal(postTitle));
 
     const unSubscribeLikeCount = getLikeCount(
       postTitle,
@@ -26,18 +26,16 @@ export default (postTitle: string) => {
     return () => unSubscribeLikeCount();
   }, [postTitle]);
 
-  const onLikeClick = async () => {
+  const onLikeClick = useCallback(async () => {
     toggleIsLikedOnLocal(postTitle);
     toggleIsLiked();
-    switch (isLiked) {
-      case true:
-        await setLikeCountDown(postTitle);
-        break;
-      case false:
-        await setLikeCountUp(postTitle);
-        break;
+
+    if (isLiked) {
+      await setLikeCountDown(postTitle);
+    } else {
+      await setLikeCountUp(postTitle);
     }
-  };
+  }, [postTitle, isLiked]);
 
   return { likeCount, isLiked, onLikeClick };
 };
