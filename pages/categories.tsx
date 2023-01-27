@@ -1,14 +1,14 @@
 import { Children } from "react";
 
-import Meta from "../components/Layout/Meta";
+import Meta from "components/Layout/Meta";
 import {
   Container,
   Title,
-} from "../components/Common/styledComponents";
-import CategoryBadges from "../components/Common/CategoryBadges";
+} from "components/Common/styledComponents";
+import CategoryBadges from "components/Common/CategoryBadges";
 
-import categoryTheme from "../lib/categoryTheme";
-import check404 from "../lib/check404";
+import categoryTheme from "lib/categoryTheme";
+import check404 from "lib/check404";
 
 const Categories = () => {
   check404();

@@ -6,13 +6,13 @@ import {
 } from "react";
 import styled, { keyframes, css } from "styled-components";
 
-import { CommentEditState } from "../../../../../@types/comment";
+import { CommentEditState } from "types/comment";
 import { useCommentEditorStateSetter } from "../context";
-import Button from "../../../../Common/Button";
-import { deleteComment } from "../../../../../lib/firebaseSetup/firebaseApps";
+import Button from "components/Common/Button";
+import { deleteComment } from "lib/firebaseSetup/firebaseApps";
 import CommentOverlapWrapper from "./CommentOverlapWrapper";
 import { useCommentDataContext } from "../../context";
-import useEditable from "../../../../../lib/hook/useEditable";
+import useEditable from "lib/hook/useEditable";
 import { useCommentPostTitleContext } from "../../../context";
 
 type Props = {

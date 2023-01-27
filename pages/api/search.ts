@@ -1,7 +1,7 @@
 import type { NextApiRequest, NextApiResponse } from "next";
 
-import type { SearchedPost } from "../../@types/searchedPosts";
-import getFuzzyPostData from "../../lib/fuzzy";
+import type { SearchedPost } from "types/searchedPosts";
+import getFuzzyPostData from "lib/fuzzy";
 
 const MAX_CONTENT_LENGTH = 100;
 const koDtf = new Intl.DateTimeFormat("ko", {

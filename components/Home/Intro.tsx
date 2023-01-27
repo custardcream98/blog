@@ -1,7 +1,7 @@
 import styled from "styled-components";
 import { motion } from "framer-motion";
 import { useRecoilValue } from "recoil";
-import { gradientTextColorSelector } from "../../lib/atoms";
+import { gradientTextColorSelector } from "lib/atoms";
 
 const TitleSpan = styled(motion.span)`
   text-align: center;

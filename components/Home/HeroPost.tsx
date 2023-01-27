@@ -1,8 +1,8 @@
 import React from "react";
 import Link from "next/link";
 import styled from "styled-components";
-import { LinkDecorated } from "../Common/styledComponents";
-import DateSpan from "../Common/DateSpan";
+import { LinkDecorated } from "components/Common/styledComponents";
+import DateSpan from "components/Common/DateSpan";
 
 type PagenationInfo = {
   index: number;

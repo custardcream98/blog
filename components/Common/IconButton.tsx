@@ -2,7 +2,7 @@ import { forwardRef } from "react";
 import type { ComponentPropsWithoutRef } from "react";
 import { IconType } from "react-icons";
 import styled, { useTheme } from "styled-components";
-import { useWindowSize } from "../../lib/hook/useWindowSize";
+import { useWindowSize } from "lib/hook/useWindowSize";
 
 type Props = {
   icon: IconType;

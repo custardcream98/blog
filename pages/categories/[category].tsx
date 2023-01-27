@@ -1,16 +1,16 @@
 import styled from "styled-components";
 
-import Meta from "../../components/Layout/Meta";
-import CategoryCard from "../../components/Category/CategoryCard";
+import Meta from "components/Layout/Meta";
+import CategoryCard from "components/Category/CategoryCard";
 import {
   Container,
   Title,
-} from "../../components/Common/styledComponents";
+} from "components/Common/styledComponents";
 
-import { getPostByCategory } from "../../lib/utils/posts";
-import categoryTheme from "../../lib/categoryTheme";
-import check404 from "../../lib/check404";
-import type PostType from "../../@types/post";
+import { getPostByCategory } from "lib/utils/posts";
+import categoryTheme from "lib/categoryTheme";
+import check404 from "lib/check404";
+import type PostType from "types/post";
 
 const PostContainer = styled(Container)`
   display: block;

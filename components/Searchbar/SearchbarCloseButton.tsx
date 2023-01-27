@@ -1,6 +1,6 @@
 import styled from "styled-components";
 
-import { ResponsiveIconButton } from "../Common/IconButton";
+import { ResponsiveIconButton } from "components/Common/IconButton";
 import { cssOutlineOnFocus } from "../Layout/Navigation/styles";
 
 const SearchbarCloseButton = styled(ResponsiveIconButton)`

@@ -4,8 +4,8 @@ import { IconContext } from "react-icons";
 import { HiEye } from "react-icons/hi";
 import { BsHeart, BsHeartFill } from "react-icons/bs";
 
-import useViewCount from "../../lib/hook/useViewCount";
-import useLikeCount from "../../lib/hook/useLikeCount";
+import useViewCount from "lib/hook/useViewCount";
+import useLikeCount from "lib/hook/useLikeCount";
 
 const HEART_COLOR = "#c33434";
 

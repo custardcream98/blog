@@ -5,10 +5,10 @@ import {
   createGlobalStyle,
   ThemeProvider,
 } from "styled-components";
-import { isDarkAtom } from "../../lib/atoms";
-import useIsMounted from "../../lib/hook/useIsMounted";
-import { getIsDarkmodeActivatedOnLocal } from "../../lib/localStorage";
-import { darkTheme, lightTheme } from "../../lib/theme";
+import { isDarkAtom } from "lib/atoms";
+import useIsMounted from "lib/hook/useIsMounted";
+import { getIsDarkmodeActivatedOnLocal } from "lib/localStorage";
+import { darkTheme, lightTheme } from "lib/theme";
 
 export const GlobalStyle = createGlobalStyle`
   body {

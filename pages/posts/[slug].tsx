@@ -1,24 +1,24 @@
 import styled from "styled-components";
 
-import Meta from "../../components/Layout/Meta";
-import { Container } from "../../components/Common/styledComponents";
-import PostTitle from "../../components/Post/PostTitle";
-import Comments from "../../components/Comments";
-import PrevNextPost from "../../components/Post/PrevNextPost";
+import Meta from "components/Layout/Meta";
+import { Container } from "components/Common/styledComponents";
+import PostTitle from "components/Post/PostTitle";
+import Comments from "components/Comments";
+import PrevNextPost from "components/Post/PrevNextPost";
 
 import {
   getPostBySlug,
   getAllPosts,
   getOgImage,
   getPrevNextPosts,
-} from "../../lib/utils/posts";
-import markdownToHtml from "../../lib/utils/markdownToHtml";
-import { createPostDoc } from "../../lib/firebaseSetup/firebaseApps";
-import check404 from "../../lib/check404";
+} from "lib/utils/posts";
+import markdownToHtml from "lib/utils/markdownToHtml";
+import { createPostDoc } from "lib/firebaseSetup/firebaseApps";
+import check404 from "lib/check404";
 
-import MarkdownBody from "../../components/Common/MarkdownBody";
-import useComments from "../../lib/hook/useComments";
-import type PostType from "../../@types/post";
+import MarkdownBody from "components/Common/MarkdownBody";
+import useComments from "lib/hook/useComments";
+import type PostType from "types/post";
 
 const PostSection = styled.section`
   width: 100%;

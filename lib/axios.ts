@@ -1,7 +1,7 @@
 import axios from "axios";
 import https from "https";
 
-import type { SearchedPost } from "../@types/searchedPosts";
+import type { SearchedPost } from "types/searchedPosts";
 
 export const postMail = (
   title: string,

@@ -1,6 +1,7 @@
 import Link from "next/link";
 import styled from "styled-components";
-import { cssOutlineOnFocus } from "../Layout/Navigation/styles";
+
+import { cssOutlineOnFocus } from "components/Layout/Navigation/styles";
 
 const StyledLink = styled.a`
   display: block;

@@ -1,8 +1,8 @@
 import React, { useCallback, useState } from "react";
 import styled, { css } from "styled-components";
 
-import useCommentForm from "../../lib/hook/useCommentForm";
-import Button from "../Common/Button";
+import useCommentForm from "lib/hook/useCommentForm";
+import Button from "components/Common/Button";
 
 type Props = {
   height?: string;

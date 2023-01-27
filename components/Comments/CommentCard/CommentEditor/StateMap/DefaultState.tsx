@@ -1,7 +1,7 @@
 import { FiMoreVertical } from "react-icons/fi";
 
-import { CommentEditState } from "../../../../../@types/comment";
-import IconButton from "../../../../Common/IconButton";
+import { CommentEditState } from "types/comment";
+import IconButton from "components/Common/IconButton";
 import { useCommentEditorStateSetter } from "../context";
 
 const DefaultState = () => {

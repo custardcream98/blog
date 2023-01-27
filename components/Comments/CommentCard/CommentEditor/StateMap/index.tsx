@@ -1,4 +1,4 @@
-import { CommentEditState } from "../../../../../@types/comment";
+import { CommentEditState } from "types/comment";
 import CheckPasswordState from "./CheckPasswordState";
 import DefaultState from "./DefaultState";
 import EditState from "./EditState";

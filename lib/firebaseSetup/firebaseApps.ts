@@ -11,11 +11,11 @@ import {
   arrayUnion,
   increment,
 } from "firebase/firestore";
-import ICommentData from "../../@types/comment";
+import ICommentData from "types/comment";
 import {
   getViewedTimeOnLocal,
   setViewedTimeOnLocal,
-} from "../localStorage";
+} from "lib/localStorage";
 import { fireStore } from "./";
 import {
   CollectionNames,

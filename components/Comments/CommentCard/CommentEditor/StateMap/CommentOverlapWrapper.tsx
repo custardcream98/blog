@@ -2,9 +2,9 @@ import { PropsWithChildren, ReactElement } from "react";
 import styled from "styled-components";
 import { IoMdClose } from "react-icons/io";
 
-import IconButton from "../../../../Common/IconButton";
+import IconButton from "components/Common/IconButton";
 import { useCommentEditorStateSetter } from "../context";
-import { CommentEditState } from "../../../../../@types/comment";
+import { CommentEditState } from "types/comment";
 import { keyframesShow } from "./styles";
 
 const CommentOverlapWrapper = ({

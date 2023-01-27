@@ -15,14 +15,14 @@ import { BsFillMoonFill } from "react-icons/bs";
 import { HiSearch } from "react-icons/hi";
 import { useRouter } from "next/router";
 
-import { LinkDecorated } from "../../Common/styledComponents";
-import BlogIcon from "../../Common/BlogIcon";
+import { LinkDecorated } from "components/Common/styledComponents";
+import BlogIcon from "components/Common/BlogIcon";
+import Searchbar from "components/Searchbar";
 
-import { isDarkAtom } from "../../../lib/atoms";
-import { useWindowSize } from "../../../lib/hook/useWindowSize";
-import Searchbar from "../../Searchbar";
-import { toggleIsDarkmodeActivatedOnLocal } from "../../../lib/localStorage";
-import { ResponsiveIconButton } from "../../Common/IconButton";
+import { isDarkAtom } from "lib/atoms";
+import { useWindowSize } from "lib/hook/useWindowSize";
+import { toggleIsDarkmodeActivatedOnLocal } from "lib/localStorage";
+import { ResponsiveIconButton } from "components/Common/IconButton";
 
 const Header = styled.header`
   height: 50px;

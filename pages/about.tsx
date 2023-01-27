@@ -1,15 +1,15 @@
 import styled from "styled-components";
 
-import Meta from "../components/Layout/Meta";
-import MarkdownBody from "../components/Common/MarkdownBody";
+import Meta from "components/Layout/Meta";
+import MarkdownBody from "components/Common/MarkdownBody";
 import {
   Container,
   Title,
-} from "../components/Common/styledComponents";
-import { getAboutContent } from "../lib/utils/posts";
+} from "components/Common/styledComponents";
+import { getAboutContent } from "lib/utils/posts";
 
-import markdownToHtml from "../lib/utils/markdownToHtml";
-import check404 from "../lib/check404";
+import markdownToHtml from "lib/utils/markdownToHtml";
+import check404 from "lib/check404";
 
 const AboutBody = styled(MarkdownBody)`
   & img {

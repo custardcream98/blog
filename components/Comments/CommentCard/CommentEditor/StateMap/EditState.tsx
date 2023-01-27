@@ -1,10 +1,11 @@
 import styled from "styled-components";
 
-import { CommentEditState } from "../../../../../@types/comment";
-import Button from "../../../../Common/Button";
-import CommentForm from "../../../CommentForm";
-import { useCommentEditorStateSetter } from "../context";
+import { CommentEditState } from "types/comment";
+import Button from "components/Common/Button";
+import CommentForm from "components/Comments/CommentForm";
+
 import CommentOverlapWrapper from "./CommentOverlapWrapper";
+import { useCommentEditorStateSetter } from "../context";
 
 const CloseButton = () => {
   const { getStateSetter } = useCommentEditorStateSetter();

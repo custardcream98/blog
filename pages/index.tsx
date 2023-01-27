@@ -3,19 +3,19 @@ import { GetServerSideProps } from "next";
 import { useRouter } from "next/router";
 import styled from "styled-components";
 
-import HeroPost from "../components/Home/HeroPost";
-import Meta from "../components/Layout/Meta";
-import Intro from "../components/Home/Intro";
-import Paging from "../components/Common/Paging";
+import HeroPost from "components/Home/HeroPost";
+import Meta from "components/Layout/Meta";
+import Intro from "components/Home/Intro";
+import Paging from "components/Common/Paging";
 import {
   Container,
   Title,
-} from "../components/Common/styledComponents";
+} from "components/Common/styledComponents";
 
-import check404 from "../lib/check404";
-import PostType from "../@types/post";
+import check404 from "lib/check404";
+import type PostType from "types/post";
 
-import PostByPageArr from "../cache/postByPageArr.json";
+import PostByPageArr from "cache/postByPageArr.json";
 
 const PAGE_SCALE = PostByPageArr.length;
 

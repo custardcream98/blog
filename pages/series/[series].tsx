@@ -4,15 +4,15 @@ import styled from "styled-components";
 import {
   Container,
   Title,
-} from "../../components/Common/styledComponents";
-import CategoryCard from "../../components/Category/CategoryCard";
-import Meta from "../../components/Layout/Meta";
+} from "components/Common/styledComponents";
+import CategoryCard from "components/Category/CategoryCard";
+import Meta from "components/Layout/Meta";
 
 import {
   getSeries,
   getPostBySeries,
-} from "../../lib/utils/posts";
-import PostType from "../../@types/post";
+} from "lib/utils/posts";
+import PostType from "types/post";
 
 const SeriesContainer = styled(Container)`
   display: block;

@@ -3,11 +3,11 @@ import {
   getLikeCount,
   setLikeCountDown,
   setLikeCountUp,
-} from "../firebaseSetup/firebaseApps";
+} from "lib/firebaseSetup/firebaseApps";
 import {
   getIsLikedOnLocal,
   toggleIsLikedOnLocal,
-} from "../localStorage";
+} from "lib/localStorage";
 
 export default (postTitle: string) => {
   const [likeCount, setLikeCount] = useState(0);

@@ -1,6 +1,6 @@
 import { useLayoutEffect, useState } from "react";
 import styled from "styled-components";
-import { LinkDecorated } from "../Common/styledComponents";
+import { LinkDecorated } from "components/Common/styledComponents";
 
 const Container = styled.footer`
   height: 100px;

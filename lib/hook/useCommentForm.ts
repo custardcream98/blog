@@ -1,14 +1,14 @@
 import { useCallback, useEffect, useState } from "react";
 
-import { CommentEditState } from "../../@types/comment";
-import { useCommentEditorStateSetter } from "../../components/Comments/CommentCard/CommentEditor/context";
-import { useCommentDataContext } from "../../components/Comments/CommentCard/context";
-import { useCommentPostTitleContext } from "../../components/Comments/context";
-import { postMail } from "../axios";
+import { CommentEditState } from "types/comment";
+import { useCommentEditorStateSetter } from "components/Comments/CommentCard/CommentEditor/context";
+import { useCommentDataContext } from "components/Comments/CommentCard/context";
+import { useCommentPostTitleContext } from "components/Comments/context";
+import { postMail } from "lib/axios";
 import {
   addComment,
   updateComment,
-} from "../firebaseSetup/firebaseApps";
+} from "lib/firebaseSetup/firebaseApps";
 import useEditable from "./useEditable";
 
 const useCommentForm = (isForEdit: boolean) => {

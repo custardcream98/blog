@@ -1,5 +1,5 @@
 import Head from "next/head";
-import getFullURL from "../../lib/utils/url";
+import getFullURL from "lib/utils/url";
 
 type Props = {
   title?: string;

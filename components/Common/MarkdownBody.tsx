@@ -1,6 +1,6 @@
 import { useRecoilValue } from "recoil";
 import styled, { css } from "styled-components";
-import { isDarkAtom } from "../../lib/atoms";
+import { isDarkAtom } from "lib/atoms";
 
 const MOBILE_BREAKPOINT = "600px";
 

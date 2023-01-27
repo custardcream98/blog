@@ -14,7 +14,7 @@ import styled from "styled-components";
 import { RiCloseFill } from "react-icons/ri";
 
 import SearchResults from "./SearchResults";
-import useSearchResults from "../../lib/hook/useSearchResults";
+import useSearchResults from "lib/hook/useSearchResults";
 import SearchbarCloseButton from "./SearchbarCloseButton";
 
 const TRANSITION_DURATION = 500;

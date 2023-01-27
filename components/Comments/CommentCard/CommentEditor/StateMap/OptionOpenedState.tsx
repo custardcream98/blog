@@ -3,8 +3,8 @@ import { IoMdClose } from "react-icons/io";
 import { AiFillEdit } from "react-icons/ai";
 import { MdDelete } from "react-icons/md";
 
-import { CommentEditState } from "../../../../../@types/comment";
-import IconButton from "../../../../Common/IconButton";
+import { CommentEditState } from "types/comment";
+import IconButton from "components/Common/IconButton";
 import { useCommentEditorStateSetter } from "../context";
 import { keyframesShow } from "./styles";
 

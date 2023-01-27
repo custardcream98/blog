@@ -1,7 +1,7 @@
 import Link from "next/link";
 import styled, { css } from "styled-components";
 
-import type PostType from "../../@types/post";
+import type PostType from "types/post";
 
 type StyleProps = {
   isPrevOnly: boolean;

@@ -3,10 +3,10 @@ import Image from "next/image";
 import Link from "next/link";
 import styled from "styled-components";
 
-import CategoryBadges from "../Common/CategoryBadges";
-import DateSpan from "../Common/DateSpan";
+import CategoryBadges from "components/Common/CategoryBadges";
+import DateSpan from "components/Common/DateSpan";
 import ViewsLikesCounter from "./ViewsLikesCounter";
-import { LinkDecorated } from "../Common/styledComponents";
+import { LinkDecorated } from "components/Common/styledComponents";
 
 const Container = styled.div`
   display: flex;

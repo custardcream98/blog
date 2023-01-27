@@ -1,8 +1,8 @@
 import { RecoilRoot } from "recoil";
 import type { AppProps } from "next/app";
 
-import ThemeProviderLayer from "../components/Layout/ThemeProviderLayer";
-import Layout from "../components/Layout/Layout";
+import ThemeProviderLayer from "components/Layout/ThemeProviderLayer";
+import Layout from "components/Layout/Layout";
 
 import "@fontsource/noto-sans/300.css";
 import "@fontsource/noto-sans/500.css";
