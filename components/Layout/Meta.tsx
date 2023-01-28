@@ -84,6 +84,14 @@ const Meta = (props: Props) => {
       <meta property="og:image" content={image} />
       <meta property="og:image:alt" content={imageAlt} />
       <meta
+        property="og:image:width"
+        content={isPost ? "1200" : "1556"}
+      />
+      <meta
+        property="og:image:height"
+        content={isPost ? "630" : "1036"}
+      />
+      <meta
         property="og:site_name"
         content={DEFAULT_TITLE}
       />
