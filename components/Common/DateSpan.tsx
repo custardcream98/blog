@@ -1,5 +1,5 @@
-import { useLayoutEffect, useState } from "react";
 import styled from "styled-components";
+import { dateToString } from "utils/helper";
 
 const DateSpanStyle = styled.time`
   margin-top: 0.2rem;
@@ -8,26 +8,15 @@ const DateSpanStyle = styled.time`
   color: ${(props) => props.theme.subTextColor};
 `;
 
-const padZero = (str: string) => str.padStart(2, "0");
-
-const dateToString = (date: Date) =>
-  `${date.getFullYear()}-${padZero(
-    (date.getMonth() + 1).toString()
-  )}-${padZero(date.getDate().toString())}`;
-
 type Props = {
-  date: string | number;
+  date: string | number | Date;
 };
 
 const DateSpan = ({ date, ...props }: Props) => {
-  const [dateString, setDateString] = useState("");
-
-  useLayoutEffect(() => {
-    setDateString(dateToString(new Date(date)));
-  }, [date]);
-
   return (
-    <DateSpanStyle {...props}>{dateString}</DateSpanStyle>
+    <DateSpanStyle {...props}>
+      {dateToString(new Date(date))}
+    </DateSpanStyle>
   );
 };
 
