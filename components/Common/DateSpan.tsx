@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import { dateToString } from "utils/helper";
+import { dateToString } from "lib/utils/helper";
 
 const DateSpanStyle = styled.time`
   margin-top: 0.2rem;

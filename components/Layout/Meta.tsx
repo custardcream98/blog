@@ -1,7 +1,7 @@
 import { memo } from "react";
 import Head from "next/head";
 import { getFullURL, resolveURL } from "lib/utils/url";
-import { compareArraysDeep } from "utils/helper";
+import { compareArraysDeep } from "lib/utils/helper";
 
 type MetaProps = {
   title?: string;
