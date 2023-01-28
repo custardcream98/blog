@@ -1,6 +1,12 @@
 import { useRouter } from "next/router";
 
-export default function getFullURL() {
+const resolveURL = (url: string) => {
+  return process.env.NEXT_PUBLIC_HOST + url;
+};
+
+const getFullURL = () => {
   const router = useRouter();
-  return process.env.NEXT_PUBLIC_HOST + router.asPath;
-}
+  return resolveURL(router.asPath);
+};
+
+export { resolveURL, getFullURL };
