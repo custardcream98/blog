@@ -56,7 +56,7 @@ const Index = ({ pageLength, posts }: Props) => {
 
   return (
     <>
-      <Meta />
+      <Meta type="default" />
       <Intro />
       <Container ref={heroPostsRef}>
         <Title as="h2" id="Posts_Title">

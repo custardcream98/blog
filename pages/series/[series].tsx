@@ -30,7 +30,11 @@ type Props = {
 const Series = ({ series, posts }: Props) => {
   return (
     <>
-      <Meta title={`시리즈 ${series}`} />
+      <Meta
+        type="default"
+        title={`시리즈 ${series}`}
+        tags={[series]}
+      />
       <SeriesContainer>
         <SeriesTitle>{`<${series} />`}</SeriesTitle>
         <ol>

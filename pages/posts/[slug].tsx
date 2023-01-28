@@ -40,6 +40,8 @@ export default function Posts({ post }: Props) {
   return (
     <>
       <Meta
+        type="post"
+        date={post.date}
         title={post.title}
         description={post.excerpt}
         image={post.coverImage}

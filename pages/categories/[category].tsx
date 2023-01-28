@@ -31,6 +31,7 @@ export default function Post({ category, posts }: Props) {
   return (
     <>
       <Meta
+        type="default"
         title={`카테고리 ${category}`}
         tags={[category]}
       />

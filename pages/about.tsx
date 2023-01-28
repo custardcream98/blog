@@ -36,6 +36,7 @@ const About = ({ content }: Props) => {
   return (
     <>
       <Meta
+        type="default"
         title="About 개발자 박시우"
         description="안녕하세요, 삽질 좋아하는 개발자 박시우입니다. 문제가 생기면 밤을 새서라도 알아내고 해결합니다."
       />

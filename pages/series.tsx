@@ -30,10 +30,16 @@ type Props = {
 const Series = ({ series }: Props) => {
   check404();
 
+  const seriesList = Object.keys(series);
+
   // TODO: 시리즈 토글로 만들기
   return (
     <>
-      <Meta title="Series" />
+      <Meta
+        type="default"
+        title="Series"
+        tags={seriesList}
+      />
       <Container>
         <Title>{`<Series />`}</Title>
         <SeriesList>
