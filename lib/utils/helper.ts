@@ -8,8 +8,6 @@ const compareArraysDeep = (a: any[], b: any[]) => {
 const padZero = (str: string) => str.padStart(2, "0");
 
 const dateToString = (date: Date) =>
-  `${date.getFullYear()}-${padZero(
-    (date.getMonth() + 1).toString()
-  )}-${padZero(date.getDate().toString())}`;
+  date.toISOString().substring(0, 10);
 
 export { compareArraysDeep, padZero, dateToString };
