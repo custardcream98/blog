@@ -87,7 +87,7 @@ const ProjectAd = ({
   );
 };
 
-const Wrapper = styled.div<WrapperProps>`
+const Wrapper = styled.aside<WrapperProps>`
   display: flex;
   align-items: center;
 
