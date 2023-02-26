@@ -13,7 +13,7 @@ const ResultsMark = styled.mark`
   border-radius: 5px;
 `;
 
-export default (query: string) => {
+const useSearchResults = (query: string) => {
   const [searchResults, setSearchResults] = useState<
     SearchedPostCardData[]
   >([]);
@@ -77,3 +77,5 @@ export default (query: string) => {
 
   return { searchResults, clearSearchedResults };
 };
+
+export default useSearchResults;

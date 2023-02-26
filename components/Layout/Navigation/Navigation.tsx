@@ -20,7 +20,7 @@ import BlogIcon from "components/Common/BlogIcon";
 import Searchbar from "components/Searchbar";
 
 import { isDarkAtom } from "lib/atoms";
-import { useWindowSize } from "lib/hook/useWindowSize";
+import useWindowSize from "lib/hook/useWindowSize";
 import { toggleIsDarkmodeActivatedOnLocal } from "lib/localStorage";
 import { ResponsiveIconButton } from "components/Common/IconButton";
 

@@ -9,7 +9,7 @@ import {
   toggleIsLikedOnLocal,
 } from "lib/localStorage";
 
-export default (postTitle: string) => {
+const useLikeCount = (postTitle: string) => {
   const [likeCount, setLikeCount] = useState(0);
   const [isLiked, setIsLiked] = useState(false);
 
@@ -39,3 +39,5 @@ export default (postTitle: string) => {
 
   return { likeCount, isLiked, onLikeClick };
 };
+
+export default useLikeCount;

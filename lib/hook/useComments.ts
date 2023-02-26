@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import type ICommentData from "types/comment";
 import { getComments } from "lib/firebaseSetup/firebaseApps";
 
-export default (postTitle: string) => {
+const useComments = (postTitle: string) => {
   const [comments, setComments] = useState<ICommentData[]>(
     []
   );
@@ -18,3 +18,5 @@ export default (postTitle: string) => {
 
   return comments;
 };
+
+export default useComments;

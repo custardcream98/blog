@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { getViewCount } from "lib/firebaseSetup/firebaseApps";
 
-export default (postTitle: string) => {
+const useViewCount = (postTitle: string) => {
   const [viewCount, setViewCount] = useState(0);
 
   useEffect(() => {
@@ -15,3 +15,5 @@ export default (postTitle: string) => {
 
   return viewCount;
 };
+
+export default useViewCount;
