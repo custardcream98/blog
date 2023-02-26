@@ -4,20 +4,16 @@ import { IconType } from "react-icons";
 import styled, { useTheme } from "styled-components";
 import useWindowSize from "lib/hook/useWindowSize";
 
-type Props<T = React.ElementType<any>> =
-  T extends React.ElementType<any>
-    ? {
-        icon: IconType;
-        title: string;
-        size?: string;
-        buttonAs?: T;
-      } & ComponentPropsWithoutRef<T>
-    : {
-        icon: IconType;
-        title: string;
-        size?: string;
-        buttonAs?: "button";
-      } & ComponentPropsWithoutRef<"button">;
+type ClickableComponents = "a" | "button";
+
+type Props = {
+  icon: IconType;
+  title: string;
+  size?: string;
+  buttonAs?: ClickableComponents;
+  href?: string;
+  target?: string;
+} & ComponentPropsWithoutRef<"button">;
 
 const IconButton = forwardRef<HTMLButtonElement, Props>(
   function IconButtonForwardRef(
