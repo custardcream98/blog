@@ -3,6 +3,9 @@ import type { AppProps } from "next/app";
 
 import ThemeProviderLayer from "components/Layout/ThemeProviderLayer";
 import Layout from "components/Layout/Layout";
+import ProjectAd from "components/Common/ProjectAd";
+
+import DevportImage from "public/static/ad/devport.png";
 
 import "@fontsource/noto-sans/300.css";
 import "@fontsource/noto-sans/500.css";
@@ -49,6 +52,12 @@ function MyApp({ Component, pageProps }: AppProps) {
         <Layout>
           <Component {...pageProps} />
         </Layout>
+        <ProjectAd
+          projectName="이력서 기반 예상 면접 질문 생성기"
+          projectLink="https://dev-port-custardcream98.vercel.app/"
+          repositoryLink="https://github.com/custardcream98/DevPort"
+          projectImage={DevportImage}
+        />
       </ThemeProviderLayer>
     </RecoilRoot>
   );
