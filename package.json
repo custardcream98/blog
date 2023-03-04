@@ -22,6 +22,7 @@
     "@next/bundle-analyzer": "^13.0.5",
     "@vercel/og": "^0.0.19",
     "axios": "^0.27.2",
+    "feed": "^4.2.2",
     "firebase": "^9.9.1",
     "framer-motion": "^6.5.1",
     "glob": "^8.0.3",
