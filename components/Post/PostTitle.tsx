@@ -101,7 +101,7 @@ const PostTitle = ({
             width={1200}
             height={630}
             placeholder="blur"
-            blurDataURL="/static/img/thumbnail_placeholder.png"
+            blurDataURL="/static/img/thumbnail_placeholder.webp"
           />
         )}
     </>
