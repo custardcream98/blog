@@ -6,10 +6,7 @@ import HeroPost from "components/Home/HeroPost";
 import Meta from "components/Layout/Meta";
 import Intro from "components/Home/Intro";
 import Paging from "components/Common/Paging";
-import {
-  Container,
-  Title,
-} from "components/Common/styledComponents";
+import { Container } from "components/Common/styledComponents";
 
 import check404 from "lib/check404";
 import PostByPageArr from "cache/postByPageArr.json";
@@ -59,9 +56,9 @@ const Index = ({ pageLength, posts }: Props) => {
       <Meta type="default" />
       <Intro />
       <Container ref={heroPostsRef}>
-        <Title as="h2" id="Posts_Title">
+        <h2 id="Posts_Title" className="sr-only">
           {"<Posts />"}
-        </Title>
+        </h2>
         <HeroPostList>
           {posts.map((post, i) => (
             <HeroPost

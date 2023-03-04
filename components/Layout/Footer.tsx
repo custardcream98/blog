@@ -5,7 +5,7 @@ import { LinkDecorated } from "components/Common/styledComponents";
 import LogoTitleSpan from "components/Common/LogoTitleSpan";
 
 const Container = styled.footer`
-  width: 100%;
+  width: 85vw;
   max-width: 800px;
 
   display: flex;
@@ -42,7 +42,7 @@ const Container = styled.footer`
     font-weight: inherit;
   }
   address ul li + li {
-    padding-left: 0.5rem;
+    padding-left: 0.7rem;
   }
   small {
     color: ${({ theme }) => theme.subTextColor};

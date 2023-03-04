@@ -1,127 +1,128 @@
-import styled from "styled-components";
-import { motion } from "framer-motion";
-import { useRecoilValue } from "recoil";
-import { gradientTextColorSelector } from "lib/atoms";
+import Image from "next/image";
+import styled, { keyframes } from "styled-components";
 
-const TitleSpan = styled(motion.span)`
-  text-align: center;
-  font-weight: 900;
-  font-size: 13vw;
-  line-height: 1;
-  font-family: "Poppins";
-  font-weight: 800;
-  @media (min-width: 800px) {
-    font-size: 104px;
+const textClipKeyframes = keyframes`
+  to {
+    background-position: 200% center;
   }
 `;
 
-const Title1 = styled(TitleSpan)`
-  letter-spacing: -0.09rem;
-`;
+const Wrapper = styled.div`
+  width: 90vw;
+  max-width: 800px;
+  margin: 5rem auto 2rem;
 
-const Title2 = styled(TitleSpan)`
-  letter-spacing: -0.13rem;
+  display: flex;
+  flex-direction: column;
 `;
 
 const TitleContainer = styled.p`
-  text-align: center;
-  padding-top: 3rem;
+  font-family: "Poppins";
+  font-size: 3.5rem;
+  line-height: 1.2;
+  font-weight: 600;
+
+  em {
+    background-image: linear-gradient(
+      -225deg,
+      #3c2395 0%,
+      #44107a 17%,
+      #ff1361 33%,
+      #fff800 50%,
+      #ff1361 66%,
+      #44107a 83%,
+      #3c2395 100%
+    );
+    background-size: 200% auto;
+    color: #fff;
+    background-clip: text;
+    display: inline-block;
+    height: 4.4rem;
+
+    text-fill-color: transparent;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    -webkit-background-clip: text;
+
+    animation: ${textClipKeyframes} 3s linear infinite;
+  }
+
+  @media (max-width: 800px) {
+    align-self: center;
+    font-size: 2rem;
+    em {
+      height: 2.5rem;
+    }
+  }
 `;
 
-const title1Var = (stringColor: string) => ({
-  start: {
-    backgroundClip: "text",
-    WebkitBackgroundClip: "text",
-    WebkitTextFillColor: "transparent",
-    backgroundImage:
-      "linear-gradient(90deg, rgb(129, 1, 188), rgb(255, 15, 163))",
-  },
-  end: {
-    backgroundClip: "text",
-    WebkitBackgroundClip: "text",
-    WebkitTextFillColor: "transparent",
-    backgroundImage: [
-      "linear-gradient(90deg, rgb(129, 1, 188), rgb(255, 15, 163))",
-      stringColor,
-      "linear-gradient(90deg, rgb(129, 1, 188), rgb(255, 15, 163))",
-    ],
-    transition: {
-      type: "linear",
-      duration: 7.5,
-      repeat: Infinity,
-    },
-  },
-});
+const IntroName = styled.strong`
+  display: block;
+  font-size: 1.2rem;
+  font-weight: 600;
+  margin-bottom: 0.5rem;
+  font-family: "Poppins";
+  color: ${({ theme }) => theme.textColor};
 
-const title2Var = (stringColor: string) => ({
-  start: {
-    backgroundClip: "text",
-    WebkitBackgroundClip: "text",
-    WebkitTextFillColor: "transparent",
-    backgroundImage: stringColor,
-  },
-  end: {
-    backgroundClip: "text",
-    WebkitBackgroundClip: "text",
-    WebkitTextFillColor: "transparent",
-    backgroundImage: [
-      stringColor,
-      "linear-gradient(90deg, rgb(223, 56, 56), rgb(255, 200, 0))",
-      stringColor,
-    ],
-    transition: {
-      type: "linear",
-      duration: 7.5,
-      repeat: Infinity,
-    },
-  },
-});
+  @media (max-width: 800px) {
+    font-size: 1rem;
+    margin-bottom: 0.2rem;
+  }
+`;
 
 const IntroParagraph = styled.p`
-  width: 70vw;
-  max-width: 600px;
-  margin: 0 auto auto;
-
-  padding: 3rem 0;
-  line-height: 1.75;
   font-size: 1rem;
-  text-align: center;
-  word-break: keep-all;
-  color: ${(props) => props.theme.subTextColor};
+
+  color: ${({ theme }) => theme.subTextColor};
+
+  line-height: 1.2;
+
+  text-align: end;
+
   @media (max-width: 800px) {
     font-size: 0.8rem;
   }
 `;
 
+const ImageWrapper = styled.span`
+  display: inline-block;
+  border-radius: 50%;
+
+  overflow: hidden;
+  width: 90px;
+  height: 90px;
+  margin-left: 1rem;
+  border: 2px solid ${({ theme }) => theme.subTextColor};
+`;
+
+const ProfileWrapper = styled.div`
+  margin-top: 5rem;
+  align-self: flex-end;
+
+  display: flex;
+  align-items: center;
+`;
+
 const Intro = () => {
-  const stringColor = useRecoilValue(
-    gradientTextColorSelector
-  );
   return (
-    <>
+    <Wrapper>
       <TitleContainer>
-        <Title1
-          variants={title1Var(stringColor)}
-          initial="start"
-          animate="end"
-        >
-          Dedicated to
-        </Title1>
-        <br />
-        <Title2
-          variants={title2Var(stringColor)}
-          initial="start"
-          animate="end"
-        >
-          CODING
-        </Title2>
+        Dedicated to <em>Coding.</em>
       </TitleContainer>
-      <IntroParagraph>
-        예쁘고 간결한 것을 정말 좋아하는 개발자 박시우의
-        블로그입니다. 공부한 것들, 공유하고 싶은 내용을
-        올립니다.
-      </IntroParagraph>
-    </>
+      <ProfileWrapper>
+        <IntroParagraph>
+          <IntroName>Shi Woo, Park</IntroName>
+          <span>만들고 싶으면 만들어야지.</span>
+        </IntroParagraph>
+        <ImageWrapper>
+          <Image
+            src="/static/img/profile.webp"
+            width={150}
+            height={150}
+          />
+        </ImageWrapper>
+      </ProfileWrapper>
+    </Wrapper>
   );
 };
 export default Intro;

@@ -18,6 +18,7 @@ import "@fontsource/noto-sans-kr/900.css";
 import "@fontsource/nanum-myeongjo";
 import "@fontsource/source-code-pro/800.css";
 import "@fontsource/poppins/800.css";
+import "@fontsource/poppins/600.css";
 
 import "../styles/reset.css";
 import "../styles/font.css";
