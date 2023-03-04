@@ -141,9 +141,12 @@ export function getPrevNextPosts(
 export const getAboutContent = () =>
   fs.readFileSync(aboutPageDirectory, "utf8");
 
-export async function getOgImage(title: string) {
-  const delay = (ms: number) =>
-    new Promise((resolve) => setTimeout(resolve, ms));
+const delay = (ms: number) =>
+  new Promise((resolve) => setTimeout(resolve, ms));
+
+export async function getOgImage(
+  title: string
+): Promise<string> {
   console.log(`Currently Deploying Thumbnail: ${title}`);
 
   while (true) {
@@ -165,6 +168,16 @@ export async function getOgImage(title: string) {
       await delay(10000);
     }
   }
+}
+
+export async function getAllOgImages(postTitles: string[]) {
+  const coverImages = await Promise.all(
+    postTitles.map((title) => getOgImage(title))
+  ).then((res) =>
+    res.map((url) => url.replace("&", "%26"))
+  );
+
+  return coverImages;
 }
 
 export function getPostByCategory(category: string) {

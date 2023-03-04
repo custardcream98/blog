@@ -5,19 +5,21 @@ import { Container } from "components/Common/styledComponents";
 import PostTitle from "components/Post/PostTitle";
 import Comments from "components/Comments";
 import PrevNextPost from "components/Post/PrevNextPost";
+import MarkdownBody from "components/Common/MarkdownBody";
 
 import {
   getPostBySlug,
   getAllPosts,
-  getOgImage,
   getPrevNextPosts,
+  getAllOgImages,
+  getOgImage,
 } from "lib/utils/posts";
 import markdownToHtml from "lib/utils/markdownToHtml";
 import { createPostDoc } from "lib/firebaseSetup/firebaseApps";
 import check404 from "lib/check404";
-
-import MarkdownBody from "components/Common/MarkdownBody";
 import useComments from "lib/hook/useComments";
+import generateRSSFeed from "lib/rss";
+
 import type PostType from "types/post";
 
 const PostSection = styled.section`
@@ -86,27 +88,29 @@ type Params = {
 };
 
 export async function getStaticProps({ params }: Params) {
-  const post = getPostBySlug(params.slug, [
+  const { slug } = params;
+
+  const post = getPostBySlug(slug, [
     "title",
     "date",
     "slug",
     "excerpt",
     "content",
     "ogImage",
-    "coverImage",
     "category",
     "series",
   ]);
 
-  const prevNextPosts = getPrevNextPosts(params.slug);
+  const prevNextPosts = getPrevNextPosts(slug);
 
   await createPostDoc(post.title);
 
   const content = await markdownToHtml(post.content || "");
 
   let coverImage = "";
-  if (process.env.NODE_ENV === "production")
+  if (process.env.NODE_ENV === "production") {
     coverImage = await getOgImage(post.title);
+  }
 
   return {
     props: {
@@ -126,16 +130,21 @@ export async function getStaticProps({ params }: Params) {
 }
 
 export async function getStaticPaths() {
-  const posts = getAllPosts(["slug"]);
+  const posts = getAllPosts(["slug", "title"]);
+
+  if (process.env.NODE_ENV !== "production") {
+    const coverImages = await getAllOgImages(
+      posts.map((post) => post.title)
+    );
+    await generateRSSFeed(coverImages);
+  }
 
   return {
-    paths: posts.map((post) => {
-      return {
-        params: {
-          slug: post.slug,
-        },
-      };
-    }),
+    paths: posts.map((post) => ({
+      params: {
+        slug: post.slug,
+      },
+    })),
     fallback: false,
   };
 }

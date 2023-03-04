@@ -1,5 +1,4 @@
 import { useEffect, useRef } from "react";
-import { GetServerSideProps } from "next";
 import { useRouter } from "next/router";
 import styled from "styled-components";
 
@@ -13,9 +12,10 @@ import {
 } from "components/Common/styledComponents";
 
 import check404 from "lib/check404";
-import type PostType from "types/post";
-
 import PostByPageArr from "cache/postByPageArr.json";
+
+import type PostType from "types/post";
+import type { GetServerSideProps } from "next";
 
 const PAGE_SCALE = PostByPageArr.length;
 
