@@ -1,39 +1,57 @@
 import { useLayoutEffect, useState } from "react";
 import styled from "styled-components";
+
 import { LinkDecorated } from "components/Common/styledComponents";
+import LogoTitleSpan from "components/Common/LogoTitleSpan";
 
 const Container = styled.footer`
-  height: 100px;
   width: 100%;
+  max-width: 800px;
+
   display: flex;
-  flex-direction: column;
-  justify-content: center;
+  justify-content: space-between;
   align-items: center;
-  box-shadow: ${(props) => props.theme.footerShadow};
+
+  box-shadow: ${({ theme }) => theme.footerShadow};
   font-size: 0.9rem;
   font-weight: 300;
-  margin-top: 0.5rem;
+  margin: 5rem auto 2rem;
 
-  @media (max-width: 780px) {
+  @media (max-width: 800px) {
+    margin-top: 3rem;
+    width: 90vw;
+
+    flex-direction: column;
     font-size: 11px;
+
+    align-items: flex-start;
   }
 
+  address {
+    margin-left: auto;
+    @media (max-width: 800px) {
+      margin: 0.7rem 0 0 0;
+    }
+  }
   address ul {
     display: flex;
   }
   address ul li {
-    color: ${(props) => props.theme.subTextColor};
+    color: ${({ theme }) => theme.subTextColor};
     font-size: inherit;
     font-weight: inherit;
-    padding-left: 0.3rem;
   }
-  address ul li:nth-of-type(1) {
-    padding-left: 0rem;
+  address ul li + li {
+    padding-left: 0.5rem;
   }
   small {
-    color: ${(props) => props.theme.subTextColor};
-    margin-bottom: 0.4rem;
+    color: ${({ theme }) => theme.subTextColor};
   }
+`;
+
+const StyledLogoTitleSpan = styled(LogoTitleSpan)`
+  display: block;
+  margin-bottom: 0.3rem;
 `;
 
 const Footer = () => {
@@ -46,6 +64,9 @@ const Footer = () => {
   return (
     <Container>
       <small>
+        <StyledLogoTitleSpan>
+          shiwoo.dev
+        </StyledLogoTitleSpan>
         &copy; {yearString} custardcream98. All rights
         reserved.
       </small>
@@ -56,7 +77,7 @@ const Footer = () => {
               href="https://github.com/custardcream98"
               target="_blank"
             >
-              Github
+              GitHub
             </LinkDecorated>
           </li>
           <li>
@@ -73,6 +94,11 @@ const Footer = () => {
               target="_blank"
             >
               Email
+            </LinkDecorated>
+          </li>
+          <li>
+            <LinkDecorated href="/rss.xml" target="_blank">
+              RSS
             </LinkDecorated>
           </li>
         </ul>

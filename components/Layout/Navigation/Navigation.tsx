@@ -17,6 +17,7 @@ import { useRouter } from "next/router";
 
 import { LinkDecorated } from "components/Common/styledComponents";
 import BlogIcon from "components/Common/BlogIcon";
+import LogoTitleSpan from "components/Common/LogoTitleSpan";
 import Searchbar from "components/Searchbar";
 
 import { isDarkAtom } from "lib/atoms";
@@ -109,16 +110,6 @@ const DarkmodeSwitch = styled.button`
   }
 `;
 
-const Title = styled.span`
-  color: ${(props) => props.theme.textColor};
-  font: 800 1rem ${(props) => props.theme.codingFont};
-  letter-spacing: -0.03rem;
-  margin-left: 7px;
-  @media (max-width: 800px) {
-    font-size: 0.9rem;
-  }
-`;
-
 const LogoTitle = styled.h1`
   display: flex;
   justify-content: flex-start;
@@ -142,6 +133,10 @@ const NavItemLi = styled.li`
 
 const NavItemWrapper = styled.div`
   display: flex;
+`;
+
+const StyledLogoTitleSpan = styled(LogoTitleSpan)`
+  margin-left: 7px;
 `;
 
 type NavItemProps = {
@@ -198,11 +193,11 @@ const Navigation = () => {
           <a>
             <LogoTitle>
               <BlogIcon color={theme.textColor} size={1} />
-              <Title
+              <StyledLogoTitleSpan
                 className={width! <= 400 ? "sr-only" : ""}
               >
-                Custardcream
-              </Title>
+                shiwoo.dev
+              </StyledLogoTitleSpan>
               <span className="sr-only">
                 : FE 개발자 박시우의 기술 블로그
               </span>

@@ -132,7 +132,7 @@ export async function getStaticProps({ params }: Params) {
 export async function getStaticPaths() {
   const posts = getAllPosts(["slug", "title"]);
 
-  if (process.env.NODE_ENV !== "production") {
+  if (process.env.NODE_ENV === "production") {
     const coverImages = await getAllOgImages(
       posts.map((post) => post.title)
     );
