@@ -6,8 +6,6 @@
 
 [이력서 Web](https://custardcream98.github.io/resume/)
 
-[Blog](https://custardcream.vercel.app/)
-
 # 🧑‍💻 저는 이런 일을 했어요!
 
 ## 스냅 사진사 SNS, Snappy
@@ -18,7 +16,7 @@ _4인, `JavaScript`, `React`, `styled-components`, `eslint`_
 
 [발표 자료 링크](https://www.icloud.com/keynote/010JUfnE6aCei9AuFDNTjTmvw)
 
-[Github Repo](https://github.com/likelion-devone/snappy)
+[GitHub Repo](https://github.com/likelion-devone/snappy)
 
 스냅 사진사와 일반 사용자를 매칭하는 SNS 서비스입니다. FE 4인이 모여 개발한 프로젝트로, 감사하게도 제가 팀장을 맡아 프로젝트를 진행했습니다.
 
@@ -32,7 +30,7 @@ _1인, `TypeScript`, `React`, `styled-components`, `React Helmet`, `Firebase`, `
 
 [커뮤니티 링크](https://share-it-rust.vercel.app/)
 
-[Github Repo](https://github.com/custardcream98/share-it)
+[GitHub Repo](https://github.com/custardcream98/share-it)
 
 '코드를 자유롭게 나누고 피드백을 주고받는 공간이 있었으면 좋겠다'는 생각으로 개발을 시작한 작은 커뮤니티입니다. `Firebase`를 통해 얻은 Auth를 철저히 확인하는 라우팅 및 커스텀 훅을 설계한 부분이 재밌었습니다. 백엔드 사이드에서도 `Firebase`와 `Express.js`를 활용해 사용자가 댓글을 남길 때 프론트로부터 받은 Auth Token을 검증 후 통과한다면 글 작성자에게 댓글 알람 메일을 보내는 엔드포인트를 하나 개발하기도 했습니다.
 
@@ -44,7 +42,7 @@ _1인, 연구실 연구과제, `TypeScript`, `Next.js`, `recoil`, `Tailwind CSS`
 
 [배포된 설문지](https://goodrider-interview-web.vercel.app/)
 
-[Github Repo](https://github.com/custardcream98/goodrider-interview-web)
+[GitHub Repo](https://github.com/custardcream98/goodrider-interview-web)
 
 단순한 설문지가 아니라, 사용자가 `<input type="range"/>`를 움직일 때마다 AHP 방법론에 의거해 사용자의 응답이 일관성을 띄고 있는지 여부를 검증, 일관성에 방해가 되는 문제를 하이라이트하고 올바른 방향으로 수정하도록 하는 아주 복잡한 로직이 들어간 설문지입니다. 기본이 되는 코드는 파이썬으로 개발됐는데, 슬라이더를 움직이는 순간 실시간으로 검증이 필요했기에 클라이언트 사이드에서 계산을 구현하기 위해 TS로 마이그레이션 해왔고, 그 과정에서 [일부 로직을 수정하거나 리팩토링](https://custardcream.vercel.app/posts/%EB%B3%B5%EC%9E%A1%ED%95%98%EA%B2%8C%20%EA%B5%AC%EC%84%B1%EB%90%9C%20if%EB%AC%B8%20%EB%A6%AC%ED%8C%A9%ED%86%A0%EB%A7%81%ED%95%98%EA%B8%B0)까지 했습니다.
 
@@ -58,7 +56,7 @@ _1인, `TypeScript`, `Next.js`, `Express.js`, `styled-components`_
 
 [블로그](https://custardcream.vercel.app/)
 
-[Github Repo](https://github.com/custardcream98/blog-from-beginning-to-end)
+[GitHub Repo](https://github.com/custardcream98/blog-from-beginning-to-end)
 
 저만의 개발 블로그는 제 개성을 나타내는 도구 중 하나라고 생각해요. 그런 의미에서 흔한 `jekyll`로 생성된 테마의 블로그를 운영하고 싶지 않았고, 직접 블로그를 하나 하나 개발하기로 했어요.
 
@@ -72,13 +70,13 @@ _1인, `React`, `Redux Toolkit`, `Firebase`_
 
 [사용해보기](https://custardcream98.github.io/smoquit/)
 
-[Github Repo](https://github.com/custardcream98/smoquit)
+[GitHub Repo](https://github.com/custardcream98/smoquit)
 
 `React.js`, `React-Redux`, `React-Bootstrap`, `Firebase` 등의 스택을 사용해 개발한 금연 타이머입니다. 평소에 금연을 도전하지만 계속해서 실패했던 이유가 금연에 대한 동기 부여가 부족했기 때문이라고 생각했고, 금연을 시작하면 실시간으로 지금까지 지킨 금연이 내게 얼마나 큰 이익을 줬는지 보여주는 Web App을 만들어야겠다 생각했습니다.
 
 로그인, 도전 내역 조회(최신순, 기록순), 프로필 수정, 리더보드 등의 기능을 구현했습니다.
 
-Github Pages로 앱을 Deploy하며 '왜 `HashRouter`로 배포하지 않으면 안되는걸까?' 라는 물음을 해결하며 Web Server가 정적인 웹사이트만을 제공하는 경우 SPA의 Routing을 어떻게 하면 좋을지에 대해 연구했고, Hashed Route(Fragment)가 아닌 `BrowserRouter`를 이용해 정상적인 path를 가진 React App을 배포할 수 있었습니다.
+GitHub Pages로 앱을 Deploy하며 '왜 `HashRouter`로 배포하지 않으면 안되는걸까?' 라는 물음을 해결하며 Web Server가 정적인 웹사이트만을 제공하는 경우 SPA의 Routing을 어떻게 하면 좋을지에 대해 연구했고, Hashed Route(Fragment)가 아닌 `BrowserRouter`를 이용해 정상적인 path를 가진 React App을 배포할 수 있었습니다.
 
 ## 경로 기반 일정 스케줄링 크로스플랫폼 어플리케이션 개발
 
@@ -86,9 +84,9 @@ _2인, 풀스택으로 참여, `Flutter`, `Django`, `PostgreSQL`_
 
 [졸업작품 설명 보러가기](https://uos-urbanscience.org/archives/uos_portfolio/%eb%8f%99%ec%84%a0%ec%9d%84-%ea%b3%a0%eb%a0%a4%ed%95%9c-all-in-one-%ec%9d%bc%ec%a0%95-%ec%8a%a4%ec%bc%80%ec%a4%84%eb%a7%81-%ec%84%9c%eb%b9%84%ec%8a%a4)
 
-[Github Repo](https://github.com/Dayplan-it/Dayplan.it)
+[GitHub Repo](https://github.com/Dayplan-it/Dayplan.it)
 
-`Flutter`와 `Django`, `PostgreSQL`을 이용해 크로스플랫폼 어플리케이션을 개발했습니다. 개발 전반에 걸쳐서 풀스택 개발자로서 참여했으며, Github를 이용한 Git-flow 기반의 협업을 경험했고, Spatial Database 설계 및 구축, AWS를 이용한 서버 Deploy등을 해봤습니다.
+`Flutter`와 `Django`, `PostgreSQL`을 이용해 크로스플랫폼 어플리케이션을 개발했습니다. 개발 전반에 걸쳐서 풀스택 개발자로서 참여했으며, GitHub를 이용한 Git-flow 기반의 협업을 경험했고, Spatial Database 설계 및 구축, AWS를 이용한 서버 Deploy등을 해봤습니다.
 
 특히, '일정'이라는 복잡한 데이터를 어떻게 하면 효율적으로 Database에 저장할 수 있을지, Server와 Front-End에서 각각 데이터를 어떻게 Serialize, Deserialize 할 수 있을지, 또 이를 위해 각 객체를 어떻게 설계해야 할지 등을 유기적으로 고민하는 과정을 거치며 크게 성장했어요.
 
