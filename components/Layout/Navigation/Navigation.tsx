@@ -7,23 +7,17 @@ import {
 } from "react";
 import Link from "next/link";
 import styled, { useTheme } from "styled-components";
-import { useRecoilState } from "recoil";
-
-import { IconContext } from "react-icons";
-import { ImSun } from "react-icons/im";
-import { BsFillMoonFill } from "react-icons/bs";
 import { HiSearch } from "react-icons/hi";
 import { useRouter } from "next/router";
 
-import { LinkDecorated } from "components/Common/styledComponents";
 import BlogIcon from "components/Common/BlogIcon";
 import LogoTitleSpan from "components/Common/LogoTitleSpan";
 import Searchbar from "components/Searchbar";
-
-import { isDarkAtom } from "lib/atoms";
-import useWindowSize from "lib/hook/useWindowSize";
-import { toggleIsDarkmodeActivatedOnLocal } from "lib/localStorage";
 import { ResponsiveIconButton } from "components/Common/IconButton";
+import NavList, { NavItem } from "./NavList";
+import DarkmodeSwitch from "./DarkmodeSwitch";
+
+import useWindowSize from "lib/hook/useWindowSize";
 
 const Header = styled.header`
   height: 50px;
@@ -41,6 +35,8 @@ const Container = styled.div`
   align-items: center;
 
   transition: top ease 0.3s;
+
+  top: -1px;
 
   ::before {
     content: " ";
@@ -68,48 +64,6 @@ const Nav = styled.nav`
   }
 `;
 
-const NavMenu = styled.ul`
-  display: flex;
-  justify-content: center;
-  align-items: center;
-`;
-
-const DarkmodeSwitch = styled.button`
-  position: absolute;
-  right: -29px;
-
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  width: 26px;
-  height: 26px;
-
-  padding: 3px;
-  background-color: transparent;
-  border: none;
-  cursor: pointer;
-  transition: scale 0.2s ease;
-  :hover {
-    scale: 1.1;
-  }
-  :active {
-    scale: 0.8;
-  }
-  @media (max-width: 800px) {
-    position: fixed;
-    width: 35px;
-    height: 35px;
-    bottom: 20px;
-    right: 20px;
-    padding: 6px;
-    box-shadow: ${(props) => props.theme.darkmodeShadow};
-    background-color: ${(props) =>
-      props.theme.navBackgroundColor};
-    backdrop-filter: blur(13px);
-    border-radius: 50%;
-  }
-`;
-
 const LogoTitle = styled.h1`
   display: flex;
   justify-content: flex-start;
@@ -117,18 +71,6 @@ const LogoTitle = styled.h1`
   &:hover {
     cursor: pointer;
   }
-`;
-
-const NavItemLinkDecorated = styled(LinkDecorated)`
-  font-size: 1rem;
-  margin: 0 0.25rem;
-  @media (max-width: 800px) {
-    font-size: 0.8rem;
-  }
-`;
-const NavItemLi = styled.li`
-  display: flex;
-  align-items: center;
 `;
 
 const NavItemWrapper = styled.div`
@@ -139,26 +81,9 @@ const StyledLogoTitleSpan = styled(LogoTitleSpan)`
   margin-left: 7px;
 `;
 
-type NavItemProps = {
-  href: string;
-  content: string;
-};
-
-const NavItem = ({ href, content }: NavItemProps) => (
-  <NavItemLi>
-    <Link href={href} passHref>
-      <NavItemLinkDecorated>{content}</NavItemLinkDecorated>
-    </Link>
-  </NavItemLi>
-);
-
 const Navigation = () => {
-  const [isDark, setIsDark] = useRecoilState(isDarkAtom);
   const [isSearchbarOn, setIsSearchbarOn] = useState(false);
-  const toggleSwitch = () => {
-    setIsDark((prev) => !prev);
-    toggleIsDarkmodeActivatedOnLocal();
-  };
+
   const theme = useTheme();
   const { width } = useWindowSize();
 
@@ -205,15 +130,12 @@ const Navigation = () => {
           </a>
         </Link>
         <NavItemWrapper>
-          <NavMenu>
-            <NavItem href="/#Posts_Title" content="Posts" />
-            <NavItem
-              href="/categories"
-              content="Categories"
-            />
-            <NavItem href="/series" content="Series" />
-            <NavItem href="/about" content="About" />
-          </NavMenu>
+          <NavList>
+            <NavItem href="/#Posts_Title">Posts</NavItem>
+            <NavItem href="/categories">Categories</NavItem>
+            <NavItem href="/series">Series</NavItem>
+            <NavItem href="/about">About</NavItem>
+          </NavList>
           <StyledResponsiveIconButton
             title="검색 버튼입니다."
             type="button"
@@ -222,29 +144,16 @@ const Navigation = () => {
             icon={HiSearch}
             onClick={() => setIsSearchbarOn(true)}
           />
-          <article>
-            <DarkmodeSwitch onClick={toggleSwitch}>
-              <span className="sr-only">
-                다크모드 스위치
-              </span>
-              <IconContext.Provider value={{ size: "90%" }}>
-                {isDark ? (
-                  <BsFillMoonFill color="#e5c704" />
-                ) : (
-                  <ImSun color="#e5c704" />
-                )}
-              </IconContext.Provider>
-            </DarkmodeSwitch>
-          </article>
+          <DarkmodeSwitch />
         </NavItemWrapper>
       </Nav>
     ),
-    [theme, width, isDark]
+    [theme, width]
   );
 
   return (
     <Header>
-      <Container ref={navRef} style={{ top: "-1px" }}>
+      <Container ref={navRef}>
         {nav}
         <Searchbar
           isSearchbarOn={isSearchbarOn}

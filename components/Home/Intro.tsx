@@ -17,7 +17,7 @@ const Wrapper = styled.div`
 `;
 
 const TitleContainer = styled.p`
-  font-family: "Poppins";
+  font-family: ${({ theme }) => theme.titleFont};
   font-size: 3.5rem;
   line-height: 1.2;
   font-weight: 600;
@@ -61,12 +61,12 @@ const IntroName = styled.strong`
   font-size: 1.2rem;
   font-weight: 600;
   margin-bottom: 0.5rem;
-  font-family: "Poppins";
+  font-family: ${({ theme }) => theme.titleFont};
   color: ${({ theme }) => theme.textColor};
 
   @media (max-width: 800px) {
-    font-size: 1rem;
-    margin-bottom: 0.2rem;
+    font-size: 0.9rem;
+    margin-bottom: 0.3rem;
   }
 `;
 
@@ -80,7 +80,7 @@ const IntroParagraph = styled.p`
   text-align: end;
 
   @media (max-width: 800px) {
-    font-size: 0.8rem;
+    font-size: 0.7rem;
   }
 `;
 
@@ -93,6 +93,12 @@ const ImageWrapper = styled.span`
   height: 90px;
   margin-left: 1rem;
   border: 2px solid ${({ theme }) => theme.subTextColor};
+
+  @media (max-width: 800px) {
+    width: 65px;
+    height: 65px;
+    margin-left: 0.7rem;
+  }
 `;
 
 const ProfileWrapper = styled.div`
@@ -117,8 +123,8 @@ const Intro = () => {
         <ImageWrapper>
           <Image
             src="/static/img/profile.webp"
-            width={150}
-            height={150}
+            width={90}
+            height={90}
           />
         </ImageWrapper>
       </ProfileWrapper>
