@@ -1,5 +1,4 @@
 import {
-  Children,
   useCallback,
   useEffect,
   useRef,
@@ -17,17 +16,14 @@ import SearchResults from "./SearchResults";
 import useSearchResults from "lib/hook/useSearchResults";
 import SearchbarCloseButton from "./SearchbarCloseButton";
 
-const TRANSITION_DURATION = 500;
+const TRANSITION_DURATION = 200;
 
 type SearchbarStyleProps = {
-  containerWidth: number;
+  isSearchbarOn: boolean;
 };
 
 const SearchbarContainer = styled.form<SearchbarStyleProps>`
-  visibility: ${({ containerWidth }) =>
-    containerWidth !== 0 ? "visible" : "hidden"};
-
-  width: ${({ containerWidth }) => containerWidth}%;
+  width: 100%;
   height: 100%;
 
   position: absolute;
@@ -35,27 +31,34 @@ const SearchbarContainer = styled.form<SearchbarStyleProps>`
 
   z-index: 101;
 
-  transition: all linear ${TRANSITION_DURATION}ms;
+  transition: all ease ${TRANSITION_DURATION}ms;
+
+  transform: translateY(
+    ${({ isSearchbarOn }) =>
+      isSearchbarOn ? "0" : "-105%"}
+  );
 
   background-color: ${({ theme }) => theme.bgColor};
 `;
 
 const SearchbarInput = styled.input`
   width: 100%;
-  height: 100%;
+  height: 80%;
 
-  padding: 20px;
+  padding: 0 20px;
 
   font-family: "Noto Sans", "Noto Sans KR", sans-serif;
   font-weight: 400;
   font-size: 1rem;
   border: none;
-  border-bottom: 2px solid
-    ${({ theme }) => theme.accentColor};
 
-  background: none;
+  border-radius: 9999px;
+  background: ${({ theme }) =>
+    theme.postElementBackgroundColor};
 
   color: ${({ theme }) => theme.textColor};
+
+  margin-right: 30px;
 
   :focus {
     outline: none;
@@ -92,6 +95,8 @@ export default function Searchbar({
     useRef<HTMLFormElement>(null);
   const buttonCloseSearchbarRef =
     useRef<HTMLButtonElement>(null);
+
+  const isResultExists = searchResults.length !== 0;
 
   const openSearchbarCallback = () => {
     if (!isSearchbarOn) {
@@ -179,7 +184,7 @@ export default function Searchbar({
       autoComplete="off"
       onSubmit={onSearchFormSubmit}
       onKeyDown={handleTabArrow}
-      containerWidth={isSearchbarOn ? 100 : 0}
+      isSearchbarOn={isSearchbarOn}
     >
       <label className="sr-only" htmlFor="search">
         검색어 입력란
@@ -205,37 +210,36 @@ export default function Searchbar({
           onClick={closeResults}
           hidden={!isSearchbarOn}
         />
-        {searchResults.length !== 0 && (
+        {isResultExists && (
           <SearchResults>
-            {Children.toArray(
-              searchResults.map((data, i) => (
-                <SearchResults.Item
-                  title={
-                    <SearchResults.ItemTitle>
-                      {data.titleNode}
-                    </SearchResults.ItemTitle>
-                  }
-                  content={
-                    <SearchResults.ItemContent>
-                      {data.contentNode}
-                    </SearchResults.ItemContent>
-                  }
-                  date={
-                    <SearchResults.ItemDate>
-                      {data.date}
-                    </SearchResults.ItemDate>
-                  }
-                  link={
-                    <SearchResults.ItemLink
-                      slug={data.slug}
-                      title={data.title}
-                      closeResults={closeResults}
-                    />
-                  }
-                  isLast={i === searchResults.length - 1}
-                />
-              ))
-            )}
+            {searchResults.map((data, i) => (
+              <SearchResults.Item
+                key={data.slug}
+                title={
+                  <SearchResults.ItemTitle>
+                    {data.titleNode}
+                  </SearchResults.ItemTitle>
+                }
+                content={
+                  <SearchResults.ItemContent>
+                    {data.contentNode}
+                  </SearchResults.ItemContent>
+                }
+                date={
+                  <SearchResults.ItemDate>
+                    {data.date}
+                  </SearchResults.ItemDate>
+                }
+                link={
+                  <SearchResults.ItemLink
+                    slug={data.slug}
+                    title={data.title}
+                    closeResults={closeResults}
+                  />
+                }
+                isLast={i === searchResults.length - 1}
+              />
+            ))}
           </SearchResults>
         )}
       </SearchbarWrapper>
