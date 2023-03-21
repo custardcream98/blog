@@ -1,0 +1,124 @@
+---
+title: "includes의 타입은 어떻게 대응하는게 좋을까"
+excerpt: "Array.includes() 메서드에 넣을 수 있는 값의 타입은 제 생각과 달랐습니다. 어떻게 하면 더 논리적인 타입을 사용해 대응할 수 있을까요?"
+date: "2023-03-22"
+category: ["TypeScript"]
+series: "Troubleshooting"
+---
+
+> `Array.includes()` 메서드에 넣을 수 있는 값의 타입은 제 생각과 달랐습니다. 어떻게 하면 더 논리적인 타입을 사용해 대응할 수 있을까요?
+
+# 코드
+
+```ts
+const RESTAURANT_TYPES = ["한식", "일식", "양식"] as const;
+
+type RestaurantType = typeof RESTAURANT_TYPES[number];
+
+const isRestaurantType = (
+  str: unknown
+): str is RestaurantType => {
+  if (typeof str !== "string") {
+    return false;
+  }
+
+  return RESTAURANT_TYPES.includes(str);
+};
+```
+
+`RESTAURANT_TYPES`라는 `ReadonlyArray`를 선언하고, 이를 활용해 `RestaurantType`을 선언했습니다.
+
+`isRestaurantType`은 인자로 넘어온 값이 `RestaurantType`인지 여부를 확인하는 타입 가드입니다. 확인하는 방법은 보시다시피 간단합니다. `includes` 메서드를 활용해 `str`을 `RESTAURANT_TYPES`가 가지고 있는지를 체크하는겁니다.
+
+하지만, 간단해 보이던 이 코드는 사실 오류를 내뿜는 코드입니다. 12번째 줄 return문의 **`RESTAURANT_TYPES.includes(str)`에서 이런 에러가 발생**합니다.
+
+![오류를_내뿜는_코드](../static/img/includes의_타입은_어떻게_대응하는게_좋을까/error.png)
+
+## `includes`의 타입
+
+```ts
+// es2016에 정의돼 있는 타입
+interface Array<T> {
+  includes(searchElement: T, fromIndex?: number): boolean;
+}
+```
+
+즉 `string` 배열이라면 인자의 타입 또한 `string`이어야 하고, `number` 배열이면 인자의 타입 또한 `number`여야 하는겁니다.
+
+위에서 보여드렸던 오류는 `RESTAURANT_TYPES` 배열이 `"한식" | "일식" | "양식"`의 유니온 리터럴 타입을 가지고 있기 때문입니다. 8번째 줄에서 `str`는 `string`으로 타입이 좁혀졌지만, 그것 조차 모자랐던거죠.
+
+## 타입 선언 덧씌우기
+
+오류의 원인을 파악하고 저는 한가지 의문이 들었습니다.
+
+`includes`가 하는 일은 배열이 주어진 인자를 포함하고 있는지 여부를 확인하는거고, 그렇다면 `includes`에 들어올 수 있는 인자는 무엇이든 가능해야 하는게 맞지 않을까요?
+
+배열이 어떻게 구성됐는지 알 수 없는 경우라면 더욱 더 이렇게 생각하는게 합리적이지 않을까요?
+
+그런 생각에 이런 타입 선언을 덧씌워 사용하려고 했습니다.
+
+```ts
+// @types/array.d.ts
+
+interface Array {
+  includes(searchElement: any, fromIndex?: number): boolean;
+}
+```
+
+이제 오류를 뿜지 않고, includes에 어떤 타입의 값이던 넣을 수 있습니다.
+
+![수정된 타입](../static/img/includes의_타입은_어떻게_대응하는게_좋을까/type.png)
+
+## 조금 더 우아하게?
+
+하지만, 이렇게 타입 선언을 임의로 수정해서 사용하는건 문제가 발생할 가능성이 있다는 생각이 들었습니다.
+
+조금 더 안전하게 처리하려면 결국엔 아래같은 방법이 그나마 유효할겁니다.
+
+```ts
+const RESTAURANT_TYPES = ["한식", "일식", "양식"] as const;
+
+type RestaurantType = typeof RESTAURANT_TYPES[number];
+
+const isRestaurantType = (
+  str: unknown
+): str is RestaurantType => {
+  if (typeof str !== "string") {
+    return false;
+  }
+
+  return RESTAURANT_TYPES.includes(str as RestaurantType);
+};
+```
+
+다만 이렇게 할 경우 `str`이 `"한식" | "일식" | "양식"` 타입이 맞다고 단언하고 진행된 결과이므로 논리적으로는 옳지 않은 선택이라는 생각이 듭니다. 위 코드 만으로는 `str`이 `string` 타입이라는 점만 보장됩니다. (물론 결과적으로 얻고자 하는건 얻을 수 있긴 하지만요.)
+
+`.includes` 메서드에 제네릭 타입이 적용됐다는건 "배열에 들어갈 수 있는 원소 중에 특정 원소가 들어있는지 여부"를 확인하고자 했던게 아닐까 라고 생각하고 다시 고민해봤습니다.
+
+그래서 나온 결과는 아래와 같습니다.
+
+```ts
+const RESTAURANT_TYPES = ["한식", "일식", "양식"] as const;
+
+type RestaurantType = typeof RESTAURANT_TYPES[number];
+
+const isRestaurantType = (
+  str: unknown
+): str is RestaurantType => {
+  if (typeof str !== "string") {
+    return false;
+  }
+
+  return (
+    RESTAURANT_TYPES as ReadonlyArray<string>
+  ).includes(str);
+};
+```
+
+타입 단언이 들어가있긴 하지만, `RESTAURANT_TYPES`는 `ReadonlyArray<string>` 타입이라는 점은 확실하게 보장된 사실이므로 논리적 비약이 없는 코드입니다.
+
+# 결론
+
+사실 마지막에 타입 단언문의 위치에 대해 고민했던 부분은 어떻게 보면 아무런 의미 없는 일이었을지도 모릅니다. 함수 외부로 단언문을 넘긴다던지 하는 문제도 아니었고 결국 이 코드를 작성하는 나 자신만 알고 넘어갔을 확률이 높은 부분이니까요. 두 방법 모두 (거의) 똑같은 결과를 주고 있기도 합니다.
+
+다만, 이런 부분 하나 하나 고민한다는 것 자체가 타입스크립트 개발자로서 한 단계 더 나아갈 수 있는 좋은 버릇이라는 생각이 듭니다. 어떻게 하면 더 논리적이고 섬세한 타입을 사용할 수 있을지 항상 고민해보고 또 좋은 내용이 있다면 간단하게 기록 해봐야겠습니다.
