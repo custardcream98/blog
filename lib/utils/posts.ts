@@ -174,7 +174,7 @@ export async function getAllOgImages(postTitles: string[]) {
   const coverImages = await Promise.all(
     postTitles.map((title) => getOgImage(title))
   ).then((res) =>
-    res.map((url) => url.replace("&", "%26"))
+    res.map((url) => url.replace("&", "&amp;"))
   );
 
   return coverImages;
