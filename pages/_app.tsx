@@ -55,7 +55,7 @@ function MyApp({ Component, pageProps }: AppProps) {
         </Layout>
         <ProjectAd
           projectName="이력서 기반 예상 면접 질문 생성기"
-          projectLink="https://dev-port-custardcream98.vercel.app/"
+          projectLink="https://devport.swygbro.com/"
           repositoryLink="https://github.com/custardcream98/DevPort"
           projectImage={DevportImage}
         />
