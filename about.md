@@ -12,9 +12,9 @@
 
 _4인, `JavaScript`, `React`, `styled-components`, `eslint`_
 
-[서비스 링크](https://devone-snappy.vercel.app/)
-
 [발표 자료 링크](https://www.icloud.com/keynote/010JUfnE6aCei9AuFDNTjTmvw)
+
+[발표 영상 링크](https://www.youtube.com/watch?v=PkcPliZGZ_0)
 
 [GitHub Repo](https://github.com/likelion-devone/snappy)
 
