@@ -123,6 +123,7 @@ const Intro = () => {
         <ImageWrapper>
           <Image
             src="/static/img/profile.webp"
+            alt="개발자 박시우의 프로필 이미지입니다."
             width={90}
             height={90}
           />
