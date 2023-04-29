@@ -1,11 +1,6 @@
+import { animatedGradientTextStyle } from "components/Common/styledComponents";
 import Image from "next/image";
-import styled, { keyframes } from "styled-components";
-
-const textClipKeyframes = keyframes`
-  to {
-    background-position: 200% center;
-  }
-`;
+import styled from "styled-components";
 
 const Wrapper = styled.div`
   width: 90vw;
@@ -33,18 +28,9 @@ const TitleContainer = styled.p`
       #44107a 83%,
       #3c2395 100%
     );
-    background-size: 200% auto;
-    color: #fff;
-    background-clip: text;
-    display: inline-block;
     height: 4.4rem;
 
-    text-fill-color: transparent;
-    -webkit-text-fill-color: transparent;
-    background-clip: text;
-    -webkit-background-clip: text;
-
-    animation: ${textClipKeyframes} 3s linear infinite;
+    ${animatedGradientTextStyle}
   }
 
   @media (max-width: 800px) {

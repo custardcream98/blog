@@ -18,5 +18,7 @@ declare module "styled-components" {
     codingFont: string;
     mainFont: string;
     titleFont: string;
+
+    resumeAccentColor: string;
   }
 }

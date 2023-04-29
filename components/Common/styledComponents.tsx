@@ -1,4 +1,4 @@
-import styled from "styled-components";
+import styled, { css, keyframes } from "styled-components";
 
 export const LinkDecorated = styled.a`
   word-break: keep-all;
@@ -31,4 +31,24 @@ export const Title = styled.strong`
   border-bottom: 3px solid #3a3e43;
   font-size: 1.4rem;
   font-weight: 700;
+`;
+
+const animatedGradientTextKeyframes = keyframes`
+  to {
+    background-position: 200% center;
+  }
+`;
+
+export const animatedGradientTextStyle = css`
+  background-size: 200% auto;
+  background-clip: text;
+  display: inline-block;
+
+  text-fill-color: transparent;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  -webkit-background-clip: text;
+
+  animation: ${animatedGradientTextKeyframes} 3s linear
+    infinite;
 `;
