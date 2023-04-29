@@ -11,7 +11,6 @@ const commonTheme = {
   mainFont:
     '"Noto Sans", "Noto Sans KR", -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji"',
   titleFont: '"Poppins", sans-serif',
-  resumeAccentColor: "#ffea00",
 };
 
 export const lightTheme: DefaultTheme = {
@@ -28,6 +27,13 @@ export const lightTheme: DefaultTheme = {
   darkmodeShadow:
     "rgba(50, 50, 93, 0.25) 0px 2px 5px -1px, rgba(0, 0, 0, 0.3) 0px 1px 3px -1px",
   accentColor: "#0070f3",
+
+  resumeAccentColor: "#ffbb00",
+  resumeTextColor: "#616161",
+  resumeStrongTextColor: "#333",
+  resumeDimTextColor: "#aaa",
+  resumeBadgeBackgroundColor: "#eee",
+  resumeBadgeTextColor: "#666",
 };
 
 export const darkTheme: DefaultTheme = {
@@ -44,4 +50,11 @@ export const darkTheme: DefaultTheme = {
   darkmodeShadow:
     "rgba(220, 205, 205, 0.25) 0px 2px 5px -1px, rgba(255, 255, 255, 0.3) 0px 1px 3px -1px",
   accentColor: "#3b96ff",
+
+  resumeAccentColor: "#ffea00",
+  resumeTextColor: "#ccc",
+  resumeStrongTextColor: "#fff",
+  resumeDimTextColor: "#858585",
+  resumeBadgeBackgroundColor: "#ffffff22",
+  resumeBadgeTextColor: "#ffffff99",
 };

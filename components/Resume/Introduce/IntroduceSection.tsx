@@ -58,7 +58,7 @@ const IntroduceP = styled.p`
 
   strong {
     font-weight: 400;
-    color: #fff;
+    color: ${({ theme }) => theme.resumeStrongTextColor};
   }
 `;
 

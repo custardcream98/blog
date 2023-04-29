@@ -20,5 +20,10 @@ declare module "styled-components" {
     titleFont: string;
 
     resumeAccentColor: string;
+    resumeTextColor: string;
+    resumeStrongTextColor: string;
+    resumeDimTextColor: string;
+    resumeBadgeBackgroundColor: string;
+    resumeBadgeTextColor: string;
   }
 }

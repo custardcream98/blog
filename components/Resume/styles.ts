@@ -43,7 +43,7 @@ export const Section = styled.section`
   margin-top: 4rem;
   margin-bottom: 4rem;
 
-  color: #ccc;
+  color: ${({ theme }) => theme.resumeTextColor};
 `;
 
 export const SectionTitle = styled.h3`
@@ -77,7 +77,7 @@ export const ProjectTitle = styled.h4`
 `;
 
 export const dimTextStyle = css`
-  color: #858585;
+  color: ${({ theme }) => theme.resumeDimTextColor};
 
   font-size: 0.9rem;
   font-weight: 300;
@@ -124,6 +124,7 @@ export const ProjectDescriptionItem = styled.li`
     content: "-";
 
     font-size: 1rem;
+    font-weight: 600;
 
     color: ${({ theme }) => theme.resumeAccentColor};
   }
@@ -142,6 +143,7 @@ export const ProjectStack = styled.li`
   padding: 0.2rem 0.4rem;
   border-radius: 0.2rem;
 
-  color: #ffffff99;
-  background-color: #ffffff22;
+  color: ${({ theme }) => theme.resumeBadgeTextColor};
+  background-color: ${({ theme }) =>
+    theme.resumeBadgeBackgroundColor};
 `;

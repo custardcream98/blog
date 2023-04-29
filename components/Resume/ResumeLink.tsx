@@ -10,11 +10,7 @@ const ResumeLink = ({ url, name }: ResumeLink) => {
       target="_blank"
       rel="noopener noreferrer"
     >
-      <SvgContainer
-        svgColor="#CCC"
-        svgWidth="0.95rem"
-        svgHeight="0.95rem"
-      >
+      <SvgContainer svgWidth="0.95rem" svgHeight="0.95rem">
         <LinkSvg />
       </SvgContainer>
       {name}
@@ -26,7 +22,8 @@ const StyledResumeLink = styled.a`
   font-size: 0.9rem;
   font-weight: 300;
 
-  border-bottom: 1px solid #ccc;
+  border-bottom: 1px solid
+    ${({ theme }) => theme.resumeTextColor};
   word-break: keep-all;
 
   span {
@@ -34,7 +31,7 @@ const StyledResumeLink = styled.a`
   }
   svg {
     vertical-align: top;
-    fill: #fff;
+    fill: ${({ theme }) => theme.resumeTextColor};
     transition: fill 0.2s ease-in-out;
   }
 
