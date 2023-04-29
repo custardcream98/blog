@@ -40,9 +40,9 @@ const animatedGradientTextKeyframes = keyframes`
 `;
 
 export const animatedGradientTextStyle = css`
+  display: inline-block;
   background-size: 200% auto;
   background-clip: text;
-  display: inline-block;
 
   text-fill-color: transparent;
   -webkit-text-fill-color: transparent;

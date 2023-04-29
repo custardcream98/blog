@@ -9,6 +9,8 @@ export const MainTitle = styled.h2`
   font-weight: 300;
   line-height: 1.5;
 
+  word-break: keep-all;
+
   .line {
     display: block;
   }
@@ -25,8 +27,8 @@ export const MainTitle = styled.h2`
     );
     background-size: 200% auto;
     ${animatedGradientTextStyle}
+    display:inline;
 
-    /* color: #fff; */
     font-weight: 600;
   }
 `;
@@ -35,7 +37,6 @@ export const Container = styled(DefaultContainer)`
   align-items: start;
 
   padding-top: 6rem;
-  padding-bottom: 6rem;
 `;
 
 export const Section = styled.section`
@@ -70,6 +71,9 @@ export const ProjectTitle = styled.h4`
   font-size: 1.1rem;
   font-weight: 400;
   margin-bottom: 0.5rem;
+
+  word-break: keep-all;
+  line-height: 1.2;
 `;
 
 export const dimTextStyle = css`
@@ -84,9 +88,11 @@ export const dimTextStyle = css`
 export const ProjectTeam = styled.span`
   ${dimTextStyle}
 
-  ::before {
-    content: ", ";
-  }
+  margin-bottom: 0.2rem;
+  display: block;
+
+  word-break: keep-all;
+  line-height: 1.2;
 `;
 
 export const ProjectShortDescription = styled.p`

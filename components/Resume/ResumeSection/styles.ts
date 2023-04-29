@@ -21,6 +21,9 @@ export const SectionItemTitle = styled.h3`
   font-size: 1.3rem;
   font-weight: 400;
   margin: 0.8rem 0 0.5rem;
+  line-height: 1.2;
+
+  word-break: keep-all;
 `;
 
 export const SectionItemDescriptionList = styled(

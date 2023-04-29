@@ -23,18 +23,17 @@ const ResumeLink = ({ url, name }: ResumeLink) => {
 };
 
 const StyledResumeLink = styled.a`
-  display: flex;
-  align-items: center;
-
   font-size: 0.9rem;
   font-weight: 300;
 
   border-bottom: 1px solid #ccc;
+  word-break: keep-all;
 
   span {
     margin-right: 0.2rem;
   }
   svg {
+    vertical-align: top;
     fill: #fff;
     transition: fill 0.2s ease-in-out;
   }

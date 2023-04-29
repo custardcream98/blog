@@ -29,8 +29,9 @@ const Item = ({
     <S.SectionItemBordered>
       <S.ProjectTitle>{title}</S.ProjectTitle>
 
-      <ResumePeriod from={period.from} to={period.to} />
       <S.ProjectTeam>{team}</S.ProjectTeam>
+
+      <ResumePeriod from={period.from} to={period.to} />
 
       <S.ProjectShortDescription>
         {shortDescription}

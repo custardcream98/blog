@@ -57,7 +57,7 @@ const IntroduceP = styled.p`
   letter-spacing: 0.03rem;
 
   strong {
-    font-weight: 600;
+    font-weight: 400;
     color: #fff;
   }
 `;
