@@ -12,7 +12,6 @@ const Container = styled.footer`
   justify-content: space-between;
   align-items: center;
 
-  box-shadow: ${({ theme }) => theme.footerShadow};
   font-size: 0.9rem;
   font-weight: 300;
   margin: 5rem auto 2rem;
@@ -28,7 +27,6 @@ const Container = styled.footer`
   }
 
   address {
-    margin-left: auto;
     @media (max-width: 800px) {
       margin: 0.7rem 0 0 0;
     }

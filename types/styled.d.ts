@@ -10,7 +10,6 @@ declare module "styled-components" {
     postElementBackgroundColor: string;
 
     darkmodeShadow: string;
-    footerShadow: string;
     bgColor: string;
     accentColor: string;
     mainColor: string;

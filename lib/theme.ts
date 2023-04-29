@@ -3,8 +3,6 @@ import type { DefaultTheme } from "styled-components";
 // TODO: 테마 관리 방법 리팩토링
 
 const commonTheme = {
-  footerShadow: "rgba(17, 17, 26, 0.1) 1px 0px 0px",
-
   mainColor: "#d7a306",
   mainGradient: "linear-gradient(90deg, #d7a306, #fbf2c8)",
   codingFont: '"Source Code Pro", monospace',
