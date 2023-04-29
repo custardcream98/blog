@@ -152,6 +152,10 @@ const Wrapper = styled.aside<WrapperProps>`
       font-size: 0.9rem;
     }
   }
+
+  @media only print {
+    display: none;
+  }
 `;
 
 const ProjectLink = styled.a`

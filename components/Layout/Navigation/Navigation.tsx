@@ -22,6 +22,10 @@ import useWindowSize from "lib/hook/useWindowSize";
 const Header = styled.header`
   height: 50px;
   width: 100%;
+
+  @media only print {
+    display: none;
+  }
 `;
 
 const Container = styled.div`

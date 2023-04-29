@@ -1,7 +1,7 @@
 import { ResumeLink } from "types/resume";
 import LinkSvg from "components/Common/Svgs/LinkSvg";
 import SvgContainer from "components/Common/Svgs/SvgContainer";
-import styled from "styled-components";
+import styled, { css } from "styled-components";
 
 const ResumeLink = ({ url, name }: ResumeLink) => {
   return (
@@ -18,13 +18,16 @@ const ResumeLink = ({ url, name }: ResumeLink) => {
   );
 };
 
-const StyledResumeLink = styled.a`
+export const iconClickableStyle = css`
   font-size: 0.9rem;
   font-weight: 300;
 
   border-bottom: 1px solid
     ${({ theme }) => theme.resumeTextColor};
   word-break: keep-all;
+
+  transition: color 0.2s ease-in-out,
+    border-color 0.2s ease-in-out;
 
   span {
     margin-right: 0.2rem;
@@ -34,9 +37,6 @@ const StyledResumeLink = styled.a`
     fill: ${({ theme }) => theme.resumeTextColor};
     transition: fill 0.2s ease-in-out;
   }
-
-  transition: color 0.2s ease-in-out,
-    border-color 0.2s ease-in-out;
 
   &:hover {
     color: ${({ theme }) => theme.resumeAccentColor};
@@ -48,6 +48,10 @@ const StyledResumeLink = styled.a`
   }
 `;
 
+const StyledResumeLink = styled.a`
+  ${iconClickableStyle}
+`;
+
 export const ResumeLinksList = styled.ul`
   display: flex;
   flex-wrap: wrap;
@@ -57,6 +61,17 @@ export const ResumeLinksList = styled.ul`
   margin-top: 1rem;
   ul + & {
     margin-top: 2rem;
+  }
+
+  @media only print {
+    margin-top: 0.8rem;
+    ul + & {
+      margin-top: 0.8rem;
+    }
+
+    :last-child {
+      margin-top: 0.5rem;
+    }
   }
 `;
 

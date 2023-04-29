@@ -11,6 +11,7 @@ import {
   ResumeLink,
   ResumeLinksList,
 } from "..";
+import { ProjectDescriptionList } from "../styles";
 
 const Section = ({
   sectionTitle,

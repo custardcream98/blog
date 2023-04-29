@@ -20,6 +20,10 @@ export const GlobalStyle = createGlobalStyle`
         다크모드 transition
       */
       transition: all 0.1s linear;
+
+      @media only print {
+        background-color: transparent;
+      }
   }
   html {
     scroll-behavior: smooth;

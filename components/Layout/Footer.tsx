@@ -45,6 +45,10 @@ const Container = styled.footer`
   small {
     color: ${({ theme }) => theme.subTextColor};
   }
+
+  @media only print {
+    display: none;
+  }
 `;
 
 const StyledLogoTitleSpan = styled(LogoTitleSpan)`

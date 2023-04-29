@@ -15,6 +15,10 @@ const Wrapper = styled.div`
 
 const Main = styled.main`
   flex-grow: 1;
+
+  @media only print {
+    margin-top: -2rem;
+  }
 `;
 
 const Layout = ({ children }: PropsWithChildren) => {

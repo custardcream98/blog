@@ -50,6 +50,12 @@ export const ResumePeriodContainer = styled.span`
       }
     }
   }
+
+  @media only print {
+    position: absolute;
+    top: 0;
+    right: 0;
+  }
 `;
 
 export default ResumePeriod;

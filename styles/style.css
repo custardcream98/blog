@@ -1,3 +1,5 @@
+@import "./print.css";
+
 /*
 	Improved screen reader only CSS class
 	@author Gaël Poupard
@@ -26,7 +28,6 @@
 		@author Harry Roberts
 		@see https://csswizardry.com/2016/05/the-importance-of-important/
 */
-
 .sr-only {
   border: 0 !important;
   clip: rect(1px, 1px, 1px, 1px) !important; /* 1 */

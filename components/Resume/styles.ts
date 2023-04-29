@@ -1,49 +1,30 @@
-import {
-  Container as DefaultContainer,
-  animatedGradientTextStyle,
-} from "components/Common/styledComponents";
+import { Container as DefaultContainer } from "components/Common/styledComponents";
 import styled, { css } from "styled-components";
-
-export const MainTitle = styled.h2`
-  font-size: 2rem;
-  font-weight: 300;
-  line-height: 1.5;
-
-  word-break: keep-all;
-
-  .line {
-    display: block;
-  }
-  .strong {
-    background-image: linear-gradient(
-      -225deg,
-      #3c2395 0%,
-      #44107a 17%,
-      #ff1361 33%,
-      #fff800 50%,
-      #ff1361 66%,
-      #44107a 83%,
-      #3c2395 100%
-    );
-    background-size: 200% auto;
-    ${animatedGradientTextStyle}
-    display:inline;
-
-    font-weight: 600;
-  }
-`;
 
 export const Container = styled(DefaultContainer)`
   align-items: start;
 
   padding-top: 6rem;
+
+  @media only print {
+    padding-top: 0rem;
+    padding-bottom: 2rem;
+  }
 `;
 
 export const Section = styled.section`
-  margin-top: 4rem;
-  margin-bottom: 4rem;
+  margin: 4rem 0;
 
   color: ${({ theme }) => theme.resumeTextColor};
+
+  @media only print {
+    margin: 2rem 0;
+    width: 100%;
+
+    :last-child {
+      page-break-inside: avoid;
+    }
+  }
 `;
 
 export const SectionTitle = styled.h3`
@@ -58,6 +39,15 @@ export const SectionItem = styled.li`
   margin-top: 3rem;
   & + & {
     margin-top: 7rem;
+  }
+
+  @media only print {
+    margin-top: 2rem;
+    & + & {
+      margin-top: 2rem;
+    }
+    position: relative;
+    break-inside: avoid;
   }
 `;
 
@@ -114,6 +104,10 @@ export const ProjectDescriptionList = styled.ul`
 
   letter-spacing: 0.03em;
   line-height: 1.5;
+
+  @media only print {
+    margin-top: 0.5rem;
+  }
 `;
 
 export const ProjectDescriptionItem = styled.li`
@@ -127,6 +121,10 @@ export const ProjectDescriptionItem = styled.li`
     font-weight: 600;
 
     color: ${({ theme }) => theme.resumeAccentColor};
+  }
+
+  @media only print {
+    margin: 0.2rem 0 0.2rem 0.2rem;
   }
 `;
 

@@ -1,7 +1,28 @@
 import styled from "styled-components";
 import { ResumeLink, S } from "..";
+import { iconClickableStyle } from "../ResumeLink";
+import PrintSvg from "components/Common/Svgs/PrintSvg";
+import SvgContainer from "components/Common/Svgs/SvgContainer";
+import { useRecoilState, useSetRecoilState } from "recoil";
+import { isDarkAtom } from "lib/atoms";
+import { setIsDarkmodeActivatedOnLocal } from "lib/localStorage";
 
 const IntroduceSection = () => {
+  const [isDark, setIsDark] = useRecoilState(isDarkAtom);
+
+  const handlePrint = async () => {
+    if (isDark) {
+      setIsDark(false);
+      setIsDarkmodeActivatedOnLocal(false);
+
+      await new Promise((resolve) =>
+        setTimeout(resolve, 500)
+      );
+    }
+
+    window.print();
+  };
+
   return (
     <S.Section>
       <h3 className="sr-only">자기 소개</h3>
@@ -45,7 +66,25 @@ const IntroduceSection = () => {
             url="https://github.com/custardcream98"
           />
         </li>
+        <li>
+          <ResumeLink
+            name="블로그"
+            url="https://shiwoo.dev"
+          />
+        </li>
       </ContactList>
+
+      <PrintButtonWrapper>
+        <button type="button" onClick={handlePrint}>
+          <SvgContainer
+            svgWidth="0.95rem"
+            svgHeight="0.95rem"
+          >
+            <PrintSvg />
+          </SvgContainer>
+          프린트하기
+        </button>
+      </PrintButtonWrapper>
     </S.Section>
   );
 };
@@ -75,6 +114,35 @@ const ContactList = styled.ul`
     + li {
       margin-left: 1rem;
     }
+    :last-child {
+      display: none;
+    }
+  }
+
+  @media only print {
+    margin-top: 1rem;
+    li:last-child {
+      display: inline-block;
+    }
+  }
+`;
+
+const PrintButtonWrapper = styled.aside`
+  width: fit-content;
+  margin-left: auto;
+  margin-top: 0.5rem;
+
+  button {
+    padding: 0;
+    cursor: pointer;
+
+    color: ${({ theme }) => theme.resumeTextColor};
+
+    ${iconClickableStyle}
+  }
+
+  @media only print {
+    display: none;
   }
 `;
 

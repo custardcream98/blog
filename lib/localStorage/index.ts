@@ -60,3 +60,11 @@ export const toggleIsDarkmodeActivatedOnLocal = () =>
     LocalStorageKeys.IS_DARKMODE_ACTIVATED,
     JSON.stringify(!getIsDarkmodeActivatedOnLocal())
   );
+
+export const setIsDarkmodeActivatedOnLocal = (
+  target: boolean
+) =>
+  localStorage.setItem(
+    LocalStorageKeys.IS_DARKMODE_ACTIVATED,
+    JSON.stringify(target)
+  );

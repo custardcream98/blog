@@ -15,6 +15,13 @@ export const SectionItemP = styled.p`
   &:last-of-type {
     margin-bottom: 1rem;
   }
+
+  @media only print {
+    margin-top: 0.5rem;
+    &:last-of-type {
+      margin-bottom: 0.5rem;
+    }
+  }
 `;
 
 export const SectionItemTitle = styled.h3`
@@ -30,4 +37,8 @@ export const SectionItemDescriptionList = styled(
   ProjectDescriptionList
 )`
   margin-top: 0.5rem;
+
+  @media only print {
+    margin-top: 0rem;
+  }
 `;
