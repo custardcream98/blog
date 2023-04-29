@@ -134,7 +134,7 @@ const Navigation = () => {
             <NavItem href="/#Posts_Title">Posts</NavItem>
             <NavItem href="/categories">Categories</NavItem>
             <NavItem href="/series">Series</NavItem>
-            <NavItem href="/about">About</NavItem>
+            <NavItem href="/resume">About</NavItem>
           </NavList>
           <StyledResponsiveIconButton
             title="검색 버튼입니다."

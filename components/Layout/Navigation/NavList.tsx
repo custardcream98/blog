@@ -24,7 +24,6 @@ const NavItem = ({ href, children }: NavItemProps) => {
   const router = useRouter();
   const currentPath = router.pathname.split("/")[1];
   const isActive = currentPath === hrefWithoutHash;
-  console.log(router);
 
   return (
     <NavItemLi>
