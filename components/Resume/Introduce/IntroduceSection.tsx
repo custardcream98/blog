@@ -6,7 +6,7 @@ const IntroduceSection = () => {
     <S.Section>
       <h3 className="sr-only">자기 소개</h3>
       <IntroduceP>
-        업작품 어플리케이션 개발에 매일 3시간만 자며
+        졸업작품 어플리케이션 개발에 매일 3시간만 자며
         매달렸을 만큼 아무리 사소한 문제라도{" "}
         <strong>꼭 해결해야만 직성이 풀리는 성격</strong>
         입니다.
