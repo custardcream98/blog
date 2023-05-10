@@ -3,7 +3,7 @@ import { ResumeLink, S } from "..";
 import { iconClickableStyle } from "../ResumeLink";
 import PrintSvg from "components/Common/Svgs/PrintSvg";
 import SvgContainer from "components/Common/Svgs/SvgContainer";
-import { useRecoilState, useSetRecoilState } from "recoil";
+import { useRecoilState } from "recoil";
 import { isDarkAtom } from "lib/atoms";
 import { setIsDarkmodeActivatedOnLocal } from "lib/localStorage";
 
@@ -36,7 +36,7 @@ const IntroduceSection = () => {
         <strong>
           기술 이야기 나누기를 아주 좋아합니다.
         </strong>{" "}
-        Google Student Clubs UOS에서 프론트엔트 팀 코어
+        Google Student Clubs UOS에서 프론트엔드 팀 코어
         멤버로서 활동하며 데일리 스크럼과 주기적인 테크톡을
         진행하였습니다. 프론트엔드 기술과 관련된 아티클을
         나누고 싶어 직접 오픈카톡방을 운영중이기도 합니다.
