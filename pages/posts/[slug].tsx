@@ -21,6 +21,8 @@ import useComments from "lib/hook/useComments";
 import generateRSSFeed from "lib/rss";
 
 import type PostType from "types/post";
+import { FirebaseServerSideApp } from "lib/firebaseSetup/server-side-setup";
+import { firebaseApp } from "lib/firebaseSetup";
 
 const PostSection = styled.section`
   width: 100%;
@@ -109,7 +111,13 @@ export async function getStaticProps({ params }: Params) {
 
   let coverImage = "";
   if (process.env.NODE_ENV === "production") {
-    coverImage = await getOgImage(post.title);
+    const serverSideFirebaseConnection =
+      new FirebaseServerSideApp(firebaseApp);
+    coverImage = await getOgImage(
+      serverSideFirebaseConnection,
+      post.title
+    );
+    await serverSideFirebaseConnection.deleteInstance();
   }
 
   return {

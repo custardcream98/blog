@@ -43,3 +43,5 @@ next-env.d.ts
 /public/atom.xml
 /public/rss.xml
 /public/rss.json
+/public/robots.txt
+/public/sitemap.xml

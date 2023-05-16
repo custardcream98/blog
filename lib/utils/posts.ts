@@ -1,12 +1,14 @@
 import fs from "fs";
 import { join } from "path";
 import matter from "gray-matter";
-import axios from "axios";
+// import axios from "axios";
 import type PostType from "types/post";
 import type { PrevNextPosts } from "types/post";
+import { getThumbnailUrl } from "lib/firebaseSetup/thumbnail";
+import { FirebaseServerSideApp } from "lib/firebaseSetup/server-side-setup";
+import { firebaseApp } from "lib/firebaseSetup";
 
 const postsDirectory = join(process.cwd(), "_posts");
-const aboutPageDirectory = join(process.cwd(), "about.md");
 
 interface Items extends PostType {
   [key: string]: string | string[] | object | undefined;
@@ -138,44 +140,59 @@ export function getPrevNextPosts(
   };
 }
 
-export const getAboutContent = () =>
-  fs.readFileSync(aboutPageDirectory, "utf8");
-
-const delay = (ms: number) =>
-  new Promise((resolve) => setTimeout(resolve, ms));
+// const delay = (ms: number) =>
+//   new Promise((resolve) => setTimeout(resolve, ms));
 
 export async function getOgImage(
+  serverSideFirebaseConnection: FirebaseServerSideApp,
   title: string
 ): Promise<string> {
   console.log(`Currently Deploying Thumbnail: ${title}`);
 
-  while (true) {
-    try {
-      const { created: fileName } = await axios
-        .post(
-          `http://custardcream.iptime.org:5000/og`,
-          {
-            title: "개발자 시우의 블로그",
-            subtitle: title,
-          },
-          { timeout: 60000 }
-        )
-        .then((res) => res.data);
-      return fileName;
-    } catch (e) {
-      console.log("retry getting img of " + title);
-
-      await delay(10000);
+  return await getThumbnailUrl(
+    serverSideFirebaseConnection,
+    {
+      title: "개발자 시우의 블로그",
+      subtitle: title,
     }
-  }
+  );
+
+  // while (true) {
+  //   try {
+  //     const { created: fileName } = await axios
+  //       .post(
+  //         `/api/og`,
+  //         {
+  //           title: "개발자 시우의 블로그",
+  //           subtitle: title,
+  //         },
+  //         { timeout: 60000 }
+  //       )
+  //       .then((res) => res.data);
+  //     return fileName;
+  //   } catch (e) {
+  //     console.log("retry getting img of " + title);
+
+  //     await delay(10000);
+  //   }
+  // }
 }
 
-export async function getAllOgImages(postTitles: string[]) {
+export async function getAllOgImages(
+  postTitles: string[]
+): Promise<string[]> {
+  const serverSideFirebaseConnection =
+    new FirebaseServerSideApp(firebaseApp);
+
   const coverImages = await Promise.all(
-    postTitles.map((title) => getOgImage(title))
+    postTitles.map((title) =>
+      getOgImage(serverSideFirebaseConnection, title)
+    )
   ).then((res) =>
     res.map((url) => url.replace("&", "&amp;"))
   );
+
+  await serverSideFirebaseConnection.deleteInstance();
 
   return coverImages;
 }

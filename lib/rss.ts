@@ -2,7 +2,7 @@ import fs from "fs";
 import { Feed } from "feed";
 
 import { resolveURL } from "lib/utils/url";
-import { getAllPosts, getOgImage } from "lib/utils/posts";
+import { getAllPosts } from "lib/utils/posts";
 import { percentEncode } from "lib/utils/helper";
 import {
   DEFAULT_IMAGE,
