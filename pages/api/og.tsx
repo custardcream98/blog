@@ -7,14 +7,14 @@ export const config = {
 
 const fontBlack = fetch(
   new URL(
-    "../../public/fonts/NotoSansKRBlack.otf",
+    "../../public/fonts/NotoSansKRBlack.woff",
     import.meta.url
   )
 ).then((res) => res.arrayBuffer());
 
 const fontMedium = fetch(
   new URL(
-    "../../public/fonts/NotoSansKRMedium.otf",
+    "../../public/fonts/NotoSansKRMedium.woff",
     import.meta.url
   )
 ).then((res) => res.arrayBuffer());
