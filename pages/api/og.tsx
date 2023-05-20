@@ -1,8 +1,13 @@
 import { ImageResponse } from "@vercel/og";
-import { NextApiRequest, NextApiResponse } from "next";
+import {
+  NextApiRequest,
+  NextApiResponse,
+  NextConfig,
+} from "next";
 
-export const config = {
+export const config: NextConfig = {
   runtime: "experimental-edge",
+  devtool: false,
 };
 
 const fontBlack = fetch(
@@ -39,11 +44,16 @@ export default async function OpengraphAPI(
           textAlign: "center",
           alignItems: "center",
           justifyContent: "center",
-          fontFamily: "Noto Sans KR",
-          fontWeight: 800,
         }}
       >
-        한국어 테스트
+        <p
+          style={{
+            fontFamily: "Noto Sans KR",
+            fontWeight: 800,
+          }}
+        >
+          한국어 테스트
+        </p>
         <div
           style={{
             fontFamily: "Noto Sans KR",
