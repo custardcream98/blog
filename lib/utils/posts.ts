@@ -158,8 +158,7 @@ export async function getOgImage(title: string) {
       }>(
         `http://custardcream.iptime.org:5000/og`,
         {
-          title: "개발자 시우의 블로그",
-          subtitle: title,
+          title,
         },
         { timeout: 60000 }
       );
