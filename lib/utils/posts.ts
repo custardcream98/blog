@@ -173,14 +173,17 @@ export async function getOgImage(title: string) {
 }
 
 export async function getAllOgImages(postTitles: string[]) {
-  const coverImages = await Promise.all(
-    postTitles.map((title) => getOgImage(title))
-  ).then((responses) =>
-    responses.map(({ lightThumbnail, darkThumbnail }) => ({
+  const coverImages = [];
+
+  for await (const title of postTitles) {
+    const { lightThumbnail, darkThumbnail } =
+      await getOgImage(title);
+
+    coverImages.push({
       lightThumbnail: lightThumbnail.replace("&", "&amp;"),
       darkThumbnail: darkThumbnail.replace("&", "&amp;"),
-    }))
-  );
+    });
+  }
 
   return coverImages;
 }
