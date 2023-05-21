@@ -1,9 +1,14 @@
-type PostType = {
+export type CoverImage = {
+  lightThumbnail: string;
+  darkThumbnail: string;
+};
+
+export type PostType = {
   slug: string;
   title: string;
   date: string;
   category: string[];
-  coverImage: string;
+  coverImage: CoverImage;
   excerpt: string;
   ogImage: {
     url: string;

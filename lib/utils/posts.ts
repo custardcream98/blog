@@ -8,11 +8,11 @@ import type { PrevNextPosts } from "types/post";
 const postsDirectory = join(process.cwd(), "_posts");
 const aboutPageDirectory = join(process.cwd(), "about.md");
 
-interface Items extends PostType {
-  [key: string]: string | string[] | object | undefined;
-}
+// interface Items extends PostType {
+//   [key: string]: string | string[] | object | undefined;
+// }
 
-const getTimeOfPost = (post: Items) =>
+const getTimeOfPost = (post: PostType) =>
   new Date(post.date).getTime();
 
 export function getPostSlugs() {
@@ -41,12 +41,15 @@ export function getPostBySlug(
   const fileContents = fs.readFileSync(fullPath, "utf8");
   const { data, content } = matter(fileContents);
 
-  const items: Items = {
+  let postMeta: PostType = {
     slug: "",
     title: "",
     date: "",
     category: [],
-    coverImage: "",
+    coverImage: {
+      lightThumbnail: "",
+      darkThumbnail: "",
+    },
     excerpt: "",
     ogImage: {
       url: "",
@@ -57,15 +60,15 @@ export function getPostBySlug(
 
   fields.forEach((field) => {
     if (field === "slug") {
-      items[field] = realSlug;
+      postMeta[field] = realSlug;
     } else if (field === "content") {
-      items[field] = content;
+      postMeta[field] = content;
     } else if (typeof data[field] !== "undefined") {
-      items[field] = data[field];
+      postMeta[field] = data[field];
     }
   });
 
-  return items;
+  return postMeta;
 }
 
 export function getAllPosts(fields: PostMeta[] = []) {
@@ -144,24 +147,24 @@ export const getAboutContent = () =>
 const delay = (ms: number) =>
   new Promise((resolve) => setTimeout(resolve, ms));
 
-export async function getOgImage(
-  title: string
-): Promise<string> {
+export async function getOgImage(title: string) {
   console.log(`Currently Deploying Thumbnail: ${title}`);
 
   while (true) {
     try {
-      const { created: fileName } = await axios
-        .post(
-          `http://custardcream.iptime.org:5000/og`,
-          {
-            title: "개발자 시우의 블로그",
-            subtitle: title,
-          },
-          { timeout: 60000 }
-        )
-        .then((res) => res.data);
-      return fileName;
+      const response = await axios.post<{
+        lightThumbnail: string;
+        darkThumbnail: string;
+      }>(
+        `http://custardcream.iptime.org:5000/og`,
+        {
+          title: "개발자 시우의 블로그",
+          subtitle: title,
+        },
+        { timeout: 60000 }
+      );
+
+      return response.data;
     } catch (e) {
       console.log("retry getting img of " + title);
 
@@ -173,8 +176,11 @@ export async function getOgImage(
 export async function getAllOgImages(postTitles: string[]) {
   const coverImages = await Promise.all(
     postTitles.map((title) => getOgImage(title))
-  ).then((res) =>
-    res.map((url) => url.replace("&", "&amp;"))
+  ).then((responses) =>
+    responses.map(({ lightThumbnail, darkThumbnail }) => ({
+      lightThumbnail: lightThumbnail.replace("&", "&amp;"),
+      darkThumbnail: darkThumbnail.replace("&", "&amp;"),
+    }))
   );
 
   return coverImages;
@@ -189,7 +195,7 @@ export function getPostByCategory(category: string) {
     "category",
     "series",
   ]);
-  let categoryPosts: Items[] = [];
+  let categoryPosts: PostType[] = [];
 
   posts.forEach((post) => {
     post.category.forEach((c) => {
@@ -209,7 +215,7 @@ export function getPostBySeries(series: string) {
     "category",
     "series",
   ]);
-  let seriesPosts: Items[] = [];
+  let seriesPosts: PostType[] = [];
 
   posts.forEach((post) => {
     if (post.series === series) seriesPosts.push(post);

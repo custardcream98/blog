@@ -20,7 +20,7 @@ import check404 from "lib/check404";
 import useComments from "lib/hook/useComments";
 import generateRSSFeed from "lib/rss";
 
-import type PostType from "types/post";
+import type { PostType } from "types/post";
 
 const PostSection = styled.section`
   width: 100%;
@@ -46,7 +46,7 @@ export default function Posts({ post }: Props) {
         date={post.date}
         title={post.title}
         description={post.excerpt}
-        image={post.coverImage}
+        image={post.coverImage.darkThumbnail}
         tags={post.category}
       />
       <PostContainer>
@@ -107,7 +107,10 @@ export async function getStaticProps({ params }: Params) {
 
   const content = await markdownToHtml(post.content || "");
 
-  let coverImage = "";
+  let coverImage = {
+    lightThumbnail: "",
+    darkThumbnail: "",
+  };
   if (process.env.NODE_ENV === "production") {
     coverImage = await getOgImage(post.title);
   }
@@ -136,7 +139,11 @@ export async function getStaticPaths() {
     const coverImages = await getAllOgImages(
       posts.map((post) => post.title)
     );
-    await generateRSSFeed(coverImages);
+    await generateRSSFeed(
+      coverImages.map(
+        (coverImage) => coverImage.darkThumbnail
+      )
+    );
   }
 
   return {

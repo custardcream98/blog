@@ -7,6 +7,9 @@ import CategoryBadges from "components/Common/CategoryBadges";
 import DateSpan from "components/Common/DateSpan";
 import ViewsLikesCounter from "./ViewsLikesCounter";
 import { LinkDecorated } from "components/Common/styledComponents";
+import { CoverImage } from "types/post";
+import { useRecoilValue } from "recoil";
+import { isDarkAtom } from "lib/atoms";
 
 const Container = styled.div`
   display: flex;
@@ -47,7 +50,7 @@ const BadgeViewsLikesCounterContainer = styled.div`
 `;
 
 type Props = {
-  coverImage?: string;
+  coverImage: CoverImage;
   title: string;
   category?: string[];
   date: string;
@@ -61,6 +64,8 @@ const PostTitle = ({
   date,
   series,
 }: Props) => {
+  const isDarkMode = useRecoilValue(isDarkAtom);
+
   return (
     <>
       <Container>
@@ -91,19 +96,30 @@ const PostTitle = ({
           )}
         </BadgeViewsLikesCounterContainer>
       </Container>
-      {coverImage &&
-        process.env.NODE_ENV === "production" && (
+      {process.env.NODE_ENV === "production" &&
+        (isDarkMode ? (
           <Thumbnail
-            key={coverImage}
-            src={coverImage}
+            key={coverImage.darkThumbnail}
+            src={coverImage.darkThumbnail}
             alt="썸네일"
             priority={true}
             width={1200}
             height={630}
             placeholder="blur"
-            blurDataURL="/static/img/thumbnail_placeholder.webp"
+            blurDataURL="/static/img/thumbnail-placeholder-dark.webp"
           />
-        )}
+        ) : (
+          <Thumbnail
+            key={coverImage.lightThumbnail}
+            src={coverImage.lightThumbnail}
+            alt="썸네일"
+            priority={true}
+            width={1200}
+            height={630}
+            placeholder="blur"
+            blurDataURL="/static/img/thumbnail-placeholder-light.webp"
+          />
+        ))}
     </>
   );
 };
