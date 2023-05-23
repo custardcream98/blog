@@ -11,7 +11,7 @@ module.exports = withBundleAnalyzer({
     styledComponents: true,
   },
   images: {
-    domains: ["firebasestorage.googleapis.com"],
+    domains: ["storage.googleapis.com"],
   },
   staticPageGenerationTimeout: 100000,
 });

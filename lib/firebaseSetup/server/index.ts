@@ -1,20 +1,13 @@
-import admin from "firebase-admin";
 import {
-  getDownloadURL,
-  getStorage,
-  ref,
-} from "firebase/storage";
-
-import { type FirebaseStorage } from "firebase/storage";
-import { type Bucket } from "@google-cloud/storage";
-import {
+  getApps,
   initializeApp,
-  getApp,
-  type FirebaseApp,
-} from "firebase/app";
-import { firebaseConfig } from "..";
+  type App as FirebaseAdminApp,
+  cert,
+} from "firebase-admin/app";
+import { getStorage } from "firebase-admin/storage";
+import { type Bucket } from "@google-cloud/storage";
 
-const credential = admin.credential.cert({
+const credential = cert({
   projectId: process.env.FIREBASE_ADMIN_PROJECT_ID,
   clientEmail: process.env.FIREBASE_ADMIN_CLIENT_EMAIL,
   privateKey:
@@ -23,6 +16,8 @@ const credential = admin.credential.cert({
       "\n"
     ),
 });
+const STORAGE_BUCKET =
+  process.env.FIREBASE_ADMIN_STORAGE_BUCKET;
 
 export class ServerSideFirebaseApp {
   private static _instance: ServerSideFirebaseApp | null;
@@ -34,48 +29,24 @@ export class ServerSideFirebaseApp {
     return ServerSideFirebaseApp._instance;
   }
 
-  public adminApp: admin.app.App;
-  public firebaseApp: FirebaseApp;
-  public firebaseStorage: FirebaseStorage;
+  public adminApp: FirebaseAdminApp;
   public adminBucket: Bucket;
 
-  constructor(
-    adminApp: admin.app.App,
-    firebaseApp: FirebaseApp
-  ) {
+  constructor(adminApp: FirebaseAdminApp) {
     this.adminApp = adminApp;
-    this.firebaseApp = firebaseApp;
-    this.adminBucket = admin.storage(adminApp).bucket();
-    this.firebaseStorage = getStorage(firebaseApp);
+    this.adminBucket = getStorage(adminApp).bucket();
   }
 
   static initialize() {
-    console.log(
-      "Initializing Firebase Admin App" +
-        process.env.FIREBASE_ADMIN_STORAGE_BUCKET
-    );
-
     const adminApp =
-      admin.apps[0] ??
-      admin.initializeApp({
+      getApps()[0] ??
+      initializeApp({
         credential,
-        storageBucket:
-          process.env.FIREBASE_ADMIN_STORAGE_BUCKET,
+        storageBucket: STORAGE_BUCKET,
       });
-
-    let firebaseApp;
-    try {
-      firebaseApp = getApp();
-    } catch (_error) {
-      firebaseApp = initializeApp({
-        ...firebaseConfig,
-        storageBucket:
-          process.env.FIREBASE_ADMIN_STORAGE_BUCKET,
-      });
-    }
 
     ServerSideFirebaseApp._instance =
-      new ServerSideFirebaseApp(adminApp, firebaseApp);
+      new ServerSideFirebaseApp(adminApp);
 
     return ServerSideFirebaseApp._instance;
   }
@@ -91,30 +62,34 @@ export class ServerSideFirebaseApp {
     return isExists;
   };
 
-  static saveBufferOnBucket = async (
-    fileName: string,
-    buffer: Buffer
-  ) => {
-    const storageRef = ref(
-      ServerSideFirebaseApp.instance.firebaseStorage,
-      fileName
-    );
+  static saveBufferOnBucket = async ({
+    fileName,
+    buffer,
+    makePublic = false,
+  }: {
+    fileName: string;
+    buffer: Buffer;
+    makePublic?: boolean;
+  }) => {
     const file =
       ServerSideFirebaseApp.instance.adminBucket.file(
-        storageRef.fullPath
+        fileName
       );
 
     await file.save(buffer);
+
+    if (makePublic) {
+      await file.makePublic();
+    }
   };
 
-  static getDownloadURLFromStorage = async (
-    fileName: string
-  ) => {
-    const storageRef = ref(
-      ServerSideFirebaseApp.instance.firebaseStorage,
-      fileName
-    );
-    const url = await getDownloadURL(storageRef);
+  static getDownloadURLFromStorage = (fileName: string) => {
+    const file =
+      ServerSideFirebaseApp.instance.adminBucket.file(
+        fileName
+      );
+
+    const url = file.publicUrl();
 
     return url;
   };

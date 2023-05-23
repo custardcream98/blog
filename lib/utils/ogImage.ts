@@ -29,14 +29,15 @@ const generateThumbnail = async (
       Template
     );
 
-    await ServerSideFirebaseApp.saveBufferOnBucket(
-      thumbnailDirectory,
-      buffer
-    );
+    await ServerSideFirebaseApp.saveBufferOnBucket({
+      fileName: thumbnailDirectory,
+      buffer,
+      makePublic: true,
+    });
   }
 
   const thumbnailUrl =
-    await ServerSideFirebaseApp.getDownloadURLFromStorage(
+    ServerSideFirebaseApp.getDownloadURLFromStorage(
       thumbnailDirectory
     );
 
