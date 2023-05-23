@@ -14,6 +14,10 @@ export const wrapHtmlString = (htmlString: string) => {
       padding: 0;
       margin: 0;
     }
+    p {
+      padding: 0;
+      margin: 0;
+    }
   </style>
   <body>
     ${htmlString}

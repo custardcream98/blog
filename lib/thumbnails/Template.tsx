@@ -54,13 +54,13 @@ const Template = ({
       <style>
         {`
           @font-face {
-            font-family: 'Noto Sans KR';
+            font-family: Noto Sans KR;
             font-style: normal;
             font-weight: 800;
             src: url(data:font/otf;charset=utf-8;base64,${notoSansKRBlack}) format('opentype');
           }
           @font-face {
-            font-family: 'Noto Sans KR';
+            font-family: Noto Sans KR;
             font-style: normal;
             font-weight: 300;
             src: url(data:font/otf;charset=utf-8;base64,${notoSansKRMedium}) format('opentype');
@@ -72,11 +72,10 @@ const Template = ({
           display: "flex",
           flexDirection: "column",
           justifyContent: "space-between",
-          fontFamily:
-            '"Noto Sans KR", "Segoe UI", Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji"',
-          width: "1200px",
-          height: "630px",
-          padding: "100px",
+          fontFamily: "Noto Sans KR",
+          width: "100%",
+          height: "100%",
+          padding: "90px",
           boxSizing: "border-box",
           color: isLight ? "#363636" : "#efefef",
           position: "relative",
@@ -92,37 +91,31 @@ const Template = ({
             zIndex: -1,
           }}
         />
+
+        <p
+          style={{
+            fontWeight: 800,
+            fontSize: "60px",
+          }}
+        >
+          SHIWOO.DEV
+        </p>
+
         <h1
           style={{
             color: "inherit",
             maxWidth: "700px",
             wordBreak: "keep-all",
-            fontWeight: 800,
+            fontWeight: 300,
             fontSize: "50px",
             overflowWrap: "break-word",
+
+            borderLeft: "5px solid",
+            paddingLeft: "40px",
           }}
         >
           {title}
         </h1>
-        <p
-          style={{
-            background:
-              "linear-gradient(90deg, rgb(223, 56, 56), rgb(255, 200, 0))",
-            WebkitBackgroundClip: "text",
-            backgroundClip: "text",
-            WebkitTextFillColor: "transparent",
-
-            fontWeight: 400,
-            fontSize: "30px",
-            overflowWrap: "break-word",
-
-            width: "fit-content",
-
-            marginLeft: "auto",
-          }}
-        >
-          shiwoo.dev
-        </p>
       </div>
     </>
   );
