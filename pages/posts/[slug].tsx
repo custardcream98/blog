@@ -11,9 +11,11 @@ import {
   getPostBySlug,
   getAllPosts,
   getPrevNextPosts,
+} from "lib/utils/posts";
+import {
   getAllOgImages,
   getOgImage,
-} from "lib/utils/posts";
+} from "lib/utils/ogImage";
 import markdownToHtml from "lib/utils/markdownToHtml";
 import { createPostDoc } from "lib/firebaseSetup/firebaseApps";
 import check404 from "lib/check404";
@@ -106,14 +108,7 @@ export async function getStaticProps({ params }: Params) {
   await createPostDoc(post.title);
 
   const content = await markdownToHtml(post.content || "");
-
-  let coverImage = {
-    lightThumbnail: "",
-    darkThumbnail: "",
-  };
-  if (process.env.NODE_ENV === "production") {
-    coverImage = await getOgImage(post.title);
-  }
+  const coverImage = await getOgImage(post.title);
 
   return {
     props: {
@@ -135,10 +130,11 @@ export async function getStaticProps({ params }: Params) {
 export async function getStaticPaths() {
   const posts = getAllPosts(["slug", "title"]);
 
+  const coverImages = await getAllOgImages(
+    posts.map((post) => post.title)
+  );
+
   if (process.env.NODE_ENV === "production") {
-    const coverImages = await getAllOgImages(
-      posts.map((post) => post.title)
-    );
     await generateRSSFeed(
       coverImages.map(
         (coverImage) => coverImage.darkThumbnail
