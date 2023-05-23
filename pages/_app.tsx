@@ -43,7 +43,7 @@ function MyApp({ Component, pageProps }: AppProps) {
   );
 
   console.log(
-    "%c이력서 : https://custardcream98.github.io/resume/\n이메일 : custardcream@kakao.com",
+    "%c이력서 : https://shiwoo.dev/resume/\n이메일 : custardcream@kakao.com",
     "font-family: 'Noto Sans'; font-size: 15px; font-weight: 500"
   );
 
