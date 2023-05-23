@@ -50,6 +50,11 @@ export class ServerSideFirebaseApp {
   }
 
   static initialize() {
+    console.log(
+      "Initializing Firebase Admin App" +
+        process.env.FIREBASE_ADMIN_STORAGE_BUCKET
+    );
+
     const adminApp =
       admin.apps[0] ??
       admin.initializeApp({
