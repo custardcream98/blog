@@ -50,22 +50,23 @@ export class ServerSideFirebaseApp {
   }
 
   static initialize() {
-    let adminApp;
-    try {
-      adminApp = admin.app();
-    } catch (_error) {
-      adminApp = admin.initializeApp({
+    const adminApp =
+      admin.apps[0] ??
+      admin.initializeApp({
         credential,
         storageBucket:
           process.env.FIREBASE_ADMIN_STORAGE_BUCKET,
       });
-    }
 
     let firebaseApp;
     try {
       firebaseApp = getApp();
     } catch (_error) {
-      firebaseApp = initializeApp(firebaseConfig);
+      firebaseApp = initializeApp({
+        ...firebaseConfig,
+        storageBucket:
+          process.env.FIREBASE_ADMIN_STORAGE_BUCKET,
+      });
     }
 
     ServerSideFirebaseApp._instance =
