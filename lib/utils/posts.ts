@@ -1,16 +1,11 @@
 import fs from "fs";
 import { join } from "path";
 import matter from "gray-matter";
-import axios from "axios";
 import type PostType from "types/post";
 import type { PrevNextPosts } from "types/post";
 
 const postsDirectory = join(process.cwd(), "_posts");
 const aboutPageDirectory = join(process.cwd(), "about.md");
-
-// interface Items extends PostType {
-//   [key: string]: string | string[] | object | undefined;
-// }
 
 const getTimeOfPost = (post: PostType) =>
   new Date(post.date).getTime();
@@ -143,50 +138,6 @@ export function getPrevNextPosts(
 
 export const getAboutContent = () =>
   fs.readFileSync(aboutPageDirectory, "utf8");
-
-const delay = (ms: number) =>
-  new Promise((resolve) => setTimeout(resolve, ms));
-
-export async function getOgImage(title: string) {
-  console.log(`Currently Deploying Thumbnail: ${title}`);
-
-  while (true) {
-    try {
-      const response = await axios.post<{
-        lightThumbnail: string;
-        darkThumbnail: string;
-      }>(
-        `http://custardcream.iptime.org:5000/og`,
-        {
-          title,
-        },
-        { timeout: 60000 }
-      );
-
-      return response.data;
-    } catch (e) {
-      console.log("retry getting img of " + title);
-
-      await delay(10000);
-    }
-  }
-}
-
-export async function getAllOgImages(postTitles: string[]) {
-  const coverImages = [];
-
-  for await (const title of postTitles) {
-    const { lightThumbnail, darkThumbnail } =
-      await getOgImage(title);
-
-    coverImages.push({
-      lightThumbnail: lightThumbnail.replace("&", "&amp;"),
-      darkThumbnail: darkThumbnail.replace("&", "&amp;"),
-    });
-  }
-
-  return coverImages;
-}
 
 export function getPostByCategory(category: string) {
   const posts = getAllPosts([

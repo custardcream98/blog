@@ -66,6 +66,14 @@ const PostTitle = ({
 }: Props) => {
   const isDarkMode = useRecoilValue(isDarkAtom);
 
+  const thumbnailSrc = isDarkMode
+    ? coverImage.darkThumbnail
+    : coverImage.lightThumbnail;
+  const thumbnailAlt = title + " 썸네일";
+  const thumbnailBlurDataURL = `/static/img/thumbnail-placeholder-${
+    isDarkMode ? "dark" : "light"
+  }.webp`;
+
   return (
     <>
       <Container>
@@ -96,30 +104,17 @@ const PostTitle = ({
           )}
         </BadgeViewsLikesCounterContainer>
       </Container>
-      {process.env.NODE_ENV === "production" &&
-        (isDarkMode ? (
-          <Thumbnail
-            key={coverImage.darkThumbnail}
-            src={coverImage.darkThumbnail}
-            alt="썸네일"
-            priority={true}
-            width={1200}
-            height={630}
-            placeholder="blur"
-            blurDataURL="/static/img/thumbnail-placeholder-dark.webp"
-          />
-        ) : (
-          <Thumbnail
-            key={coverImage.lightThumbnail}
-            src={coverImage.lightThumbnail}
-            alt="썸네일"
-            priority={true}
-            width={1200}
-            height={630}
-            placeholder="blur"
-            blurDataURL="/static/img/thumbnail-placeholder-light.webp"
-          />
-        ))}
+
+      <Thumbnail
+        key={thumbnailSrc}
+        src={thumbnailSrc}
+        alt={thumbnailAlt}
+        priority={true}
+        width={1200}
+        height={630}
+        placeholder="blur"
+        blurDataURL={thumbnailBlurDataURL}
+      />
     </>
   );
 };
