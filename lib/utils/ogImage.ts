@@ -24,9 +24,10 @@ const generateThumbnail = async (
 
   if (!isThumbnailExists) {
     const buffer = await generateThumbnailBuffer(
-      postTitle,
-      isLight,
-      Template
+      Template({
+        title: postTitle,
+        isLight,
+      })
     );
 
     await ServerSideFirebaseApp.saveBufferOnBucket({
