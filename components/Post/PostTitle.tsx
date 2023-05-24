@@ -38,8 +38,12 @@ const DateSpanforTitle = styled(DateSpan)`
 `;
 
 const Thumbnail = styled(Image)`
-  width: 100%;
   border-radius: 4px;
+
+  width: 100%;
+  height: auto;
+
+  display: block;
 `;
 
 const BadgeViewsLikesCounterContainer = styled.div`
@@ -115,6 +119,7 @@ const PostTitle = ({
         height={630}
         placeholder="blur"
         blurDataURL={thumbnailBlurDataURL}
+        quality={100}
       />
     </>
   );

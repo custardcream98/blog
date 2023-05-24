@@ -42,13 +42,11 @@ const ProjectAd = ({
 
   return (
     <Wrapper isMounted={isMounted} isClosed={isClosed}>
-      <Image
-        className="project-ad-image"
+      <ProjectAdImage
         src={projectImage}
         alt={projectName + " 아이콘 이미지"}
         width={50}
         height={50}
-        objectFit="cover"
       />
       <div className="project-ad-content">
         <strong className="project-ad-title">
@@ -156,6 +154,10 @@ const Wrapper = styled.aside<WrapperProps>`
   @media only print {
     display: none;
   }
+`;
+
+const ProjectAdImage = styled(Image)`
+  object-fit: cover;
 `;
 
 const ProjectLink = styled.a`
