@@ -1,5 +1,4 @@
 import { Children } from "react";
-import Image from "next/image";
 import styled from "styled-components";
 
 import CategoryBadges from "components/Common/CategoryBadges";
@@ -7,8 +6,7 @@ import DateSpan from "components/Common/DateSpan";
 import ViewsLikesCounter from "./ViewsLikesCounter";
 import { LinkDecorated } from "components/Common/styledComponents";
 import { CoverImage } from "types/post";
-import { useRecoilValue } from "recoil";
-import { isDarkAtom } from "lib/atoms";
+import PostThumbnail from "./PostThumbnail";
 
 const Container = styled.div`
   display: flex;
@@ -37,15 +35,6 @@ const DateSpanforTitle = styled(DateSpan)`
   font-weight: 400;
 `;
 
-const Thumbnail = styled(Image)`
-  border-radius: 4px;
-
-  width: 100%;
-  height: auto;
-
-  display: block;
-`;
-
 const BadgeViewsLikesCounterContainer = styled.div`
   display: flex;
   justify-content: space-between;
@@ -67,16 +56,6 @@ const PostTitle = ({
   date,
   series,
 }: Props) => {
-  const isDarkMode = useRecoilValue(isDarkAtom);
-
-  const thumbnailSrc = isDarkMode
-    ? coverImage.darkThumbnail
-    : coverImage.lightThumbnail;
-  const thumbnailAlt = title + " 썸네일";
-  const thumbnailBlurDataURL = `/static/img/thumbnail-placeholder-${
-    isDarkMode ? "dark" : "light"
-  }.webp`;
-
   return (
     <>
       <Container>
@@ -110,16 +89,10 @@ const PostTitle = ({
         </BadgeViewsLikesCounterContainer>
       </Container>
 
-      <Thumbnail
-        key={thumbnailSrc}
-        src={thumbnailSrc}
-        alt={thumbnailAlt}
-        priority={true}
-        width={1200}
-        height={630}
-        placeholder="blur"
-        blurDataURL={thumbnailBlurDataURL}
-        quality={100}
+      <PostThumbnail
+        key={title}
+        title={title}
+        {...coverImage}
       />
     </>
   );
