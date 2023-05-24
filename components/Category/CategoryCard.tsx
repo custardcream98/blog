@@ -20,20 +20,26 @@ const LinkDecoratedForCate = styled(LinkDecorated)`
   padding-bottom: 0.2rem;
 `;
 
-type Props = {
-  post: PostType;
-};
+type Props = PostType;
 
-const CategoryCard = ({ post }: Props) => (
+const CategoryCard = ({
+  slug,
+  title,
+  date,
+  category,
+}: Props) => (
   <Container>
-    <Link href={`/posts/${post.slug}`} passHref>
-      <LinkDecoratedForCate>
-        {post.title}
-      </LinkDecoratedForCate>
-    </Link>
-    <DateSpan date={post.date} />
+    <LinkDecoratedForCate
+      href={{
+        pathname: "/posts/[slug]",
+        query: { slug: slug },
+      }}
+    >
+      {title}
+    </LinkDecoratedForCate>
+    <DateSpan date={date} />
     <CategoryBadges>
-      {post.category.map((category) => (
+      {category.map((category) => (
         <CategoryBadges.Badge
           key={category}
           category={category}

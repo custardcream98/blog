@@ -1,5 +1,4 @@
 import styled from "styled-components";
-import Link from "next/link";
 import { useRouter } from "next/router";
 
 import { LinkDecorated } from "components/Common/styledComponents";
@@ -27,11 +26,9 @@ const NavItem = ({ href, children }: NavItemProps) => {
 
   return (
     <NavItemLi>
-      <Link href={href} passHref>
-        <NavItemLinkDecorated isActive={isActive}>
-          {children}
-        </NavItemLinkDecorated>
-      </Link>
+      <NavItemLinkDecorated isActive={isActive} href={href}>
+        {children}
+      </NavItemLinkDecorated>
     </NavItemLi>
   );
 };

@@ -4,7 +4,7 @@ import styled from "styled-components";
 import { cssOutlineOnFocus } from "components/Layout/Navigation/styles";
 import LinkIcon from "components/Common/LinkIcon";
 
-const StyledLink = styled.a`
+const StyledLink = styled(Link)`
   display: block;
   align-self: end;
 
@@ -42,16 +42,18 @@ export default function LinkToPost({
   const id = "link-icon_" + title.replaceAll(" ", "_");
 
   return (
-    <Link href={`/posts/${slug}`} passHref>
-      <StyledLink
-        className="result-link"
-        onClick={closeResults}
-      >
-        <LinkIcon
-          id={id}
-          title={`${title} 포스트로 이동하기`}
-        />
-      </StyledLink>
-    </Link>
+    <StyledLink
+      href={{
+        pathname: "/posts/[slug]",
+        query: { slug: slug },
+      }}
+      className="result-link"
+      onClick={closeResults}
+    >
+      <LinkIcon
+        id={id}
+        title={`${title} 포스트로 이동하기`}
+      />
+    </StyledLink>
   );
 }

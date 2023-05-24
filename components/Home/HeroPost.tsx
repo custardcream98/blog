@@ -1,5 +1,4 @@
 import React from "react";
-import Link from "next/link";
 import styled from "styled-components";
 import { LinkDecorated } from "components/Common/styledComponents";
 import DateSpan from "components/Common/DateSpan";
@@ -104,19 +103,18 @@ const HeroPost = ({
       maxPostCount={maxPostCount}
     >
       <Title>
-        <Link href={`/posts/${slug}`} passHref>
-          <TitleLink>{title}</TitleLink>
-        </Link>
+        <TitleLink href={`/posts/${slug}`}>
+          {title}
+        </TitleLink>
         <DateSpanForHeroPost date={date} />
       </Title>
-      <Link href={`/posts/${slug}`} passHref>
-        <ExcerptLink
-          index={index}
-          maxPostCount={maxPostCount}
-        >
-          <Excerpt>{excerpt}</Excerpt>
-        </ExcerptLink>
-      </Link>
+      <ExcerptLink
+        index={index}
+        maxPostCount={maxPostCount}
+        href={`/posts/${slug}`}
+      >
+        <Excerpt>{excerpt}</Excerpt>
+      </ExcerptLink>
     </ContentContainer>
   );
 };

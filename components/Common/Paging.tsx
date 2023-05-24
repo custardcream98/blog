@@ -12,7 +12,7 @@ const Container = styled.nav`
   justify-content: center;
 `;
 
-const StyledLink = styled.a`
+const StyledLink = styled(Link)`
   display: inline-block;
   margin: 0 7px;
   line-height: 24px;
@@ -56,51 +56,65 @@ type Props = {
   currentPage: number;
 };
 
-const getPath = (page: number) => `?page=${page}`;
-
 const Paging = ({ pageScale, currentPage }: Props) => {
   const theme = useTheme();
 
   return (
     <Container>
       {currentPage !== 1 && (
-        <Link href={getPath(currentPage - 1)} passHref>
-          <LeftArrow>
-            <span className="sr-only">이전 글</span>
-            <MdOutlineKeyboardArrowLeft
-              color={theme.textColor}
-              size="1.5rem"
-            />
-          </LeftArrow>
-        </Link>
+        <LeftArrow
+          href={{
+            pathname: "/",
+            query: { page: currentPage - 1 },
+          }}
+        >
+          <span className="sr-only">이전 글</span>
+          <MdOutlineKeyboardArrowLeft
+            color={theme.textColor}
+            size="1.5rem"
+          />
+        </LeftArrow>
       )}
       <PagenumList>
         {Children.toArray(
           new Array(pageScale).fill(0).map((_, index) => (
             <li>
-              <Link href={getPath(index + 1)} passHref>
-                {index + 1 === currentPage ? (
-                  <Pagenum__selected>
-                    {index + 1}
-                  </Pagenum__selected>
-                ) : (
-                  <Pagenum>{index + 1}</Pagenum>
-                )}
-              </Link>
+              {index + 1 === currentPage ? (
+                <Pagenum__selected
+                  href={{
+                    pathname: "/",
+                    query: { page: index + 1 },
+                  }}
+                >
+                  {index + 1}
+                </Pagenum__selected>
+              ) : (
+                <Pagenum
+                  href={{
+                    pathname: "/",
+                    query: { page: index + 1 },
+                  }}
+                >
+                  {index + 1}
+                </Pagenum>
+              )}
             </li>
           ))
         )}
       </PagenumList>
       {currentPage !== pageScale && (
-        <Link href={getPath(currentPage + 1)} passHref>
-          <RightArrow>
-            <span className="sr-only">다음 글</span>
-            <MdOutlineKeyboardArrowRight
-              color={theme.textColor}
-              size="1.5rem"
-            />
-          </RightArrow>
-        </Link>
+        <RightArrow
+          href={{
+            pathname: "/",
+            query: { page: currentPage + 1 },
+          }}
+        >
+          <span className="sr-only">다음 글</span>
+          <MdOutlineKeyboardArrowRight
+            color={theme.textColor}
+            size="1.5rem"
+          />
+        </RightArrow>
       )}
     </Container>
   );

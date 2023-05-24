@@ -1,6 +1,7 @@
+import Link from "next/link";
 import styled, { css, keyframes } from "styled-components";
 
-export const LinkDecorated = styled.a`
+export const LinkDecorated = styled(Link)`
   word-break: keep-all;
   text-decoration: none;
   &:hover {

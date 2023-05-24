@@ -39,7 +39,7 @@ export default function Post({ category, posts }: Props) {
         <PostTitle>{`<${category} />`}</PostTitle>
         <ol>
           {posts.map((post) => (
-            <CategoryCard key={post.slug} post={post} />
+            <CategoryCard key={post.slug} {...post} />
           ))}
         </ol>
       </PostContainer>
