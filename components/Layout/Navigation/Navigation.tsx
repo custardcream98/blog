@@ -118,20 +118,18 @@ const Navigation = () => {
   const nav = useMemo(
     () => (
       <Nav>
-        <Link href="/" passHref>
-          <a>
-            <LogoTitle>
-              <BlogIcon color={theme.textColor} size={1} />
-              <StyledLogoTitleSpan
-                className={width! <= 400 ? "sr-only" : ""}
-              >
-                shiwoo.dev
-              </StyledLogoTitleSpan>
-              <span className="sr-only">
-                : FE 개발자 박시우의 기술 블로그
-              </span>
-            </LogoTitle>
-          </a>
+        <Link href="/">
+          <LogoTitle>
+            <BlogIcon color={theme.textColor} size={1} />
+            <StyledLogoTitleSpan
+              className={width! <= 400 ? "sr-only" : ""}
+            >
+              shiwoo.dev
+            </StyledLogoTitleSpan>
+            <span className="sr-only">
+              : FE 개발자 박시우의 기술 블로그
+            </span>
+          </LogoTitle>
         </Link>
         <NavItemWrapper>
           <NavList>

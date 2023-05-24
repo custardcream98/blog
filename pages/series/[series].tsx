@@ -38,11 +38,9 @@ const Series = ({ series, posts }: Props) => {
       <SeriesContainer>
         <SeriesTitle>{`<${series} />`}</SeriesTitle>
         <ol>
-          {React.Children.toArray(
-            posts.map((post) => (
-              <CategoryCard post={post} />
-            ))
-          )}
+          {posts.map((post) => (
+            <CategoryCard key={post.slug} {...post} />
+          ))}
         </ol>
       </SeriesContainer>
     </>

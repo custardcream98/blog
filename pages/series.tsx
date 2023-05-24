@@ -45,9 +45,12 @@ const Series = ({ series }: Props) => {
         <SeriesList>
           {Object.keys(series).map((key) => (
             <SeriesTitle key={key}>
-              <Link href={`/series/${key}`} passHref>
-                <LinkDecorated>{`${key} (${series[key]})`}</LinkDecorated>
-              </Link>
+              <LinkDecorated
+                href={{
+                  pathname: "/series/[series]",
+                  query: { series: key },
+                }}
+              >{`${key} (${series[key]})`}</LinkDecorated>
             </SeriesTitle>
           ))}
         </SeriesList>

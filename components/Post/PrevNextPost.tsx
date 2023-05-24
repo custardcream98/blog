@@ -126,10 +126,20 @@ const PrevNextPost = ({ post }: Props) => (
   >
     {post.prevTitle ? (
       <LinkWrapper>
-        <Link href={`../posts/${post.prevSlug}`}>
+        <Link
+          href={{
+            pathname: "/posts/[slug]",
+            query: { slug: post.prevSlug },
+          }}
+        >
           ← 이전글
         </Link>
-        <Link href={`../posts/${post.prevSlug}`}>
+        <Link
+          href={{
+            pathname: "/posts/[slug]",
+            query: { slug: post.prevSlug },
+          }}
+        >
           {post.prevTitle}
         </Link>
       </LinkWrapper>
@@ -138,10 +148,20 @@ const PrevNextPost = ({ post }: Props) => (
     )}
     {post.nextTitle ? (
       <LinkWrapper>
-        <Link href={`../posts/${post.nextSlug}`}>
+        <Link
+          href={{
+            pathname: "/posts/[slug]",
+            query: { slug: post.nextSlug },
+          }}
+        >
           다음글 →
         </Link>
-        <Link href={`../posts/${post.nextSlug}`}>
+        <Link
+          href={{
+            pathname: "/posts/[slug]",
+            query: { slug: post.nextSlug },
+          }}
+        >
           {post.nextTitle}
         </Link>
       </LinkWrapper>

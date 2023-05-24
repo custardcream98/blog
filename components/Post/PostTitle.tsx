@@ -1,6 +1,5 @@
 import { Children } from "react";
 import Image from "next/image";
-import Link from "next/link";
 import styled from "styled-components";
 
 import CategoryBadges from "components/Common/CategoryBadges";
@@ -39,8 +38,12 @@ const DateSpanforTitle = styled(DateSpan)`
 `;
 
 const Thumbnail = styled(Image)`
-  width: 100%;
   border-radius: 4px;
+
+  width: 100%;
+  height: auto;
+
+  display: block;
 `;
 
 const BadgeViewsLikesCounterContainer = styled.div`
@@ -78,12 +81,14 @@ const PostTitle = ({
     <>
       <Container>
         {series && (
-          <Link
-            href={`/series/${encodeURI(series)}`}
-            passHref
+          <SeriesName
+            href={{
+              pathname: "/series/[series]",
+              query: { series: encodeURI(series) },
+            }}
           >
-            <SeriesName>{series}</SeriesName>
-          </Link>
+            {series}
+          </SeriesName>
         )}
         <Title>{title}</Title>
         <DateSpanforTitle date={date} />
@@ -114,6 +119,7 @@ const PostTitle = ({
         height={630}
         placeholder="blur"
         blurDataURL={thumbnailBlurDataURL}
+        quality={100}
       />
     </>
   );

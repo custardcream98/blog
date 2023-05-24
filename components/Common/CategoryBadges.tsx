@@ -8,7 +8,7 @@ interface IBadge {
   borderColor: string;
 }
 
-const StyledAnchor = styled.a<IBadge>`
+const StyledAnchor = styled(Link)<IBadge>`
   display: block;
 
   margin: 0.3rem;
@@ -50,14 +50,16 @@ const Badge = ({ category }: Props) => {
 
   return (
     <li>
-      <Link href={`/categories/${category}`} passHref>
-        <StyledAnchor
-          backgroundColor={`${color}4e`}
-          borderColor={color}
-        >
-          {category}
-        </StyledAnchor>
-      </Link>
+      <StyledAnchor
+        href={{
+          pathname: "/categories/[category]",
+          query: { category: category },
+        }}
+        backgroundColor={`${color}4e`}
+        borderColor={color}
+      >
+        {category}
+      </StyledAnchor>
     </li>
   );
 };
