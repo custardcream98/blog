@@ -48,6 +48,15 @@ const generateThumbnail = async (
 export async function getOgImage(
   postTitle: string
 ): Promise<CoverImage> {
+  if (process.env.NODE_ENV === "development") {
+    return {
+      lightThumbnail:
+        "https://storage.googleapis.com/blog-e8ab2.appspot.com/thumbnails%2Flight%2FJavaScript%25EB%25A7%258C%25EC%259C%25BC%25EB%25A1%259C%2520SPA%2520%25EA%25B0%259C%25EB%25B0%259C%25ED%2595%25B4%25EB%25B3%25B4%25EA%25B8%25B0.webp",
+      darkThumbnail:
+        "https://storage.googleapis.com/blog-e8ab2.appspot.com/thumbnails%2Fdark%2FJavaScript%25EB%25A7%258C%25EC%259C%25BC%25EB%25A1%259C%2520SPA%2520%25EA%25B0%259C%25EB%25B0%259C%25ED%2595%25B4%25EB%25B3%25B4%25EA%25B8%25B0.webp",
+    };
+  }
+
   const resolvedPostTitle = postTitle.replace(/\//g, "-");
 
   return {
@@ -70,7 +79,8 @@ export async function getAllOgImages(
   for (const postTitle of postTitles) {
     console.log("Generating og image for", postTitle);
 
-    ogImages.push(await getOgImage(postTitle));
+    const ogImage = await getOgImage(postTitle);
+    ogImages.push(ogImage);
   }
 
   return ogImages;
