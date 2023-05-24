@@ -89,11 +89,7 @@ const PostTitle = ({
         </BadgeViewsLikesCounterContainer>
       </Container>
 
-      <PostThumbnail
-        key={title}
-        title={title}
-        {...coverImage}
-      />
+      <PostThumbnail title={title} {...coverImage} />
     </>
   );
 };

@@ -39,6 +39,7 @@ const PostThumbnail = ({
 
   return (
     <Thumbnail
+      key={thumbnailSrc}
       src={thumbnailSrc}
       alt={thumbnailAlt}
       priority={true}
