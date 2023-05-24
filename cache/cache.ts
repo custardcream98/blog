@@ -1,10 +1,10 @@
 import { JSDOM } from "jsdom";
 import fs from "fs";
 
-import { markdownToHtmlForCache } from "lib/utils/markdownToHtml";
-import { getAllPosts } from "lib/utils/posts";
-import type { PostTypeWithoutContent } from "types/post";
-import type { CachePost } from "types/cache";
+import { markdownToHtmlForCache } from "src/lib/utils/markdownToHtml";
+import { getAllPosts } from "src/lib/utils/posts";
+import type { PostTypeWithoutContent } from "src/types/post";
+import type { CachePost } from "src/types/cache";
 
 const POST_PER_PAGE = 5;
 
