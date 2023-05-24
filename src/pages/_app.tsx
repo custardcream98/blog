@@ -20,9 +20,10 @@ import "@fontsource/source-code-pro/800.css";
 import "@fontsource/poppins/500.css";
 import "@fontsource/poppins/600.css";
 
-import "../styles/reset.css";
-import "../styles/font.css";
-import "../styles/style.css";
+import "src/styles/reset.css";
+import "src/styles/font.css";
+import "src/styles/style.css";
+import "src/styles/tailwind.css";
 
 function MyApp({ Component, pageProps }: AppProps) {
   console.clear();
