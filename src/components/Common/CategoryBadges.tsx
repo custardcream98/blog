@@ -1,7 +1,8 @@
+import categoryTheme from "src/lib/categoryTheme";
+
+import Link from "next/link";
 import type { ReactNode } from "react";
 import styled from "styled-components";
-import Link from "next/link";
-import categoryTheme from "src/lib/categoryTheme";
 
 interface IBadge {
   backgroundColor: string;
@@ -37,15 +38,11 @@ type Props = {
   category: string;
 };
 
-const CategoryBadges = ({
-  children,
-}: {
-  children: ReactNode;
-}) => (
-  <CategoryBadgesWrapper>{children}</CategoryBadgesWrapper>
-);
+function CategoryBadges({ children }: { children: ReactNode }) {
+  return <CategoryBadgesWrapper>{children}</CategoryBadgesWrapper>;
+}
 
-const Badge = ({ category }: Props) => {
+function Badge({ category }: Props) {
   const { color } = categoryTheme[category];
 
   return (
@@ -62,7 +59,7 @@ const Badge = ({ category }: Props) => {
       </StyledAnchor>
     </li>
   );
-};
+}
 
 CategoryBadges.Badge = Badge;
 

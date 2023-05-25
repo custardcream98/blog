@@ -23,10 +23,7 @@ export type PostType = {
   nextExcerpt?: string;
 };
 
-export type PostTypeWithoutContent = Omit<
-  PostType,
-  "content"
->;
+export type PostTypeWithoutContent = Omit<PostType, "content">;
 
 export default PostType;
 

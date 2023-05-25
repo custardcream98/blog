@@ -1,5 +1,6 @@
-import styled from "styled-components";
 import { ProjectDescriptionList } from "../styles";
+
+import styled from "styled-components";
 
 export const SectionItemP = styled.p`
   font-weight: 300;
@@ -33,9 +34,7 @@ export const SectionItemTitle = styled.h3`
   word-break: keep-all;
 `;
 
-export const SectionItemDescriptionList = styled(
-  ProjectDescriptionList
-)`
+export const SectionItemDescriptionList = styled(ProjectDescriptionList)`
   margin-top: 0.5rem;
 
   @media only print {

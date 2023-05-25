@@ -1,30 +1,19 @@
-import { PropsWithChildren } from "react";
 import { Project } from "src/types/resume";
-import {
-  S,
-  ResumeLink,
-  ResumePeriod,
-  ResumeLinksList,
-} from "..";
 
-const Section = ({ children }: PropsWithChildren) => {
+import { ResumeLink, ResumeLinksList, ResumePeriod, S } from "..";
+
+import { PropsWithChildren } from "react";
+
+function Section({ children }: PropsWithChildren) {
   return (
     <S.Section>
       <S.SectionTitle>프로젝트</S.SectionTitle>
       <S.SectionItemList>{children}</S.SectionItemList>
     </S.Section>
   );
-};
+}
 
-const Item = ({
-  title,
-  shortDescription,
-  stacks,
-  links,
-  period,
-  team,
-  descriptions,
-}: Project) => {
+function Item({ title, shortDescription, stacks, links, period, team, descriptions }: Project) {
   return (
     <S.SectionItemBordered>
       <S.ProjectTitle>{title}</S.ProjectTitle>
@@ -33,15 +22,11 @@ const Item = ({
 
       <ResumePeriod from={period.from} to={period.to} />
 
-      <S.ProjectShortDescription>
-        {shortDescription}
-      </S.ProjectShortDescription>
+      <S.ProjectShortDescription>{shortDescription}</S.ProjectShortDescription>
 
       <S.ProjectDescriptionList>
         {descriptions.map((description) => (
-          <S.ProjectDescriptionItem key={description}>
-            {description}
-          </S.ProjectDescriptionItem>
+          <S.ProjectDescriptionItem key={description}>{description}</S.ProjectDescriptionItem>
         ))}
       </S.ProjectDescriptionList>
 
@@ -55,14 +40,12 @@ const Item = ({
 
       <S.ProjectStacks>
         {stacks.map((stack) => (
-          <S.ProjectStack key={stack}>
-            {stack}
-          </S.ProjectStack>
+          <S.ProjectStack key={stack}>{stack}</S.ProjectStack>
         ))}
       </S.ProjectStacks>
     </S.SectionItemBordered>
   );
-};
+}
 
 const Projects = Object.assign(Section, {
   Item,

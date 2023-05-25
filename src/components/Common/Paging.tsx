@@ -1,10 +1,7 @@
-import { Children } from "react";
-import styled, { useTheme } from "styled-components";
-import {
-  MdOutlineKeyboardArrowLeft,
-  MdOutlineKeyboardArrowRight,
-} from "react-icons/md";
 import Link from "next/link";
+import { Children } from "react";
+import { MdOutlineKeyboardArrowLeft, MdOutlineKeyboardArrowRight } from "react-icons/md";
+import styled, { useTheme } from "styled-components";
 
 const Container = styled.nav`
   position: relative;
@@ -46,7 +43,7 @@ const Pagenum = styled(StyledLink)`
   font-weight: 300;
 `;
 
-const Pagenum__selected = styled(Pagenum)`
+const SelectedPagenum = styled(Pagenum)`
   font-weight: 500;
   scale: 1.4;
 `;
@@ -56,7 +53,7 @@ type Props = {
   currentPage: number;
 };
 
-const Paging = ({ pageScale, currentPage }: Props) => {
+function Paging({ pageScale, currentPage }: Props) {
   const theme = useTheme();
 
   return (
@@ -68,11 +65,8 @@ const Paging = ({ pageScale, currentPage }: Props) => {
             query: { page: currentPage - 1 },
           }}
         >
-          <span className="sr-only">이전 글</span>
-          <MdOutlineKeyboardArrowLeft
-            color={theme.textColor}
-            size="1.5rem"
-          />
+          <span className='sr-only'>이전 글</span>
+          <MdOutlineKeyboardArrowLeft color={theme.textColor} size='1.5rem' />
         </LeftArrow>
       )}
       <PagenumList>
@@ -80,14 +74,14 @@ const Paging = ({ pageScale, currentPage }: Props) => {
           new Array(pageScale).fill(0).map((_, index) => (
             <li>
               {index + 1 === currentPage ? (
-                <Pagenum__selected
+                <SelectedPagenum
                   href={{
                     pathname: "/",
                     query: { page: index + 1 },
                   }}
                 >
                   {index + 1}
-                </Pagenum__selected>
+                </SelectedPagenum>
               ) : (
                 <Pagenum
                   href={{
@@ -99,7 +93,7 @@ const Paging = ({ pageScale, currentPage }: Props) => {
                 </Pagenum>
               )}
             </li>
-          ))
+          )),
         )}
       </PagenumList>
       {currentPage !== pageScale && (
@@ -109,15 +103,12 @@ const Paging = ({ pageScale, currentPage }: Props) => {
             query: { page: currentPage + 1 },
           }}
         >
-          <span className="sr-only">다음 글</span>
-          <MdOutlineKeyboardArrowRight
-            color={theme.textColor}
-            size="1.5rem"
-          />
+          <span className='sr-only'>다음 글</span>
+          <MdOutlineKeyboardArrowRight color={theme.textColor} size='1.5rem' />
         </RightArrow>
       )}
     </Container>
   );
-};
+}
 
 export default Paging;

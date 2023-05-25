@@ -1,18 +1,17 @@
-import { useRef } from "react";
-import type { RefObject } from "react";
+import { type RefObject, useRef } from "react";
 
-const useEditable = <
-  T extends HTMLInputElement | HTMLTextAreaElement
->(): [
+const useEditable = <T extends HTMLInputElement | HTMLTextAreaElement>(): [
   RefObject<T>,
   () => string | undefined,
-  () => void
+  () => void,
 ] => {
   const editableRef = useRef<T>(null);
 
   const getEditableVal = () => editableRef.current?.value;
   const clearEditableVal = () => {
-    editableRef.current!.value = "";
+    if (!editableRef.current) return;
+
+    editableRef.current.value = "";
   };
 
   return [editableRef, getEditableVal, clearEditableVal];

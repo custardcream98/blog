@@ -1,25 +1,23 @@
 import { convertYYMMToKorean } from "src/lib/utils/string";
 import type { Period } from "src/types/resume";
-import styled from "styled-components";
+
 import { dimTextStyle } from "./styles";
 
-const ResumePeriod = ({ from, to }: Period) => {
+import styled from "styled-components";
+
+function ResumePeriod({ from, to }: Period) {
   if (to) {
     if (from === to) {
       return (
         <ResumePeriodContainer>
-          <time dateTime={from}>
-            {convertYYMMToKorean(from)}
-          </time>
+          <time dateTime={from}>{convertYYMMToKorean(from)}</time>
         </ResumePeriodContainer>
       );
     }
 
     return (
       <ResumePeriodContainer>
-        <time dateTime={from}>
-          {convertYYMMToKorean(from)}
-        </time>
+        <time dateTime={from}>{convertYYMMToKorean(from)}</time>
         <time dateTime={to}>{convertYYMMToKorean(to)}</time>
       </ResumePeriodContainer>
     );
@@ -27,13 +25,11 @@ const ResumePeriod = ({ from, to }: Period) => {
 
   return (
     <ResumePeriodContainer>
-      <time dateTime={from}>
-        {convertYYMMToKorean(from)}
-      </time>
+      <time dateTime={from}>{convertYYMMToKorean(from)}</time>
       <span>진행중</span>
     </ResumePeriodContainer>
   );
-};
+}
 
 export const ResumePeriodContainer = styled.span`
   ${dimTextStyle}

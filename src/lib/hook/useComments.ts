@@ -1,17 +1,13 @@
-import { useEffect, useState } from "react";
-import type ICommentData from "src/types/comment";
 import { getComments } from "src/lib/firebaseSetup/firebaseApps";
+import type ICommentData from "src/types/comment";
+
+import { useEffect, useState } from "react";
 
 const useComments = (postTitle: string) => {
-  const [comments, setComments] = useState<ICommentData[]>(
-    []
-  );
+  const [comments, setComments] = useState<ICommentData[]>([]);
 
   useEffect(() => {
-    const unSubscribeComments = getComments(
-      postTitle,
-      setComments
-    );
+    const unSubscribeComments = getComments(postTitle, setComments);
 
     return () => unSubscribeComments();
   }, [postTitle]);

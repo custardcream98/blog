@@ -1,15 +1,13 @@
-import { useCallback, useEffect, useState } from "react";
-
-import { CommentEditState } from "src/types/comment";
 import { useCommentEditorStateSetter } from "src/components/Comments/CommentCard/CommentEditor/context";
 import { useCommentDataContext } from "src/components/Comments/CommentCard/context";
 import { useCommentPostTitleContext } from "src/components/Comments/context";
 import { postMail } from "src/lib/axios";
-import {
-  addComment,
-  updateComment,
-} from "src/lib/firebaseSetup/firebaseApps";
+import { addComment, updateComment } from "src/lib/firebaseSetup/firebaseApps";
+import { CommentEditState } from "src/types/comment";
+
 import useEditable from "./useEditable";
+
+import { useCallback, useEffect, useState } from "react";
 
 const useCommentForm = (isForEdit: boolean) => {
   const {
@@ -23,14 +21,11 @@ const useCommentForm = (isForEdit: boolean) => {
   const title = useCommentPostTitleContext();
   const { changeStateTo } = useCommentEditorStateSetter();
 
-  const [usernameRef, getUsername, clearUsername] =
-    useEditable<HTMLInputElement>();
+  const [usernameRef, getUsername, clearUsername] = useEditable<HTMLInputElement>();
 
-  const [passwordRef, getPassword, clearPassword] =
-    useEditable<HTMLInputElement>();
+  const [passwordRef, getPassword, clearPassword] = useEditable<HTMLInputElement>();
 
-  const [commentRef, getComment, clearComment] =
-    useEditable<HTMLTextAreaElement>();
+  const [commentRef, getComment, clearComment] = useEditable<HTMLTextAreaElement>();
 
   const [isLoading, setIsLoading] = useState(false);
 
@@ -53,6 +48,9 @@ const useCommentForm = (isForEdit: boolean) => {
     initialUsername,
     initialPassword,
     initialComment,
+    usernameRef,
+    passwordRef,
+    commentRef,
   ]);
 
   const handleCommentSubmit = useCallback(
@@ -66,12 +64,7 @@ const useCommentForm = (isForEdit: boolean) => {
       const password = getPassword();
       const comment = getComment();
 
-      if (
-        !username ||
-        !password ||
-        !comment ||
-        (password && password.length <= 4)
-      ) {
+      if (!username || !password || !comment || (password && password.length <= 4)) {
         setIsLoading(false);
         throw Error("입력 오류");
       }
@@ -79,16 +72,16 @@ const useCommentForm = (isForEdit: boolean) => {
       if (isForEdit) {
         try {
           await updateComment({
-            title,
+            comment,
             commentId,
             password,
-            comment,
+            title,
             username,
           });
 
-          updateCommentData!({
-            password,
+          updateCommentData({
             comment,
+            password,
             username,
           });
         } catch (error) {
@@ -101,9 +94,9 @@ const useCommentForm = (isForEdit: boolean) => {
 
       try {
         await addComment({
-          title,
-          password,
           comment,
+          password,
+          title,
           username,
         });
       } catch (error) {
@@ -119,15 +112,27 @@ const useCommentForm = (isForEdit: boolean) => {
 
       setIsLoading(false);
     },
-    [title, commentId]
+    [
+      title,
+      commentId,
+      changeStateTo,
+      clearComment,
+      clearPassword,
+      clearUsername,
+      getComment,
+      getPassword,
+      getUsername,
+      isForEdit,
+      updateCommentData,
+    ],
   );
 
   return {
-    usernameRef,
-    passwordRef,
     commentRef,
-    isLoading,
     handleCommentSubmit,
+    isLoading,
+    passwordRef,
+    usernameRef,
   };
 };
 

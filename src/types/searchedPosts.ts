@@ -11,8 +11,7 @@ export interface SearchedPost extends SearchedPostData {
   matchLength: number;
 }
 
-export interface SearchedPostCardData
-  extends SearchedPostData {
+export interface SearchedPostCardData extends SearchedPostData {
   title: string;
   titleNode: ReactNode;
   contentNode: ReactNode;

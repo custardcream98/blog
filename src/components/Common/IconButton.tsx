@@ -1,8 +1,8 @@
-import { forwardRef } from "react";
-import type { ComponentPropsWithoutRef } from "react";
+import useWindowSize from "src/lib/hook/useWindowSize";
+
+import { type ComponentPropsWithoutRef, forwardRef } from "react";
 import { IconType } from "react-icons";
 import styled, { useTheme } from "styled-components";
-import useWindowSize from "src/lib/hook/useWindowSize";
 
 type ClickableComponents = "a" | "button";
 
@@ -15,21 +15,19 @@ type Props = {
   target?: string;
 } & ComponentPropsWithoutRef<"button">;
 
-const IconButton = forwardRef<HTMLButtonElement, Props>(
-  function IconButtonForwardRef(
-    { icon, title, size = "1rem", buttonAs, ...props },
-    ref
-  ) {
-    const Icon = icon;
-    const { textColor } = useTheme();
+const IconButton = forwardRef<HTMLButtonElement, Props>(function IconButtonForwardRef(
+  { icon, title, size = "1rem", buttonAs, ...props },
+  ref,
+) {
+  const Icon = icon;
+  const { textColor } = useTheme();
 
-    return (
-      <Button ref={ref} as={buttonAs} {...props}>
-        <Icon color={textColor} size={size} title={title} />
-      </Button>
-    );
-  }
-);
+  return (
+    <Button ref={ref} as={buttonAs} {...props}>
+      <Icon color={textColor} size={size} title={title} />
+    </Button>
+  );
+});
 
 const ResponsiveIconButton = forwardRef<
   HTMLButtonElement,
@@ -37,10 +35,7 @@ const ResponsiveIconButton = forwardRef<
     mobileSize: string;
     desktopSize: string;
   }
->(function ResponsiveIconButtonForwardRef(
-  { icon, title, mobileSize, desktopSize, ...props },
-  ref
-) {
+>(function ResponsiveIconButtonForwardRef({ icon, title, mobileSize, desktopSize, ...props }, ref) {
   const { width } = useWindowSize();
   const isMobile = width <= 800;
 
@@ -49,7 +44,7 @@ const ResponsiveIconButton = forwardRef<
       ref={ref}
       size={isMobile ? mobileSize : desktopSize}
       title={title}
-      type="button"
+      type='button'
       icon={icon}
       {...props}
     />

@@ -1,7 +1,4 @@
-import puppeteer, {
-  type Browser,
-  type Page,
-} from "puppeteer";
+import puppeteer, { type Browser, type Page } from "puppeteer";
 
 export class PuppeteerBrowser {
   private static instance: PuppeteerBrowser | null;
@@ -13,10 +10,7 @@ export class PuppeteerBrowser {
     this.page = page;
   }
 
-  static async init(
-    width: number = 1200,
-    height: number = 630
-  ) {
+  static async init(width = 1200, height = 630) {
     if (PuppeteerBrowser.instance) {
       return PuppeteerBrowser.instance;
     }
@@ -24,17 +18,14 @@ export class PuppeteerBrowser {
     const browser = await puppeteer.launch({
       args: ["--no-sandbox", "--disable-setuid-sandbox"],
       defaultViewport: {
-        width,
         height,
+        width,
       },
     });
 
     const page = await browser.newPage();
 
-    PuppeteerBrowser.instance = new PuppeteerBrowser(
-      browser,
-      page
-    );
+    PuppeteerBrowser.instance = new PuppeteerBrowser(browser, page);
 
     setTimeout(() => {
       PuppeteerBrowser.close();
@@ -49,9 +40,7 @@ export class PuppeteerBrowser {
     }
 
     if (!PuppeteerBrowser.instance) {
-      throw new Error(
-        "PuppeteerBrowser instance is not initialized"
-      );
+      throw new Error("PuppeteerBrowser instance is not initialized");
     }
 
     const page = PuppeteerBrowser.instance.page;
@@ -65,9 +54,9 @@ export class PuppeteerBrowser {
     });
 
     const image = await page.screenshot({
+      encoding: "binary",
       omitBackground: true,
       type: "webp",
-      encoding: "binary",
     });
 
     return image as Buffer;

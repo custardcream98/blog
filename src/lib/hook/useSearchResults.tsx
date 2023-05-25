@@ -1,8 +1,8 @@
+import { searchPosts } from "src/lib/axios";
+import type { SearchedPostCardData } from "src/types/searchedPosts";
+
 import { useCallback, useEffect, useState } from "react";
 import styled from "styled-components";
-
-import type { SearchedPostCardData } from "src/types/searchedPosts";
-import { searchPosts } from "src/lib/axios";
 
 const FETCH_DEBOUNCE_COOLTIME = 300;
 
@@ -14,9 +14,7 @@ const ResultsMark = styled.mark`
 `;
 
 const useSearchResults = (query: string) => {
-  const [searchResults, setSearchResults] = useState<
-    SearchedPostCardData[]
-  >([]);
+  const [searchResults, setSearchResults] = useState<SearchedPostCardData[]>([]);
 
   const queryCallback = () => {
     if (!query) {
@@ -27,37 +25,35 @@ const useSearchResults = (query: string) => {
       try {
         const searchedData = await searchPosts(query);
 
-        const searchedResultCardsData = searchedData.map(
-          ({ title, content, ...res }) => {
-            if (typeof title === "object") {
-              return {
-                title: title.join(""),
-                titleNode: (
-                  <>
-                    {title[0]}
-                    <ResultsMark>{title[1]}</ResultsMark>
-                    {title[2]}
-                  </>
-                ),
-                contentNode: content,
-                ...res,
-              };
-            }
-
+        const searchedResultCardsData = searchedData.map(({ title, content, ...res }) => {
+          if (typeof title === "object") {
             return {
-              title,
-              titleNode: title,
-              contentNode: (
+              contentNode: content,
+              title: title.join(""),
+              titleNode: (
                 <>
-                  {content[0]}
-                  <ResultsMark>{content[1]}</ResultsMark>
-                  {content[2]}
+                  {title[0]}
+                  <ResultsMark>{title[1]}</ResultsMark>
+                  {title[2]}
                 </>
               ),
               ...res,
             };
           }
-        );
+
+          return {
+            contentNode: (
+              <>
+                {content[0]}
+                <ResultsMark>{content[1]}</ResultsMark>
+                {content[2]}
+              </>
+            ),
+            title,
+            titleNode: title,
+            ...res,
+          };
+        });
 
         setSearchResults(searchedResultCardsData);
       } catch (error) {
@@ -70,12 +66,9 @@ const useSearchResults = (query: string) => {
 
   useEffect(queryCallback, [query]);
 
-  const clearSearchedResults = useCallback(
-    () => setSearchResults([]),
-    []
-  );
+  const clearSearchedResults = useCallback(() => setSearchResults([]), []);
 
-  return { searchResults, clearSearchedResults };
+  return { clearSearchedResults, searchResults };
 };
 
 export default useSearchResults;

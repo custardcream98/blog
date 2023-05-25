@@ -1,8 +1,8 @@
+import LogoTitleSpan from "src/components/Common/LogoTitleSpan";
+import { LinkDecorated } from "src/components/Common/styledComponents";
+
 import { useLayoutEffect, useState } from "react";
 import styled from "styled-components";
-
-import { LinkDecorated } from "src/components/Common/styledComponents";
-import LogoTitleSpan from "src/components/Common/LogoTitleSpan";
 
 const Container = styled.footer`
   width: 85vw;
@@ -56,7 +56,7 @@ const StyledLogoTitleSpan = styled(LogoTitleSpan)`
   margin-bottom: 0.3rem;
 `;
 
-const Footer = () => {
+function Footer() {
   const [yearString, setYearString] = useState(2022);
 
   useLayoutEffect(() => {
@@ -66,40 +66,31 @@ const Footer = () => {
   return (
     <Container>
       <small>
-        <StyledLogoTitleSpan>
-          shiwoo.dev
-        </StyledLogoTitleSpan>
-        &copy; {yearString} custardcream98. All rights
-        reserved.
+        <StyledLogoTitleSpan>shiwoo.dev</StyledLogoTitleSpan>
+        &copy; {yearString} custardcream98. All rights reserved.
       </small>
       <address>
         <ul>
           <li>
-            <LinkDecorated
-              href="https://github.com/custardcream98"
-              target="_blank"
-            >
+            <LinkDecorated href='https://github.com/custardcream98' target='_blank'>
               GitHub
             </LinkDecorated>
           </li>
           <li>
             <LinkDecorated
-              href="https://www.linkedin.com/in/shi-woo-park-668b33147/"
-              target="_blank"
+              href='https://www.linkedin.com/in/shi-woo-park-668b33147/'
+              target='_blank'
             >
               LinkedIn
             </LinkDecorated>
           </li>
           <li>
-            <LinkDecorated
-              href="mailto:custardcream@kakao.com"
-              target="_blank"
-            >
+            <LinkDecorated href='mailto:custardcream@kakao.com' target='_blank'>
               Email
             </LinkDecorated>
           </li>
           <li>
-            <LinkDecorated href="/rss.xml" target="_blank">
+            <LinkDecorated href='/rss.xml' target='_blank'>
               RSS
             </LinkDecorated>
           </li>
@@ -107,6 +98,6 @@ const Footer = () => {
       </address>
     </Container>
   );
-};
+}
 
 export default Footer;

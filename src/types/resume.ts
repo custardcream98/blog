@@ -10,9 +10,7 @@ export type ResumeLink = {
   url: string;
 };
 
-export type ProjectTeam = `${number | "개"}인 프로젝트${
-  | string
-  | ""}`;
+export type ProjectTeam = `${number | "개"}인 프로젝트${string | ""}`;
 
 export type Project = {
   title: string;

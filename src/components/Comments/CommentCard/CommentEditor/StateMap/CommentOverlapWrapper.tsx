@@ -1,35 +1,34 @@
-import { PropsWithChildren, ReactElement } from "react";
-import styled from "styled-components";
-import { IoMdClose } from "react-icons/io";
-
 import IconButton from "src/components/Common/IconButton";
-import { useCommentEditorStateSetter } from "../context";
 import { CommentEditState } from "src/types/comment";
+
+import { useCommentEditorStateSetter } from "../context";
+
 import { keyframesShow } from "./styles";
 
-const CommentOverlapWrapper = ({
-  children,
-  closer,
-}: PropsWithChildren<{ closer: ReactElement }>) => {
+import { PropsWithChildren, ReactElement } from "react";
+import { IoMdClose } from "react-icons/io";
+import styled from "styled-components";
+
+function CommentOverlapWrapper({ children, closer }: PropsWithChildren<{ closer: ReactElement }>) {
   return (
     <Wrapper>
       {children}
       {closer}
     </Wrapper>
   );
-};
+}
 
-const CloseButtonWithIcon = () => {
+function CloseButtonWithIcon() {
   const { getStateSetter } = useCommentEditorStateSetter();
 
   return (
     <StyledIconButton
       icon={IoMdClose}
-      title="닫기 버튼입니다."
+      title='닫기 버튼입니다.'
       onClick={getStateSetter(CommentEditState.DEFAULT)}
     />
   );
-};
+}
 
 const Wrapper = styled.div`
   position: absolute;
@@ -49,7 +48,6 @@ const StyledIconButton = styled(IconButton)`
   margin-top: 1.5rem;
 `;
 
-CommentOverlapWrapper.CloseButtonWithIcon =
-  CloseButtonWithIcon;
+CommentOverlapWrapper.CloseButtonWithIcon = CloseButtonWithIcon;
 
 export default CommentOverlapWrapper;

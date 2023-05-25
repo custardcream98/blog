@@ -1,20 +1,20 @@
+import CommentCard from "./CommentCard";
+import { CommentFormWithOpenButton } from "./CommentForm";
+import CommentPostTitleContextProvider from "./context";
+
 import type { PropsWithChildren } from "react";
 import styled from "styled-components";
-
-import { CommentFormWithOpenButton } from "./CommentForm";
-import CommentCard from "./CommentCard";
-import CommentPostTitleContextProvider from "./context";
 
 type Props = PropsWithChildren<{
   postTitle: string;
 }>;
-const Comments = ({ children, postTitle }: Props) => {
+function Comments({ children, postTitle }: Props) {
   return (
     <CommentPostTitleContextProvider postTitle={postTitle}>
       <Wrapper>{children}</Wrapper>
     </CommentPostTitleContextProvider>
   );
-};
+}
 
 const Wrapper = styled.section`
   display: flex;
@@ -31,11 +31,13 @@ const Title = styled.h3`
   border-bottom: 3px solid #25282c;
 `;
 
+function CommentsList({ children }: PropsWithChildren) {
+  return <ol>{children}</ol>;
+}
+
 Comments.Title = Title;
 Comments.Form = CommentFormWithOpenButton;
-Comments.List = ({ children }: PropsWithChildren) => (
-  <ol>{children}</ol>
-);
+Comments.List = CommentsList;
 Comments.Item = CommentCard;
 
 export default Comments;

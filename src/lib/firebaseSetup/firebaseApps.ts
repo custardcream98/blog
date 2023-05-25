@@ -1,27 +1,23 @@
+import { getViewedTimeOnLocal, setViewedTimeOnLocal } from "src/lib/localStorage";
+import { percentEncode } from "src/lib/utils/helper";
+import ICommentData from "src/types/comment";
+
+import { CollectionNames, DocumentKeys } from "./collectionNames";
+import { fireStore } from ".";
+
 import { FirebaseError } from "firebase/app";
 import {
-  doc,
-  setDoc,
   addDoc,
-  getDoc,
-  deleteDoc,
-  updateDoc,
-  collection,
-  onSnapshot,
   arrayUnion,
+  collection,
+  deleteDoc,
+  doc,
+  getDoc,
   increment,
+  onSnapshot,
+  setDoc,
+  updateDoc,
 } from "firebase/firestore";
-import ICommentData from "src/types/comment";
-import {
-  getViewedTimeOnLocal,
-  setViewedTimeOnLocal,
-} from "src/lib/localStorage";
-import { fireStore } from ".";
-import {
-  CollectionNames,
-  DocumentKeys,
-} from "./collectionNames";
-import { percentEncode } from "src/lib/utils/helper";
 
 interface IAddCommentProps {
   title: string;
@@ -40,26 +36,20 @@ interface ICommentDocRefProps {
 */
 
 const getPostDocRef = (title: string) =>
-  doc(
-    fireStore,
-    CollectionNames.COLLECTION_POSTS,
-    percentEncode(title)
-  );
+  doc(fireStore, CollectionNames.COLLECTION_POSTS, percentEncode(title));
 
 export const createPostDoc = async (title: string) => {
   const postDocRef = getPostDocRef(title);
 
   try {
-    const _ = await (await getDoc(postDocRef)).data()![
-      DocumentKeys.KEY_VIEWS
-    ];
+    const _ = await (await getDoc(postDocRef)).data()?.[DocumentKeys.KEY_VIEWS];
   } catch (e) {
     if (e instanceof FirebaseError) {
       if (e.code === "not-found") {
-        await setDoc(postDocRef, { views: [], likes: 0 });
+        await setDoc(postDocRef, { likes: 0, views: [] });
       }
     } else if (e instanceof TypeError) {
-      await setDoc(postDocRef, { views: [], likes: 0 });
+      await setDoc(postDocRef, { likes: 0, views: [] });
     }
   }
 };
@@ -69,24 +59,15 @@ export const createPostDoc = async (title: string) => {
 */
 
 const getCommentCollectionRef = (title: string) =>
-  collection(
-    getPostDocRef(title),
-    CollectionNames.COLLECTION_COMMENTS
-  );
+  collection(getPostDocRef(title), CollectionNames.COLLECTION_COMMENTS);
 
-export const getCommentDocRef = ({
-  title,
-  commentId,
-}: ICommentDocRefProps) =>
+export const getCommentDocRef = ({ title, commentId }: ICommentDocRefProps) =>
   doc(getCommentCollectionRef(title), commentId);
 
-export const deleteComment = async ({
-  title,
-  commentId,
-}: ICommentDocRefProps) => {
+export const deleteComment = async ({ title, commentId }: ICommentDocRefProps) => {
   const commentDocRef = getCommentDocRef({
-    title,
     commentId,
+    title,
   });
   await deleteDoc(commentDocRef);
 };
@@ -104,59 +85,44 @@ export const updateComment = async ({
   comment,
 }: UpdateCommentProps) => {
   const commentDocRef = getCommentDocRef({
-    title,
     commentId,
+    title,
   });
   await updateDoc(commentDocRef, {
-    password,
     comment,
+    password,
     username,
   });
 };
 
-export const addComment = async ({
-  title,
-  password,
-  comment,
-  username,
-}: IAddCommentProps) => {
-  const commentCollectionRef =
-    getCommentCollectionRef(title);
+export const addComment = async ({ title, password, comment, username }: IAddCommentProps) => {
+  const commentCollectionRef = getCommentCollectionRef(title);
   await addDoc(commentCollectionRef, {
+    comment,
     createdAt: Date.now(),
     password,
-    comment,
     username,
   });
 };
 
 export const getComments = (
   title: string,
-  setComments: React.Dispatch<
-    React.SetStateAction<ICommentData[]>
-  >
+  setComments: React.Dispatch<React.SetStateAction<ICommentData[]>>,
 ) => {
-  const commentCollectionRef =
-    getCommentCollectionRef(title);
+  const commentCollectionRef = getCommentCollectionRef(title);
 
-  const unSubscribe = onSnapshot(
-    commentCollectionRef,
-    (snapshot) => {
-      const commentsArr: ICommentData[] = [];
-      snapshot.docs
-        .sort(
-          (post1, post2) =>
-            post1.data().createdAt - post2.data().createdAt
-        )
-        .map((doc) =>
-          commentsArr.push({
-            ...(doc.data() as ICommentData),
-            id: doc.id,
-          })
-        );
-      setComments((_) => [...commentsArr]);
-    }
-  );
+  const unSubscribe = onSnapshot(commentCollectionRef, (snapshot) => {
+    const commentsArr: ICommentData[] = [];
+    snapshot.docs
+      .sort((post1, post2) => post1.data().createdAt - post2.data().createdAt)
+      .map((doc) =>
+        commentsArr.push({
+          ...(doc.data() as ICommentData),
+          id: doc.id,
+        }),
+      );
+    setComments((_) => [...commentsArr]);
+  });
 
   return unSubscribe;
 };
@@ -167,23 +133,20 @@ export const getComments = (
 
 export const getViewCount = (
   title: string,
-  setViewCount: React.Dispatch<React.SetStateAction<number>>
+  setViewCount: React.Dispatch<React.SetStateAction<number>>,
 ) => {
   const postDocRef = getPostDocRef(title);
-  const isViewAble =
-    Date.now() - getViewedTimeOnLocal(title) > 1200000;
+  const isViewAble = Date.now() - getViewedTimeOnLocal(title) > 1200000;
 
   if (isViewAble) {
     const time = Date.now();
-    updateDoc(postDocRef, { views: arrayUnion(time) }).then(
-      (_) => setViewedTimeOnLocal(title, time)
+    updateDoc(postDocRef, { views: arrayUnion(time) }).then((_) =>
+      setViewedTimeOnLocal(title, time),
     );
   }
 
   const unSubscribe = onSnapshot(postDocRef, (post) =>
-    setViewCount(
-      post.data()![DocumentKeys.KEY_VIEWS].length
-    )
+    setViewCount(post.data()?.[DocumentKeys.KEY_VIEWS].length),
   );
 
   return unSubscribe;
@@ -195,12 +158,12 @@ export const getViewCount = (
 
 export const getLikeCount = (
   title: string,
-  setLikeCount: React.Dispatch<React.SetStateAction<number>>
+  setLikeCount: React.Dispatch<React.SetStateAction<number>>,
 ) => {
   const postDocRef = getPostDocRef(title);
 
   const unSubscribe = onSnapshot(postDocRef, (post) =>
-    setLikeCount(post.data()![DocumentKeys.KEY_LIKES])
+    setLikeCount(post.data()?.[DocumentKeys.KEY_LIKES]),
   );
 
   return unSubscribe;

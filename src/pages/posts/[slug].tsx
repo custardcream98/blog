@@ -1,28 +1,18 @@
-import styled from "styled-components";
-
-import Meta from "src/components/Layout/Meta";
-import { Container } from "src/components/Common/styledComponents";
-import PostTitle from "src/components/Post/PostTitle";
 import Comments from "src/components/Comments";
-import PrevNextPost from "src/components/Post/PrevNextPost";
 import MarkdownBody from "src/components/Common/MarkdownBody";
-
-import {
-  getPostBySlug,
-  getAllPosts,
-  getPrevNextPosts,
-} from "src/lib/utils/posts";
-import {
-  getAllOgImages,
-  getOgImage,
-} from "src/lib/utils/ogImage";
-import markdownToHtml from "src/lib/utils/markdownToHtml";
+import { Container } from "src/components/Common/styledComponents";
+import Meta from "src/components/Layout/Meta";
+import PostTitle from "src/components/Post/PostTitle";
+import PrevNextPost from "src/components/Post/PrevNextPost";
 import { createPostDoc } from "src/lib/firebaseSetup/firebaseApps";
-import check404 from "src/lib/check404";
 import useComments from "src/lib/hook/useComments";
 import generateRSSFeed from "src/lib/rss";
-
+import markdownToHtml from "src/lib/utils/markdownToHtml";
+import { getAllOgImages, getOgImage } from "src/lib/utils/ogImage";
+import { getAllPosts, getPostBySlug, getPrevNextPosts } from "src/lib/utils/posts";
 import type { PostType } from "src/types/post";
+
+import styled from "styled-components";
 
 const PostSection = styled.section`
   width: 100%;
@@ -37,14 +27,13 @@ type Props = {
 };
 
 export default function Posts({ post }: Props) {
-  check404();
   const postTitle = post.title.replaceAll("/", ",");
   const comments = useComments(postTitle);
 
   return (
     <>
       <Meta
-        type="post"
+        type='post'
         date={post.date}
         title={post.title}
         description={post.excerpt}
@@ -64,17 +53,11 @@ export default function Posts({ post }: Props) {
         </PostSection>
         <PrevNextPost post={post} />
         <Comments postTitle={postTitle}>
-          <Comments.Title>
-            Comments({comments.length})
-          </Comments.Title>
+          <Comments.Title>Comments({comments.length})</Comments.Title>
           <Comments.Form key={postTitle} />
           <Comments.List>
             {comments.map((commentData) => (
-              <Comments.Item
-                key={commentData.id}
-                commentId={commentData.id}
-                {...commentData}
-              />
+              <Comments.Item key={commentData.id} commentId={commentData.id} {...commentData} />
             ))}
           </Comments.List>
         </Comments>
@@ -116,12 +99,12 @@ export async function getStaticProps({ params }: Params) {
         ...post,
         content,
         coverImage,
-        prevTitle: prevNextPosts.prevTitle ?? null,
-        prevSlug: prevNextPosts.prevSlug ?? null,
-        prevExcerpt: prevNextPosts.prevExcerpt ?? null,
-        nextTitle: prevNextPosts.nextTitle ?? null,
-        nextSlug: prevNextPosts.nextSlug ?? null,
         nextExcerpt: prevNextPosts.nextExcerpt ?? null,
+        nextSlug: prevNextPosts.nextSlug ?? null,
+        nextTitle: prevNextPosts.nextTitle ?? null,
+        prevExcerpt: prevNextPosts.prevExcerpt ?? null,
+        prevSlug: prevNextPosts.prevSlug ?? null,
+        prevTitle: prevNextPosts.prevTitle ?? null,
       },
     },
   };
@@ -130,24 +113,18 @@ export async function getStaticProps({ params }: Params) {
 export async function getStaticPaths() {
   const posts = getAllPosts(["slug", "title"]);
 
-  const coverImages = await getAllOgImages(
-    posts.map((post) => post.title)
-  );
+  const coverImages = await getAllOgImages(posts.map((post) => post.title));
 
   if (process.env.NODE_ENV === "production") {
-    await generateRSSFeed(
-      coverImages.map(
-        (coverImage) => coverImage.darkThumbnail
-      )
-    );
+    await generateRSSFeed(coverImages.map((coverImage) => coverImage.darkThumbnail));
   }
 
   return {
+    fallback: false,
     paths: posts.map((post) => ({
       params: {
         slug: post.slug,
       },
     })),
-    fallback: false,
   };
 }

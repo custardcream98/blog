@@ -1,4 +1,5 @@
 import { CommentEditState } from "src/types/comment";
+
 import CheckPasswordState from "./CheckPasswordState";
 import DefaultState from "./DefaultState";
 import EditState from "./EditState";
@@ -16,6 +17,7 @@ const commentEditorStateChildrenMap: {
     <CheckPasswordState stateTo={CommentEditState.DELETE} />
   ),
   [CommentEditState.EDIT]: EditState,
+  // eslint-disable-next-line react/jsx-no-useless-fragment
   [CommentEditState.DELETE]: () => <></>,
 };
 

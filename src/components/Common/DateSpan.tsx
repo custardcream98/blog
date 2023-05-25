@@ -1,5 +1,6 @@
-import styled from "styled-components";
 import { dateToString } from "src/lib/utils/helper";
+
+import styled from "styled-components";
 
 const DateSpanStyle = styled.time`
   margin-top: 0.2rem;
@@ -12,12 +13,8 @@ type Props = {
   date: string | number | Date;
 };
 
-const DateSpan = ({ date, ...props }: Props) => {
-  return (
-    <DateSpanStyle {...props}>
-      {dateToString(new Date(date))}
-    </DateSpanStyle>
-  );
-};
+function DateSpan({ date, ...props }: Props) {
+  return <DateSpanStyle {...props}>{dateToString(new Date(date))}</DateSpanStyle>;
+}
 
 export default DateSpan;

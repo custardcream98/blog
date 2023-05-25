@@ -1,6 +1,7 @@
+import { isDarkAtom } from "src/lib/atoms";
+
 import { useRecoilValue } from "recoil";
 import styled, { css } from "styled-components";
-import { isDarkAtom } from "src/lib/atoms";
 
 const MOBILE_BREAKPOINT = "600px";
 
@@ -113,8 +114,7 @@ const MarkdownBodyStyle = styled.div<StyleProps>`
     font-style: italic;
     letter-spacing: 0.04rem;
     border-radius: 4px;
-    background-color: ${({ theme }) =>
-      theme.postElementBackgroundColor};
+    background-color: ${({ theme }) => theme.postElementBackgroundColor};
     color: ${({ theme }) => theme.textColor};
     font-size: 93%;
     p {
@@ -134,8 +134,7 @@ const MarkdownBodyStyle = styled.div<StyleProps>`
 
   div[data-rehype-pretty-code-fragment] {
     margin: 1rem 0;
-    background-color: ${({ theme }) =>
-      theme.postElementBackgroundColor};
+    background-color: ${({ theme }) => theme.postElementBackgroundColor};
     border-radius: 4px;
     counter-reset: codeblock;
     pre {
@@ -154,8 +153,7 @@ const MarkdownBodyStyle = styled.div<StyleProps>`
           width: 0.9rem;
           padding: 0 0.7rem;
           height: 0.65rem;
-          background-color: ${({ isDark }) =>
-            isDark ? "#292929" : "#dfdfdf"};
+          background-color: ${({ isDark }) => (isDark ? "#292929" : "#dfdfdf")};
         }
         &::before {
           border-top-left-radius: 4px;
@@ -268,8 +266,7 @@ const MarkdownBodyStyle = styled.div<StyleProps>`
   }
 
   .toc {
-    border-left: 2px solid
-      ${({ theme }) => theme.subTextColor};
+    border-left: 2px solid ${({ theme }) => theme.subTextColor};
     color: ${({ theme }) => theme.textColor};
     margin-bottom: 2rem;
     padding: 0.3rem 0.8rem 0.3rem 0.7rem;
@@ -325,8 +322,7 @@ const MarkdownBodyStyle = styled.div<StyleProps>`
     margin: auto;
     max-width: 600px;
     border-top: 1px solid ${({ theme }) => theme.textColor};
-    border-bottom: 1px solid
-      ${({ theme }) => theme.textColor};
+    border-bottom: 1px solid ${({ theme }) => theme.textColor};
     th,
     td {
       padding: 0.2rem 3rem;
@@ -381,7 +377,7 @@ type Props = {
   className?: string;
 };
 
-const MarkdownBody = ({ content, className }: Props) => {
+function MarkdownBody({ content, className }: Props) {
   const isDark = useRecoilValue(isDarkAtom);
 
   return (
@@ -393,6 +389,6 @@ const MarkdownBody = ({ content, className }: Props) => {
       className={className}
     />
   );
-};
+}
 
 export default MarkdownBody;

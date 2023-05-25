@@ -1,12 +1,13 @@
-import { Children } from "react";
-import styled from "styled-components";
-
 import CategoryBadges from "src/components/Common/CategoryBadges";
 import DateSpan from "src/components/Common/DateSpan";
-import ViewsLikesCounter from "./ViewsLikesCounter";
 import { LinkDecorated } from "src/components/Common/styledComponents";
 import { CoverImage } from "src/types/post";
+
 import PostThumbnail from "./PostThumbnail";
+import ViewsLikesCounter from "./ViewsLikesCounter";
+
+import { Children } from "react";
+import styled from "styled-components";
 
 const Container = styled.div`
   display: flex;
@@ -49,13 +50,7 @@ type Props = {
   series?: string;
 };
 
-const PostTitle = ({
-  coverImage,
-  title,
-  category,
-  date,
-  series,
-}: Props) => {
+function PostTitle({ coverImage, title, category, date, series }: Props) {
   return (
     <>
       <Container>
@@ -75,23 +70,17 @@ const PostTitle = ({
           {category && (
             <CategoryBadges>
               {Children.toArray(
-                category.map((keyword) => (
-                  <CategoryBadges.Badge
-                    category={keyword}
-                  />
-                ))
+                category.map((keyword) => <CategoryBadges.Badge category={keyword} />),
               )}
             </CategoryBadges>
           )}
-          {process.env.NODE_ENV === "production" && (
-            <ViewsLikesCounter key={title} title={title} />
-          )}
+          {process.env.NODE_ENV === "production" && <ViewsLikesCounter key={title} title={title} />}
         </BadgeViewsLikesCounterContainer>
       </Container>
 
       <PostThumbnail title={title} {...coverImage} />
     </>
   );
-};
+}
 
 export default PostTitle;

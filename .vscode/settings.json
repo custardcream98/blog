@@ -1,5 +1,21 @@
 {
   "tailwindCSS.experimental.classRegex": [
     ["cva\\(([^)]*)\\)", "[\"'`]([^\"'`]*).*?[\"'`]"]
-  ]
+  ],
+  // "[typescript]": {
+  //   "editor.formatOnSave": true
+  // },
+  // "[typescriptreact]": {
+  //   "editor.formatOnSave": true
+  // },
+  // "[javascript]": {
+  //   "editor.formatOnSave": true
+  // },
+  // "[javascriptreact]": {
+  //   "editor.formatOnSave": true
+  // },
+  // "editor.codeActionsOnSave": {
+  //   "source.fixAll.eslint": true,
+  //   "source.fixAll": true
+  // },
 }

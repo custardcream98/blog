@@ -1,18 +1,11 @@
+import CategoryCard from "src/components/Category/CategoryCard";
+import { Container, Title } from "src/components/Common/styledComponents";
+import Meta from "src/components/Layout/Meta";
+import { getPostBySeries, getSeries } from "src/lib/utils/posts";
+import PostType from "src/types/post";
+
 import React from "react";
 import styled from "styled-components";
-
-import {
-  Container,
-  Title,
-} from "src/components/Common/styledComponents";
-import CategoryCard from "src/components/Category/CategoryCard";
-import Meta from "src/components/Layout/Meta";
-
-import {
-  getSeries,
-  getPostBySeries,
-} from "src/lib/utils/posts";
-import PostType from "src/types/post";
 
 const SeriesContainer = styled(Container)`
   display: block;
@@ -27,14 +20,10 @@ type Props = {
   posts: PostType[];
 };
 
-const Series = ({ series, posts }: Props) => {
+function Series({ series, posts }: Props) {
   return (
     <>
-      <Meta
-        type="default"
-        title={`시리즈 ${series}`}
-        tags={[series]}
-      />
+      <Meta type='default' title={`시리즈 ${series}`} tags={[series]} />
       <SeriesContainer>
         <SeriesTitle>{`<${series} />`}</SeriesTitle>
         <ol>
@@ -45,7 +34,7 @@ const Series = ({ series, posts }: Props) => {
       </SeriesContainer>
     </>
   );
-};
+}
 
 export default Series;
 
@@ -55,21 +44,22 @@ type Params = {
   };
 };
 
-export async function getStaticProps({ params }: Params) {
+export function getStaticProps({ params }: Params) {
   const posts = getPostBySeries(params.series);
 
   return {
     props: {
-      series: params.series,
       posts: posts,
+      series: params.series,
     },
   };
 }
 
-export async function getStaticPaths() {
+export function getStaticPaths() {
   const series = getSeries();
 
   return {
+    fallback: false,
     paths: Object.keys(series).map((key) => {
       return {
         params: {
@@ -77,6 +67,5 @@ export async function getStaticPaths() {
         },
       };
     }),
-    fallback: false,
   };
 }

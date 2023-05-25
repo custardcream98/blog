@@ -1,27 +1,21 @@
-import { createContext, useContext } from "react";
-import type { PropsWithChildren } from "react";
+import { createContext, type PropsWithChildren, useContext } from "react";
 
-const CommentPostTitleContext = createContext({
-  postTitle: "",
-});
+const CommentPostTitleContext = createContext("");
 
 export const useCommentPostTitleContext = () => {
-  const { postTitle } = useContext(CommentPostTitleContext);
+  const postTitle = useContext(CommentPostTitleContext);
   return postTitle;
 };
 
 type Props = PropsWithChildren<{
   postTitle: string;
 }>;
-const CommentPostTitleContextProvider = ({
-  children,
-  postTitle,
-}: Props) => {
+function CommentPostTitleContextProvider({ children, postTitle }: Props) {
   return (
-    <CommentPostTitleContext.Provider value={{ postTitle }}>
+    <CommentPostTitleContext.Provider value={postTitle}>
       {children}
     </CommentPostTitleContext.Provider>
   );
-};
+}
 
 export default CommentPostTitleContextProvider;

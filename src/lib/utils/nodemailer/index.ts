@@ -6,17 +6,19 @@ type Email = {
   content: string;
 };
 
+const TRANSPORT = {
+  auth: {
+    pass: process.env.EMAIL_PASSWORD,
+    user: process.env.EMAIL_USER,
+  },
+  host: process.env.EMAIL_HOST,
+  port: parseInt(process.env.EMAIL_PORT as string, 10),
+  secure: true,
+  service: process.env.EMAIL_SERVICE,
+};
+
 async function mailer({ receiverEmailAddress, title, content }: Email) {
-  const transporter = nodemailer.createTransport({
-    service: process.env.EMAIL_SERVICE,
-    host: process.env.EMAIL_HOST,
-    port: parseInt(process.env.EMAIL_PORT!),
-    secure: true,
-    auth: {
-      user: process.env.EMAIL_USER,
-      pass: process.env.EMAIL_PASSWORD,
-    },
-  });
+  const transporter = nodemailer.createTransport(TRANSPORT);
 
   await new Promise((resolve, reject) => {
     transporter.verify((error, success) => {
@@ -32,9 +34,9 @@ async function mailer({ receiverEmailAddress, title, content }: Email) {
 
   const message = {
     from: process.env.EMAIL_SENDER,
-    to: receiverEmailAddress,
-    subject: title,
     html: content,
+    subject: title,
+    to: receiverEmailAddress,
   };
 
   await new Promise((resolve, reject) => {

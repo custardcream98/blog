@@ -7,15 +7,11 @@ type StyledSvgContainerProps = {
   svgColor?: string;
   svgHoverColor?: string;
 };
-type SvgContainerProps = PropsWithChildren &
-  StyledSvgContainerProps;
+type SvgContainerProps = PropsWithChildren & StyledSvgContainerProps;
 
-const SvgContainer = ({
-  children,
-  ...restProps
-}: SvgContainerProps) => {
+function SvgContainer({ children, ...restProps }: SvgContainerProps) {
   return <Container {...restProps}>{children}</Container>;
-};
+}
 
 const Container = styled.span<StyledSvgContainerProps>`
   display: inline-block;

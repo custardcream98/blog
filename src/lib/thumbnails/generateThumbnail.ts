@@ -1,4 +1,5 @@
 import { PuppeteerBrowser } from "../puppeteer";
+
 import { renderToString } from "react-dom/server";
 
 export const wrapHtmlString = (htmlString: string) => {
@@ -25,24 +26,16 @@ export const wrapHtmlString = (htmlString: string) => {
   `;
 };
 
-export const htmlStringToBuffer = async (
-  content: string
-) => {
-  const image = await PuppeteerBrowser.getScreenshot(
-    content
-  );
+export const htmlStringToBuffer = async (content: string) => {
+  const image = await PuppeteerBrowser.getScreenshot(content);
 
   return image as Buffer;
 };
 
-export const generateThumbnailBuffer = async (
-  template: JSX.Element
-) => {
+export const generateThumbnailBuffer = async (template: JSX.Element) => {
   const htmlString = renderToString(template);
 
-  const buffer = await htmlStringToBuffer(
-    wrapHtmlString(htmlString)
-  );
+  const buffer = await htmlStringToBuffer(wrapHtmlString(htmlString));
 
   return buffer;
 };

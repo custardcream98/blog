@@ -1,4 +1,5 @@
 import { animatedGradientTextStyle } from "src/components/Common/styledComponents";
+
 import Image from "next/image";
 import styled from "styled-components";
 
@@ -95,7 +96,7 @@ const ProfileWrapper = styled.div`
   align-items: center;
 `;
 
-const Intro = () => {
+function Intro() {
   return (
     <Wrapper>
       <TitleContainer>
@@ -108,8 +109,8 @@ const Intro = () => {
         </IntroParagraph>
         <ImageWrapper>
           <Image
-            src="/static/img/profile.webp"
-            alt="개발자 박시우의 프로필 이미지입니다."
+            src='/static/img/profile.webp'
+            alt='개발자 박시우의 프로필 이미지입니다.'
             width={90}
             height={90}
           />
@@ -117,5 +118,5 @@ const Intro = () => {
       </ProfileWrapper>
     </Wrapper>
   );
-};
+}
 export default Intro;

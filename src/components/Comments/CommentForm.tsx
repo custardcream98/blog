@@ -1,109 +1,84 @@
+import Button from "src/components/Common/Button";
+import useCommentForm from "src/lib/hook/useCommentForm";
+
 import React, { useCallback, useState } from "react";
 import styled, { css } from "styled-components";
-
-import useCommentForm from "src/lib/hook/useCommentForm";
-import Button from "src/components/Common/Button";
 
 type Props = {
   height?: string;
   isFormOpened?: boolean;
   isForEdit?: boolean;
 };
-const CommentForm = ({
-  height,
-  isFormOpened = true,
-  isForEdit = false,
-}: Props) => {
-  const {
-    usernameRef,
-    passwordRef,
-    commentRef,
-    isLoading,
-    handleCommentSubmit,
-  } = useCommentForm(isForEdit);
+function CommentForm({ height, isFormOpened = true, isForEdit = false }: Props) {
+  const { usernameRef, passwordRef, commentRef, isLoading, handleCommentSubmit } =
+    useCommentForm(isForEdit);
 
   return (
-    <StyledForm
-      formHeight={height}
-      hidden={!isFormOpened}
-      onSubmit={handleCommentSubmit}
-    >
-      <label className="sr-only" htmlFor="input-id">
+    <StyledForm formHeight={height} hidden={!isFormOpened} onSubmit={handleCommentSubmit}>
+      <label className='sr-only' htmlFor='input-id'>
         아이디를 입력해주세요.
       </label>
       <InputUsername
         ref={usernameRef}
-        id="input-id"
-        type="text"
-        placeholder="아이디"
-        autoComplete="off"
-        autoCorrect="off"
-        autoCapitalize="off"
+        id='input-id'
+        type='text'
+        placeholder='아이디'
+        autoComplete='off'
+        autoCorrect='off'
+        autoCapitalize='off'
         spellCheck={false}
         required
       />
-      <label className="sr-only" htmlFor="input-password">
+      <label className='sr-only' htmlFor='input-password'>
         비밀번호를 입력해주세요.
       </label>
       <InputPassword
         ref={passwordRef}
-        id="input-password"
-        type="password"
-        placeholder="비밀번호"
+        id='input-password'
+        type='password'
+        placeholder='비밀번호'
         minLength={4}
-        autoComplete="off"
-        autoCorrect="off"
-        autoCapitalize="off"
+        autoComplete='off'
+        autoCorrect='off'
+        autoCapitalize='off'
         spellCheck={false}
         required
       />
-      <label className="sr-only" htmlFor="textarea-comment">
+      <label className='sr-only' htmlFor='textarea-comment'>
         댓글을 입력해주세요.
       </label>
       <TextareaContent
         formHeight={height}
         ref={commentRef}
-        id="textarea-comment"
-        placeholder="댓글을 입력해주세요."
-        autoComplete="off"
-        autoCorrect="off"
-        autoCapitalize="off"
+        id='textarea-comment'
+        placeholder='댓글을 입력해주세요.'
+        autoComplete='off'
+        autoCorrect='off'
+        autoCapitalize='off'
         spellCheck={false}
         required
-      ></TextareaContent>
-      <SubmitCommentButton
-        type="submit"
-        width="66px"
-        height="30px"
-        isLoading={isLoading}
-      >
+      />
+      <SubmitCommentButton type='submit' width='66px' height='30px' isLoading={isLoading}>
         {isForEdit ? "수정하기" : "댓글 달기"}
       </SubmitCommentButton>
     </StyledForm>
   );
-};
+}
 
-const CommentFormWithOpenButton = () => {
+function CommentFormWithOpenButton() {
   const [isFormOpened, setIsFormOpened] = useState(false);
 
-  const openCommentForm = useCallback(
-    () => setIsFormOpened(true),
-    []
-  );
+  const openCommentForm = useCallback(() => setIsFormOpened(true), []);
 
   return (
     <>
       <CommentForm isFormOpened={isFormOpened} />
-      <FormOpenButton
-        type="button"
-        hidden={isFormOpened}
-        onClick={openCommentForm}
-      >
+      <FormOpenButton type='button' hidden={isFormOpened} onClick={openCommentForm}>
         댓글을 입력해주세요.
       </FormOpenButton>
     </>
   );
-};
+}
 
 const cssRoundedBox = css`
   border: 1px solid ${({ theme }) => theme.subTextColor};
@@ -118,8 +93,7 @@ const StyledForm = styled.form<StyledFormProps>`
   position: relative;
 
   width: 100%;
-  height: ${({ formHeight }) =>
-    formHeight ? formHeight : "150px"};
+  height: ${({ formHeight }) => (formHeight ? formHeight : "150px")};
 
   overflow: hidden;
 

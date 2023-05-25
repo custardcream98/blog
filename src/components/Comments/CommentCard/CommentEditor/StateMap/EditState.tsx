@@ -1,37 +1,35 @@
-import styled from "styled-components";
-
-import { CommentEditState } from "src/types/comment";
-import Button from "src/components/Common/Button";
 import CommentForm from "src/components/Comments/CommentForm";
+import Button from "src/components/Common/Button";
+import { CommentEditState } from "src/types/comment";
 
-import CommentOverlapWrapper from "./CommentOverlapWrapper";
 import { useCommentEditorStateSetter } from "../context";
 
-const CloseButton = () => {
+import CommentOverlapWrapper from "./CommentOverlapWrapper";
+
+import styled from "styled-components";
+
+function CloseButton() {
   const { getStateSetter } = useCommentEditorStateSetter();
 
   return (
     <StyledButton
-      width="40px"
-      height="30px"
+      width='40px'
+      height='30px'
       isLoading={false}
       onClick={getStateSetter(CommentEditState.DEFAULT)}
     >
       취소
     </StyledButton>
   );
-};
+}
 
-const EditState = () => {
+function EditState() {
   return (
     <CommentOverlapWrapper closer={<CloseButton />}>
-      <CommentForm
-        height="calc(100% - 10px)"
-        isForEdit={true}
-      />
+      <CommentForm height='calc(100% - 10px)' isForEdit />
     </CommentOverlapWrapper>
   );
-};
+}
 
 const StyledButton = styled(Button)`
   position: absolute;

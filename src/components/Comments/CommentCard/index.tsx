@@ -1,33 +1,27 @@
-import styled from "styled-components";
-
-import CommentEditor from "./CommentEditor";
 import DateSpan from "src/components/Common/DateSpan";
-import { CommentDataContextProvider } from "./context";
-import CommentEditorStateContextProvider from "./CommentEditor/context";
 import type { ICommentDataProps } from "src/types/comment";
+
+import CommentEditorStateContextProvider from "./CommentEditor/context";
+import CommentEditor from "./CommentEditor";
+import { CommentDataContextProvider } from "./context";
+
+import styled from "styled-components";
 
 type UserInfoProps = {
   username: string;
   createdAt: number;
 };
 
-const UserInfo = ({
-  username,
-  createdAt,
-}: UserInfoProps) => (
-  <UserInfoWrapper>
-    <Username>{username}</Username>
-    <CommentDate date={createdAt} />
-  </UserInfoWrapper>
-);
+function UserInfo({ username, createdAt }: UserInfoProps) {
+  return (
+    <UserInfoWrapper>
+      <Username>{username}</Username>
+      <CommentDate date={createdAt} />
+    </UserInfoWrapper>
+  );
+}
 
-const CommentCard = ({
-  commentId,
-  comment,
-  createdAt,
-  username,
-  password,
-}: ICommentDataProps) => {
+function CommentCard({ commentId, comment, createdAt, username, password }: ICommentDataProps) {
   return (
     <CommentDataContextProvider
       commentId={commentId}
@@ -39,10 +33,7 @@ const CommentCard = ({
       <CommentEditorStateContextProvider>
         <Wrapper>
           <CommentTopWrapper>
-            <UserInfo
-              username={username}
-              createdAt={createdAt}
-            />
+            <UserInfo username={username} createdAt={createdAt} />
             <CommentEditor />
           </CommentTopWrapper>
           <Content>{comment}</Content>
@@ -50,15 +41,14 @@ const CommentCard = ({
       </CommentEditorStateContextProvider>
     </CommentDataContextProvider>
   );
-};
+}
 
 const Wrapper = styled.li`
   position: relative;
 
   padding: 1.5rem 0;
 
-  border-bottom: 1px solid
-    ${({ theme }) => theme.subTextColor};
+  border-bottom: 1px solid ${({ theme }) => theme.subTextColor};
   &:last-child {
     /** :not() selector를 사용해도 됨 */
     border: none;

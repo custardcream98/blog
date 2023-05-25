@@ -50,6 +50,5 @@ export const animatedGradientTextStyle = css`
   background-clip: text;
   -webkit-background-clip: text;
 
-  animation: ${animatedGradientTextKeyframes} 3s linear
-    infinite;
+  animation: ${animatedGradientTextKeyframes} 3s linear infinite;
 `;

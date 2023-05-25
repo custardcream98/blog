@@ -1,19 +1,16 @@
+import { type PostType, type PrevNextPosts } from "src/types/post";
+
 import fs from "fs";
-import { join } from "path";
 import matter from "gray-matter";
-import type PostType from "src/types/post";
-import type { PrevNextPosts } from "src/types/post";
+import { join } from "path";
 
 const postsDirectory = join(process.cwd(), "_posts");
 const aboutPageDirectory = join(process.cwd(), "about.md");
 
-const getTimeOfPost = (post: PostType) =>
-  new Date(post.date).getTime();
+const getTimeOfPost = (post: PostType) => new Date(post.date).getTime();
 
 export function getPostSlugs() {
-  return fs
-    .readdirSync(postsDirectory)
-    .filter((dir) => /\.md$/.test(dir));
+  return fs.readdirSync(postsDirectory).filter((dir) => /\.md$/.test(dir));
 }
 
 type PostMeta =
@@ -27,30 +24,27 @@ type PostMeta =
   | "content"
   | "series";
 
-export function getPostBySlug(
-  slug: string,
-  fields: PostMeta[] = []
-) {
+export function getPostBySlug(slug: string, fields: PostMeta[] = []) {
   const realSlug = slug.replace(/\.md$/, "");
   const fullPath = join(postsDirectory, `${realSlug}.md`);
   const fileContents = fs.readFileSync(fullPath, "utf8");
   const { data, content } = matter(fileContents);
 
-  let postMeta: PostType = {
-    slug: "",
-    title: "",
-    date: "",
+  const postMeta: PostType = {
     category: [],
+    content: "",
     coverImage: {
-      lightThumbnail: "",
       darkThumbnail: "",
+      lightThumbnail: "",
     },
+    date: "",
     excerpt: "",
     ogImage: {
       url: "",
     },
-    content: "",
     series: "",
+    slug: "",
+    title: "",
   };
 
   fields.forEach((field) => {
@@ -70,10 +64,7 @@ export function getAllPosts(fields: PostMeta[] = []) {
   const slugs = getPostSlugs();
   const posts = slugs
     .map((slug) => getPostBySlug(slug, fields))
-    .sort(
-      (post1, post2) =>
-        getTimeOfPost(post2) - getTimeOfPost(post1)
-    );
+    .sort((post1, post2) => getTimeOfPost(post2) - getTimeOfPost(post1));
 
   return posts;
 }
@@ -82,73 +73,54 @@ export function getSeries() {
   const slugs = getPostSlugs();
   const posts = slugs
     .map((slug) => getPostBySlug(slug, ["series"]))
-    .sort(
-      (post1, post2) =>
-        getTimeOfPost(post2) - getTimeOfPost(post1)
-    );
-  let series: { [key: string]: number } = {};
+    .sort((post1, post2) => getTimeOfPost(post2) - getTimeOfPost(post1));
+  const series: { [key: string]: number } = {};
   posts.forEach((post) => {
     if (post.series) {
-      if (!Object.hasOwn(series, post.series))
-        series[post.series] = 1;
+      if (!Object.hasOwn(series, post.series)) series[post.series] = 1;
       else series[post.series] += 1;
     }
   });
   return series;
 }
 
-export function getPrevNextPosts(
-  slug: string
-): PrevNextPosts {
-  const posts = getAllPosts([
-    "title",
-    "slug",
-    "excerpt",
-    "date",
-  ]);
+export function getPrevNextPosts(slug: string): PrevNextPosts {
+  const posts = getAllPosts(["title", "slug", "excerpt", "date"]);
 
   const index = posts.findIndex((p) => p.slug === slug);
 
   const next =
     index !== 0
       ? {
-          title: posts[index - 1].title,
-          slug: posts[index - 1].slug,
           excerpt: posts[index - 1].excerpt,
+          slug: posts[index - 1].slug,
+          title: posts[index - 1].title,
         }
       : null;
   const prev =
     posts.length - 1 !== index
       ? {
-          title: posts[index + 1].title,
-          slug: posts[index + 1].slug,
           excerpt: posts[index + 1].excerpt,
+          slug: posts[index + 1].slug,
+          title: posts[index + 1].title,
         }
       : null;
 
   return {
-    prevTitle: prev?.title,
-    prevSlug: prev?.slug,
-    prevExcerpt: prev?.excerpt,
-    nextTitle: next?.title,
-    nextSlug: next?.slug,
     nextExcerpt: next?.excerpt,
+    nextSlug: next?.slug,
+    nextTitle: next?.title,
+    prevExcerpt: prev?.excerpt,
+    prevSlug: prev?.slug,
+    prevTitle: prev?.title,
   };
 }
 
-export const getAboutContent = () =>
-  fs.readFileSync(aboutPageDirectory, "utf8");
+export const getAboutContent = () => fs.readFileSync(aboutPageDirectory, "utf8");
 
 export function getPostByCategory(category: string) {
-  const posts = getAllPosts([
-    "title",
-    "slug",
-    "excerpt",
-    "date",
-    "category",
-    "series",
-  ]);
-  let categoryPosts: PostType[] = [];
+  const posts = getAllPosts(["title", "slug", "excerpt", "date", "category", "series"]);
+  const categoryPosts: PostType[] = [];
 
   posts.forEach((post) => {
     post.category.forEach((c) => {
@@ -160,15 +132,8 @@ export function getPostByCategory(category: string) {
 }
 
 export function getPostBySeries(series: string) {
-  const posts = getAllPosts([
-    "title",
-    "slug",
-    "excerpt",
-    "date",
-    "category",
-    "series",
-  ]);
-  let seriesPosts: PostType[] = [];
+  const posts = getAllPosts(["title", "slug", "excerpt", "date", "category", "series"]);
+  const seriesPosts: PostType[] = [];
 
   posts.forEach((post) => {
     if (post.series === series) seriesPosts.push(post);

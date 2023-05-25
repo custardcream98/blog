@@ -1,7 +1,7 @@
+import type PostType from "src/types/post";
+
 import Link from "next/link";
 import styled, { css } from "styled-components";
-
-import type PostType from "src/types/post";
 
 type StyleProps = {
   isPrevOnly: boolean;
@@ -97,8 +97,7 @@ const LinkWrapper = styled.div`
   &:hover {
     cursor: pointer;
     color: ${(props) => props.theme.accentColor};
-    background-color: ${(props) =>
-      props.theme.subTextColor};
+    background-color: ${(props) => props.theme.subTextColor};
     transition: all 150ms linear;
   }
   @media (max-width: 800px) {
@@ -119,56 +118,55 @@ type Props = {
   post: PostType;
 };
 
-const PrevNextPost = ({ post }: Props) => (
-  <Container
-    isPrevOnly={!post.nextTitle}
-    isNextOnly={!post.prevTitle}
-  >
-    {post.prevTitle ? (
-      <LinkWrapper>
-        <Link
-          href={{
-            pathname: "/posts/[slug]",
-            query: { slug: post.prevSlug },
-          }}
-        >
-          ← 이전글
-        </Link>
-        <Link
-          href={{
-            pathname: "/posts/[slug]",
-            query: { slug: post.prevSlug },
-          }}
-        >
-          {post.prevTitle}
-        </Link>
-      </LinkWrapper>
-    ) : (
-      <div></div>
-    )}
-    {post.nextTitle ? (
-      <LinkWrapper>
-        <Link
-          href={{
-            pathname: "/posts/[slug]",
-            query: { slug: post.nextSlug },
-          }}
-        >
-          다음글 →
-        </Link>
-        <Link
-          href={{
-            pathname: "/posts/[slug]",
-            query: { slug: post.nextSlug },
-          }}
-        >
-          {post.nextTitle}
-        </Link>
-      </LinkWrapper>
-    ) : (
-      <div></div>
-    )}
-  </Container>
-);
+function PrevNextPost({ post }: Props) {
+  return (
+    <Container isPrevOnly={!post.nextTitle} isNextOnly={!post.prevTitle}>
+      {post.prevTitle ? (
+        <LinkWrapper>
+          <Link
+            href={{
+              pathname: "/posts/[slug]",
+              query: { slug: post.prevSlug },
+            }}
+          >
+            ← 이전글
+          </Link>
+          <Link
+            href={{
+              pathname: "/posts/[slug]",
+              query: { slug: post.prevSlug },
+            }}
+          >
+            {post.prevTitle}
+          </Link>
+        </LinkWrapper>
+      ) : (
+        <div></div>
+      )}
+      {post.nextTitle ? (
+        <LinkWrapper>
+          <Link
+            href={{
+              pathname: "/posts/[slug]",
+              query: { slug: post.nextSlug },
+            }}
+          >
+            다음글 →
+          </Link>
+          <Link
+            href={{
+              pathname: "/posts/[slug]",
+              query: { slug: post.nextSlug },
+            }}
+          >
+            {post.nextTitle}
+          </Link>
+        </LinkWrapper>
+      ) : (
+        <div></div>
+      )}
+    </Container>
+  );
+}
 
 export default PrevNextPost;

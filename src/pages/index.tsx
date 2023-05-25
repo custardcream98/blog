@@ -1,18 +1,15 @@
-import { useEffect, useRef } from "react";
-import { useRouter } from "next/router";
-import styled from "styled-components";
-
-import HeroPost from "src/components/Home/HeroPost";
-import Meta from "src/components/Layout/Meta";
-import Intro from "src/components/Home/Intro";
 import Paging from "src/components/Common/Paging";
 import { Container } from "src/components/Common/styledComponents";
-
-import check404 from "src/lib/check404";
-import PostByPageArr from "cache/postByPageArr.json";
-
+import HeroPost from "src/components/Home/HeroPost";
+import Intro from "src/components/Home/Intro";
+import Meta from "src/components/Layout/Meta";
 import type PostType from "src/types/post";
-import type { GetServerSideProps } from "next";
+
+import PostByPageArr from "cache/postByPageArr.json";
+import type { GetServerSidePropsContext } from "next";
+import { useRouter } from "next/router";
+import { useEffect, useRef } from "react";
+import styled from "styled-components";
 
 const PAGE_SCALE = PostByPageArr.length;
 
@@ -28,15 +25,10 @@ type Props = {
   posts: PostType[];
 };
 
-const Index = ({ pageLength, posts }: Props) => {
+function Index({ pageLength, posts }: Props) {
   const router = useRouter();
   const { page: queryPage } = router.query;
-  const page = parseInt(queryPage as string) || 1;
-
-  if (page > pageLength) {
-    router.push({ pathname: "/" });
-    return <></>;
-  }
+  const page = parseInt(queryPage as string, 10) || 1;
 
   const heroPostsRef = useRef<HTMLDivElement>(null);
 
@@ -49,14 +41,18 @@ const Index = ({ pageLength, posts }: Props) => {
     }
   }, [queryPage]);
 
-  check404();
+  if (page > pageLength) {
+    router.push({ pathname: "/" });
+    // eslint-disable-next-line react/jsx-no-useless-fragment
+    return <></>;
+  }
 
   return (
     <>
-      <Meta type="default" />
+      <Meta type='default' />
       <Intro />
       <Container ref={heroPostsRef}>
-        <h2 id="Posts_Title" className="sr-only">
+        <h2 id='Posts_Title' className='sr-only'>
           {"<Posts />"}
         </h2>
         <HeroPostList>
@@ -76,21 +72,17 @@ const Index = ({ pageLength, posts }: Props) => {
       </Container>
     </>
   );
-};
+}
 
 export default Index;
 
-export const getServerSideProps: GetServerSideProps =
-  async (context) => {
-    const { page } = context.query;
+export const getServerSideProps = (context: GetServerSidePropsContext) => {
+  const { page } = context.query;
 
-    return {
-      props: {
-        pageLength: PAGE_SCALE,
-        posts:
-          typeof page === "string"
-            ? PostByPageArr[parseInt(page) - 1]
-            : PostByPageArr[0],
-      },
-    };
+  return {
+    props: {
+      pageLength: PAGE_SCALE,
+      posts: typeof page === "string" ? PostByPageArr[parseInt(page, 10) - 1] : PostByPageArr[0],
+    },
   };
+};

@@ -1,4 +1,5 @@
 import { Container as DefaultContainer } from "src/components/Common/styledComponents";
+
 import styled, { css } from "styled-components";
 
 export const Container = styled(DefaultContainer)`
@@ -142,6 +143,5 @@ export const ProjectStack = styled.li`
   border-radius: 0.2rem;
 
   color: ${({ theme }) => theme.resumeBadgeTextColor};
-  background-color: ${({ theme }) =>
-    theme.resumeBadgeBackgroundColor};
+  background-color: ${({ theme }) => theme.resumeBadgeBackgroundColor};
 `;

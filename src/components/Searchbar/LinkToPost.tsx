@@ -1,8 +1,8 @@
+import LinkIcon from "src/components/Common/LinkIcon";
+import { cssOutlineOnFocus } from "src/components/Layout/Navigation/styles";
+
 import Link from "next/link";
 import styled from "styled-components";
-
-import { cssOutlineOnFocus } from "src/components/Layout/Navigation/styles";
-import LinkIcon from "src/components/Common/LinkIcon";
 
 const StyledLink = styled(Link)`
   display: block;
@@ -31,13 +31,8 @@ type Props = {
   closeResults: () => void;
 };
 
-export default function LinkToPost({
-  slug,
-  title,
-  closeResults,
-}: Props) {
-  title =
-    typeof title === "string" ? title : title.join("");
+export default function LinkToPost({ slug, title, closeResults }: Props) {
+  title = typeof title === "string" ? title : title.join("");
 
   const id = "link-icon_" + title.replaceAll(" ", "_");
 
@@ -47,13 +42,10 @@ export default function LinkToPost({
         pathname: "/posts/[slug]",
         query: { slug: slug },
       }}
-      className="result-link"
+      className='result-link'
       onClick={closeResults}
     >
-      <LinkIcon
-        id={id}
-        title={`${title} 포스트로 이동하기`}
-      />
+      <LinkIcon id={id} title={`${title} 포스트로 이동하기`} />
     </StyledLink>
   );
 }

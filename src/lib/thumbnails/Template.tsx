@@ -5,54 +5,20 @@ import React from "react";
 const ROOT = process.cwd();
 
 const backgroundLight = readFileSync(
-  path.join(
-    ROOT,
-    "src",
-    "lib",
-    "thumbnails",
-    "assets",
-    "background-light.png"
-  )
+  path.join(ROOT, "src", "lib", "thumbnails", "assets", "background-light.png"),
 ).toString("base64");
 const backgroundDark = readFileSync(
-  path.join(
-    ROOT,
-    "src",
-    "lib",
-    "thumbnails",
-    "assets",
-    "background-dark.png"
-  )
+  path.join(ROOT, "src", "lib", "thumbnails", "assets", "background-dark.png"),
 ).toString("base64");
 
 const notoSansKRBlack = readFileSync(
-  path.join(
-    ROOT,
-    "src",
-    "lib",
-    "thumbnails",
-    "assets",
-    "NotoSansKR-Black.otf"
-  )
+  path.join(ROOT, "src", "lib", "thumbnails", "assets", "NotoSansKR-Black.otf"),
 ).toString("base64");
 const notoSansKRMedium = readFileSync(
-  path.join(
-    ROOT,
-    "src",
-    "lib",
-    "thumbnails",
-    "assets",
-    "NotoSansKR-Medium.otf"
-  )
+  path.join(ROOT, "src", "lib", "thumbnails", "assets", "NotoSansKR-Medium.otf"),
 ).toString("base64");
 
-const Template = ({
-  title,
-  isLight = false,
-}: {
-  title: string;
-  isLight?: boolean;
-}) => {
+function Template({ title, isLight = false }: { title: string; isLight?: boolean }) {
   return (
     <>
       <style>
@@ -73,33 +39,33 @@ const Template = ({
       </style>
       <div
         style={{
-          display: "flex",
-          flexDirection: "column",
-          justifyContent: "space-between",
-          fontFamily: "Noto Sans KR",
-          width: "100%",
-          height: "100%",
-          padding: "90px",
           boxSizing: "border-box",
           color: isLight ? "#363636" : "#efefef",
+          display: "flex",
+          flexDirection: "column",
+          fontFamily: "Noto Sans KR",
+          height: "100%",
+          justifyContent: "space-between",
+          padding: "90px",
           position: "relative",
+          width: "100%",
         }}
       >
+        {/* eslint-disable-next-line @next/next/no-img-element */}
         <img
-          src={`data:image/png;base64,${
-            isLight ? backgroundLight : backgroundDark
-          }`}
+          src={`data:image/png;base64,${isLight ? backgroundLight : backgroundDark}`}
           style={{
-            position: "absolute",
             inset: 0,
+            position: "absolute",
             zIndex: -1,
           }}
+          alt=''
         />
 
         <p
           style={{
-            fontWeight: 800,
             fontSize: "60px",
+            fontWeight: 800,
           }}
         >
           SHIWOO.DEV
@@ -107,15 +73,15 @@ const Template = ({
 
         <h1
           style={{
+            borderLeft: "5px solid",
             color: "inherit",
-            maxWidth: "700px",
-            wordBreak: "keep-all",
-            fontWeight: 300,
             fontSize: "50px",
+            fontWeight: 300,
+            maxWidth: "700px",
             overflowWrap: "break-word",
 
-            borderLeft: "5px solid",
             paddingLeft: "40px",
+            wordBreak: "keep-all",
           }}
         >
           {title}
@@ -123,6 +89,6 @@ const Template = ({
       </div>
     </>
   );
-};
+}
 
 export default Template;

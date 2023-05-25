@@ -25,7 +25,4 @@ interface ICommentEditorStateContext {
 }
 
 export { CommentEditState };
-export type {
-  ICommentDataProps,
-  ICommentEditorStateContext,
-};
+export type { ICommentDataProps, ICommentEditorStateContext };

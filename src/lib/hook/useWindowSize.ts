@@ -1,8 +1,4 @@
-import {
-  useCallback,
-  useLayoutEffect,
-  useState,
-} from "react";
+import { useCallback, useLayoutEffect, useState } from "react";
 
 type WindowSize = {
   width: number;
@@ -13,14 +9,14 @@ type WindowSize = {
  */
 const useWindowSize = () => {
   const [windowSize, setWindowSize] = useState<WindowSize>({
-    width: 0,
     height: 0,
+    width: 0,
   });
 
   const handleResize = useCallback(() => {
     setWindowSize({
-      width: window.innerWidth,
       height: window.innerHeight,
+      width: window.innerWidth,
     });
   }, []);
 
@@ -29,9 +25,8 @@ const useWindowSize = () => {
 
     handleResize(); // useEffect 첫 동작시 바로 확인
 
-    return () =>
-      window.removeEventListener("resize", handleResize);
-  }, []);
+    return () => window.removeEventListener("resize", handleResize);
+  }, [handleResize]);
 
   return windowSize;
 };

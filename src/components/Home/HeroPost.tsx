@@ -1,7 +1,8 @@
+import DateSpan from "src/components/Common/DateSpan";
+import { LinkDecorated } from "src/components/Common/styledComponents";
+
 import React from "react";
 import styled from "styled-components";
-import { LinkDecorated } from "src/components/Common/styledComponents";
-import DateSpan from "src/components/Common/DateSpan";
 
 type PagenationInfo = {
   index: number;
@@ -10,8 +11,7 @@ type PagenationInfo = {
 
 const ContentContainer = styled.li<PagenationInfo>`
   width: 100%;
-  margin-bottom: ${(props) =>
-    props.index === props.maxPostCount - 1 ? "20px" : "0"};
+  margin-bottom: ${(props) => (props.index === props.maxPostCount - 1 ? "20px" : "0")};
 `;
 
 const Title = styled.h3`
@@ -32,9 +32,7 @@ const ExcerptLink = styled(LinkDecorated)<PagenationInfo>`
   font-weight: 300;
   line-height: 1.5;
   border-bottom: ${(props) =>
-    props.index === props.maxPostCount - 1
-      ? "none"
-      : "1px solid " + props.theme.subTextColor};
+    props.index === props.maxPostCount - 1 ? "none" : "1px solid " + props.theme.subTextColor};
 `;
 
 const Excerpt = styled.p`
@@ -89,34 +87,18 @@ type Props = {
   slug: string;
 };
 
-const HeroPost = ({
-  index,
-  maxPostCount,
-  title,
-  date,
-  excerpt,
-  slug,
-}: Props) => {
+function HeroPost({ index, maxPostCount, title, date, excerpt, slug }: Props) {
   return (
-    <ContentContainer
-      index={index}
-      maxPostCount={maxPostCount}
-    >
+    <ContentContainer index={index} maxPostCount={maxPostCount}>
       <Title>
-        <TitleLink href={`/posts/${slug}`}>
-          {title}
-        </TitleLink>
+        <TitleLink href={`/posts/${slug}`}>{title}</TitleLink>
         <DateSpanForHeroPost date={date} />
       </Title>
-      <ExcerptLink
-        index={index}
-        maxPostCount={maxPostCount}
-        href={`/posts/${slug}`}
-      >
+      <ExcerptLink index={index} maxPostCount={maxPostCount} href={`/posts/${slug}`}>
         <Excerpt>{excerpt}</Excerpt>
       </ExcerptLink>
     </ContentContainer>
   );
-};
+}
 
 export default HeroPost;

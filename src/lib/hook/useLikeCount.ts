@@ -1,13 +1,7 @@
+import { getLikeCount, setLikeCountDown, setLikeCountUp } from "src/lib/firebaseSetup/firebaseApps";
+import { getIsLikedOnLocal, toggleIsLikedOnLocal } from "src/lib/localStorage";
+
 import { useCallback, useEffect, useState } from "react";
-import {
-  getLikeCount,
-  setLikeCountDown,
-  setLikeCountUp,
-} from "src/lib/firebaseSetup/firebaseApps";
-import {
-  getIsLikedOnLocal,
-  toggleIsLikedOnLocal,
-} from "src/lib/localStorage";
 
 const useLikeCount = (postTitle: string) => {
   const [likeCount, setLikeCount] = useState(0);
@@ -18,10 +12,7 @@ const useLikeCount = (postTitle: string) => {
   useEffect(() => {
     setIsLiked(getIsLikedOnLocal(postTitle));
 
-    const unSubscribeLikeCount = getLikeCount(
-      postTitle,
-      setLikeCount
-    );
+    const unSubscribeLikeCount = getLikeCount(postTitle, setLikeCount);
 
     return () => unSubscribeLikeCount();
   }, [postTitle]);
@@ -37,7 +28,7 @@ const useLikeCount = (postTitle: string) => {
     }
   }, [postTitle, isLiked]);
 
-  return { likeCount, isLiked, onLikeClick };
+  return { isLiked, likeCount, onLikeClick };
 };
 
 export default useLikeCount;

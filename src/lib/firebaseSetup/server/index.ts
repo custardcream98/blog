@@ -1,23 +1,13 @@
-import {
-  getApps,
-  initializeApp,
-  type App as FirebaseAdminApp,
-  cert,
-} from "firebase-admin/app";
-import { getStorage } from "firebase-admin/storage";
 import { type Bucket } from "@google-cloud/storage";
+import { type App as FirebaseAdminApp, cert, getApps, initializeApp } from "firebase-admin/app";
+import { getStorage } from "firebase-admin/storage";
 
 const credential = cert({
-  projectId: process.env.FIREBASE_ADMIN_PROJECT_ID,
   clientEmail: process.env.FIREBASE_ADMIN_CLIENT_EMAIL,
-  privateKey:
-    process.env.FIREBASE_ADMIN_PRIVATE_KEY?.replace(
-      /\\n/g,
-      "\n"
-    ),
+  privateKey: process.env.FIREBASE_ADMIN_PRIVATE_KEY?.replace(/\\n/g, "\n"),
+  projectId: process.env.FIREBASE_ADMIN_PROJECT_ID,
 });
-const STORAGE_BUCKET =
-  process.env.FIREBASE_ADMIN_STORAGE_BUCKET;
+const STORAGE_BUCKET = process.env.FIREBASE_ADMIN_STORAGE_BUCKET;
 
 export class ServerSideFirebaseApp {
   private static _instance: ServerSideFirebaseApp | null;
@@ -45,18 +35,13 @@ export class ServerSideFirebaseApp {
         storageBucket: STORAGE_BUCKET,
       });
 
-    ServerSideFirebaseApp._instance =
-      new ServerSideFirebaseApp(adminApp);
+    ServerSideFirebaseApp._instance = new ServerSideFirebaseApp(adminApp);
 
     return ServerSideFirebaseApp._instance;
   }
 
   static isFileExists = async (fileName: string) => {
-    const file =
-      ServerSideFirebaseApp.instance.adminBucket.file(
-        fileName,
-        {}
-      );
+    const file = ServerSideFirebaseApp.instance.adminBucket.file(fileName, {});
     const [isExists] = await file.exists();
 
     return isExists;
@@ -71,10 +56,7 @@ export class ServerSideFirebaseApp {
     buffer: Buffer;
     makePublic?: boolean;
   }) => {
-    const file =
-      ServerSideFirebaseApp.instance.adminBucket.file(
-        fileName
-      );
+    const file = ServerSideFirebaseApp.instance.adminBucket.file(fileName);
 
     await file.save(buffer);
 
@@ -84,10 +66,7 @@ export class ServerSideFirebaseApp {
   };
 
   static getDownloadURLFromStorage = (fileName: string) => {
-    const file =
-      ServerSideFirebaseApp.instance.adminBucket.file(
-        fileName
-      );
+    const file = ServerSideFirebaseApp.instance.adminBucket.file(fileName);
 
     const url = file.publicUrl();
 

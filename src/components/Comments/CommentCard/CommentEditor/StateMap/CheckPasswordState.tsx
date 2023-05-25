@@ -1,24 +1,21 @@
-import {
-  FormEventHandler,
-  useCallback,
-  useEffect,
-  useState,
-} from "react";
-import styled, { keyframes, css } from "styled-components";
-
-import { CommentEditState } from "src/types/comment";
-import { useCommentEditorStateSetter } from "../context";
 import Button from "src/components/Common/Button";
 import { deleteComment } from "src/lib/firebaseSetup/firebaseApps";
-import CommentOverlapWrapper from "./CommentOverlapWrapper";
-import { useCommentDataContext } from "../../context";
 import useEditable from "src/lib/hook/useEditable";
+import { CommentEditState } from "src/types/comment";
+
 import { useCommentPostTitleContext } from "../../../context";
+import { useCommentDataContext } from "../../context";
+import { useCommentEditorStateSetter } from "../context";
+
+import CommentOverlapWrapper from "./CommentOverlapWrapper";
+
+import { FormEventHandler, useCallback, useEffect, useState } from "react";
+import styled, { css, keyframes } from "styled-components";
 
 type Props = {
   stateTo: CommentEditState;
 };
-const CheckPasswordState = ({ stateTo }: Props) => {
+function CheckPasswordState({ stateTo }: Props) {
   const { changeStateTo } = useCommentEditorStateSetter();
   const postTitle = useCommentPostTitleContext();
   const { commentId, password } = useCommentDataContext();
@@ -27,44 +24,33 @@ const CheckPasswordState = ({ stateTo }: Props) => {
 
   const [isDeleting, setIsDeleting] = useState(false);
 
-  const [
-    inputPasswordRef,
-    getPasswordVal,
-    clearPasswordInput,
-  ] = useEditable<HTMLInputElement>();
+  const [inputPasswordRef, getPasswordVal, clearPasswordInput] = useEditable<HTMLInputElement>();
 
-  const handleFormSubmit: FormEventHandler<HTMLFormElement> =
-    useCallback(
-      async (event) => {
-        event.preventDefault();
+  const handleFormSubmit: FormEventHandler<HTMLFormElement> = useCallback(
+    async (event) => {
+      event.preventDefault();
 
-        const isPasswordCorrect =
-          password === getPasswordVal();
+      const isPasswordCorrect = password === getPasswordVal();
 
-        if (!isPasswordCorrect) {
-          setShakeToggle((prev) => !prev);
-          clearPasswordInput();
-          return setErrorMessage("비밀번호가 틀렸습니다.");
-        }
+      if (!isPasswordCorrect) {
+        setShakeToggle((prev) => !prev);
+        clearPasswordInput();
+        return setErrorMessage("비밀번호가 틀렸습니다.");
+      }
 
-        if (stateTo === CommentEditState.DELETE) {
-          setIsDeleting(true);
-          await deleteComment({
-            title: postTitle,
-            commentId,
-          });
-          return;
-        }
+      if (stateTo === CommentEditState.DELETE) {
+        setIsDeleting(true);
+        await deleteComment({
+          commentId,
+          title: postTitle,
+        });
+        return;
+      }
 
-        return changeStateTo(stateTo);
-      },
-      [
-        password,
-        getPasswordVal,
-        clearPasswordInput,
-        stateTo,
-      ]
-    );
+      return changeStateTo(stateTo);
+    },
+    [password, getPasswordVal, clearPasswordInput, stateTo, changeStateTo, commentId, postTitle],
+  );
 
   useEffect(() => {
     const timeoutId = setTimeout(() => {
@@ -72,46 +58,33 @@ const CheckPasswordState = ({ stateTo }: Props) => {
     }, 200);
 
     return () => clearTimeout(timeoutId);
-  }, []);
+  }, [inputPasswordRef]);
 
   return (
-    <CommentOverlapWrapper
-      closer={<CommentOverlapWrapper.CloseButtonWithIcon />}
-    >
+    <CommentOverlapWrapper closer={<CommentOverlapWrapper.CloseButtonWithIcon />}>
       <Form onSubmit={handleFormSubmit}>
-        <Label htmlFor="password">
-          비밀번호를 입력해주세요.
-        </Label>
+        <Label htmlFor='password'>비밀번호를 입력해주세요.</Label>
         <InputWrapper>
           <Input
             ref={inputPasswordRef}
-            id="password"
-            type="password"
-            placeholder="비밀번호"
-            autoComplete="off"
-            autoCorrect="off"
-            autoCapitalize="off"
+            id='password'
+            type='password'
+            placeholder='비밀번호'
+            autoComplete='off'
+            autoCorrect='off'
+            autoCapitalize='off'
             spellCheck={false}
             required
           />
-          <SubmitButton
-            type="submit"
-            width="40px"
-            height="25px"
-            isLoading={isDeleting}
-          >
+          <SubmitButton type='submit' width='40px' height='25px' isLoading={isDeleting}>
             입력
           </SubmitButton>
-          {errorMessage && (
-            <ErrorMessage shakeToggle={shakeToggle}>
-              {errorMessage}
-            </ErrorMessage>
-          )}
+          {errorMessage && <ErrorMessage shakeToggle={shakeToggle}>{errorMessage}</ErrorMessage>}
         </InputWrapper>
       </Form>
     </CommentOverlapWrapper>
   );
-};
+}
 
 const InputWrapper = styled.div`
   position: relative;

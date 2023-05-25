@@ -1,16 +1,11 @@
-import styled from "styled-components";
-
-import Meta from "src/components/Layout/Meta";
 import CategoryCard from "src/components/Category/CategoryCard";
-import {
-  Container,
-  Title,
-} from "src/components/Common/styledComponents";
-
-import { getPostByCategory } from "src/lib/utils/posts";
+import { Container, Title } from "src/components/Common/styledComponents";
+import Meta from "src/components/Layout/Meta";
 import categoryTheme from "src/lib/categoryTheme";
-import check404 from "src/lib/check404";
+import { getPostByCategory } from "src/lib/utils/posts";
 import type PostType from "src/types/post";
+
+import styled from "styled-components";
 
 const PostContainer = styled(Container)`
   display: block;
@@ -26,15 +21,9 @@ type Props = {
 };
 
 export default function Post({ category, posts }: Props) {
-  check404();
-
   return (
     <>
-      <Meta
-        type="default"
-        title={`카테고리 ${category}`}
-        tags={[category]}
-      />
+      <Meta type='default' title={`카테고리 ${category}`} tags={[category]} />
       <PostContainer>
         <PostTitle>{`<${category} />`}</PostTitle>
         <ol>
@@ -53,7 +42,7 @@ type Params = {
   };
 };
 
-export async function getStaticProps({ params }: Params) {
+export function getStaticProps({ params }: Params) {
   const posts = getPostByCategory(params.category);
 
   return {
@@ -64,13 +53,13 @@ export async function getStaticProps({ params }: Params) {
   };
 }
 
-export async function getStaticPaths() {
+export function getStaticPaths() {
   return {
+    fallback: false,
     paths: Object.keys(categoryTheme).map((category) => ({
       params: {
         category,
       },
     })),
-    fallback: false,
   };
 }

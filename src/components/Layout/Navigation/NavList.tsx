@@ -1,9 +1,8 @@
-import styled from "styled-components";
-import { useRouter } from "next/router";
-
 import { LinkDecorated } from "src/components/Common/styledComponents";
 
+import { useRouter } from "next/router";
 import type { PropsWithChildren } from "react";
+import styled from "styled-components";
 
 type NavItemProps = PropsWithChildren<{
   href: string;
@@ -13,12 +12,10 @@ type NavItemLinkDecoratedProps = {
   isActive: boolean;
 };
 
-const NavItem = ({ href, children }: NavItemProps) => {
-  const hrefWithoutHash = (
-    href.includes("#")
-      ? href.slice(0, href.indexOf("#"))
-      : href
-  ).split("/")[1];
+function NavItem({ href, children }: NavItemProps) {
+  const hrefWithoutHash = (href.includes("#") ? href.slice(0, href.indexOf("#")) : href).split(
+    "/",
+  )[1];
 
   const router = useRouter();
   const currentPath = router.pathname.split("/")[1];
@@ -31,7 +28,7 @@ const NavItem = ({ href, children }: NavItemProps) => {
       </NavItemLinkDecorated>
     </NavItemLi>
   );
-};
+}
 
 const NavList = styled.ul`
   display: flex;
@@ -49,12 +46,9 @@ const NavList = styled.ul`
     margin-right: 0.5rem;
   }
 `;
-const NavItemLinkDecorated = styled(
-  LinkDecorated
-)<NavItemLinkDecoratedProps>`
+const NavItemLinkDecorated = styled(LinkDecorated)<NavItemLinkDecoratedProps>`
   font-size: 1rem;
-  color: ${({ theme, isActive }) =>
-    isActive ? theme.textColor : theme.subTextColor};
+  color: ${({ theme, isActive }) => (isActive ? theme.textColor : theme.subTextColor)};
 
   @media (max-width: 800px) {
     font-size: 0.8rem;

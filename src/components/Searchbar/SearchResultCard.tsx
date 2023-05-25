@@ -7,9 +7,7 @@ type ResultCardWrapperProps = {
 const ResultCardWrapper = styled.li<ResultCardWrapperProps>`
   padding: 20px 0;
 
-  ${({ isLast, theme }) =>
-    !isLast &&
-    "border-bottom: 1px solid " + theme.subTextColor};
+  ${({ isLast, theme }) => !isLast && "border-bottom: 1px solid " + theme.subTextColor};
 
   .result-title-wrapper {
     display: flex;
@@ -66,28 +64,19 @@ type Props = {
   isLast: boolean;
 };
 
-const SearchResultCard = ({
-  title,
-  date,
-  content,
-  link,
-  isLast,
-}: Props) => {
+function SearchResultCard({ title, date, content, link, isLast }: Props) {
   return (
-    <ResultCardWrapper
-      isLast={isLast}
-      className="result-card-wrapper"
-    >
-      <div className="result-title-wrapper">
+    <ResultCardWrapper isLast={isLast} className='result-card-wrapper'>
+      <div className='result-title-wrapper'>
         {title}
         {date}
       </div>
-      <div className="result-content-wrapper">
+      <div className='result-content-wrapper'>
         {content}
         {link}
       </div>
     </ResultCardWrapper>
   );
-};
+}
 
 export default SearchResultCard;

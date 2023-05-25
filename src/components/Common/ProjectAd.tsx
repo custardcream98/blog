@@ -1,15 +1,13 @@
-import styled, { css } from "styled-components";
-import { useCallback, useState } from "react";
-import Image from "next/image";
-import { RiCloseFill } from "react-icons/ri";
-import { BsGithub } from "react-icons/bs";
-
-import useIsMounted from "src/lib/hook/useIsMounted";
 import IconButton from "src/components/Common/IconButton";
 import LinkIcon from "src/components/Common/LinkIcon";
-
-import type { StaticImageData } from "next/image";
+import useIsMounted from "src/lib/hook/useIsMounted";
 import useWindowSize from "src/lib/hook/useWindowSize";
+
+import Image, { type StaticImageData } from "next/image";
+import { useCallback, useState } from "react";
+import { BsGithub } from "react-icons/bs";
+import { RiCloseFill } from "react-icons/ri";
+import styled, { css } from "styled-components";
 
 type NoticeProps = {
   projectName: string;
@@ -23,12 +21,7 @@ type WrapperProps = {
   isClosed: boolean;
 };
 
-const ProjectAd = ({
-  projectName,
-  projectLink,
-  repositoryLink,
-  projectImage,
-}: NoticeProps) => {
+function ProjectAd({ projectName, projectLink, repositoryLink, projectImage }: NoticeProps) {
   const isMounted = useIsMounted();
   const [isClosed, setIsClosed] = useState(false);
   const { width } = useWindowSize();
@@ -48,42 +41,36 @@ const ProjectAd = ({
         width={50}
         height={50}
       />
-      <div className="project-ad-content">
-        <strong className="project-ad-title">
-          제가 개발한 서비스 구경하고 가세요!
-        </strong>
-        <p className="project-ad-name">{projectName}</p>
+      <div className='project-ad-content'>
+        <strong className='project-ad-title'>제가 개발한 서비스 구경하고 가세요!</strong>
+        <p className='project-ad-name'>{projectName}</p>
       </div>
       <ClickablesWrapper>
         {!isMobile && (
           <IconButton
-            className="project-ad-github"
+            className='project-ad-github'
             icon={BsGithub}
-            title="레포지토리 링크"
+            title='레포지토리 링크'
             size={iconSize}
-            buttonAs="a"
+            buttonAs='a'
             href={repositoryLink}
-            target="_blank"
+            target='_blank'
           />
         )}
-        <ProjectLink href={projectLink} target="_blank">
-          <LinkIcon
-            id="project-ad-link"
-            title="프로젝트 링크"
-            size={iconSize}
-          />
+        <ProjectLink href={projectLink} target='_blank'>
+          <LinkIcon id='project-ad-link' title='프로젝트 링크' size={iconSize} />
         </ProjectLink>
         <CloseButton
           icon={RiCloseFill}
-          title="프로젝트 광고 닫기"
-          size="20px"
+          title='프로젝트 광고 닫기'
+          size='20px'
           onClick={handleClose}
-          type="button"
+          type='button'
         />
       </ClickablesWrapper>
     </Wrapper>
   );
-};
+}
 
 const Wrapper = styled.aside<WrapperProps>`
   display: flex;
@@ -100,8 +87,7 @@ const Wrapper = styled.aside<WrapperProps>`
 
   padding: 20px;
   border-radius: 10px;
-  background-color: ${({ theme }) =>
-    theme.postElementBackgroundColor + "22"};
+  background-color: ${({ theme }) => theme.postElementBackgroundColor + "22"};
 
   box-shadow: ${({ theme }) => theme.darkmodeShadow};
 
