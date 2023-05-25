@@ -1,122 +1,28 @@
-import { animatedGradientTextStyle } from "src/components/Common/styledComponents";
-
 import Image from "next/image";
-import styled from "styled-components";
-
-const Wrapper = styled.div`
-  width: 90vw;
-  max-width: 800px;
-  margin: 5rem auto 2rem;
-
-  display: flex;
-  flex-direction: column;
-`;
-
-const TitleContainer = styled.p`
-  font-family: ${({ theme }) => theme.titleFont};
-  font-size: 3.5rem;
-  line-height: 1.2;
-  font-weight: 600;
-
-  em {
-    background-image: linear-gradient(
-      -225deg,
-      #3c2395 0%,
-      #44107a 17%,
-      #ff1361 33%,
-      #fff800 50%,
-      #ff1361 66%,
-      #44107a 83%,
-      #3c2395 100%
-    );
-    height: 4.4rem;
-
-    ${animatedGradientTextStyle}
-  }
-
-  @media (max-width: 800px) {
-    align-self: center;
-    font-size: 2rem;
-    em {
-      height: 2.5rem;
-    }
-  }
-`;
-
-const IntroName = styled.strong`
-  display: block;
-  font-size: 1.2rem;
-  font-weight: 600;
-  margin-bottom: 0.5rem;
-  font-family: ${({ theme }) => theme.titleFont};
-  color: ${({ theme }) => theme.textColor};
-
-  @media (max-width: 800px) {
-    font-size: 0.9rem;
-    margin-bottom: 0.3rem;
-  }
-`;
-
-const IntroParagraph = styled.p`
-  font-size: 1rem;
-
-  color: ${({ theme }) => theme.subTextColor};
-
-  line-height: 1.2;
-
-  text-align: end;
-
-  @media (max-width: 800px) {
-    font-size: 0.7rem;
-  }
-`;
-
-const ImageWrapper = styled.span`
-  display: inline-block;
-  border-radius: 50%;
-
-  overflow: hidden;
-  width: 90px;
-  height: 90px;
-  margin-left: 1rem;
-  border: 2px solid ${({ theme }) => theme.subTextColor};
-
-  @media (max-width: 800px) {
-    width: 65px;
-    height: 65px;
-    margin-left: 0.7rem;
-  }
-`;
-
-const ProfileWrapper = styled.div`
-  margin-top: 5rem;
-  align-self: flex-end;
-
-  display: flex;
-  align-items: center;
-`;
 
 function Intro() {
   return (
-    <Wrapper>
-      <TitleContainer>
-        Dedicated to <em>Coding.</em>
-      </TitleContainer>
-      <ProfileWrapper>
-        <IntroParagraph>
-          <IntroName>Shi Woo, Park</IntroName>
+    <div className='mx-auto mb-[2rem] mt-[5rem] flex w-[90vw] max-w-800 flex-col'>
+      <p className='font-title text-[2rem] font-semibold leading-1.2 pc:text-[3.5rem]'>
+        Dedicated to{" "}
+        <em className='text-gradient-intro h-[2.5rem] animate-bg-gradient pc:h-auto'>Coding.</em>
+      </p>
+      <div className='mt-[5rem] flex items-center self-end'>
+        <p className='text-[0.7rem] leading-1.2 text-default-sub-light dark:text-default-sub-dark pc:text-[1rem]'>
+          <strong className='mb-[0.3rem] block font-title text-[0.9rem] font-semibold text-default-light dark:text-default-dark pc:mb-[0.5rem] pc:text-[1.2rem]'>
+            Shi Woo, Park
+          </strong>
           <span>만들고 싶으면 만들어야지.</span>
-        </IntroParagraph>
-        <ImageWrapper>
-          <Image
-            src='/static/img/profile.webp'
-            alt='개발자 박시우의 프로필 이미지입니다.'
-            width={90}
-            height={90}
-          />
-        </ImageWrapper>
-      </ProfileWrapper>
-    </Wrapper>
+        </p>
+        <Image
+          src='/static/img/profile.webp'
+          alt='개발자 박시우의 프로필 이미지입니다.'
+          width={90}
+          height={90}
+          className='ml-[0.7rem] block h-[4.0625rem] w-[4.0625rem] rounded-full border-2 border-solid border-default-sub-light dark:border-default-sub-dark pc:ml-[1rem] pc:h-[5.625rem] pc:w-[5.625rem]	'
+        />
+      </div>
+    </div>
   );
 }
 export default Intro;

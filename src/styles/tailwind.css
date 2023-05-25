@@ -1,3 +1,15 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+@layer component {
+  .text-gradient-intro {
+    @apply text-fill-transparent inline-block h-[4.4rem] bg-intro bg-[200%_auto] bg-clip-text;
+  }
+}
+
+@layer utilities {
+  .text-fill-transparent {
+    -webkit-text-fill-color: transparent;
+  }
+}

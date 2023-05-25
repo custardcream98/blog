@@ -4,7 +4,14 @@ module.exports = {
   darkMode: "class",
   plugins: [],
   theme: {
+    backgroundImage: {
+      intro:
+        "linear-gradient( -225deg, #3c2395 0%, #44107a 17%, #ff1361 33%, #fff800 50%, #ff1361 66%, #44107a 83%, #3c2395 100%)",
+    },
     extend: {
+      animation: {
+        "bg-gradient": "bg-gradient 3s linear infinite",
+      },
       colors: {
         accent: {
           dark: "#3b96ff",
@@ -63,6 +70,16 @@ module.exports = {
           },
         },
       },
+      keyframes: {
+        "bg-gradient": {
+          "100%": {
+            "background-position": "200% center",
+          },
+        },
+      },
+      maxWidth: {
+        800: "50rem",
+      },
     },
     fontFamily: {
       mono: ["Source Code Pro", "monospace"],
@@ -78,8 +95,11 @@ module.exports = {
       serif: ["Nanum Myeongjo", "serif"],
       title: ["Poppins", "sans-serif"],
     },
+    lineHeight: {
+      1.2: "1.2",
+    },
     screens: {
-      mobile: "780px",
+      pc: "780px",
     },
   },
 };
