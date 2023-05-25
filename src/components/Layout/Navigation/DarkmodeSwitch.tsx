@@ -13,7 +13,17 @@ function DarkmodeSwitch() {
   const [isDark, setIsDark] = useRecoilState(isDarkAtom);
 
   const toggleSwitch = () => {
-    setIsDark((prev) => !prev);
+    setIsDark((prev) => {
+      const $root = document.documentElement;
+
+      if (prev) {
+        $root.classList.remove("dark");
+      } else {
+        $root.classList.add("dark");
+      }
+
+      return !prev;
+    });
     toggleIsDarkmodeActivatedOnLocal();
   };
 

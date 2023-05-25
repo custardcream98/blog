@@ -16,7 +16,7 @@ export const toggleIsLikedOnLocal = (title: string) =>
 export const getIsLikedOnLocal = (title: string) =>
   JSON.parse(localStorage.getItem(getIsLikedLocalStorageKey(title)) ?? "false");
 
-export const getIsDarkmodeActivatedOnLocal = () => {
+export const getIsDarkmodeActivatedOnLocal = (): boolean => {
   const isDarkmodeActivatedOnLocal =
     localStorage.getItem(LocalStorageKeys.IS_DARKMODE_ACTIVATED) ?? undefined;
 

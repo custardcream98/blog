@@ -32,7 +32,16 @@ function ThemeProviderLayer({ children }: PropsWithChildren) {
   const isMounted = useIsMounted();
 
   useLayoutEffect(() => {
-    setIsDark(getIsDarkmodeActivatedOnLocal());
+    const isDarkmodeActivatedOnLocal = getIsDarkmodeActivatedOnLocal();
+    const $root = document.documentElement;
+
+    if (isDarkmodeActivatedOnLocal) {
+      $root.classList.add("dark");
+      setIsDark(true);
+    } else {
+      $root.classList.remove("dark");
+      setIsDark(false);
+    }
   }, [setIsDark]);
 
   const body = (
