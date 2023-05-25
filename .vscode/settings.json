@@ -1,21 +1,11 @@
 {
   "tailwindCSS.experimental.classRegex": [
-    ["cva\\(([^)]*)\\)", "[\"'`]([^\"'`]*).*?[\"'`]"]
+    ["cva\\(([^)]*)\\)", "[\"'`]([^\"'`]*).*?[\"'`]"],
+    "wind\\([^)]{1,}\\)`([^`]*)`",
+    "wd(?:|\\.hover|\\.active|\\.focus|\\.prefix\\([\"'`][^\"'`]*[\"'`]\\))`([^`]*)`"
   ],
-  // "[typescript]": {
-  //   "editor.formatOnSave": true
-  // },
-  // "[typescriptreact]": {
-  //   "editor.formatOnSave": true
-  // },
-  // "[javascript]": {
-  //   "editor.formatOnSave": true
-  // },
-  // "[javascriptreact]": {
-  //   "editor.formatOnSave": true
-  // },
-  // "editor.codeActionsOnSave": {
-  //   "source.fixAll.eslint": true,
-  //   "source.fixAll": true
-  // },
+  "editor.codeActionsOnSave": {
+    "source.fixAll.eslint": true,
+    "source.fixAll": true
+  }
 }

@@ -7,3 +7,6 @@ export const convertYYMMToKorean = (yymm: DateYYMM) => {
 
   return `${yearString}년 ${month}월`;
 };
+
+export const isNotEmptyString = (value: unknown) =>
+  !!value && value !== "\n" && value !== "\t" && value !== "\r";
