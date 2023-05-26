@@ -6221,6 +6221,11 @@ util-deprecate@^1.0.1, util-deprecate@^1.0.2:
   resolved "https://registry.yarnpkg.com/util-deprecate/-/util-deprecate-1.0.2.tgz#450d4dc9fa70de732762fbd2d4a28981419a0ccf"
   integrity sha512-EPD5q1uXyFxJpCrLnCc1nHnq3gOa6DZBocAIiI2TaSCA7VCJ1UJDMagCzIkXNsUYfD1daK//LTEQ8xiIbrHtcw==
 
+utility-class-components@^0.0.1:
+  version "0.0.1"
+  resolved "https://registry.yarnpkg.com/utility-class-components/-/utility-class-components-0.0.1.tgz#143a059ab15b47548e98d005fd026cbfabe0d194"
+  integrity sha512-DxwnIwX81Aa5RE7DbROEFFq/M3nDdbc8v05Ybw6Fa/15zSYdapEIi+p5ObN9IBsXph3J65IegQE6M+AzZUKP/w==
+
 uuid@^8.0.0:
   version "8.3.2"
   resolved "https://registry.yarnpkg.com/uuid/-/uuid-8.3.2.tgz#80d5b5ced271bb9af6c445f21a1a04c606cefbe2"

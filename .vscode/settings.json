@@ -1,9 +1,9 @@
 {
   "tailwindCSS.experimental.classRegex": [
     ["cva\\(([^)]*)\\)", "[\"'`]([^\"'`]*).*?[\"'`]"],
-    "wind\\([^)]{1,}\\)`([^`]*)`",
-    // "wdSelect\\([^)]{1,}\\).style`([^`]*)`",
-    "wd(?:|\\.hover|\\.active|\\.focus|\\.prefix\\([\"'`][^\"'`]*[\"'`]\\))`([^`]*)`"
+    "utld\\.[a-z]{1,}`([^`]*)`",
+    "utld\\([^)]{1,}\\)`([^`]*)`",
+    "ud`([^`]*)`"
   ],
   "editor.codeActionsOnSave": {
     "source.fixAll.eslint": true,

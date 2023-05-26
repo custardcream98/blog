@@ -46,7 +46,8 @@
     "remark-gfm": "^3.0.1",
     "remark-rehype": "^10.1.0",
     "shiki": "^0.10.1",
-    "styled-components": "^5.3.5"
+    "styled-components": "^5.3.5",
+    "utility-class-components": "^0.0.1"
   },
   "devDependencies": {
     "@types/glob": "^7.2.0",
