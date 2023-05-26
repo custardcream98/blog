@@ -1,69 +1,75 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { isNotEmptyString } from "src/lib/utils/string";
 
 import { type ComponentPropsWithoutRef, createElement, forwardRef } from "react";
 
 export type ClassValue =
   | ClassArray
-  | ClassDictionary
+  // | ClassDictionary
   | string
   | number
   | null
   | boolean
   | undefined;
-export type ClassDictionary = Record<string, unknown>;
+// export type ClassDictionary = Record<string, unknown>;
 export type ClassArray = ClassValue[];
 
-const _cxObjectToString = (target: Record<string, unknown>): string => {
-  return Object.entries(target).reduce((sum, [key, value]) => {
-    if (value) {
-      const seperator = key.includes(":") ? "" : "-";
-      const style = cx(value as ClassValue)
-        .split(" ")
-        .filter((s) => isNotEmptyString(s));
-      const withPrefix = style.reduce((sum, s) => `${sum} ${key}${seperator}${s}`, "");
+// const _cxObjectToString = (target: Record<string, unknown>): string => {
+//   return Object.entries(target).reduce((sum, [key, value]) => {
+//     if (value) {
+//       const seperator = key.includes(":") ? "" : "-";
+//       const style = cx(value as ClassValue)
+//         .split(" ")
+//         .filter((s) => isNotEmptyString(s));
+//       const withPrefix = style.reduce((sum, s) => `${sum} ${key}${seperator}${s}`, "");
 
-      return `${sum} ${withPrefix}`;
-    }
-    return `${sum} ${key}`;
-  }, "");
-};
+//       return `${sum} ${withPrefix}`;
+//     }
+//     return `${sum} ${key}`;
+//   }, "");
+// };
 
 const _cxArrayToString = (target: ClassValue[]): string =>
   target.map((value) => cx(value)).join(" ");
 
 const cx = (...values: ClassValue[]): string => {
-  return values.reduce<string>((sum, value) => {
-    if (!value || !isNotEmptyString(value)) {
-      return sum;
-    }
+  return values
+    .reduce<string>((sum, value) => {
+      if (!value || !isNotEmptyString(value)) {
+        return sum;
+      }
 
-    if (typeof value === "string" || typeof value === "number") {
-      return `${sum} ${value}`;
-    }
-    if (Array.isArray(value)) {
-      return `${sum} ${_cxArrayToString(value)}`;
-    }
-    if (typeof value === "object") {
-      return `${sum} ${_cxObjectToString(value)}`;
-    }
+      if (typeof value === "string" || typeof value === "number") {
+        return `${sum} ${value}`;
+      }
+      if (Array.isArray(value)) {
+        return `${sum} ${_cxArrayToString(value)}`;
+      }
+      // if (typeof value === "object") {
+      //   return `${sum} ${_cxObjectToString(value)}`;
+      // }
 
-    throw new Error(`cx error - Unhandled value type: ${value}`);
-  }, "");
+      throw new Error(`cx error - Unhandled value type: ${value}`);
+    }, "")
+    .trim()
+    .split(" ")
+    .filter((token) => isNotEmptyString(token))
+    .join(" ");
 };
 
-export const wdSelect = (prefix: string) => {
-  return {
-    style: (template: TemplateStringsArray, ...templateElements: ClassValue[]) => {
-      const templateArr = template.map((e) => e.split(" ")).flat();
-      const templateElementArr = cx(templateElements).split(" ");
+// export const wdSelect = (prefix: string) => {
+//   return {
+//     style: (template: TemplateStringsArray, ...templateElements: ClassValue[]) => {
+//       const templateArr = template.map((e) => e.split(" ")).flat();
+//       const templateElementArr = cx(templateElements).split(" ");
 
-      return [...templateArr, ...templateElementArr]
-        .filter((e) => isNotEmptyString(e))
-        .map((value) => `${prefix}:${value}`)
-        .join(" ");
-    },
-  };
-};
+//       return [...templateArr, ...templateElementArr]
+//         .filter((e) => isNotEmptyString(e))
+//         .map((value) => `${prefix}:${value}`)
+//         .join(" ");
+//     },
+//   };
+// };
 
 export const wd = (template: TemplateStringsArray, ...templateElements: ClassValue[]) => {
   return template
@@ -71,44 +77,19 @@ export const wd = (template: TemplateStringsArray, ...templateElements: ClassVal
       const templateElement = templateElements[index];
 
       if (!templateElement) {
-        return `${sum}${n}`;
+        return `${sum} ${cx(n)}`;
       }
 
-      return `${sum}${n}${cx(templateElement)}`;
+      return `${sum} ${cx(n)} ${cx(templateElement)}`;
     }, "")
-    .trim()
     .replace(/\s{2,}/g, " ");
 };
 
-interface HTMLElementByTag extends Record<keyof JSX.IntrinsicElements, HTMLElement> {
-  div: HTMLDivElement;
-  span: HTMLSpanElement;
-  p: HTMLParagraphElement;
-  a: HTMLAnchorElement;
-  button: HTMLButtonElement;
-  input: HTMLInputElement;
-  label: HTMLLabelElement;
-  select: HTMLSelectElement;
-  textarea: HTMLTextAreaElement;
-  ul: HTMLUListElement;
-  li: HTMLLIElement;
-  ol: HTMLOListElement;
-  h1: HTMLHeadingElement;
-  h2: HTMLHeadingElement;
-  h3: HTMLHeadingElement;
-  h4: HTMLHeadingElement;
-  h5: HTMLHeadingElement;
-  h6: HTMLHeadingElement;
-  img: HTMLImageElement;
-
-  [key: string]: HTMLElement;
-}
-
-export const wind = <Tag extends keyof JSX.IntrinsicElements>(tag: Tag) => {
+export const wind = <C extends keyof JSX.IntrinsicElements | React.ComponentType<any>>(tag: C) => {
   const windStyle = (template: TemplateStringsArray, ...templateElements: ClassValue[]) => {
     const classToConcat = wd(template, ...templateElements);
 
-    const TailwindComponent = forwardRef<HTMLElementByTag[Tag], ComponentPropsWithoutRef<Tag>>(
+    const TailwindComponent = forwardRef<any, ComponentPropsWithoutRef<C>>(
       function TailwindComponentForwarded({ children, className, ...restProps }, ref) {
         const style = cx(classToConcat, className);
 

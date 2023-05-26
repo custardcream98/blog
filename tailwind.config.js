@@ -1,6 +1,54 @@
+// const wdSelectTransform = (code) => {
+//   console.log("컴파일");
+
+//   const variantGroupsRegex = /wdSelect\(['"`]([^)'"`]{1,})['"`]\).style`([^`]*)`/g;
+//   const variantGroupMatches = [...code.matchAll(variantGroupsRegex)];
+
+//   // const selectorRegex = //g
+
+//   variantGroupMatches.forEach(([matchStr, selector, classes]) => {
+//     const parsedClasses = classes
+//       .split(/[\s\n]/)
+//       .filter((token) => !!token && token !== "\n" && token !== "\r" && token !== "\r\n")
+//       .map((cls) => `${selector}:${cls}`)
+//       .join(" ");
+
+//     code = code.replace(matchStr, parsedClasses);
+//     console.log("selector", selector);
+//     console.log("parsedClasses", parsedClasses);
+//   });
+
+//   return code;
+// };
+
+const GROUP_SELECTOR_REGEX = /([^\s:-]*[:-])\(([^)]{1,})\)/g;
+const groupSelectorTransformer = (code) => {
+  const variantGroupMatches = [...code.matchAll(GROUP_SELECTOR_REGEX)];
+
+  variantGroupMatches.forEach(([matchStr, selector, classes]) => {
+    const parsedClasses = classes
+      .split(/[\s\n]/)
+      .filter((token) => !!token && token !== "\n" && token !== "\r" && token !== "\r\n")
+      .map((cls) => `${selector}${cls}`)
+      .join(" ");
+
+    code = code.replace(matchStr, parsedClasses);
+  });
+
+  return code;
+};
+
 /** @type {import('tailwindcss').Config} */
 module.exports = {
-  content: ["./src/**/*.{js,ts,jsx,tsx,mdx}"],
+  content: {
+    files: ["./src/**/*.{js,ts,jsx,tsx,mdx}"],
+    transform: {
+      tsx: (code) => {
+        code = groupSelectorTransformer(code);
+        return code;
+      },
+    },
+  },
   darkMode: "class",
   plugins: [],
   theme: {
@@ -99,7 +147,10 @@ module.exports = {
       1.2: "1.2",
     },
     screens: {
-      pc: "780px",
+      mobile: {
+        max: "800px",
+      },
+      pc: "800px",
     },
   },
 };
