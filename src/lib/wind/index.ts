@@ -1,6 +1,8 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { isNotEmptyString } from "src/lib/utils/string";
 
+import { DOM_ELEMENTS } from "./domElements";
+
 import { type ComponentPropsWithoutRef, createElement, forwardRef } from "react";
 
 export type ClassValue =
@@ -85,7 +87,7 @@ export const wd = (template: TemplateStringsArray, ...templateElements: ClassVal
     .replace(/\s{2,}/g, " ");
 };
 
-export const wind = <C extends keyof JSX.IntrinsicElements | React.ComponentType<any>>(tag: C) => {
+const _wind = <C extends keyof JSX.IntrinsicElements | React.ComponentType<any>>(tag: C) => {
   const windStyle = (template: TemplateStringsArray, ...templateElements: ClassValue[]) => {
     const classToConcat = wd(template, ...templateElements);
 
@@ -102,6 +104,14 @@ export const wind = <C extends keyof JSX.IntrinsicElements | React.ComponentType
 
   return windStyle;
 };
+
+type WindPredifined = Record<(typeof DOM_ELEMENTS)[number], ReturnType<typeof _wind>>;
+const _windPredifined = DOM_ELEMENTS.reduce<WindPredifined>((obj, tag) => {
+  obj[tag] = _wind(tag);
+  return obj;
+}, {} as WindPredifined);
+
+export const wind = Object.assign(_wind, _windPredifined);
 
 // const compose = (x) => ({
 //   end: () => x,
