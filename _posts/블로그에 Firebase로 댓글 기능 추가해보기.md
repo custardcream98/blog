@@ -85,12 +85,7 @@ export const fireStore = getFirestore();
 
 ```ts
 const onSubmit = async (event: React.ChangeEvent<HTMLFormElement>) => {
-  const commentCollectionRef = collection(
-    fireStore,
-    COLLECTION_POSTS,
-    title,
-    COLLECTION_COMMENTS
-  );
+  const commentCollectionRef = collection(fireStore, COLLECTION_POSTS, title, COLLECTION_COMMENTS);
   await addDoc(commentCollectionRef, {
     createdAt: Date.now(),
     password,
@@ -105,13 +100,7 @@ const onSubmit = async (event: React.ChangeEvent<HTMLFormElement>) => {
 삭제나 수정 또한 간단합니다.
 
 ```ts
-const commentDocRef = doc(
-  fireStore,
-  COLLECTION_POSTS,
-  title,
-  COLLECTION_COMMENTS,
-  comment.id
-);
+const commentDocRef = doc(fireStore, COLLECTION_POSTS, title, COLLECTION_COMMENTS, comment.id);
 await deleteDoc(commentDocRef); // doc 삭제
 await updateDoc(commentDocRef, { comment: commentText }); // doc 수정
 ```
@@ -134,20 +123,13 @@ interface ICommentData {
 const [comments, setComments] = useState<ICommentData[]>([]);
 
 useEffect(() => {
-  onSnapshot(
-    collection(fireStore, COLLECTION_POSTS, title, COLLECTION_COMMENTS),
-    (snapshot) => {
-      const commentsArr: ICommentData[] = [];
-      snapshot.docs
-        .sort((post1, post2) =>
-          post1.data().createdAt > post2.data().createdAt ? -1 : 1
-        )
-        .map((doc) =>
-          commentsArr.push({ ...(doc.data() as ICommentData), id: doc.id })
-        );
-      setComments((_) => [...commentsArr]);
-    }
-  );
+  onSnapshot(collection(fireStore, COLLECTION_POSTS, title, COLLECTION_COMMENTS), (snapshot) => {
+    const commentsArr: ICommentData[] = [];
+    snapshot.docs
+      .sort((post1, post2) => (post1.data().createdAt > post2.data().createdAt ? -1 : 1))
+      .map((doc) => commentsArr.push({ ...(doc.data() as ICommentData), id: doc.id }));
+    setComments((_) => [...commentsArr]);
+  });
 }, []);
 ```
 

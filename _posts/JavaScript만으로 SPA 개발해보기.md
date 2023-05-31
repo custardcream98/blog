@@ -184,7 +184,7 @@ export default function render(rootElement) {
         window.history.pushState(
           {},
           `/coins/${coin.id}`,
-          window.location.origin + `/coins/${coin.id}`
+          window.location.origin + `/coins/${coin.id}`,
         );
 
         coinDetail(rootElement, coin.id);

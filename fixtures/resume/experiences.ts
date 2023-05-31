@@ -7,12 +7,8 @@ const experiences: ResumeSectionData[] = [
       from: "2022-10",
       to: "2022-11",
     },
-    points: [
-      "타입스크립트를 처음 접하는 사람들을 위한 개념서를 집필했습니다.",
-    ],
-    descriptions: [
-      "인터페이스, 제네릭 챕터 집필에 참여했습니다.",
-    ],
+    points: ["타입스크립트를 처음 접하는 사람들을 위한 개념서를 집필했습니다."],
+    descriptions: ["인터페이스, 제네릭 챕터 집필에 참여했습니다."],
   },
   {
     title: "Google Developer Student Clubs UOS",
@@ -30,8 +26,7 @@ const experiences: ResumeSectionData[] = [
     ],
   },
   {
-    title:
-      "서울시립대학교 공간 데이터베이스 연구실 학부생 연구원",
+    title: "서울시립대학교 공간 데이터베이스 연구실 학부생 연구원",
     period: {
       from: "2021-06",
       to: "2023-02",
@@ -55,9 +50,7 @@ const experiences: ResumeSectionData[] = [
   {
     title: "WEB 이력서 경진대회",
     period: { from: "2022-10", to: "2022-10" },
-    points: [
-      "멋쟁이사자처럼 FE School 주최 WEB 이력서 경진대회에서 최우수상을 수상했습니다.",
-    ],
+    points: ["멋쟁이사자처럼 FE School 주최 WEB 이력서 경진대회에서 최우수상을 수상했습니다."],
     links: [
       {
         name: "수상 이력서",

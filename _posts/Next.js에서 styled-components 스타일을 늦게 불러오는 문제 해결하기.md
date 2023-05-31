@@ -61,7 +61,7 @@ MyDocument.getInitialProps = async (ctx: DocumentContext) => {
 export default class MyDocument extends Document {
   render() {
     return (
-      <Html lang="kr">
+      <Html lang='kr'>
         <Head>
           {this.props.styles} {/* 이 한 줄만 추가하면 됩니다. */}
         </Head>

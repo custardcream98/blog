@@ -4,7 +4,12 @@ module.exports = {
     es2021: true,
     node: true,
   },
-  extends: ["eslint:recommended", "next", "plugin:@typescript-eslint/recommended", "prettier"],
+  extends: [
+    "eslint:recommended",
+    "next",
+    "plugin:@typescript-eslint/recommended",
+    "plugin:prettier/recommended",
+  ],
   ignorePatterns: ["node_modules/"],
   overrides: [],
   parser: "@typescript-eslint/parser",

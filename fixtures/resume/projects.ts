@@ -54,13 +54,7 @@ const projects: Project[] = [
         url: "https://www.npmjs.com/package/custard-ui",
       },
     ],
-    stacks: [
-      "React.js",
-      "TypeScript",
-      "Emotion",
-      "Jest",
-      "Storybook",
-    ],
+    stacks: ["React.js", "TypeScript", "Emotion", "Jest", "Storybook"],
   },
   {
     title: "Snappy",
@@ -121,13 +115,7 @@ const projects: Project[] = [
         url: "https://shiwoo.dev/posts/%EB%8C%93%EA%B8%80%20%EC%BB%B4%ED%8F%AC%EB%84%8C%ED%8A%B8%20%EB%A6%AC%ED%8C%A9%ED%86%A0%EB%A7%81%ED%95%98%EA%B8%B0",
       },
     ],
-    stacks: [
-      "Next.js",
-      "TypeScript",
-      "styled-components",
-      "Node.js",
-      "Firebase",
-    ],
+    stacks: ["Next.js", "TypeScript", "styled-components", "Node.js", "Firebase"],
   },
   {
     title: "착한 이륜차 운전자 평가 모델 개발용 설문 폼",
@@ -158,13 +146,7 @@ const projects: Project[] = [
         url: "https://shiwoo.dev/posts/%EB%B3%B5%EC%9E%A1%ED%95%98%EA%B2%8C%20%EA%B5%AC%EC%84%B1%EB%90%9C%20if%EB%AC%B8%20%EB%A6%AC%ED%8C%A9%ED%86%A0%EB%A7%81%ED%95%98%EA%B8%B0",
       },
     ],
-    stacks: [
-      "Next.js",
-      "TypeScript",
-      "Recoil",
-      "Cypress",
-      "Tailwind",
-    ],
+    stacks: ["Next.js", "TypeScript", "Recoil", "Cypress", "Tailwind"],
   },
   {
     title: "Dayplan.it",
@@ -189,13 +171,7 @@ const projects: Project[] = [
         url: "https://uos-urbanscience.org/archives/uos_portfolio/%eb%8f%99%ec%84%a0%ec%9d%84-%ea%b3%a0%eb%a0%a4%ed%95%9c-all-in-one-%ec%9d%bc%ec%a0%95-%ec%8a%a4%ec%bc%80%ec%a4%84%eb%a7%81-%ec%84%9c%eb%b9%84%ec%8a%a4",
       },
     ],
-    stacks: [
-      "Flutter",
-      "Django",
-      "PostgreSQL",
-      "Dart",
-      "Python",
-    ],
+    stacks: ["Flutter", "Django", "PostgreSQL", "Dart", "Python"],
   },
   {
     title: "카카오톡, 디스코드 챗봇",

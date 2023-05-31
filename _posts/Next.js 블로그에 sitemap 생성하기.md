@@ -27,13 +27,7 @@ npm i next-sitemap
 
 ```json
 {
-  "include": [
-    "next-env.d.ts",
-    "**/*.ts",
-    "**/*.tsx",
-    "**/*.d.ts",
-    "next-sitemap.config.js"
-  ]
+  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", "**/*.d.ts", "next-sitemap.config.js"]
 }
 ```
 
