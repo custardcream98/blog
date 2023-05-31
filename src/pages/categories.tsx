@@ -1,9 +1,9 @@
 import { Container, Title } from "src/components/Common";
 import CategoryBadges from "src/components/Common/CategoryBadges";
 import Meta from "src/components/Layout/Meta";
-import categoryTheme from "src/constants/categoryTheme";
+import categoryTheme, { type Categoires } from "src/constants/categoryTheme";
 
-const CATEGORIES = Object.keys(categoryTheme);
+const CATEGORIES = Object.keys(categoryTheme) as Categoires[];
 
 function CategoriesPage() {
   return (
