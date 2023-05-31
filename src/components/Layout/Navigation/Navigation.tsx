@@ -11,110 +11,123 @@ import Link from "next/link";
 import { useRouter } from "next/router";
 import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import { HiSearch } from "react-icons/hi";
-import styled, { useTheme } from "styled-components";
+import { utld } from "utility-class-components";
 
-const Header = styled.header`
-  height: 50px;
-  width: 100%;
+const TRANSLATE_DISSAPPEAR = "translate-y-[-51px]";
+const TRANSLATE_APPEAR = "translate-y-[-1px]";
 
-  @media only print {
-    display: none;
-  }
+const Header = utld.header`
+  h-[3.125rem]
+  w-full
+  print:hidden
 `;
 
-const Container = styled.div`
-  width: 100%;
-  box-shadow: ${(props) => props.theme.navLineShadow};
-  position: fixed;
+const Container = utld.div`
+  w-full
 
-  z-index: 101;
-  display: flex;
-  justify-content: center;
-  align-items: center;
+  fixed
 
-  transition: top ease 0.3s;
+  z-[101]
+  flex
+  justify-center
+  items-center
 
-  top: -1px;
+  transition-transform
+  duration-300
+  translate-y-[-1px]
 
-  ::before {
-    content: " ";
-    position: absolute;
-    inset: 0;
-    background-color: ${(props) => props.theme.navBackgroundColor};
-    backdrop-filter: blur(8px);
-    z-index: -1;
-  }
+  before:(
+    absolute
+    inset-0
+    bg-nav-bg-light
+    dark:bg-nav-bg-dark
+    backdrop-blur
+    z-[-1]
+  )
 `;
 
-const Nav = styled.nav`
-  position: relative;
+const Nav = utld.nav`
+  relative
+  
+  h-nav
+  w-[85vw]
+  max-w-800
+  flex
+  justify-between
+  items-center
 
-  height: 50px;
-  width: 85vw;
-  max-width: 800px;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-
-  @media (max-width: 800px) {
-    width: 90vw;
-  }
+  mobile:w-[90vw]
 `;
 
-const LogoTitle = styled.h1`
-  display: flex;
-  justify-content: flex-start;
-  align-items: center;
-  &:hover {
-    cursor: pointer;
-  }
+const LogoTitle = utld.h1`
+  flex
+  justify-start
+  items-center
+
+  font-mono
 `;
 
-const NavItemWrapper = styled.div`
-  display: flex;
+const NavItemWrapper = utld.div`
+  flex
 `;
 
-const StyledLogoTitleSpan = styled(LogoTitleSpan)`
-  margin-left: 7px;
+const StyledLogoTitleSpan = utld(LogoTitleSpan)`
+  ml-[0.4375rem]
 `;
 
 function Navigation() {
   const [isSearchbarOn, setIsSearchbarOn] = useState(false);
 
-  const theme = useTheme();
   const { width } = useWindowSize();
+  const isMobile = width <= 800;
+  const isSmallScreen = width <= 400;
 
   const router = useRouter();
+  const isPostRoute = useMemo(() => /\/posts\//g.test(router.route), [router]);
 
   const navRef = useRef<HTMLDivElement>(null);
   const lastScrollTopRef = useRef(0);
 
   const onScroll = useCallback(() => {
-    if (!navRef.current) return;
+    if (!navRef.current || !isPostRoute) return;
 
     const currentScrollTop = document.documentElement.scrollTop;
-    navRef.current.style.top = lastScrollTopRef.current < currentScrollTop ? "-51px" : "-1px";
+
+    if (currentScrollTop < 50) {
+      return;
+    }
+
+    if (lastScrollTopRef.current < currentScrollTop) {
+      navRef.current.classList.remove(TRANSLATE_APPEAR);
+      navRef.current.classList.add(TRANSLATE_DISSAPPEAR);
+    } else {
+      navRef.current.classList.remove(TRANSLATE_DISSAPPEAR);
+      navRef.current.classList.add(TRANSLATE_APPEAR);
+    }
 
     lastScrollTopRef.current = currentScrollTop;
-  }, []);
+  }, [isPostRoute]);
 
   useEffect(() => {
-    if (!navRef.current) return;
-
-    if (/post/g.test(router.route) && width <= 400) {
-      navRef.current.style.top = "-1px";
-      window.addEventListener("touchmove", onScroll);
-      return () => window.removeEventListener("touchmove", onScroll);
+    if (!navRef.current) {
+      return;
     }
-  }, [router, width, onScroll]);
+
+    window.addEventListener("touchmove", onScroll);
+    window.addEventListener("scroll", onScroll);
+    return () => {
+      window.removeEventListener("touchmove", onScroll);
+      window.removeEventListener("scroll", onScroll);
+    };
+  }, [onScroll]);
 
   const nav = useMemo(
     () => (
       <Nav>
         <Link href='/'>
           <LogoTitle>
-            <BlogIcon color={theme.textColor} size={1} />
-            <StyledLogoTitleSpan className={width <= 400 ? "sr-only" : ""}>
+            <BlogIcon className='text-default-light dark:text-default-dark' size={1} />
+            <StyledLogoTitleSpan className={isSmallScreen ? "sr-only" : ""}>
               shiwoo.dev
             </StyledLogoTitleSpan>
             <span className='sr-only'>: FE 개발자 박시우의 기술 블로그</span>
@@ -135,11 +148,11 @@ function Navigation() {
             icon={HiSearch}
             onClick={() => setIsSearchbarOn(true)}
           />
-          <DarkmodeSwitch />
+          {!isMobile && <DarkmodeSwitch />}
         </NavItemWrapper>
       </Nav>
     ),
-    [theme, width],
+    [isMobile, isSmallScreen],
   );
 
   return (
@@ -148,12 +161,13 @@ function Navigation() {
         {nav}
         <Searchbar isSearchbarOn={isSearchbarOn} onSearchbarClose={() => setIsSearchbarOn(false)} />
       </Container>
+      {isMobile && <DarkmodeSwitch />}
     </Header>
   );
 }
 
-const StyledResponsiveIconButton = styled(ResponsiveIconButton)`
-  margin-left: 0.25rem;
+const StyledResponsiveIconButton = utld(ResponsiveIconButton)`
+  ml-1
 `;
 
 export default Navigation;

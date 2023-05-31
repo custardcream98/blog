@@ -1,147 +1,147 @@
-import { Container as DefaultContainer } from "src/components/Common/styledComponents";
+import { Container as DefaultContainer } from "src/components/Common";
 
-import styled, { css } from "styled-components";
+import { ud, utld } from "utility-class-components";
 
-export const Container = styled(DefaultContainer)`
-  align-items: start;
+export const Container = utld(DefaultContainer)`
+  !items-start
 
-  padding-top: 6rem;
+  pt-24
 
-  @media only print {
-    padding-top: 0rem;
-    padding-bottom: 2rem;
-  }
+  print:(
+    pt-0
+    pb-8
+  )
 `;
 
-export const Section = styled.section`
-  margin: 4rem 0;
+export const Section = utld.section`
+  my-16
+  text-resume-text-light
+  dark:text-resume-text-dark
 
-  color: ${({ theme }) => theme.resumeTextColor};
-
-  @media only print {
-    margin: 2rem 0;
-    width: 100%;
-
-    :last-child {
-      page-break-inside: avoid;
-    }
-  }
+  print:(
+    my-8
+    w-full
+    last:break-inside-avoid-page
+  )
 `;
 
-export const SectionTitle = styled.h3`
-  font-size: 1.7rem;
-  font-weight: 600;
-  margin-bottom: 1.7rem;
+export const SectionTitle = utld.h3`
+  text-[1.7rem]
+  font-semibold
+  mb-[1.7rem]
 `;
 
-export const SectionItemList = styled.ul``;
+export const SectionItemList = utld.ul``;
 
-export const SectionItem = styled.li`
-  margin-top: 3rem;
-  & + & {
-    margin-top: 7rem;
-  }
+export const SectionItem = utld.li`
+  mt-12
+  [&+&]:mt-28
 
-  @media only print {
-    margin-top: 2rem;
-    & + & {
-      margin-top: 2rem;
-    }
-    position: relative;
-    break-inside: avoid;
-  }
+  print:(
+    mt-8
+    [&+&]:mt-8
+    relative
+    break-inside-avoid
+  )
 `;
 
-export const SectionItemBordered = styled(SectionItem)`
-  list-style: none;
-  padding-left: 1rem;
-  border-left: 1px solid #ccc;
+export const SectionItemBordered = utld(SectionItem)`
+  pl-4
+  border-l
+  border-solid
+  border-[#ccc]
 `;
 
-export const ProjectTitle = styled.h4`
-  font-size: 1.1rem;
-  font-weight: 400;
-  margin-bottom: 0.5rem;
+export const ProjectTitle = utld.h4`
+  text-[1.1rem]
+  font-normal
+  mb-2
 
-  word-break: keep-all;
-  line-height: 1.2;
+  break-keep
+  leading-[1.2]
 `;
 
-export const dimTextStyle = css`
-  color: ${({ theme }) => theme.resumeDimTextColor};
+export const dimTextStyle = ud`
+  text-[0.9rem]
+  font-light
 
-  font-size: 0.9rem;
-  font-weight: 300;
+  tracking-[0.02rem]
 
-  letter-spacing: 0.02rem;
+  text-resume-text-dim-light
+  dark:text-resume-text-dim-dark
 `;
 
-export const ProjectTeam = styled.span`
+export const ProjectTeam = utld.span`
   ${dimTextStyle}
 
-  margin-bottom: 0.2rem;
-  display: block;
-
-  word-break: keep-all;
-  line-height: 1.2;
+  block
+  mb-[0.2rem]
+  break-keep
+  leading-[1.2]
 `;
 
-export const ProjectShortDescription = styled.p`
-  margin-top: 1rem;
+export const ProjectShortDescription = utld.p`
+  mt-4
 
-  font-weight: 300;
-  font-size: 0.9rem;
+  font-light
+  text-[0.9rem]
 
-  line-height: 1.6;
+  leading-[1.6]
 
-  letter-spacing: 0.04em;
+  tracking-[0.04rem]
 `;
 
-export const ProjectDescriptionList = styled.ul`
-  margin-top: 1.5rem;
+export const ProjectDescriptionList = utld.ul`
+  mt-6
 
-  font-weight: 300;
-  font-size: 0.9rem;
+  font-light
+  text-[0.9rem]
 
-  letter-spacing: 0.03em;
-  line-height: 1.5;
+  tracking-[0.03rem]
+  leading-[1.5]
 
-  @media only print {
-    margin-top: 0.5rem;
-  }
+  print:mt-2
+
+  marker:(
+    content-['-']
+
+    text-[1rem]
+    font-semibold
+
+    text-resume-accent-light
+    dark:text-resume-accent-dark
+  )
 `;
 
-export const ProjectDescriptionItem = styled.li`
-  margin: 0.4rem 0 0.4rem 0.4rem;
-  padding-left: 0.6rem;
+export const ProjectDescriptionItem = utld.li`
+  my-[0.4rem]
+  ml-[0.4rem]
+  pl-[0.6rem]
 
-  ::marker {
-    content: "-";
-
-    font-size: 1rem;
-    font-weight: 600;
-
-    color: ${({ theme }) => theme.resumeAccentColor};
-  }
-
-  @media only print {
-    margin: 0.2rem 0 0.2rem 0.2rem;
-  }
+  print:(
+    my-[0.2rem]
+    ml-[0.2rem]
+  )
 `;
 
-export const ProjectStacks = styled.ul`
-  display: flex;
-  flex-wrap: wrap;
-  gap: 5px;
+export const ProjectStacks = utld.ul`
+  flex
+  flex-wrap
+  gap-[0.3125rem]
 `;
 
-export const ProjectStack = styled.li`
-  font-size: 0.8rem;
-  font-weight: 300;
+export const ProjectStack = utld.li`
+  font-light
+  text-[0.8rem]
 
-  padding: 0.2rem 0.4rem;
-  border-radius: 0.2rem;
+  py-[0.2rem]
+  px-[0.4rem]
 
-  color: ${({ theme }) => theme.resumeBadgeTextColor};
-  background-color: ${({ theme }) => theme.resumeBadgeBackgroundColor};
+  rounded-[0.2rem]
+
+  text-resume-badge-text-light
+  dark:text-resume-badge-text-dark
+
+  bg-resume-badge-bg-light
+  dark:bg-resume-badge-bg-dark
 `;

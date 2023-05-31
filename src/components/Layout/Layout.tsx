@@ -3,20 +3,17 @@ import Footer from "./Footer";
 
 import Head from "next/head";
 import type { PropsWithChildren } from "react";
-import styled from "styled-components";
+import { utld } from "utility-class-components";
 
-const Wrapper = styled.div`
-  display: flex;
-  flex-direction: column;
-  min-height: calc(100vh - 50px); // 뷰포트 높이 - Navbar 높이
+const Wrapper = utld.div`
+  flex
+  flex-col
+  min-h-[calc(100vh-50px)]
 `;
 
-const Main = styled.main`
-  flex-grow: 1;
-
-  @media only print {
-    margin-top: -2rem;
-  }
+const Main = utld.main`
+  flex-1
+  print:mt-[-2rem]
 `;
 
 function Layout({ children }: PropsWithChildren) {

@@ -7,7 +7,7 @@ import Image, { type StaticImageData } from "next/image";
 import { useCallback, useState } from "react";
 import { BsGithub } from "react-icons/bs";
 import { RiCloseFill } from "react-icons/ri";
-import styled, { css } from "styled-components";
+import { ud, utld } from "utility-class-components";
 
 type NoticeProps = {
   projectName: string;
@@ -21,7 +21,12 @@ type WrapperProps = {
   isClosed: boolean;
 };
 
-function ProjectAd({ projectName, projectLink, repositoryLink, projectImage }: NoticeProps) {
+export default function ProjectAd({
+  projectName,
+  projectLink,
+  repositoryLink,
+  projectImage,
+}: NoticeProps) {
   const isMounted = useIsMounted();
   const [isClosed, setIsClosed] = useState(false);
   const { width } = useWindowSize();
@@ -41,14 +46,13 @@ function ProjectAd({ projectName, projectLink, repositoryLink, projectImage }: N
         width={50}
         height={50}
       />
-      <div className='project-ad-content'>
-        <strong className='project-ad-title'>제가 개발한 서비스 구경하고 가세요!</strong>
-        <p className='project-ad-name'>{projectName}</p>
-      </div>
+      <ProjectAdContent>
+        <ProjectAdTitle>제가 개발한 서비스 구경하고 가세요!</ProjectAdTitle>
+        <ProjectAdName>{projectName}</ProjectAdName>
+      </ProjectAdContent>
       <ClickablesWrapper>
         {!isMobile && (
-          <IconButton
-            className='project-ad-github'
+          <ProjectAdGithub
             icon={BsGithub}
             title='레포지토리 링크'
             size={iconSize}
@@ -72,127 +76,115 @@ function ProjectAd({ projectName, projectLink, repositoryLink, projectImage }: N
   );
 }
 
-const Wrapper = styled.aside<WrapperProps>`
-  display: flex;
-  align-items: center;
+const Wrapper = utld.aside<WrapperProps>`
+  flex
+  items-center
 
-  position: fixed;
-  bottom: 20px;
-  right: 20px;
-  left: 20px;
-  z-index: 1000;
+  fixed
+  bottom-5
+  right-5
+  left-5
+  z-50
 
-  max-width: 900px;
-  margin: 0 auto;
+  max-w-[56.25rem]
+  mx-auto
 
-  padding: 20px;
-  border-radius: 10px;
-  background-color: ${({ theme }) => theme.postElementBackgroundColor + "22"};
+  p-5
+  rounded-[0.625rem]
 
-  box-shadow: ${({ theme }) => theme.darkmodeShadow};
+  shadow-sm
+  shadow-black
+  dark:shadow-white
 
-  transition: all 1.5s ease;
-  transform: translateY(200%);
-  opacity: 0;
+  transition-all
+  duration-[1.5s]
 
-  backdrop-filter: blur(10px);
+  backdrop-blur-[0.625rem]
 
-  @media (max-width: 500px) {
-    padding: 10px;
-  }
+  ad:p-[0.625rem]
+
+  print:hidden
 
   ${({ isMounted, isClosed }) =>
     isMounted &&
     (!isClosed
-      ? css`
-          transform: translateY(0);
-          opacity: 1;
+      ? ud`
+          translate-y-0
+          opacity-100
         `
-      : css`
-          transform: translateY(200%);
-          opacity: 0;
+      : ud`
+          translate-y-[200%]
+          opacity-0
         `)}
-
-  .project-ad-content {
-    margin-left: 20px;
-
-    @media (max-width: 500px) {
-      margin-left: 10px;
-    }
-  }
-
-  strong.project-ad-title {
-    display: block;
-    margin-bottom: 10px;
-    font-size: 0.9rem;
-    color: ${({ theme }) => theme.subTextColor};
-
-    @media (max-width: 500px) {
-      font-size: 0.5rem;
-    }
-  }
-  p.project-ad-name {
-    @media (max-width: 500px) {
-      font-size: 0.9rem;
-    }
-  }
-
-  @media only print {
-    display: none;
-  }
 `;
 
-const ProjectAdImage = styled(Image)`
-  object-fit: cover;
+const ProjectAdContent = utld.div`
+  ml-5
+  ad:ml-[0.625rem]
 `;
 
-const ProjectLink = styled.a`
-  margin-right: 20px;
-  > svg {
-    transition: stroke 0.3s ease, fill 0.3s ease;
-  }
+const ProjectAdTitle = utld.strong`
+  block
+  mb-1
 
-  @media (max-width: 500px) {
-    margin-right: 0;
-  }
+  text-[0.9rem]
+
+  text-default-sub-light
+  dark:text-default-sub-dark
+
+  ad:text-[0.6rem]
 `;
 
-const CloseButton = styled(IconButton)`
-  position: absolute;
-  top: 12px;
-  right: 12px;
-
-  @media (max-width: 500px) {
-    position: static;
-    margin-bottom: 6px;
-  }
+const ProjectAdName = utld.p`
+  text-[1.1rem]
+  ad:text-[0.9rem]
 `;
 
-const ClickablesWrapper = styled.div`
-  display: flex;
-  align-items: center;
-  margin-left: auto;
-
-  a.project-ad-github > svg {
-    transition: stroke 0.3s ease, fill 0.3s ease;
-  }
-
-  a.project-ad-github {
-    margin-left: auto;
-    margin-right: 20px;
-
-    > svg:hover {
-      fill: ${({ theme }) => theme.accentColor};
-    }
-
-    @media (max-width: 500px) {
-      display: none;
-    }
-  }
-
-  @media (max-width: 500px) {
-    flex-direction: column-reverse;
-  }
+const ProjectAdImage = utld(Image)`
+  object-cover
 `;
 
-export default ProjectAd;
+const ProjectLink = utld.a`
+  mr-5
+
+  [&>svg]:transition-[stroke,fill]
+  [&>svg]:duration-300
+
+  ad:mr-0
+`;
+
+const CloseButton = utld(IconButton)`
+  absolute
+  top-3
+  right-3
+
+  ad:(
+    static
+    mb-[0.375rem]
+  )
+`;
+
+const ClickablesWrapper = utld.div`
+  flex
+  items-center
+  ml-auto
+
+  ad:flex-col-reverse
+`;
+
+const ProjectAdGithub = utld(IconButton)`
+  mr-5
+  ml-auto
+
+  [&>svg]:(
+    transition-[stroke,fill]
+    duration-300
+  )
+
+  hover:[&>svg]:(
+    fill-accent-light
+    dark:fill-accent-dark
+  )
+
+  ad:hidden
+`;

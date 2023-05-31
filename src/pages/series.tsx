@@ -1,18 +1,21 @@
-import { Container, LinkDecorated, Title } from "src/components/Common/styledComponents";
+import { Container, LinkDecorated, Title } from "src/components/Common";
 import Meta from "src/components/Layout/Meta";
 import { getSeries } from "src/lib/utils/posts";
 
-import styled from "styled-components";
+import { utld } from "utility-class-components";
 
-const SeriesTitle = styled.li`
-  margin: 2px;
-  padding: 9px;
-  border-radius: 8px;
-  color: ${(props) => props.theme.textColor};
+const SeriesTitle = utld.li`
+  m-[0.125rem]
+  p-[0.5625rem]
+
+  rounded-[0.5rem]
+
+  text-default-light
+  dark:text-default-dark
 `;
 
-const SeriesList = styled.ul`
-  width: 100%;
+const SeriesList = utld.ul`
+  w-full
 `;
 
 type Props = {

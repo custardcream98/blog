@@ -1,24 +1,20 @@
-import { isDarkAtom } from "src/lib/atoms";
 import { CoverImage } from "src/types/post";
 
 import Image from "next/image";
 import PlaceholderDark from "public/static/img/thumbnail-placeholder-dark.webp";
 import PlaceholderLight from "public/static/img/thumbnail-placeholder-light.webp";
-import { useRecoilValue } from "recoil";
-import styled from "styled-components";
+import { utld } from "utility-class-components";
 
 const PLACEHOLDERS = {
   DARK: PlaceholderDark.blurDataURL,
   LIGHT: PlaceholderLight.blurDataURL,
 };
 
-const Thumbnail = styled(Image)`
-  border-radius: 4px;
+const Thumbnail = utld(Image)`
+  rounded-[4px]
 
-  width: 100%;
-  height: auto;
-
-  display: block;
+  w-full
+  h-auto
 `;
 
 type Props = CoverImage & {
@@ -26,23 +22,35 @@ type Props = CoverImage & {
 };
 
 function PostThumbnail({ darkThumbnail, lightThumbnail, title }: Props) {
-  const isDarkMode = useRecoilValue(isDarkAtom);
-
-  const thumbnailSrc = isDarkMode ? darkThumbnail : lightThumbnail;
   const thumbnailAlt = title + " 썸네일";
 
   return (
-    <Thumbnail
-      key={thumbnailSrc}
-      src={thumbnailSrc}
-      alt={thumbnailAlt}
-      priority
-      width={1200}
-      height={630}
-      placeholder='blur'
-      blurDataURL={PLACEHOLDERS[isDarkMode ? "DARK" : "LIGHT"]}
-      quality={100}
-    />
+    <>
+      <Thumbnail
+        className='hidden dark:block'
+        key={darkThumbnail}
+        src={darkThumbnail}
+        alt={thumbnailAlt}
+        priority
+        width={1200}
+        height={630}
+        placeholder='blur'
+        blurDataURL={PLACEHOLDERS.DARK}
+        quality={100}
+      />
+      <Thumbnail
+        className='block dark:hidden'
+        key={lightThumbnail}
+        src={lightThumbnail}
+        alt={thumbnailAlt}
+        priority
+        width={1200}
+        height={630}
+        placeholder='blur'
+        blurDataURL={PLACEHOLDERS.DARK}
+        quality={100}
+      />
+    </>
   );
 }
 

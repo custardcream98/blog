@@ -1,8 +1,8 @@
-import { LinkDecorated } from "src/components/Common/styledComponents";
+import { LinkDecorated } from "src/components/Common";
 
 import { useRouter } from "next/router";
 import type { PropsWithChildren } from "react";
-import styled from "styled-components";
+import { utld } from "utility-class-components";
 
 type NavItemProps = PropsWithChildren<{
   href: string;
@@ -30,33 +30,36 @@ function NavItem({ href, children }: NavItemProps) {
   );
 }
 
-const NavList = styled.ul`
-  display: flex;
-  justify-content: center;
-  align-items: center;
+const NavList = utld.ul`
+  flex
+  items-center
 
-  gap: 2rem;
-  margin-right: 2rem;
+  gap-8
+  mr-8
 
-  font-weight: 500;
-  font-family: ${({ theme }) => theme.titleFont};
+  font-medium
+  font-title
 
-  @media (max-width: 800px) {
-    gap: 0.5rem;
-    margin-right: 0.5rem;
-  }
+  mobile:(
+    gap-2
+    mr-2
+  )
 `;
-const NavItemLinkDecorated = styled(LinkDecorated)<NavItemLinkDecoratedProps>`
-  font-size: 1rem;
-  color: ${({ theme, isActive }) => (isActive ? theme.textColor : theme.subTextColor)};
 
-  @media (max-width: 800px) {
-    font-size: 0.8rem;
-  }
+const NavItemLinkDecorated = utld(LinkDecorated)<NavItemLinkDecoratedProps>`
+  text-[1rem]
+
+  mobile:text-[0.8rem]
+
+  ${({ isActive }) =>
+    isActive
+      ? "text-default-light dark:text-default-dark"
+      : "text-default-sub-light dark:text-default-sub-dark"}
 `;
-const NavItemLi = styled.li`
-  display: flex;
-  align-items: center;
+
+const NavItemLi = utld.li`
+  flex
+  items-center
 `;
 
 export { NavItem };

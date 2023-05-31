@@ -2,27 +2,28 @@ import LinkIcon from "src/components/Common/LinkIcon";
 import { cssOutlineOnFocus } from "src/components/Layout/Navigation/styles";
 
 import Link from "next/link";
-import styled from "styled-components";
+import { utld } from "utility-class-components";
 
-const StyledLink = styled(Link)`
-  display: block;
-  align-self: end;
+const StyledLink = utld(Link)`
+  block
+  self-end
 
-  width: 20px;
-  height: 20px;
+  w-5
+  h-5
 
-  margin: 0 10px;
-
-  .link-icon {
-    width: 100%;
-    height: 100%;
-    stroke: ${({ theme }) => theme.textColor};
-    :hover {
-      stroke: ${({ theme }) => theme.accentColor};
-    }
-  }
+  mx-[10px]
 
   ${cssOutlineOnFocus}
+
+  [&>.link-icon]:(
+    w-full
+    h-full
+    stroke-default-light
+    hover:stroke-accent
+
+    dark:stroke-default-dark
+    dark:hover:stroke-accent 
+  )
 `;
 
 type Props = {

@@ -1,59 +1,59 @@
 import type { ReactNode } from "react";
-import styled from "styled-components";
+import { utld } from "utility-class-components";
 
 type ResultCardWrapperProps = {
   isLast: boolean;
 };
-const ResultCardWrapper = styled.li<ResultCardWrapperProps>`
-  padding: 20px 0;
 
-  ${({ isLast, theme }) => !isLast && "border-bottom: 1px solid " + theme.subTextColor};
+const ResultCardWrapper = utld.li<ResultCardWrapperProps>`
+  py-5
 
-  .result-title-wrapper {
-    display: flex;
-    justify-content: space-between;
-  }
-  .result-content-wrapper {
-    display: flex;
-  }
+  ${({ isLast }) =>
+    !isLast ? "border-b border-solid border-default-sub-light dark:border-default-dark" : ""}
+  
+  [&>.result-title-wrapper]:(
+    flex
+    justify-between
+  )
 
-  @media (max-width: 400px) {
-    .result-title-wrapper {
-      flex-direction: column;
-      margin-bottom: 10px;
-    }
-  }
+  [&>.result-content-wrapper]:flex
+
+  mobile:[&>.result-title-wrapper]:(
+    flex-col
+    mb-[0.625rem]
+  )
 `;
 
-export const SearchResultCardTitle = styled.strong`
-  display: block;
-  font-size: 1.1rem;
-  margin-bottom: 10px;
-  line-height: 1.5;
-  @media (max-width: 400px) {
-    font-size: 0.9rem;
-    margin-bottom: 5px;
-  }
+export const SearchResultCardTitle = utld.strong`
+  block
+  text-[1.1rem]
+  mb-2.5
+  leading-[1.5]
+
+  mobile:(
+    text-[0.9rem]
+    mb-[0.3125rem]
+  )
 `;
 
-export const SearchResultCardContent = styled.p`
-  line-height: 1.4;
-  font-size: 0.9rem;
-  font-weight: 300;
-  flex: 1;
-  @media (max-width: 400px) {
-    font-size: 0.8rem;
-    line-height: 1.5;
-  }
+export const SearchResultCardContent = utld.p`
+  leading-[1.4]
+  text-[0.9rem]
+  font-light
+  flex-1
+
+  mobile:(
+    text-[0.8rem]
+    leading-[1.5]
+  )
 `;
 
-export const SearchResultCardDate = styled.time`
-  font-size: 0.8rem;
-  font-weight: 300;
-  white-space: nowrap;
-  @media (max-width: 400px) {
-    font-size: 0.7rem;
-  }
+export const SearchResultCardDate = utld.time`
+  text-[0.8rem]
+  font-light
+  whitespace-nowrap
+  
+  mobile:text-[0.7rem]
 `;
 
 type Props = {

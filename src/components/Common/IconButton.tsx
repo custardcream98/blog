@@ -1,8 +1,8 @@
 import useWindowSize from "src/lib/hook/useWindowSize";
 
-import { type ComponentPropsWithoutRef, forwardRef } from "react";
+import { type ComponentPropsWithoutRef, createElement, forwardRef } from "react";
 import { IconType } from "react-icons";
-import styled, { useTheme } from "styled-components";
+import { utld } from "utility-class-components";
 
 type ClickableComponents = "a" | "button";
 
@@ -20,12 +20,11 @@ const IconButton = forwardRef<HTMLButtonElement, Props>(function IconButtonForwa
   ref,
 ) {
   const Icon = icon;
-  const { textColor } = useTheme();
 
-  return (
-    <Button ref={ref} as={buttonAs} {...props}>
-      <Icon color={textColor} size={size} title={title} />
-    </Button>
+  return createElement(
+    buttonAs ?? "button",
+    { ref, ...props },
+    <Icon className='text-default-light dark:text-default-dark' size={size} title={title} />,
   );
 });
 
@@ -51,20 +50,11 @@ const ResponsiveIconButton = forwardRef<
   );
 });
 
-const Button = styled.button`
-  margin: 0;
-  padding: 0;
-  background: none;
-  border: none;
-
-  cursor: pointer;
-`;
-
-const StyledResponsiveIconButton = styled(IconButton)`
-  @media (max-width: 800px) {
-    width: 22px;
-    height: 22px;
-  }
+const StyledResponsiveIconButton = utld(IconButton)`
+  mobile:(
+    w-[1.375.rem]
+    h-[1.375.rem]
+  )
 `;
 
 export { ResponsiveIconButton };

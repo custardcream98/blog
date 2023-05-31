@@ -1,58 +1,36 @@
 import { PropsWithChildren } from "react";
-import styled, { css } from "styled-components";
+import { utld } from "utility-class-components";
 
 type StyledSvgContainerProps = {
   svgWidth?: string;
   svgHeight?: string;
   svgColor?: string;
-  svgHoverColor?: string;
 };
-type SvgContainerProps = PropsWithChildren & StyledSvgContainerProps;
+type SvgContainerProps = PropsWithChildren<StyledSvgContainerProps>;
 
-function SvgContainer({ children, ...restProps }: SvgContainerProps) {
-  return <Container {...restProps}>{children}</Container>;
+function SvgContainer({ children, svgColor, svgHeight, svgWidth }: SvgContainerProps) {
+  return (
+    <Container
+      style={{
+        color: svgColor,
+        height: svgHeight,
+        width: svgWidth,
+      }}
+    >
+      {children}
+    </Container>
+  );
 }
 
-const Container = styled.span<StyledSvgContainerProps>`
-  display: inline-block;
+const Container = utld.span`
+  inline-block
 
-  > svg {
-    fill: currentColor;
-    width: inherit;
-    height: inherit;
-  }
-
-  ${({ svgWidth, svgHeight, svgColor, svgHoverColor }) =>
-    css`
-      ${
-        svgWidth &&
-        css`
-          width: ${svgWidth};
-        `
-      }
-
-      ${
-        svgHeight &&
-        css`
-          height: ${svgHeight};
-        `
-      }
-
-      ${
-        svgColor &&
-        css`
-          color: ${svgColor};
-        `
-      }
-
-      :hover {
-        ${
-          svgHoverColor &&
-          css`
-            color: ${svgHoverColor};
-          `
-        }
-    `}
+  [&>svg]:(
+    align-top
+    fill-current
+    w-[inherit]
+    h-[inherit]
+  )
 `;
 
 export default SvgContainer;

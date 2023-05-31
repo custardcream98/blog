@@ -1,392 +1,405 @@
-import { isDarkAtom } from "src/lib/atoms";
+// const MarkdownBodyStyle = styled.div`
+//   --main-font-size: 1rem;
+//   --main-heading-margin: 4rem;
+//   --post-element-background-color: rgb(240, 240, 240);
+//   --text-color: #121212;
+//   --code-line-number-background-color: #dfdfdf; /* #292929 */
+//   --accent-color: #0070f3; /* #3b96ff */
+//   --background-color: #fcfcfc; /* #121212 */
+//   --sub-text-color: rgb(140, 140, 140); /* rgb(177, 177, 177) */
 
-import { useRecoilValue } from "recoil";
-import styled, { css } from "styled-components";
+//   pre[data-theme="light"],
+//   code[data-theme="light"] {
+//     display: initial;
+//   }
 
-const MOBILE_BREAKPOINT = "600px";
+//   pre[data-theme="dark"],
+//   code[data-theme="dark"] {
+//     display: none;
+//   }
 
-type StyleProps = {
-  isDark: boolean;
-};
+//   :is(.dark &) {
+//     --post-element-background-color: #1e1e1e;
+//     --text-color: #efefef;
+//     --code-line-number-background-color: #292929;
+//     --accent-color: #3b96ff;
+//     --background-color: #121212;
+//     --sub-text-color: rgb(177, 177, 177);
 
-const MarkdownBodyStyle = styled.div<StyleProps>`
-  --main-font-size: 1rem;
-  --main-heading-margin: 4rem;
-  @media (max-width: 800px) {
-    --main-font-size: 0.95rem;
-  }
+//     pre[data-theme="light"],
+//     code[data-theme="light"] {
+//       display: none;
+//     }
 
-  -ms-text-size-adjust: 100%;
-  -webkit-text-size-adjust: 100%;
-  width: 100%;
-  margin-top: 2rem;
-  font-size: var(--main-font-size);
-  font-weight: 300;
-  line-height: 1.9;
-  word-wrap: break-word;
-  letter-spacing: 0.03rem;
+//     pre[data-theme="dark"],
+//     code[data-theme="dark"] {
+//       display: initial;
+//     }
+//   }
 
-  a {
-    background-color: transparent;
-    color: #58a6ff;
-    text-decoration: none;
-  }
-  a:active,
-  a:hover {
-    outline-width: 0;
-    text-decoration: underline;
-  }
-  b,
-  strong {
-    font-weight: 700;
-  }
-  h1,
-  h2,
-  h3,
-  h4,
-  h5,
-  h6 {
-    font-weight: 700;
-    line-height: 1.25;
-    display: block;
-  }
-  h1 tt,
-  h1 code,
-  h2 tt,
-  h2 code,
-  h3 tt,
-  h3 code,
-  h4 tt,
-  h4 code,
-  h5 tt,
-  h5 code,
-  h6 tt,
-  h6 code {
-    padding: 0 0.2em;
-    font-size: inherit;
-  }
+//   @media (max-width: 800px) {
+//     --main-font-size: 0.9rem;
+//   }
 
-  /* Scroll Target Margin */
+//   -ms-text-size-adjust: 100%;
+//   -webkit-text-size-adjust: 100%;
 
-  h1:target,
-  h2:target,
-  h3:target,
-  h4:target,
-  h5:target,
-  h6:target {
-    scroll-margin-top: 60px;
-  }
+//   width: 100%;
+//   margin-top: 2rem;
+//   font-size: var(--main-font-size);
+//   font-weight: 300;
+//   line-height: 1.9;
+//   word-wrap: break-word;
+//   letter-spacing: 0.03rem;
 
-  /* 
-    Semantic한 HTML을 위해 h1, h2는 쓰지 않고
-    h3부터만 사용합니다.
-  */
+//   a {
+//     background-color: transparent;
+//     color: #58a6ff;
+//     text-decoration: none;
+//   }
+//   a:active,
+//   a:hover {
+//     outline-width: 0;
+//     text-decoration: underline;
+//   }
+//   b,
+//   strong {
+//     font-weight: 700;
+//   }
+//   h1,
+//   h2,
+//   h3,
+//   h4,
+//   h5,
+//   h6 {
+//     font-weight: 700;
+//     line-height: 1.25;
+//     display: block;
+//   }
+//   h1 tt,
+//   h1 code,
+//   h2 tt,
+//   h2 code,
+//   h3 tt,
+//   h3 code,
+//   h4 tt,
+//   h4 code,
+//   h5 tt,
+//   h5 code,
+//   h6 tt,
+//   h6 code {
+//     padding: 0 0.2em;
+//     font-size: inherit;
+//   }
 
-  h3 {
-    margin: var(--main-heading-margin) 0 1rem 0;
-    padding-bottom: 0.3em;
-    font-size: calc(var(--main-font-size) * 2);
-    border-bottom: 1px solid #21262d;
-  }
-  h4 {
-    margin: calc(var(--main-heading-margin) * 0.8) 0 1rem 0;
-    padding-bottom: 0.3em;
-    font-size: calc(var(--main-font-size) * 1.6);
-    border-bottom: 1px solid #21262d;
-  }
-  h5 {
-    margin: calc(var(--main-heading-margin) * 0.8) 0 1rem 0;
-    font-size: calc(var(--main-font-size) * 1.3);
-  }
-  h6 {
-    margin: calc(var(--main-heading-margin) * 0.8) 0 1rem 0;
-    font-size: calc(var(--main-font-size) * 1.2);
-  }
+//   /* Scroll Target Margin */
 
-  p {
-    margin-bottom: calc(var(--main-heading-margin) * 0.5);
-  }
+//   h1:target,
+//   h2:target,
+//   h3:target,
+//   h4:target,
+//   h5:target,
+//   h6:target {
+//     scroll-margin-top: 60px;
+//   }
 
-  blockquote {
-    margin: 0 0 1rem 0;
-    padding: 1.5rem;
-    border-left: 0.2rem solid #f9bf00;
-    font-style: italic;
-    letter-spacing: 0.04rem;
-    border-radius: 4px;
-    background-color: ${({ theme }) => theme.postElementBackgroundColor};
-    color: ${({ theme }) => theme.textColor};
-    font-size: 93%;
-    p {
-      margin: 0;
-    }
-  }
+//   /*
+//     Semantic한 HTML을 위해 h1, h2는 쓰지 않고
+//     h3부터만 사용합니다.
+//   */
 
-  code,
-  tt {
-    font-family: "D2Coding";
-    padding: 0 0.4em;
-    margin: 0;
-    font-size: 0.85em;
-    vertical-align: 0.0725em;
-    color: rgb(203, 155, 34);
-  }
+//   h3 {
+//     margin: var(--main-heading-margin) 0 1rem 0;
+//     padding-bottom: 0.3em;
+//     font-size: calc(var(--main-font-size) * 2);
+//     border-bottom: 1px solid #21262d;
+//   }
+//   h4 {
+//     margin: calc(var(--main-heading-margin) * 0.8) 0 1rem 0;
+//     padding-bottom: 0.3em;
+//     font-size: calc(var(--main-font-size) * 1.6);
+//     border-bottom: 1px solid #21262d;
+//   }
+//   h5 {
+//     margin: calc(var(--main-heading-margin) * 0.8) 0 1rem 0;
+//     font-size: calc(var(--main-font-size) * 1.3);
+//   }
+//   h6 {
+//     margin: calc(var(--main-heading-margin) * 0.8) 0 1rem 0;
+//     font-size: calc(var(--main-font-size) * 1.2);
+//   }
 
-  div[data-rehype-pretty-code-fragment] {
-    margin: 1rem 0;
-    background-color: ${({ theme }) => theme.postElementBackgroundColor};
-    border-radius: 4px;
-    counter-reset: codeblock;
-    pre {
-      overflow: auto hidden;
-      /* padding: 0.75rem 0; */
-      code {
-        padding: 0;
-        display: grid;
-        background-color: transparent;
-        font-size: calc(var(--main-font-size) * 0.8);
-        &::before,
-        &::after,
-        .line::before {
-          content: " ";
-          display: inline-block;
-          width: 0.9rem;
-          padding: 0 0.7rem;
-          height: 0.65rem;
-          background-color: ${({ isDark }) => (isDark ? "#292929" : "#dfdfdf")};
-        }
-        &::before {
-          border-top-left-radius: 4px;
-        }
-        &::after {
-          border-bottom-left-radius: 4px;
-        }
-        .line {
-          padding-right: 1rem;
-          &::before {
-            height: 100%;
-            margin-right: 0.9rem;
-            text-align: right;
-            content: counter(codeblock);
-            counter-increment: codeblock;
-            color: #717171;
-          }
-        }
-      }
-    }
-  }
+//   p {
+//     margin-bottom: calc(var(--main-heading-margin) * 0.5);
+//   }
 
-  /* 
-    코드블록 다크모드 조정
-  */
-  ${({ isDark }) =>
-    isDark
-      ? css`
-          pre[data-theme="light"],
-          code[data-theme="light"] {
-            display: none;
-          }
-        `
-      : css`
-          pre[data-theme="dark"],
-          code[data-theme="dark"] {
-            display: none;
-          }
-        `}
+//   blockquote {
+//     margin: 0 0 1rem 0;
+//     padding: 1.5rem;
+//     border-left: 0.2rem solid #f9bf00;
+//     font-style: italic;
+//     letter-spacing: 0.04rem;
+//     border-radius: 4px;
+//     background-color: var(--post-element-background-color);
+//     color: var(--text-color);
+//     font-size: 93%;
+//     p {
+//       margin: 0;
+//     }
+//   }
 
-  img {
-    max-width: 100%;
-    image-resolution: from-image;
-    display: block;
-    margin: auto;
-  }
+//   code,
+//   tt {
+//     font-family: "D2Coding";
+//     padding: 0 0.4em;
+//     margin: 0;
+//     font-size: 0.85em;
+//     vertical-align: 0.0725em;
+//     color: rgb(203, 155, 34);
+//   }
 
-  ol {
-    counter-reset: item;
-  }
+//   div[data-rehype-pretty-code-fragment] {
+//     margin: 1rem 0;
+//     background-color: var(--post-element-background-color);
+//     border-radius: 4px;
 
-  & > ol,
-  & > ul {
-    margin-bottom: calc(var(--main-heading-margin) * 0.4);
-  }
+//     counter-reset: codeblock;
+//     line-height: 1;
 
-  li {
-    position: relative;
-    display: block;
-    margin: calc(var(--main-heading-margin) * 0.1) 0;
-    padding-left: 1rem;
-  }
+//     overflow-x: auto;
+//     overflow-y: hidden;
+//     display: grid;
 
-  ul > li {
-    margin-left: 1.5rem;
-    padding-left: 1.3rem;
-  }
+//     pre {
+//       code {
+//         padding: 0;
+//         font-size: calc(var(--main-font-size) * 0.8);
 
-  ul > li > ul > li {
-    margin-left: 0.3rem;
-  }
+//         &::before,
+//         &::after {
+//           content: "";
+//           display: block;
+//           width: 2rem;
+//           padding: 0 0.7rem;
+//           height: 0.65rem;
+//           background-color: var(--code-line-number-background-color);
+//         }
+//         &::before {
+//           border-top-left-radius: 4px;
+//         }
+//         &::after {
+//           border-bottom-left-radius: 4px;
+//         }
+//         .line {
+//           padding-right: 1rem;
 
-  ul > li::before {
-    content: " ";
-    position: absolute;
-    left: 0rem;
-    top: 0.8rem;
-    width: 6px;
-    height: 6px;
-    border-radius: 50%;
-    background-color: ${({ theme }) => theme.textColor};
-  }
+//           &::before {
+//             content: counter(codeblock);
+//             counter-increment: codeblock;
 
-  ol > li::before {
-    content: counters(item, ".") " ";
-    font-weight: 500;
-    margin: 0 0.4rem 0.2rem 0.3rem;
-    counter-increment: item;
-  }
+//             display: inline-block;
 
-  hr {
-    margin: 2rem 0;
-  }
+//             width: 2rem;
+//             padding: 0.3rem 0.4rem;
 
-  a {
-    color: ${({ theme }) => theme.accentColor};
-    transition: all 0.3s ease;
-    border-radius: 4px;
+//             margin-right: 0.9rem;
+//             text-align: right;
 
-    &:hover {
-      text-decoration: none;
-      padding: 0.1rem 0.3rem;
-      margin: -0.1rem -0.3rem;
+//             color: #717171;
+//             background-color: var(--code-line-number-background-color);
+//           }
+//         }
+//       }
+//     }
+//   }
 
-      ${({ theme }) => css`
-        color: ${theme.bgColor};
-        background-color: ${theme.textColor};
-      `}
-    }
-  }
+//   img {
+//     max-width: 100%;
+//     image-resolution: from-image;
+//     display: block;
+//     margin: auto;
+//   }
 
-  .toc {
-    border-left: 2px solid ${({ theme }) => theme.subTextColor};
-    color: ${({ theme }) => theme.textColor};
-    margin-bottom: 2rem;
-    padding: 0.3rem 0.8rem 0.3rem 0.7rem;
-    font-size: calc(var(--main-font-size) * 0.9);
+//   ol {
+//     counter-reset: item;
+//   }
 
-    .toc-link {
-      color: inherit;
-      &:hover {
-        color: ${({ theme }) => theme.bgColor};
-      }
-      &:hover::before {
-        background-color: ${({ theme }) => theme.textColor};
-      }
-    }
-    .toc-level > .toc-item::before {
-      content: counters(item, ".") " ";
-      font-weight: 500;
-    }
-    .toc-level > .toc-item {
-      margin: calc(var(--main-heading-margin) * 0.06) 0;
-    }
-    > .toc-level > .toc-item {
-      padding-left: 0;
-    }
-  }
+//   & > ol,
+//   & > ul {
+//     margin-bottom: calc(var(--main-heading-margin) * 0.4);
+//   }
 
-  em {
-    font-family: "Nanum Myeongjo", serif;
-    font-style: italic;
+//   li {
+//     position: relative;
+//     display: block;
+//     margin: calc(var(--main-heading-margin) * 0.1) 0;
+//     padding-left: 1rem;
+//   }
 
-    &::before {
-      content: "'";
-      margin-left: 0.2rem;
-    }
-    &::after {
-      content: "'";
-      margin-right: 0.2rem;
-    }
-  }
+//   ul > li {
+//     margin-left: 1.5rem;
+//     padding-left: 1.3rem;
+//   }
 
-  iframe {
-    border: 2px solid ${({ theme }) => theme.textColor};
-    border-radius: 10px;
-    margin: 0 auto;
-  }
+//   ul > li > ul > li {
+//     margin-left: 0.3rem;
+//   }
 
-  p[class="iframe-container"] {
-    width: 100%;
-    overflow: auto;
-  }
+//   ul > li::before {
+//     content: " ";
+//     position: absolute;
+//     left: 0rem;
+//     top: 0.8rem;
+//     width: 6px;
+//     height: 6px;
+//     border-radius: 50%;
+//     background-color: var(--text-color);
+//   }
 
-  table {
-    margin: auto;
-    max-width: 600px;
-    border-top: 1px solid ${({ theme }) => theme.textColor};
-    border-bottom: 1px solid ${({ theme }) => theme.textColor};
-    th,
-    td {
-      padding: 0.2rem 3rem;
-      @media (max-width: 800px) {
-        padding: 0.2rem 0.8rem;
-      }
-    }
-    thead {
-      background-color: #9b9b9b6f;
-      font-weight: 700;
-      th {
-        text-align: center;
-      }
-    }
-    tbody {
-      td {
-        text-align: start;
-        padding-left: 0.5rem;
-      }
-    }
-  }
+//   ol > li::before {
+//     content: counters(item, ".") " ";
+//     font-weight: 500;
+//     margin: 0 0.4rem 0.2rem 0.3rem;
+//     counter-increment: item;
+//   }
 
-  figure {
-    margin: 15px 0;
-    figcaption {
-      font-weight: 300;
-      font-size: calc(var(--main-font-size) * 0.8);
-      font-style: italic;
-    }
-  }
+//   hr {
+//     margin: 2rem 0;
+//   }
 
-  .half {
-    display: inline-block;
-    width: calc(50% - 5px);
-  }
-  .half + .half {
-    margin-left: 10px;
-  }
+//   a {
+//     color: var(--accent-color);
+//     transition: all 0.3s ease;
+//     border-radius: 4px;
 
-  blockquote,
-  div[data-rehype-pretty-code-fragment] {
-    @media (max-width: ${MOBILE_BREAKPOINT}) {
-      margin-left: -5vw;
-      margin-right: -5vw;
-      border-radius: 0;
-    }
-  }
-`;
+//     &:hover {
+//       text-decoration: none;
+//       padding: 0.1rem 0.3rem;
+//       margin: -0.1rem -0.3rem;
+
+//       color: var(--background-color);
+//       background-color: var(--text-color);
+//     }
+//   }
+
+//   .toc {
+//     border-left: 2px solid var(--sub-text-color);
+//     color: var(--text-color);
+//     margin-bottom: 2rem;
+//     padding: 0.3rem 0.8rem 0.3rem 0.7rem;
+//     font-size: calc(var(--main-font-size) * 0.9);
+
+//     .toc-link {
+//       color: inherit;
+//       &:hover {
+//         color: var(--background-color);
+//       }
+//       &:hover::before {
+//         background-color: var(--text-color);
+//       }
+//     }
+//     .toc-level > .toc-item::before {
+//       content: counters(item, ".") " ";
+//       font-weight: 500;
+//     }
+//     .toc-level > .toc-item {
+//       margin: calc(var(--main-heading-margin) * 0.06) 0;
+//     }
+//     > .toc-level > .toc-item {
+//       padding-left: 0;
+//     }
+//   }
+
+//   em {
+//     font-family: "Nanum Myeongjo", serif;
+//     font-style: italic;
+
+//     &::before {
+//       content: "'";
+//       margin-left: 0.2rem;
+//     }
+//     &::after {
+//       content: "'";
+//       margin-right: 0.2rem;
+//     }
+//   }
+
+//   iframe {
+//     border: 2px solid var(--text-color);
+//     border-radius: 10px;
+//     margin: 0 auto;
+//   }
+
+//   p[class="iframe-container"] {
+//     width: 100%;
+//     overflow: auto;
+//   }
+
+//   table {
+//     margin: auto;
+//     max-width: 600px;
+//     border-top: 1px solid var(--text-color);
+//     border-bottom: 1px solid var(--text-color);
+//     th,
+//     td {
+//       padding: 0.2rem 3rem;
+//       @media (max-width: 800px) {
+//         padding: 0.2rem 0.8rem;
+//       }
+//     }
+//     thead {
+//       background-color: #9b9b9b6f;
+//       font-weight: 700;
+//       th {
+//         text-align: center;
+//       }
+//     }
+//     tbody {
+//       td {
+//         text-align: start;
+//         padding-left: 0.5rem;
+//       }
+//     }
+//   }
+
+//   figure {
+//     margin: 15px 0;
+//     figcaption {
+//       font-weight: 300;
+//       font-size: calc(var(--main-font-size) * 0.8);
+//       font-style: italic;
+//     }
+//   }
+
+//   .half {
+//     display: inline-block;
+//     width: calc(50% - 5px);
+//   }
+//   .half + .half {
+//     margin-left: 10px;
+//   }
+
+//   blockquote,
+//   div[data-rehype-pretty-code-fragment] {
+//     @media (max-width: 600px) {
+//       margin-left: -5vw;
+//       margin-right: -5vw;
+//       border-radius: 0;
+//     }
+//   }
+// `;
 
 type Props = {
   content: string;
-  className?: string;
 };
 
-function MarkdownBody({ content, className }: Props) {
-  const isDark = useRecoilValue(isDarkAtom);
-
+function MarkdownBody({ content }: Props) {
   return (
-    <MarkdownBodyStyle
-      isDark={isDark}
+    <div
       dangerouslySetInnerHTML={{
         __html: content,
       }}
-      className={className}
+      className='post-content'
     />
   );
 }

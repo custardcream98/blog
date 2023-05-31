@@ -2,7 +2,7 @@ import { Project } from "src/types/resume";
 
 import { ResumeLink, ResumeLinksList, ResumePeriod, S } from "..";
 
-import { PropsWithChildren } from "react";
+import { type PropsWithChildren } from "react";
 
 function Section({ children }: PropsWithChildren) {
   return (

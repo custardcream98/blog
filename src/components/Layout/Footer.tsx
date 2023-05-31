@@ -1,76 +1,72 @@
+import { LinkDecorated } from "src/components/Common";
 import LogoTitleSpan from "src/components/Common/LogoTitleSpan";
-import { LinkDecorated } from "src/components/Common/styledComponents";
 
-import { useLayoutEffect, useState } from "react";
-import styled from "styled-components";
+import { utld } from "utility-class-components";
 
-const Container = styled.footer`
-  width: 85vw;
-  max-width: 800px;
+const Container = utld.footer`
+  print:hidden
 
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
+  w-[85vw]
+  max-w-800
 
-  font-size: 0.9rem;
-  font-weight: 300;
-  margin: 5rem auto 2rem;
+  flex
+  justify-between
+  items-center
 
-  @media (max-width: 800px) {
-    margin-top: 3rem;
-    width: 90vw;
+  text-[0.9rem]
+  font-light
+  mt-20
+  mb-8
+  mx-auto
 
-    flex-direction: column;
-    font-size: 11px;
+  mobile:(
+    flex-col
+    items-start
 
-    align-items: flex-start;
-  }
+    text-[0.6875rem]
+    mt-12
 
-  address {
-    @media (max-width: 800px) {
-      margin: 0.7rem 0 0 0;
-    }
-  }
-  address ul {
-    display: flex;
-  }
-  address ul li {
-    color: ${({ theme }) => theme.subTextColor};
-    font-size: inherit;
-    font-weight: inherit;
-  }
-  address ul li + li {
-    padding-left: 0.7rem;
-  }
-  small {
-    color: ${({ theme }) => theme.subTextColor};
-  }
-
-  @media only print {
-    display: none;
-  }
+    w-[90vw]
+  )
 `;
 
-const StyledLogoTitleSpan = styled(LogoTitleSpan)`
-  display: block;
-  margin-bottom: 0.3rem;
+const Small = utld.small`
+  text-default-sub-light
+  dark:text-default-sub-dark
+`;
+
+const Address = utld.address`
+  mobile:mt-[0.7rem]
+`;
+
+const AddressUl = utld.ul`
+  flex
+
+  [&>li]:(
+    text-default-sub-light
+    dark:text-default-sub-dark
+    text-inherit
+  )
+
+  [&>li+li]:pl-[0.7rem]
+`;
+
+const StyledLogoTitleSpan = utld(LogoTitleSpan)`
+  block
+  mb-[0.3rem]
 `;
 
 function Footer() {
-  const [yearString, setYearString] = useState(2022);
-
-  useLayoutEffect(() => {
-    setYearString(new Date().getFullYear());
-  }, []);
+  const YEAR = new Date().getFullYear();
 
   return (
     <Container>
-      <small>
+      <Small>
         <StyledLogoTitleSpan>shiwoo.dev</StyledLogoTitleSpan>
-        &copy; {yearString} custardcream98. All rights reserved.
-      </small>
-      <address>
-        <ul>
+        &copy; {YEAR} custardcream98. All rights reserved.
+      </Small>
+      <Address>
+        <AddressUl>
           <li>
             <LinkDecorated href='https://github.com/custardcream98' target='_blank'>
               GitHub
@@ -94,8 +90,8 @@ function Footer() {
               RSS
             </LinkDecorated>
           </li>
-        </ul>
-      </address>
+        </AddressUl>
+      </Address>
     </Container>
   );
 }

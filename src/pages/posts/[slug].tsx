@@ -1,6 +1,6 @@
 import Comments from "src/components/Comments";
+import { Container } from "src/components/Common";
 import MarkdownBody from "src/components/Common/MarkdownBody";
-import { Container } from "src/components/Common/styledComponents";
 import Meta from "src/components/Layout/Meta";
 import PostTitle from "src/components/Post/PostTitle";
 import PrevNextPost from "src/components/Post/PrevNextPost";
@@ -12,14 +12,14 @@ import { getAllOgImages, getOgImage } from "src/lib/utils/ogImage";
 import { getAllPosts, getPostBySlug, getPrevNextPosts } from "src/lib/utils/posts";
 import type { PostType } from "src/types/post";
 
-import styled from "styled-components";
+import { utld } from "utility-class-components";
 
-const PostSection = styled.section`
-  width: 100%;
+const PostSection = utld.section`
+  w-full
 `;
 
-const PostContainer = styled(Container)`
-  max-width: 680px;
+const PostContainer = utld(Container)`
+  !max-w-[42.5rem]
 `;
 
 type Props = {
@@ -51,7 +51,7 @@ export default function Posts({ post }: Props) {
           />
           <MarkdownBody content={post.content} />
         </PostSection>
-        <PrevNextPost post={post} />
+        <PrevNextPost {...post} />
         <Comments postTitle={postTitle}>
           <Comments.Title>Comments({comments.length})</Comments.Title>
           <Comments.Form key={postTitle} />

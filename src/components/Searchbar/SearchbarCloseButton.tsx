@@ -2,12 +2,12 @@ import { ResponsiveIconButton } from "src/components/Common/IconButton";
 
 import { cssOutlineOnFocus } from "../Layout/Navigation/styles";
 
-import styled from "styled-components";
+import { utld } from "utility-class-components";
 
-const SearchbarCloseButton = styled(ResponsiveIconButton)`
-  position: absolute;
-  margin-left: 0;
-  right: 0;
+const SearchbarCloseButton = utld(ResponsiveIconButton)`
+  absolute
+  ml-0
+  right-0
 
   ${cssOutlineOnFocus}
 `;

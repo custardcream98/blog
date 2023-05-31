@@ -1,18 +1,14 @@
 import CategoryCard from "src/components/Category/CategoryCard";
-import { Container, Title } from "src/components/Common/styledComponents";
+import { Container, Title } from "src/components/Common";
 import Meta from "src/components/Layout/Meta";
-import categoryTheme from "src/lib/categoryTheme";
+import categoryTheme from "src/constants/categoryTheme";
 import { getPostByCategory } from "src/lib/utils/posts";
 import type PostType from "src/types/post";
 
-import styled from "styled-components";
+import { utld } from "utility-class-components";
 
-const PostContainer = styled(Container)`
-  display: block;
-`;
-
-const PostTitle = styled(Title)`
-  display: inline-block;
+const PostTitle = utld(Title)`
+  inline-block
 `;
 
 type Props = {
@@ -24,14 +20,14 @@ export default function Post({ category, posts }: Props) {
   return (
     <>
       <Meta type='default' title={`카테고리 ${category}`} tags={[category]} />
-      <PostContainer>
+      <Container>
         <PostTitle>{`<${category} />`}</PostTitle>
         <ol>
           {posts.map((post) => (
             <CategoryCard key={post.slug} {...post} />
           ))}
         </ol>
-      </PostContainer>
+      </Container>
     </>
   );
 }

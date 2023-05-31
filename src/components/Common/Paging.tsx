@@ -1,61 +1,14 @@
 import Link from "next/link";
 import { Children } from "react";
 import { MdOutlineKeyboardArrowLeft, MdOutlineKeyboardArrowRight } from "react-icons/md";
-import styled, { useTheme } from "styled-components";
-
-const Container = styled.nav`
-  position: relative;
-  display: flex;
-  justify-content: center;
-`;
-
-const StyledLink = styled(Link)`
-  display: inline-block;
-  margin: 0 7px;
-  line-height: 24px;
-  &:hover {
-    text-decoration: underline;
-    cursor: pointer;
-  }
-  @media (max-width: 600px) {
-    font-size: 0.9rem;
-  }
-`;
-
-const PagenumList = styled.ol`
-  display: flex;
-  align-items: center;
-`;
-
-const LeftArrow = styled(StyledLink)`
-  position: absolute;
-  left: -30px;
-`;
-
-const RightArrow = styled(StyledLink)`
-  position: absolute;
-  right: -30px;
-`;
-
-const Pagenum = styled(StyledLink)`
-  display: inline-block;
-  color: ${(props) => props.theme.textColor};
-  font-weight: 300;
-`;
-
-const SelectedPagenum = styled(Pagenum)`
-  font-weight: 500;
-  scale: 1.4;
-`;
+import { utld } from "utility-class-components";
 
 type Props = {
   pageScale: number;
   currentPage: number;
 };
 
-function Paging({ pageScale, currentPage }: Props) {
-  const theme = useTheme();
-
+export default function Paging({ pageScale, currentPage }: Props) {
   return (
     <Container>
       {currentPage !== 1 && (
@@ -66,7 +19,10 @@ function Paging({ pageScale, currentPage }: Props) {
           }}
         >
           <span className='sr-only'>이전 글</span>
-          <MdOutlineKeyboardArrowLeft color={theme.textColor} size='1.5rem' />
+          <MdOutlineKeyboardArrowLeft
+            className='text-default-light dark:text-default-dark'
+            size='1.5rem'
+          />
         </LeftArrow>
       )}
       <PagenumList>
@@ -104,11 +60,59 @@ function Paging({ pageScale, currentPage }: Props) {
           }}
         >
           <span className='sr-only'>다음 글</span>
-          <MdOutlineKeyboardArrowRight color={theme.textColor} size='1.5rem' />
+          <MdOutlineKeyboardArrowRight
+            className='text-default-light dark:text-default-dark'
+            size='1.5rem'
+          />
         </RightArrow>
       )}
     </Container>
   );
 }
 
-export default Paging;
+const Container = utld.nav`
+  relative
+
+  flex
+  justify-center
+`;
+
+const StyledLink = utld(Link)`
+  inline-block
+  
+  mx-[0.4375rem]
+  leading-[1.5rem]
+
+  hover:underline
+
+  mobile:(text-[0.9rem] text-red)
+`;
+
+const PagenumList = utld.ol`
+  flex
+  items-center
+`;
+
+const LeftArrow = utld(StyledLink)`
+  absolute
+  left-[-1.875rem]
+`;
+
+const RightArrow = utld(StyledLink)`
+  absolute
+  right-[-1.875rem]
+`;
+
+const Pagenum = utld(StyledLink)`
+  inline-block
+
+  text-default-light
+  dark:text-default-dark
+  
+  font-light
+`;
+
+const SelectedPagenum = utld(Pagenum)`
+  font-medium
+  scale-[1.4]
+`;

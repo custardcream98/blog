@@ -1,20 +1,24 @@
 import Button from "src/components/Common/Button";
 import useCommentForm from "src/lib/hook/useCommentForm";
 
-import React, { useCallback, useState } from "react";
-import styled, { css } from "styled-components";
+import { useCallback, useState } from "react";
+import { ud, utld } from "utility-class-components";
 
 type Props = {
   height?: string;
-  isFormOpened?: boolean;
   isForEdit?: boolean;
 };
-function CommentForm({ height, isFormOpened = true, isForEdit = false }: Props) {
+export default function CommentForm({ height, isForEdit = false }: Props) {
   const { usernameRef, passwordRef, commentRef, isLoading, handleCommentSubmit } =
     useCommentForm(isForEdit);
 
   return (
-    <StyledForm formHeight={height} hidden={!isFormOpened} onSubmit={handleCommentSubmit}>
+    <StyledForm
+      style={{
+        height: height,
+      }}
+      onSubmit={handleCommentSubmit}
+    >
       <label className='sr-only' htmlFor='input-id'>
         아이디를 입력해주세요.
       </label>
@@ -48,7 +52,9 @@ function CommentForm({ height, isFormOpened = true, isForEdit = false }: Props) 
         댓글을 입력해주세요.
       </label>
       <TextareaContent
-        formHeight={height}
+        style={{
+          height: height ? "calc(100% - 31px)" : "117px",
+        }}
         ref={commentRef}
         id='textarea-comment'
         placeholder='댓글을 입력해주세요.'
@@ -58,21 +64,21 @@ function CommentForm({ height, isFormOpened = true, isForEdit = false }: Props) 
         spellCheck={false}
         required
       />
-      <SubmitCommentButton type='submit' width='66px' height='30px' isLoading={isLoading}>
+      <SubmitCommentButton type='submit' width='70px' height='30px' isLoading={isLoading}>
         {isForEdit ? "수정하기" : "댓글 달기"}
       </SubmitCommentButton>
     </StyledForm>
   );
 }
 
-function CommentFormWithOpenButton() {
+export function CommentFormWithOpenButton() {
   const [isFormOpened, setIsFormOpened] = useState(false);
 
   const openCommentForm = useCallback(() => setIsFormOpened(true), []);
 
   return (
     <>
-      <CommentForm isFormOpened={isFormOpened} />
+      {isFormOpened && <CommentForm />}
       <FormOpenButton type='button' hidden={isFormOpened} onClick={openCommentForm}>
         댓글을 입력해주세요.
       </FormOpenButton>
@@ -80,106 +86,88 @@ function CommentFormWithOpenButton() {
   );
 }
 
-const cssRoundedBox = css`
-  border: 1px solid ${({ theme }) => theme.subTextColor};
-  color: ${({ theme }) => theme.textColor};
-  border-radius: 5px;
+const roundedBoxStyle = ud`
+  border
+  border-solid
+  border-default-sub-light
+  dark:border-default-sub-dark
+  text-default-light
+  dark:text-default-dark
+
+  rounded-[0.3125rem]
 `;
 
-type StyledFormProps = {
-  formHeight?: string;
-};
-const StyledForm = styled.form<StyledFormProps>`
-  position: relative;
+const StyledForm = utld.form`
+  relative
 
-  width: 100%;
-  height: ${({ formHeight }) => (formHeight ? formHeight : "150px")};
+  w-full
 
-  overflow: hidden;
+  overflow-hidden
 
-  background-color: ${({ theme }) => theme.subTextColor};
+  bg-default-sub-light
+  dark:bg-default-sub-dark
 
-  ${cssRoundedBox}
+  ${roundedBoxStyle}
 `;
 
-const FormOpenButton = styled.button`
-  width: 100%;
-  height: 50px;
-  font-family: ${({ theme }) => theme.mainFont};
-  font-weight: 300;
+const FormOpenButton = utld.button`
+  w-full
+  h-[3.125rem]
+  font-sans
+  font-light
 
-  cursor: pointer;
-
-  ${cssRoundedBox}
+  ${roundedBoxStyle}
 `;
 
-const cssEditable = css`
-  padding: 0.5rem;
+const editableStyle = ud`
+  p-2
 
-  ${({ theme }) => css`
-    font-family: ${theme.mainFont};
-    background-color: ${theme.bgColor};
-    color: ${theme.textColor};
+  text-[0.8rem]
+  placeholder:text-[0.8rem]
+  placeholder:font-medium
 
-    :-webkit-autofill,
-    :-webkit-autofill:hover,
-    :-webkit-autofill:focus,
-    :-webkit-autofill:active {
-      -webkit-box-shadow: 0 0 0 30px ${theme.bgColor} inset !important;
-      -webkit-text-fill-color: ${theme.textColor} !important;
-    }
+  font-sans
+  bg-bg-light
+  text-default-light
 
-    :focus {
-      outline: 2px solid ${theme.accentColor};
-      outline-offset: -3px;
-      border-radius: 5px;
-    }
-  `}
+  dark:(
+    bg-bg-dark
+    text-default-dark
+  )
 `;
 
-const InputUsername = styled.input`
-  width: calc(50% - 0.5px);
-  height: 30px;
-  ${cssEditable}
-`;
-const InputPassword = styled(InputUsername)`
-  margin-left: 1px;
+const InputUsername = utld.input`
+  w-[calc(50%-0.03125rem)]
+  h-[1.875rem]
+
+  ${editableStyle}
 `;
 
-type TextareaContentProps = {
-  formHeight?: string;
-};
-const TextareaContent = styled.textarea<TextareaContentProps>`
-  display: block;
-  margin-top: 1px;
-  ${({ formHeight }) =>
-    formHeight
-      ? css`
-          height: calc(100% - 31px);
-        `
-      : css`
-          height: 117px;
-        `};
-  width: 100%;
-
-  resize: none;
-
-  font-size: 0.9rem;
-  line-height: 1.4;
-  font-weight: 300;
-
-  @media (max-width: 780px) {
-    font-size: 0.8rem;
-  }
-
-  ${cssEditable}
+const InputPassword = utld(InputUsername)`
+  ml-[1px]
 `;
 
-const SubmitCommentButton = styled(Button)`
-  position: absolute;
-  right: 10px;
-  bottom: 10px;
+const TextareaContent = utld.textarea`
+  block
+  mt-[1px]
+  w-full
+
+  resize-none
+
+  text-[0.9rem]
+  leading-[1.4]
+  font-light
+
+  mobile:text-[0.8rem]
+
+  ${editableStyle}
 `;
 
-export { CommentFormWithOpenButton };
-export default CommentForm;
+const SubmitCommentButton = utld(Button)`
+  absolute
+
+  right-[0.3125rem]
+  bottom-[0.3125rem]
+
+  text-[0.9rem]
+`;

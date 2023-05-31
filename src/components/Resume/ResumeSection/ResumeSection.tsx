@@ -4,7 +4,7 @@ import { ResumeLink, ResumeLinksList, ResumePeriod, S } from "..";
 
 import { SectionItemDescriptionList, SectionItemP, SectionItemTitle } from "./styles";
 
-import { PropsWithChildren } from "react";
+import { type PropsWithChildren } from "react";
 
 function Section({ sectionTitle, children }: PropsWithChildren<{ sectionTitle: string }>) {
   return (

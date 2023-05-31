@@ -1,20 +1,19 @@
 import PrintSvg from "src/components/Common/Svgs/PrintSvg";
 import SvgContainer from "src/components/Common/Svgs/SvgContainer";
-import { isDarkAtom } from "src/lib/atoms";
 import { setIsDarkmodeActivatedOnLocal } from "src/lib/localStorage";
 
 import { iconClickableStyle } from "../ResumeLink";
 import { ResumeLink, S } from "..";
 
-import { useRecoilState } from "recoil";
-import styled from "styled-components";
+import { utld } from "utility-class-components";
 
 function IntroduceSection() {
-  const [isDark, setIsDark] = useRecoilState(isDarkAtom);
-
   const handlePrint = async () => {
+    const $root = document.documentElement;
+    const isDark = $root.classList.contains("dark");
+
     if (isDark) {
-      setIsDark(false);
+      $root.classList.remove("dark");
       setIsDarkmodeActivatedOnLocal(false);
 
       await new Promise((resolve) => setTimeout(resolve, 500));
@@ -52,9 +51,8 @@ function IntroduceSection() {
           <ResumeLink name='블로그' url='https://shiwoo.dev' />
         </li>
       </ContactList>
-
       <PrintButtonWrapper>
-        <button type='button' onClick={handlePrint}>
+        <button type='button' onClick={handlePrint} className={iconClickableStyle}>
           <SvgContainer svgWidth='0.95rem' svgHeight='0.95rem'>
             <PrintSvg />
           </SvgContainer>
@@ -65,61 +63,49 @@ function IntroduceSection() {
   );
 }
 
-const IntroduceP = styled.p`
-  margin-top: 1.2rem;
-  line-height: 1.7;
-  font-weight: 300;
-  letter-spacing: 0.03rem;
+const IntroduceP = utld.p`
+  mt-[1.2rem]
+  leading-[1.7]
+  font-light
+  tracking-[0.03rem]
 
-  strong {
-    font-weight: 400;
-    color: ${({ theme }) => theme.resumeStrongTextColor};
-  }
+  [&>strong]:(
+    font-normal
+    text-resume-text-strong-light
+    dark:text-resume-text-strong-dark
+  )
 `;
 
-const ContactList = styled.ul`
-  margin-left: auto;
-  margin-top: 2.5rem;
+const ContactList = utld.ul`
+  ml-auto
+  mt-10
 
-  width: fit-content;
+  w-fit
 
-  font-weight: 300;
+  font-light
 
-  > li {
-    display: inline-block;
-    + li {
-      margin-left: 1rem;
-    }
-    :last-child {
-      display: none;
-    }
-  }
+  [&>li]:inline-block
+  [&>li+li]:ml-4
+  [&>li:last-child]:hidden
 
-  @media only print {
-    margin-top: 1rem;
-    li:last-child {
-      display: inline-block;
-    }
-  }
+  print:(
+    mt-4
+    [&>li:last-child]:inline-block
+  )
 `;
 
-const PrintButtonWrapper = styled.aside`
-  width: fit-content;
-  margin-left: auto;
-  margin-top: 0.5rem;
+const PrintButtonWrapper = utld.aside`
+  w-fit
+  ml-auto
+  mt-2
 
-  button {
-    padding: 0;
-    cursor: pointer;
+  [&_button]:(
+    p-0
+    text-resume-text-light
+    dark:text-resume-text-dark
+  )
 
-    color: ${({ theme }) => theme.resumeTextColor};
-
-    ${iconClickableStyle}
-  }
-
-  @media only print {
-    display: none;
-  }
+  print:hidden
 `;
 
 export default IntroduceSection;

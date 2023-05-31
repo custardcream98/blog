@@ -1,18 +1,17 @@
 import CategoryCard from "src/components/Category/CategoryCard";
-import { Container, Title } from "src/components/Common/styledComponents";
+import { Container, Title } from "src/components/Common";
 import Meta from "src/components/Layout/Meta";
 import { getPostBySeries, getSeries } from "src/lib/utils/posts";
 import PostType from "src/types/post";
 
-import React from "react";
-import styled from "styled-components";
+import { utld } from "utility-class-components";
 
-const SeriesContainer = styled(Container)`
-  display: block;
+const SeriesContainer = utld(Container)`
+  !block
 `;
 
-const SeriesTitle = styled(Title)`
-  display: inline-block;
+const SeriesTitle = utld(Title)`
+  inline-block
 `;
 
 type Props = {

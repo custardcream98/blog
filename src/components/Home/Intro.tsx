@@ -3,7 +3,7 @@ import Image from "next/image";
 function Intro() {
   return (
     <div className='mx-auto mb-[2rem] mt-[5rem] flex w-[90vw] max-w-800 flex-col'>
-      <p className='font-title text-[2rem] font-semibold leading-1.2 pc:text-[3.5rem]'>
+      <p className='font-title text-[2rem] font-semibold leading-[1.3] pc:text-[3.5rem]'>
         Dedicated to{" "}
         <em className='text-gradient-intro h-[2.5rem] animate-bg-gradient pc:h-auto'>Coding.</em>
       </p>

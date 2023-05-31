@@ -1,82 +1,11 @@
+import { LinkDecorated } from "src/components/Common";
 import DateSpan from "src/components/Common/DateSpan";
-import { LinkDecorated } from "src/components/Common/styledComponents";
 
-import React from "react";
-import styled from "styled-components";
+import { ud, utld } from "utility-class-components";
 
 type PagenationInfo = {
-  index: number;
-  maxPostCount: number;
+  isLastPage: boolean;
 };
-
-const ContentContainer = styled.li<PagenationInfo>`
-  width: 100%;
-  margin-bottom: ${(props) => (props.index === props.maxPostCount - 1 ? "20px" : "0")};
-`;
-
-const Title = styled.h3`
-  display: inline-block;
-  width: 40%;
-  height: 100%;
-  padding: 20px 0;
-  margin-right: 1rem;
-`;
-
-const ExcerptLink = styled(LinkDecorated)<PagenationInfo>`
-  display: inline-block;
-  width: calc(60% - 1rem);
-  height: 100%;
-  vertical-align: top;
-  padding: 20px 0;
-  font-size: 1rem;
-  font-weight: 300;
-  line-height: 1.5;
-  border-bottom: ${(props) =>
-    props.index === props.maxPostCount - 1 ? "none" : "1px solid " + props.theme.subTextColor};
-`;
-
-const Excerpt = styled.p`
-  width: 100%;
-
-  /*
-    Multi Line truncate
-  */
-  display: -webkit-box;
-  -webkit-box-orient: vertical;
-  overflow: hidden;
-  text-overflow: ellipsis;
-  -webkit-line-clamp: 3;
-  font-size: 16px;
-  line-height: 1.5;
-  height: 72px;
-
-  @media (max-width: 780px) {
-    font-size: 13px;
-    height: 59px;
-  }
-`;
-
-const DateSpanForHeroPost = styled(DateSpan)`
-  display: block;
-`;
-
-const TitleLink = styled(LinkDecorated)`
-  /*
-    Multi Line truncate
-  */
-  display: -webkit-box;
-  -webkit-box-orient: vertical;
-  overflow: hidden;
-  text-overflow: ellipsis;
-  -webkit-line-clamp: 2;
-  font-size: 18px;
-  line-height: 1.5;
-  max-height: 54px;
-
-  @media (max-width: 780px) {
-    font-size: 15px;
-  }
-`;
 
 type Props = {
   index: number;
@@ -87,18 +16,87 @@ type Props = {
   slug: string;
 };
 
-function HeroPost({ index, maxPostCount, title, date, excerpt, slug }: Props) {
+export default function HeroPost({ index, maxPostCount, title, date, excerpt, slug }: Props) {
+  const isLastPage = index === maxPostCount - 1;
+
   return (
-    <ContentContainer index={index} maxPostCount={maxPostCount}>
-      <Title>
-        <TitleLink href={`/posts/${slug}`}>{title}</TitleLink>
-        <DateSpanForHeroPost date={date} />
-      </Title>
-      <ExcerptLink index={index} maxPostCount={maxPostCount} href={`/posts/${slug}`}>
-        <Excerpt>{excerpt}</Excerpt>
-      </ExcerptLink>
+    <ContentContainer isLastPage={isLastPage}>
+      <LinkDecorated
+        href={{
+          pathname: "/posts/[slug]",
+          query: { slug },
+        }}
+      >
+        <Title>
+          <TitleText>{title}</TitleText>
+          <DateSpanForHeroPost date={date} />
+        </Title>
+        <Excerpt isLastPage={isLastPage}>
+          <ExcerptText>{excerpt}</ExcerptText>
+        </Excerpt>
+      </LinkDecorated>
     </ContentContainer>
   );
 }
 
-export default HeroPost;
+const ContentContainer = utld.li<PagenationInfo>`
+  w-full
+  ${({ isLastPage }) => (isLastPage ? "mb-5" : "")}
+`;
+
+const Title = utld.h3`
+  inline-block
+  w-2/5
+  h-full
+  py-5
+  mr-4
+`;
+
+const Excerpt = utld.span<PagenationInfo>`
+  inline-block
+  w-[calc(60%-1rem)]
+  h-full
+  align-top
+  py-5
+  text-[1rem]
+  font-light
+  leading-[1.5]
+  
+  ${({ isLastPage }) =>
+    !isLastPage &&
+    ud`
+      border-b
+      border-solid
+      border-default-sub-light
+      dark:border-default-sub-dark
+    `}
+`;
+
+const ExcerptText = utld.p`
+  w-full
+
+  line-clamp-3
+  overrflow-elipsis
+  text-[1rem]
+  leading-[1.5]
+  h-[4.5rem]  
+
+  mobile:(
+    text-[0.8125rem]
+    h-[3.6875rem] 
+  )
+`;
+
+const DateSpanForHeroPost = utld(DateSpan)`
+  block
+`;
+
+const TitleText = utld.span`
+  line-clamp-2
+  overrflow-elipsis
+  text-[1.125rem]
+  leading-[1.5]
+  max-h-[3.375rem]
+
+  mobile:text-[0.9375rem]
+`;

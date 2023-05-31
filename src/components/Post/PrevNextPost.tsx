@@ -1,172 +1,77 @@
 import type PostType from "src/types/post";
 
 import Link from "next/link";
-import styled, { css } from "styled-components";
+import { utld } from "utility-class-components";
 
-type StyleProps = {
-  isPrevOnly: boolean;
-  isNextOnly: boolean;
-};
+type PrevNextPostFormationType = "both" | "prev-only" | "next-only";
 
-const Container = styled.aside<StyleProps>`
-  display: flex;
-  width: 100%;
-  margin: 2rem 0;
-  justify-content: space-between;
+const Container = utld.aside<{
+  formation: PrevNextPostFormationType;
+}>`
+  w-full
+  mt-24
+  mb-10
 
-  & div {
-    width: 50%;
-  }
+  flex
+  justify-between
+  gap-6
 
-  & div:first-child {
-    ${({ isNextOnly, theme }) =>
-      !isNextOnly
-        ? css`
-            border: 1px solid ${theme.textColor};
-          `
-        : css`
-            border: none;
-          `}
-    border-radius: 4px 0 0 4px;
-  }
-  & div:last-child {
-    ${({ isPrevOnly, theme }) =>
-      !isPrevOnly
-        ? css`
-            border: 1px solid ${theme.textColor};
-          `
-        : css`
-            border: none;
-          `}
-    ${({ isNextOnly }) =>
-      !isNextOnly &&
-      css`
-        border-left: none;
-      `};
-    border-radius: 0 4px 4px 0;
-    text-align: end;
-  }
-
-  @media (max-width: 800px) {
-    flex-direction: column;
-    & div {
-      width: 100%;
-      height: 4.5rem;
-      justify-content: center;
-    }
-    & div:first-child {
-      border-radius: 4px 4px 0 0;
-    }
-    & div:last-child {
-      ${({ isPrevOnly, theme }) =>
-        !isPrevOnly
-          ? css`
-              border: 1px solid ${theme.textColor};
-            `
-          : css`
-              border: none;
-            `}
-      ${({ isNextOnly }) =>
-        !isNextOnly &&
-        css`
-          border-top: none;
-        `};
-
-      border-radius: 0 0 4px 4px;
-      text-align: end;
-    }
-  }
+  ${({ formation }) => formation === "next-only" && "text-right"}
 `;
 
-const LinkWrapper = styled.div`
-  display: flex;
-  flex-direction: column;
-  padding: 1rem;
-  & a {
-    word-break: keep-all;
-  }
-  & a:first-child {
-    font-size: 0.8rem;
-  }
-  & a:last-child {
-    text-overflow: ellipsis;
-    margin-top: 0.4rem;
-    font-size: 0.9rem;
-    line-height: 1.3;
-  }
-  &:hover {
-    cursor: pointer;
-    color: ${(props) => props.theme.accentColor};
-    background-color: ${(props) => props.theme.subTextColor};
-    transition: all 150ms linear;
-  }
-  @media (max-width: 800px) {
-    padding: 0.5rem;
-    & a:first-child {
-      font-size: 0.7rem;
-    }
-    & a:last-child {
-      text-overflow: ellipsis;
-      margin-top: 0.4rem;
-      font-size: 0.8rem;
-      line-height: 1.3;
-    }
-  }
+const LinkWrapper = utld(Link)`
+  w-full
+  inline-block
+
+  break-keep
+
+  transition-[color]
+
+  [&+&]:text-right
+
+  [&>span:first-child]:(
+    text-[0.8rem]
+    mb-1
+    block
+  )
+  [&>span:last-child]:text-[1rem]
+
+  hover:(
+    text-accent-light
+    dark:text-accent-dark
+  )
 `;
 
-type Props = {
-  post: PostType;
-};
+type Props = PostType;
 
-function PrevNextPost({ post }: Props) {
+export default function PrevNextPost({ prevSlug, prevTitle, nextSlug, nextTitle }: Props) {
+  const formation: PrevNextPostFormationType =
+    prevTitle && nextTitle ? "both" : prevTitle ? "prev-only" : "next-only";
+
   return (
-    <Container isPrevOnly={!post.nextTitle} isNextOnly={!post.prevTitle}>
-      {post.prevTitle ? (
-        <LinkWrapper>
-          <Link
-            href={{
-              pathname: "/posts/[slug]",
-              query: { slug: post.prevSlug },
-            }}
-          >
-            ← 이전글
-          </Link>
-          <Link
-            href={{
-              pathname: "/posts/[slug]",
-              query: { slug: post.prevSlug },
-            }}
-          >
-            {post.prevTitle}
-          </Link>
+    <Container formation={formation}>
+      {prevTitle && (
+        <LinkWrapper
+          href={{
+            pathname: "/posts/[slug]",
+            query: { slug: prevSlug },
+          }}
+        >
+          <span>← 이전글</span>
+          <span>{prevTitle}</span>
         </LinkWrapper>
-      ) : (
-        <div></div>
       )}
-      {post.nextTitle ? (
-        <LinkWrapper>
-          <Link
-            href={{
-              pathname: "/posts/[slug]",
-              query: { slug: post.nextSlug },
-            }}
-          >
-            다음글 →
-          </Link>
-          <Link
-            href={{
-              pathname: "/posts/[slug]",
-              query: { slug: post.nextSlug },
-            }}
-          >
-            {post.nextTitle}
-          </Link>
+      {nextTitle && (
+        <LinkWrapper
+          href={{
+            pathname: "/posts/[slug]",
+            query: { slug: nextSlug },
+          }}
+        >
+          <span>다음글 →</span>
+          <span>{nextTitle}</span>
         </LinkWrapper>
-      ) : (
-        <div></div>
       )}
     </Container>
   );
 }
-
-export default PrevNextPost;

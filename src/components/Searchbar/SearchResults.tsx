@@ -6,19 +6,19 @@ import SearchResultCard, {
 } from "./SearchResultCard";
 
 import type { PropsWithChildren } from "react";
-import styled from "styled-components";
+import { utld } from "utility-class-components";
 
-const ResultsWrapper = styled.ol`
-  position: absolute;
-  width: 100%;
-  max-height: calc(100vh - 80px);
-  overflow-y: scroll;
-  top: 60px;
-  background: ${({ theme }) => theme.postElementBackgroundColor};
-  box-shadow: ${({ theme }) => theme.subTextColor} 0px 1px 8px 0px;
+const ResultsWrapper = utld.ol`
+  absolute
+  w-full
+  max-h-[calc(100vh-80px)]
+  overflow-y-scroll
+  top-[3.75rem]
+  bg-post-element-bg-light
+  dark:bg-post-element-bg-dark
 
-  padding: 0 15px;
-  border-radius: 10px;
+  px-[0.9375rem]
+  rounded-lg
 `;
 
 function SearchResults({ children, ...props }: PropsWithChildren) {

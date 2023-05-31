@@ -4,9 +4,10 @@ import useViewCount from "src/lib/hook/useViewCount";
 import { IconContext } from "react-icons";
 import { BsHeart, BsHeartFill } from "react-icons/bs";
 import { HiEye } from "react-icons/hi";
-import styled, { useTheme } from "styled-components";
+import { utld } from "utility-class-components";
 
-const HEART_COLOR = "#c33434";
+const HEART_COLOR = "text-[#c33434]";
+const SUB_TEXT_COLOR = "text-default-sub-light dark:text-default-sub-dark";
 const LIKE_ICON_STYLE_CONTEXT = {
   size: "1em",
   style: {
@@ -15,46 +16,46 @@ const LIKE_ICON_STYLE_CONTEXT = {
   },
 };
 
-const Container = styled.div`
-  display: flex;
-  align-items: center;
-  height: 3.643rem;
+const Container = utld.div`
+  flex
+  items-center
+  h-[3.643rem]
 `;
 
-const CounterContainer = styled.em`
-  margin-left: 0.5rem;
-  display: flex;
-  align-items: center;
+const CounterContainer = utld.em`
+  ml-2
+  flex
+  items-center
 `;
 
 type LikeValueProps = {
   isLiked: boolean;
 };
 
-const LikeBtn = styled.button<LikeValueProps>`
-  margin-left: 1rem;
-  padding: 0.2rem 0 0 0;
-  display: flex;
-  align-items: center;
-  background-color: transparent;
-  border: none;
-  color: ${({ isLiked, theme }) => (isLiked ? HEART_COLOR : theme.subTextColor)};
-  cursor: pointer;
+const LikeBtn = utld.button<LikeValueProps>`
+  ml-4
+  pt-[0.2rem]
+  flex
+  items-center
+  bg-transparent
+  border-none
+  
+  ${({ isLiked }) => (isLiked ? HEART_COLOR : SUB_TEXT_COLOR)}
 `;
 
-const Value = styled.span`
-  margin-left: 0.3rem;
-  vertical-align: center;
-  font-size: 1rem;
-  font-weight: 300;
+const Value = utld.span`
+  ml-[0.3rem]
+  text-[1rem]
+  font-light
 `;
 
-const CounterValue = styled(Value)`
-  color: ${({ theme }) => theme.subTextColor};
+const CounterValue = utld(Value)`
+  text-default-sub-light
+  dark:text-default-sub-dark
 `;
 
-const LikeValue = styled(Value)<LikeValueProps>`
-  color: ${({ isLiked, theme }) => (isLiked ? HEART_COLOR : theme.subTextColor)};
+const LikeValue = utld(Value)<LikeValueProps>`
+ ${({ isLiked }) => (isLiked ? HEART_COLOR : SUB_TEXT_COLOR)}
 `;
 
 type Props = {
@@ -64,20 +65,19 @@ type Props = {
 function ViewsLikesCounter({ title }: Props) {
   const viewCount = useViewCount(title);
   const { likeCount, isLiked, onLikeClick } = useLikeCount(title);
-  const theme = useTheme();
 
   return (
     <Container>
       <CounterContainer>
-        <HiEye title='조회수' size={15} color={theme.subTextColor} />
+        <HiEye title='조회수' size={15} className={SUB_TEXT_COLOR} />
         <CounterValue>{viewCount}</CounterValue>
       </CounterContainer>
       <LikeBtn type='button' onClick={onLikeClick} isLiked={isLiked}>
         <IconContext.Provider value={LIKE_ICON_STYLE_CONTEXT}>
           {isLiked ? (
-            <BsHeartFill title='좋아요 버튼' color={HEART_COLOR} />
+            <BsHeartFill title='좋아요 버튼' className={HEART_COLOR} />
           ) : (
-            <BsHeart title='좋아요 버튼' color={theme.subTextColor} />
+            <BsHeart title='좋아요 버튼' className={SUB_TEXT_COLOR} />
           )}
         </IconContext.Provider>
         <LikeValue isLiked={isLiked}>{likeCount}</LikeValue>

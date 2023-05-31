@@ -5,7 +5,7 @@ import CommentEditorStateContextProvider from "./CommentEditor/context";
 import CommentEditor from "./CommentEditor";
 import { CommentDataContextProvider } from "./context";
 
-import styled from "styled-components";
+import { utld } from "utility-class-components";
 
 type UserInfoProps = {
   username: string;
@@ -21,7 +21,13 @@ function UserInfo({ username, createdAt }: UserInfoProps) {
   );
 }
 
-function CommentCard({ commentId, comment, createdAt, username, password }: ICommentDataProps) {
+export default function CommentCard({
+  commentId,
+  comment,
+  createdAt,
+  username,
+  password,
+}: ICommentDataProps) {
   return (
     <CommentDataContextProvider
       commentId={commentId}
@@ -43,61 +49,54 @@ function CommentCard({ commentId, comment, createdAt, username, password }: ICom
   );
 }
 
-const Wrapper = styled.li`
-  position: relative;
+const Wrapper = utld.li`
+  relative
+  py-6
 
-  padding: 1.5rem 0;
+  border-b
+  border-solid
+  border-default-sub-light
+  dark:border-default-sub-dark
 
-  border-bottom: 1px solid ${({ theme }) => theme.subTextColor};
-  &:last-child {
-    /** :not() selector를 사용해도 됨 */
-    border: none;
-  }
+  overflow-hidden
 
-  overflow: hidden;
+  last:border-none
 `;
 
-const Content = styled.p`
-  font-size: 0.9rem;
-  line-height: 1.4;
-  font-weight: 300;
+const Content = utld.p`
+  text-[0.9rem]
+  leading-[1.4]
+  font-light
 
-  @media (max-width: 780px) {
-    font-size: 0.8rem;
-  }
+  mobile:text-[0.8rem]
 `;
 
-const UserInfoWrapper = styled.p`
-  flex: 1;
+const UserInfoWrapper = utld.p`
+  flex-1
 `;
 
-const Username = styled.strong`
-  display: block;
+const Username = utld.strong`
+  block
 
-  width: 100%;
-  font-size: 0.9rem;
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
+  w-full
+  text-[0.9rem]
+  whitespace-nowrap
+  overflow-hidden
+  overflow-ellipsis
 
-  @media (max-width: 780px) {
-    font-size: 0.8rem;
-  }
+  mobile:text-[0.8rem]
 `;
 
-const CommentDate = styled(DateSpan)`
-  font-size: 0.6rem;
-  @media (max-width: 780px) {
-    font-size: 0.5rem;
-  }
+const CommentDate = utld(DateSpan)`
+  text-[0.6rem]
+  mobile:text-[0.5rem]
 `;
 
-const CommentTopWrapper = styled.div`
-  display: flex;
+const CommentTopWrapper = utld.div`
+  flex
 
-  justify-content: space-between;
-  align-items: center;
-  margin-bottom: 0.5rem;
+  justify-between
+  items-center
+
+  mb-2
 `;
-
-export default CommentCard;

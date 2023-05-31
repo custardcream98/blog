@@ -3282,11 +3282,6 @@ gzip-size@^6.0.0:
   dependencies:
     duplexer "^0.1.2"
 
-hamt_plus@1.0.2:
-  version "1.0.2"
-  resolved "https://registry.yarnpkg.com/hamt_plus/-/hamt_plus-1.0.2.tgz#e21c252968c7e33b20f6a1b094cd85787a265601"
-  integrity sha512-t2JXKaehnMb9paaYA7J0BX8QQAY8lwfQ9Gjf4pg/mk4krt+cmwmU652HOoWonf+7+EQV97ARPMhhVgU1ra2GhA==
-
 has-bigints@^1.0.1, has-bigints@^1.0.2:
   version "1.0.2"
   resolved "https://registry.yarnpkg.com/has-bigints/-/has-bigints-1.0.2.tgz#0871bd3e3d51626f6ca0966668ba35d5602d6eaa"
@@ -5300,18 +5295,6 @@ readdirp@~3.6.0:
   dependencies:
     picomatch "^2.2.1"
 
-reading-time@^1.5.0:
-  version "1.5.0"
-  resolved "https://registry.yarnpkg.com/reading-time/-/reading-time-1.5.0.tgz#d2a7f1b6057cb2e169beaf87113cc3411b5bc5bb"
-  integrity sha512-onYyVhBNr4CmAxFsKS7bz+uTLRakypIe4R+5A824vBSkQy/hB3fZepoVEf8OVAxzLvK+H/jm9TzpI3ETSm64Kg==
-
-recoil@^0.7.4:
-  version "0.7.6"
-  resolved "https://registry.yarnpkg.com/recoil/-/recoil-0.7.6.tgz#75297ecd70bbfeeb72e861aa6141a86bb6dfcd5e"
-  integrity sha512-hsBEw7jFdpBCY/tu2GweiyaqHKxVj6EqF2/SfrglbKvJHhpN57SANWvPW+gE90i3Awi+A5gssOd3u+vWlT+g7g==
-  dependencies:
-    hamt_plus "1.0.2"
-
 regenerator-runtime@^0.13.11:
   version "0.13.11"
   resolved "https://registry.yarnpkg.com/regenerator-runtime/-/regenerator-runtime-0.13.11.tgz#f6dca3e7ceec20590d07ada785636a90cdca17f9"
@@ -6221,10 +6204,10 @@ util-deprecate@^1.0.1, util-deprecate@^1.0.2:
   resolved "https://registry.yarnpkg.com/util-deprecate/-/util-deprecate-1.0.2.tgz#450d4dc9fa70de732762fbd2d4a28981419a0ccf"
   integrity sha512-EPD5q1uXyFxJpCrLnCc1nHnq3gOa6DZBocAIiI2TaSCA7VCJ1UJDMagCzIkXNsUYfD1daK//LTEQ8xiIbrHtcw==
 
-utility-class-components@^0.0.1:
-  version "0.0.1"
-  resolved "https://registry.yarnpkg.com/utility-class-components/-/utility-class-components-0.0.1.tgz#143a059ab15b47548e98d005fd026cbfabe0d194"
-  integrity sha512-DxwnIwX81Aa5RE7DbROEFFq/M3nDdbc8v05Ybw6Fa/15zSYdapEIi+p5ObN9IBsXph3J65IegQE6M+AzZUKP/w==
+utility-class-components@^0.1.3:
+  version "0.1.3"
+  resolved "https://registry.yarnpkg.com/utility-class-components/-/utility-class-components-0.1.3.tgz#7cdde2a83dc2e2c7ba7ee40c587539c2b1923dc8"
+  integrity sha512-0zP6BPxBEL8WtUpW3yUUh8tz1iA57Qp+qObJKlGX/8ulZDzMqbHVK6oGJ1XGqbvuZVnZgvF/lheQpWpPAMSwZw==
 
 uuid@^8.0.0:
   version "8.3.2"

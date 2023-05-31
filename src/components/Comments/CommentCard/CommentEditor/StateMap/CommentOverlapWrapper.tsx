@@ -3,11 +3,9 @@ import { CommentEditState } from "src/types/comment";
 
 import { useCommentEditorStateSetter } from "../context";
 
-import { keyframesShow } from "./styles";
-
 import { PropsWithChildren, ReactElement } from "react";
 import { IoMdClose } from "react-icons/io";
-import styled from "styled-components";
+import { utld } from "utility-class-components";
 
 function CommentOverlapWrapper({ children, closer }: PropsWithChildren<{ closer: ReactElement }>) {
   return (
@@ -30,22 +28,23 @@ function CloseButtonWithIcon() {
   );
 }
 
-const Wrapper = styled.div`
-  position: absolute;
-  inset: 0;
+const Wrapper = utld.div`
+  absolute
+  inset-0
 
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
+  flex
+  justify-between
+  items-center
 
-  animation: ${keyframesShow} 0.2s ease;
+  animate-show
 
-  background-color: ${({ theme }) => theme.bgColor};
+  bg-bg-light
+  dark:bg-bg-dark
 `;
 
-const StyledIconButton = styled(IconButton)`
-  align-self: flex-start;
-  margin-top: 1.5rem;
+const StyledIconButton = utld(IconButton)`
+  self-start
+  mt-6
 `;
 
 CommentOverlapWrapper.CloseButtonWithIcon = CloseButtonWithIcon;

@@ -1,12 +1,14 @@
 import { dateToString } from "src/lib/utils/helper";
 
-import styled from "styled-components";
+import { utld } from "utility-class-components";
 
-const DateSpanStyle = styled.time`
-  margin-top: 0.2rem;
-  font-weight: 300;
-  font-size: 0.8rem;
-  color: ${(props) => props.theme.subTextColor};
+const DateSpanStyle = utld.time`
+  mt-[0.2rem]
+  font-light
+  text-[0.8rem]
+
+  text-default-sub-light
+  dark:text-default-sub-dark
 `;
 
 type Props = {
@@ -14,7 +16,8 @@ type Props = {
 };
 
 function DateSpan({ date, ...props }: Props) {
-  return <DateSpanStyle {...props}>{dateToString(new Date(date))}</DateSpanStyle>;
+  const dateString = dateToString(new Date(date));
+  return <DateSpanStyle {...props}>{dateString}</DateSpanStyle>;
 }
 
 export default DateSpan;

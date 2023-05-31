@@ -1,5 +1,5 @@
 import type { ComponentPropsWithoutRef } from "react";
-import styled, { css } from "styled-components";
+import { utld } from "utility-class-components";
 
 type Props = {
   title: string;
@@ -7,11 +7,7 @@ type Props = {
   size?: string;
 } & ComponentPropsWithoutRef<"svg">;
 
-type StyledSvgProps = {
-  size: string;
-};
-
-function LinkIcon({ title, id, size = "100%", ...props }: Props) {
+export default function LinkIcon({ title, id, size = "100%", ...props }: Props) {
   return (
     <StyledSvg
       className='link-icon'
@@ -22,7 +18,10 @@ function LinkIcon({ title, id, size = "100%", ...props }: Props) {
       strokeLinejoin='round'
       fill='none'
       aria-labelledby={id}
-      size={size}
+      style={{
+        height: size,
+        width: size,
+      }}
       {...props}
     >
       <title id={id}>{title}</title>
@@ -33,15 +32,12 @@ function LinkIcon({ title, id, size = "100%", ...props }: Props) {
   );
 }
 
-const StyledSvg = styled.svg<StyledSvgProps>`
-  ${({ size }) => css`
-    width: ${size};
-    height: ${size};
-  `}
-  stroke: ${({ theme }) => theme.textColor};
-  :hover {
-    stroke: ${({ theme }) => theme.accentColor};
-  }
-`;
+const StyledSvg = utld.svg`
+  stroke-default-light
+  dark:stroke-default-dark
 
-export default LinkIcon;
+  hover:(
+    stroke-accent-light
+    dark:stroke-accent-dark
+  )
+`;

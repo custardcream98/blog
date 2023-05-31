@@ -1,11 +1,11 @@
+import { Container, Title } from "src/components/Common";
 import CategoryBadges from "src/components/Common/CategoryBadges";
-import { Container, Title } from "src/components/Common/styledComponents";
 import Meta from "src/components/Layout/Meta";
-import categoryTheme from "src/lib/categoryTheme";
+import categoryTheme from "src/constants/categoryTheme";
 
 const CATEGORIES = Object.keys(categoryTheme);
 
-function Categories() {
+function CategoriesPage() {
   return (
     <>
       <Meta type='default' title='Categories' tags={CATEGORIES} />
@@ -21,4 +21,4 @@ function Categories() {
   );
 }
 
-export default Categories;
+export default CategoriesPage;

@@ -1,50 +1,17 @@
-// const wdSelectTransform = (code) => {
-//   console.log("컴파일");
-
-//   const variantGroupsRegex = /wdSelect\(['"`]([^)'"`]{1,})['"`]\).style`([^`]*)`/g;
-//   const variantGroupMatches = [...code.matchAll(variantGroupsRegex)];
-
-//   // const selectorRegex = //g
-
-//   variantGroupMatches.forEach(([matchStr, selector, classes]) => {
-//     const parsedClasses = classes
-//       .split(/[\s\n]/)
-//       .filter((token) => !!token && token !== "\n" && token !== "\r" && token !== "\r\n")
-//       .map((cls) => `${selector}:${cls}`)
-//       .join(" ");
-
-//     code = code.replace(matchStr, parsedClasses);
-//     console.log("selector", selector);
-//     console.log("parsedClasses", parsedClasses);
-//   });
-
-//   return code;
-// };
-
-const GROUP_SELECTOR_REGEX = /([^\s:-]*[:-])\(([^)]{1,})\)/g;
-const groupSelectorTransformer = (code) => {
-  const variantGroupMatches = [...code.matchAll(GROUP_SELECTOR_REGEX)];
-
-  variantGroupMatches.forEach(([matchStr, selector, classes]) => {
-    const parsedClasses = classes
-      .split(/[\s\n]/)
-      .filter((token) => !!token && token !== "\n" && token !== "\r" && token !== "\r\n")
-      .map((cls) => `${selector}${cls}`)
-      .join(" ");
-
-    code = code.replace(matchStr, parsedClasses);
-  });
-
-  return code;
-};
+// eslint-disable-next-line @typescript-eslint/no-var-requires
+const { transformGroupSelector } = require("utility-class-components");
 
 /** @type {import('tailwindcss').Config} */
 module.exports = {
   content: {
     files: ["./src/**/*.{js,ts,jsx,tsx,mdx}"],
     transform: {
+      ts: (code) => {
+        code = transformGroupSelector(code);
+        return code;
+      },
       tsx: (code) => {
-        code = groupSelectorTransformer(code);
+        code = transformGroupSelector(code);
         return code;
       },
     },
@@ -59,6 +26,18 @@ module.exports = {
     extend: {
       animation: {
         "bg-gradient": "bg-gradient 3s linear infinite",
+        shake: "shake 0.2s",
+        "shake-reverse": "shake 0.2s reverse",
+        show: "show 0.2s ease",
+      },
+      boxShadow: {
+        "default-dark":
+          "rgba(220, 205, 205, 0.25) 0px 2px 5px -1px, rgba(255, 255, 255, 0.3) 0px 1px 3px -1px",
+        "default-light":
+          "rgba(50, 50, 93, 0.25) 0px 2px 5px -1px, rgba(0, 0, 0, 0.3) 0px 1px 3px -1px",
+
+        "line-dark": "rgba(200, 200, 200, 0.25)",
+        "line-light": "rgba(17, 17, 26, 0.1)",
       },
       colors: {
         accent: {
@@ -68,10 +47,6 @@ module.exports = {
         bg: {
           dark: "#121212",
           light: "#fcfcfc",
-        },
-        darkmodeShadow: {
-          dark: "rgba(220, 205, 205, 0.25) 0px 2px 5px -1px, rgba(255, 255, 255, 0.3) 0px 1px 3px -1px",
-          light: "rgba(50, 50, 93, 0.25) 0px 2px 5px -1px, rgba(0, 0, 0, 0.3) 0px 1px 3px -1px",
         },
         default: {
           dark: "#efefef",
@@ -83,12 +58,6 @@ module.exports = {
         },
         nav: {
           bg: { dark: "#6a6a6a14", light: "#e7e7e767" },
-          shadow: {
-            line: {
-              dark: "rgba(200, 200, 200, 0.25) 0px 1px 0px",
-              light: "rgba(17, 17, 26, 0.1) 0px 1px 0px",
-            },
-          },
         },
         post: {
           element: {
@@ -124,9 +93,33 @@ module.exports = {
             "background-position": "200% center",
           },
         },
+        shake: {
+          "0%, 100%": {
+            transform: "translateX(0)",
+          },
+          "25%": {
+            transform: "translateX(-10%)",
+          },
+          "75%": {
+            transform: "translateX(10%)",
+          },
+        },
+        show: {
+          "0%": {
+            opacity: 0,
+            transform: "translateX(50%)",
+          },
+          "100%": {
+            opacity: 1,
+            transform: "translateX(0)",
+          },
+        },
       },
       maxWidth: {
         800: "50rem",
+      },
+      spacing: {
+        nav: "3.125rem",
       },
     },
     fontFamily: {
@@ -147,6 +140,9 @@ module.exports = {
       1.2: "1.2",
     },
     screens: {
+      ad: {
+        max: "500px",
+      },
       mobile: {
         max: "800px",
       },

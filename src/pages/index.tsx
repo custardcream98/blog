@@ -1,5 +1,5 @@
+import { Container } from "src/components/Common";
 import Paging from "src/components/Common/Paging";
-import { Container } from "src/components/Common/styledComponents";
 import HeroPost from "src/components/Home/HeroPost";
 import Intro from "src/components/Home/Intro";
 import Meta from "src/components/Layout/Meta";
@@ -9,23 +9,16 @@ import PostByPageArr from "cache/postByPageArr.json";
 import type { GetServerSidePropsContext } from "next";
 import { useRouter } from "next/router";
 import { useEffect, useRef } from "react";
-import styled from "styled-components";
+import { utld } from "utility-class-components";
 
 const PAGE_SCALE = PostByPageArr.length;
-
-const HeroPostList = styled.ol`
-  min-height: 592px;
-  @media (max-width: 780px) {
-    min-height: 527px;
-  }
-`;
 
 type Props = {
   pageLength: number;
   posts: PostType[];
 };
 
-function Index({ pageLength, posts }: Props) {
+export default function HomePage({ pageLength, posts }: Props) {
   const router = useRouter();
   const { page: queryPage } = router.query;
   const page = parseInt(queryPage as string, 10) || 1;
@@ -74,8 +67,6 @@ function Index({ pageLength, posts }: Props) {
   );
 }
 
-export default Index;
-
 export const getServerSideProps = (context: GetServerSidePropsContext) => {
   const { page } = context.query;
 
@@ -86,3 +77,8 @@ export const getServerSideProps = (context: GetServerSidePropsContext) => {
     },
   };
 };
+
+const HeroPostList = utld.ol`
+  min-h-[37rem]
+  mobile:min-h-[32.9375rem]
+`;

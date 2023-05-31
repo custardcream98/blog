@@ -2,7 +2,7 @@ import "@fontsource/nanum-myeongjo";
 
 import ProjectAd from "src/components/Common/ProjectAd";
 import Layout from "src/components/Layout/Layout";
-import ThemeProviderLayer from "src/components/Layout/ThemeProviderLayer";
+import { ThemeSetter } from "src/components/Theme";
 
 import "@fontsource/noto-sans/300.css";
 import "@fontsource/noto-sans/500.css";
@@ -15,14 +15,13 @@ import "@fontsource/noto-sans-kr/900.css";
 import "@fontsource/source-code-pro/800.css";
 import "@fontsource/poppins/500.css";
 import "@fontsource/poppins/600.css";
-import "src/styles/reset.css";
 import "src/styles/font.css";
-import "src/styles/style.css";
+import "src/styles/print.css";
 import "src/styles/tailwind.css";
+import "src/styles/post.css";
 
 import type { AppProps } from "next/app";
 import DevportImage from "public/static/ad/devport.png";
-import { RecoilRoot } from "recoil";
 
 function MyApp({ Component, pageProps }: AppProps) {
   console.clear();
@@ -45,19 +44,17 @@ function MyApp({ Component, pageProps }: AppProps) {
   );
 
   return (
-    <RecoilRoot>
-      <ThemeProviderLayer>
-        <Layout>
-          <Component {...pageProps} />
-        </Layout>
-        <ProjectAd
-          projectName='이력서 기반 예상 면접 질문 생성기'
-          projectLink='https://devport.swygbro.com/'
-          repositoryLink='https://github.com/custardcream98/DevPort'
-          projectImage={DevportImage}
-        />
-      </ThemeProviderLayer>
-    </RecoilRoot>
+    <ThemeSetter>
+      <Layout>
+        <Component {...pageProps} />
+      </Layout>
+      <ProjectAd
+        projectName='이력서 기반 예상 면접 질문 생성기'
+        projectLink='https://devport.swygbro.com/'
+        repositoryLink='https://github.com/custardcream98/DevPort'
+        projectImage={DevportImage}
+      />
+    </ThemeSetter>
   );
 }
 

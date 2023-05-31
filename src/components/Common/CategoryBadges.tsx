@@ -1,41 +1,36 @@
-import categoryTheme from "src/lib/categoryTheme";
+import categoryTheme, { type Categoires } from "src/constants/categoryTheme";
 
 import Link from "next/link";
 import type { ReactNode } from "react";
-import styled from "styled-components";
+import { utld } from "utility-class-components";
 
-interface IBadge {
-  backgroundColor: string;
-  borderColor: string;
-}
+const StyledAnchor = utld(Link)`
+  block
 
-const StyledAnchor = styled(Link)<IBadge>`
-  display: block;
+  m-[0.3rem]
+  px-[0.4rem]
+  py-[0.2rem]
+  
+  font-medium
+  text-[0.85rem]
+  rounded-full
 
-  margin: 0.3rem;
-  padding: 0.3rem;
-  font-weight: 500;
-  font-size: 0.85rem;
-  border-radius: 100px;
-  letter-spacing: 0.02rem;
-  border: 0.1rem solid ${(props) => props.borderColor};
-  color: ${(props) => props.borderColor};
-  background-color: ${(props) => props.backgroundColor};
-  flex-wrap: nowrap;
+  border-[0.1rem]
+  border-solid
 
-  &:hover {
-    cursor: pointer;
-  }
+  flex-nowrap
 `;
 
-const CategoryBadgesWrapper = styled.ul`
-  display: flex;
-  flex-wrap: wrap;
-  margin: 0.7rem -0.3rem;
+const CategoryBadgesWrapper = utld.ul`
+  flex
+  flex-wrap
+
+  mx-[-0.3rem]
+  my-[0.7rem]
 `;
 
 type Props = {
-  category: string;
+  category: Categoires;
 };
 
 function CategoryBadges({ children }: { children: ReactNode }) {
@@ -43,7 +38,7 @@ function CategoryBadges({ children }: { children: ReactNode }) {
 }
 
 function Badge({ category }: Props) {
-  const { color } = categoryTheme[category];
+  const style = categoryTheme[category];
 
   return (
     <li>
@@ -52,8 +47,7 @@ function Badge({ category }: Props) {
           pathname: "/categories/[category]",
           query: { category: category },
         }}
-        backgroundColor={`${color}4e`}
-        borderColor={color}
+        className={style}
       >
         {category}
       </StyledAnchor>

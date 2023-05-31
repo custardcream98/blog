@@ -1,3 +1,5 @@
+"use client";
+
 import useSearchResults from "src/lib/hook/useSearchResults";
 
 import SearchbarCloseButton from "./SearchbarCloseButton";
@@ -13,7 +15,7 @@ import {
   useState,
 } from "react";
 import { RiCloseFill } from "react-icons/ri";
-import styled from "styled-components";
+import { utld } from "utility-class-components";
 
 const TRANSITION_DURATION = 200;
 
@@ -21,56 +23,58 @@ type SearchbarStyleProps = {
   isSearchbarOn: boolean;
 };
 
-const SearchbarContainer = styled.form<SearchbarStyleProps>`
-  width: 100%;
-  height: 100%;
+const SearchbarContainer = utld.form<SearchbarStyleProps>`
+  w-full
+  h-full
 
-  position: absolute;
-  right: 0;
+  absolute
+  right-0
 
-  z-index: 101;
+  z-[101]
 
-  transition: all ease ${TRANSITION_DURATION}ms;
+  transition-all
+  duration-[200ms]
 
-  transform: translateY(${({ isSearchbarOn }) => (isSearchbarOn ? "0" : "-105%")});
+  ${({ isSearchbarOn }) => (isSearchbarOn ? "" : "translate-y-[-105%]")}
 
-  background-color: ${({ theme }) => theme.bgColor};
+  bg-bg-light
+  dark:bg-bg-dark
 `;
 
-const SearchbarInput = styled.input`
-  width: 100%;
-  height: 80%;
+const SearchbarInput = utld.input`
+  w-full
+  h-4/5
 
-  padding: 0 20px;
+  px-5
 
-  font-family: "Noto Sans", "Noto Sans KR", sans-serif;
-  font-weight: 400;
-  font-size: 1rem;
-  border: none;
+  font-sans
+  font-normal
+  text-base
+  border-none
 
-  border-radius: 9999px;
-  background: ${({ theme }) => theme.postElementBackgroundColor};
+  rounded-full
+  bg-post-element-bg-light
+  dark:bg-post-element-bg-dark
 
-  color: ${({ theme }) => theme.textColor};
+  text-default-light
+  dark:text-default-dark
 
-  margin-right: 30px;
+  mr-[1.875rem]
 
-  :focus {
-    outline: none;
-  }
+  focus:outline-none
 `;
 
-const SearchbarWrapper = styled.div`
-  position: relative;
+const SearchbarWrapper = utld.div`
+  relative
 
-  width: 90vw;
-  max-width: 800px;
-  height: 100%;
-  margin: auto;
+  w-[90vw]
+  max-w-800
+  h-full
+  m-auto
 
-  display: flex;
-  justify-content: center;
-  align-items: center;
+  flex
+  justify-center
+  items-center
 `;
 
 type Props = {

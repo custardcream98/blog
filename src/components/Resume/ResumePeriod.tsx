@@ -3,9 +3,9 @@ import type { Period } from "src/types/resume";
 
 import { dimTextStyle } from "./styles";
 
-import styled from "styled-components";
+import { utld } from "utility-class-components";
 
-function ResumePeriod({ from, to }: Period) {
+export default function ResumePeriod({ from, to }: Period) {
   if (to) {
     if (from === to) {
       return (
@@ -31,27 +31,25 @@ function ResumePeriod({ from, to }: Period) {
   );
 }
 
-export const ResumePeriodContainer = styled.span`
+export const ResumePeriodContainer = utld.span`
   ${dimTextStyle}
-  display: inline-block;
-  margin-top: 0.2rem;
-  margin-bottom: 0.2rem;
 
-  time:first-child {
-    + time,
-    + span {
-      ::before {
-        content: "~";
-        margin: 0 0.3rem;
-      }
-    }
-  }
+  inline-block
+  my-[0.2rem]
 
-  @media only print {
-    position: absolute;
-    top: 0;
-    right: 0;
-  }
+  [&>time:first-child+time::before]:(
+    content-['~']
+    mx-[0.3rem]
+  )
+
+  [&>time:first-child+span::before]:(
+    content-['~']
+    mx-[0.3rem]
+  )
+
+  print:(
+    absolute
+    top-0
+    right-0
+  )
 `;
-
-export default ResumePeriod;

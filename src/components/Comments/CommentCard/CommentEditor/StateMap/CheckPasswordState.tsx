@@ -10,12 +10,12 @@ import { useCommentEditorStateSetter } from "../context";
 import CommentOverlapWrapper from "./CommentOverlapWrapper";
 
 import { FormEventHandler, useCallback, useEffect, useState } from "react";
-import styled, { css, keyframes } from "styled-components";
+import { ud, utld } from "utility-class-components";
 
 type Props = {
   stateTo: CommentEditState;
 };
-function CheckPasswordState({ stateTo }: Props) {
+export default function CheckPasswordState({ stateTo }: Props) {
   const { changeStateTo } = useCommentEditorStateSetter();
   const postTitle = useCommentPostTitleContext();
   const { commentId, password } = useCommentDataContext();
@@ -86,94 +86,49 @@ function CheckPasswordState({ stateTo }: Props) {
   );
 }
 
-const InputWrapper = styled.div`
-  position: relative;
+const InputWrapper = utld.div`
+  relative
 `;
 
-const Form = styled.form`
-  position: relative;
-  font-size: 0.9rem;
+const Form = utld.form`
+  relative
+  text-[0.9rem]
 `;
-const Label = styled.label`
-  display: block;
+const Label = utld.label`
+  block
 
-  margin-bottom: 0.4rem;
+  mb-[0.4rem]
 `;
-const Input = styled.input`
-  border-radius: 5px;
-  height: 25px;
-  width: 200px;
-  padding: 0 0.3rem;
+const Input = utld.input`
+  rounded-[5px]
 
-  ${({ theme }) => css`
-    border: 1px solid ${theme.subTextColor};
+  h-[1.5625rem]
+  w-[12.5rem]
 
-    font-family: ${theme.mainFont};
-    color: ${theme.textColor};
-
-    :-webkit-autofill,
-    :-webkit-autofill:hover,
-    :-webkit-autofill:focus,
-    :-webkit-autofill:active {
-      -webkit-text-fill-color: ${theme.textColor} !important;
-    }
-
-    :focus {
-      outline: 2px solid ${theme.accentColor};
-      outline-offset: -3px;
-    }
-  `}
-`;
-const SubmitButton = styled(Button)`
-  position: absolute;
-  left: 205px;
+  px-[0.3rem]
 `;
 
-const keyframesShake = keyframes`
-  0% {
-    transform: translate(0);
-  }
-  25% {
-    transform: translate(-10%);
-  }
-  75% {
-    transform: translate(10%);
-  }
-  100% {
-    transform: translate(0);
-  }
+const SubmitButton = utld(Button)`
+  absolute
+  left-[12.8125rem]
 `;
-const keyframesShakRev = keyframes`
-  0% {
-    transform: translate(0);
-  }
-  25% {
-    transform: translate(10%);
-  }
-  75% {
-    transform: translate(-10%);
-  }
-  100% {
-    transform: translate(0);
-  }
-`;
+
 type ErrorMessageProps = { shakeToggle: boolean };
-const ErrorMessage = styled.span<ErrorMessageProps>`
-  display: inline-block;
-  position: absolute;
-  top: 29px;
-  left: 0;
 
-  color: red;
-  font-size: 0.8rem;
+const ErrorMessage = utld.span<ErrorMessageProps>`
+  absolute
+  top-[1.8125rem]
+  left-0
+
+  text-red-500
+  text-[0.8rem]
+
   ${({ shakeToggle }) =>
     shakeToggle
-      ? css`
-          animation: ${keyframesShake} 0.2s;
-        `
-      : css`
-          animation: ${keyframesShakRev} 0.2s reverse;
-        `}
+      ? ud`
+        animate-shake
+      `
+      : ud`
+        animate-shake-reverse
+      `}
 `;
-
-export default CheckPasswordState;

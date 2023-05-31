@@ -1,10 +1,10 @@
 import LinkSvg from "src/components/Common/Svgs/LinkSvg";
 import SvgContainer from "src/components/Common/Svgs/SvgContainer";
-import { ResumeLink } from "src/types/resume";
+import type { ResumeLink } from "src/types/resume";
 
-import styled, { css } from "styled-components";
+import { ud, utld } from "utility-class-components";
 
-function ResumeLink({ url, name }: ResumeLink) {
+export default function ResumeLink({ url, name }: ResumeLink) {
   return (
     <StyledResumeLink href={url} target='_blank' rel='noopener noreferrer'>
       <SvgContainer svgWidth='0.95rem' svgHeight='0.95rem'>
@@ -15,59 +15,61 @@ function ResumeLink({ url, name }: ResumeLink) {
   );
 }
 
-export const iconClickableStyle = css`
-  font-size: 0.9rem;
-  font-weight: 300;
+export const iconClickableStyle = ud`
+  text-[0.9rem]
+  font-light
 
-  border-bottom: 1px solid ${({ theme }) => theme.resumeTextColor};
-  word-break: keep-all;
+  border-t-[0]
+  border-r-[0]
+  border-l-[0]
+  border-b
+  border-solid
+  border-resume-text-light
+  dark:border-resume-text-dark
+  break-keep
 
-  transition: color 0.2s ease-in-out, border-color 0.2s ease-in-out;
+  transition-colors
+  ease-in-out
+  duration-200
 
-  span {
-    margin-right: 0.2rem;
-  }
-  svg {
-    vertical-align: top;
-    fill: ${({ theme }) => theme.resumeTextColor};
-    transition: fill 0.2s ease-in-out;
-  }
+  [&>span]:mr-[0.2rem]
 
-  &:hover {
-    color: ${({ theme }) => theme.resumeAccentColor};
-    border-color: ${({ theme }) => theme.resumeAccentColor};
+  [&_svg]:(
+    fill-resume-text-light
+    dark:fill-resume-text-dark
+    transition-[fill]
+    ease-in-out
+    duration-200
+    hover:fill-resume-accent-light
+    dark:hover:fill-resume-accent-dark
+  )
 
-    svg {
-      fill: ${({ theme }) => theme.resumeAccentColor};
-    }
-  }
+  hover:(
+    text-resume-accent-light
+    dark:text-resume-accent-dark
+
+    border-resume-accent-light
+    dark:border-resume-accent-dark
+  )
 `;
 
-const StyledResumeLink = styled.a`
+const StyledResumeLink = utld.a`
   ${iconClickableStyle}
 `;
 
-export const ResumeLinksList = styled.ul`
-  display: flex;
-  flex-wrap: wrap;
-  gap: 10px;
+export const ResumeLinksList = utld.ul`
+  flex
+  flex-wrap
+  gap-[0.625rem]
 
-  margin-bottom: 0.8rem;
-  margin-top: 1rem;
-  ul + & {
-    margin-top: 2rem;
-  }
+  mb-[0.8rem]
+  mt-4
+  [ul+&]:mt-8
 
-  @media only print {
-    margin-top: 0.8rem;
-    ul + & {
-      margin-top: 0.8rem;
-    }
+  print:(
+    mt-[0.8rem]
+    [ul+&]:mt-[0.8rem]
 
-    :last-child {
-      margin-top: 0.5rem;
-    }
-  }
+    last:mt-2
+  )
 `;
-
-export default ResumeLink;

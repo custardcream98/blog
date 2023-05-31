@@ -1,11 +1,11 @@
-import Document, { DocumentContext, Head, Html, Main, NextScript } from "next/document";
+import Document, { Head, Html, Main, NextScript } from "next/document";
 import Script from "next/script";
-import { ServerStyleSheet } from "styled-components";
+import { utld } from "utility-class-components";
 
 export default class MyDocument extends Document {
   render() {
     return (
-      <Html lang='ko'>
+      <Html lang='ko' className='scroll-smooth'>
         <Head>
           <link rel='icon' type='image/png' href='../static/icon.png' />
           <meta
@@ -27,34 +27,25 @@ export default class MyDocument extends Document {
             gtag('js', new Date());
             gtag('config', '${process.env.NEXT_PUBLIC_GOOGLE_ANALYTICS_ID}');`}
           </Script>
-          {this.props.styles}
         </Head>
-
-        <body>
+        <Body>
           <Main />
           <NextScript />
-        </body>
+        </Body>
       </Html>
     );
   }
 }
 
-MyDocument.getInitialProps = async (ctx: DocumentContext) => {
-  const sheet = new ServerStyleSheet();
-  const originalRenderPage = ctx.renderPage;
+const Body = utld.body`
+  font-sans
+  text-default-light
+  dark:text-default-dark
+  bg-bg-light
+  dark:bg-bg-dark
 
-  try {
-    ctx.renderPage = () =>
-      originalRenderPage({
-        enhanceApp: (App) => (props) => sheet.collectStyles(<App {...props} />),
-      });
+  transition-all
+  duration-100
 
-    const initialProps = await Document.getInitialProps(ctx);
-    return {
-      ...initialProps,
-      styles: [initialProps.styles, sheet.getStyleElement()],
-    };
-  } finally {
-    sheet.seal();
-  }
-};
+  print:bg-transparent
+`;

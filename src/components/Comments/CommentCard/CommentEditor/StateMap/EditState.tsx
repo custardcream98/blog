@@ -6,7 +6,7 @@ import { useCommentEditorStateSetter } from "../context";
 
 import CommentOverlapWrapper from "./CommentOverlapWrapper";
 
-import styled from "styled-components";
+import { utld } from "utility-class-components";
 
 function CloseButton() {
   const { getStateSetter } = useCommentEditorStateSetter();
@@ -31,10 +31,10 @@ function EditState() {
   );
 }
 
-const StyledButton = styled(Button)`
-  position: absolute;
-  right: 82px;
-  bottom: 16px;
+const StyledButton = utld(Button)`
+  absolute
+  right-[5.125rem]
+  bottom-[1rem]
 `;
 
 export default EditState;

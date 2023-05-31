@@ -1,10 +1,13 @@
-import type { ComponentPropsWithoutRef, MouseEventHandler } from "react";
+import type { ComponentPropsWithoutRef, CSSProperties, MouseEventHandler } from "react";
 import { Rings } from "react-loader-spinner";
-import styled, { css, useTheme } from "styled-components";
+import { utld } from "utility-class-components";
 
-type Props = ComponentPropsWithoutRef<"button"> & StyledProps & { isLoading?: boolean };
-function Button({ children, width, height, isLoading, onClick, ...props }: Props) {
-  const { subTextColor } = useTheme();
+type Props = ComponentPropsWithoutRef<"button"> & {
+  width: CSSProperties["width"];
+  height: CSSProperties["height"];
+} & StyledProps;
+
+export default function Button({ children, width, height, isLoading, onClick, ...props }: Props) {
   const handleClick: MouseEventHandler<HTMLButtonElement> = (event) => {
     if (isLoading) {
       event.preventDefault();
@@ -16,54 +19,61 @@ function Button({ children, width, height, isLoading, onClick, ...props }: Props
 
   return (
     <StyledButton
-      width={width}
-      height={height}
+      style={{
+        height,
+        width,
+      }}
       isLoading={isLoading}
       onClick={handleClick}
       {...props}
     >
-      {isLoading ? <Rings color={subTextColor} width={width} height={width} /> : children}
+      {isLoading ? (
+        <Rings
+          wrapperClass='[&>svg]:stroke-default-sub-light [&>svg]:dark:stroke-default-sub-dark'
+          width={width}
+          height={width}
+        />
+      ) : (
+        children
+      )}
     </StyledButton>
   );
 }
 
 type StyledProps = {
-  width: string;
-  height: string;
   isLoading: boolean;
 };
-const StyledButton = styled.button<StyledProps>`
-  height: ${({ height }) => height};
-  width: ${({ width }) => width};
-  border-radius: 5px;
 
-  overflow: hidden;
+const StyledButton = utld.button<StyledProps>`
+  rounded-[5px]
 
-  display: inline-flex;
-  justify-content: center;
-  align-items: center;
-  // 로딩 인디케이터 가운데 정렬을 위해 필요
+  overflow-hidden
 
-  transition: all 0.2s ease;
-  cursor: pointer;
+  inline-flex
+  justify-center
+  items-center
 
-  ${({ isLoading }) =>
-    isLoading &&
-    css`
-      pointer-events: none;
-    `}
+  transition-all
+  transition-ease
+  duration-200
 
-  ${({ theme }) => css`
-    font-family: ${theme.mainFont};
-    background-color: ${theme.textColor};
-    color: ${theme.bgColor};
+  font-sans
+  bg-default-light
+  dark:bg-default-dark
+  text-bg-light
+  dark:text-bg-dark
 
-    :hover,
-    :focus {
-      color: ${theme.accentColor};
-      scale: 1.05;
-    }
-  `}
+  hover:(
+    text-accent-light
+    dark:text-accent-dark
+    scale-[1.05]
+  )
+
+  focus:(
+    text-accent-light
+    dark:text-accent-dark
+    scale-[1.05]
+  )
+
+  ${({ isLoading }) => isLoading && "pointer-events-none"}
 `;
-
-export default Button;

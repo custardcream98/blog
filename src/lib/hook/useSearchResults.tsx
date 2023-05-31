@@ -2,15 +2,17 @@ import { searchPosts } from "src/lib/axios";
 import type { SearchedPostCardData } from "src/types/searchedPosts";
 
 import { useCallback, useEffect, useState } from "react";
-import styled from "styled-components";
+import { utld } from "utility-class-components";
 
 const FETCH_DEBOUNCE_COOLTIME = 300;
 
-const ResultsMark = styled.mark`
-  background-color: ${({ theme }) => theme.accentColor};
-  padding: 0 3px;
+const ResultsMark = utld.mark`
+  bg-accent-light
+  dark:bg-accent-dark
 
-  border-radius: 5px;
+  px-[0.1875rem]
+
+  rounded-[0.3125rem]
 `;
 
 const useSearchResults = (query: string) => {

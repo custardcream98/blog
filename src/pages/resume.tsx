@@ -1,4 +1,3 @@
-import { animatedGradientTextStyle } from "src/components/Common/styledComponents";
 import Meta from "src/components/Layout/Meta";
 import {
   CareersSection,
@@ -9,7 +8,7 @@ import {
 } from "src/components/Resume";
 
 import { careers, educations, experiences, projects } from "fixtures/resume";
-import styled from "styled-components";
+import { utld } from "utility-class-components";
 
 function Resume() {
   return (
@@ -22,7 +21,12 @@ function Resume() {
       <S.Container>
         <MainTitle>
           <span className='line'>안녕하세요,</span>
-          <strong className='strong'>주니어 프론트엔드 개발자 박시우</strong>입니다.
+          {
+            <strong className='text-gradient-intro animate-bg-gradient font-semibold'>
+              주니어 프론트엔드 개발자 박시우
+            </strong>
+          }
+          입니다.
         </MainTitle>
         <IntroduceSection />
         <CareersSection>
@@ -50,40 +54,19 @@ function Resume() {
   );
 }
 
-const MainTitle = styled.h2`
-  font-size: 2rem;
-  font-weight: 300;
-  line-height: 1.5;
+const MainTitle = utld.h2`
+  text-[2rem]
+  font-light
+  leading-[1.5]
 
-  word-break: keep-all;
+  break-keep
 
-  .line {
-    display: block;
-  }
+  print:(
+    text-[1.5rem]
+    mt-[1cm]
+  )
 
-  .strong {
-    background-image: linear-gradient(
-      -225deg,
-      #3c2395 0%,
-      #44107a 17%,
-      #ff1361 33%,
-      #fff800 50%,
-      #ff1361 66%,
-      #44107a 83%,
-      #3c2395 100%
-    );
-
-    ${animatedGradientTextStyle}
-
-    display:inline;
-    font-weight: 600;
-  }
-
-  @media only print {
-    font-size: 1.5rem;
-
-    margin-top: 1cm;
-  }
+  [&>.line]:block
 `;
 
 export default Resume;

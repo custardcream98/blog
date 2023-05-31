@@ -1,13 +1,15 @@
-import styled from "styled-components";
+import { utld } from "utility-class-components";
 
-const LogoTitleSpan = styled.span`
-  color: ${({ theme }) => theme.textColor};
-  font: 800 1rem ${({ theme }) => theme.codingFont};
-  letter-spacing: -0.03rem;
+const LogoTitleSpan = utld.span`
+  text-[1rem]
+  font-mono
+  font-extrabold
+  tracking-[-0.03rem]
 
-  @media (max-width: 800px) {
-    font-size: 0.9rem;
-  }
+  text-default-light
+  dark:text-default-dark
+
+  mobile:text-[0.9rem]
 `;
 
 export default LogoTitleSpan;

@@ -3,7 +3,7 @@ import { CommentFormWithOpenButton } from "./CommentForm";
 import CommentPostTitleContextProvider from "./context";
 
 import type { PropsWithChildren } from "react";
-import styled from "styled-components";
+import { utld } from "utility-class-components";
 
 type Props = PropsWithChildren<{
   postTitle: string;
@@ -16,19 +16,23 @@ function Comments({ children, postTitle }: Props) {
   );
 }
 
-const Wrapper = styled.section`
-  display: flex;
-  flex-direction: column;
-  width: 100%;
+const Wrapper = utld.section`
+  flex
+  flex-col
+  w-full
 `;
 
-const Title = styled.h3`
-  width: 100%;
-  font-weight: 500;
-  font-size: 1.5rem;
-  padding-bottom: 0.5rem;
-  margin-bottom: 1rem;
-  border-bottom: 3px solid #25282c;
+const Title = utld.h3`
+  w-full
+  font-medium
+  text-[1.5rem]
+  pb-2
+  mb-4
+
+  border-b-[3px]
+  border-default-sub-light
+  dark:border-default-sub-dark
+  border-solid
 `;
 
 function CommentsList({ children }: PropsWithChildren) {

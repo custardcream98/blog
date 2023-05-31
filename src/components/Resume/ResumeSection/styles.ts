@@ -1,43 +1,37 @@
 import { ProjectDescriptionList } from "../styles";
 
-import styled from "styled-components";
+import { utld } from "utility-class-components";
 
-export const SectionItemP = styled.p`
-  font-weight: 300;
-  font-size: 0.9rem;
-  line-height: 1.5;
-  letter-spacing: 0.03em;
+export const SectionItemP = utld.p`
+  font-light
+  text-[0.9rem]
+  leading-[1.5]
+  tracking-[0.03rem]
 
-  margin-top: 1rem;
-  & + & {
-    margin-top: 0.2rem;
-  }
+  mt-4
+  [&+&]:mt-[0.2rem]
 
-  &:last-of-type {
-    margin-bottom: 1rem;
-  }
+  last-of-type:mb-4
 
-  @media only print {
-    margin-top: 0.5rem;
-    &:last-of-type {
-      margin-bottom: 0.5rem;
-    }
-  }
+  print:(
+    mt-2
+    last-of-type:mb-2
+  )
 `;
 
-export const SectionItemTitle = styled.h3`
-  font-size: 1.3rem;
-  font-weight: 400;
-  margin: 0.8rem 0 0.5rem;
-  line-height: 1.2;
+export const SectionItemTitle = utld.h3`
+  text-[1.3rem]
+  font-normal
+  leading-[1.2]
+  
+  mt-[0.8rem]
+  mb-2
 
-  word-break: keep-all;
+  break-keep
 `;
 
-export const SectionItemDescriptionList = styled(ProjectDescriptionList)`
-  margin-top: 0.5rem;
+export const SectionItemDescriptionList = utld(ProjectDescriptionList)`
+  !mt-2
 
-  @media only print {
-    margin-top: 0rem;
-  }
+  print:!mt-0
 `;

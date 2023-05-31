@@ -1,3 +1,5 @@
+import type { Categoires } from "src/constants/categoryTheme";
+
 export type CoverImage = {
   lightThumbnail: string;
   darkThumbnail: string;
@@ -7,7 +9,7 @@ export type PostType = {
   slug: string;
   title: string;
   date: string;
-  category: string[];
+  category: Categoires[];
   coverImage: CoverImage;
   excerpt: string;
   ogImage: {
