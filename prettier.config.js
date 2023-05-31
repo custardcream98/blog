@@ -5,11 +5,6 @@ module.exports = {
   printWidth: 100,
   semi: true,
   tabWidth: 2,
-  tailwindFunctions: [
-    "cva",
-    "wind",
-    "wd",
-    // "wdSelect"
-  ],
+  tailwindFunctions: ["cva", "utld", "ud"],
   trailingComma: "all",
 };
