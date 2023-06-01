@@ -33,8 +33,9 @@ function EditState() {
 
 const StyledButton = utld(Button)`
   absolute
-  right-[5.125rem]
-  bottom-[1rem]
+  right-[5.1rem]
+  bottom-[0.67rem]
+  text-[0.9rem]
 `;
 
 export default EditState;
