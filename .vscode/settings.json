@@ -1,0 +1,14 @@
+{
+  "tailwindCSS.experimental.classRegex": [
+    ["cva\\(([^)]*)\\)", "[\"'`]([^\"'`]*).*?[\"'`]"],
+    "utld(?:\\.[a-z0-9]*|\\([^)]*\\))(?:<[^>]*>|)`([^`]*)`",
+    "ud`([^`]*)`"
+  ],
+  "tailwindCSS.lint.cssConflict": "ignore",
+  "tailwindCSS.colorDecorators": true,
+  "editor.codeActionsOnSave": {
+    "source.fixAll.eslint": true,
+    "source.fixAll": true
+  },
+  "editor.colorDecorators": true
+}

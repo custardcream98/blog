@@ -87,11 +87,7 @@ HTML 문서의 최상단 요소로, **루트 요소**라고도 불립니다. 다
 
 <!-- media attribute를 사용해 미디어 유형이나 쿼리를 지정할 수도 있습니다. -->
 <link href="print.css" rel="stylesheet" media="print" />
-<link
-  href="mobile.css"
-  rel="stylesheet"
-  media="screen and (max-width: 600px)"
-/>
+<link href="mobile.css" rel="stylesheet" media="screen and (max-width: 600px)" />
 ```
 
 ### `<meta>`

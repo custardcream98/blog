@@ -13,11 +13,9 @@ series: "Troubleshooting"
 ```ts
 const RESTAURANT_TYPES = ["한식", "일식", "양식"] as const;
 
-type RestaurantType = typeof RESTAURANT_TYPES[number];
+type RestaurantType = (typeof RESTAURANT_TYPES)[number];
 
-const isRestaurantType = (
-  str: unknown
-): str is RestaurantType => {
+const isRestaurantType = (str: unknown): str is RestaurantType => {
   if (typeof str !== "string") {
     return false;
   }
@@ -78,11 +76,9 @@ interface Array {
 ```ts
 const RESTAURANT_TYPES = ["한식", "일식", "양식"] as const;
 
-type RestaurantType = typeof RESTAURANT_TYPES[number];
+type RestaurantType = (typeof RESTAURANT_TYPES)[number];
 
-const isRestaurantType = (
-  str: unknown
-): str is RestaurantType => {
+const isRestaurantType = (str: unknown): str is RestaurantType => {
   if (typeof str !== "string") {
     return false;
   }
@@ -100,18 +96,14 @@ const isRestaurantType = (
 ```ts
 const RESTAURANT_TYPES = ["한식", "일식", "양식"] as const;
 
-type RestaurantType = typeof RESTAURANT_TYPES[number];
+type RestaurantType = (typeof RESTAURANT_TYPES)[number];
 
-const isRestaurantType = (
-  str: unknown
-): str is RestaurantType => {
+const isRestaurantType = (str: unknown): str is RestaurantType => {
   if (typeof str !== "string") {
     return false;
   }
 
-  return (
-    RESTAURANT_TYPES as ReadonlyArray<string>
-  ).includes(str);
+  return (RESTAURANT_TYPES as ReadonlyArray<string>).includes(str);
 };
 ```
 

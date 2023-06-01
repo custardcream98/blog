@@ -68,17 +68,13 @@ category: ["React.js", "CSS"]
 import OtherComponent from "./OtherComponent";
 
 // 레이지 로딩
-const OtherComponent = React.lazy(() =>
-  import("./OtherComponent")
-);
+const OtherComponent = React.lazy(() => import("./OtherComponent"));
 ```
 
 ```js
 import React, { Suspense } from "react";
 
-const OtherComponent = React.lazy(() =>
-  import("./OtherComponent")
-);
+const OtherComponent = React.lazy(() => import("./OtherComponent"));
 
 function MyComponent() {
   return (
@@ -100,9 +96,7 @@ const HomePage = lazy(() => import("./Home"));
 const ProfilePage = lazy(() => import("./Profile"));
 const PostNewPage = lazy(() => import("./Post/New"));
 const LoginPage = lazy(() => import("./Auth"));
-const PostByPostIdPage = lazy(
-  () => import("./Post/[postId]")
-);
+const PostByPostIdPage = lazy(() => import("./Post/[postId]"));
 const PostEditPage = lazy(() => import("./Post/Edit"));
 const MyPostsPage = lazy(() => import("./Profile/Myposts"));
 
@@ -111,9 +105,7 @@ const AppRouter = () => {
     <Router>
       <Navbar />
       <Main>
-        <Suspense fallback={<LoadingIndicator />}>
-          {/* ... 라우팅 컴포넌트들 */}
-        </Suspense>
+        <Suspense fallback={<LoadingIndicator />}>{/* ... 라우팅 컴포넌트들 */}</Suspense>
       </Main>
       <Footer />
     </Router>
@@ -196,8 +188,7 @@ CSS는 Render Blocking Resource입니다. Share it!은 Pretendard라는 웹 폰�
   font-weight: 800;
   font-display: swap;
   src: local("Pretendard ExtraBold"),
-    url("../fonts/Pretendard/Pretendard-Black.subset.woff2")
-      format("woff2"), url("../fonts/Pretendard/Pretendard-ExtraBold.subset.woff")
+    url("../fonts/Pretendard/Pretendard-Black.subset.woff2") format("woff2"), url("../fonts/Pretendard/Pretendard-ExtraBold.subset.woff")
       format("woff");
 }
 /* 똑같이 font-weight에 따라 다 불러옵니다. */

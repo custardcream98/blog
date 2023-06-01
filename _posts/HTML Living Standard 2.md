@@ -56,9 +56,9 @@ Text-level 요소는 **요소 안의 컨텐츠의 크기만큼만 영역을 점�
 
 ```html
 <p>
-  Lorem ipsum dolor sit amet consectetur adipisicing elit. Ex suscipit non ad et
-  nemo voluptatum facere assumenda fugiat soluta sapiente! Non similique nostrum
-  soluta eaque nobis consequuntur expedita, veniam distinctio?
+  Lorem ipsum dolor sit amet consectetur adipisicing elit. Ex suscipit non ad et nemo voluptatum
+  facere assumenda fugiat soluta sapiente! Non similique nostrum soluta eaque nobis consequuntur
+  expedita, veniam distinctio?
 </p>
 ```
 
@@ -326,9 +326,7 @@ HTML 안에서 또 다른 HTML 페이지를 보여주고 싶을 때 사용하는
 
 ```html
 <form action="">
-  <label for="myDevice"
-    >현재 사용하고 있는 스마트폰의 제조사를 선택해주세요</label
-  >
+  <label for="myDevice">현재 사용하고 있는 스마트폰의 제조사를 선택해주세요</label>
   <select name="device" id="myDevice">
     <option value="iphone">아이폰</option>
     <option value="galaxy">갤럭시폰</option>

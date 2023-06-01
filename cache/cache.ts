@@ -1,10 +1,10 @@
-import { JSDOM } from "jsdom";
-import fs from "fs";
+import { markdownToHtmlForCache } from "src/lib/utils/markdownToHtml";
+import { getAllPosts } from "src/lib/utils/posts";
+import type { CachePost } from "src/types/cache";
+import type { PostTypeWithoutContent } from "src/types/post";
 
-import { markdownToHtmlForCache } from "lib/utils/markdownToHtml";
-import { getAllPosts } from "lib/utils/posts";
-import type { PostTypeWithoutContent } from "types/post";
-import type { CachePost } from "types/cache";
+import fs from "fs";
+import { JSDOM } from "jsdom";
 
 const POST_PER_PAGE = 5;
 
@@ -21,83 +21,56 @@ const postsData = getAllPosts([
 
 (async () => {
   const postsCache: CachePost[] = await Promise.all(
-    postsData.map(
-      async ({ slug, title, content, date }) => {
-        const cacheHTML = await markdownToHtmlForCache(
-          content
-        );
-        const { document: cacheDocument } = new JSDOM(
-          cacheHTML
-        ).window;
-        const elements = cacheDocument.querySelectorAll(
-          "h1, h2, h3, h4, h5, h6, p, ol, ul"
-        );
+    postsData.map(async ({ slug, title, content, date }) => {
+      const cacheHTML = await markdownToHtmlForCache(content);
+      const { document: cacheDocument } = new JSDOM(cacheHTML).window;
+      const elements = cacheDocument.querySelectorAll("h1, h2, h3, h4, h5, h6, p, ol, ul");
 
-        let extractedContent = "";
+      let extractedContent = "";
 
-        elements.forEach(
-          (ele) =>
-            (extractedContent +=
-              ele.textContent?.replaceAll("\n", "") + " ")
-        );
+      elements.forEach((ele) => (extractedContent += ele.textContent?.replaceAll("\n", "") + " "));
 
-        return {
-          slug,
-          title,
-          date,
-          content: extractedContent,
-        };
-      }
-    )
+      return {
+        content: extractedContent,
+        date,
+        slug,
+        title,
+      };
+    }),
   );
 
-  postsCache.sort(
-    (post1, post2) =>
-      post1.content.length - post2.content.length
-  );
+  postsCache.sort((post1, post2) => post1.content.length - post2.content.length);
 
-  fs.writeFile(
-    `./cache/cache.json`,
-    JSON.stringify(postsCache),
-    (error) => {
-      if (error) {
-        console.error(error);
-      }
-      console.log("캐시 생성 완료");
+  fs.writeFile("./cache/cache.json", JSON.stringify(postsCache), (error) => {
+    if (error) {
+      console.error(error);
     }
-  );
+    console.log("캐시 생성 완료");
+  });
 
   const postByPageArr = postsData
-    .sort(
-      (post1, post2) =>
-        Date.parse(post2.date) - Date.parse(post1.date)
-    )
+    .sort((post1, post2) => Date.parse(post2.date) - Date.parse(post1.date))
     .reduce<[PostTypeWithoutContent[]]>(
       (acc, post, i) => {
-        if (i % POST_PER_PAGE === 0 && i !== 0)
-          acc.push([]);
+        if (i % POST_PER_PAGE === 0 && i !== 0) acc.push([]);
         acc[Math.floor(i / POST_PER_PAGE)].push({
-          slug: post.slug,
-          title: post.title,
-          date: post.date,
           category: post.category,
           coverImage: post.coverImage,
+          date: post.date,
           excerpt: post.excerpt,
           ogImage: post.ogImage,
+          slug: post.slug,
+          title: post.title,
         });
         return acc;
       },
-      [[]]
+      [[]],
     );
 
-  fs.writeFile(
-    `./cache/postByPageArr.json`,
-    JSON.stringify(postByPageArr),
-    (error) => {
-      if (error) {
-        console.error(error);
-      }
-      console.log("postByPageArr 캐시 생성 완료");
+  fs.writeFile("./cache/postByPageArr.json", JSON.stringify(postByPageArr), (error) => {
+    if (error) {
+      console.error(error);
     }
-  );
+    console.log("postByPageArr 캐시 생성 완료");
+  });
 })();
