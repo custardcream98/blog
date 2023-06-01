@@ -1,7 +1,7 @@
 import IconButton from "src/components/Common/IconButton";
 import LinkIcon from "src/components/Common/LinkIcon";
-import useIsMounted from "src/lib/hook/useIsMounted";
-import useWindowSize from "src/lib/hook/useWindowSize";
+import useIsMounted from "src/hook/useIsMounted";
+import useWindowSize from "src/hook/useWindowSize";
 
 import Image, { type StaticImageData } from "next/image";
 import { useCallback, useState } from "react";

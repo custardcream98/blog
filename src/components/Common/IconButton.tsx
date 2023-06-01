@@ -1,4 +1,4 @@
-import useWindowSize from "src/lib/hook/useWindowSize";
+import useWindowSize from "src/hook/useWindowSize";
 
 import { type ComponentPropsWithoutRef, createElement, forwardRef } from "react";
 import { IconType } from "react-icons";

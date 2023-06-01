@@ -2,7 +2,7 @@ import BlogIcon from "src/components/Common/BlogIcon";
 import { ResponsiveIconButton } from "src/components/Common/IconButton";
 import LogoTitleSpan from "src/components/Common/LogoTitleSpan";
 import Searchbar from "src/components/Searchbar";
-import useWindowSize from "src/lib/hook/useWindowSize";
+import useWindowSize from "src/hook/useWindowSize";
 
 import DarkmodeSwitch from "./DarkmodeSwitch";
 import NavList, { NavItem } from "./NavList";

@@ -1,6 +1,6 @@
 "use client";
 
-import useSearchResults from "src/lib/hook/useSearchResults";
+import useSearchResults from "src/hook/useSearchResults";
 
 import SearchbarCloseButton from "./SearchbarCloseButton";
 import SearchResults from "./SearchResults";

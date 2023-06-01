@@ -1,4 +1,4 @@
-import useIsMounted from "src/lib/hook/useIsMounted";
+import useIsMounted from "src/hook/useIsMounted";
 import { getIsDarkmodeActivatedOnLocal } from "src/lib/localStorage";
 
 import { type PropsWithChildren, useLayoutEffect } from "react";

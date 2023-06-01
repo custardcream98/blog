@@ -1,5 +1,5 @@
 import Button from "src/components/Common/Button";
-import useCommentForm from "src/lib/hook/useCommentForm";
+import useCommentForm from "src/hook/useCommentForm";
 
 import { useCallback, useState } from "react";
 import { ud, utld } from "utility-class-components";

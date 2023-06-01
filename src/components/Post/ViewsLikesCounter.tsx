@@ -1,5 +1,5 @@
-import useLikeCount from "src/lib/hook/useLikeCount";
-import useViewCount from "src/lib/hook/useViewCount";
+import useLikeCount from "src/hook/useLikeCount";
+import useViewCount from "src/hook/useViewCount";
 
 import { IconContext } from "react-icons";
 import { BsHeart, BsHeartFill } from "react-icons/bs";

@@ -1,6 +1,6 @@
 import Button from "src/components/Common/Button";
+import useEditable from "src/hook/useEditable";
 import { deleteComment } from "src/lib/firebaseSetup/firebaseApps";
-import useEditable from "src/lib/hook/useEditable";
 import { CommentEditState } from "src/types/comment";
 
 import { useCommentPostTitleContext } from "../../../context";
