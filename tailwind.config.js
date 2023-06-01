@@ -27,7 +27,6 @@ module.exports = {
       animation: {
         "bg-gradient": "bg-gradient 3s linear infinite",
         shake: "shake 0.2s",
-        "shake-reverse": "shake 0.2s reverse",
         show: "show 0.2s ease",
       },
       boxShadow: {

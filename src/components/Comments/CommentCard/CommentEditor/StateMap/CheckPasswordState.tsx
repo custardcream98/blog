@@ -10,7 +10,7 @@ import { useCommentEditorStateSetter } from "../context";
 import CommentOverlapWrapper from "./CommentOverlapWrapper";
 
 import { FormEventHandler, useCallback, useEffect, useState } from "react";
-import { ud, utld } from "utility-class-components";
+import { utld } from "utility-class-components";
 
 type Props = {
   stateTo: CommentEditState;
@@ -20,7 +20,13 @@ export default function CheckPasswordState({ stateTo }: Props) {
   const postTitle = useCommentPostTitleContext();
   const { commentId, password } = useCommentDataContext();
   const [errorMessage, setErrorMessage] = useState("");
-  const [shakeToggle, setShakeToggle] = useState(false);
+  const [isAnimatingShake, setIsAnimatingShake] = useState(false);
+  const handleShakeAnimationStart = useCallback(() => {
+    setIsAnimatingShake(true);
+  }, []);
+  const handleShakeAnimationEnd = useCallback(() => {
+    setIsAnimatingShake(false);
+  }, []);
 
   const [isDeleting, setIsDeleting] = useState(false);
 
@@ -33,7 +39,7 @@ export default function CheckPasswordState({ stateTo }: Props) {
       const isPasswordCorrect = password === getPasswordVal();
 
       if (!isPasswordCorrect) {
-        setShakeToggle((prev) => !prev);
+        handleShakeAnimationStart();
         clearPasswordInput();
         return setErrorMessage("비밀번호가 틀렸습니다.");
       }
@@ -49,7 +55,16 @@ export default function CheckPasswordState({ stateTo }: Props) {
 
       return changeStateTo(stateTo);
     },
-    [password, getPasswordVal, clearPasswordInput, stateTo, changeStateTo, commentId, postTitle],
+    [
+      password,
+      getPasswordVal,
+      clearPasswordInput,
+      stateTo,
+      changeStateTo,
+      commentId,
+      postTitle,
+      handleShakeAnimationStart,
+    ],
   );
 
   useEffect(() => {
@@ -79,7 +94,14 @@ export default function CheckPasswordState({ stateTo }: Props) {
           <SubmitButton type='submit' width='40px' height='25px' isLoading={isDeleting}>
             입력
           </SubmitButton>
-          {errorMessage && <ErrorMessage shakeToggle={shakeToggle}>{errorMessage}</ErrorMessage>}
+          {errorMessage && (
+            <ErrorMessage
+              isAnimatingShake={isAnimatingShake}
+              onAnimationEnd={handleShakeAnimationEnd}
+            >
+              {errorMessage}
+            </ErrorMessage>
+          )}
         </InputWrapper>
       </Form>
     </CommentOverlapWrapper>
@@ -106,6 +128,13 @@ const Input = utld.input`
   w-[12.5rem]
 
   px-[0.3rem]
+
+  bg-bg-light
+  dark:bg-bg-dark
+
+  border
+  border-default-light
+  dark:border-default-dark
 `;
 
 const SubmitButton = utld(Button)`
@@ -113,7 +142,7 @@ const SubmitButton = utld(Button)`
   left-[12.8125rem]
 `;
 
-type ErrorMessageProps = { shakeToggle: boolean };
+type ErrorMessageProps = { isAnimatingShake: boolean };
 
 const ErrorMessage = utld.span<ErrorMessageProps>`
   absolute
@@ -123,12 +152,5 @@ const ErrorMessage = utld.span<ErrorMessageProps>`
   text-red-500
   text-[0.8rem]
 
-  ${({ shakeToggle }) =>
-    shakeToggle
-      ? ud`
-        animate-shake
-      `
-      : ud`
-        animate-shake-reverse
-      `}
+  ${({ isAnimatingShake }) => isAnimatingShake && "animate-shake"}
 `;
