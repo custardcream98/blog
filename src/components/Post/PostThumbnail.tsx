@@ -1,3 +1,4 @@
+import useIsDarkmodeActivated from "src/hook/useIsDarkmodeActivated";
 import { CoverImage } from "src/types/post";
 
 import Image from "next/image";
@@ -11,6 +12,8 @@ const PLACEHOLDERS = {
 };
 
 const Thumbnail = utld(Image)`
+  block
+
   rounded-[4px]
 
   w-full
@@ -22,35 +25,22 @@ type Props = CoverImage & {
 };
 
 function PostThumbnail({ darkThumbnail, lightThumbnail, title }: Props) {
+  const isDarkmodeActivated = useIsDarkmodeActivated();
   const thumbnailAlt = title + " 썸네일";
+  const thumbnailSrc = isDarkmodeActivated ? darkThumbnail : lightThumbnail;
 
   return (
-    <>
-      <Thumbnail
-        className='hidden dark:block'
-        key={darkThumbnail}
-        src={darkThumbnail}
-        alt={thumbnailAlt}
-        priority
-        width={1200}
-        height={630}
-        placeholder='blur'
-        blurDataURL={PLACEHOLDERS.DARK}
-        quality={100}
-      />
-      <Thumbnail
-        className='block dark:hidden'
-        key={lightThumbnail}
-        src={lightThumbnail}
-        alt={thumbnailAlt}
-        priority
-        width={1200}
-        height={630}
-        placeholder='blur'
-        blurDataURL={PLACEHOLDERS.DARK}
-        quality={100}
-      />
-    </>
+    <Thumbnail
+      key={thumbnailSrc}
+      src={thumbnailSrc}
+      alt={thumbnailAlt}
+      priority
+      width={1200}
+      height={630}
+      placeholder='blur'
+      blurDataURL={PLACEHOLDERS[isDarkmodeActivated ? "DARK" : "LIGHT"]}
+      quality={100}
+    />
   );
 }
 
