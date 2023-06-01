@@ -64,9 +64,12 @@ const useCommentForm = (isForEdit: boolean) => {
       const password = getPassword();
       const comment = getComment();
 
-      if (!username || !password || !comment || (password && password.length <= 4)) {
+      if (!username || !password || !comment) {
         setIsLoading(false);
         throw Error("입력 오류");
+      } else if (password.length <= 3) {
+        alert("비밀번호는 4자 이상 입력해주세요.");
+        throw Error("비밀번호가 너무 짧습니다.");
       }
 
       if (isForEdit) {
