@@ -76,7 +76,6 @@ const ExcerptText = utld.p`
   w-full
 
   line-clamp-3
-  overrflow-elipsis
   text-[1rem]
   leading-[1.5]
   h-[4.5rem]  
@@ -93,7 +92,6 @@ const DateSpanForHeroPost = utld(DateSpan)`
 
 const TitleText = utld.span`
   line-clamp-2
-  overrflow-elipsis
   text-[1.125rem]
   leading-[1.5]
   max-h-[3.375rem]

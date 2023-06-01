@@ -16,6 +16,9 @@ const Container = utld.aside<{
   justify-between
   gap-6
 
+  mobile:flex-col
+  mobile:gap-2
+
   ${({ formation }) => formation === "next-only" && "text-right"}
 `;
 
@@ -33,8 +36,16 @@ const LinkWrapper = utld(Link)`
     text-[0.8rem]
     mb-1
     block
+    mobile:text-[0.6rem]
   )
-  [&>span:last-child]:text-[1rem]
+
+  [&>span:last-child]:(
+    text-[1rem]
+    h-[2.84375rem]
+    line-clamp-2
+    mobile:text-[0.8rem]
+    mobile:h-[2.2rem]
+  )
 
   hover:(
     text-accent-light
@@ -58,7 +69,7 @@ export default function PrevNextPost({ prevSlug, prevTitle, nextSlug, nextTitle 
           }}
         >
           <span>← 이전글</span>
-          <span>{prevTitle}</span>
+          <span className='pl-3'>{prevTitle}</span>
         </LinkWrapper>
       )}
       {nextTitle && (
@@ -69,7 +80,7 @@ export default function PrevNextPost({ prevSlug, prevTitle, nextSlug, nextTitle 
           }}
         >
           <span>다음글 →</span>
-          <span>{nextTitle}</span>
+          <span className='pr-3'>{nextTitle}</span>
         </LinkWrapper>
       )}
     </Container>
