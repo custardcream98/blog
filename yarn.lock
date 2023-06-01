@@ -5053,7 +5053,7 @@ progress@2.0.3:
   resolved "https://registry.yarnpkg.com/progress/-/progress-2.0.3.tgz#7e8cf8d8f5b8f239c1bc68beb4eb78567d572ef8"
   integrity sha512-7PiHtLll5LdnKIMw100I+8xJXR5gW2QwWYkT6iJva0bXitZKa/XMrSbdmg3r2Xnaidz9Qumd0VPaMrZlF9V9sA==
 
-prop-types@^15.8.1:
+prop-types@^15.6.2, prop-types@^15.8.1:
   version "15.8.1"
   resolved "https://registry.yarnpkg.com/prop-types/-/prop-types-15.8.1.tgz#67d87bf1a694f48435cf332c24af10214a3140b5"
   integrity sha512-oj87CgZICdulUohogVAR7AjlC0327U4el4L6eAvOqCeudMDVU0NThNaV+b9Df4dXgSP1gXMTnPdhfe/2qDH5cg==
@@ -5235,6 +5235,15 @@ react-loader-spinner@^5.1.7-beta.1:
     react-is "^18.2.0"
     styled-components "^5.3.5"
     styled-tools "^1.7.2"
+
+react@^16.0.0:
+  version "16.14.0"
+  resolved "https://registry.yarnpkg.com/react/-/react-16.14.0.tgz#94d776ddd0aaa37da3eda8fc5b6b18a4c9a3114d"
+  integrity sha512-0X2CImDkJGApiAlcf0ODKIneSwBPhqJawOa5wCtKbu7ZECrmS26NvtSILynQ66cgkT/RJ4LidJOc3bUESwmU8g==
+  dependencies:
+    loose-envify "^1.1.0"
+    object-assign "^4.1.1"
+    prop-types "^15.6.2"
 
 react@^18.2.0:
   version "18.2.0"
@@ -6175,10 +6184,12 @@ util-deprecate@^1.0.1, util-deprecate@^1.0.2:
   resolved "https://registry.yarnpkg.com/util-deprecate/-/util-deprecate-1.0.2.tgz#450d4dc9fa70de732762fbd2d4a28981419a0ccf"
   integrity sha512-EPD5q1uXyFxJpCrLnCc1nHnq3gOa6DZBocAIiI2TaSCA7VCJ1UJDMagCzIkXNsUYfD1daK//LTEQ8xiIbrHtcw==
 
-utility-class-components@^0.1.3:
-  version "0.1.3"
-  resolved "https://registry.yarnpkg.com/utility-class-components/-/utility-class-components-0.1.3.tgz#7cdde2a83dc2e2c7ba7ee40c587539c2b1923dc8"
-  integrity sha512-0zP6BPxBEL8WtUpW3yUUh8tz1iA57Qp+qObJKlGX/8ulZDzMqbHVK6oGJ1XGqbvuZVnZgvF/lheQpWpPAMSwZw==
+utility-class-components@^0.1.4:
+  version "0.1.4"
+  resolved "https://registry.yarnpkg.com/utility-class-components/-/utility-class-components-0.1.4.tgz#a9785ebc976d9c7dfc02a1bf9ad6e4409937eb7f"
+  integrity sha512-dT1JttGMQvB5qMJ4T654bZ5DQFzGNHaoaQHIUHnDtOUeBegrQ4QglmzgsT0pBsD/x9bkloBR2LJKoZHfP8g2HA==
+  dependencies:
+    react "^16.0.0"
 
 uuid@^8.0.0:
   version "8.3.2"
