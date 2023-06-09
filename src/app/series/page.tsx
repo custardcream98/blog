@@ -1,13 +1,11 @@
 import { Container, LinkDecorated, Title } from "src/components/Common";
-import { getSeries } from "src/lib/utils/posts";
 
 import { sharedMetadata } from "../sharedMetadata";
 
+import { SERIES, SERIES_COUNT_MAP } from "./data";
+
 import { type Metadata } from "next";
 import { utld } from "utility-class-components";
-
-const SERIES_COUNT_MAP = getSeries();
-const SERIES = Object.keys(SERIES_COUNT_MAP);
 
 const META_TITLE = "Series";
 

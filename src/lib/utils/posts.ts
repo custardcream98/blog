@@ -7,7 +7,7 @@ import { join } from "path";
 const postsDirectory = join(process.cwd(), "_posts");
 const aboutPageDirectory = join(process.cwd(), "about.md");
 
-const getTimeOfPost = (post: PostType) => new Date(post.date).getTime();
+export const getTimeOfPost = (post: PostType) => new Date(post.date).getTime();
 
 export function getPostSlugs() {
   return fs.readdirSync(postsDirectory).filter((dir) => /\.md$/.test(dir));
@@ -69,21 +69,6 @@ export function getAllPosts(fields: PostMeta[] = []) {
   return posts;
 }
 
-export function getSeries() {
-  const slugs = getPostSlugs();
-  const posts = slugs
-    .map((slug) => getPostBySlug(slug, ["series"]))
-    .sort((post1, post2) => getTimeOfPost(post2) - getTimeOfPost(post1));
-  const series: { [key: string]: number } = {};
-  posts.forEach((post) => {
-    if (post.series) {
-      if (!Object.hasOwn(series, post.series)) series[post.series] = 1;
-      else series[post.series] += 1;
-    }
-  });
-  return series;
-}
-
 export function getPrevNextPosts(slug: string): PrevNextPosts {
   const posts = getAllPosts(["title", "slug", "excerpt", "date"]);
 
@@ -129,15 +114,4 @@ export function getPostByCategory(category: string) {
   });
 
   return categoryPosts;
-}
-
-export function getPostBySeries(series: string) {
-  const posts = getAllPosts(["title", "slug", "excerpt", "date", "category", "series"]);
-  const seriesPosts: PostType[] = [];
-
-  posts.forEach((post) => {
-    if (post.series === series) seriesPosts.push(post);
-  });
-
-  return seriesPosts;
 }

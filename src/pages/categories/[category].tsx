@@ -1,4 +1,4 @@
-import CategoryCard from "src/components/Category/CategoryCard";
+import CategoryCard from "src/app/series/[series]/_components/CategoryCard";
 import { Container, Title } from "src/components/Common";
 import Meta from "src/components/Layout/Meta";
 import categoryTheme from "src/constants/categoryTheme";
