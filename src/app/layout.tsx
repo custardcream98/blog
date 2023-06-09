@@ -3,6 +3,7 @@ import "@fontsource/nanum-myeongjo";
 import ProjectAd from "src/components/Common/ProjectAd";
 
 import { Footer, Navigation, ThemeSetter } from "./_components";
+import { sharedMetadata } from "./sharedMetadata";
 
 import "@fontsource/noto-sans/300.css";
 import "@fontsource/noto-sans/500.css";
@@ -20,10 +21,46 @@ import "src/styles/print.css";
 import "src/styles/tailwind.css";
 import "src/styles/post.css";
 
+import { type Metadata } from "next";
 import Script from "next/script";
 import DevportImage from "public/static/ad/devport.png";
 import { type PropsWithChildren } from "react";
 import { utld } from "utility-class-components";
+
+const DEFAULT_TITLE = "FE 개발자 박시우의 기술 블로그";
+const DEFAULT_URL = new URL("https://shiwoo.dev");
+
+export const metadata: Metadata = {
+  ...sharedMetadata,
+
+  metadataBase: DEFAULT_URL,
+
+  openGraph: {
+    ...sharedMetadata.openGraph,
+    locale: "ko_KR",
+    siteName: DEFAULT_TITLE,
+    title: {
+      default: DEFAULT_TITLE,
+      template: `${DEFAULT_TITLE}: %s`,
+    },
+  },
+
+  title: {
+    default: DEFAULT_TITLE,
+    template: `${DEFAULT_TITLE}: %s`,
+  },
+
+  twitter: {
+    ...sharedMetadata.twitter,
+    card: "summary_large_image",
+    creator: "@ova_sw",
+    site: "@ova_sw",
+    title: {
+      default: DEFAULT_TITLE,
+      template: `${DEFAULT_TITLE}: %s`,
+    },
+  },
+};
 
 export default function RootLayout({ children }: PropsWithChildren) {
   console.clear();
