@@ -5,13 +5,14 @@ import type { Metadata } from "next";
 const DEFAULT_KEYWORDS = ["HTML", "CSS", "JavaScript"];
 const DEFAULT_DESCRIPTION =
   "예쁘고 간결한 것을 정말 좋아하는 개발자 박시우의 블로그입니다. 공부한 것들, 공유하고 싶은 내용을 올립니다.";
-const DEFAULT_URL = "https://shiwoo.dev";
-const DEFAULT_IMAGE = DEFAULT_URL + "/static/img/thumbnail.webp";
+const DEFAULT_URL = new URL("https://shiwoo.dev");
+const DEFAULT_IMAGE = "/static/img/thumbnail.webp";
 const DEFAULT_TITLE = "FE 개발자 박시우의 기술 블로그";
 
 export const metadata: Metadata = {
   description: DEFAULT_DESCRIPTION,
   keywords: DEFAULT_KEYWORDS,
+  metadataBase: DEFAULT_URL,
   openGraph: {
     description: DEFAULT_DESCRIPTION,
     images: [
@@ -29,7 +30,6 @@ export const metadata: Metadata = {
       template: `${DEFAULT_TITLE}: %s`,
     },
     type: "website",
-    url: DEFAULT_URL,
   },
   title: {
     default: DEFAULT_TITLE,
@@ -47,7 +47,10 @@ export const metadata: Metadata = {
       width: 1556,
     },
     site: "@ova_sw",
-    title: DEFAULT_TITLE,
+    title: {
+      default: DEFAULT_TITLE,
+      template: `${DEFAULT_TITLE}: %s`,
+    },
   },
 };
 

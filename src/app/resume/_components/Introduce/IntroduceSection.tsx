@@ -1,27 +1,10 @@
-import PrintSvg from "src/components/Common/Svgs/PrintSvg";
-import SvgContainer from "src/components/Common/Svgs/SvgContainer";
-import { setIsDarkmodeActivatedOnLocal } from "src/lib/localStorage";
-
-import { iconClickableStyle } from "../ResumeLink";
 import { ResumeLink, S } from "..";
+
+import { PrintButton } from "./PrintButton";
 
 import { utld } from "utility-class-components";
 
 function IntroduceSection() {
-  const handlePrint = async () => {
-    const $root = document.documentElement;
-    const isDark = $root.classList.contains("dark");
-
-    if (isDark) {
-      $root.classList.remove("dark");
-      setIsDarkmodeActivatedOnLocal(false);
-
-      await new Promise((resolve) => setTimeout(resolve, 500));
-    }
-
-    window.print();
-  };
-
   return (
     <S.Section>
       <h3 className='sr-only'>자기 소개</h3>
@@ -52,12 +35,7 @@ function IntroduceSection() {
         </li>
       </ContactList>
       <PrintButtonWrapper>
-        <button type='button' onClick={handlePrint} className={iconClickableStyle}>
-          <SvgContainer svgWidth='0.95rem' svgHeight='0.95rem'>
-            <PrintSvg />
-          </SvgContainer>
-          프린트하기
-        </button>
+        <PrintButton />
       </PrintButtonWrapper>
     </S.Section>
   );
