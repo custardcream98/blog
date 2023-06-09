@@ -1,6 +1,6 @@
 import { LinkDecorated } from "src/components/Common";
 
-import { useRouter } from "next/router";
+import { usePathname } from "next/navigation";
 import type { PropsWithChildren } from "react";
 import { utld } from "utility-class-components";
 
@@ -17,9 +17,8 @@ function NavItem({ href, children }: NavItemProps) {
     "/",
   )[1];
 
-  const router = useRouter();
-  const currentPath = router.pathname.split("/")[1];
-  const isActive = currentPath === hrefWithoutHash;
+  const pathname = usePathname();
+  const isActive = pathname === hrefWithoutHash;
 
   return (
     <NavItemLi>

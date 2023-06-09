@@ -6,11 +6,9 @@ import { BsFillMoonFill } from "react-icons/bs";
 import { ImSun } from "react-icons/im";
 import { utld } from "utility-class-components";
 
-("use client");
-
 const ICON_CONTEXT = { size: "90%" };
 
-function DarkmodeSwitch() {
+export function DarkmodeSwitch() {
   const [isDarkmodeActivated, setIsDarkmodeActivated] = useState(false);
 
   useEffect(() => {
@@ -82,5 +80,3 @@ const Button = utld.button`
     dark:shadow-default-dark
   )
 `;
-
-export default DarkmodeSwitch;

@@ -1,6 +1,6 @@
 import { ResponsiveIconButton } from "src/components/Common/IconButton";
 
-import { cssOutlineOnFocus } from "../Layout/Navigation/styles";
+import { cssOutlineOnFocus } from "../Navigation/styles";
 
 import { utld } from "utility-class-components";
 

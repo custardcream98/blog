@@ -1,3 +1,5 @@
+"use client";
+
 import useIsMounted from "src/hook/useIsMounted";
 import { getIsDarkmodeActivatedOnLocal } from "src/lib/localStorage";
 

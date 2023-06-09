@@ -1,21 +1,29 @@
+import { generateNumberArray } from "src/utils";
+
 import Link from "next/link";
-import { Children } from "react";
 import { MdOutlineKeyboardArrowLeft, MdOutlineKeyboardArrowRight } from "react-icons/md";
-import { utld } from "utility-class-components";
+import { ud, utld } from "utility-class-components";
 
 type Props = {
   pageScale: number;
   currentPage: number;
 };
 
-export default function Paging({ pageScale, currentPage }: Props) {
+export function Paging({ pageScale, currentPage }: Props) {
+  const isFirstPage = currentPage === 1;
+  const isLastPage = currentPage === pageScale;
+  const prevPageNumber = currentPage - 1;
+  const nextPageNumber = currentPage + 1;
+
+  const pagesArray = generateNumberArray(pageScale, 1);
+
   return (
     <Container>
-      {currentPage !== 1 && (
+      {!isFirstPage && (
         <LeftArrow
           href={{
             pathname: "/",
-            query: { page: currentPage - 1 },
+            query: { page: prevPageNumber },
           }}
         >
           <span className='sr-only'>이전 글</span>
@@ -26,37 +34,25 @@ export default function Paging({ pageScale, currentPage }: Props) {
         </LeftArrow>
       )}
       <PagenumList>
-        {Children.toArray(
-          new Array(pageScale).fill(0).map((_, index) => (
-            <li>
-              {index + 1 === currentPage ? (
-                <SelectedPagenum
-                  href={{
-                    pathname: "/",
-                    query: { page: index + 1 },
-                  }}
-                >
-                  {index + 1}
-                </SelectedPagenum>
-              ) : (
-                <Pagenum
-                  href={{
-                    pathname: "/",
-                    query: { page: index + 1 },
-                  }}
-                >
-                  {index + 1}
-                </Pagenum>
-              )}
-            </li>
-          )),
-        )}
+        {pagesArray.map((pageNum) => (
+          <li key={pageNum}>
+            <Pagenum
+              href={{
+                pathname: "/",
+                query: { page: pageNum },
+              }}
+              isSelectedPage={pageNum === currentPage}
+            >
+              {pageNum}
+            </Pagenum>
+          </li>
+        ))}
       </PagenumList>
-      {currentPage !== pageScale && (
+      {!isLastPage && (
         <RightArrow
           href={{
             pathname: "/",
-            query: { page: currentPage + 1 },
+            query: { page: nextPageNumber },
           }}
         >
           <span className='sr-only'>다음 글</span>
@@ -103,16 +99,20 @@ const RightArrow = utld(StyledLink)`
   right-[-1.875rem]
 `;
 
-const Pagenum = utld(StyledLink)`
+const selectedPageNumStyle = ud`
+  font-medium
+  scale-[1.4]
+`;
+
+const Pagenum = utld(StyledLink)<{
+  isSelectedPage: boolean;
+}>`
   inline-block
 
   text-default-light
   dark:text-default-dark
   
   font-light
-`;
 
-const SelectedPagenum = utld(Pagenum)`
-  font-medium
-  scale-[1.4]
+  ${({ isSelectedPage }) => isSelectedPage && selectedPageNumStyle}
 `;

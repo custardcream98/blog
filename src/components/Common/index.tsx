@@ -1,7 +1,7 @@
 import Link from "next/link";
 import { utld } from "utility-class-components";
 
-export const Container = utld.div`
+export const Container = utld.section`
   mx-auto
 
   w-[90vw]

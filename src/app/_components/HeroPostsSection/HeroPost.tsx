@@ -16,17 +16,12 @@ type Props = {
   slug: string;
 };
 
-export default function HeroPost({ index, maxPostCount, title, date, excerpt, slug }: Props) {
+export function HeroPost({ index, maxPostCount, title, date, excerpt, slug }: Props) {
   const isLastPage = index === maxPostCount - 1;
 
   return (
     <ContentContainer isLastPage={isLastPage}>
-      <LinkDecorated
-        href={{
-          pathname: "/posts/[slug]",
-          query: { slug },
-        }}
-      >
+      <LinkDecorated href={`/posts/${slug}`}>
         <Title>
           <TitleText>{title}</TitleText>
           <DateSpanForHeroPost date={date} />

@@ -1,3 +1,5 @@
+"use client";
+
 import IconButton from "src/components/Common/IconButton";
 import LinkIcon from "src/components/Common/LinkIcon";
 import useIsMounted from "src/hook/useIsMounted";

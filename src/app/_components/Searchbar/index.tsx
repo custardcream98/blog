@@ -82,7 +82,7 @@ type Props = {
   onSearchbarClose: () => void;
 };
 
-export default function Searchbar({ isSearchbarOn, onSearchbarClose }: Props) {
+export function Searchbar({ isSearchbarOn, onSearchbarClose }: Props) {
   const [searchInput, setSearchInput] = useState("");
   const { searchResults, clearSearchedResults } = useSearchResults(searchInput);
   const inputRef = useRef<HTMLInputElement>(null);

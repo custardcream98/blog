@@ -56,7 +56,7 @@ const StyledLogoTitleSpan = utld(LogoTitleSpan)`
   mb-[0.3rem]
 `;
 
-function Footer() {
+export function Footer() {
   const YEAR = new Date().getFullYear();
 
   return (
@@ -95,5 +95,3 @@ function Footer() {
     </Container>
   );
 }
-
-export default Footer;
