@@ -1,4 +1,4 @@
-import { Container as DefaultContainer } from "src/components
+import { Container as DefaultContainer } from "src/components";
 
 import { ud, utld } from "utility-class-components";
 
