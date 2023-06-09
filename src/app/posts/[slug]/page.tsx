@@ -97,7 +97,7 @@ export default async function PostsDynamicPage({ params: { slug } }: PostParams)
     "coverImage",
   ]);
 
-  const prevNextPosts = await getPrevNextPosts(slug);
+  const prevNextPosts = await getPrevNextPosts(decodedSlug);
 
   const contentHtml = await markdownToHtml(post.content);
 
