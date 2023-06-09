@@ -2,26 +2,26 @@ import { PostCard } from "src/app/_components";
 import { sharedMetadata } from "src/app/sharedMetadata";
 import { Container, Title } from "src/components/Common";
 
-import { SERIES } from "../data";
+import { CATEGORIES } from "../data";
 
-import { getPostBySeries } from "./data";
+import { getPostByCategory } from "./data";
 
 import { type Metadata } from "next";
 import { utld } from "utility-class-components";
 
-type SeriesParams = {
+type CategoryParams = {
   params: {
-    series: string;
+    category: string;
   };
 };
 
-export const generateMetadata = ({ params: { series } }: SeriesParams): Metadata => {
-  const parsedSeries = decodeURI(series);
-  const META_TITLE = `시리즈 - ${parsedSeries}`;
+export const generateMetadata = ({ params: { category } }: CategoryParams): Metadata => {
+  const parsedCategory = decodeURI(category);
+  const META_TITLE = `카테고리 - ${parsedCategory}`;
 
   return {
     ...sharedMetadata,
-    keywords: parsedSeries,
+    keywords: parsedCategory,
     openGraph: {
       ...sharedMetadata.openGraph,
       title: META_TITLE,
@@ -37,31 +37,30 @@ export const generateMetadata = ({ params: { series } }: SeriesParams): Metadata
 };
 
 export const generateStaticParams = () => {
-  return SERIES.map((series) => ({
-    series,
+  return CATEGORIES.map((category) => ({
+    category,
   }));
 };
 
-export default function SeriesDynamicPage({ params: { series } }: SeriesParams) {
-  const parsedSeries = decodeURI(series);
-  const posts = getPostBySeries(parsedSeries);
+export default function CategoryDynamicPage({ params: { category } }: CategoryParams) {
+  const posts = getPostByCategory(category);
 
   return (
-    <SeriesContainer>
-      <SeriesTitle>{`<${parsedSeries} />`}</SeriesTitle>
+    <PostsContainer>
+      <PostTitle>{`<${category} />`}</PostTitle>
       <ol>
         {posts.map((post) => (
           <PostCard key={post.slug} {...post} />
         ))}
       </ol>
-    </SeriesContainer>
+    </PostsContainer>
   );
 }
 
-const SeriesContainer = utld(Container)`
+const PostsContainer = utld(Container)`
   !block
 `;
 
-const SeriesTitle = utld(Title)`
+const PostTitle = utld(Title)`
   inline-block
 `;

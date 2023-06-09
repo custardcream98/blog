@@ -1,13 +1,13 @@
 import { Container, Title } from "src/components/Common";
 import CategoryBadges from "src/components/Common/CategoryBadges";
-import categoryTheme, { type Categoires } from "src/constants/categoryTheme";
 
 import { sharedMetadata } from "../sharedMetadata";
+
+import { CATEGORIES } from "./data";
 
 import { type Metadata } from "next";
 
 const META_TITLE = "Categories";
-const CATEGORIES = Object.keys(categoryTheme) as Categoires[];
 
 export const metadata: Metadata = {
   ...sharedMetadata,

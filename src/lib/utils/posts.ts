@@ -102,16 +102,3 @@ export function getPrevNextPosts(slug: string): PrevNextPosts {
 }
 
 export const getAboutContent = () => fs.readFileSync(aboutPageDirectory, "utf8");
-
-export function getPostByCategory(category: string) {
-  const posts = getAllPosts(["title", "slug", "excerpt", "date", "category", "series"]);
-  const categoryPosts: PostType[] = [];
-
-  posts.forEach((post) => {
-    post.category.forEach((c) => {
-      if (c === category) categoryPosts.push(post);
-    });
-  });
-
-  return categoryPosts;
-}

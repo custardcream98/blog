@@ -5,9 +5,9 @@ import type PostType from "src/types/post";
 
 import { utld } from "utility-class-components";
 
-type CategoryCardProps = PostType;
+type PostCardProps = PostType;
 
-export function CategoryCard({ slug, title, date, category }: CategoryCardProps) {
+export function PostCard({ slug, title, date, category }: PostCardProps) {
   return (
     <Container>
       <LinkDecoratedForCate href={`/posts/${slug}`}>{title}</LinkDecoratedForCate>
