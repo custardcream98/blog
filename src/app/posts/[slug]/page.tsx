@@ -21,7 +21,7 @@ type PostParams = {
 };
 
 export const generateMetadata = async ({ params: { slug } }: PostParams): Promise<Metadata> => {
-  const decodedSlug = decodeURI(slug);
+  const decodedSlug = decodeURIComponent(slug);
   const { title, date, excerpt, coverImage, category, series } = await getPostBySlug(decodedSlug, [
     "title",
     "date",
@@ -84,7 +84,7 @@ export const generateStaticParams = async () => {
 };
 
 export default async function PostsDynamicPage({ params: { slug } }: PostParams) {
-  const decodedSlug = decodeURI(slug);
+  const decodedSlug = decodeURIComponent(slug);
 
   const post = await getPostBySlug(decodedSlug, [
     "title",

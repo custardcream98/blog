@@ -16,7 +16,7 @@ type SeriesParams = {
 };
 
 export const generateMetadata = ({ params: { series } }: SeriesParams): Metadata => {
-  const parsedSeries = decodeURI(series);
+  const parsedSeries = decodeURIComponent(series);
   const META_TITLE = `시리즈 - ${parsedSeries}`;
 
   return {
@@ -46,7 +46,7 @@ export const generateStaticParams = async () => {
 };
 
 export default async function SeriesDynamicPage({ params: { series } }: SeriesParams) {
-  const parsedSeries = decodeURI(series);
+  const parsedSeries = decodeURIComponent(series);
   const posts = await getPostBySeries(parsedSeries);
 
   return (

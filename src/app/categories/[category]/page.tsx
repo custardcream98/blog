@@ -17,7 +17,7 @@ type CategoryParams = {
 };
 
 export const generateMetadata = ({ params: { category } }: CategoryParams): Metadata => {
-  const parsedCategory = decodeURI(category);
+  const parsedCategory = decodeURIComponent(category);
   const META_TITLE = `카테고리 - ${parsedCategory}`;
 
   return {

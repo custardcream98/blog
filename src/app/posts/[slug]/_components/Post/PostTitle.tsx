@@ -19,7 +19,7 @@ export function PostTitle({ coverImage, title, category, date, series }: PostTit
   return (
     <>
       <Container>
-        {series && <SeriesName href={`/series/${encodeURI(series)}`}>{series}</SeriesName>}
+        {series && <SeriesName href={`/series/${encodeURIComponent(series)}`}>{series}</SeriesName>}
         <Title>{title}</Title>
         <DateSpanforTitle date={date} />
         <BadgeViewsLikesCounterContainer>

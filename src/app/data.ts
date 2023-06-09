@@ -19,7 +19,7 @@ export const getPostSlugs = () => {
 };
 
 const getPostFileData = (slug: string) => {
-  const fullPath = path.join(DIRECTORY_POSTS, `${slug.replace("%2C", ",")}.md`);
+  const fullPath = path.join(DIRECTORY_POSTS, `${slug}.md`);
   const file = fs.readFileSync(fullPath, "utf8");
   return matter(file);
 };
@@ -45,14 +45,13 @@ export const getPostBySlug = async <Field extends PostMeta[]>(
   slug: string,
   fields: Field,
 ): Promise<PostByFields<Field[number]>> => {
-  const { data, content } = getPostFileData(slug);
+  const { data, content } = getPostFileData(decodeURIComponent(slug));
 
   const postMeta = fields.reduce((postMeta, field) => {
     if (field === "slug") {
-      const realSlug = encodeURI(slug);
       return {
         ...postMeta,
-        slug: realSlug,
+        slug,
       };
     } else if (field === "content") {
       return {
