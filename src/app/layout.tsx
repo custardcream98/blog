@@ -17,7 +17,6 @@ import "@fontsource/source-code-pro/800.css";
 import "@fontsource/poppins/500.css";
 import "@fontsource/poppins/600.css";
 import "src/styles/font.css";
-import "src/styles/print.css";
 import "src/styles/tailwind.css";
 
 import { type Metadata } from "next";
