@@ -1,5 +1,5 @@
+import { getAllPosts } from "src/app/data";
 import { markdownToHtmlForCache } from "src/lib/utils/markdownToHtml";
-import { getAllPosts } from "src/lib/utils/posts";
 import type { CachePost } from "src/types/cache";
 import type { PostTypeWithoutContent } from "src/types/post";
 
@@ -8,18 +8,17 @@ import { JSDOM } from "jsdom";
 
 const POST_PER_PAGE = 5;
 
-const postsData = getAllPosts([
-  "slug",
-  "title",
-  "content",
-  "excerpt",
-  "date",
-  "coverImage",
-  "category",
-  "ogImage",
-]);
-
 (async () => {
+  const postsData = await getAllPosts([
+    "slug",
+    "title",
+    "content",
+    "excerpt",
+    "date",
+    "coverImage",
+    "category",
+  ]);
+
   const postsCache: CachePost[] = await Promise.all(
     postsData.map(async ({ slug, title, content, date }) => {
       const cacheHTML = await markdownToHtmlForCache(content);
@@ -58,7 +57,6 @@ const postsData = getAllPosts([
           coverImage: post.coverImage,
           date: post.date,
           excerpt: post.excerpt,
-          ogImage: post.ogImage,
           slug: post.slug,
           title: post.title,
         });

@@ -12,17 +12,8 @@ export type PostType = {
   category: Categoires[];
   coverImage: CoverImage;
   excerpt: string;
-  ogImage: {
-    url: string;
-  };
   content: string;
   series?: string;
-  prevTitle?: string;
-  prevSlug?: string;
-  prevExcerpt?: string;
-  nextTitle?: string;
-  nextSlug?: string;
-  nextExcerpt?: string;
 };
 
 export type PostTypeWithoutContent = Omit<PostType, "content">;
