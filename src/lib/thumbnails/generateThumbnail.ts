@@ -1,7 +1,5 @@
 import { PuppeteerBrowser } from "../puppeteer";
 
-import { renderToString } from "react-dom/server";
-
 export const wrapHtmlString = (htmlString: string) => {
   return `
   <style>
@@ -33,7 +31,8 @@ export const htmlStringToBuffer = async (content: string) => {
 };
 
 export const generateThumbnailBuffer = async (template: JSX.Element) => {
-  const htmlString = renderToString(template);
+  const ReactDOMServer = (await import("react-dom/server")).default;
+  const htmlString = ReactDOMServer.renderToString(template);
 
   const buffer = await htmlStringToBuffer(wrapHtmlString(htmlString));
 

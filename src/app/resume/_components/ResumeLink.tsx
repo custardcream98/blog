@@ -1,5 +1,5 @@
-import LinkSvg from "src/components/Common/Svgs/LinkSvg";
-import SvgContainer from "src/components/Common/Svgs/SvgContainer";
+import LinkSvg from "src/components/Svgs/LinkSvg";
+import SvgContainer from "src/components/Svgs/SvgContainer";
 import type { ResumeLink } from "src/types/resume";
 
 import { ud, utld } from "utility-class-components";

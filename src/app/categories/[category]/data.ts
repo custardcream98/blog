@@ -1,7 +1,8 @@
-import { getAllPosts } from "src/lib/utils/posts";
+import { getAllPosts } from "src/app/data";
+import { type Categoires } from "src/constants/categoryTheme";
 
-export function getPostByCategory(category: string) {
-  const posts = getAllPosts(["title", "slug", "excerpt", "date", "category", "series"]);
+export const getPostByCategory = async (category: Categoires) => {
+  const posts = await getAllPosts(["title", "slug", "excerpt", "date", "category", "series"]);
 
-  return posts.filter((post) => (post.category as string[]).includes(category));
-}
+  return posts.filter((post) => post.category.includes(category));
+};

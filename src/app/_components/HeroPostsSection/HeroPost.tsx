@@ -1,5 +1,4 @@
-import { LinkDecorated } from "src/components/Common";
-import DateSpan from "src/components/Common/DateSpan";
+import { DateSpan, LinkDecorated } from "src/components";
 
 import { ud, utld } from "utility-class-components";
 

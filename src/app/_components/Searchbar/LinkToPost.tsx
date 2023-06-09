@@ -1,5 +1,5 @@
 import { cssOutlineOnFocus } from "src/app/_components/Navigation/styles";
-import LinkIcon from "src/components/Common/LinkIcon";
+import { LinkIcon } from "src/components";
 
 import Link from "next/link";
 import { utld } from "utility-class-components";

@@ -1,11 +1,9 @@
-import { LinkDecorated } from "src/components/Common";
-import CategoryBadges from "src/components/Common/CategoryBadges";
-import DateSpan from "src/components/Common/DateSpan";
+import { CategoryBadges, DateSpan, LinkDecorated } from "src/components";
 import type PostType from "src/types/post";
 
 import { utld } from "utility-class-components";
 
-type PostCardProps = PostType;
+type PostCardProps = Pick<PostType, "slug" | "title" | "date" | "category">;
 
 export function PostCard({ slug, title, date, category }: PostCardProps) {
   return (

@@ -1,7 +1,7 @@
-import { getAllPosts } from "src/lib/utils/posts";
+import { getAllPosts } from "src/app/data";
 
-export const getPostBySeries = (series: string) => {
-  const posts = getAllPosts(["title", "slug", "excerpt", "date", "category", "series"]);
+export const getPostBySeries = async (series: string) => {
+  const posts = await getAllPosts(["title", "slug", "date", "category", "series"]);
 
   return posts.filter((post) => post.series === series);
 };

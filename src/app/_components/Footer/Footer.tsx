@@ -1,5 +1,4 @@
-import { LinkDecorated } from "src/components/Common";
-import LogoTitleSpan from "src/components/Common/LogoTitleSpan";
+import { LinkDecorated, LogoTitleSpan } from "src/components";
 
 import { utld } from "utility-class-components";
 

@@ -1,10 +1,8 @@
-import { getPostBySlug, getPostSlugs, getTimeOfPost } from "src/lib/utils/posts";
+import { getAllPosts } from "../data";
 
-const getSeries = () => {
-  const slugs = getPostSlugs();
-  const posts = slugs
-    .map((slug) => getPostBySlug(slug, ["series"]))
-    .sort((post1, post2) => getTimeOfPost(post2) - getTimeOfPost(post1));
+export const getSeries = async () => {
+  const posts = await getAllPosts(["series"]);
+
   const series: { [key: string]: number } = {};
   posts.forEach((post) => {
     if (post.series) {
@@ -14,6 +12,3 @@ const getSeries = () => {
   });
   return series;
 };
-
-export const SERIES_COUNT_MAP = getSeries();
-export const SERIES = Object.keys(SERIES_COUNT_MAP);

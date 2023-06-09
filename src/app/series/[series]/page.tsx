@@ -1,8 +1,8 @@
 import { PostCard } from "src/app/_components";
 import { sharedMetadata } from "src/app/sharedMetadata";
-import { Container, Title } from "src/components/Common";
+import { Container, Title } from "src/components";
 
-import { SERIES } from "../data";
+import { getSeries } from "../data";
 
 import { getPostBySeries } from "./data";
 
@@ -36,22 +36,25 @@ export const generateMetadata = ({ params: { series } }: SeriesParams): Metadata
   };
 };
 
-export const generateStaticParams = () => {
+export const generateStaticParams = async () => {
+  const SERIES_COUNT_MAP = await getSeries();
+  const SERIES = Object.keys(SERIES_COUNT_MAP);
+
   return SERIES.map((series) => ({
     series,
   }));
 };
 
-export default function SeriesDynamicPage({ params: { series } }: SeriesParams) {
+export default async function SeriesDynamicPage({ params: { series } }: SeriesParams) {
   const parsedSeries = decodeURI(series);
-  const posts = getPostBySeries(parsedSeries);
+  const posts = await getPostBySeries(parsedSeries);
 
   return (
     <SeriesContainer>
       <SeriesTitle>{`<${parsedSeries} />`}</SeriesTitle>
       <ol>
-        {posts.map((post) => (
-          <PostCard key={post.slug} {...post} />
+        {posts.map(({ category, date, slug, title }) => (
+          <PostCard key={slug} category={category} date={date} slug={slug} title={title} />
         ))}
       </ol>
     </SeriesContainer>

@@ -1,4 +1,4 @@
-import { ResponsiveIconButton } from "src/components/Common/IconButton";
+import { ResponsiveIconButton } from "src/components";
 
 import { cssOutlineOnFocus } from "../Navigation/styles";
 

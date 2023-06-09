@@ -1,4 +1,4 @@
-import { LinkDecorated } from "src/components/Common";
+import { LinkDecorated } from "src/components";
 
 import { usePathname } from "next/navigation";
 import type { PropsWithChildren } from "react";

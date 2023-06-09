@@ -1,7 +1,7 @@
 "use client";
 
-import PrintSvg from "src/components/Common/Svgs/PrintSvg";
-import SvgContainer from "src/components/Common/Svgs/SvgContainer";
+import PrintSvg from "src/components/Svgs/PrintSvg";
+import SvgContainer from "src/components/Svgs/SvgContainer";
 import { setIsDarkmodeActivatedOnLocal } from "src/lib/localStorage";
 
 import { iconClickableStyle } from "../ResumeLink";

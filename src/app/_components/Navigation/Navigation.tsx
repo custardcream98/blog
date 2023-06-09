@@ -1,8 +1,6 @@
 "use client";
 
-import BlogIcon from "src/components/Common/BlogIcon";
-import { ResponsiveIconButton } from "src/components/Common/IconButton";
-import LogoTitleSpan from "src/components/Common/LogoTitleSpan";
+import { BlogIcon, LogoTitleSpan, ResponsiveIconButton } from "src/components";
 import useWindowSize from "src/hook/useWindowSize";
 
 import { Searchbar } from "../Searchbar";

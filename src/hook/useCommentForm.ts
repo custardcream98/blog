@@ -1,6 +1,6 @@
-import { useCommentEditorStateSetter } from "src/components/Comments/CommentCard/CommentEditor/context";
-import { useCommentDataContext } from "src/components/Comments/CommentCard/context";
-import { useCommentPostTitleContext } from "src/components/Comments/context";
+import { useCommentEditorStateSetter } from "src/app/posts/[slug]/_components/Comments/CommentCard/CommentEditor/context";
+import { useCommentDataContext } from "src/app/posts/[slug]/_components/Comments/CommentCard/context";
+import { useCommentPostTitleContext } from "src/app/posts/[slug]/_components/Comments/context";
 import { postMail } from "src/lib/axios";
 import { addComment, updateComment } from "src/lib/firebaseSetup/firebaseApps";
 import { CommentEditState } from "src/types/comment";

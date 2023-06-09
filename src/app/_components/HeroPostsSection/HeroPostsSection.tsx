@@ -1,6 +1,6 @@
 "use client";
 
-import { Container } from "src/components/Common";
+import { Container } from "src/components";
 
 import { Paging } from "../Paging";
 

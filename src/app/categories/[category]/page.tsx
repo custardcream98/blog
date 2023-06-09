@@ -1,6 +1,7 @@
 import { PostCard } from "src/app/_components";
 import { sharedMetadata } from "src/app/sharedMetadata";
-import { Container, Title } from "src/components/Common";
+import { Container, Title } from "src/components";
+import { type Categoires } from "src/constants/categoryTheme";
 
 import { CATEGORIES } from "../data";
 
@@ -11,7 +12,7 @@ import { utld } from "utility-class-components";
 
 type CategoryParams = {
   params: {
-    category: string;
+    category: Categoires;
   };
 };
 
@@ -42,8 +43,8 @@ export const generateStaticParams = () => {
   }));
 };
 
-export default function CategoryDynamicPage({ params: { category } }: CategoryParams) {
-  const posts = getPostByCategory(category);
+export default async function CategoryDynamicPage({ params: { category } }: CategoryParams) {
+  const posts = await getPostByCategory(category);
 
   return (
     <PostsContainer>

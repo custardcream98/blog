@@ -1,5 +1,4 @@
-import { Container, Title } from "src/components/Common";
-import CategoryBadges from "src/components/Common/CategoryBadges";
+import { CategoryBadges, Container, Title } from "src/components";
 
 import { sharedMetadata } from "../sharedMetadata";
 

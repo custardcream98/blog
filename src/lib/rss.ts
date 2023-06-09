@@ -1,17 +1,17 @@
+import { getAllPosts } from "src/app/data";
 import { DEFAULT_IMAGE, DEFAULT_TITLE } from "src/constants/meta";
 import { percentEncode } from "src/lib/utils/helper";
-import { getAllPosts } from "src/lib/utils/posts";
 import { resolveURL } from "src/lib/utils/url";
 
 import { Feed, type FeedOptions } from "feed";
 import fs from "fs";
 
-const generateRSSFeed = (coverImages: string[]) => {
+const generateRSSFeed = async (coverImages: string[]) => {
   if (!process.env.NEXT_PUBLIC_HOST) {
     throw new Error("NEXT_PUBLIC_HOST is not defined");
   }
 
-  const allPosts = getAllPosts(["title", "slug", "excerpt", "date", "coverImage"]);
+  const allPosts = await getAllPosts(["title", "slug", "excerpt", "date", "coverImage"]);
 
   const feedOptions: FeedOptions = {
     copyright: "© " + new Date().getFullYear() + " custardcream98. All rights reserved.",
