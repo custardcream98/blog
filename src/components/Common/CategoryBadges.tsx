@@ -4,7 +4,7 @@ import Link from "next/link";
 import type { ReactNode } from "react";
 import { utld } from "utility-class-components";
 
-const StyledAnchor = utld(Link)`
+const StyledLink = utld(Link)`
   block
 
   m-[0.3rem]
@@ -42,15 +42,14 @@ function Badge({ category }: Props) {
 
   return (
     <li>
-      <StyledAnchor
+      <StyledLink
         href={{
-          pathname: "/categories/[category]",
-          query: { category: category },
+          pathname: `/categories/${category}`,
         }}
         className={style}
       >
         {category}
-      </StyledAnchor>
+      </StyledLink>
     </li>
   );
 }
