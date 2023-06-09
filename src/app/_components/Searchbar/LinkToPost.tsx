@@ -38,14 +38,7 @@ export default function LinkToPost({ slug, title, closeResults }: Props) {
   const id = "link-icon_" + title.replaceAll(" ", "_");
 
   return (
-    <StyledLink
-      href={{
-        pathname: "/posts/[slug]",
-        query: { slug: slug },
-      }}
-      className='result-link'
-      onClick={closeResults}
-    >
+    <StyledLink href={`/posts/${slug}`} className='result-link' onClick={closeResults}>
       <LinkIcon id={id} title={`${title} 포스트로 이동하기`} />
     </StyledLink>
   );
