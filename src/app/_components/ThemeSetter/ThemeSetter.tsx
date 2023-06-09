@@ -1,14 +1,11 @@
 "use client";
 
-import useIsMounted from "src/hook/useIsMounted";
 import { getIsDarkmodeActivatedOnLocal } from "src/lib/localStorage";
 
-import { type PropsWithChildren, useLayoutEffect } from "react";
+import { type PropsWithChildren, useEffect } from "react";
 
 export function ThemeSetter({ children }: PropsWithChildren): JSX.Element {
-  const isMounted = useIsMounted();
-
-  useLayoutEffect(() => {
+  useEffect(() => {
     const isDarkmodeActivatedOnLocal = getIsDarkmodeActivatedOnLocal();
     const $root = document.documentElement;
 
@@ -16,11 +13,6 @@ export function ThemeSetter({ children }: PropsWithChildren): JSX.Element {
       $root.classList.add("dark");
     }
   }, []);
-
-  if (!isMounted || !children) {
-    // eslint-disable-next-line react/jsx-no-useless-fragment
-    return <></>;
-  }
 
   return <>{children}</>;
 }
