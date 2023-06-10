@@ -5,6 +5,9 @@ const withBundleAnalyzer = require("@next/bundle-analyzer")({
 
 module.exports = withBundleAnalyzer({
   compress: true,
+  experimental: {
+    appDir: true,
+  },
   images: {
     domains: ["storage.googleapis.com"],
   },
