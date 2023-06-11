@@ -21,6 +21,7 @@ export function Paging({ pageScale, currentPage }: Props) {
     <Container>
       {!isFirstPage && (
         <LeftArrow
+          scroll={false}
           href={{
             pathname: "/",
             query: { page: prevPageNumber },
@@ -37,6 +38,7 @@ export function Paging({ pageScale, currentPage }: Props) {
         {pagesArray.map((pageNum) => (
           <li key={pageNum}>
             <Pagenum
+              scroll={false}
               href={{
                 pathname: "/",
                 query: { page: pageNum },
@@ -50,6 +52,7 @@ export function Paging({ pageScale, currentPage }: Props) {
       </PagenumList>
       {!isLastPage && (
         <RightArrow
+          scroll={false}
           href={{
             pathname: "/",
             query: { page: nextPageNumber },

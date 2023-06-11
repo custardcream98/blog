@@ -12,15 +12,15 @@ type Props = {
   title: string;
   date: string;
   excerpt: string;
-  slug: string;
+  hash: string;
 };
 
-export function HeroPost({ index, maxPostCount, title, date, excerpt, slug }: Props) {
+export function HeroPost({ index, maxPostCount, title, date, excerpt, hash }: Props) {
   const isLastPage = index === maxPostCount - 1;
 
   return (
     <ContentContainer isLastPage={isLastPage}>
-      <LinkDecorated href={`/posts/${slug}`}>
+      <LinkDecorated href={`posts/${hash}`}>
         <Title>
           <TitleText>{title}</TitleText>
           <DateSpanForHeroPost date={date} />
