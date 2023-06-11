@@ -1,3 +1,4 @@
+import { getHashedSlug } from "src/app/data";
 import type { PrevNextPosts } from "src/types/post";
 
 import Link from "next/link";
@@ -14,13 +15,13 @@ export function PrevNextPost({ prevSlug, prevTitle, nextSlug, nextTitle }: PrevN
   return (
     <Container formation={formation}>
       {prevTitle && (
-        <LinkWrapper href={`/posts/${prevSlug ?? ""}`}>
+        <LinkWrapper href={`/posts/${getHashedSlug(prevSlug ?? "")}`}>
           <span>← 이전글</span>
           <span className='pl-3'>{prevTitle}</span>
         </LinkWrapper>
       )}
       {nextTitle && (
-        <LinkWrapper href={`/posts/${nextSlug ?? ""}`}>
+        <LinkWrapper href={`/posts/${getHashedSlug(nextSlug ?? "")}`}>
           <span>다음글 →</span>
           <span className='pr-3'>{nextTitle}</span>
         </LinkWrapper>

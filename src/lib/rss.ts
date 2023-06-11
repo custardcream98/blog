@@ -1,6 +1,5 @@
-import { getAllPosts } from "src/app/data";
+import { getAllPosts, getHashedSlug } from "src/app/data";
 import { DEFAULT_IMAGE, DEFAULT_TITLE } from "src/constants/meta";
-import { percentEncode } from "src/lib/utils/helper";
 import { resolveURL } from "src/lib/utils/url";
 
 import { Feed, type FeedOptions } from "feed";
@@ -32,7 +31,7 @@ const generateRSSFeed = async (coverImages: string[]) => {
   const feed = new Feed(feedOptions);
 
   allPosts.forEach((post, index) => {
-    const postURL = resolveURL(`/posts/${percentEncode(post.slug)}`);
+    const postURL = resolveURL(`/posts/${getHashedSlug(post.slug)}`);
 
     feed.addItem({
       date: new Date(post.date),

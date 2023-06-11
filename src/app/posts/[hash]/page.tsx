@@ -1,4 +1,4 @@
-import { getAllPosts, getPostBySlug } from "src/app/data";
+import { getAllPosts, getHashedSlug, getPostBySlug, getSlugFromHased } from "src/app/data";
 import { sharedMetadata } from "src/app/sharedMetadata";
 import { Container, MarkdownBody } from "src/components";
 import { createPostDoc } from "src/lib/firebaseSetup/firebaseApps";
@@ -17,13 +17,13 @@ import { utld } from "utility-class-components";
 
 type PostParams = {
   params: {
-    slug: string;
+    hash: string;
   };
 };
 
-export const generateMetadata = async ({ params: { slug } }: PostParams): Promise<Metadata> => {
-  const decodedSlug = decodeURIComponent(slug);
-  const { title, date, excerpt, coverImage, category, series } = await getPostBySlug(decodedSlug, [
+export const generateMetadata = async ({ params: { hash } }: PostParams): Promise<Metadata> => {
+  const slug = getSlugFromHased(hash);
+  const { title, date, excerpt, coverImage, category, series } = await getPostBySlug(slug, [
     "title",
     "date",
     "slug",
@@ -56,6 +56,7 @@ export const generateMetadata = async ({ params: { slug } }: PostParams): Promis
       tags: META_KEYWORDS,
       title: META_TITLE,
       type: "article",
+      url: `/posts/${hash}`,
     },
     publisher: "Shiwoo, Park",
 
@@ -80,14 +81,14 @@ export const generateStaticParams = async () => {
   }
 
   return posts.map(({ slug }) => ({
-    slug: decodeURIComponent(slug),
+    hash: getHashedSlug(slug),
   }));
 };
 
-export default async function PostsDynamicPage({ params: { slug } }: PostParams) {
-  const decodedSlug = decodeURIComponent(slug);
+export default async function PostsDynamicPage({ params: { hash } }: PostParams) {
+  const slug = getSlugFromHased(hash);
 
-  const post = await getPostBySlug(decodedSlug, [
+  const post = await getPostBySlug(slug, [
     "title",
     "date",
     "slug",
@@ -98,7 +99,7 @@ export default async function PostsDynamicPage({ params: { slug } }: PostParams)
     "coverImage",
   ]);
 
-  const prevNextPosts = await getPrevNextPosts(decodedSlug);
+  const prevNextPosts = await getPrevNextPosts(slug);
 
   const contentHtml = await markdownToHtml(post.content);
 

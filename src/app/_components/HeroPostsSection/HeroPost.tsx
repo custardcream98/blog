@@ -1,3 +1,4 @@
+import { getHashedSlug } from "src/app/data";
 import { DateSpan, LinkDecorated } from "src/components";
 
 import { ud, utld } from "utility-class-components";
@@ -20,7 +21,7 @@ export function HeroPost({ index, maxPostCount, title, date, excerpt, slug }: Pr
 
   return (
     <ContentContainer isLastPage={isLastPage}>
-      <LinkDecorated href={`posts/${encodeURIComponent(slug)}`}>
+      <LinkDecorated href={`posts/${getHashedSlug(slug)}`}>
         <Title>
           <TitleText>{title}</TitleText>
           <DateSpanForHeroPost date={date} />

@@ -1,7 +1,9 @@
-import { getAllPosts } from "src/app/data";
 import { markdownToHtmlForCache } from "src/lib/utils/markdownToHtml";
 import type { CachePost } from "src/types/cache";
 import type { PostTypeWithoutContent } from "src/types/post";
+import { hash } from "src/utils/hash";
+
+import { getAllPosts } from "./data";
 
 import fs from "fs";
 import { JSDOM } from "jsdom";
@@ -9,7 +11,7 @@ import { JSDOM } from "jsdom";
 const POST_PER_PAGE = 5;
 
 (async () => {
-  const postsData = await getAllPosts([
+  const postsData = getAllPosts([
     "slug",
     "title",
     "content",
@@ -45,6 +47,32 @@ const POST_PER_PAGE = 5;
       console.error(error);
     }
     console.log("캐시 생성 완료");
+  });
+
+  const postSlugHashedMap = postsCache.reduce<Record<string, string>>((acc, post) => {
+    const hashedSlug = hash(post.slug);
+    acc[hashedSlug] = post.slug;
+    return acc;
+  }, {});
+
+  const postSlugHashedMapReversed = postsCache.reduce<Record<string, string>>((acc, post) => {
+    const hashedSlug = hash(post.slug);
+    acc[post.slug] = hashedSlug;
+    return acc;
+  }, {});
+
+  fs.writeFile("./cache/hash.json", JSON.stringify(postSlugHashedMap), (error) => {
+    if (error) {
+      console.error(error);
+    }
+    console.log("해시맵 생성 완료");
+  });
+
+  fs.writeFile("./cache/hashReversed.json", JSON.stringify(postSlugHashedMapReversed), (error) => {
+    if (error) {
+      console.error(error);
+    }
+    console.log("해시맵-reversed 생성 완료");
   });
 
   const postByPageArr = postsData

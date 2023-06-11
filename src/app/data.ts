@@ -3,6 +3,8 @@ import "server-only";
 import { getOgImage } from "src/lib/utils/ogImage";
 import type { PostType } from "src/types/post";
 
+import HASH_MAP from "cache/hash.json";
+import HASH_REVERSERSED_MAP from "cache/hashReversed.json";
 import fs from "fs";
 import matter from "gray-matter";
 import path from "path";
@@ -45,7 +47,7 @@ export const getPostBySlug = async <Field extends PostMeta[]>(
   slug: string,
   fields: Field,
 ): Promise<PostByFields<Field[number]>> => {
-  const { data, content } = getPostFileData(decodeURIComponent(slug));
+  const { data, content } = getPostFileData(slug);
 
   const postMeta = fields.reduce((postMeta, field) => {
     if (field === "slug") {
@@ -74,4 +76,12 @@ export const getPostBySlug = async <Field extends PostMeta[]>(
   postMeta.date = data.date;
 
   return postMeta;
+};
+
+export const getHashedSlug = (slug: string) => {
+  return (HASH_REVERSERSED_MAP as Record<string, string>)[slug];
+};
+
+export const getSlugFromHased = (hash: string) => {
+  return (HASH_MAP as Record<string, string>)[hash];
 };
