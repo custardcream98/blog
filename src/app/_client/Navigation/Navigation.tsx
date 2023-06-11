@@ -49,13 +49,7 @@ export function Navigation() {
   }, []);
 
   useEffect(() => {
-    if (!navRef.current) {
-      return;
-    }
-
     if (!isPostRoute) {
-      navRef.current.classList.remove(translateAppearStyle);
-      navRef.current.classList.remove(translateDissappearStyle);
       return;
     }
 
@@ -66,6 +60,15 @@ export function Navigation() {
       window.removeEventListener("scroll", onScroll);
     };
   }, [isPostRoute, onScroll]);
+
+  useEffect(() => {
+    if (!navRef.current) {
+      return;
+    }
+
+    navRef.current.classList.remove(translateAppearStyle);
+    navRef.current.classList.remove(translateDissappearStyle);
+  }, [pathname]);
 
   const nav = useMemo(
     () => (
