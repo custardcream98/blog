@@ -1,6 +1,5 @@
-import { toggleIsDarkmodeActivatedOnLocal } from "src/lib/localStorage";
+import { useSetIsDarkmodeActivatedContext } from "../context";
 
-import { useEffect, useState } from "react";
 import { IconContext } from "react-icons";
 import { BsFillMoonFill } from "react-icons/bs";
 import { ImSun } from "react-icons/im";
@@ -9,31 +8,11 @@ import { utld } from "utility-class-components";
 const ICON_CONTEXT = { size: "90%" };
 
 export function DarkmodeSwitch() {
-  const [isDarkmodeActivated, setIsDarkmodeActivated] = useState(false);
-
-  useEffect(() => {
-    const $root = document.documentElement;
-
-    if ($root.classList.contains("dark")) {
-      setIsDarkmodeActivated(true);
-    } else {
-      setIsDarkmodeActivated(false);
-    }
-  }, []);
-
-  const toggleSwitch = () => {
-    const $root = document.documentElement;
-
-    const prev = $root.classList.toggle("dark");
-
-    setIsDarkmodeActivated(prev);
-
-    toggleIsDarkmodeActivatedOnLocal();
-  };
+  const { setIsDarkmodeActivatedToggle, isDarkmodeActivated } = useSetIsDarkmodeActivatedContext();
 
   return (
     <article>
-      <Button onClick={toggleSwitch}>
+      <Button onClick={setIsDarkmodeActivatedToggle}>
         <span className='sr-only'>다크모드 스위치</span>
         <IconContext.Provider value={ICON_CONTEXT}>
           {isDarkmodeActivated ? <BsFillMoonFill color='#e5c704' /> : <ImSun color='#e5c704' />}

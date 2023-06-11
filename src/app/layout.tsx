@@ -2,7 +2,8 @@ import "@fontsource/nanum-myeongjo";
 
 import { ClientLogger, ProjectAd } from "src/components/client";
 
-import { Navigation, ThemeSetter } from "./_client";
+import { IsDarkmodeActivatedContextProvider } from "./_client/context";
+import { Navigation } from "./_client";
 import { Footer } from "./_components";
 import { sharedMetadata } from "./sharedMetadata";
 
@@ -63,7 +64,7 @@ export const metadata: Metadata = {
 
 export default function RootLayout({ children }: PropsWithChildren) {
   return (
-    <html lang='ko' className='scroll-smooth'>
+    <html lang='ko' className='dark scroll-smooth'>
       <head>
         <link rel='icon' type='image/png' href='../static/icon.png' />
         <meta
@@ -87,7 +88,7 @@ export default function RootLayout({ children }: PropsWithChildren) {
         </Script>
       </head>
       <Body>
-        <ThemeSetter>
+        <IsDarkmodeActivatedContextProvider>
           <Navigation />
           <Wrapper>
             <Main>{children}</Main>
@@ -99,7 +100,7 @@ export default function RootLayout({ children }: PropsWithChildren) {
             repositoryLink='https://github.com/custardcream98/DevPort'
             projectImage={DevportImage}
           />
-        </ThemeSetter>
+        </IsDarkmodeActivatedContextProvider>
         <ClientLogger />
       </Body>
     </html>

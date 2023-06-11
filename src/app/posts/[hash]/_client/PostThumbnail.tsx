@@ -1,4 +1,4 @@
-import useIsDarkmodeActivated from "src/hook/useIsDarkmodeActivated";
+import { useIsDarkmodeActivated } from "src/app/_client/context";
 import { CoverImage } from "src/types/post";
 
 import Image from "next/image";
