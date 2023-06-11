@@ -1,6 +1,5 @@
+import { PrintButton } from "../../_client";
 import { ResumeLink, S } from "..";
-
-import { PrintButton } from "./PrintButton";
 
 import { utld } from "utility-class-components";
 

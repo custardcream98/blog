@@ -14,13 +14,13 @@ export function PrevNextPost({ prevSlug, prevTitle, nextSlug, nextTitle }: PrevN
   return (
     <Container formation={formation}>
       {prevTitle && (
-        <LinkWrapper href={`/posts/${prevSlug}`}>
+        <LinkWrapper href={`/posts/${prevSlug ?? ""}`}>
           <span>← 이전글</span>
           <span className='pl-3'>{prevTitle}</span>
         </LinkWrapper>
       )}
       {nextTitle && (
-        <LinkWrapper href={`/posts/${nextSlug}`}>
+        <LinkWrapper href={`/posts/${nextSlug ?? ""}`}>
           <span>다음글 →</span>
           <span className='pr-3'>{nextTitle}</span>
         </LinkWrapper>

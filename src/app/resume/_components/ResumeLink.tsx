@@ -4,7 +4,7 @@ import type { ResumeLink } from "src/types/resume";
 
 import { ud, utld } from "utility-class-components";
 
-export default function ResumeLink({ url, name }: ResumeLink) {
+export function ResumeLink({ url, name }: ResumeLink) {
   return (
     <StyledResumeLink href={url} target='_blank' rel='noopener noreferrer'>
       <SvgContainer svgWidth='0.95rem' svgHeight='0.95rem'>

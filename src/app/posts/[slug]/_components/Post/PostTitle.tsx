@@ -2,8 +2,7 @@ import { CategoryBadges, DateSpan, LinkDecorated } from "src/components";
 import { type Categoires } from "src/constants/categoryTheme";
 import { CoverImage } from "src/types/post";
 
-import PostThumbnail from "./PostThumbnail";
-import ViewsLikesCounter from "./ViewsLikesCounter";
+import { PostThumbnail, ViewsLikesCounter } from "../../_client";
 
 import { utld } from "utility-class-components";
 

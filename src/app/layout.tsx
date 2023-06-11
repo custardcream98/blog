@@ -1,8 +1,9 @@
 import "@fontsource/nanum-myeongjo";
 
-import { ClientLogger, ProjectAd } from "src/components";
+import { ClientLogger, ProjectAd } from "src/components/client";
 
-import { Footer, Navigation, ThemeSetter } from "./_components";
+import { Navigation, ThemeSetter } from "./_client";
+import { Footer } from "./_components";
 import { sharedMetadata } from "./sharedMetadata";
 
 import "@fontsource/noto-sans/300.css";

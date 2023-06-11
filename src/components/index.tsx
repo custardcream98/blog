@@ -34,12 +34,8 @@ export const LinkDecorated = utld(Link)`
 `;
 
 export * from "./BlogIcon";
-export * from "./Button";
 export * from "./CategoryBadges";
 export * from "./DateSpan";
-export * from "./IconButton";
 export * from "./LinkIcon";
 export * from "./LogoTitleSpan";
 export * from "./MarkdownBody";
-export * from "./ProjectAd";
-export * from "./ClientLogger";

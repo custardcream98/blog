@@ -20,7 +20,7 @@ export function HeroPost({ index, maxPostCount, title, date, excerpt, slug }: Pr
 
   return (
     <ContentContainer isLastPage={isLastPage}>
-      <LinkDecorated href={`/posts/${slug}`}>
+      <LinkDecorated href={`posts/${encodeURIComponent(slug)}`}>
         <Title>
           <TitleText>{title}</TitleText>
           <DateSpanForHeroPost date={date} />

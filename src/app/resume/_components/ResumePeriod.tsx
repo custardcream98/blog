@@ -5,7 +5,7 @@ import { dimTextStyle } from "./styles";
 
 import { utld } from "utility-class-components";
 
-export default function ResumePeriod({ from, to }: Period) {
+export function ResumePeriod({ from, to }: Period) {
   if (to) {
     if (from === to) {
       return (

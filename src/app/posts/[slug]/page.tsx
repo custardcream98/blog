@@ -6,7 +6,8 @@ import generateRSSFeed from "src/lib/rss";
 import markdownToHtml from "src/lib/utils/markdownToHtml";
 import { getAllOgImages } from "src/lib/utils/ogImage";
 
-import { Comments, PostTitle, PrevNextPost } from "./_components";
+import { Comments } from "./_client";
+import { PostTitle, PrevNextPost } from "./_components";
 import { getPrevNextPosts } from "./data";
 
 import "src/styles/post.css";
@@ -79,7 +80,7 @@ export const generateStaticParams = async () => {
   }
 
   return posts.map(({ slug }) => ({
-    slug,
+    slug: decodeURIComponent(slug),
   }));
 };
 
