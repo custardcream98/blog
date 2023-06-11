@@ -27,7 +27,9 @@ export function Navigation() {
   const lastScrollTopRef = useRef(0);
 
   const onScroll = useCallback(() => {
-    if (!navRef.current || !isPostRoute) return;
+    if (!navRef.current) {
+      return;
+    }
 
     const currentScrollTop = document.documentElement.scrollTop;
 
@@ -44,10 +46,16 @@ export function Navigation() {
     }
 
     lastScrollTopRef.current = currentScrollTop;
-  }, [isPostRoute]);
+  }, []);
 
   useEffect(() => {
     if (!navRef.current) {
+      return;
+    }
+
+    if (!isPostRoute) {
+      navRef.current.classList.remove(translateAppearStyle);
+      navRef.current.classList.remove(translateDissappearStyle);
       return;
     }
 
@@ -57,7 +65,7 @@ export function Navigation() {
       window.removeEventListener("touchmove", onScroll);
       window.removeEventListener("scroll", onScroll);
     };
-  }, [onScroll]);
+  }, [isPostRoute, onScroll]);
 
   const nav = useMemo(
     () => (
