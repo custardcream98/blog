@@ -10,7 +10,7 @@
     "lint": "next lint",
     "lint:fix": "next lint --fix",
     "postbuild": "next-sitemap",
-    "cache": "tsx ./cache/cache.ts",
+    "cache": "tsx ./cache/cache.ts && prettier --write ./cache/*",
     "prepare": "husky install",
     "analyze": "ANALYZE=true next build"
   },
