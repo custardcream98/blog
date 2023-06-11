@@ -81,7 +81,7 @@ export function Navigation() {
         </Link>
         <NavItemWrapper>
           <NavList>
-            <NavList.Item href='/#Posts_Title'>Posts</NavList.Item>
+            <NavList.Item href='/#post-cards-section'>Posts</NavList.Item>
             <NavList.Item href='/categories'>Categories</NavList.Item>
             <NavList.Item href='/series'>Series</NavList.Item>
             <NavList.Item href='/resume'>About</NavList.Item>

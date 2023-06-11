@@ -1,5 +1,7 @@
 import { generateNumberArray } from "src/utils";
 
+import { POSTS_SECTION_ID } from "../HeroPostsSection";
+
 import Link from "next/link";
 import { MdOutlineKeyboardArrowLeft, MdOutlineKeyboardArrowRight } from "react-icons/md";
 import { ud, utld } from "utility-class-components";
@@ -23,6 +25,7 @@ export function Paging({ pageScale, currentPage }: Props) {
         <LeftArrow
           scroll={false}
           href={{
+            hash: POSTS_SECTION_ID,
             pathname: "/",
             query: { page: prevPageNumber },
           }}
@@ -40,6 +43,7 @@ export function Paging({ pageScale, currentPage }: Props) {
             <Pagenum
               scroll={false}
               href={{
+                hash: POSTS_SECTION_ID,
                 pathname: "/",
                 query: { page: pageNum },
               }}
@@ -54,6 +58,7 @@ export function Paging({ pageScale, currentPage }: Props) {
         <RightArrow
           scroll={false}
           href={{
+            hash: POSTS_SECTION_ID,
             pathname: "/",
             query: { page: nextPageNumber },
           }}

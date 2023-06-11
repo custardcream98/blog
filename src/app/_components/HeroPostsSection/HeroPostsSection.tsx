@@ -8,6 +8,7 @@ import PostByPageArr from "cache/postByPageArr.json";
 import { utld } from "utility-class-components";
 
 const PAGE_SCALE = PostByPageArr.length;
+export const POSTS_SECTION_ID = "post-cards-section";
 
 export function HeroPostsSection({ page }: { page?: string }) {
   const parsedPage = page ? parseInt(page, 10) : 1;
@@ -16,10 +17,8 @@ export function HeroPostsSection({ page }: { page?: string }) {
   const posts = PostByPageArr[pageIndex];
 
   return (
-    <Container>
-      <h2 id='Posts_Title' className='sr-only'>
-        {"<Posts />"}
-      </h2>
+    <Container id={POSTS_SECTION_ID}>
+      <h2 className='sr-only'>{"<Posts />"}</h2>
       <HeroPostList>
         {posts.map((post, i) => (
           <HeroPost
