@@ -34,6 +34,7 @@ const POST_PER_PAGE = 5;
       return {
         content: extractedContent,
         date,
+        hash: hash(slug),
         slug,
         title,
       };
@@ -49,17 +50,18 @@ const POST_PER_PAGE = 5;
     console.log("캐시 생성 완료");
   });
 
-  const postSlugHashedMap = postsCache.reduce<Record<string, string>>((acc, post) => {
-    const hashedSlug = hash(post.slug);
-    acc[hashedSlug] = post.slug;
+  const postSlugHashedMap = postsCache.reduce<Record<string, string>>((acc, { slug, hash }) => {
+    acc[hash] = slug;
     return acc;
   }, {});
 
-  const postSlugHashedMapReversed = postsCache.reduce<Record<string, string>>((acc, post) => {
-    const hashedSlug = hash(post.slug);
-    acc[post.slug] = hashedSlug;
-    return acc;
-  }, {});
+  const postSlugHashedMapReversed = postsCache.reduce<Record<string, string>>(
+    (acc, { slug, hash }) => {
+      acc[slug] = hash;
+      return acc;
+    },
+    {},
+  );
 
   fs.writeFile("./cache/hash.json", JSON.stringify(postSlugHashedMap), (error) => {
     if (error) {
@@ -85,6 +87,7 @@ const POST_PER_PAGE = 5;
           coverImage: post.coverImage,
           date: post.date,
           excerpt: post.excerpt,
+          hash: post.hash,
           slug: post.slug,
           title: post.title,
         });

@@ -1,5 +1,4 @@
-import { getHashedSlug } from "src/app/data";
-import type { PrevNextPosts } from "src/types/post";
+import { type PrevNextPosts } from "../../data";
 
 import Link from "next/link";
 import { utld } from "utility-class-components";
@@ -8,20 +7,25 @@ type PrevNextPostFormationType = "both" | "prev-only" | "next-only";
 
 type PrevNextPostProps = PrevNextPosts;
 
-export function PrevNextPost({ prevSlug, prevTitle, nextSlug, nextTitle }: PrevNextPostProps) {
+export function PrevNextPost({
+  prevHashedSlug,
+  prevTitle,
+  nextHashedSlug,
+  nextTitle,
+}: PrevNextPostProps) {
   const formation: PrevNextPostFormationType =
     prevTitle && nextTitle ? "both" : prevTitle ? "prev-only" : "next-only";
 
   return (
     <Container formation={formation}>
       {prevTitle && (
-        <LinkWrapper href={`/posts/${getHashedSlug(prevSlug ?? "")}`}>
+        <LinkWrapper href={`/posts/${prevHashedSlug ?? ""}`}>
           <span>← 이전글</span>
           <span className='pl-3'>{prevTitle}</span>
         </LinkWrapper>
       )}
       {nextTitle && (
-        <LinkWrapper href={`/posts/${getHashedSlug(nextSlug ?? "")}`}>
+        <LinkWrapper href={`/posts/${nextHashedSlug ?? ""}`}>
           <span>다음글 →</span>
           <span className='pr-3'>{nextTitle}</span>
         </LinkWrapper>

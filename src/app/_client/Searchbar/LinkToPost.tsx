@@ -27,18 +27,18 @@ const StyledLink = utld(Link)`
 `;
 
 type Props = {
-  slug: string;
+  hash: string;
   title: string | string[];
   closeResults: () => void;
 };
 
-export default function LinkToPost({ slug, title, closeResults }: Props) {
+export default function LinkToPost({ hash, title, closeResults }: Props) {
   title = typeof title === "string" ? title : title.join("");
 
   const id = "link-icon_" + title.replaceAll(" ", "_");
 
   return (
-    <StyledLink href={`/posts/${slug}`} className='result-link' onClick={closeResults}>
+    <StyledLink href={`/posts/${hash}`} className='result-link' onClick={closeResults}>
       <LinkIcon id={id} title={`${title} 포스트로 이동하기`} />
     </StyledLink>
   );

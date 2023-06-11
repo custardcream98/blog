@@ -15,7 +15,7 @@ const ResultsMark = utld.mark`
   rounded-[0.3125rem]
 `;
 
-const useSearchResults = (query: string) => {
+export const useSearchResults = (query: string) => {
   const [searchResults, setSearchResults] = useState<SearchedPostCardData[]>([]);
 
   const queryCallback = () => {
@@ -72,5 +72,3 @@ const useSearchResults = (query: string) => {
 
   return { clearSearchedResults, searchResults };
 };
-
-export default useSearchResults;

@@ -1,4 +1,4 @@
-import useSearchResults from "src/hook/useSearchResults";
+import { useSearchResults } from "../_hooks";
 
 import SearchbarCloseButton from "./SearchbarCloseButton";
 import SearchResults from "./SearchResults";
@@ -187,13 +187,13 @@ export function Searchbar({ isSearchbarOn, onSearchbarClose }: Props) {
           <SearchResults>
             {searchResults.map((data, i) => (
               <SearchResults.Item
-                key={data.slug}
+                key={data.hash}
                 title={<SearchResults.ItemTitle>{data.titleNode}</SearchResults.ItemTitle>}
                 content={<SearchResults.ItemContent>{data.contentNode}</SearchResults.ItemContent>}
                 date={<SearchResults.ItemDate>{data.date}</SearchResults.ItemDate>}
                 link={
                   <SearchResults.ItemLink
-                    slug={data.slug}
+                    hash={data.hash}
                     title={data.title}
                     closeResults={closeResults}
                   />

@@ -1,4 +1,4 @@
-import { getAllPosts, getHashedSlug, getPostBySlug, getSlugFromHased } from "src/app/data";
+import { getAllPosts, getPostByHashedSlug } from "src/app/data";
 import { sharedMetadata } from "src/app/sharedMetadata";
 import { Container, MarkdownBody } from "src/components";
 import { createPostDoc } from "src/lib/firebaseSetup/firebaseApps";
@@ -22,8 +22,7 @@ type PostParams = {
 };
 
 export const generateMetadata = async ({ params: { hash } }: PostParams): Promise<Metadata> => {
-  const slug = getSlugFromHased(hash);
-  const { title, date, excerpt, coverImage, category, series } = await getPostBySlug(slug, [
+  const { title, date, excerpt, coverImage, category, series } = await getPostByHashedSlug(hash, [
     "title",
     "date",
     "slug",
@@ -80,15 +79,13 @@ export const generateStaticParams = async () => {
     Promise.all(posts.map((post) => createPostDoc(post.title)));
   }
 
-  return posts.map(({ slug }) => ({
-    hash: getHashedSlug(slug),
+  return posts.map(({ hash }) => ({
+    hash,
   }));
 };
 
 export default async function PostsDynamicPage({ params: { hash } }: PostParams) {
-  const slug = getSlugFromHased(hash);
-
-  const post = await getPostBySlug(slug, [
+  const post = await getPostByHashedSlug(hash, [
     "title",
     "date",
     "slug",
@@ -99,7 +96,7 @@ export default async function PostsDynamicPage({ params: { hash } }: PostParams)
     "coverImage",
   ]);
 
-  const prevNextPosts = await getPrevNextPosts(slug);
+  const prevNextPosts = await getPrevNextPosts(hash);
 
   const contentHtml = await markdownToHtml(post.content);
 
@@ -117,7 +114,7 @@ export default async function PostsDynamicPage({ params: { hash } }: PostParams)
         />
         <MarkdownBody content={contentHtml} />
       </PostSection>
-      <PrevNextPost key={post.slug} {...prevNextPosts} />
+      <PrevNextPost key={post.hash} {...prevNextPosts} />
       <Comments postTitle={postTitle} />
     </PostContainer>
   );

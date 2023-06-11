@@ -53,8 +53,8 @@ export default async function SeriesDynamicPage({ params: { series } }: SeriesPa
     <SeriesContainer>
       <SeriesTitle>{`<${parsedSeries} />`}</SeriesTitle>
       <ol>
-        {posts.map(({ category, date, slug, title }) => (
-          <PostCard key={slug} category={category} date={date} slug={slug} title={title} />
+        {posts.map(({ category, date, hash, title }) => (
+          <PostCard key={hash} category={category} date={date} hash={hash} title={title} />
         ))}
       </ol>
     </SeriesContainer>

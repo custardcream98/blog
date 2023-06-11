@@ -29,7 +29,7 @@ export function HeroPostsSection({ page }: { page?: string }) {
             title={post.title}
             date={post.date}
             excerpt={post.excerpt}
-            slug={post.slug}
+            hash={post.hash}
           />
         ))}
       </HeroPostList>

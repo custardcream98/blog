@@ -7,6 +7,7 @@ export type CoverImage = {
 
 export type PostType = {
   slug: string;
+  hash: string;
   title: string;
   date: string;
   category: Categoires[];
@@ -19,12 +20,3 @@ export type PostType = {
 export type PostTypeWithoutContent = Omit<PostType, "content">;
 
 export default PostType;
-
-export interface PrevNextPosts {
-  prevTitle?: string;
-  prevSlug?: string;
-  prevExcerpt?: string;
-  nextTitle?: string;
-  nextSlug?: string;
-  nextExcerpt?: string;
-}
