@@ -1,5 +1,4 @@
 import { getAllPosts, getPostByHashedSlug } from "src/app/data";
-import { sharedMetadata } from "src/app/sharedMetadata";
 import { Container } from "src/components";
 import { FONT_D2_CODING, FONT_NOTO_SERIF_KR } from "src/fonts";
 import { createPostDoc } from "src/lib/firebaseSetup/firebaseApps";
@@ -10,64 +9,11 @@ import { getAllOgImages } from "src/lib/utils/ogImage";
 import { Comments } from "./_client";
 import { MarkdownBody, PostTitle, PrevNextPost } from "./_components";
 import { getPrevNextPosts } from "./data";
+import type { PostPageParams } from "./types";
 
-import { type Metadata } from "next";
 import { utld } from "utility-class-components";
 
-type PostParams = {
-  params: {
-    hash: string;
-  };
-};
-
-export const generateMetadata = async ({ params: { hash } }: PostParams): Promise<Metadata> => {
-  const { title, date, excerpt, coverImage, category, series } = await getPostByHashedSlug(hash, [
-    "title",
-    "date",
-    "slug",
-    "excerpt",
-    "coverImage",
-    "category",
-    "series",
-  ]);
-
-  const META_TITLE = title;
-  const META_DESCRIPTION = excerpt;
-  const META_KEYWORDS = series ? [...category, series] : category;
-  const META_IMAGE = {
-    alt: `${title} 포스트 썸네일`,
-    height: 630,
-    url: coverImage.darkThumbnail,
-    width: 1200,
-  };
-
-  return {
-    ...sharedMetadata,
-    description: META_DESCRIPTION,
-    keywords: META_KEYWORDS,
-    openGraph: {
-      ...sharedMetadata.openGraph,
-      authors: "Shiwoo, Park",
-      description: META_DESCRIPTION,
-      images: META_IMAGE,
-      publishedTime: date,
-      tags: META_KEYWORDS,
-      title: META_TITLE,
-      type: "article",
-      url: `/posts/${hash}`,
-    },
-    publisher: "Shiwoo, Park",
-
-    title: META_TITLE,
-
-    twitter: {
-      ...sharedMetadata.twitter,
-      description: META_DESCRIPTION,
-      images: META_IMAGE,
-      title: META_TITLE,
-    },
-  };
-};
+export { generateMetadata } from "./metadata";
 
 export const generateStaticParams = async () => {
   const posts = await getAllPosts(["slug", "title"]);
@@ -83,7 +29,7 @@ export const generateStaticParams = async () => {
   }));
 };
 
-export default async function PostsDynamicPage({ params: { hash } }: PostParams) {
+export default async function PostsDynamicPage({ params: { hash } }: PostPageParams) {
   const post = await getPostByHashedSlug(hash, [
     "title",
     "date",
@@ -121,12 +67,12 @@ export default async function PostsDynamicPage({ params: { hash } }: PostParams)
 
 const FONTS = [FONT_D2_CODING.variable, FONT_NOTO_SERIF_KR.variable];
 
-const PostSection = utld.section`
-  w-full
-`;
-
 const PostContainer = utld(Container)`
   !max-w-[42.5rem]
 
   ${FONTS}
+`;
+
+const PostSection = utld.section`
+  w-full
 `;

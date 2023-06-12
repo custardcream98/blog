@@ -1,5 +1,5 @@
 import { getAllPosts, getHashedSlug } from "src/app/data";
-import { DEFAULT_IMAGE, DEFAULT_TITLE } from "src/constants/meta";
+import { METADATA_DEFAULT_IMAGE, METADATA_DEFAULT_TITLE } from "src/app/sharedMetadata";
 import { resolveURL } from "src/lib/utils/url";
 
 import { Feed, type FeedOptions } from "feed";
@@ -22,10 +22,10 @@ const generateRSSFeed = async (coverImages: string[]) => {
     },
     generator: "custardcream98",
     id: process.env.NEXT_PUBLIC_HOST,
-    image: DEFAULT_IMAGE,
+    image: METADATA_DEFAULT_IMAGE.url,
     language: "ko",
     link: process.env.NEXT_PUBLIC_HOST,
-    title: DEFAULT_TITLE,
+    title: METADATA_DEFAULT_TITLE,
   };
 
   const feed = new Feed(feedOptions);

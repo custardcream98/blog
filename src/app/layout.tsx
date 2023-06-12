@@ -4,50 +4,15 @@ import { FONT_NOTO_SANS_KR, FONT_POPPINS, FONT_SOURCE_CODE_PRO } from "src/fonts
 import { IsDarkmodeActivatedContextProvider } from "./_client/context";
 import { Navigation } from "./_client";
 import { Footer } from "./_components";
-import { sharedMetadata } from "./sharedMetadata";
 
 import "./style.css";
 
-import { type Metadata } from "next";
 import Script from "next/script";
 import DevportImage from "public/static/ad/devport.png";
 import { type PropsWithChildren } from "react";
 import { utld } from "utility-class-components";
 
-const DEFAULT_TITLE = "FE 개발자 박시우의 기술 블로그";
-const DEFAULT_URL = new URL("https://shiwoo.dev");
-
-export const metadata: Metadata = {
-  ...sharedMetadata,
-
-  metadataBase: DEFAULT_URL,
-
-  openGraph: {
-    ...sharedMetadata.openGraph,
-    locale: "ko_KR",
-    siteName: DEFAULT_TITLE,
-    title: {
-      default: DEFAULT_TITLE,
-      template: `${DEFAULT_TITLE}: %s`,
-    },
-  },
-
-  title: {
-    default: DEFAULT_TITLE,
-    template: `${DEFAULT_TITLE}: %s`,
-  },
-
-  twitter: {
-    ...sharedMetadata.twitter,
-    card: "summary_large_image",
-    creator: "@ova_sw",
-    site: "@ova_sw",
-    title: {
-      default: DEFAULT_TITLE,
-      template: `${DEFAULT_TITLE}: %s`,
-    },
-  },
-};
+export { metadata } from "./metadata";
 
 export default function RootLayout({ children }: PropsWithChildren) {
   return (
