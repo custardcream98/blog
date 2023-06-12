@@ -1,6 +1,7 @@
 import { getAllPosts, getPostByHashedSlug } from "src/app/data";
 import { sharedMetadata } from "src/app/sharedMetadata";
 import { Container, MarkdownBody } from "src/components";
+import { FONT_D2_CODING, FONT_NOTO_SERIF_KR } from "src/fonts";
 import { createPostDoc } from "src/lib/firebaseSetup/firebaseApps";
 import generateRSSFeed from "src/lib/rss";
 import markdownToHtml from "src/lib/utils/markdownToHtml";
@@ -120,10 +121,14 @@ export default async function PostsDynamicPage({ params: { hash } }: PostParams)
   );
 }
 
+const FONTS = [FONT_D2_CODING.variable, FONT_NOTO_SERIF_KR.variable];
+
 const PostSection = utld.section`
   w-full
 `;
 
 const PostContainer = utld(Container)`
   !max-w-[42.5rem]
+
+  ${FONTS}
 `;

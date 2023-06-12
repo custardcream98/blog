@@ -122,18 +122,10 @@ module.exports = {
       },
     },
     fontFamily: {
-      mono: ["Source Code Pro", "monospace"],
-      sans: [
-        "Noto Sans",
-        "Noto Sans KR",
-        "-apple-system",
-        "BlinkMacSystemFont",
-        "Segoe UI",
-        "Apple Color Emoji",
-        "Segoe UI Emoji",
-      ],
-      serif: ["Nanum Myeongjo", "serif"],
-      title: ["Poppins", "sans-serif"],
+      mono: ["var(--font-source-code-pro)"],
+      sans: ["var(--font-noto-sans-kr)"],
+      serif: ["var(--font-noto-serif-kr)"],
+      title: ["var(--font-poppins)"],
     },
     lineHeight: {
       1.2: "1.2",

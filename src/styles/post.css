@@ -154,7 +154,7 @@
 
 .post-content code,
 .post-content tt {
-  font-family: "D2Coding";
+  font-family: var(--font-d2-coding);
   padding: 0 0.4em;
   margin: 0;
   font-size: 0.85em;
@@ -308,7 +308,7 @@
 }
 
 .post-content em {
-  font-family: "Nanum Myeongjo", serif;
+  font-family: var(--font-noto-serif-kr);
   font-style: italic;
 }
 .post-content em::before {

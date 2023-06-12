@@ -1,24 +1,11 @@
-import "@fontsource/nanum-myeongjo";
-
 import { ClientLogger, ProjectAd } from "src/components/client";
+import { FONT_NOTO_SANS_KR, FONT_POPPINS, FONT_SOURCE_CODE_PRO } from "src/fonts";
 
 import { IsDarkmodeActivatedContextProvider } from "./_client/context";
 import { Navigation } from "./_client";
 import { Footer } from "./_components";
 import { sharedMetadata } from "./sharedMetadata";
 
-import "@fontsource/noto-sans/300.css";
-import "@fontsource/noto-sans/500.css";
-import "@fontsource/noto-sans/700.css";
-import "@fontsource/noto-sans/900.css";
-import "@fontsource/noto-sans-kr/300.css";
-import "@fontsource/noto-sans-kr/500.css";
-import "@fontsource/noto-sans-kr/700.css";
-import "@fontsource/noto-sans-kr/900.css";
-import "@fontsource/source-code-pro/800.css";
-import "@fontsource/poppins/500.css";
-import "@fontsource/poppins/600.css";
-import "src/styles/font.css";
 import "src/styles/tailwind.css";
 
 import { type Metadata } from "next";
@@ -107,6 +94,8 @@ export default function RootLayout({ children }: PropsWithChildren) {
   );
 }
 
+const FONTS = [FONT_NOTO_SANS_KR.variable, FONT_POPPINS.variable, FONT_SOURCE_CODE_PRO.variable];
+
 const Body = utld.body`
   font-sans
   text-default-light
@@ -118,6 +107,8 @@ const Body = utld.body`
   duration-100
 
   print:bg-transparent
+
+  ${FONTS}
 `;
 
 const Wrapper = utld.div`
