@@ -6,7 +6,7 @@ import { Navigation } from "./_client";
 import { Footer } from "./_components";
 import { sharedMetadata } from "./sharedMetadata";
 
-import "src/styles/tailwind.css";
+import "./style.css";
 
 import { type Metadata } from "next";
 import Script from "next/script";

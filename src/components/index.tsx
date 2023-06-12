@@ -38,4 +38,3 @@ export * from "./CategoryBadges";
 export * from "./DateSpan";
 export * from "./LinkIcon";
 export * from "./LogoTitleSpan";
-export * from "./MarkdownBody";

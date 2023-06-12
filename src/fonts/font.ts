@@ -36,27 +36,7 @@ export const FONT_NOTO_SANS_KR = localFont({
       weight: "300",
     },
     {
-      path: "./NotoSansKR/NotoSansKR-Light.woff",
-      style: "normal",
-      weight: "300",
-    },
-    {
-      path: "./NotoSansKR/NotoSansKR-Light.otf",
-      style: "normal",
-      weight: "300",
-    },
-    {
       path: "./NotoSansKR/NotoSansKR-Medium.woff2",
-      style: "normal",
-      weight: "500",
-    },
-    {
-      path: "./NotoSansKR/NotoSansKR-Medium.woff",
-      style: "normal",
-      weight: "500",
-    },
-    {
-      path: "./NotoSansKR/NotoSansKR-Medium.otf",
       style: "normal",
       weight: "500",
     },
@@ -66,27 +46,7 @@ export const FONT_NOTO_SANS_KR = localFont({
       weight: "700",
     },
     {
-      path: "./NotoSansKR/NotoSansKR-Bold.woff",
-      style: "normal",
-      weight: "700",
-    },
-    {
-      path: "./NotoSansKR/NotoSansKR-Bold.otf",
-      style: "normal",
-      weight: "700",
-    },
-    {
       path: "./NotoSansKR/NotoSansKR-Black.woff2",
-      style: "normal",
-      weight: "900",
-    },
-    {
-      path: "./NotoSansKR/NotoSansKR-Black.woff",
-      style: "normal",
-      weight: "900",
-    },
-    {
-      path: "./NotoSansKR/NotoSansKR-Black.otf",
       style: "normal",
       weight: "900",
     },
@@ -105,16 +65,6 @@ export const FONT_NOTO_SERIF_KR = localFont({
       style: "normal",
       weight: "400",
     },
-    {
-      path: "./NotoSerifKR/NotoSerifKR-Regular.woff",
-      style: "normal",
-      weight: "400",
-    },
-    {
-      path: "./NotoSerifKR/NotoSerifKR-Regular.otf",
-      style: "normal",
-      weight: "400",
-    },
   ],
   variable: "--font-noto-serif-kr",
 });
@@ -126,16 +76,6 @@ export const FONT_D2_CODING = localFont({
   src: [
     {
       path: "./D2Coding/d2coding-subset.woff2",
-      style: "normal",
-      weight: "400",
-    },
-    {
-      path: "./D2Coding/d2coding-subset.woff",
-      style: "normal",
-      weight: "400",
-    },
-    {
-      path: "./D2Coding/d2coding-subset.ttf",
       style: "normal",
       weight: "400",
     },

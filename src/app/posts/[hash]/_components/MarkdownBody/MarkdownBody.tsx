@@ -389,6 +389,8 @@
 //   }
 // `;
 
+import "./style.css";
+
 type Props = {
   content: string;
 };

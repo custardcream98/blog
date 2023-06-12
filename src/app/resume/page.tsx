@@ -2,7 +2,7 @@ import { sharedMetadata } from "../sharedMetadata";
 
 import { CareersSection, IntroduceSection, ProjectSection, ResumeSection, S } from "./_components";
 
-import "src/styles/print.css";
+import "./style.css";
 
 import { careers, educations, experiences, projects } from "fixtures/resume";
 import { type Metadata } from "next";

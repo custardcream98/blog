@@ -1,6 +1,6 @@
 import { getAllPosts, getPostByHashedSlug } from "src/app/data";
 import { sharedMetadata } from "src/app/sharedMetadata";
-import { Container, MarkdownBody } from "src/components";
+import { Container } from "src/components";
 import { FONT_D2_CODING, FONT_NOTO_SERIF_KR } from "src/fonts";
 import { createPostDoc } from "src/lib/firebaseSetup/firebaseApps";
 import generateRSSFeed from "src/lib/rss";
@@ -8,10 +8,8 @@ import markdownToHtml from "src/lib/utils/markdownToHtml";
 import { getAllOgImages } from "src/lib/utils/ogImage";
 
 import { Comments } from "./_client";
-import { PostTitle, PrevNextPost } from "./_components";
+import { MarkdownBody, PostTitle, PrevNextPost } from "./_components";
 import { getPrevNextPosts } from "./data";
-
-import "src/styles/post.css";
 
 import { type Metadata } from "next";
 import { utld } from "utility-class-components";
