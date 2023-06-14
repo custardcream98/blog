@@ -17,7 +17,7 @@ export function PrevNextPost({
     prevTitle && nextTitle ? "both" : prevTitle ? "prev-only" : "next-only";
 
   return (
-    <Container formation={formation}>
+    <Container $formation={formation}>
       {prevTitle && (
         <LinkWrapper href={`/posts/${prevHashedSlug ?? ""}`}>
           <span>← 이전글</span>
@@ -35,7 +35,7 @@ export function PrevNextPost({
 }
 
 const Container = utld.aside<{
-  formation: PrevNextPostFormationType;
+  $formation: PrevNextPostFormationType;
 }>`
   w-full
   mt-24
@@ -48,7 +48,7 @@ const Container = utld.aside<{
   mobile:flex-col
   mobile:gap-2
 
-  ${({ formation }) => formation === "next-only" && "text-right"}
+  ${({ $formation }) => $formation === "next-only" && "text-right"}
 `;
 
 const LinkWrapper = utld(Link)`

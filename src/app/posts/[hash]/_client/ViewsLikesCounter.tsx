@@ -28,7 +28,7 @@ const CounterContainer = utld.em`
 `;
 
 type LikeValueProps = {
-  isLiked: boolean;
+  $isLiked: boolean;
 };
 
 const LikeBtn = utld.button<LikeValueProps>`
@@ -39,7 +39,7 @@ const LikeBtn = utld.button<LikeValueProps>`
   bg-transparent
   border-none
   
-  ${({ isLiked }) => (isLiked ? HEART_COLOR : SUB_TEXT_COLOR)}
+  ${({ $isLiked }) => ($isLiked ? HEART_COLOR : SUB_TEXT_COLOR)}
 `;
 
 const Value = utld.span`
@@ -54,7 +54,7 @@ const CounterValue = utld(Value)`
 `;
 
 const LikeValue = utld(Value)<LikeValueProps>`
- ${({ isLiked }) => (isLiked ? HEART_COLOR : SUB_TEXT_COLOR)}
+ ${({ $isLiked }) => ($isLiked ? HEART_COLOR : SUB_TEXT_COLOR)}
 `;
 
 type Props = {
@@ -71,7 +71,7 @@ export function ViewsLikesCounter({ title }: Props) {
         <HiEye title='조회수' size={15} className={SUB_TEXT_COLOR} />
         <CounterValue>{viewCount}</CounterValue>
       </CounterContainer>
-      <LikeBtn type='button' onClick={onLikeClick} isLiked={isLiked}>
+      <LikeBtn type='button' onClick={onLikeClick} $isLiked={isLiked}>
         <IconContext.Provider value={LIKE_ICON_STYLE_CONTEXT}>
           {isLiked ? (
             <BsHeartFill title='좋아요 버튼' className={HEART_COLOR} />
@@ -79,7 +79,7 @@ export function ViewsLikesCounter({ title }: Props) {
             <BsHeart title='좋아요 버튼' className={SUB_TEXT_COLOR} />
           )}
         </IconContext.Provider>
-        <LikeValue isLiked={isLiked}>{likeCount}</LikeValue>
+        <LikeValue $isLiked={isLiked}>{likeCount}</LikeValue>
       </LikeBtn>
     </Container>
   );

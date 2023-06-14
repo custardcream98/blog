@@ -18,11 +18,6 @@ type NoticeProps = {
   projectImage: StaticImageData;
 };
 
-type WrapperProps = {
-  isMounted: boolean;
-  isClosed: boolean;
-};
-
 export function ProjectAd({ projectName, projectLink, repositoryLink, projectImage }: NoticeProps) {
   const isMounted = useIsMounted();
   const [isClosed, setIsClosed] = useState(false);
@@ -36,7 +31,7 @@ export function ProjectAd({ projectName, projectLink, repositoryLink, projectIma
   }, []);
 
   return (
-    <Wrapper isMounted={isMounted} isClosed={isClosed}>
+    <Wrapper $isMounted={isMounted} $isClosed={isClosed}>
       <ProjectAdImage
         src={projectImage}
         alt={projectName + " 아이콘 이미지"}
@@ -73,7 +68,10 @@ export function ProjectAd({ projectName, projectLink, repositoryLink, projectIma
   );
 }
 
-const Wrapper = utld.aside<WrapperProps>`
+const Wrapper = utld.aside<{
+  $isMounted: boolean;
+  $isClosed: boolean;
+}>`
   flex
   items-center
 
@@ -102,9 +100,9 @@ const Wrapper = utld.aside<WrapperProps>`
 
   print:hidden
 
-  ${({ isMounted, isClosed }) =>
-    isMounted &&
-    (!isClosed
+  ${({ $isMounted, $isClosed }) =>
+    $isMounted &&
+    (!$isClosed
       ? ud`
           translate-y-0
           opacity-100

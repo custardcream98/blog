@@ -2,14 +2,14 @@ import type { ReactNode } from "react";
 import { utld } from "utility-class-components";
 
 type ResultCardWrapperProps = {
-  isLast: boolean;
+  $isLast: boolean;
 };
 
 const ResultCardWrapper = utld.li<ResultCardWrapperProps>`
   py-5
 
-  ${({ isLast }) =>
-    !isLast ? "border-b border-solid border-default-sub-light dark:border-default-dark" : ""}
+  ${({ $isLast }) =>
+    !$isLast ? "border-b border-solid border-default-sub-light dark:border-default-dark" : ""}
   
   [&>.result-title-wrapper]:(
     flex
@@ -66,7 +66,7 @@ type Props = {
 
 function SearchResultCard({ title, date, content, link, isLast }: Props) {
   return (
-    <ResultCardWrapper isLast={isLast} className='result-card-wrapper'>
+    <ResultCardWrapper $isLast={isLast} className='result-card-wrapper'>
       <div className='result-title-wrapper'>
         {title}
         {date}

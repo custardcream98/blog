@@ -47,7 +47,7 @@ export function Paging({ pageScale, currentPage }: Props) {
                 pathname: "/",
                 query: { page: pageNum },
               }}
-              isSelectedPage={pageNum === currentPage}
+              $isSelectedPage={pageNum === currentPage}
             >
               {pageNum}
             </Pagenum>
@@ -113,7 +113,7 @@ const selectedPageNumStyle = ud`
 `;
 
 const Pagenum = utld(StyledLink)<{
-  isSelectedPage: boolean;
+  $isSelectedPage: boolean;
 }>`
   inline-block
 
@@ -122,5 +122,5 @@ const Pagenum = utld(StyledLink)<{
   
   font-light
 
-  ${({ isSelectedPage }) => isSelectedPage && selectedPageNumStyle}
+  ${({ $isSelectedPage }) => $isSelectedPage && selectedPageNumStyle}
 `;

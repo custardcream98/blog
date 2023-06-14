@@ -8,10 +8,6 @@ type NavItemProps = PropsWithChildren<{
   href: string;
 }>;
 
-type NavItemLinkDecoratedProps = {
-  isActive: boolean;
-};
-
 function NavItem({ href, children }: NavItemProps) {
   const hrefWithoutHash = (href.includes("#") ? href.slice(0, href.indexOf("#")) : href).split(
     "/",
@@ -22,7 +18,7 @@ function NavItem({ href, children }: NavItemProps) {
 
   return (
     <NavItemLi>
-      <NavItemLinkDecorated isActive={isActive} href={href}>
+      <NavItemLinkDecorated $isActive={isActive} href={href}>
         {children}
       </NavItemLinkDecorated>
     </NavItemLi>
@@ -45,13 +41,15 @@ const Nav = utld.ul`
   )
 `;
 
-const NavItemLinkDecorated = utld(LinkDecorated)<NavItemLinkDecoratedProps>`
+const NavItemLinkDecorated = utld(LinkDecorated)<{
+  $isActive: boolean;
+}>`
   text-[1rem]
 
   mobile:text-[0.8rem]
 
-  ${({ isActive }) =>
-    isActive
+  ${({ $isActive }) =>
+    $isActive
       ? "text-default-light dark:text-default-dark"
       : "text-default-sub-light dark:text-default-sub-dark"}
 `;

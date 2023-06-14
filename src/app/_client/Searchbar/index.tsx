@@ -17,70 +17,12 @@ import { utld } from "utility-class-components";
 
 const TRANSITION_DURATION = 200;
 
-type SearchbarStyleProps = {
-  isSearchbarOn: boolean;
-};
-
-const SearchbarContainer = utld.form<SearchbarStyleProps>`
-  w-full
-  h-full
-
-  absolute
-  right-0
-
-  z-[101]
-
-  transition-all
-  duration-[200ms]
-
-  ${({ isSearchbarOn }) => (isSearchbarOn ? "" : "translate-y-[-105%]")}
-
-  bg-bg-light
-  dark:bg-bg-dark
-`;
-
-const SearchbarInput = utld.input`
-  w-full
-  h-4/5
-
-  px-5
-
-  font-sans
-  font-normal
-  text-base
-  border-none
-
-  rounded-full
-  bg-post-element-bg-light
-  dark:bg-post-element-bg-dark
-
-  text-default-light
-  dark:text-default-dark
-
-  mr-[1.875rem]
-
-  focus:outline-none
-`;
-
-const SearchbarWrapper = utld.div`
-  relative
-
-  w-[90vw]
-  max-w-800
-  h-full
-  m-auto
-
-  flex
-  justify-center
-  items-center
-`;
-
-type Props = {
+type SearchbarProps = {
   isSearchbarOn: boolean;
   onSearchbarClose: () => void;
 };
 
-export function Searchbar({ isSearchbarOn, onSearchbarClose }: Props) {
+export function Searchbar({ isSearchbarOn, onSearchbarClose }: SearchbarProps) {
   const [searchInput, setSearchInput] = useState("");
   const { searchResults, clearSearchedResults } = useSearchResults(searchInput);
   const inputRef = useRef<HTMLInputElement>(null);
@@ -157,7 +99,7 @@ export function Searchbar({ isSearchbarOn, onSearchbarClose }: Props) {
       autoComplete='off'
       onSubmit={onSearchFormSubmit}
       onKeyDown={handleTabArrow}
-      isSearchbarOn={isSearchbarOn}
+      $isSearchbarOn={isSearchbarOn}
     >
       <label className='sr-only' htmlFor='search'>
         검색어 입력란
@@ -207,3 +149,59 @@ export function Searchbar({ isSearchbarOn, onSearchbarClose }: Props) {
     </SearchbarContainer>
   );
 }
+
+const SearchbarContainer = utld.form<{
+  $isSearchbarOn: boolean;
+}>`
+  w-full
+  h-full
+
+  absolute
+  right-0
+
+  z-[101]
+
+  transition-all
+  duration-[200ms]
+
+  ${({ $isSearchbarOn }) => ($isSearchbarOn ? "" : "translate-y-[-105%]")}
+
+  bg-bg-light
+  dark:bg-bg-dark
+`;
+
+const SearchbarInput = utld.input`
+  w-full
+  h-4/5
+
+  px-5
+
+  font-sans
+  font-normal
+  text-base
+  border-none
+
+  rounded-full
+  bg-post-element-bg-light
+  dark:bg-post-element-bg-dark
+
+  text-default-light
+  dark:text-default-dark
+
+  mr-[1.875rem]
+
+  focus:outline-none
+`;
+
+const SearchbarWrapper = utld.div`
+  relative
+
+  w-[90vw]
+  max-w-800
+  h-full
+  m-auto
+
+  flex
+  justify-center
+  items-center
+`;

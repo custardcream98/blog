@@ -3,7 +3,7 @@ import { DateSpan, LinkDecorated } from "src/components";
 import { ud, utld } from "utility-class-components";
 
 type PagenationInfo = {
-  isLastPage: boolean;
+  $isLastPage: boolean;
 };
 
 type Props = {
@@ -19,13 +19,13 @@ export function HeroPost({ index, maxPostCount, title, date, excerpt, hash }: Pr
   const isLastPage = index === maxPostCount - 1;
 
   return (
-    <ContentContainer isLastPage={isLastPage}>
+    <ContentContainer $isLastPage={isLastPage}>
       <LinkDecorated href={`posts/${hash}`}>
         <Title>
           <TitleText>{title}</TitleText>
           <DateSpanForHeroPost date={date} />
         </Title>
-        <Excerpt isLastPage={isLastPage}>
+        <Excerpt $isLastPage={isLastPage}>
           <ExcerptText>{excerpt}</ExcerptText>
         </Excerpt>
       </LinkDecorated>
@@ -35,7 +35,7 @@ export function HeroPost({ index, maxPostCount, title, date, excerpt, hash }: Pr
 
 const ContentContainer = utld.li<PagenationInfo>`
   w-full
-  ${({ isLastPage }) => (isLastPage ? "mb-5" : "")}
+  ${({ $isLastPage }) => ($isLastPage ? "mb-5" : "")}
 `;
 
 const Title = utld.h3`
@@ -56,8 +56,8 @@ const Excerpt = utld.span<PagenationInfo>`
   font-light
   leading-[1.5]
   
-  ${({ isLastPage }) =>
-    !isLastPage &&
+  ${({ $isLastPage }) =>
+    !$isLastPage &&
     ud`
       border-b
       border-solid

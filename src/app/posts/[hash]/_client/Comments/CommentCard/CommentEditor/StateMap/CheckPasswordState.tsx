@@ -96,7 +96,7 @@ export default function CheckPasswordState({ stateTo }: Props) {
           </SubmitButton>
           {errorMessage && (
             <ErrorMessage
-              isAnimatingShake={isAnimatingShake}
+              $isAnimatingShake={isAnimatingShake}
               onAnimationEnd={handleShakeAnimationEnd}
             >
               {errorMessage}
@@ -142,7 +142,7 @@ const SubmitButton = utld(Button)`
   left-[12.8125rem]
 `;
 
-type ErrorMessageProps = { isAnimatingShake: boolean };
+type ErrorMessageProps = { $isAnimatingShake: boolean };
 
 const ErrorMessage = utld.span<ErrorMessageProps>`
   absolute
@@ -152,5 +152,5 @@ const ErrorMessage = utld.span<ErrorMessageProps>`
   text-red-500
   text-[0.8rem]
 
-  ${({ isAnimatingShake }) => isAnimatingShake && "animate-shake"}
+  ${({ $isAnimatingShake }) => $isAnimatingShake && "animate-shake"}
 `;

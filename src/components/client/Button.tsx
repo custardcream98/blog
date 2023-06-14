@@ -5,7 +5,8 @@ import { utld } from "utility-class-components";
 type Props = ComponentPropsWithoutRef<"button"> & {
   width: CSSProperties["width"];
   height: CSSProperties["height"];
-} & StyledProps;
+  isLoading: boolean;
+};
 
 export function Button({ children, width, height, isLoading, onClick, ...props }: Props) {
   const handleClick: MouseEventHandler<HTMLButtonElement> = (event) => {
@@ -23,7 +24,7 @@ export function Button({ children, width, height, isLoading, onClick, ...props }
         height,
         width,
       }}
-      isLoading={isLoading}
+      $isLoading={isLoading}
       onClick={handleClick}
       {...props}
     >
@@ -40,11 +41,9 @@ export function Button({ children, width, height, isLoading, onClick, ...props }
   );
 }
 
-type StyledProps = {
-  isLoading: boolean;
-};
-
-const StyledButton = utld.button<StyledProps>`
+const StyledButton = utld.button<{
+  $isLoading: boolean;
+}>`
   rounded-[5px]
 
   overflow-hidden
@@ -75,5 +74,5 @@ const StyledButton = utld.button<StyledProps>`
     scale-[1.05]
   )
 
-  ${({ isLoading }) => isLoading && "pointer-events-none"}
+  ${({ $isLoading }) => $isLoading && "pointer-events-none"}
 `;
