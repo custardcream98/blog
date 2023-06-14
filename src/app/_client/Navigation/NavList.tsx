@@ -1,7 +1,8 @@
 import { LinkDecorated } from "src/components";
 
+import { parseUrl } from "next/dist/shared/lib/router/utils/parse-url";
 import { usePathname } from "next/navigation";
-import type { PropsWithChildren } from "react";
+import { type PropsWithChildren, useMemo } from "react";
 import { utld } from "utility-class-components";
 
 type NavItemProps = PropsWithChildren<{
@@ -9,12 +10,10 @@ type NavItemProps = PropsWithChildren<{
 }>;
 
 function NavItem({ href, children }: NavItemProps) {
-  const hrefWithoutHash = (href.includes("#") ? href.slice(0, href.indexOf("#")) : href).split(
-    "/",
-  )[1];
+  const currentPathname = usePathname();
+  const pathname = useMemo(() => parseUrl(href).pathname, [href]);
 
-  const pathname = usePathname();
-  const isActive = pathname === hrefWithoutHash;
+  const isActive = currentPathname === pathname;
 
   return (
     <NavItemLi>
