@@ -1,21 +1,23 @@
 import getFuzzyPostData from "src/lib/fuzzy";
 import type { SearchedPost } from "src/types/searchedPosts";
 
-import type { NextApiRequest, NextApiResponse } from "next";
+import { NextResponse } from "next/server";
 
 const MAX_CONTENT_LENGTH = 100;
 const koDtf = new Intl.DateTimeFormat("ko", {
   dateStyle: "short",
 });
 
-export default function searchAPI(req: NextApiRequest, res: NextApiResponse) {
-  const { q } = req.query;
+export function GET(request: Request) {
+  const q = new URL(request.url).searchParams.get("q");
 
-  if (req.method !== "GET" || typeof q !== "string") {
-    return res.status(400).json({ message: "잘못된 요청입니다." });
+  if (typeof q !== "string") {
+    return NextResponse.json("잘못된 요청입니다.", { status: 400 });
   }
 
-  if (process.env.NODE_ENV === "development") console.log("요청 query: " + q);
+  if (process.env.NODE_ENV === "development") {
+    console.log("요청 query: " + q);
+  }
 
   const results = q ? getFuzzyPostData(q).slice(0, 5) : [];
   const slicedResults: SearchedPost[] = [];
@@ -48,7 +50,9 @@ export default function searchAPI(req: NextApiRequest, res: NextApiResponse) {
     }
   });
 
-  if (process.env.NODE_ENV === "development") console.log("탐색 끝, 응답합니다.");
+  if (process.env.NODE_ENV === "development") {
+    console.log("탐색 끝, 응답합니다.");
+  }
 
-  return res.status(200).setHeader("Content-Type", "application/json").json(slicedResults);
+  return NextResponse.json(slicedResults);
 }
