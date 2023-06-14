@@ -1,25 +1,23 @@
+import { useSetIsDarkmodeActivatedContext } from "src/app/_client/context";
 import PrintSvg from "src/components/Svgs/PrintSvg";
 import SvgContainer from "src/components/Svgs/SvgContainer";
-import { setIsDarkmodeActivatedOnLocal } from "src/lib/localStorage";
 
 import { iconClickableStyle } from "../_components/ResumeLink";
 
 import { useCallback } from "react";
 
 export function PrintButton() {
-  const handlePrint = useCallback(async () => {
-    const $root = document.documentElement;
-    const isDark = $root.classList.contains("dark");
+  const { isDarkmodeActivated, setIsDarkmodeActivatedFalse } = useSetIsDarkmodeActivatedContext();
 
-    if (isDark) {
-      $root.classList.remove("dark");
-      setIsDarkmodeActivatedOnLocal(false);
+  const handlePrint = useCallback(async () => {
+    if (isDarkmodeActivated) {
+      setIsDarkmodeActivatedFalse();
 
       await new Promise((resolve) => setTimeout(resolve, 500));
     }
 
     window.print();
-  }, []);
+  }, [isDarkmodeActivated, setIsDarkmodeActivatedFalse]);
 
   return (
     <button type='button' onClick={handlePrint} className={iconClickableStyle}>
