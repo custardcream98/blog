@@ -1,5 +1,5 @@
-import { convertYYMMToKorean } from "src/lib/utils/string";
 import type { Period } from "src/types/resume";
+import { convertYYMMToKorean } from "src/utils";
 
 import { dimTextStyle } from "./styles";
 

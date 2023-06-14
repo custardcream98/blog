@@ -8,5 +8,9 @@ export const convertYYMMToKorean = (yymm: DateYYMM) => {
   return `${yearString}년 ${month}월`;
 };
 
-export const isNotEmptyString = (value: unknown) =>
-  !!value && value !== "\n" && value !== "\t" && value !== "\r";
+const utf8Encoder = new TextEncoder();
+export const encodeToPercentString = (str: string) => {
+  return Array.from(utf8Encoder.encode(str))
+    .map((i) => "%" + i.toString(16).toUpperCase().padStart(2, "0"))
+    .join("");
+};

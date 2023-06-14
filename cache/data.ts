@@ -1,6 +1,6 @@
 import { PostMeta } from "src/app/data";
 import type PostType from "src/types/post";
-import { hash } from "src/utils/hash";
+import { hash } from "src/utils";
 
 import fs from "fs";
 import matter from "gray-matter";

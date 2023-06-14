@@ -1,6 +1,6 @@
 import { getViewedTimeOnLocal, setViewedTimeOnLocal } from "src/lib/localStorage";
-import { percentEncode } from "src/lib/utils/helper";
 import ICommentData from "src/types/comment";
+import { encodeToPercentString } from "src/utils";
 
 import { CollectionNames, DocumentKeys } from "./collectionNames";
 import { fireStore } from ".";
@@ -36,13 +36,13 @@ interface ICommentDocRefProps {
 */
 
 const getPostDocRef = (title: string) =>
-  doc(fireStore, CollectionNames.COLLECTION_POSTS, percentEncode(title));
+  doc(fireStore, CollectionNames.COLLECTION_POSTS, encodeToPercentString(title));
 
 export const createPostDoc = async (title: string) => {
   const postDocRef = getPostDocRef(title);
 
   try {
-    const _ = await (await getDoc(postDocRef)).data()?.[DocumentKeys.KEY_VIEWS];
+    await (await getDoc(postDocRef)).data()?.[DocumentKeys.KEY_VIEWS];
   } catch (e) {
     if (e instanceof FirebaseError) {
       if (e.code === "not-found") {

@@ -1,9 +1,12 @@
 import { getAllPosts, getHashedSlug } from "src/app/data";
 import { METADATA_DEFAULT_IMAGE, METADATA_DEFAULT_TITLE } from "src/app/sharedMetadata";
-import { resolveURL } from "src/lib/utils/url";
 
 import { Feed, type FeedOptions } from "feed";
 import fs from "fs";
+
+const getFullUrl = (url: string) => {
+  return process.env.NEXT_PUBLIC_HOST + url;
+};
 
 const generateRSSFeed = async (coverImages: string[]) => {
   if (!process.env.NEXT_PUBLIC_HOST) {
@@ -14,11 +17,11 @@ const generateRSSFeed = async (coverImages: string[]) => {
 
   const feedOptions: FeedOptions = {
     copyright: "© " + new Date().getFullYear() + " custardcream98. All rights reserved.",
-    favicon: resolveURL("/static/icon.png"),
+    favicon: getFullUrl("/static/icon.png"),
     feedLinks: {
-      atom: resolveURL("/atom.xml"),
-      json: resolveURL("/rss.json"),
-      rss2: resolveURL("/rss.xml"),
+      atom: getFullUrl("/atom.xml"),
+      json: getFullUrl("/rss.json"),
+      rss2: getFullUrl("/rss.xml"),
     },
     generator: "custardcream98",
     id: process.env.NEXT_PUBLIC_HOST,
@@ -31,7 +34,7 @@ const generateRSSFeed = async (coverImages: string[]) => {
   const feed = new Feed(feedOptions);
 
   allPosts.forEach((post, index) => {
-    const postURL = resolveURL(`/posts/${getHashedSlug(post.slug)}`);
+    const postURL = getFullUrl(`/posts/${getHashedSlug(post.slug)}`);
 
     feed.addItem({
       date: new Date(post.date),

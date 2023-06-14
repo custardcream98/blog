@@ -1,4 +1,4 @@
-import { dateToString } from "src/lib/utils/helper";
+import { dateToString } from "src/utils";
 
 import { utld } from "utility-class-components";
 

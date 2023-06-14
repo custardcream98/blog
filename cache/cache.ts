@@ -1,7 +1,7 @@
-import { markdownToHtmlForCache } from "src/lib/utils/markdownToHtml";
+import { markdownToHtmlForCache } from "src/lib/markdownToHtml";
 import type { CachePost } from "src/types/cache";
 import type { PostTypeWithoutContent } from "src/types/post";
-import { hash } from "src/utils/hash";
+import { hash } from "src/utils";
 
 import { getAllPosts } from "./data";
 

@@ -1,4 +1,4 @@
-import mailer from "src/lib/utils/nodemailer";
+import mailer from "src/lib/nodemailer";
 
 import type { NextApiRequest, NextApiResponse } from "next";
 

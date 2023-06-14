@@ -1,6 +1,6 @@
 import "server-only";
 
-import { getOgImage } from "src/lib/utils/ogImage";
+import { getOgImage } from "src/lib/thumbnails/ogImage";
 import type { PostType } from "src/types/post";
 
 import HASH_MAP from "cache/hash.json";
