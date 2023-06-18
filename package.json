@@ -44,7 +44,7 @@
     "remark-rehype": "^10.1.0",
     "server-only": "^0.0.1",
     "shiki": "^0.10.1",
-    "utility-class-components": "^0.2.0"
+    "utility-class-components": "^0.2.2"
   },
   "devDependencies": {
     "@types/glob": "^7.2.0",
