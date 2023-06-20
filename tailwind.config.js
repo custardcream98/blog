@@ -122,10 +122,10 @@ module.exports = {
       },
     },
     fontFamily: {
-      mono: ["var(--font-source-code-pro)"],
-      sans: ["var(--font-noto-sans-kr)"],
-      serif: ["var(--font-noto-serif-kr)"],
-      title: ["var(--font-poppins)"],
+      mono: ["Source Code Pro", "monospace"],
+      sans: ["Noto Sans KR", "sans-serif"],
+      serif: ["Noto Serif KR", "serif"],
+      title: ["Poppins", "sans-serif"],
     },
     lineHeight: {
       1.2: "1.2",

@@ -1,6 +1,6 @@
 import { getAllPosts, getPostByHashedSlug } from "src/app/data";
 import { Container } from "src/components";
-import { FONT_D2_CODING, FONT_NOTO_SERIF_KR } from "src/fonts";
+import { FONT_D2_CODING } from "src/fonts";
 import { createPostDoc } from "src/lib/firebaseSetup/firebaseApps";
 import markdownToHtml from "src/lib/markdownToHtml";
 import generateRSSFeed from "src/lib/rss";
@@ -10,6 +10,8 @@ import { Comments } from "./_client";
 import { MarkdownBody, PostTitle, PrevNextPost } from "./_components";
 import { getPrevNextPosts } from "./data";
 import type { PostPageParams } from "./types";
+
+import "@fontsource/noto-serif-kr/400.css";
 
 import { utld } from "utility-class-components";
 
@@ -65,12 +67,10 @@ export default async function PostsDynamicPage({ params: { hash } }: PostPagePar
   );
 }
 
-const FONTS = [FONT_D2_CODING.variable, FONT_NOTO_SERIF_KR.variable];
-
 const PostContainer = utld(Container)`
   !max-w-[42.5rem]
 
-  ${FONTS}
+  ${FONT_D2_CODING.variable}
 `;
 
 const PostSection = utld.section`
