@@ -12,8 +12,8 @@ export const POSTS_SECTION_ID = "post-cards-section";
 
 export function HeroPostsSection({ page }: { page?: string }) {
   const parsedPage = page ? parseInt(page, 10) : 1;
-  const isValidPage = parsedPage > 0 && parsedPage <= PAGE_SCALE;
-  const pageIndex = isValidPage ? parsedPage - 1 : 0;
+  const validPage = parsedPage < 0 ? 1 : parsedPage > PAGE_SCALE ? PAGE_SCALE : parsedPage;
+  const pageIndex = validPage - 1;
   const posts = PostByPageArr[pageIndex];
 
   return (
@@ -32,7 +32,7 @@ export function HeroPostsSection({ page }: { page?: string }) {
           />
         ))}
       </HeroPostList>
-      <Paging currentPage={parsedPage} />
+      <Paging currentPage={validPage} />
     </Container>
   );
 }
