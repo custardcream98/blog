@@ -2,25 +2,29 @@ import { generateNumberArray } from "src/utils";
 
 import { POSTS_SECTION_ID } from "../HeroPostsSection";
 
+import { CurrentPageIndicator } from "./CurrentPageIndicator.client";
+
+import PostByPageArr from "cache/postByPageArr.json";
 import Link from "next/link";
 import { MdOutlineKeyboardArrowLeft, MdOutlineKeyboardArrowRight } from "react-icons/md";
 import { ud, utld } from "utility-class-components";
 
+const PAGE_SCALE = PostByPageArr.length;
+const PAGES_ARRAY = generateNumberArray(PAGE_SCALE, 1);
+
 type PagingProps = {
-  pageScale: number;
-  currentPage: number;
+  currentPage?: number;
 };
 
-export function Paging({ pageScale, currentPage }: PagingProps) {
+export function Paging({ currentPage = 1 }: PagingProps) {
   const isFirstPage = currentPage === 1;
-  const isLastPage = currentPage === pageScale;
+  const isLastPage = currentPage === PAGE_SCALE;
   const prevPageNumber = currentPage - 1;
   const nextPageNumber = currentPage + 1;
 
-  const pagesArray = generateNumberArray(pageScale, 1);
-
   return (
     <Container>
+      <CurrentPageIndicator currentPage={currentPage} />
       {!isFirstPage && (
         <LeftArrow
           scroll={false}
@@ -35,7 +39,7 @@ export function Paging({ pageScale, currentPage }: PagingProps) {
         </LeftArrow>
       )}
       <PagenumList>
-        {pagesArray.map((pageNum) => (
+        {PAGES_ARRAY.map((pageNum) => (
           <li key={pageNum}>
             <Pagenum
               scroll={false}
@@ -79,9 +83,9 @@ const Container = utld.nav`
 const StyledLink = utld(Link)`
   inline-block
   
-  w-[1.5rem]
-  h-[1.5rem]
-  mx-[0.25rem]
+  w-6
+  h-6
+  mx-1
 
   leading-[1.5rem]
 
@@ -124,22 +128,13 @@ const Pagenum = utld(StyledLink)<{
   $isSelectedPage: boolean;
 }>`
   font-light
-
   ${({ $isSelectedPage }) =>
-    $isSelectedPage
-      ? ud`
-        text-default-dark
-        dark:text-default-light
-
-        bg-accent-light
-        dark:bg-accent-dark
-
-        pointer-events-none
-
-        font-medium
-        `
-      : ud`
-        text-default-light
-        dark:text-default-dark
-        `}
+    $isSelectedPage &&
+    ud`
+    duration-500
+    pointer-events-none
+    text-default-dark
+    dark:text-default-light
+    font-medium
+  `}
 `;

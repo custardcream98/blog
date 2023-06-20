@@ -32,7 +32,7 @@ export function HeroPostsSection({ page }: { page?: string }) {
           />
         ))}
       </HeroPostList>
-      <Paging pageScale={PAGE_SCALE} currentPage={parsedPage} />
+      <Paging currentPage={parsedPage} />
     </Container>
   );
 }
