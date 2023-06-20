@@ -64,8 +64,19 @@ export function Searchbar({ isSearchbarOn, onSearchbarClose }: SearchbarProps) {
       ),
     ];
   }, []);
+  const isSearchInputComposingRef = useRef(false);
+  const handleCompositionStart = useCallback(() => {
+    isSearchInputComposingRef.current = true;
+  }, []);
+  const handleCompositionEnd = useCallback(() => {
+    isSearchInputComposingRef.current = false;
+  }, []);
   const handleTabArrow = useCallback(
     (event: KeyboardEvent) => {
+      if (isSearchInputComposingRef.current) {
+        return;
+      }
+
       const { key } = event;
       if (!TAB_AND_ARROW_KEYS.has(key)) {
         return;
@@ -118,6 +129,8 @@ export function Searchbar({ isSearchbarOn, onSearchbarClose }: SearchbarProps) {
             autoComplete='off'
             onChange={handleInputChange}
             value={searchInput}
+            onCompositionStart={handleCompositionStart}
+            onCompositionEnd={handleCompositionEnd}
           />
         </SearchbarInputGradientBorder>
         <SearchbarCloseButton
