@@ -1,7 +1,11 @@
+import useDelayedFocus from "src/hook/useDelayedFocus";
+import { calculateLoopedIndex } from "src/utils";
+
 import { useSearchResults } from "../_hooks";
 
-import SearchbarCloseButton from "./SearchbarCloseButton";
-import SearchResults from "./SearchResults";
+import { SearchbarCloseButton } from "./SearchbarCloseButton";
+import { RESULT_LINK_CLASSNAME } from "./SearchResultCard";
+import { SearchResults } from "./SearchResults";
 
 import {
   type ChangeEvent,
@@ -16,6 +20,11 @@ import { RiCloseFill } from "react-icons/ri";
 import { utld } from "utility-class-components";
 
 const TRANSITION_DURATION = 200;
+const TAB_KEY = "Tab";
+const ARROW_UP_KEY = "ArrowUp";
+const ARROW_DOWN_KEY = "ArrowDown";
+
+const TAB_AND_ARROW_KEYS = new Set([TAB_KEY, ARROW_UP_KEY, ARROW_DOWN_KEY]);
 
 type SearchbarProps = {
   isSearchbarOn: boolean;
@@ -25,33 +34,8 @@ type SearchbarProps = {
 export function Searchbar({ isSearchbarOn, onSearchbarClose }: SearchbarProps) {
   const [searchInput, setSearchInput] = useState("");
   const { searchResults, clearSearchedResults } = useSearchResults(searchInput);
-  const inputRef = useRef<HTMLInputElement>(null);
-  const searchbarContainerRef = useRef<HTMLFormElement>(null);
-  const buttonCloseSearchbarRef = useRef<HTMLButtonElement>(null);
-
   const isResultExists = searchResults.length !== 0;
-
-  const openSearchbarCallback = () => {
-    if (!isSearchbarOn) {
-      return;
-    }
-    const focusTimeout = setTimeout(() => inputRef.current?.focus(), TRANSITION_DURATION);
-    return () => clearTimeout(focusTimeout);
-  };
-
-  useEffect(openSearchbarCallback, [isSearchbarOn]);
-
-  const closeResults = useCallback(() => {
-    setSearchInput("");
-    clearSearchedResults();
-    onSearchbarClose();
-  }, [clearSearchedResults, onSearchbarClose]);
-
-  const onSearchFormSubmit = (event: FormEvent<HTMLFormElement>) => {
-    event.preventDefault();
-  };
-
-  const onInputChange = useCallback(
+  const handleInputChange = useCallback(
     (event: ChangeEvent<HTMLInputElement>) => {
       clearSearchedResults();
       setSearchInput(event.currentTarget.value);
@@ -59,45 +43,63 @@ export function Searchbar({ isSearchbarOn, onSearchbarClose }: SearchbarProps) {
     [clearSearchedResults],
   );
 
-  const handleTabArrow = useCallback((event: KeyboardEvent) => {
-    const { key } = event;
-    if (key !== "Tab" && key !== "ArrowUp" && key !== "ArrowDown") {
-      return;
+  const inputRef = useRef<HTMLInputElement>(null);
+  const focusOnSearchInput = useDelayedFocus(inputRef, TRANSITION_DURATION);
+  useEffect(() => {
+    if (isSearchbarOn) {
+      focusOnSearchInput();
     }
-    event.preventDefault();
+  }, [isSearchbarOn, focusOnSearchInput]);
 
-    const tabIterables = [
+  const searchResultsListRef = useRef<HTMLOListElement>(null);
+  const buttonCloseSearchbarRef = useRef<HTMLButtonElement>(null);
+  const getTabbableElements = useCallback(() => {
+    return [
       inputRef.current,
       buttonCloseSearchbarRef.current,
-      ...Array.from<HTMLAnchorElement>(
-        searchbarContainerRef.current?.querySelectorAll(
-          ".result-link",
+      ...Array.from(
+        searchResultsListRef.current?.querySelectorAll(
+          `.${RESULT_LINK_CLASSNAME}`,
         ) as NodeListOf<HTMLAnchorElement>,
       ),
     ];
+  }, []);
+  const handleTabArrow = useCallback(
+    (event: KeyboardEvent) => {
+      const { key } = event;
+      if (!TAB_AND_ARROW_KEYS.has(key)) {
+        return;
+      }
+      event.preventDefault();
 
-    const currentFocusIndex = tabIterables.indexOf(document.activeElement as HTMLInputElement);
+      const tabIterables = getTabbableElements();
+      const currentFocusIndex = tabIterables.indexOf(document.activeElement as HTMLInputElement);
 
-    if (currentFocusIndex === -1) {
-      return;
-    }
+      if (currentFocusIndex === -1) {
+        return;
+      }
 
-    if (key === "ArrowUp") {
-      tabIterables[
-        currentFocusIndex === 0 ? tabIterables.length - 1 : currentFocusIndex - 1
-      ]?.focus();
-    } else {
-      tabIterables[
-        currentFocusIndex === tabIterables.length - 1 ? 0 : currentFocusIndex + 1
-      ]?.focus();
-    }
+      const offset = key === ARROW_UP_KEY ? -1 : 1;
+      const nextFocusIndex = calculateLoopedIndex(currentFocusIndex, offset, tabIterables.length);
+      tabIterables[nextFocusIndex]?.focus();
+    },
+    [getTabbableElements],
+  );
+
+  const closeResults = useCallback(() => {
+    setSearchInput("");
+    clearSearchedResults();
+    onSearchbarClose();
+  }, [clearSearchedResults, onSearchbarClose]);
+
+  const handleFormSubmit = useCallback((event: FormEvent<HTMLFormElement>) => {
+    event.preventDefault();
   }, []);
 
   return (
-    <SearchbarContainer
-      ref={searchbarContainerRef}
+    <SearchbarForm
       autoComplete='off'
-      onSubmit={onSearchFormSubmit}
+      onSubmit={handleFormSubmit}
       onKeyDown={handleTabArrow}
       $isSearchbarOn={isSearchbarOn}
     >
@@ -113,7 +115,7 @@ export function Searchbar({ isSearchbarOn, onSearchbarClose }: SearchbarProps) {
           required
           spellCheck='false'
           autoComplete='off'
-          onChange={onInputChange}
+          onChange={handleInputChange}
           value={searchInput}
         />
         <SearchbarCloseButton
@@ -126,31 +128,31 @@ export function Searchbar({ isSearchbarOn, onSearchbarClose }: SearchbarProps) {
           hidden={!isSearchbarOn}
         />
         {isResultExists && (
-          <SearchResults>
-            {searchResults.map((data, i) => (
+          <SearchResults ref={searchResultsListRef}>
+            {searchResults.map((data, index) => (
               <SearchResults.Item
                 key={data.hash}
-                title={<SearchResults.ItemTitle>{data.titleNode}</SearchResults.ItemTitle>}
-                content={<SearchResults.ItemContent>{data.contentNode}</SearchResults.ItemContent>}
-                date={<SearchResults.ItemDate>{data.date}</SearchResults.ItemDate>}
-                link={
-                  <SearchResults.ItemLink
-                    hash={data.hash}
-                    title={data.title}
-                    closeResults={closeResults}
-                  />
+                hash={data.hash}
+                resultTitle={data.title}
+                resultTitleNode={
+                  <SearchResults.ItemTitle>{data.titleNode}</SearchResults.ItemTitle>
                 }
-                isLast={i === searchResults.length - 1}
+                contentNode={
+                  <SearchResults.ItemContent>{data.contentNode}</SearchResults.ItemContent>
+                }
+                resultDateNode={<SearchResults.ItemDate>{data.date}</SearchResults.ItemDate>}
+                isLast={index === searchResults.length - 1}
+                onClick={closeResults}
               />
             ))}
           </SearchResults>
         )}
       </SearchbarWrapper>
-    </SearchbarContainer>
+    </SearchbarForm>
   );
 }
 
-const SearchbarContainer = utld.form<{
+const SearchbarForm = utld.form<{
   $isSearchbarOn: boolean;
 }>`
   w-full

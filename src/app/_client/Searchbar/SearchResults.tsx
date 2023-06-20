@@ -1,11 +1,9 @@
-import LinkToPost from "./LinkToPost";
 import SearchResultCard, {
   SearchResultCardContent,
   SearchResultCardDate,
   SearchResultCardTitle,
 } from "./SearchResultCard";
 
-import type { PropsWithChildren } from "react";
 import { utld } from "utility-class-components";
 
 const ResultsWrapper = utld.ol`
@@ -21,14 +19,9 @@ const ResultsWrapper = utld.ol`
   rounded-lg
 `;
 
-function SearchResults({ children, ...props }: PropsWithChildren) {
-  return <ResultsWrapper {...props}>{children}</ResultsWrapper>;
-}
-
-SearchResults.Item = SearchResultCard;
-SearchResults.ItemLink = LinkToPost;
-SearchResults.ItemTitle = SearchResultCardTitle;
-SearchResults.ItemContent = SearchResultCardContent;
-SearchResults.ItemDate = SearchResultCardDate;
-
-export default SearchResults;
+export const SearchResults = Object.assign(ResultsWrapper, {
+  Item: SearchResultCard,
+  ItemContent: SearchResultCardContent,
+  ItemDate: SearchResultCardDate,
+  ItemTitle: SearchResultCardTitle,
+});

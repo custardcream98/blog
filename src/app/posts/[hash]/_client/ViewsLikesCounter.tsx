@@ -5,6 +5,34 @@ import { BsHeart, BsHeartFill } from "react-icons/bs";
 import { HiEye } from "react-icons/hi";
 import { utld } from "utility-class-components";
 
+type ViewsLikesCounterProps = {
+  title: string;
+};
+
+export function ViewsLikesCounter({ title }: ViewsLikesCounterProps) {
+  const viewCount = useViewCount(title);
+  const { likeCount, isLiked, onLikeClick } = useLikeCount(title);
+
+  return (
+    <Container>
+      <CounterContainer>
+        <HiEye title='조회수' size={15} className={SUB_TEXT_COLOR} />
+        <CounterValue>{viewCount}</CounterValue>
+      </CounterContainer>
+      <LikeBtn type='button' onClick={onLikeClick} $isLiked={isLiked}>
+        <IconContext.Provider value={LIKE_ICON_STYLE_CONTEXT}>
+          {isLiked ? (
+            <BsHeartFill title='좋아요 버튼' className={HEART_COLOR} />
+          ) : (
+            <BsHeart title='좋아요 버튼' className={SUB_TEXT_COLOR} />
+          )}
+        </IconContext.Provider>
+        <LikeValue $isLiked={isLiked}>{likeCount}</LikeValue>
+      </LikeBtn>
+    </Container>
+  );
+}
+
 const HEART_COLOR = "text-[#c33434]";
 const SUB_TEXT_COLOR = "text-default-sub-light dark:text-default-sub-dark";
 const LIKE_ICON_STYLE_CONTEXT = {
@@ -56,31 +84,3 @@ const CounterValue = utld(Value)`
 const LikeValue = utld(Value)<LikeValueProps>`
  ${({ $isLiked }) => ($isLiked ? HEART_COLOR : SUB_TEXT_COLOR)}
 `;
-
-type Props = {
-  title: string;
-};
-
-export function ViewsLikesCounter({ title }: Props) {
-  const viewCount = useViewCount(title);
-  const { likeCount, isLiked, onLikeClick } = useLikeCount(title);
-
-  return (
-    <Container>
-      <CounterContainer>
-        <HiEye title='조회수' size={15} className={SUB_TEXT_COLOR} />
-        <CounterValue>{viewCount}</CounterValue>
-      </CounterContainer>
-      <LikeBtn type='button' onClick={onLikeClick} $isLiked={isLiked}>
-        <IconContext.Provider value={LIKE_ICON_STYLE_CONTEXT}>
-          {isLiked ? (
-            <BsHeartFill title='좋아요 버튼' className={HEART_COLOR} />
-          ) : (
-            <BsHeart title='좋아요 버튼' className={SUB_TEXT_COLOR} />
-          )}
-        </IconContext.Provider>
-        <LikeValue $isLiked={isLiked}>{likeCount}</LikeValue>
-      </LikeBtn>
-    </Container>
-  );
-}

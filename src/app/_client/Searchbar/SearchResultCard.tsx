@@ -1,27 +1,55 @@
-import type { ReactNode } from "react";
+import { LinkIcon } from "src/components";
+
+import { cssOutlineOnFocus } from "../Navigation/styles";
+
+import Link from "next/link";
+import type { ComponentPropsWithoutRef, ReactNode } from "react";
 import { utld } from "utility-class-components";
 
-type ResultCardWrapperProps = {
-  $isLast: boolean;
+export const RESULT_LINK_CLASSNAME = "result-link";
+
+type SearchResultCardProps = ComponentPropsWithoutRef<"a"> & {
+  resultTitle: string;
+  resultTitleNode: ReactNode;
+  resultDateNode: ReactNode;
+  contentNode: ReactNode;
+  hash: string;
+  isLast: boolean;
 };
 
-const ResultCardWrapper = utld.li<ResultCardWrapperProps>`
+function SearchResultCard({
+  resultTitle,
+  resultTitleNode,
+  resultDateNode,
+  contentNode,
+  hash,
+  isLast,
+  ...props
+}: SearchResultCardProps) {
+  return (
+    <ResultCardItem $isLast={isLast}>
+      <StyledLink href={`/posts/${hash}`} className={RESULT_LINK_CLASSNAME} {...props}>
+        <ResultTitleWrapper>
+          {resultTitleNode}
+          {resultDateNode}
+        </ResultTitleWrapper>
+        <ResultContentWrapper>
+          {contentNode}
+          <LinkIcon className='link-icon' title={`${resultTitle} 포스트로 이동하기`} />
+        </ResultContentWrapper>
+      </StyledLink>
+    </ResultCardItem>
+  );
+}
+
+type ResultCardItemProps = {
+  $isLast: boolean;
+};
+const ResultCardItem = utld.li<ResultCardItemProps>`
   py-5
 
   ${({ $isLast }) =>
-    !$isLast ? "border-b border-solid border-default-sub-light dark:border-default-dark" : ""}
-  
-  [&>.result-title-wrapper]:(
-    flex
-    justify-between
-  )
-
-  [&>.result-content-wrapper]:flex
-
-  mobile:[&>.result-title-wrapper]:(
-    flex-col
-    mb-[0.625rem]
-  )
+    !$isLast && "border-b border-solid border-default-sub-light dark:border-default-dark"}
 `;
 
 export const SearchResultCardTitle = utld.strong`
@@ -56,27 +84,39 @@ export const SearchResultCardDate = utld.time`
   mobile:text-[0.7rem]
 `;
 
-type Props = {
-  title: ReactNode;
-  date: ReactNode;
-  content: ReactNode;
-  link: ReactNode;
-  isLast: boolean;
-};
+const StyledLink = utld(Link)`
+  block
 
-function SearchResultCard({ title, date, content, link, isLast }: Props) {
-  return (
-    <ResultCardWrapper $isLast={isLast} className='result-card-wrapper'>
-      <div className='result-title-wrapper'>
-        {title}
-        {date}
-      </div>
-      <div className='result-content-wrapper'>
-        {content}
-        {link}
-      </div>
-    </ResultCardWrapper>
-  );
-}
+  hover:text-accent-light
+  dark:hover:text-accent-dark
+  transition-colors
+
+  ${cssOutlineOnFocus}
+
+  [&_.link-icon]:(
+    w-5
+    h-5
+    self-end
+
+    stroke-default-light
+    hover:stroke-accent-light
+
+    dark:stroke-default-dark
+    dark:hover:stroke-accent-dark
+  )
+`;
+
+const ResultTitleWrapper = utld.div`
+  flex
+  justify-between
+  mobile:(
+    flex-col
+    mb-[0.625rem]
+  )
+`;
+
+const ResultContentWrapper = utld.div`
+  flex
+`;
 
 export default SearchResultCard;
