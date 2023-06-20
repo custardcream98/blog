@@ -107,17 +107,19 @@ export function Searchbar({ isSearchbarOn, onSearchbarClose }: SearchbarProps) {
         검색어 입력란
       </label>
       <SearchbarWrapper>
-        <SearchbarInput
-          ref={inputRef}
-          id='search'
-          type='text'
-          placeholder='검색어를 입력해주세요.'
-          required
-          spellCheck='false'
-          autoComplete='off'
-          onChange={handleInputChange}
-          value={searchInput}
-        />
+        <SearchbarInputGradientBorder>
+          <SearchbarInput
+            ref={inputRef}
+            id='search'
+            type='text'
+            placeholder='검색어를 입력해주세요.'
+            required
+            spellCheck='false'
+            autoComplete='off'
+            onChange={handleInputChange}
+            value={searchInput}
+          />
+        </SearchbarInputGradientBorder>
         <SearchbarCloseButton
           ref={buttonCloseSearchbarRef}
           title='검색바 닫기'
@@ -152,9 +154,10 @@ export function Searchbar({ isSearchbarOn, onSearchbarClose }: SearchbarProps) {
   );
 }
 
-const SearchbarForm = utld.form<{
+type SearchbarFormProps = {
   $isSearchbarOn: boolean;
-}>`
+};
+const SearchbarForm = utld.form<SearchbarFormProps>`
   w-full
   h-full
 
@@ -172,29 +175,6 @@ const SearchbarForm = utld.form<{
   dark:bg-bg-dark
 `;
 
-const SearchbarInput = utld.input`
-  w-full
-  h-4/5
-
-  px-5
-
-  font-sans
-  font-normal
-  text-base
-  border-none
-
-  rounded-full
-  bg-post-element-bg-light
-  dark:bg-post-element-bg-dark
-
-  text-default-light
-  dark:text-default-dark
-
-  mr-[1.875rem]
-
-  focus:outline-none
-`;
-
 const SearchbarWrapper = utld.div`
   relative
 
@@ -206,4 +186,44 @@ const SearchbarWrapper = utld.div`
   flex
   justify-center
   items-center
+`;
+
+const SearchbarInput = utld.input`
+  w-full
+  h-full
+
+  px-5
+
+  font-sans
+  font-normal
+  text-base
+
+  rounded-full
+  bg-post-element-bg-light
+  dark:bg-post-element-bg-dark
+
+  text-default-light
+  dark:text-default-dark
+
+  focus:(
+    !outline-none
+    rounded-full
+  )
+`;
+
+const SearchbarInputGradientBorder = utld.div`
+  w-full
+  h-4/5
+  mr-[1.875rem]
+  rounded-full
+  p-[0.125rem]
+
+  focus-within:(
+    bg-[200%_auto]
+    bg-gradient-to-r
+    from-accent-light
+    via-[#c9faff]
+    to-accent-light
+    animate-bg-gradient
+  )
 `;

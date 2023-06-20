@@ -19,15 +19,15 @@ module.exports = {
   darkMode: "class",
   plugins: [],
   theme: {
-    backgroundImage: {
-      intro:
-        "linear-gradient( -225deg, #3c2395 0%, #44107a 17%, #ff1361 33%, #fff800 50%, #ff1361 66%, #44107a 83%, #3c2395 100%)",
-    },
     extend: {
       animation: {
         "bg-gradient": "bg-gradient 3s linear infinite",
         shake: "shake 0.2s",
         show: "show 0.2s ease",
+      },
+      backgroundImage: {
+        intro:
+          "linear-gradient( -225deg, #3c2395 0%, #44107a 17%, #ff1361 33%, #fff800 50%, #ff1361 66%, #44107a 83%, #3c2395 100%)",
       },
       boxShadow: {
         "default-dark":
