@@ -23,8 +23,8 @@ export function ProjectAd({ projectName, projectLink, repositoryLink, projectIma
   const [isClosed, setIsClosed] = useState(false);
   const { width } = useWindowSize();
 
-  const iconSize = width > 500 ? "25px" : "20px";
-  const isMobile = width <= 500;
+  const iconSize = width > 600 ? 25 : 20;
+  const isMobile = width <= 600;
 
   const handleClose = useCallback(() => {
     setIsClosed(true);
@@ -54,7 +54,7 @@ export function ProjectAd({ projectName, projectLink, repositoryLink, projectIma
           />
         )}
         <ProjectLink href={projectLink} target='_blank'>
-          <LinkIcon id='project-ad-link' title='프로젝트 링크' size={iconSize} />
+          <LinkIcon id='project-ad-link' title='프로젝트 링크' width={iconSize} height={iconSize} />
         </ProjectLink>
         <CloseButton
           icon={RiCloseFill}

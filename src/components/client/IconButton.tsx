@@ -9,7 +9,7 @@ type ClickableComponents = "a" | "button";
 type IconButtonProps = {
   icon: IconType;
   title: string;
-  size?: string;
+  size?: string | number;
   buttonAs?: ClickableComponents;
   href?: string;
   target?: string;
