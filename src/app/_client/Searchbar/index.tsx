@@ -1,7 +1,7 @@
+import useDebouncedValue from "src/hook/useDebouncedValue";
 import useDelayedFocus from "src/hook/useDelayedFocus";
-import { calculateLoopedIndex } from "src/utils";
-
-import { useSearchResults } from "../_hooks";
+import { useGetSearchedPostCardDataQuery } from "src/request";
+import { calculateLoopedIndex, preventDefaultEvent } from "src/utils";
 
 import { SearchbarCloseButton } from "./SearchbarCloseButton";
 import { RESULT_LINK_CLASSNAME } from "./SearchResultCard";
@@ -9,7 +9,6 @@ import { SearchResults } from "./SearchResults";
 
 import {
   type ChangeEvent,
-  type FormEvent,
   type KeyboardEvent,
   useCallback,
   useEffect,
@@ -18,6 +17,8 @@ import {
 } from "react";
 import { RiCloseFill } from "react-icons/ri";
 import { utld } from "utility-class-components";
+
+const SEARCH_INPUT_DEBOUNCE_DELAY = 300;
 
 const TRANSITION_DURATION = 200;
 const TAB_KEY = "Tab";
@@ -33,15 +34,15 @@ type SearchbarProps = {
 
 export function Searchbar({ isSearchbarOn, onSearchbarClose }: SearchbarProps) {
   const [searchInput, setSearchInput] = useState("");
-  const { searchResults, clearSearchedResults } = useSearchResults(searchInput);
-  const isResultExists = searchResults.length !== 0;
-  const handleInputChange = useCallback(
-    (event: ChangeEvent<HTMLInputElement>) => {
-      clearSearchedResults();
-      setSearchInput(event.currentTarget.value);
-    },
-    [clearSearchedResults],
-  );
+  const handleInputChange = useCallback((event: ChangeEvent<HTMLInputElement>) => {
+    event.preventDefault();
+    setSearchInput(event.currentTarget.value);
+  }, []);
+  const debouncedSearchInput = useDebouncedValue(searchInput, SEARCH_INPUT_DEBOUNCE_DELAY);
+  const { isLoading: isSearchedPostsCardDataLoading, data: searchedPostsCardData } =
+    useGetSearchedPostCardDataQuery(!searchInput ? searchInput : debouncedSearchInput);
+  const isSearchedPostsCardDataEmpty =
+    isSearchedPostsCardDataLoading || !searchedPostsCardData || searchedPostsCardData.length === 0;
 
   const inputRef = useRef<HTMLInputElement>(null);
   const focusOnSearchInput = useDelayedFocus(inputRef, TRANSITION_DURATION);
@@ -99,18 +100,13 @@ export function Searchbar({ isSearchbarOn, onSearchbarClose }: SearchbarProps) {
 
   const closeResults = useCallback(() => {
     setSearchInput("");
-    clearSearchedResults();
     onSearchbarClose();
-  }, [clearSearchedResults, onSearchbarClose]);
-
-  const handleFormSubmit = useCallback((event: FormEvent<HTMLFormElement>) => {
-    event.preventDefault();
-  }, []);
+  }, [onSearchbarClose]);
 
   return (
     <SearchbarForm
       autoComplete='off'
-      onSubmit={handleFormSubmit}
+      onSubmit={preventDefaultEvent}
       onKeyDown={handleTabArrow}
       $isSearchbarOn={isSearchbarOn}
     >
@@ -142,9 +138,9 @@ export function Searchbar({ isSearchbarOn, onSearchbarClose }: SearchbarProps) {
           onClick={closeResults}
           hidden={!isSearchbarOn}
         />
-        {isResultExists && (
+        {!isSearchedPostsCardDataEmpty && (
           <SearchResults ref={searchResultsListRef}>
-            {searchResults.map((data, index) => (
+            {searchedPostsCardData.map((data, index) => (
               <SearchResults.Item
                 key={data.hash}
                 hash={data.hash}
@@ -156,7 +152,7 @@ export function Searchbar({ isSearchbarOn, onSearchbarClose }: SearchbarProps) {
                   <SearchResults.ItemContent>{data.contentNode}</SearchResults.ItemContent>
                 }
                 resultDateNode={<SearchResults.ItemDate>{data.date}</SearchResults.ItemDate>}
-                isLast={index === searchResults.length - 1}
+                isLast={index === searchedPostsCardData.length - 1}
                 onClick={closeResults}
               />
             ))}

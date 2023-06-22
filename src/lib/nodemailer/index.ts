@@ -1,11 +1,5 @@
 import nodemailer from "nodemailer";
 
-type Email = {
-  receiverEmailAddress: string;
-  title: string;
-  content: string;
-};
-
 const TRANSPORT = {
   auth: {
     pass: process.env.EMAIL_PASSWORD,
@@ -15,9 +9,14 @@ const TRANSPORT = {
   port: parseInt(process.env.EMAIL_PORT as string, 10),
   secure: true,
   service: process.env.EMAIL_SERVICE,
-};
+} as const;
 
-async function mailer({ receiverEmailAddress, title, content }: Email) {
+type Email = {
+  receiverEmailAddress: string;
+  title: string;
+  content: string;
+};
+export const sendMail = async ({ receiverEmailAddress, title, content }: Email) => {
   const transporter = nodemailer.createTransport(TRANSPORT);
 
   await new Promise((resolve, reject) => {
@@ -50,6 +49,4 @@ async function mailer({ receiverEmailAddress, title, content }: Email) {
       }
     });
   });
-}
-
-export default mailer;
+};

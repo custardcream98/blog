@@ -5,7 +5,7 @@ interface SearchedPostData {
   date: string;
 }
 
-export interface SearchedPost extends SearchedPostData {
+export interface SearchedPostCardDataRaw extends SearchedPostData {
   title: string | string[];
   content: string | string[];
   matchLength: number;

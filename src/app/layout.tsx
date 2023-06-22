@@ -1,9 +1,9 @@
 import { ClientLogger, ProjectAd } from "src/components/client";
 import { FONT_NOTO_SANS_KR, FONT_POPPINS, FONT_SOURCE_CODE_PRO } from "src/fonts";
 
-import { IsDarkmodeActivatedContextProvider } from "./_client/context";
 import { Navigation } from "./_client";
 import { Footer } from "./_components";
+import { RootProvider } from "./_providers";
 
 import "./style.css";
 
@@ -40,7 +40,7 @@ export default function RootLayout({ children }: PropsWithChildren) {
         </Script>
       </head>
       <Body>
-        <IsDarkmodeActivatedContextProvider>
+        <RootProvider>
           <Navigation />
           <Wrapper>
             <Main>{children}</Main>
@@ -52,7 +52,7 @@ export default function RootLayout({ children }: PropsWithChildren) {
             repositoryLink='https://github.com/custardcream98/DevPort'
             projectImage={DevportImage}
           />
-        </IsDarkmodeActivatedContextProvider>
+        </RootProvider>
         <ClientLogger />
       </Body>
     </html>

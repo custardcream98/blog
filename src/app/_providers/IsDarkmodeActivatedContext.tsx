@@ -32,27 +32,32 @@ export function useSetIsDarkmodeActivatedContext() {
   return useContext(IsDarkmodeActivatedContext);
 }
 
+const DARKMODE_CLASS_NAME = "dark";
 export function IsDarkmodeActivatedContextProvider({ children }: PropsWithChildren) {
   const [isDarkmodeActivated, setIsDarkmodeActivated] = useState(true);
   const $root = useRef<HTMLElement | null>(null);
 
-  const setIsDarkmodeActivatedToggle = useCallback((target?: boolean) => {
-    setIsDarkmodeActivated((prev) => {
-      const nextValue = typeof target === "boolean" ? target : !prev;
-
-      console.log(nextValue);
-
-      setIsDarkmodeActivatedOnLocal(nextValue);
-
-      if (nextValue) {
-        $root.current?.classList.add("dark");
-      } else {
-        $root.current?.classList.remove("dark");
-      }
-
-      return nextValue;
-    });
+  const setIsDarkmodeActivatedOnRootElement = useCallback((isDarkmodeActivated: boolean) => {
+    if (isDarkmodeActivated) {
+      $root.current?.classList.add(DARKMODE_CLASS_NAME);
+    } else {
+      $root.current?.classList.remove(DARKMODE_CLASS_NAME);
+    }
   }, []);
+
+  const setIsDarkmodeActivatedToggle = useCallback(
+    (target?: boolean) => {
+      setIsDarkmodeActivated((prev) => {
+        const nextValue = typeof target === "boolean" ? target : !prev;
+
+        setIsDarkmodeActivatedOnLocal(nextValue);
+        setIsDarkmodeActivatedOnRootElement(nextValue);
+
+        return nextValue;
+      });
+    },
+    [setIsDarkmodeActivatedOnRootElement],
+  );
 
   const setIsDarkmodeActivatedTrue = useCallback(() => {
     setIsDarkmodeActivatedToggle(true);
@@ -82,10 +87,10 @@ export function IsDarkmodeActivatedContextProvider({ children }: PropsWithChildr
     $root.current = document.documentElement;
 
     if (!isDarkmodeActivatedOnLocal) {
-      $root.current.classList.remove("dark");
+      setIsDarkmodeActivatedOnRootElement(false);
       setIsDarkmodeActivated(false);
     }
-  }, []);
+  }, [setIsDarkmodeActivatedOnRootElement]);
 
   return (
     <IsDarkmodeActivatedContext.Provider value={isDarkmodeActivatedContextValue}>

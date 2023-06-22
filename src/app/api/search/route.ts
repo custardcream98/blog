@@ -1,5 +1,5 @@
 import getFuzzyPostData from "src/lib/fuzzy";
-import type { SearchedPost } from "src/types/searchedPosts";
+import type { SearchedPostCardDataRaw } from "src/types/searchedPosts";
 
 import { NextResponse } from "next/server";
 
@@ -20,7 +20,7 @@ export function GET(request: Request) {
   }
 
   const results = q ? getFuzzyPostData(q).slice(0, 5) : [];
-  const slicedResults: SearchedPost[] = [];
+  const slicedResults: SearchedPostCardDataRaw[] = [];
 
   results.forEach((result) => {
     if (typeof result.title === "object") {
