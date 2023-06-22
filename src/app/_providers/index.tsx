@@ -1,3 +1,5 @@
+"use client";
+
 import { IsDarkmodeActivatedContextProvider } from "./IsDarkmodeActivatedContext";
 import { QueryClientProvider } from "./QueryClientProvider";
 
