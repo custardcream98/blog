@@ -1,4 +1,4 @@
-import { useSetIsDarkmodeActivatedContext } from "../context";
+import { useSetIsDarkmodeActivatedContext } from "src/app/_providers";
 
 import { IconContext } from "react-icons";
 import { BsFillMoonFill } from "react-icons/bs";

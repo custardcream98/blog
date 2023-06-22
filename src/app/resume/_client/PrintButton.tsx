@@ -1,4 +1,4 @@
-import { useSetIsDarkmodeActivatedContext } from "src/app/_client/context";
+import { useSetIsDarkmodeActivatedContext } from "src/app/_providers";
 import PrintSvg from "src/components/Svgs/PrintSvg";
 import SvgContainer from "src/components/Svgs/SvgContainer";
 

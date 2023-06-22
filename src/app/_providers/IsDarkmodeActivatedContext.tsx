@@ -40,8 +40,6 @@ export function IsDarkmodeActivatedContextProvider({ children }: PropsWithChildr
     setIsDarkmodeActivated((prev) => {
       const nextValue = typeof target === "boolean" ? target : !prev;
 
-      console.log(nextValue);
-
       setIsDarkmodeActivatedOnLocal(nextValue);
 
       if (nextValue) {
