@@ -1,18 +1,21 @@
-import { type RefObject, useRef } from "react";
+import { type RefObject, useCallback, useLayoutEffect, useRef } from "react";
 
-const useEditable = <T extends HTMLInputElement | HTMLTextAreaElement>(): [
-  RefObject<T>,
-  () => string | undefined,
-  () => void,
-] => {
+const useEditable = <T extends HTMLInputElement | HTMLTextAreaElement>(
+  initialValue?: string,
+): [RefObject<T>, () => string | undefined, () => void] => {
   const editableRef = useRef<T>(null);
+  useLayoutEffect(() => {
+    if (!editableRef.current || !initialValue) return;
 
-  const getEditableVal = () => editableRef.current?.value;
-  const clearEditableVal = () => {
+    editableRef.current.value = initialValue;
+  }, [initialValue]);
+
+  const getEditableVal = useCallback(() => editableRef.current?.value, []);
+  const clearEditableVal = useCallback(() => {
     if (!editableRef.current) return;
 
     editableRef.current.value = "";
-  };
+  }, []);
 
   return [editableRef, getEditableVal, clearEditableVal];
 };
