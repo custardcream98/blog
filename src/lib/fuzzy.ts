@@ -1,4 +1,4 @@
-import type { SearchedPost } from "src/types/searchedPosts";
+import type { SearchedPostCardDataRaw } from "src/types/searchedPosts";
 
 import CacheDB from "cache/cache.json";
 
@@ -86,7 +86,7 @@ const findFuzzyPostData = (option: "title" | "content", regex: RegExp, exclude?:
   return results;
 };
 
-export default function getFuzzyPostData(query: string): SearchedPost[] {
+export default function getFuzzyPostData(query: string): SearchedPostCardDataRaw[] {
   const regex = createFuzzyMatcher(query);
   const fuzzyByTitle = findFuzzyPostData("title", regex);
 
