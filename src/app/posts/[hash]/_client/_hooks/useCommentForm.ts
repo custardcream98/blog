@@ -1,6 +1,6 @@
 import useEditable from "src/hook/useEditable";
 import { addComment, updateComment } from "src/lib/firebaseSetup/firebaseApps";
-import { postAlertSW } from "src/request/postAlertSW";
+import { usePostAlertSWMutation } from "src/request";
 import { CommentEditState } from "src/types/comment";
 
 import { useCommentEditorStateSetter } from "../Comments/CommentCard/CommentEditor/context";
@@ -17,6 +17,7 @@ export const useCommentForm = (isForEdit: boolean) => {
     comment: initialComment,
     updateCommentData,
   } = useCommentDataContext();
+  const { mutate: mutatePostAlertSW } = usePostAlertSWMutation();
 
   const title = useCommentPostTitleContext();
   const { changeStateTo } = useCommentEditorStateSetter();
@@ -107,7 +108,7 @@ export const useCommentForm = (isForEdit: boolean) => {
         alert("댓글 등록중 오류가 발생했습니다.");
       }
 
-      postAlertSW(title, username, comment);
+      mutatePostAlertSW({ comment, postTitle: title, username });
 
       clearUsername();
       clearPassword();
@@ -127,6 +128,7 @@ export const useCommentForm = (isForEdit: boolean) => {
       getUsername,
       isForEdit,
       updateCommentData,
+      mutatePostAlertSW,
     ],
   );
 

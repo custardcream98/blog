@@ -6,7 +6,12 @@ import https from "https";
 
 const POST_MAIL_URL = "/alert-sw";
 
-export const postAlertSW = async (postTitle: string, username: string, comment: string) => {
+export type PostAlertSWRequestBody = {
+  postTitle: string;
+  username: string;
+  comment: string;
+};
+export const postAlertSW = async ({ postTitle, username, comment }: PostAlertSWRequestBody) => {
   const response = await nextApi.post<AlertSWResponse>(
     POST_MAIL_URL,
     {
