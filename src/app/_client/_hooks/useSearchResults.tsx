@@ -4,8 +4,6 @@ import type { SearchedPostCardData } from "src/types/searchedPosts";
 import { useCallback, useEffect, useState } from "react";
 import { utld } from "utility-class-components";
 
-const FETCH_DEBOUNCE_COOLTIME = 300;
-
 const ResultsMark = utld.mark`
   bg-accent-light
   dark:bg-accent-dark
@@ -18,55 +16,55 @@ const ResultsMark = utld.mark`
 export const useSearchResults = (query: string) => {
   const [searchResults, setSearchResults] = useState<SearchedPostCardData[]>([]);
 
-  const queryCallback = () => {
-    if (!query) {
-      return;
-    }
+  const getSearchedPostCardData = useCallback(async (query: string) => {
+    const searchedData = await searchPosts(query);
 
-    const inputTimeout = setTimeout(async () => {
-      try {
-        const searchedData = await searchPosts(query);
-
-        const searchedResultCardsData = searchedData.map(({ title, content, ...res }) => {
-          if (typeof title === "object") {
-            return {
-              contentNode: content,
-              title: title.join(""),
-              titleNode: (
-                <>
-                  {title[0]}
-                  <ResultsMark>{title[1]}</ResultsMark>
-                  {title[2]}
-                </>
-              ),
-              ...res,
-            };
-          }
-
+    const searchedResultCardsData: SearchedPostCardData[] = searchedData.map(
+      ({ title, content, ...res }) => {
+        if (typeof title === "object") {
           return {
-            contentNode: (
+            contentNode: content,
+            title: title.join(""),
+            titleNode: (
               <>
-                {content[0]}
-                <ResultsMark>{content[1]}</ResultsMark>
-                {content[2]}
+                {title[0]}
+                <ResultsMark>{title[1]}</ResultsMark>
+                {title[2]}
               </>
             ),
-            title,
-            titleNode: title,
             ...res,
           };
-        });
+        }
 
-        setSearchResults(searchedResultCardsData);
-      } catch (error) {
-        console.log(error);
-      }
-    }, FETCH_DEBOUNCE_COOLTIME);
+        return {
+          contentNode: (
+            <>
+              {content[0]}
+              <ResultsMark>{content[1]}</ResultsMark>
+              {content[2]}
+            </>
+          ),
+          title,
+          titleNode: title,
+          ...res,
+        };
+      },
+    );
 
-    return () => clearTimeout(inputTimeout);
-  };
+    return searchedResultCardsData;
+  }, []);
 
-  useEffect(queryCallback, [query]);
+  const getAndSetSearchedResultCardsData = useCallback(
+    async (query: string) => {
+      const searchedResultCardsData = await getSearchedPostCardData(query);
+      setSearchResults(searchedResultCardsData);
+    },
+    [getSearchedPostCardData],
+  );
+
+  useEffect(() => {
+    getAndSetSearchedResultCardsData(query);
+  }, [query, getAndSetSearchedResultCardsData]);
 
   const clearSearchedResults = useCallback(() => setSearchResults([]), []);
 

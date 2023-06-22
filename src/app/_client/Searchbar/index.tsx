@@ -1,3 +1,4 @@
+import useDebouncedValue from "src/hook/useDebouncedValue";
 import useDelayedFocus from "src/hook/useDelayedFocus";
 import { calculateLoopedIndex } from "src/utils";
 
@@ -19,6 +20,8 @@ import {
 import { RiCloseFill } from "react-icons/ri";
 import { utld } from "utility-class-components";
 
+const SEARCH_INPUT_DEBOUNCE_DELAY = 300;
+
 const TRANSITION_DURATION = 200;
 const TAB_KEY = "Tab";
 const ARROW_UP_KEY = "ArrowUp";
@@ -33,7 +36,8 @@ type SearchbarProps = {
 
 export function Searchbar({ isSearchbarOn, onSearchbarClose }: SearchbarProps) {
   const [searchInput, setSearchInput] = useState("");
-  const { searchResults, clearSearchedResults } = useSearchResults(searchInput);
+  const debouncedSearchInput = useDebouncedValue(searchInput, SEARCH_INPUT_DEBOUNCE_DELAY);
+  const { searchResults, clearSearchedResults } = useSearchResults(debouncedSearchInput);
   const isResultExists = searchResults.length !== 0;
   const handleInputChange = useCallback(
     (event: ChangeEvent<HTMLInputElement>) => {
