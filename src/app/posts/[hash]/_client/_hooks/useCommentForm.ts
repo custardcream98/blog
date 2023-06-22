@@ -1,6 +1,6 @@
 import useEditable from "src/hook/useEditable";
-import { postMail } from "src/lib/axios";
 import { addComment, updateComment } from "src/lib/firebaseSetup/firebaseApps";
+import { postAlertSW } from "src/request/postAlertSW";
 import { CommentEditState } from "src/types/comment";
 
 import { useCommentEditorStateSetter } from "../Comments/CommentCard/CommentEditor/context";
@@ -107,7 +107,7 @@ export const useCommentForm = (isForEdit: boolean) => {
         alert("댓글 등록중 오류가 발생했습니다.");
       }
 
-      postMail(title, username, comment);
+      postAlertSW(title, username, comment);
 
       clearUsername();
       clearPassword();
