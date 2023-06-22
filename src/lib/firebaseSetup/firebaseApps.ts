@@ -19,17 +19,10 @@ import {
   updateDoc,
 } from "firebase/firestore";
 
-interface IAddCommentProps {
-  title: string;
-  password: string;
-  comment: string;
-  username: string;
-}
-
-interface ICommentDocRefProps {
+type CommentDocRefProps = {
   title: string;
   commentId: string;
-}
+};
 
 /*
   Posts
@@ -61,10 +54,10 @@ export const createPostDoc = async (title: string) => {
 const getCommentCollectionRef = (title: string) =>
   collection(getPostDocRef(title), CollectionNames.COLLECTION_COMMENTS);
 
-export const getCommentDocRef = ({ title, commentId }: ICommentDocRefProps) =>
+export const getCommentDocRef = ({ title, commentId }: CommentDocRefProps) =>
   doc(getCommentCollectionRef(title), commentId);
 
-export const deleteComment = async ({ title, commentId }: ICommentDocRefProps) => {
+export const deleteComment = async ({ title, commentId }: CommentDocRefProps) => {
   const commentDocRef = getCommentDocRef({
     commentId,
     title,
@@ -72,7 +65,7 @@ export const deleteComment = async ({ title, commentId }: ICommentDocRefProps) =
   await deleteDoc(commentDocRef);
 };
 
-type UpdateCommentProps = ICommentDocRefProps & {
+export type UpdateCommentProps = CommentDocRefProps & {
   username: string;
   password: string;
   comment: string;
@@ -95,7 +88,13 @@ export const updateComment = async ({
   });
 };
 
-export const addComment = async ({ title, password, comment, username }: IAddCommentProps) => {
+export type AddCommentProps = {
+  title: string;
+  password: string;
+  comment: string;
+  username: string;
+};
+export const addComment = async ({ title, password, comment, username }: AddCommentProps) => {
   const commentCollectionRef = getCommentCollectionRef(title);
   await addDoc(commentCollectionRef, {
     comment,
