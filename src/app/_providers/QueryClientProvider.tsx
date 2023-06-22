@@ -1,6 +1,7 @@
 import { getQueryClient } from "src/request/queryClient";
 
 import { QueryClientProvider as RQQueryClientProvider } from "@tanstack/react-query";
+import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
 import { type PropsWithChildren, useMemo } from "react";
 
 export function QueryClientProvider({ children }: PropsWithChildren) {
@@ -8,5 +9,10 @@ export function QueryClientProvider({ children }: PropsWithChildren) {
     return getQueryClient();
   }, []);
 
-  return <RQQueryClientProvider client={queryClient}>{children}</RQQueryClientProvider>;
+  return (
+    <RQQueryClientProvider client={queryClient}>
+      {children}
+      <ReactQueryDevtools />
+    </RQQueryClientProvider>
+  );
 }
