@@ -1,4 +1,4 @@
-import { markdownToHtmlForCache } from "src/lib/markdownToHtml";
+import { compileMdForCache } from "src/lib/md";
 import type { CachePost } from "src/types/cache";
 import type { PostTypeWithoutContent } from "src/types/post";
 import { hash } from "src/utils";
@@ -23,7 +23,7 @@ const POST_PER_PAGE = 5;
 
   const postsCache: CachePost[] = await Promise.all(
     postsData.map(async ({ slug, title, content, date }) => {
-      const cacheHTML = await markdownToHtmlForCache(content);
+      const cacheHTML = await compileMdForCache(content);
       const { document: cacheDocument } = new JSDOM(cacheHTML).window;
       const elements = cacheDocument.querySelectorAll("h1, h2, h3, h4, h5, h6, p, ol, ul");
 

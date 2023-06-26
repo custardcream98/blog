@@ -2,7 +2,7 @@ import { getAllPosts, getPostByHashedSlug } from "src/app/data";
 import { Container } from "src/components";
 import { FONT_D2_CODING, FONT_NOTO_SERIF_KR } from "src/fonts";
 import { createPostDoc } from "src/lib/firebaseSetup/firebaseApps";
-import markdownToHtml from "src/lib/markdownToHtml";
+import { compileMd } from "src/lib/md";
 import generateRSSFeed from "src/lib/rss";
 import { getAllOgImages } from "src/lib/thumbnails/ogImage";
 
@@ -43,7 +43,7 @@ export default async function PostsDynamicPage({ params: { hash } }: PostPagePar
 
   const prevNextPosts = await getPrevNextPosts(hash);
 
-  const contentHtml = await markdownToHtml(post.content);
+  const contentHtml = await compileMd(post.content);
 
   const postTitle = post.title.replaceAll("/", ",");
 
