@@ -1,4 +1,4 @@
-import { compileMdForCache } from "src/lib/md";
+import { compileMDXForCache } from "src/lib/mdx/compileMDX";
 import type { CachePost } from "src/types/cache";
 import type { PostTypeWithoutContent } from "src/types/post";
 import { hash } from "src/utils";
@@ -7,10 +7,11 @@ import { getAllPosts } from "./data";
 
 import fs from "fs";
 import { JSDOM } from "jsdom";
+import { renderToStaticMarkup } from "react-dom/server";
 
 const POST_PER_PAGE = 5;
 
-(async () => {
+const generateCache = async () => {
   const postsData = getAllPosts([
     "slug",
     "title",
@@ -23,8 +24,8 @@ const POST_PER_PAGE = 5;
 
   const postsCache: CachePost[] = await Promise.all(
     postsData.map(async ({ slug, title, content, date }) => {
-      const cacheHTML = await compileMdForCache(content);
-      const { document: cacheDocument } = new JSDOM(cacheHTML).window;
+      const { content: mdxContent } = await compileMDXForCache(content);
+      const { document: cacheDocument } = new JSDOM(renderToStaticMarkup(mdxContent)).window;
       const elements = cacheDocument.querySelectorAll("h1, h2, h3, h4, h5, h6, p, ol, ul");
 
       let extractedContent = "";
@@ -102,4 +103,6 @@ const POST_PER_PAGE = 5;
     }
     console.log("postByPageArr 캐시 생성 완료");
   });
-})();
+};
+
+generateCache();

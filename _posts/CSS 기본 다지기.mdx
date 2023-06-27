@@ -46,7 +46,10 @@ div {
 ```
 
 <p align='center'>
-<iframe src='../examples/LikeLion/9월2일%20CSS%20특강/no1.html' style="width: 50%; height:100px;"></iframe>
+  <iframe
+    src='../examples/LikeLion/9월2일%20CSS%20특강/no1.html'
+    className='h-[100px] w-1/2'
+  ></iframe>
 </p>
 
 여기에서 'wow'를 컨텐츠로 가지고 있는 `div`는 `User Agent Stylesheet`에서 정한 `body`의 `margin: 8px;`에 영향을 받고 있는 것을 볼 수 있습니다.
@@ -79,7 +82,10 @@ div {
 ```
 
 <p align='center'>
-<iframe src='../examples/LikeLion/9월2일%20CSS%20특강/no2.html' style="width: 50%; height:100px;"></iframe>
+  <iframe
+    src='../examples/LikeLion/9월2일%20CSS%20특강/no2.html'
+    className='h-[100px] w-1/2'
+  ></iframe>
 </p>
 
 즉, `width: auto;`는 브라우저가 계산한 자식(자신)의 `margin`, `padding`, `border`등을 고려해 **유연하게** 부모가 제공하는 최대 컨텐츠 영역 너비만큼을 줍니다.
@@ -109,7 +115,10 @@ div {
 ```
 
 <p align='center'>
-<iframe src='../examples/LikeLion/9월2일%20CSS%20특강/no3.html' style="width: 50%; height:270px;"></iframe>
+  <iframe
+    src='../examples/LikeLion/9월2일%20CSS%20특강/no3.html'
+    className='h-[270px] w-1/2'
+  ></iframe>
 </p>
 
 즉, `content-box`는 컨텐츠의 크기를 `width`와 `height`로 정한 후 거기에 `padding`과 `border`를 더해 박스의 크기를 결정하고, `border-box`는 `padding`과 `border`를 포함한 크기가 `width`와 `height`가 되도록 컨텐츠 영역을 유연하게 조정합니다.
@@ -144,7 +153,10 @@ div {
 ```
 
 <p align='center'>
-<iframe src='../examples/LikeLion/9월2일%20CSS%20특강/no4.html' style="width: 50%; height:580px;"></iframe>
+  <iframe
+    src='../examples/LikeLion/9월2일%20CSS%20특강/no4.html'
+    className='h-[580px] w-1/2'
+  ></iframe>
 </p>
 
 여기에서 각 div들은 `Block-level elements`이므로 한 줄이 주어집니다. `margin`으로 `auto`를 주면 브라우저가 계산 후 가용한 잉여공간을 최대로 채울 수 있는 값이 부여됩니다.
@@ -228,7 +240,10 @@ div + img {
 ```
 
 <p align='center'>
-<iframe src='../examples/LikeLion/9월2일%20CSS%20특강/no5-1.html' style="width: 95%; height:230px;"></iframe>
+  <iframe
+    src='../examples/LikeLion/9월2일%20CSS%20특강/no5-1.html'
+    className='h-[230px] w-[95%]'
+  ></iframe>
 </p>
 
 이런 HTML이 있다고 하면, `div.header` 안의 요소들을 가운데 정렬하는 방법은 어떤게 있을까요? `div.header`를 가운데 정렬했듯 `margin: auto;`를 이용하면 될까요?
@@ -249,13 +264,19 @@ div + img {
 ```
 
 <p align='center'>
-<iframe src='../examples/LikeLion/9월2일%20CSS%20특강/no5-2.html' style="width: 95%; height:230px;"></iframe>
+  <iframe
+    src='../examples/LikeLion/9월2일%20CSS%20특강/no5-2.html'
+    className='h-[230px] w-[95%]'
+  ></iframe>
 </p>
 
 `<h1>`과 `<p>`에 `background-color`를 줘보면 왜 이렇게 되는건지 확실히 보입니다.
 
 <p align='center'>
-<iframe src='../examples/LikeLion/9월2일%20CSS%20특강/no5-3.html' style="width: 95%; height:230px;"></iframe>
+  <iframe
+    src='../examples/LikeLion/9월2일%20CSS%20특강/no5-3.html'
+    className='h-[230px] w-[95%]'
+  ></iframe>
 </p>
 
 > `<div>`, `<h1>` ~ `<h6>` 등은 '컨테이너'일 뿐이고, 그 안에 컨텐츠로 들어간 텍스트는 `Inline elements`라는 점을 헷갈리면 안됩니다.
@@ -293,7 +314,10 @@ div + img {
 ```
 
 <p align='center'>
-<iframe src='../examples/LikeLion/9월2일%20CSS%20특강/no5-4.html' style="width: 80%; height:100px;"></iframe>
+  <iframe
+    src='../examples/LikeLion/9월2일%20CSS%20특강/no5-4.html'
+    className='h-[100px] w-4/5'
+  ></iframe>
 </p>
 
 이렇듯 `Inline elements`는 `baseline`을 기준으로 움직이는 요소들입니다. 따라서 `baseline`과 같은 방향이라면 margin이나 padding이 공간을 차지하고, 다른 방향이라면 생기긴 하는데 공간을 차지하진 않습니다.
@@ -312,7 +336,10 @@ div + img {
 ```
 
 <p align='center'>
-<iframe src='../examples/LikeLion/9월2일%20CSS%20특강/no6.html' style="width: 60%; height:100px;"></iframe>
+  <iframe
+    src='../examples/LikeLion/9월2일%20CSS%20특강/no6.html'
+    className='h-[100px] w-3/5'
+  ></iframe>
 </p>
 
 HTML은 마크업을 할 때 개행한 경우 구분되는 요소로 생각하고 **약간의 공백을 자동으로 부여**합니다. 이 공백의 사이즈는 `font-size`에 따라 달라집니다.
@@ -375,7 +402,10 @@ a {
 ```
 
 <p align='center'>
-<iframe src='../examples/LikeLion/9월2일%20CSS%20특강/no7.html' style="width: 60%; height:80px;"></iframe>
+  <iframe
+    src='../examples/LikeLion/9월2일%20CSS%20특강/no7.html'
+    className='h-[80px] w-3/5'
+  ></iframe>
 </p>
 
 원래 `<a>` 요소는 `Inline elements`이므로 `padding`이나 `border` property가 baseline이 아닌 위 아래 방향으로 영향을 줄 수 없습니다. 그러나 `display: inline-block;`을 부여해서 `Inline elements`임에도 `Block-level elements`처럼 작용되도록 만들었습니다.
@@ -401,7 +431,10 @@ a {
 ```
 
 <p align='center'>
-<iframe src='../examples/LikeLion/9월2일%20CSS%20특강/no8.html' style="width: 60%; height:150px;"></iframe>
+  <iframe
+    src='../examples/LikeLion/9월2일%20CSS%20특강/no8.html'
+    className='h-[150px] w-3/5'
+  ></iframe>
 </p>
 
 `.child` 코드를 보면 `margin: 10px;`를 줬으므로 A와 B 사이에는 20px의 마진이 생겨야 하나, 10px이 들어간 것을 볼 수 있습니다. 또한 A의 위와 B아래에도 각각 10px씩 공간이 있어야 하는데, 그 공간 없이 H모양이 돼버렸습니다.
@@ -432,7 +465,10 @@ h1 {
 ```
 
 <p align='center'>
-<iframe src='../examples/LikeLion/9월2일%20CSS%20특강/no9-1.html' style="width: 60%; height:90px;"></iframe>
+  <iframe
+    src='../examples/LikeLion/9월2일%20CSS%20특강/no9-1.html'
+    className='h-[90px] w-3/5'
+  ></iframe>
 </p>
 
 원래 style은 가장 마지막에 나온 코드가 적용됩니다. 그러나, 이 경우 **더 구체적으로 선택했다고 평가되는** `.text`의 스타일이 적용됩니다.
@@ -452,7 +488,10 @@ h1 {
 ```
 
 <p align='center'>
-<iframe src='../examples/LikeLion/9월2일%20CSS%20특강/no9-2.html' style="width: 60%; height:90px;"></iframe>
+  <iframe
+    src='../examples/LikeLion/9월2일%20CSS%20특강/no9-2.html'
+    className='h-[90px] w-3/5'
+  ></iframe>
 </p>
 
 `.text`와 `.text.text`가 차이가 없으므로 `background-color: orange;`가 적용될 것 같지만, 재밌게도 `.text.text`쪽의 스타일이 적용됩니다.

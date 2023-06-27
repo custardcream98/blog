@@ -9,7 +9,7 @@ import path from "path";
 const DIRECTORY_POSTS = path.join(process.cwd(), "_posts");
 
 const getPostFileData = (slug: string) => {
-  const fullPath = path.join(DIRECTORY_POSTS, `${slug}.md`);
+  const fullPath = path.join(DIRECTORY_POSTS, `${slug}.mdx`);
   const file = fs.readFileSync(fullPath, "utf8");
   return matter(file);
 };
@@ -17,8 +17,8 @@ const getPostFileData = (slug: string) => {
 export const getPostSlugs = () => {
   return fs
     .readdirSync(DIRECTORY_POSTS)
-    .filter((dir) => /\.md$/.test(dir))
-    .map((dir) => dir.replace(/\.md$/, ""));
+    .filter((dir) => /\.mdx$/.test(dir))
+    .map((dir) => dir.replace(/\.mdx$/, ""));
 };
 
 export const getAllPosts = <Field extends PostMeta[]>(fields: Field) => {

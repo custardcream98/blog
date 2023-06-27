@@ -2,12 +2,12 @@ import { getAllPosts, getPostByHashedSlug } from "src/app/data";
 import { Container } from "src/components";
 import { FONT_D2_CODING, FONT_NOTO_SERIF_KR } from "src/fonts";
 import { createPostDoc } from "src/lib/firebaseSetup/firebaseApps";
-import { compileMd } from "src/lib/md";
+import { PostMDX } from "src/lib/mdx";
 import generateRSSFeed from "src/lib/rss";
 import { getAllOgImages } from "src/lib/thumbnails/ogImage";
 
 import { Comments } from "./_client";
-import { MarkdownBody, PostTitle, PrevNextPost } from "./_components";
+import { PostTitle, PrevNextPost } from "./_components";
 import { getPrevNextPosts } from "./data";
 import type { PostPageParams } from "./types";
 
@@ -43,8 +43,6 @@ export default async function PostsDynamicPage({ params: { hash } }: PostPagePar
 
   const prevNextPosts = await getPrevNextPosts(hash);
 
-  const contentHtml = await compileMd(post.content);
-
   const postTitle = post.title.replaceAll("/", ",");
 
   return (
@@ -57,7 +55,7 @@ export default async function PostsDynamicPage({ params: { hash } }: PostPagePar
           date={post.date}
           series={post.series}
         />
-        <MarkdownBody content={contentHtml} />
+        <PostMDX source={post.content} />
       </PostSection>
       <PrevNextPost key={post.hash} {...prevNextPosts} />
       <Comments postTitle={postTitle} />
