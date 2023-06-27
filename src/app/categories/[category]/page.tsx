@@ -1,5 +1,6 @@
 import { PostCard } from "src/app/_components";
 import { Container, Title } from "src/components";
+import { type Categoires } from "src/constants/categoryTheme";
 
 import { CATEGORIES } from "../data";
 
@@ -17,11 +18,12 @@ export const generateStaticParams = () => {
 };
 
 export default async function CategoryDynamicPage({ params: { category } }: CategoryPageParams) {
-  const posts = await getPostByCategory(category);
+  const decodedCategory = decodeURIComponent(category) as Categoires;
+  const posts = await getPostByCategory(decodedCategory);
 
   return (
     <PostsContainer>
-      <PostTitle>{`<${category} />`}</PostTitle>
+      <PostTitle>{`<${decodedCategory} />`}</PostTitle>
       <ol>
         {posts.map((post) => (
           <PostCard key={post.slug} {...post} />

@@ -20,12 +20,12 @@ export const generateStaticParams = async () => {
 };
 
 export default async function SeriesDynamicPage({ params: { series } }: SeriesPageParams) {
-  const parsedSeries = decodeURIComponent(series);
-  const posts = await getPostBySeries(parsedSeries);
+  const decodedSeries = decodeURIComponent(series);
+  const posts = await getPostBySeries(decodedSeries);
 
   return (
     <SeriesContainer>
-      <SeriesTitle>{`<${parsedSeries} />`}</SeriesTitle>
+      <SeriesTitle>{`<${decodedSeries} />`}</SeriesTitle>
       <ol>
         {posts.map(({ category, date, slug, title }) => (
           <PostCard key={slug} category={category} date={date} slug={slug} title={title} />
