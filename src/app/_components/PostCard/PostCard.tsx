@@ -3,12 +3,12 @@ import type PostType from "src/types/post";
 
 import { utld } from "utility-class-components";
 
-type PostCardProps = Pick<PostType, "hash" | "title" | "date" | "category">;
+type PostCardProps = Pick<PostType, "slug" | "title" | "date" | "category">;
 
-export function PostCard({ hash, title, date, category }: PostCardProps) {
+export function PostCard({ slug, title, date, category }: PostCardProps) {
   return (
     <Container>
-      <LinkDecoratedForCate href={`/posts/${hash}`}>{title}</LinkDecoratedForCate>
+      <LinkDecoratedForCate href={`/posts/${slug}`}>{title}</LinkDecoratedForCate>
       <DateSpan date={date} />
       <CategoryBadges>
         {category.map((category) => (

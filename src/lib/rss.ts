@@ -1,4 +1,4 @@
-import { getAllPosts, getHashedSlug } from "src/app/data";
+import { getAllPosts } from "src/app/data";
 import { METADATA_DEFAULT_IMAGE, METADATA_DEFAULT_TITLE } from "src/app/sharedMetadata";
 
 import { Feed, type FeedOptions } from "feed";
@@ -34,7 +34,7 @@ const generateRSSFeed = async (coverImages: string[]) => {
   const feed = new Feed(feedOptions);
 
   allPosts.forEach((post, index) => {
-    const postURL = getFullUrl(`/posts/${getHashedSlug(post.slug)}`);
+    const postURL = getFullUrl(`/posts/${post.slug}`);
 
     feed.addItem({
       date: new Date(post.date),

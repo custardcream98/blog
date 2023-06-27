@@ -1,8 +1,6 @@
 import { getOgImage } from "src/lib/thumbnails/ogImage";
 import type { PostType } from "src/types/post";
 
-import HASH_MAP from "cache/hash.json";
-import HASH_REVERSERSED_MAP from "cache/hashReversed.json";
 import fs from "fs";
 import matter from "gray-matter";
 import path from "path";
@@ -24,7 +22,7 @@ const getPostFileData = (slug: string) => {
   return matter(file);
 };
 
-type PostByFields<Fields extends PostMeta> = Pick<PostType, "date" | "hash" | Fields>;
+type PostByFields<Fields extends PostMeta> = Pick<PostType, "date" | Fields>;
 
 export const getAllPosts = async <Field extends PostMeta[]>(fields: Field) => {
   const slugs = getPostSlugs();
@@ -41,7 +39,7 @@ const hasField = <T extends object, FieldType>(
   fields: PostMeta[],
 ): targetObject is T & Record<typeof targetField, FieldType> => fields.includes(targetField);
 
-const getPostBySlug = async <Field extends PostMeta[]>(
+export const getPostBySlug = async <Field extends PostMeta[]>(
   slug: string,
   fields: Field,
 ): Promise<PostByFields<Field[number]>> => {
@@ -72,27 +70,6 @@ const getPostBySlug = async <Field extends PostMeta[]>(
   }
 
   postMeta.date = data.date;
-  postMeta.hash = getHashedSlug(slug);
 
   return postMeta;
-};
-
-export const getPostByHashedSlug = async <Field extends PostMeta[]>(
-  hash: string,
-  fields: Field,
-): Promise<PostByFields<Field[number]>> => {
-  const slug = getSlugFromHased(hash);
-  return await getPostBySlug(slug, fields);
-};
-
-export const getHashedSlug = (slug: string) => {
-  if (typeof (HASH_REVERSERSED_MAP as Record<string, string>)[slug] === "undefined") {
-    throw new Error(`Slug "${slug}" is not found in HASH_REVERSERSED_MAP`);
-  }
-
-  return (HASH_REVERSERSED_MAP as Record<string, string>)[slug];
-};
-
-const getSlugFromHased = (hash: string) => {
-  return (HASH_MAP as Record<string, string>)[hash];
 };

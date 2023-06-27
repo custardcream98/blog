@@ -6,21 +6,21 @@ type PagenationInfo = {
   $isLastPage: boolean;
 };
 
-type Props = {
+type HeroPostProps = {
   index: number;
   maxPostCount: number;
   title: string;
   date: string;
   excerpt: string;
-  hash: string;
+  slug: string;
 };
 
-export function HeroPost({ index, maxPostCount, title, date, excerpt, hash }: Props) {
+export function HeroPost({ index, maxPostCount, title, date, excerpt, slug }: HeroPostProps) {
   const isLastPage = index === maxPostCount - 1;
 
   return (
     <ContentContainer $isLastPage={isLastPage}>
-      <LinkDecorated href={`posts/${hash}`}>
+      <LinkDecorated href={`posts/${slug}`}>
         <Title>
           <TitleText>{title}</TitleText>
           <DateSpanForHeroPost date={date} />

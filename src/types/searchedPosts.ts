@@ -1,7 +1,7 @@
 import { ReactNode } from "react";
 
 interface SearchedPostData {
-  hash: string;
+  slug: string;
   date: string;
 }
 

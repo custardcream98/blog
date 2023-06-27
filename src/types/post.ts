@@ -7,7 +7,6 @@ export type CoverImage = {
 
 export type PostType = {
   slug: string;
-  hash: string;
   title: string;
   date: string;
   category: Categoires[];

@@ -142,8 +142,8 @@ export function Searchbar({ isSearchbarOn, onSearchbarClose }: SearchbarProps) {
           <SearchResults ref={searchResultsListRef}>
             {searchedPostsCardData.map((data, index) => (
               <SearchResults.Item
-                key={data.hash}
-                hash={data.hash}
+                key={data.slug}
+                slug={data.slug}
                 resultTitle={data.title}
                 resultTitleNode={
                   <SearchResults.ItemTitle>{data.titleNode}</SearchResults.ItemTitle>

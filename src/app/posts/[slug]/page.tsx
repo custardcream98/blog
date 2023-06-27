@@ -1,4 +1,4 @@
-import { getAllPosts, getPostByHashedSlug } from "src/app/data";
+import { getAllPosts, getPostBySlug } from "src/app/data";
 import { Container } from "src/components";
 import { FONT_D2_CODING, FONT_NOTO_SERIF_KR } from "src/fonts";
 import { createPostDoc } from "src/lib/firebaseSetup/firebaseApps";
@@ -24,13 +24,13 @@ export const generateStaticParams = async () => {
     Promise.all(posts.map((post) => createPostDoc(post.title)));
   }
 
-  return posts.map(({ hash }) => ({
-    hash,
+  return posts.map(({ slug }) => ({
+    slug,
   }));
 };
 
-export default async function PostsDynamicPage({ params: { hash } }: PostPageParams) {
-  const post = await getPostByHashedSlug(hash, [
+export default async function PostsDynamicPage({ params: { slug } }: PostPageParams) {
+  const post = await getPostBySlug(slug, [
     "title",
     "date",
     "slug",
@@ -41,7 +41,7 @@ export default async function PostsDynamicPage({ params: { hash } }: PostPagePar
     "coverImage",
   ]);
 
-  const prevNextPosts = await getPrevNextPosts(hash);
+  const prevNextPosts = await getPrevNextPosts(slug);
 
   const postTitle = post.title.replaceAll("/", ",");
 
@@ -57,7 +57,7 @@ export default async function PostsDynamicPage({ params: { hash } }: PostPagePar
         />
         <PostMDX source={post.content} />
       </PostSection>
-      <PrevNextPost key={post.hash} {...prevNextPosts} />
+      <PrevNextPost key={slug} {...prevNextPosts} />
       <Comments postTitle={postTitle} />
     </PostContainer>
   );

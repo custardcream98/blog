@@ -4,17 +4,17 @@ import { getAllPosts } from "src/app/data";
 
 export interface PrevNextPosts {
   prevTitle?: string;
-  prevHashedSlug?: string;
+  prevSlug?: string;
   prevExcerpt?: string;
   nextTitle?: string;
-  nextHashedSlug?: string;
+  nextSlug?: string;
   nextExcerpt?: string;
 }
 
-export const getPrevNextPosts = async (hash: string): Promise<PrevNextPosts> => {
+export const getPrevNextPosts = async (slug: string): Promise<PrevNextPosts> => {
   const posts = await getAllPosts(["title", "slug", "excerpt"]);
 
-  const index = posts.findIndex((p) => p.hash === hash);
+  const index = posts.findIndex((p) => p.slug === slug);
   const isLatestPost = index === 0;
   const isOldestPost = posts.length - 1 === index;
 
@@ -23,10 +23,10 @@ export const getPrevNextPosts = async (hash: string): Promise<PrevNextPosts> => 
 
   return {
     nextExcerpt: nextPost?.excerpt,
-    nextHashedSlug: nextPost?.hash,
+    nextSlug: nextPost?.slug,
     nextTitle: nextPost?.title,
     prevExcerpt: prevPost?.excerpt,
-    prevHashedSlug: prevPost?.hash,
+    prevSlug: prevPost?.slug,
     prevTitle: prevPost?.title,
   };
 };

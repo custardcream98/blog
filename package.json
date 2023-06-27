@@ -11,6 +11,7 @@
     "lint:fix": "next lint --fix",
     "postbuild": "next-sitemap",
     "cache": "tsx --tsconfig ./tsconfig.node.json ./cache/cache.ts && prettier --write ./cache/*",
+    "slug": "tsx --tsconfig ./tsconfig.node.json ./cache/convert.ts && prettier --write ./cache/*",
     "prepare": "husky install",
     "analyze": "ANALYZE=true next build"
   },

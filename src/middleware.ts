@@ -1,9 +1,11 @@
-import HASH_REVERSERSED_MAP from "cache/hashReversed.json";
+import HASH_REVERSERSED_MAP from "cache/hashReversedSlug.json";
+import SLUG_MAP from "cache/slug.json";
 import { type NextRequest, NextResponse } from "next/server";
 
 const HTTP_STATUS_CODE_MOVED_PERMANENTLY = 308;
 
-const isSlug = (target: string): target is keyof typeof HASH_REVERSERSED_MAP =>
+const isKoreanSlug = (target: string): target is keyof typeof SLUG_MAP => target in SLUG_MAP;
+const isHashedSlug = (target: string): target is keyof typeof HASH_REVERSERSED_MAP =>
   target in HASH_REVERSERSED_MAP;
 
 /**
@@ -17,7 +19,14 @@ export function middleware(request: NextRequest) {
   if (pathname !== "posts") return NextResponse.next();
 
   const slugAble = decodeURIComponent(postId);
-  if (isSlug(slugAble)) {
+  if (isKoreanSlug(slugAble)) {
+    return NextResponse.redirect(
+      new URL(`/posts/${SLUG_MAP[slugAble]}`, request.url),
+      HTTP_STATUS_CODE_MOVED_PERMANENTLY,
+    );
+  }
+
+  if (isHashedSlug(slugAble)) {
     return NextResponse.redirect(
       new URL(`/posts/${HASH_REVERSERSED_MAP[slugAble]}`, request.url),
       HTTP_STATUS_CODE_MOVED_PERMANENTLY,

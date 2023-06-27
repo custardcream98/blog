@@ -13,7 +13,7 @@ type SearchResultCardProps = ComponentPropsWithoutRef<"a"> & {
   resultTitleNode: ReactNode;
   resultDateNode: ReactNode;
   contentNode: ReactNode;
-  hash: string;
+  slug: string;
   isLast: boolean;
 };
 
@@ -22,13 +22,13 @@ function SearchResultCard({
   resultTitleNode,
   resultDateNode,
   contentNode,
-  hash,
+  slug,
   isLast,
   ...props
 }: SearchResultCardProps) {
   return (
     <ResultCardItem $isLast={isLast}>
-      <StyledLink href={`/posts/${hash}`} className={RESULT_LINK_CLASSNAME} {...props}>
+      <StyledLink href={`/posts/${slug}`} className={RESULT_LINK_CLASSNAME} {...props}>
         <ResultTitleWrapper>
           {resultTitleNode}
           {resultDateNode}

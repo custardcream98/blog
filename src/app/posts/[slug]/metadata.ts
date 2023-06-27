@@ -1,12 +1,12 @@
-import { getPostByHashedSlug } from "src/app/data";
+import { getPostBySlug } from "src/app/data";
 import { sharedMetadata } from "src/app/sharedMetadata";
 
 import type { PostPageParams } from "./types";
 
 import { type Metadata } from "next";
 
-export const generateMetadata = async ({ params: { hash } }: PostPageParams): Promise<Metadata> => {
-  const { title, date, excerpt, coverImage, category, series } = await getPostByHashedSlug(hash, [
+export const generateMetadata = async ({ params: { slug } }: PostPageParams): Promise<Metadata> => {
+  const { title, date, excerpt, coverImage, category, series } = await getPostBySlug(slug, [
     "title",
     "date",
     "slug",
@@ -41,7 +41,7 @@ export const generateMetadata = async ({ params: { hash } }: PostPageParams): Pr
         absolute: META_TITLE,
       },
       type: "article",
-      url: `/posts/${hash}`,
+      url: `/posts/${slug}`,
     },
     publisher: "Shiwoo, Park",
 

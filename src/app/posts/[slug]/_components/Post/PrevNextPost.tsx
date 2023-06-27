@@ -7,25 +7,20 @@ type PrevNextPostFormationType = "both" | "prev-only" | "next-only";
 
 type PrevNextPostProps = PrevNextPosts;
 
-export function PrevNextPost({
-  prevHashedSlug,
-  prevTitle,
-  nextHashedSlug,
-  nextTitle,
-}: PrevNextPostProps) {
+export function PrevNextPost({ prevSlug, prevTitle, nextSlug, nextTitle }: PrevNextPostProps) {
   const formation: PrevNextPostFormationType =
     prevTitle && nextTitle ? "both" : prevTitle ? "prev-only" : "next-only";
 
   return (
     <Container $formation={formation}>
       {prevTitle && (
-        <LinkWrapper href={`/posts/${prevHashedSlug ?? ""}`}>
+        <LinkWrapper href={`/posts/${prevSlug ?? ""}`}>
           <span>← 이전글</span>
           <span className='pl-3'>{prevTitle}</span>
         </LinkWrapper>
       )}
       {nextTitle && (
-        <LinkWrapper href={`/posts/${nextHashedSlug ?? ""}`}>
+        <LinkWrapper href={`/posts/${nextSlug ?? ""}`}>
           <span>다음글 →</span>
           <span className='pr-3'>{nextTitle}</span>
         </LinkWrapper>

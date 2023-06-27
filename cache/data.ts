@@ -1,6 +1,5 @@
 import { PostMeta } from "src/app/data";
 import type PostType from "src/types/post";
-import { hash } from "src/utils";
 
 import fs from "fs";
 import matter from "gray-matter";
@@ -30,7 +29,7 @@ export const getAllPosts = <Field extends PostMeta[]>(fields: Field) => {
   return posts;
 };
 
-type PostByFields<Fields extends PostMeta> = Pick<PostType, "date" | "hash" | Fields>;
+type PostByFields<Fields extends PostMeta> = Pick<PostType, "date" | Fields>;
 
 export const getPostBySlug = <Field extends PostMeta[]>(
   slug: string,
@@ -59,7 +58,6 @@ export const getPostBySlug = <Field extends PostMeta[]>(
   }, {} as PostByFields<Field[number]>);
 
   postMeta.date = data.date;
-  postMeta.hash = hash(slug);
 
   return postMeta;
 };
