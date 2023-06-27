@@ -1,25 +1,36 @@
-import { LinkSvg } from "src/components/Svgs";
+import { ExternalLinkSvg } from "src/components/Svgs";
 import { copyLink } from "src/utils";
 
 import { utld } from "utility-class-components";
 
 const handleCopyPostLink = async () => {
   await copyLink();
-  alert("링크를 복사했습니다 😄");
+  alert("포스트 URL을 복사했습니다 😄");
 };
 
 export function PostActions() {
   return (
-    <button type='button' onClick={handleCopyPostLink}>
-      <StyledLinkSvg svgTitle='글 링크 복사하기' />
-    </button>
+    <Button type='button' onClick={handleCopyPostLink}>
+      <StyledExternalLinkSvg />
+      URL 복사하기
+    </Button>
   );
 }
 
-const StyledLinkSvg = utld(LinkSvg)`
+const Button = utld.button`
+  text-[0.8rem]
+text-default-sub-light
+dark:text-default-sub-dark
+
+  flex
+  items-center
+`;
+
+const StyledExternalLinkSvg = utld(ExternalLinkSvg)`
   text-default-sub-light
   dark:text-default-sub-dark
 
-  w-5
-  h-5
+  w-4
+  h-4
+  mr-2
 `;

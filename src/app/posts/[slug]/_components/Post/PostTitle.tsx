@@ -83,6 +83,7 @@ const DateActionWrapper = utld.div`
 
 const DateSpanforTitle = utld(DateSpan)`
   !font-normal
+  !mt-0
 `;
 
 const BadgeViewsLikesCounterContainer = utld.div`

@@ -1,4 +1,4 @@
-import { LinkSvg } from "src/components/Svgs";
+import { ExternalLinkSvg } from "src/components/Svgs";
 import { copyLink } from "src/utils";
 
 import { iconClickableStyle } from "../_components";
@@ -13,7 +13,7 @@ const handleCopyResumeLink = async () => {
 export function CopyLinkButton() {
   return (
     <button type='button' className={iconClickableStyle} onClick={handleCopyResumeLink}>
-      <LinkSvg />
+      <ExternalLinkSvg className='!fill-none' />
       링크 복사하기
     </button>
   );
