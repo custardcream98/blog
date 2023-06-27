@@ -6,7 +6,7 @@ import { ud, utld } from "utility-class-components";
 export function ResumeLink({ url, name }: ResumeLink) {
   return (
     <StyledResumeLink href={url} target='_blank' rel='noopener noreferrer'>
-      <LinkSvg width='0.95rem' height='0.95rem' />
+      <LinkSvg />
       {name}
     </StyledResumeLink>
   );
@@ -41,6 +41,9 @@ export const iconClickableStyle = ud`
     duration-200
     hover:fill-resume-accent-light
     dark:hover:fill-resume-accent-dark
+
+    w-[0.95rem]
+    h-[0.95rem]
   )
 
   hover:(

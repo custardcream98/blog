@@ -1,4 +1,4 @@
-import { PrintButton } from "../../_client";
+import { CopyLinkButton, PrintButton } from "../../_client";
 import { ResumeLink, S } from "..";
 
 import { utld } from "utility-class-components";
@@ -33,9 +33,10 @@ function IntroduceSection() {
           <ResumeLink name='블로그' url='https://shiwoo.dev' />
         </li>
       </ContactList>
-      <PrintButtonWrapper>
+      <ButtonWrapper>
         <PrintButton />
-      </PrintButtonWrapper>
+        <CopyLinkButton />
+      </ButtonWrapper>
     </S.Section>
   );
 }
@@ -71,7 +72,7 @@ const ContactList = utld.ul`
   )
 `;
 
-const PrintButtonWrapper = utld.aside`
+const ButtonWrapper = utld.aside`
   w-fit
   ml-auto
   mt-2
@@ -81,6 +82,8 @@ const PrintButtonWrapper = utld.aside`
     text-resume-text-light
     dark:text-resume-text-dark
   )
+
+  [&_button+button]:ml-4
 
   print:hidden
 `;

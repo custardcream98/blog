@@ -1,16 +1,16 @@
 import { LinkSvg } from "src/components/Svgs";
+import { copyLink } from "src/utils";
 
 import { utld } from "utility-class-components";
 
-const copyLink = async () => {
-  const currentUrl = window.location.href;
-  await window.navigator.clipboard.writeText(currentUrl);
+const handleCopyPostLink = async () => {
+  await copyLink();
   alert("링크를 복사했습니다 😄");
 };
 
 export function PostActions() {
   return (
-    <button type='button' onClick={copyLink}>
+    <button type='button' onClick={handleCopyPostLink}>
       <StyledLinkSvg svgTitle='글 링크 복사하기' />
     </button>
   );

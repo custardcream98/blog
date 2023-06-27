@@ -20,7 +20,7 @@ export function PrintButton() {
 
   return (
     <button type='button' onClick={handlePrint} className={iconClickableStyle}>
-      <PrinterSvg width='0.95rem' height='0.95rem' />
+      <PrinterSvg />
       프린트하기
     </button>
   );
