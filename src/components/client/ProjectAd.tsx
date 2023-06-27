@@ -1,7 +1,7 @@
 import useIsMounted from "src/hook/useIsMounted";
 import useWindowSize from "src/hook/useWindowSize";
 
-import { LinkIcon } from "../LinkIcon";
+import { ExternalLinkSvg } from "../Svgs";
 
 import { IconButton } from "./IconButton";
 
@@ -54,7 +54,12 @@ export function ProjectAd({ projectName, projectLink, repositoryLink, projectIma
           />
         )}
         <ProjectLink href={projectLink} target='_blank'>
-          <LinkIcon id='project-ad-link' title='프로젝트 링크' width={iconSize} height={iconSize} />
+          <ExternalLinkSvg
+            svgTitle='프로젝트 링크'
+            width={iconSize}
+            height={iconSize}
+            className='text-default-light hover:text-accent-light dark:text-default-dark hover:dark:text-accent-dark'
+          />
         </ProjectLink>
         <CloseButton
           icon={RiCloseFill}

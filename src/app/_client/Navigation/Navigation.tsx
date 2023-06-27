@@ -1,5 +1,6 @@
-import { BlogIcon, LogoTitleSpan } from "src/components";
+import { LogoTitleSpan } from "src/components";
 import { ResponsiveIconButton } from "src/components/client";
+import { LogoSvg } from "src/components/Svgs";
 import useWindowSize from "src/hook/useWindowSize";
 
 import { Searchbar } from "../Searchbar";
@@ -75,7 +76,7 @@ export function Navigation() {
       <Nav>
         <Link href='/'>
           <LogoTitle>
-            <BlogIcon className='text-default-light dark:text-default-dark' size={1} />
+            <LogoSvg className='h-4 w-4 text-default-light dark:text-default-dark' />
             <StyledLogoTitleSpan className={isSmallScreen ? "sr-only" : ""}>
               shiwoo.dev
             </StyledLogoTitleSpan>

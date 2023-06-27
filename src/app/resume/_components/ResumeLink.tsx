@@ -1,5 +1,4 @@
-import LinkSvg from "src/components/Svgs/LinkSvg";
-import SvgContainer from "src/components/Svgs/SvgContainer";
+import { LinkSvg } from "src/components/Svgs";
 import type { ResumeLink } from "src/types/resume";
 
 import { ud, utld } from "utility-class-components";
@@ -7,9 +6,7 @@ import { ud, utld } from "utility-class-components";
 export function ResumeLink({ url, name }: ResumeLink) {
   return (
     <StyledResumeLink href={url} target='_blank' rel='noopener noreferrer'>
-      <SvgContainer svgWidth='0.95rem' svgHeight='0.95rem'>
-        <LinkSvg />
-      </SvgContainer>
+      <LinkSvg width='0.95rem' height='0.95rem' />
       {name}
     </StyledResumeLink>
   );
@@ -35,6 +32,8 @@ export const iconClickableStyle = ud`
   [&>span]:mr-[0.2rem]
 
   [&_svg]:(
+    inline-block
+    mr-1
     fill-resume-text-light
     dark:fill-resume-text-dark
     transition-[fill]

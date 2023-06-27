@@ -1,6 +1,5 @@
 import { useSetIsDarkmodeActivatedContext } from "src/app/_providers";
-import PrintSvg from "src/components/Svgs/PrintSvg";
-import SvgContainer from "src/components/Svgs/SvgContainer";
+import { PrinterSvg } from "src/components/Svgs";
 
 import { iconClickableStyle } from "../_components/ResumeLink";
 
@@ -21,9 +20,7 @@ export function PrintButton() {
 
   return (
     <button type='button' onClick={handlePrint} className={iconClickableStyle}>
-      <SvgContainer svgWidth='0.95rem' svgHeight='0.95rem'>
-        <PrintSvg />
-      </SvgContainer>
+      <PrinterSvg width='0.95rem' height='0.95rem' />
       프린트하기
     </button>
   );

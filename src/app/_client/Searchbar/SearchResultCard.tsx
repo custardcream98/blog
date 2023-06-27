@@ -1,4 +1,4 @@
-import { LinkIcon } from "src/components";
+import { ExternalLinkSvg } from "src/components/Svgs";
 
 import { cssOutlineOnFocus } from "../Navigation/styles";
 
@@ -35,7 +35,10 @@ function SearchResultCard({
         </ResultTitleWrapper>
         <ResultContentWrapper>
           {contentNode}
-          <LinkIcon className='link-icon' title={`${resultTitle} 포스트로 이동하기`} />
+          <ExternalLinkSvg
+            svgTitle={`${resultTitle} 포스트로 이동하기`}
+            className='h-5 w-5 self-end'
+          />
         </ResultContentWrapper>
       </StyledLink>
     </ResultCardItem>
@@ -90,20 +93,19 @@ const StyledLink = utld(Link)`
   hover:text-accent-light
   dark:hover:text-accent-dark
   transition-colors
+  
+  [&_svg]:(
+    transition-[stroke,fill]
+    text-default-light
+    dark:text-default-dark
+  )
+
+  [&:hover_svg]:(
+    text-accent-light 
+    dark:text-accent-dark
+  )
 
   ${cssOutlineOnFocus}
-
-  [&_.link-icon]:(
-    w-5
-    h-5
-    self-end
-
-    stroke-default-light
-    hover:stroke-accent-light
-
-    dark:stroke-default-dark
-    dark:hover:stroke-accent-dark
-  )
 `;
 
 const ResultTitleWrapper = utld.div`

@@ -1,4 +1,4 @@
-import LinkSvg from "src/components/Svgs/LinkSvg";
+import { LinkSvg } from "src/components/Svgs";
 
 import { utld } from "utility-class-components";
 
@@ -11,7 +11,7 @@ const copyLink = async () => {
 export function PostActions() {
   return (
     <button type='button' onClick={copyLink}>
-      <StyledLinkSvg title='글 링크 복사하기' />
+      <StyledLinkSvg svgTitle='글 링크 복사하기' />
     </button>
   );
 }

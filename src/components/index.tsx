@@ -33,8 +33,6 @@ export const LinkDecorated = utld(Link)`
   hover:(text-accent-light dark:text-accent-dark)
 `;
 
-export * from "./BlogIcon";
 export * from "./CategoryBadges";
 export * from "./DateSpan";
-export * from "./LinkIcon";
 export * from "./LogoTitleSpan";
