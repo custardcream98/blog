@@ -1,5 +1,5 @@
 "use client";
 
 export * from "./Comments";
-export * from "./PostThumbnail";
 export * from "./ViewsLikesCounter";
+export * from "./Post";

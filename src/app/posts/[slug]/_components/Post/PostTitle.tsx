@@ -2,7 +2,7 @@ import { CategoryBadges, DateSpan, LinkDecorated } from "src/components";
 import { type Categoires } from "src/constants/categoryTheme";
 import { CoverImage } from "src/types/post";
 
-import { PostThumbnail, ViewsLikesCounter } from "../../_client";
+import { PostActions, PostThumbnail, ViewsLikesCounter } from "../../_client";
 
 import { utld } from "utility-class-components";
 
@@ -20,7 +20,10 @@ export function PostTitle({ coverImage, title, category, date, series }: PostTit
       <Container>
         {series && <SeriesName href={`/series/${encodeURIComponent(series)}`}>{series}</SeriesName>}
         <Title>{title}</Title>
-        <DateSpanforTitle date={date} />
+        <DateActionWrapper>
+          <DateSpanforTitle date={date} />
+          <PostActions />
+        </DateActionWrapper>
         <BadgeViewsLikesCounterContainer>
           {category && (
             <CategoryBadges>
@@ -70,8 +73,15 @@ const SeriesName = utld(LinkDecorated)`
   dark:text-default-sub-dark
 `;
 
+const DateActionWrapper = utld.div`
+  flex
+  items-center
+  justify-between
+
+  mt-[1.1rem]
+`;
+
 const DateSpanforTitle = utld(DateSpan)`
-  !mt-[1.1rem]
   !font-normal
 `;
 
