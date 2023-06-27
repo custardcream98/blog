@@ -11,18 +11,15 @@ category: ["React.js", "CSS"]
 
 [서비스 링크](https://share-it-rust.vercel.app/)
 
-<style>
-  .post-img-wrapper {
-    display: flex;
-    justify-content: space-between;
-  }
-  .post-img-wrapper > * {
-    width: calc(50% - 10px);
-  }
-</style>
-<p class="post-img-wrapper" >
-  <img src="/static/img/개인_프로젝트_Share_it!의_성능_최적화하기/메인_페이지.png" alt="메인 페이지" />
-  <img src="/static/img/개인_프로젝트_Share_it!의_성능_최적화하기/포스트_페이지.png" alt="포스트 페이지" />
+<p className='flex justify-between [&_*]:w-[calc(50%-10px)]'>
+  <img
+    src='/static/img/개인_프로젝트_Share_it!의_성능_최적화하기/메인_페이지.png'
+    alt='메인 페이지'
+  />
+  <img
+    src='/static/img/개인_프로젝트_Share_it!의_성능_최적화하기/포스트_페이지.png'
+    alt='포스트 페이지'
+  />
 </p>
 
 코드를 자유롭게 나누고 리뷰와 질문을 남기는 공간이 있으면 좋겠다는 생각에 개발한 간단한 커뮤니티입니다. TypeScript, React, styled-components 등을 기술 스택으로 사용했습니다. React Helmet 모듈을 사용해 SEO도 최대한 챙겨보고자 했습니다.
@@ -115,20 +112,33 @@ const AppRouter = () => {
 
 ## 개선 결과
 
-<figure class="half">
-  <img src="/static/img/개인_프로젝트_Share_it!의_성능_최적화하기/before_lazyload_description_score.png" alt="레이지 로딩 적용 전 점수" />
+<figure className='half'>
+  <img
+    src='/static/img/개인_프로젝트_Share_it!의_성능_최적화하기/before_lazyload_description_score.png'
+    alt='레이지 로딩 적용 전 점수'
+  />
   <figcaption>좌: lazy load 적용 전</figcaption>
-</figure><figure class="half">
-  <img src="/static/img/개인_프로젝트_Share_it!의_성능_최적화하기/after_lazyload_description_score.png" alt="레이지 로딩 적용 후 점수" />
+</figure>
+<figure className='half'>
+  <img
+    src='/static/img/개인_프로젝트_Share_it!의_성능_최적화하기/after_lazyload_description_score.png'
+    alt='레이지 로딩 적용 후 점수'
+  />
   <figcaption>우: lazy load 적용 후</figcaption>
 </figure>
 
 <figure>
-  <img src="/static/img/개인_프로젝트_Share_it!의_성능_최적화하기/before_lazyload_chunk.png" alt="레이지 로딩 적용 전 청크 크기" />
+  <img
+    src='/static/img/개인_프로젝트_Share_it!의_성능_최적화하기/before_lazyload_chunk.png'
+    alt='레이지 로딩 적용 전 청크 크기'
+  />
   <figcaption>적용 전</figcaption>
 </figure>
 <figure>
-  <img src="/static/img/개인_프로젝트_Share_it!의_성능_최적화하기/after_lazyload_chunk.png" alt="레이지 로딩 적용 후 청크 크기" />
+  <img
+    src='/static/img/개인_프로젝트_Share_it!의_성능_최적화하기/after_lazyload_chunk.png'
+    alt='레이지 로딩 적용 후 청크 크기'
+  />
   <figcaption>적용 후</figcaption>
 </figure>
 
@@ -200,11 +210,18 @@ CSS는 Render Blocking Resource입니다. Share it!은 Pretendard라는 웹 폰�
 
 ## 개선 결과
 
-<figure class="half">
-  <img src="/static/img/개인_프로젝트_Share_it!의_성능_최적화하기/after_lazyload_description_score.png" alt="폰트 최적화 전" />
+<figure className='half'>
+  <img
+    src='/static/img/개인_프로젝트_Share_it!의_성능_최적화하기/after_lazyload_description_score.png'
+    alt='폰트 최적화 전'
+  />
   <figcaption>좌: 폰트 최적화 전</figcaption>
-</figure><figure class="half">
-  <img src="/static/img/개인_프로젝트_Share_it!의_성능_최적화하기/after_fontimize_description_score.png" alt="폰트 최적화 후" />
+</figure>
+<figure className='half'>
+  <img
+    src='/static/img/개인_프로젝트_Share_it!의_성능_최적화하기/after_fontimize_description_score.png'
+    alt='폰트 최적화 후'
+  />
   <figcaption>우: 폰트 최적화 후</figcaption>
 </figure>
 

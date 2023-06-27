@@ -27,7 +27,7 @@ category: ["React.js", "Next.js"]
 
 저는 이 캐시를 매 커밋 직전에 자동으로 생성하고자 합니다. 이를 위해 아래의 파일을 생성했습니다.
 
-```typescript
+```ts
 // cache/cache.ts
 
 import fs from "fs";
@@ -107,7 +107,7 @@ npm run cache && git add ./cache/cache.json
 우선, 검색용 API를 개발하기 앞서서 한가지 생각해볼 문제가 있습니다.
 
 <figure>
-  <img src="/static/img/블로그에_검색_기능을_구현해보자/자동완성.gif" alt="네이버 자동완성" />
+  <img src='/static/img/블로그에_검색_기능을_구현해보자/자동완성.gif' alt='네이버 자동완성' />
   <figcaption>네이버의 자동완성</figcaption>
 </figure>
 
@@ -125,7 +125,7 @@ Fuzzy 알고리즘은 이를 구현할 때 쓸 수 있는 방법중 하나입니
 
 아래는 제가 수정한 코드입니다.
 
-```ts
+```typescript
 // utils/fuzzy.ts
 
 // 태곤님의 createFuzzyMatcher()

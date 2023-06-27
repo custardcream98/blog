@@ -1,5 +1,3 @@
-import "server-only";
-
 import { getOgImage } from "src/lib/thumbnails/ogImage";
 import type { PostType } from "src/types/post";
 
@@ -16,12 +14,12 @@ const DIRECTORY_POSTS = path.join(process.cwd(), "_posts");
 export const getPostSlugs = () => {
   return fs
     .readdirSync(DIRECTORY_POSTS)
-    .filter((dir) => /\.md$/.test(dir))
-    .map((dir) => dir.replace(/\.md$/, ""));
+    .filter((dir) => /\.mdx$/.test(dir))
+    .map((dir) => dir.replace(/\.mdx$/, ""));
 };
 
 const getPostFileData = (slug: string) => {
-  const fullPath = path.join(DIRECTORY_POSTS, `${slug}.md`);
+  const fullPath = path.join(DIRECTORY_POSTS, `${slug}.mdx`);
   const file = fs.readFileSync(fullPath, "utf8");
   return matter(file);
 };
@@ -88,6 +86,10 @@ export const getPostByHashedSlug = async <Field extends PostMeta[]>(
 };
 
 export const getHashedSlug = (slug: string) => {
+  if (typeof (HASH_REVERSERSED_MAP as Record<string, string>)[slug] === "undefined") {
+    throw new Error(`Slug "${slug}" is not found in HASH_REVERSERSED_MAP`);
+  }
+
   return (HASH_REVERSERSED_MAP as Record<string, string>)[slug];
 };
 

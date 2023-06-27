@@ -1,0 +1,15 @@
+{
+  "extends": "./tsconfig.paths.json",
+
+  "compilerOptions": {
+    "target": "ESNext",
+    "allowJs": true,
+    "skipLibCheck": true,
+    "strict": true,
+    "esModuleInterop": true,
+    "module": "ESNext",
+    "isolatedModules": true,
+    "moduleResolution": "Node"
+  },
+  "exclude": ["node_modules"]
+}
