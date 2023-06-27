@@ -67,6 +67,7 @@ const Title = utld.h2`
 `;
 
 const SeriesName = utld(LinkDecorated)`
+  w-fit
   mb-[0.3125rem]
   text-[1rem]
   text-default-sub-light
