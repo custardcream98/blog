@@ -10,13 +10,19 @@ export type PostAlertSWRequestBody = {
   postTitle: string;
   username: string;
   comment: string;
+  linkToPost: string;
 };
-export const postAlertSW = async ({ postTitle, username, comment }: PostAlertSWRequestBody) => {
+export const postAlertSW = async ({
+  postTitle,
+  username,
+  comment,
+  linkToPost,
+}: PostAlertSWRequestBody) => {
   const response = await nextApi.post<AlertSWResponse>(
     POST_MAIL_URL,
     {
       comment,
-      linkToPost: window.location.href,
+      linkToPost,
       postTitle,
       username,
     },

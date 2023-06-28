@@ -7,6 +7,7 @@ import {
 } from "src/lib/firebaseSetup/firebaseApps";
 import { usePostAlertSWMutation } from "src/request";
 import { CommentEditState } from "src/types/comment";
+import { getCurrentURL } from "src/utils";
 
 import { useCommentEditorStateSetter } from "../Comments/CommentCard/CommentEditor/context";
 import { useCommentDataContext } from "../Comments/CommentCard/context";
@@ -86,7 +87,10 @@ export const useCommentForm = (isForEdit: boolean) => {
           title,
           username,
         });
-        mutatePostAlertSW({ comment, postTitle: title, username });
+
+        const CURRENT_POST_URL = getCurrentURL();
+
+        mutatePostAlertSW({ comment, linkToPost: CURRENT_POST_URL, postTitle: title, username });
       } catch (error) {
         console.error(error);
         alert("댓글 등록중 오류가 발생했습니다.");
