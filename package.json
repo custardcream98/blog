@@ -1,6 +1,6 @@
 {
-  "name": "custardcream98.github.io",
-  "version": "0.1.0",
+  "name": "shiwoo.dev",
+  "version": "1.0.0",
   "private": true,
   "scripts": {
     "dev": "next dev",
