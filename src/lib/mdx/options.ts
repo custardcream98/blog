@@ -1,4 +1,4 @@
-import { externalLink, headingToStartFrom } from "./plugin";
+import { externalLink, headingToStartFrom, imageSize } from "./plugin";
 
 import rehypeToc from "@jsdevtools/rehype-toc";
 import { type SerializeOptions } from "next-mdx-remote/dist/types";
@@ -34,6 +34,7 @@ export const postMDXOptions: SerializeOptions = {
         },
       ],
       [headingToStartFrom, { startFrom: 3 }],
+      [imageSize, { mdxJsxElementTagName: ["img", "NextImage"] }],
     ],
     remarkPlugins: [remarkGfm],
   },

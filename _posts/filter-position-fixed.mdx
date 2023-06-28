@@ -24,7 +24,7 @@ series: "Troubleshooting"
 
 그런데 이상하게도 아래처럼 동작했습니다.
 
-![navbar 안의 다크모드 스위치 위치가 마음대로 동작하지 않는 모습](../static/img/filter를_주면_position_fixed_동작이_달라져요!/다크모드_스위치_위치이상.gif)
+![navbar 안의 다크모드 스위치 위치가 마음대로 동작하지 않는 모습](/static/img/filter를_주면_position_fixed_동작이_달라져요!/다크모드_스위치_위치이상.gif)
 
 `.darkmode-switch` 요소가 뷰포트 기준이 아닌 navbar 기준으로 위치하고 있는 상황으로 보였습니다. `.darkmode-switch` 요소는 navbar의 자식 요소긴 하나, `position: fixed;` 를 부여하면 뷰포트 전체를 기준으로 위치하도록 할 수 있을 거라고 생각했는데, 왜 이런 일이 벌어진걸까요?
 
@@ -135,6 +135,6 @@ Webkit 엔진에서는 문제가 없겠지만 Blink 엔진에서도 제대로 �
 
 ## 결과
 
-![navbar 안의 다크모드 스위치 위치가 마음대로 동작하지 않는 모습](../static/img/filter를_주면_position_fixed_동작이_달라져요!/해결.gif)
+![navbar 안의 다크모드 스위치 위치가 마음대로 동작하지 않는 모습](/static/img/filter를_주면_position_fixed_동작이_달라져요!/해결.gif)
 
 이제 원하던대로 잘 동작하네요!

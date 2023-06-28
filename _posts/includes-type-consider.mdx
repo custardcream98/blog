@@ -30,7 +30,7 @@ const isRestaurantType = (str: unknown): str is RestaurantType => {
 
 하지만, 간단해 보이던 이 코드는 사실 오류를 내뿜는 코드입니다. 12번째 줄 return문의 **`RESTAURANT_TYPES.includes(str)`에서 이런 에러가 발생**합니다.
 
-![오류를_내뿜는_코드](../static/img/includes의_타입은_어떻게_대응하는게_좋을까/error.png)
+![오류를_내뿜는_코드](/static/img/includes의_타입은_어떻게_대응하는게_좋을까/error.png)
 
 ## `includes`의 타입
 
@@ -65,7 +65,7 @@ interface Array {
 
 이제 오류를 뿜지 않고, includes에 어떤 타입의 값이던 넣을 수 있습니다.
 
-![수정된 타입](../static/img/includes의_타입은_어떻게_대응하는게_좋을까/type.png)
+![수정된 타입](/static/img/includes의_타입은_어떻게_대응하는게_좋을까/type.png)
 
 ## 조금 더 우아하게?
 

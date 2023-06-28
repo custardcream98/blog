@@ -21,7 +21,7 @@ series: "Troubleshooting"
 
 그런데...
 
-![node-sass에서는_false](../static/img/Sass_버전에_따라서_Equality_Operator의_작동_결과가_달라진다/node-sass_왜구랩.png)
+![node-sass에서는_false](/static/img/Sass_버전에_따라서_Equality_Operator의_작동_결과가_달라진다/node-sass_왜구랩.png)
 
 보시다시피 `@debug 1 != 1px;`가 `false`가 나오고 있습니다.
 
@@ -29,7 +29,7 @@ series: "Troubleshooting"
 
 ## 버전을 체크해보자
 
-![node-sass 버전](../static/img/Sass_버전에_따라서_Equality_Operator의_작동_결과가_달라진다/node-sass_version.png)
+![node-sass 버전](/static/img/Sass_버전에_따라서_Equality_Operator의_작동_결과가_달라진다/node-sass_version.png)
 
 제가 사용한 `node-sass`의 버전입니다. `node-sass`는 7.0.3으로 최신 버전이 맞는데, 밑에 `libsass`라는 Sass Compiler의 버전이 3.5.5라고 나와 있습니다.
 
@@ -43,7 +43,7 @@ LibSass는 Sass 코드를 컴파일 할 수 있는 컴파일러로, C와 C++로 
 
 버전 3.6 대의 Changelog를 한번 살펴보다가 [버전 3.6.5의 수정 내역](https://github.com/sass/libsass/releases/tag/3.6.5)중 이런 문구를 발견했습니다.
 
-![libsass changelog](../static/img/Sass_버전에_따라서_Equality_Operator의_작동_결과가_달라진다/libsass_changelog.png)
+![libsass changelog](/static/img/Sass_버전에_따라서_Equality_Operator의_작동_결과가_달라진다/libsass_changelog.png)
 
 밑에서 네번째 줄에 보시면 _Fix edge case regarding unit-less number equality as object keys_ 라는 문구가 있습니다. 해석하면 '단위가 없는 숫자의 동일성을 객체의 키로 인식하는 edge case 수정' 정도가 될 것 같습니다. (edge case란 디버깅 혹은 단위 테스트에서 사용되는 용어로 여기에서는 '특이 케이스'정도로 생각할 수 있겠습니다.)
 
@@ -57,7 +57,7 @@ LibSass는 Sass 코드를 컴파일 할 수 있는 컴파일러로, C와 C++로 
 
 그러다보니 한 쪽이 unit-less일 경우 반대쪽의 단위로 이상한걸 막 써놔도 숫자만 같으면 같다고 판단해버립니다...
 
-![1shiwoo](../static/img/Sass_버전에_따라서_Equality_Operator의_작동_결과가_달라진다/1shiwoo.png)
+![1shiwoo](/static/img/Sass_버전에_따라서_Equality_Operator의_작동_결과가_달라진다/1shiwoo.png)
 
 # 결론: Dart Sass를 쓰자
 
@@ -65,7 +65,7 @@ LibSass는 Sass 코드를 컴파일 할 수 있는 컴파일러로, C와 C++로 
 
 다만, 이 과정에서 또 알게된 중요한 사실은 **LibSass가 deprecated 됐다는 점**입니다. Sass 공식 문서에서는 **Dart Sass를 이용할 것**을 권장하고 있습니다.
 
-![libsass changelog](../static/img/Sass_버전에_따라서_Equality_Operator의_작동_결과가_달라진다/LibSassDeprecated.png)
+![libsass changelog](/static/img/Sass_버전에_따라서_Equality_Operator의_작동_결과가_달라진다/LibSassDeprecated.png)
 
 ## Mac에서 Dart Sass 설치하기
 
@@ -81,7 +81,7 @@ brew install sass/sass/sass
 
 가장 최근 버전은 1.55.0입니다!
 
-![sass 설치 완](../static/img/Sass_버전에_따라서_Equality_Operator의_작동_결과가_달라진다/sass_설치완.png)
+![sass 설치 완](/static/img/Sass_버전에_따라서_Equality_Operator의_작동_결과가_달라진다/sass_설치완.png)
 
 `package.json`의 `scripts`를 아래와 같은 형식으로 변경하고
 
@@ -100,7 +100,7 @@ brew install sass/sass/sass
 @debug 1 != 1px;
 ```
 
-![잘 나와요!](../static/img/Sass_버전에_따라서_Equality_Operator의_작동_결과가_달라진다/최종결과.png)
+![잘 나와요!](/static/img/Sass_버전에_따라서_Equality_Operator의_작동_결과가_달라진다/최종결과.png)
 
 짜잔~! 이제 잘 나오네요! 🙌🙌
 
