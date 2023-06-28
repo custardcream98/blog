@@ -1,10 +1,11 @@
 import { ExternalLinkSvg } from "src/components/Svgs";
-import { copyLink } from "src/utils";
+import { addToClipboard, getCurrentURL } from "src/utils";
 
 import { utld } from "utility-class-components";
 
 const handleCopyPostLink = async () => {
-  await copyLink();
+  const currentPostURL = getCurrentURL();
+  await addToClipboard(currentPostURL);
   alert("포스트 URL을 복사했습니다 😄");
 };
 
