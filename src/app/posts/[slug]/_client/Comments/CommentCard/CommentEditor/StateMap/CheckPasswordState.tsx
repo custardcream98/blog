@@ -1,5 +1,5 @@
 import { Button } from "src/components/client";
-import useEditable from "src/hook/useEditable";
+import { useEditable } from "src/hook";
 import { deleteComment } from "src/lib/firebaseSetup/firebaseApps";
 import { CommentEditState } from "src/types/comment";
 

@@ -1,5 +1,4 @@
-import useIsMounted from "src/hook/useIsMounted";
-import useWindowSize from "src/hook/useWindowSize";
+import { useIsMounted, useWindowSize } from "src/hook";
 
 import { ExternalLinkSvg } from "../Svgs";
 

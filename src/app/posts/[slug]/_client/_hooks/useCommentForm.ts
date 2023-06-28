@@ -1,4 +1,4 @@
-import useEditable from "src/hook/useEditable";
+import { useEditable } from "src/hook";
 import {
   addComment,
   type AddCommentProps,

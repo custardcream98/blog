@@ -1,6 +1,6 @@
 "use client";
 
-import useWindowSize from "src/hook/useWindowSize";
+import { useWindowSize } from "src/hook";
 
 import { useMemo } from "react";
 import { utld } from "utility-class-components";

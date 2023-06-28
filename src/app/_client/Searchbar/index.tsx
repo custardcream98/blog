@@ -1,5 +1,4 @@
-import useDebouncedValue from "src/hook/useDebouncedValue";
-import useDelayedFocus from "src/hook/useDelayedFocus";
+import { useDebouncedValue, useDelayedFocus } from "src/hook";
 import { useGetSearchedPostCardDataQuery } from "src/request";
 import { calculateLoopedIndex, preventDefaultEvent } from "src/utils";
 

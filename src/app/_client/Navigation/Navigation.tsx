@@ -1,7 +1,7 @@
 import { LogoTitleSpan } from "src/components";
 import { ResponsiveIconButton } from "src/components/client";
 import { LogoSvg } from "src/components/Svgs";
-import useWindowSize from "src/hook/useWindowSize";
+import { useWindowSize } from "src/hook";
 
 import { Searchbar } from "../Searchbar";
 

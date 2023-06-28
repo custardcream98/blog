@@ -3,7 +3,7 @@ import { useEffect, useState } from "react";
 /**
  * 컴포넌트 mount 여부를 확인하는 커스텀 hook
  */
-const useIsMounted = () => {
+export const useIsMounted = () => {
   const [mounted, setMounted] = useState(false);
 
   useEffect(() => {
@@ -12,5 +12,3 @@ const useIsMounted = () => {
 
   return mounted;
 };
-
-export default useIsMounted;

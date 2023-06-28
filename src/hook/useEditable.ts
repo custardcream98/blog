@@ -1,6 +1,6 @@
 import { type RefObject, useCallback, useLayoutEffect, useRef } from "react";
 
-const useEditable = <T extends HTMLInputElement | HTMLTextAreaElement>(
+export const useEditable = <T extends HTMLInputElement | HTMLTextAreaElement>(
   initialValue?: string,
 ): [RefObject<T>, () => string | undefined, () => void] => {
   const editableRef = useRef<T>(null);
@@ -19,5 +19,3 @@ const useEditable = <T extends HTMLInputElement | HTMLTextAreaElement>(
 
   return [editableRef, getEditableVal, clearEditableVal];
 };
-
-export default useEditable;

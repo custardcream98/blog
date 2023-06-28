@@ -7,7 +7,7 @@ type WindowSize = {
 /**
  * resize 이벤트 발생을 listen해 윈도우 사이즈 변경을 확인할 수 있도록 하는 커스텀 훅
  */
-const useWindowSize = () => {
+export const useWindowSize = () => {
   const [windowSize, setWindowSize] = useState<WindowSize>({
     height: 0,
     width: 0,
@@ -30,5 +30,3 @@ const useWindowSize = () => {
 
   return windowSize;
 };
-
-export default useWindowSize;
