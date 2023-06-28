@@ -1,10 +1,9 @@
 import { safeNumber } from "src/utils";
 
 import NextImage from "next/image";
-import { type MDXRemoteProps } from "next-mdx-remote/rsc";
 import { ComponentProps } from "react";
 
-function MDXImage({
+export function MDXImage({
   src,
   alt,
   width,
@@ -23,14 +22,9 @@ function MDXImage({
       src={src}
       width={resolvedWidth}
       height={resolvedHeight}
-      placeholder={"empty"}
+      priority
+      quality={100}
       {...props}
     />
   ) : null;
 }
-
-export const postComponents: MDXRemoteProps["components"] = {
-  NextImage: MDXImage,
-  img: MDXImage,
-  wrapper: ({ children }) => <div className='post-content'>{children}</div>,
-};
