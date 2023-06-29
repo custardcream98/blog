@@ -2,21 +2,21 @@ import { readFileSync } from "fs";
 import path from "path";
 import React from "react";
 
-const ROOT = process.cwd();
+const ASSETS_PATH = path.join(process.cwd(), "src", "lib", "thumbnails", "assets");
 
-const backgroundLight = readFileSync(
-  path.join(ROOT, "src", "lib", "thumbnails", "assets", "background-light.png"),
-).toString("base64");
-const backgroundDark = readFileSync(
-  path.join(ROOT, "src", "lib", "thumbnails", "assets", "background-dark.png"),
-).toString("base64");
+const backgroundLight = readFileSync(path.join(ASSETS_PATH, "background-light.png")).toString(
+  "base64",
+);
+const backgroundDark = readFileSync(path.join(ASSETS_PATH, "background-dark.png")).toString(
+  "base64",
+);
 
-const notoSansKRBlack = readFileSync(
-  path.join(ROOT, "src", "lib", "thumbnails", "assets", "NotoSansKR-Black.otf"),
-).toString("base64");
-const notoSansKRMedium = readFileSync(
-  path.join(ROOT, "src", "lib", "thumbnails", "assets", "NotoSansKR-Medium.otf"),
-).toString("base64");
+const notoSansKRBlack = readFileSync(path.join(ASSETS_PATH, "NotoSansKR-Black.otf")).toString(
+  "base64",
+);
+const notoSansKRMedium = readFileSync(path.join(ASSETS_PATH, "NotoSansKR-Medium.otf")).toString(
+  "base64",
+);
 
 function Template({ title, isLight = false }: { title: string; isLight?: boolean }) {
   return (
