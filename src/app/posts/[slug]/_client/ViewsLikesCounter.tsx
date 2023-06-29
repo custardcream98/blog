@@ -11,24 +11,31 @@ type ViewsLikesCounterProps = {
 
 export function ViewsLikesCounter({ title }: ViewsLikesCounterProps) {
   const viewCount = useViewCount(title);
+  const isViewCountLoaded = typeof viewCount !== "undefined";
+
   const { likeCount, isLiked, onLikeClick } = useLikeCount(title);
+  const isLikeCountLoaded = typeof likeCount !== "undefined";
 
   return (
     <Container>
-      <CounterContainer>
-        <HiEye title='조회수' size={15} className={SUB_TEXT_COLOR} />
-        <CounterValue>{viewCount}</CounterValue>
-      </CounterContainer>
-      <LikeBtn type='button' onClick={onLikeClick} $isLiked={isLiked}>
-        <IconContext.Provider value={LIKE_ICON_STYLE_CONTEXT}>
-          {isLiked ? (
-            <BsHeartFill title='좋아요 버튼' className={HEART_COLOR} />
-          ) : (
-            <BsHeart title='좋아요 버튼' className={SUB_TEXT_COLOR} />
-          )}
-        </IconContext.Provider>
-        <LikeValue $isLiked={isLiked}>{likeCount}</LikeValue>
-      </LikeBtn>
+      {isViewCountLoaded && (
+        <CounterContainer>
+          <HiEye title='조회수' size={15} className={SUB_TEXT_COLOR} />
+          <CounterValue>{viewCount}</CounterValue>
+        </CounterContainer>
+      )}
+      {isLikeCountLoaded && (
+        <LikeBtn type='button' onClick={onLikeClick} $isLiked={isLiked}>
+          <IconContext.Provider value={LIKE_ICON_STYLE_CONTEXT}>
+            {isLiked ? (
+              <BsHeartFill title='좋아요 버튼' className={HEART_COLOR} />
+            ) : (
+              <BsHeart title='좋아요 버튼' className={SUB_TEXT_COLOR} />
+            )}
+          </IconContext.Provider>
+          <LikeValue $isLiked={isLiked}>{likeCount}</LikeValue>
+        </LikeBtn>
+      )}
     </Container>
   );
 }

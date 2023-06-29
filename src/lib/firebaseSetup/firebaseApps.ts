@@ -132,7 +132,7 @@ export const getComments = (
 
 export const getViewCount = (
   title: string,
-  setViewCount: React.Dispatch<React.SetStateAction<number>>,
+  setViewCount: React.Dispatch<React.SetStateAction<number | undefined>>,
 ) => {
   const postDocRef = getPostDocRef(title);
   const isViewAble = Date.now() - getViewedTimeOnLocal(title) > 1200000;
@@ -157,7 +157,7 @@ export const getViewCount = (
 
 export const getLikeCount = (
   title: string,
-  setLikeCount: React.Dispatch<React.SetStateAction<number>>,
+  setLikeCount: React.Dispatch<React.SetStateAction<number | undefined>>,
 ) => {
   const postDocRef = getPostDocRef(title);
 
