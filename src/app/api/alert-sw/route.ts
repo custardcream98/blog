@@ -1,10 +1,13 @@
 import { sendMail } from "src/lib/nodemailer";
 import type { AlertSWResponse } from "src/types/alertSW";
+import { getRequestBody } from "src/utils";
 
 import { NextResponse } from "next/server";
 
+type RequestBody = { postTitle: string; username: string; comment: string; linkToPost: string };
+
 export async function POST(request: Request): Promise<NextResponse<AlertSWResponse>> {
-  const { postTitle, username, comment, linkToPost } = await request.json();
+  const { postTitle, username, comment, linkToPost } = await getRequestBody<RequestBody>(request);
 
   const receiverEmailAddress = process.env.EMAIL_RECEIVER;
   if (!receiverEmailAddress) {
