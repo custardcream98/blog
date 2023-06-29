@@ -1,6 +1,13 @@
 [
   [
     {
+      "category": ["etc"],
+      "date": "2023-06-29",
+      "excerpt": "개발자로서 첫 커리어였던 Wavve Tech Internship을 통해 얻은 것들을 정리해봅니다.",
+      "slug": "internship-retro",
+      "title": "내가 인턴십을 통해 얻은 것"
+    },
+    {
       "category": ["TypeScript"],
       "date": "2023-03-22",
       "excerpt": "Array.includes() 메서드에 넣을 수 있는 값의 타입은 제 생각과 달랐습니다. 어떻게 하면 더 논리적인 타입을 사용해 대응할 수 있을까요?",
@@ -27,16 +34,16 @@
       "excerpt": "4개월 간의 FE 스쿨 과정이 모두 끝났습니다.",
       "slug": "likelion-frontend-final-retro",
       "title": "멋사 프론트엔드 스쿨 마무리 회고, 앞으로 나는...?"
-    },
+    }
+  ],
+  [
     {
       "category": ["React.js", "Next.js"],
       "date": "2022-11-27T01:30:00+09:00",
       "excerpt": "지난 포스트에 이어서 검색 기능을 마저 구현해봤습니다. Debouncing과 Throttling을 비교해봤습니다.",
       "slug": "blog-search-feature-part2",
       "title": "블로그에 검색 기능을 구현해보자 2"
-    }
-  ],
-  [
+    },
     {
       "category": ["React.js", "Next.js"],
       "date": "2022-11-26T04:09:00+09:00",
@@ -64,16 +71,16 @@
       "excerpt": "연구실 과제용 웹페이지 개발중 복잡한 모양의 if else 구문이 필요한 경우가 있었는데, 어떻게 하면 더 보기 좋은 코드가 될지 고민했습니다.",
       "slug": "refactor-complex-if",
       "title": "복잡하게 구성된 if문 리팩토링하기"
-    },
+    }
+  ],
+  [
     {
       "category": ["HTML", "CSS"],
       "date": "2022-11-01",
       "excerpt": "블로그의 navbar를 리뉴얼하는 과정에서 다크모드 스위치에 부여한 position fixed가 navbar 기준으로만 동작하는 문제를 해결하고자 했습니다.",
       "slug": "filter-position-fixed",
       "title": "filter를 주면 position fixed 동작이 달라져요!"
-    }
-  ],
-  [
+    },
     {
       "category": ["Next.js", "JavaScript"],
       "date": "2022-10-31",
@@ -101,16 +108,16 @@
       "excerpt": "드디어 JS 본격적으로 시작!!",
       "slug": "likelion-frontend-week5",
       "title": "멋사 프론트엔드 스쿨 5주차 회고"
-    },
+    }
+  ],
+  [
     {
       "category": ["CSS"],
       "date": "2022-09-29T18:09:00+09:00",
       "excerpt": "Sass를 공부하던중 저 혼자 Equality Operator의 작동 결과가 다른것을 알게 됐습니다.",
       "slug": "sass-equality-op-version",
       "title": "Sass 버전에 따라서 Equality Operator의 작동 결과가 달라진다?"
-    }
-  ],
-  [
+    },
     {
       "category": ["CSS"],
       "date": "2022-09-27T18:09:00+09:00",
@@ -138,16 +145,16 @@
       "excerpt": "뭔가 뿌듯했던 셋째주였어요!",
       "slug": "likelion-frontend-week3",
       "title": "멋사 프론트엔드 스쿨 3주차 회고"
-    },
+    }
+  ],
+  [
     {
       "category": ["HTML", "CSS", "JavaScript"],
       "date": "2022-09-15",
       "excerpt": "멋사 프론트엔드 스쿨에서 받은 과제를 어떻게 해결했는지 기록했습니다. 디자이너의 시안을 그대로 코드로 옮기는 실무에 가까운 일은 처음 해봤는데 정말 좋은 경험이었습니다.",
       "slug": "10000-hour-rule-responsive-web",
       "title": "1만 시간의 법칙 반응형 웹 개발 및 피드백"
-    }
-  ],
-  [
+    },
     {
       "category": ["JavaScript"],
       "date": "2022-09-12T19:09:00+09:00",
@@ -175,16 +182,16 @@
       "excerpt": "둘째주가 되니까 슬슬 계획대로 안되기 시작합니다...",
       "slug": "likelion-frontend-week2",
       "title": "멋사 프론트엔드 스쿨 2주차 회고"
-    },
+    }
+  ],
+  [
     {
       "category": ["HTML"],
       "date": "2022-09-07T17:09:00+09:00",
       "excerpt": "HTML Living Standard를 확실히 공부해서 기본기를 다지는 시간 2탄!!",
       "slug": "html-living-standard-part2",
       "title": "HTML Living Standard 2"
-    }
-  ],
-  [
+    },
     {
       "category": ["HTML"],
       "date": "2022-09-07T12:06:00+09:00",
@@ -212,16 +219,16 @@
       "excerpt": "매번 Git을 편하게 쓰고 싶어서 GUI로만 다뤄왔는데, Git 명령어를 정리해 CLI 환경에서도 Git을 얼마든지 사용할 수 있게 공부했습니다.",
       "slug": "git-cli-summary1",
       "title": "Git CLI 명령어 정리 1"
-    },
+    }
+  ],
+  [
     {
       "category": ["HTML"],
       "date": "2022-08-30",
       "excerpt": "emmet(에멧) 사용법을 정리했습니다. 에멧을 잘 사용하면 HTML 작업 능률이 엄청 올라갑니다!",
       "slug": "emmet-summary",
       "title": "emmet(에멧) 정리!"
-    }
-  ],
-  [
+    },
     {
       "category": ["etc"],
       "date": "2022-08-23",
@@ -249,16 +256,16 @@
       "excerpt": "바람직한 웹 개발자는 Vanilla JS를 잘 다룰줄 알아야 합니다. Single Page Application을 React.js 등 프레임워크의 도움 없이 Vanilla JS로 개발해보겠습니다.",
       "slug": "javascript-only-spa",
       "title": "JavaScript만으로 SPA 개발해보기"
-    },
+    }
+  ],
+  [
     {
       "category": ["etc"],
       "date": "2022-08-14",
       "excerpt": "bundler의 대표주자 Webpack이 무엇인지, Core Concepts를 확실하게 정리해두려고 합니다.",
       "slug": "what-is-webpack",
       "title": "Webpack이란?"
-    }
-  ],
-  [
+    },
     {
       "category": ["Next.js", "Firebase"],
       "date": "2022-08-11",
@@ -286,16 +293,16 @@
       "excerpt": "Next.js가 html을 불러올 때 JavaScript의 실행이 한 발짝씩 늦어서 styled-components로 지정된 스타일이 뒤늦게 로드되는 문제를 해결해보겠습니다.",
       "slug": "nextjs-styled-late-load",
       "title": "Next.js에서 styled-components 스타일을 늦게 불러오는 문제 해결하기"
-    },
+    }
+  ],
+  [
     {
       "category": ["Firebase"],
       "date": "2022-08-04",
       "excerpt": "Next.js를 이용해 이쁜 블로그를 개발했는데, 아직 댓글 기능이 없네요. 외부 서비스를 이용하지 않고 직접 개발해보려고 합니다.",
       "slug": "blog-comment-feature-firebase",
       "title": "블로그에 Firebase로 댓글기능 개발하기"
-    }
-  ],
-  [
+    },
     {
       "category": ["React.js", "TypeScript"],
       "date": "2022-08-02",
