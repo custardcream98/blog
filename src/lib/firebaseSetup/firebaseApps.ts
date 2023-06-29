@@ -33,16 +33,21 @@ const getPostDocRef = (title: string) =>
 
 export const createPostDoc = async (title: string) => {
   const postDocRef = getPostDocRef(title);
+  const createDoc = () => setDoc(postDocRef, { likes: 0, views: [] });
 
   try {
-    await (await getDoc(postDocRef)).data()?.[DocumentKeys.KEY_VIEWS];
+    const isDocExists = (await getDoc(postDocRef)).exists();
+
+    if (!isDocExists) {
+      await createDoc();
+    }
   } catch (e) {
     if (e instanceof FirebaseError) {
       if (e.code === "not-found") {
-        await setDoc(postDocRef, { likes: 0, views: [] });
+        await createDoc();
       }
     } else if (e instanceof TypeError) {
-      await setDoc(postDocRef, { likes: 0, views: [] });
+      await createDoc();
     }
   }
 };

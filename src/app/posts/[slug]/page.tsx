@@ -15,13 +15,17 @@ import { utld } from "utility-class-components";
 
 export { generateMetadata } from "./metadata";
 
+const createAllPostDocs = (posts: { title: string }[]) =>
+  Promise.all(posts.map((post) => createPostDoc(post.title)));
+
 export const generateStaticParams = async () => {
   const posts = await getAllPosts(["slug", "title"]);
 
   if (process.env.NODE_ENV === "production") {
     const coverImages = await getAllOgImages(posts.map((post) => post.title));
-    await generateRSSFeed(coverImages.map((coverImage) => coverImage.darkThumbnail));
-    Promise.all(posts.map((post) => createPostDoc(post.title)));
+    const darkTumbnails = coverImages.map(({ darkThumbnail }) => darkThumbnail);
+    await generateRSSFeed(darkTumbnails);
+    await createAllPostDocs(posts);
   }
 
   return posts.map(({ slug }) => ({
@@ -30,7 +34,7 @@ export const generateStaticParams = async () => {
 };
 
 export default async function PostsDynamicPage({ params: { slug } }: PostPageParams) {
-  const post = await getPostBySlug(slug, [
+  const { coverImage, title, category, date, series, content } = await getPostBySlug(slug, [
     "title",
     "date",
     "slug",
@@ -43,22 +47,22 @@ export default async function PostsDynamicPage({ params: { slug } }: PostPagePar
 
   const prevNextPosts = await getPrevNextPosts(slug);
 
-  const postTitle = post.title.replaceAll("/", ",");
+  const postTitleForComments = title.replaceAll("/", ",");
 
   return (
     <PostContainer>
       <PostSection>
         <PostTitle
-          coverImage={post.coverImage}
-          title={post.title}
-          category={post.category}
-          date={post.date}
-          series={post.series}
+          coverImage={coverImage}
+          title={title}
+          category={category}
+          date={date}
+          series={series}
         />
-        <PostMDX source={post.content} />
+        <PostMDX source={content} />
       </PostSection>
       <PrevNextPost key={slug} {...prevNextPosts} />
-      <Comments postTitle={postTitle} />
+      <Comments postTitle={postTitleForComments} />
     </PostContainer>
   );
 }
