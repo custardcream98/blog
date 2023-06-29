@@ -18,3 +18,8 @@ export const addDoc = async (docRef: CollectionReference<DocumentData>, data: Do
   const result = await docRef.add(data);
   return result;
 };
+
+export const updateDoc = async (docRef: DocumentReference<DocumentData>, data: DocumentData) => {
+  const result = await docRef.update(data);
+  return result;
+};

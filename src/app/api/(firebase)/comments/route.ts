@@ -7,7 +7,7 @@ import {
 } from "src/utils";
 
 import type { TitleRequest } from "../_types";
-import { addDoc, getCollectionSnapshot, getCommentCollectionRef } from "../_utils";
+import { addDoc, getCollectionSnapshot, getCommentCollectionRef, updateDoc } from "../_utils";
 
 import { StatusCodes } from "http-status-codes";
 import { NextResponse } from "next/server";
@@ -71,4 +71,26 @@ export async function POST(request: Request): Promise<NextResponse> {
   const result = await addDoc(commentCollectionRef, newCommentDocData);
 
   return NextResponse.json({ data: { created: result.id } });
+}
+
+export type PatchCommentRequestBody = PostCommentRequestBody & {
+  commentId: string;
+};
+export async function PATCH(request: Request): Promise<NextResponse> {
+  const { commentId, title, ...restData } = await getRequestBody<PatchCommentRequestBody>(request);
+
+  if (!commentId || !title) {
+    return NextResponse.json(
+      { message: "잘못된 요청입니다. (commentId 혹은 title이 없습니다.)" },
+      { status: StatusCodes.BAD_REQUEST },
+    );
+  }
+
+  const encodedTitle = encodeToPercentString(title);
+  const commentCollectionRef = getCommentCollectionRef(encodedTitle);
+  const commentDocRef = commentCollectionRef.doc(commentId);
+
+  const result = await updateDoc(commentDocRef, restData);
+
+  return NextResponse.json({ data: { updatedAt: result.writeTime } });
 }
