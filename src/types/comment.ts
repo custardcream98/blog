@@ -1,4 +1,4 @@
-export default interface ICommentData {
+export interface CommentData {
   id: string;
   comment: string;
   createdAt: number;
@@ -6,7 +6,7 @@ export default interface ICommentData {
   username: string;
 }
 
-type ICommentDataProps = Omit<ICommentData, "id"> & {
+type ICommentDataProps = Omit<CommentData, "id"> & {
   commentId: string;
 };
 

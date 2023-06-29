@@ -1,5 +1,5 @@
 import { getViewedTimeOnLocal, setViewedTimeOnLocal } from "src/lib/localStorage";
-import ICommentData from "src/types/comment";
+import { CommentData } from "src/types/comment";
 import { encodeToPercentString } from "src/utils";
 
 import { CollectionNames, DocumentKeys } from "./collectionNames";
@@ -111,17 +111,17 @@ export const addComment = async ({ title, password, comment, username }: AddComm
 
 export const getComments = (
   title: string,
-  setComments: React.Dispatch<React.SetStateAction<ICommentData[]>>,
+  setComments: React.Dispatch<React.SetStateAction<CommentData[]>>,
 ) => {
   const commentCollectionRef = getCommentCollectionRef(title);
 
   const unSubscribe = onSnapshot(commentCollectionRef, (snapshot) => {
-    const commentsArr: ICommentData[] = [];
+    const commentsArr: CommentData[] = [];
     snapshot.docs
       .sort((post1, post2) => post1.data().createdAt - post2.data().createdAt)
       .map((doc) =>
         commentsArr.push({
-          ...(doc.data() as ICommentData),
+          ...(doc.data() as CommentData),
           id: doc.id,
         }),
       );

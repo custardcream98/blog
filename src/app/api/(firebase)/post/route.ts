@@ -1,16 +1,15 @@
 import { encodeToPercentString, getRequestBody } from "src/utils";
 
+import type { TitleRequest } from "../_types";
 import { getDoc, getPostDocRef, setDoc } from "../_utils";
 
 import { StatusCodes } from "http-status-codes";
 import { NextResponse } from "next/server";
 
-type RequestBody = { title: string };
-
 const DEFAULT_POST_DOC_DATA = { likes: 0, views: [] };
 
 export async function POST(request: Request): Promise<NextResponse> {
-  const { title } = await getRequestBody<RequestBody>(request);
+  const { title } = await getRequestBody<TitleRequest>(request);
 
   if (!title) {
     return NextResponse.json(
