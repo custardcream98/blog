@@ -4,7 +4,7 @@ const { transformGroupSelector } = require("utility-class-components");
 /** @type {import('tailwindcss').Config} */
 module.exports = {
   content: {
-    files: ["./src/**/*.{js,ts,jsx,tsx,mdx}"],
+    files: ["./src/**/*.{js,ts,jsx,tsx}", "./_posts/**/*.{md,mdx}"],
     transform: {
       ts: (code) => {
         code = transformGroupSelector(code);
