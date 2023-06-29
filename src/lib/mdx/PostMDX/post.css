@@ -7,6 +7,7 @@
   --accent-color: #0070f3;
   --background-color: #fcfcfc;
   --sub-text-color: #8c8c8c;
+  --code-line-highlighted: #ffa50024;
   -ms-text-size-adjust: 100%;
   -webkit-text-size-adjust: 100%;
 
@@ -21,7 +22,7 @@
 
 .post-content pre[data-theme="light"],
 .post-content code[data-theme="light"] {
-  display: initial;
+  display: grid;
 }
 
 .post-content pre[data-theme="dark"],
@@ -36,6 +37,7 @@
   --accent-color: #3b96ff;
   --background-color: #121212;
   --sub-text-color: #b1b1b1;
+  --code-line-highlighted: #ffa5002b;
 }
 
 :is(.dark .post-content) pre[data-theme="light"],
@@ -45,7 +47,7 @@
 
 :is(.dark .post-content) pre[data-theme="dark"],
 :is(.dark .post-content) code[data-theme="dark"] {
-  display: initial;
+  display: grid;
 }
 
 @media (max-width: 800px) {
@@ -166,16 +168,16 @@
   margin: 1rem 0;
   background-color: var(--post-element-background-color);
   border-radius: 4px;
-  counter-reset: codeblock;
-  line-height: 1;
   overflow-x: auto;
   overflow-y: hidden;
-  display: grid;
 }
 
 .post-content div[data-rehype-pretty-code-fragment] pre code {
+  display: grid;
   padding: 0;
   font-size: calc(var(--main-font-size) * 0.8);
+
+  counter-reset: codeblock;
 }
 
 .post-content div[data-rehype-pretty-code-fragment] pre code::before,
@@ -197,12 +199,17 @@
 }
 
 .post-content div[data-rehype-pretty-code-fragment] pre code .line {
+  display: block;
+  margin-top: 0;
+  margin-bottom: 0;
   padding-right: 1rem;
+  line-height: 1.1;
 }
 
 .post-content div[data-rehype-pretty-code-fragment] pre code .line::before {
   content: counter(codeblock);
   counter-increment: codeblock;
+
   display: inline-block;
   width: 2rem;
   padding: 0.3rem 0.4rem;
@@ -210,6 +217,10 @@
   text-align: right;
   color: #717171;
   background-color: var(--code-line-number-background-color);
+}
+
+.post-content div[data-rehype-pretty-code-fragment] pre code .line[data-highlighted-line] {
+  background-color: var(--code-line-highlighted);
 }
 
 .post-content img {

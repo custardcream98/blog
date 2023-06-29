@@ -1,10 +1,29 @@
 import { externalLink, headingToStartFrom, imageSize } from "./plugin";
 
 import rehypeToc from "@jsdevtools/rehype-toc";
+import { type Element } from "hast";
 import { type SerializeOptions } from "next-mdx-remote/dist/types";
-import rehypePrettyCode from "rehype-pretty-code";
+import rehypePrettyCode, { type Options as RehypePrettyCodeOptions } from "rehype-pretty-code";
 import rehypeSlug from "rehype-slug";
 import remarkGfm from "remark-gfm";
+
+const REHYPE_PRETTY_CODE_OPTOINS: Partial<RehypePrettyCodeOptions> = {
+  onVisitHighlightedLine(node: Element) {
+    if (!node.properties) {
+      node.properties = {};
+    }
+    node.properties["data-highlighted-line"] = true;
+  },
+  onVisitLine(node: Element) {
+    if (node.children.length === 0) {
+      node.children = [{ type: "text", value: " " }];
+    }
+  },
+  theme: {
+    dark: "material-default",
+    light: "rose-pine-dawn",
+  },
+};
 
 export const postMDXOptions: SerializeOptions = {
   mdxOptions: {
@@ -17,22 +36,7 @@ export const postMDXOptions: SerializeOptions = {
       ],
       rehypeSlug,
       rehypeToc,
-      [
-        rehypePrettyCode,
-        {
-          onVisitLine(node: { children: string | any[] }) {
-            // Prevent lines from collapsing in `display: grid` mode, and
-            // allow empty lines to be copy/pasted
-            if (node.children.length === 0) {
-              node.children = [{ type: "text", value: " " }];
-            }
-          },
-          theme: {
-            dark: "material-default",
-            light: "rose-pine-dawn",
-          },
-        },
-      ],
+      [rehypePrettyCode, REHYPE_PRETTY_CODE_OPTOINS],
       [headingToStartFrom, { startFrom: 3 }],
       [imageSize, { mdxJsxElementTagName: ["img", "NextImage"] }],
     ],
