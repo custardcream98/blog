@@ -1,0 +1,36 @@
+import { encodeToPercentString, getRequestBody } from "src/utils";
+
+import { getDoc, getPostDocRef, setDoc } from "../_utils";
+
+import { StatusCodes } from "http-status-codes";
+import { NextResponse } from "next/server";
+
+type RequestBody = { title: string };
+
+const DEFAULT_POST_DOC_DATA = { likes: 0, views: [] };
+
+export async function POST(request: Request): Promise<NextResponse> {
+  const { title } = await getRequestBody<RequestBody>(request);
+
+  if (!title) {
+    return NextResponse.json(
+      { message: "잘못된 요청입니다. (title이 없습니다.)" },
+      { status: StatusCodes.BAD_REQUEST },
+    );
+  }
+
+  const encodedTitle = encodeToPercentString(title);
+
+  const postDocRef = getPostDocRef(encodedTitle);
+  const { exists: isDocExists } = await getDoc(postDocRef);
+
+  if (!isDocExists) {
+    const result = await setDoc(postDocRef, DEFAULT_POST_DOC_DATA);
+    return NextResponse.json(
+      { message: "Post Doc 생성 성공", result },
+      { status: StatusCodes.CREATED },
+    );
+  }
+
+  return NextResponse.json({ message: "이미 존재하는 Post Doc 입니다." });
+}
