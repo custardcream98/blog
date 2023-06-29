@@ -2,6 +2,7 @@ import getFuzzyPostData from "src/lib/fuzzy";
 import type { SearchedPostCardDataRaw } from "src/types/searchedPosts";
 import { parseSearchParams } from "src/utils";
 
+import { StatusCodes } from "http-status-codes";
 import { NextResponse } from "next/server";
 
 const MAX_CONTENT_LENGTH = 100;
@@ -17,7 +18,7 @@ export function GET(request: Request) {
   const { q } = parseSearchParams<SearchParams>(request.url);
 
   if (typeof q === "undefined") {
-    return NextResponse.json("잘못된 요청입니다.", { status: 400 });
+    return NextResponse.json("잘못된 요청입니다.", { status: StatusCodes.BAD_REQUEST });
   }
 
   if (process.env.NODE_ENV === "development") {
