@@ -12,6 +12,9 @@ export const compileMDX = async (source: string) => {
 
 export const compileMDXForCache = async (source: string) => {
   const mdxSource = await NMRcompileMDX({
+    components: {
+      NextImage: () => null,
+    },
     options: postMDXOptionsForCache,
     source,
   });
