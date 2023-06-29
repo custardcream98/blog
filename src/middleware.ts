@@ -9,26 +9,28 @@ const isHashedSlug = (target: string): target is keyof typeof HASH_REVERSERSED_M
   target in HASH_REVERSERSED_MAP;
 
 /**
- * Next.js 13에서 한글 경로를 지원하지 않는 이슈로 인해
- * 기존에 사용되던 한글 경로들을
- * 새로운 hased path로 리다이렉트 시켜주는 미들웨어
+ * Post Slug를 한글 => hash값 => 영어로 변경함에 따라
+ * 레거시 경로에 대응할 수 있도록 해주는 미들웨어
  */
 export function middleware(request: NextRequest) {
-  const [, pathname, postId] = request.nextUrl.pathname.split("/");
+  const {
+    nextUrl: { pathname },
+    url: baseUrl,
+  } = request;
 
-  if (pathname !== "posts") return NextResponse.next();
+  const [, subDirectory, slug] = pathname.split("/");
 
-  const slugAble = decodeURIComponent(postId);
-  if (isKoreanSlug(slugAble)) {
+  if (subDirectory !== "posts") return NextResponse.next();
+
+  const decodedSlug = decodeURIComponent(slug);
+  if (isKoreanSlug(decodedSlug)) {
     return NextResponse.redirect(
-      new URL(`/posts/${SLUG_MAP[slugAble]}`, request.url),
+      new URL(`/posts/${SLUG_MAP[decodedSlug]}`, baseUrl),
       HTTP_STATUS_CODE_MOVED_PERMANENTLY,
     );
-  }
-
-  if (isHashedSlug(slugAble)) {
+  } else if (isHashedSlug(decodedSlug)) {
     return NextResponse.redirect(
-      new URL(`/posts/${HASH_REVERSERSED_MAP[slugAble]}`, request.url),
+      new URL(`/posts/${HASH_REVERSERSED_MAP[decodedSlug]}`, baseUrl),
       HTTP_STATUS_CODE_MOVED_PERMANENTLY,
     );
   }
