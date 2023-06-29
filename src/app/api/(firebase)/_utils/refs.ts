@@ -13,7 +13,9 @@ export const getPostDocRef = (postTitle: string) => {
   return postsRef.doc(postTitle);
 };
 
-export const getCommentCollectionRef = (postTitle: string): CollectionReference<CommentData> => {
+export const getCommentCollectionRef = (postTitle: string) => {
   const postDocRef = getPostDocRef(postTitle);
-  return postDocRef.collection(Collections.COMMENTS) as CollectionReference<CommentData>;
+  return postDocRef.collection(Collections.COMMENTS) as CollectionReference<
+    Omit<CommentData, "id">
+  >;
 };
