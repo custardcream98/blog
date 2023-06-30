@@ -1,4 +1,6 @@
-import { useLikeCount, useViewCount } from "./_hooks";
+import { useGetPostViewsQuery } from "src/request";
+
+import { useLikeCount } from "./_hooks";
 
 import { IconContext } from "react-icons";
 import { BsHeart, BsHeartFill } from "react-icons/bs";
@@ -10,20 +12,18 @@ type ViewsLikesCounterProps = {
 };
 
 export function ViewsLikesCounter({ title }: ViewsLikesCounterProps) {
-  const viewCount = useViewCount(title);
-  const isViewCountLoaded = typeof viewCount !== "undefined";
+  const { data: viewsData } = useGetPostViewsQuery(title);
+  const isViewCountLoaded = viewsData !== undefined;
 
   const { likeCount, isLiked, onLikeClick } = useLikeCount(title);
   const isLikeCountLoaded = typeof likeCount !== "undefined";
 
   return (
     <Container>
-      {isViewCountLoaded && (
-        <CounterContainer>
-          <HiEye title='조회수' size={15} className={SUB_TEXT_COLOR} />
-          <CounterValue>{viewCount}</CounterValue>
-        </CounterContainer>
-      )}
+      <CounterContainer>
+        <HiEye title='조회수' size={15} className={SUB_TEXT_COLOR} />
+        {isViewCountLoaded && <CounterValue>{viewsData.views}</CounterValue>}
+      </CounterContainer>
       {isLikeCountLoaded && (
         <LikeBtn type='button' onClick={onLikeClick} $isLiked={isLiked}>
           <IconContext.Provider value={LIKE_ICON_STYLE_CONTEXT}>
