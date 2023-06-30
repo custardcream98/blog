@@ -1,19 +1,16 @@
-import { getViewedTimeOnLocal, setViewedTimeOnLocal } from "src/lib/localStorage";
 import { CommentData } from "src/types/comment";
 import { encodeToPercentString } from "src/utils";
 
-import { CollectionNames, DocumentKeys } from "./collectionNames";
+import { CollectionNames } from "./collectionNames";
 import { fireStore } from ".";
 
 import { FirebaseError } from "firebase/app";
 import {
   addDoc,
-  arrayUnion,
   collection,
   deleteDoc,
   doc,
   getDoc,
-  increment,
   onSnapshot,
   setDoc,
   updateDoc,
@@ -129,56 +126,4 @@ export const getComments = (
   });
 
   return unSubscribe;
-};
-
-/*
-  Views
-*/
-
-export const getViewCount = (
-  title: string,
-  setViewCount: React.Dispatch<React.SetStateAction<number | undefined>>,
-) => {
-  const postDocRef = getPostDocRef(title);
-  const isViewAble = Date.now() - getViewedTimeOnLocal(title) > 1200000;
-
-  if (isViewAble) {
-    const time = Date.now();
-    updateDoc(postDocRef, { views: arrayUnion(time) }).then((_) =>
-      setViewedTimeOnLocal(title, time),
-    );
-  }
-
-  const unSubscribe = onSnapshot(postDocRef, (post) =>
-    setViewCount(post.data()?.[DocumentKeys.KEY_VIEWS].length),
-  );
-
-  return unSubscribe;
-};
-
-/*
-  Likes
-*/
-
-export const getLikeCount = (
-  title: string,
-  setLikeCount: React.Dispatch<React.SetStateAction<number | undefined>>,
-) => {
-  const postDocRef = getPostDocRef(title);
-
-  const unSubscribe = onSnapshot(postDocRef, (post) =>
-    setLikeCount(post.data()?.[DocumentKeys.KEY_LIKES]),
-  );
-
-  return unSubscribe;
-};
-
-export const setLikeCountUp = async (title: string) => {
-  const postDocRef = getPostDocRef(title);
-  await updateDoc(postDocRef, { likes: increment(1) });
-};
-
-export const setLikeCountDown = async (title: string) => {
-  const postDocRef = getPostDocRef(title);
-  await updateDoc(postDocRef, { likes: increment(-1) });
 };

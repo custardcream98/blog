@@ -15,7 +15,7 @@ export function ViewsLikesCounter({ title }: ViewsLikesCounterProps) {
   const { data: viewsData } = useGetPostViewsQuery(title);
   const isViewCountLoaded = viewsData !== undefined;
 
-  const { likeCount, isLiked, onLikeClick } = useLikeCount(title);
+  const { likeCount, isLiked, handleLikeClick } = useLikeCount(title);
   const isLikeCountLoaded = typeof likeCount !== "undefined";
 
   return (
@@ -25,7 +25,7 @@ export function ViewsLikesCounter({ title }: ViewsLikesCounterProps) {
         {isViewCountLoaded && <CounterValue>{viewsData.views}</CounterValue>}
       </CounterContainer>
       {isLikeCountLoaded && (
-        <LikeBtn type='button' onClick={onLikeClick} $isLiked={isLiked}>
+        <LikeBtn type='button' onClick={handleLikeClick} $isLiked={isLiked}>
           <IconContext.Provider value={LIKE_ICON_STYLE_CONTEXT}>
             {isLiked ? (
               <BsHeartFill title='좋아요 버튼' className={HEART_COLOR} />

@@ -1,33 +1,30 @@
-import { getLikeCount, setLikeCountDown, setLikeCountUp } from "src/lib/firebaseSetup/firebaseApps";
-import { getIsLikedOnLocal, toggleIsLikedOnLocal } from "src/lib/localStorage";
+import { useLocalStorageState } from "src/hook";
+import { useGetPostLikesQuery, usePatchPostLikesMutation } from "src/request";
 
-import { useCallback, useEffect, useLayoutEffect, useState } from "react";
+import { useCallback } from "react";
+
+const LOCALSTORAGE_IS_LIKED_KEY = "isLiked";
+const getIsLikedLocalStorageKey = (title: string) => `${LOCALSTORAGE_IS_LIKED_KEY}-${title}`;
 
 export const useLikeCount = (postTitle: string) => {
-  const [likeCount, setLikeCount] = useState<number | undefined>();
-  const [isLiked, setIsLiked] = useState(false);
+  const [isLiked, setIsLiked] = useLocalStorageState<boolean>(
+    getIsLikedLocalStorageKey(postTitle),
+    false,
+  );
+  const { data: likesData } = useGetPostLikesQuery(postTitle);
+  const likeCount = likesData ? likesData.likes : undefined;
 
-  const toggleIsLiked = () => setIsLiked((prev) => !prev);
+  const { mutate: mutatePatchPostLikes } = usePatchPostLikesMutation();
 
-  useLayoutEffect(() => {
-    setIsLiked(getIsLikedOnLocal(postTitle));
-  }, [postTitle]);
-  useEffect(() => {
-    const unSubscribeLikeCount = getLikeCount(postTitle, setLikeCount);
+  const handleLikeClick = useCallback(() => {
+    setIsLiked((isLikedPreviously) => {
+      const nextIsLiked = !isLikedPreviously;
 
-    return () => unSubscribeLikeCount();
-  }, [postTitle]);
+      mutatePatchPostLikes({ shouldLike: nextIsLiked, title: postTitle });
 
-  const onLikeClick = useCallback(async () => {
-    toggleIsLikedOnLocal(postTitle);
-    toggleIsLiked();
+      return nextIsLiked;
+    });
+  }, [postTitle, mutatePatchPostLikes, setIsLiked]);
 
-    if (isLiked) {
-      await setLikeCountDown(postTitle);
-    } else {
-      await setLikeCountUp(postTitle);
-    }
-  }, [postTitle, isLiked]);
-
-  return { isLiked, likeCount, onLikeClick };
+  return { handleLikeClick, isLiked, likeCount };
 };
