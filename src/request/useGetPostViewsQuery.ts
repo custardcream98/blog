@@ -5,10 +5,10 @@ import { getPostViews } from "./getPostViews";
 import { useQuery } from "@tanstack/react-query";
 import { useEffect } from "react";
 
-const USE_GET_SEARCHED_QUERY_KEY = "views";
+const USE_GET_POST_VIEWS_QUERY_KEY = "views";
 const LOCALSTORAGE_LAST_VIEWED_KEY = "lastViewed";
 
-const getUseGetPostViewsQueryKey = (title: string) => [USE_GET_SEARCHED_QUERY_KEY, title];
+const getUseGetPostViewsQueryKey = (title: string) => [USE_GET_POST_VIEWS_QUERY_KEY, title];
 
 export const useGetPostViewsQuery = (title: string) => {
   const LOCALSTORAGE_KEY = `${LOCALSTORAGE_LAST_VIEWED_KEY}-${title}`;
