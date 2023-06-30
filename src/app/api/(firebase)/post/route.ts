@@ -26,7 +26,7 @@ export async function POST(request: Request): Promise<NextResponse> {
   if (!isDocExists) {
     const result = await setDoc(postDocRef, DEFAULT_POST_DOC_DATA);
     return NextResponse.json(
-      { message: "Post Doc 생성 성공", result },
+      { data: { createdAt: result.writeTime.toMillis() }, message: "Post Doc 생성 성공" },
       { status: StatusCodes.CREATED },
     );
   }
