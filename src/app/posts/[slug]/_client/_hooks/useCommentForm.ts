@@ -1,11 +1,7 @@
 import { useEditable } from "src/hook";
-import {
-  addComment,
-  type AddCommentProps,
-  updateComment,
-  type UpdateCommentProps,
-} from "src/lib/firebaseSetup/firebaseApps";
-import { usePostAlertSWMutation } from "src/request";
+import { updateComment, type UpdateCommentProps } from "src/lib/firebaseSetup/firebaseApps";
+import { usePostAlertSWMutation, usePostPostCommentMutation } from "src/request";
+import { type PostPostCommentRequest } from "src/request/postPostComment";
 import { CommentEditState } from "src/types/comment";
 import { getCurrentURL } from "src/utils";
 
@@ -77,26 +73,22 @@ export const useCommentForm = (isForEdit: boolean) => {
     [changeStateTo, updateCommentData],
   );
 
+  const { mutate: mutatePostPostComment } = usePostPostCommentMutation();
   const { mutate: mutatePostAlertSW } = usePostAlertSWMutation();
   const handleAddComment = useCallback(
-    async ({ comment, password, title, username }: AddCommentProps) => {
-      try {
-        await addComment({
-          comment,
-          password,
-          title,
-          username,
-        });
+    ({ comment, password, title, username }: PostPostCommentRequest) => {
+      mutatePostPostComment({
+        comment,
+        password,
+        title,
+        username,
+      });
 
-        const CURRENT_POST_URL = getCurrentURL();
+      const CURRENT_POST_URL = getCurrentURL();
 
-        mutatePostAlertSW({ comment, linkToPost: CURRENT_POST_URL, postTitle: title, username });
-      } catch (error) {
-        console.error(error);
-        alert("댓글 등록중 오류가 발생했습니다.");
-      }
+      mutatePostAlertSW({ comment, linkToPost: CURRENT_POST_URL, postTitle: title, username });
     },
-    [mutatePostAlertSW],
+    [mutatePostPostComment, mutatePostAlertSW],
   );
 
   const [isLoading, setIsLoading] = useState(false);
@@ -123,7 +115,7 @@ export const useCommentForm = (isForEdit: boolean) => {
         });
       }
 
-      await handleAddComment({
+      handleAddComment({
         comment,
         password,
         title,
