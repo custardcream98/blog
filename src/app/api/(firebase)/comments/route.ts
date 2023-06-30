@@ -9,10 +9,11 @@ import {
 import type { TitleRequest } from "../_types";
 import {
   addDoc,
-  getCollectionSnapshot,
+  getCollection,
   getCommentCollectionRef,
   getCommentDocRef,
   getDoc,
+  getDocData,
   updateDoc,
 } from "../_utils";
 
@@ -33,8 +34,8 @@ export async function GET(request: Request): Promise<NextResponse> {
 
   const commentCollectionRef = getCommentCollectionRef(encodedTitle);
 
-  const commentSnapshot = await getCollectionSnapshot(commentCollectionRef);
-  const commentsUnordered = commentSnapshot.docs.map((doc) => ({ ...doc.data(), id: doc.id }));
+  const commentSnapshot = await getCollection(commentCollectionRef);
+  const commentsUnordered = commentSnapshot.docs.map((doc) => ({ ...getDocData(doc), id: doc.id }));
   const comments = sortObjectArray(commentsUnordered, "createdAt");
 
   return NextResponse.json({ data: comments });
@@ -98,14 +99,7 @@ export async function PATCH(request: Request): Promise<NextResponse> {
   const encodedTitle = encodeToPercentString(title);
   const commentDocRef = getCommentDocRef(encodedTitle, commentId);
   const commentDoc = await getDoc(commentDocRef);
-  const commentDocData = commentDoc.data();
-
-  if (!commentDocData) {
-    return NextResponse.json(
-      { message: "잘못된 요청입니다. (해당하는 댓글이 없습니다.)" },
-      { status: StatusCodes.BAD_REQUEST },
-    );
-  }
+  const commentDocData = getDocData(commentDoc);
 
   const isPasswordInvalid = commentDocData.password !== password;
   if (isPasswordInvalid) {

@@ -3,8 +3,8 @@ export const getRequestBody = async <T>(request: Request): Promise<Partial<T>> =
   return body;
 };
 
-export const parseSearchParams = <T>(url: string): Partial<T> => {
+export const parseSearchParams = <T>(url: string) => {
   const searchParams = new URL(url).searchParams;
   const params = Object.fromEntries(searchParams.entries());
-  return params as Partial<T>;
+  return params as { [key in keyof T]?: string };
 };

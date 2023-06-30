@@ -1,6 +1,6 @@
 import { encodeToPercentString, getRequestBody } from "src/utils";
 
-import { deleteDoc, getCommentDocRef, getDoc } from "../../_utils";
+import { deleteDoc, getCommentDocRef, getDoc, getDocData } from "../../_utils";
 
 import { StatusCodes } from "http-status-codes";
 import { NextResponse } from "next/server";
@@ -26,14 +26,7 @@ export async function POST(request: Request): Promise<NextResponse> {
   const encodedTitle = encodeToPercentString(title);
   const commentDocRef = getCommentDocRef(encodedTitle, commentId);
   const commentDoc = await getDoc(commentDocRef);
-  const commentDocData = commentDoc.data();
-
-  if (!commentDocData) {
-    return NextResponse.json(
-      { message: "잘못된 요청입니다. (해당하는 댓글이 없습니다.)" },
-      { status: StatusCodes.BAD_REQUEST },
-    );
-  }
+  const commentDocData = getDocData(commentDoc);
 
   const isPasswordInvalid = commentDocData.password !== password;
   if (isPasswordInvalid) {
