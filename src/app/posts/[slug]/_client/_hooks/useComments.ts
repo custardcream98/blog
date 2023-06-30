@@ -1,16 +1,7 @@
-import { getComments } from "src/lib/firebaseSetup/firebaseApps";
-import type { CommentData } from "src/types/comment";
-
-import { useEffect, useState } from "react";
+import { useGetPostCommentsQuery } from "src/request";
 
 export const useComments = (postTitle: string) => {
-  const [comments, setComments] = useState<CommentData[]>([]);
+  const { data } = useGetPostCommentsQuery(postTitle);
 
-  useEffect(() => {
-    const unSubscribeComments = getComments(postTitle, setComments);
-
-    return () => unSubscribeComments();
-  }, [postTitle]);
-
-  return comments;
+  return data ? data.comments : [];
 };
