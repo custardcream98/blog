@@ -10,7 +10,7 @@ export type GetPostCommentsRequest = {
   title: string;
 };
 export const getPostComments = async ({ title }: GetPostCommentsRequest) => {
-  const response = await nextApi.get<NextApiResponse<{ comments: CommentData }>>(
+  const response = await nextApi.get<NextApiResponse<{ comments: CommentData[] }>>(
     GET_POST_COMMENTS_URL,
     {
       params: { title },
