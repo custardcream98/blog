@@ -53,5 +53,7 @@ export async function GET(request: Request): Promise<NextResponse> {
   const postDoc = await getDoc(postDocRef);
   const { views } = getDocData(postDoc);
 
-  return NextResponse.json({ data: { views: views.length } });
+  return NextResponse.json({
+    data: { isIncreased: isViewCountShouldBeIncreased, views: views.length },
+  });
 }
