@@ -19,3 +19,8 @@ export const getCommentCollectionRef = (postTitle: string) => {
     Omit<CommentData, "id">
   >;
 };
+
+export const getCommentDocRef = (postTitle: string, commentId: string) => {
+  const commentCollectionRef = getCommentCollectionRef(postTitle);
+  return commentCollectionRef.doc(commentId);
+};
