@@ -1,6 +1,13 @@
 import { encodeToPercentString, getRequestBody } from "src/utils";
 
-import { deleteDoc, getCommentDocRef, getDoc, getDocData } from "../../_utils";
+import {
+  deleteDoc,
+  getCommentDocRef,
+  getCommentsCollectionRef,
+  getDoc,
+  getDocData,
+} from "../../../_utils";
+import { getComments } from "../route";
 
 import { StatusCodes } from "http-status-codes";
 import { NextResponse } from "next/server";
@@ -38,5 +45,8 @@ export async function POST(request: Request): Promise<NextResponse> {
 
   const result = await deleteDoc(commentDocRef);
 
-  return NextResponse.json({ data: { deletedAt: result.writeTime } });
+  const commentsCollectionRef = getCommentsCollectionRef(encodedTitle);
+  const comments = await getComments(commentsCollectionRef);
+
+  return NextResponse.json({ data: { comments, deletedAt: result.writeTime.toMillis() } });
 }

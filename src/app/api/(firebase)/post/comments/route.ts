@@ -6,19 +6,30 @@ import {
   sortObjectArray,
 } from "src/utils";
 
-import type { TitleRequest } from "../_types";
+import type { TitleRequest } from "../../_types";
 import {
   addDoc,
   getCollection,
-  getCommentCollectionRef,
   getCommentDocRef,
+  getCommentsCollectionRef,
   getDoc,
   getDocData,
   updateDoc,
-} from "../_utils";
+} from "../../_utils";
 
+import { type CollectionReference } from "firebase-admin/firestore";
 import { StatusCodes } from "http-status-codes";
 import { NextResponse } from "next/server";
+
+export const getComments = async (
+  commentsCollectionRef: CollectionReference<Omit<CommentData, "id">>,
+) => {
+  const commentSnapshot = await getCollection(commentsCollectionRef);
+  const commentsUnordered = commentSnapshot.docs.map((doc) => ({ ...getDocData(doc), id: doc.id }));
+  const comments = sortObjectArray(commentsUnordered, "createdAt");
+
+  return comments;
+};
 
 export async function GET(request: Request): Promise<NextResponse> {
   const { title } = parseSearchParams<TitleRequest>(request.url);
@@ -32,13 +43,10 @@ export async function GET(request: Request): Promise<NextResponse> {
 
   const encodedTitle = encodeToPercentString(title);
 
-  const commentCollectionRef = getCommentCollectionRef(encodedTitle);
+  const commentsCollectionRef = getCommentsCollectionRef(encodedTitle);
+  const comments = await getComments(commentsCollectionRef);
 
-  const commentSnapshot = await getCollection(commentCollectionRef);
-  const commentsUnordered = commentSnapshot.docs.map((doc) => ({ ...getDocData(doc), id: doc.id }));
-  const comments = sortObjectArray(commentsUnordered, "createdAt");
-
-  return NextResponse.json({ data: comments });
+  return NextResponse.json({ data: { comments } });
 }
 
 export type PostCommentRequestBody = {
@@ -68,7 +76,7 @@ export async function POST(request: Request): Promise<NextResponse> {
   }
 
   const encodedTitle = encodeToPercentString(title);
-  const commentCollectionRef = getCommentCollectionRef(encodedTitle);
+  const commentsCollectionRef = getCommentsCollectionRef(encodedTitle);
   const newCommentDocData: Omit<CommentData, "id"> = {
     comment,
     createdAt: Date.now(),
@@ -76,28 +84,30 @@ export async function POST(request: Request): Promise<NextResponse> {
     username,
   };
 
-  const result = await addDoc(commentCollectionRef, newCommentDocData);
+  const result = await addDoc(commentsCollectionRef, newCommentDocData);
 
-  return NextResponse.json({ data: { created: result.id } });
+  const comments = await getComments(commentsCollectionRef);
+
+  return NextResponse.json({ data: { comments, created: result.id } });
 }
 
 export type PatchCommentRequestBody = PostCommentRequestBody & {
-  commentId: string;
+  id: string;
 };
 export async function PATCH(request: Request): Promise<NextResponse> {
-  const { commentId, title, password, ...restData } = await getRequestBody<PatchCommentRequestBody>(
+  const { id, title, password, ...restData } = await getRequestBody<PatchCommentRequestBody>(
     request,
   );
 
-  if (!commentId || !title || !password) {
+  if (!id || !title || !password) {
     return NextResponse.json(
-      { message: "잘못된 요청입니다. (commentId 혹은 title 혹은 password가 없습니다.)" },
+      { message: "잘못된 요청입니다. (id 혹은 title 혹은 password가 없습니다.)" },
       { status: StatusCodes.BAD_REQUEST },
     );
   }
 
   const encodedTitle = encodeToPercentString(title);
-  const commentDocRef = getCommentDocRef(encodedTitle, commentId);
+  const commentDocRef = getCommentDocRef(encodedTitle, id);
   const commentDoc = await getDoc(commentDocRef);
   const commentDocData = getDocData(commentDoc);
 
@@ -111,5 +121,8 @@ export async function PATCH(request: Request): Promise<NextResponse> {
 
   const result = await updateDoc(commentDocRef, restData);
 
-  return NextResponse.json({ data: { updatedAt: result.writeTime } });
+  const commentsCollectionRef = getCommentsCollectionRef(encodedTitle);
+  const comments = await getComments(commentsCollectionRef);
+
+  return NextResponse.json({ data: { comments, updatedAt: result.writeTime.toMillis() } });
 }
