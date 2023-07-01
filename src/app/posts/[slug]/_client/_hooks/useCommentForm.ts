@@ -1,6 +1,10 @@
 import { useEditable } from "src/hook";
-import { updateComment, type UpdateCommentProps } from "src/lib/firebaseSetup/firebaseApps";
-import { usePostAlertSWMutation, usePostPostCommentMutation } from "src/request";
+import {
+  usePatchPostCommentMutation,
+  usePostAlertSWMutation,
+  usePostPostCommentMutation,
+} from "src/request";
+import { type PatchPostCommentRequest } from "src/request/patchPostComment";
 import { type PostPostCommentRequest } from "src/request/postPostComment";
 import { CommentEditState } from "src/types/comment";
 import { getCurrentURL } from "src/utils";
@@ -9,7 +13,7 @@ import { useCommentEditorStateSetter } from "../Comments/CommentCard/CommentEdit
 import { useCommentDataContext } from "../Comments/CommentCard/context";
 import { useCommentPostTitleContext } from "../Comments/context";
 
-import { useCallback, useState } from "react";
+import { useCallback } from "react";
 
 export const useCommentForm = (isForEdit: boolean) => {
   const {
@@ -17,7 +21,7 @@ export const useCommentForm = (isForEdit: boolean) => {
     username: initialUsername,
     password: initialPassword,
     comment: initialComment,
-    updateCommentData,
+    updateCommentDataContext,
   } = useCommentDataContext();
 
   const [usernameRef, getUsername, clearUsername] = useEditable<HTMLInputElement>(initialUsername);
@@ -48,10 +52,12 @@ export const useCommentForm = (isForEdit: boolean) => {
   const title = useCommentPostTitleContext();
 
   const { changeStateTo } = useCommentEditorStateSetter();
+  const { mutateAsync: mutatePatchPostCommentAsync, isLoading: isPostCommentPatching } =
+    usePatchPostCommentMutation();
   const handleUpdateComment = useCallback(
-    async ({ comment, commentId, password, title, username }: UpdateCommentProps) => {
+    async ({ comment, commentId, password, title, username }: PatchPostCommentRequest) => {
       try {
-        await updateComment({
+        await mutatePatchPostCommentAsync({
           comment,
           commentId,
           password,
@@ -59,9 +65,8 @@ export const useCommentForm = (isForEdit: boolean) => {
           username,
         });
 
-        updateCommentData({
+        updateCommentDataContext({
           comment,
-          password,
           username,
         });
       } catch (error) {
@@ -70,14 +75,15 @@ export const useCommentForm = (isForEdit: boolean) => {
 
       return changeStateTo(CommentEditState.DEFAULT);
     },
-    [changeStateTo, updateCommentData],
+    [changeStateTo, updateCommentDataContext, mutatePatchPostCommentAsync],
   );
 
-  const { mutate: mutatePostPostComment } = usePostPostCommentMutation();
+  const { mutateAsync: mutatePostPostCommentAsync, isLoading: isPostCommentPosting } =
+    usePostPostCommentMutation();
   const { mutate: mutatePostAlertSW } = usePostAlertSWMutation();
   const handleAddComment = useCallback(
-    ({ comment, password, title, username }: PostPostCommentRequest) => {
-      mutatePostPostComment({
+    async ({ comment, password, title, username }: PostPostCommentRequest) => {
+      await mutatePostPostCommentAsync({
         comment,
         password,
         title,
@@ -88,20 +94,19 @@ export const useCommentForm = (isForEdit: boolean) => {
 
       mutatePostAlertSW({ comment, linkToPost: CURRENT_POST_URL, postTitle: title, username });
     },
-    [mutatePostPostComment, mutatePostAlertSW],
+    [mutatePostPostCommentAsync, mutatePostAlertSW],
   );
 
-  const [isLoading, setIsLoading] = useState(false);
+  const isLoading = isPostCommentPatching || isPostCommentPosting;
+
   const handleCommentSubmit = useCallback(
     async (event: React.ChangeEvent<HTMLFormElement>) => {
       event.preventDefault();
       event.stopPropagation();
 
-      setIsLoading(true);
-
       const commentFormdata = getCommentFormData();
       if (!commentFormdata) {
-        return setIsLoading(false);
+        return;
       }
       const { comment, password, username } = commentFormdata;
 
@@ -115,7 +120,7 @@ export const useCommentForm = (isForEdit: boolean) => {
         });
       }
 
-      handleAddComment({
+      await handleAddComment({
         comment,
         password,
         title,
@@ -123,8 +128,6 @@ export const useCommentForm = (isForEdit: boolean) => {
       });
 
       clearCommentForm();
-
-      setIsLoading(false);
     },
     [
       title,

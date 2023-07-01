@@ -1,3 +1,4 @@
+import { type PatchPostCommentRequest } from "src/request/patchPostComment";
 import type { ICommentDataProps } from "src/types/comment";
 
 import {
@@ -9,11 +10,10 @@ import {
   useState,
 } from "react";
 
+type CommentDataUpdateProps = Omit<PatchPostCommentRequest, "title" | "password" | "commentId">;
 interface ICommentDataContext extends ICommentDataProps {
-  updateCommentData: ({ comment, password, username }: CommentDataUpdateProps) => void;
+  updateCommentDataContext: ({ comment, username }: CommentDataUpdateProps) => void;
 }
-
-type CommentDataUpdateProps = Omit<Omit<ICommentDataProps, "commentId">, "createdAt">;
 
 const CommentDataContext = createContext<ICommentDataContext>({
   comment: "",
@@ -21,7 +21,7 @@ const CommentDataContext = createContext<ICommentDataContext>({
   createdAt: 0,
   password: "",
   // eslint-disable-next-line @typescript-eslint/no-empty-function
-  updateCommentData: () => {},
+  updateCommentDataContext: () => {},
   username: "",
 });
 
@@ -33,21 +33,18 @@ const useCommentDataContext = () => {
 function CommentDataContextProvider({ children, ...props }: PropsWithChildren<ICommentDataProps>) {
   const [commentData, setCommentData] = useState<ICommentDataProps>(props);
 
-  const updateCommentData = useCallback(
-    ({ comment, password, username }: CommentDataUpdateProps) =>
-      setCommentData(({ commentId, createdAt }) => ({
-        comment,
-        commentId,
-        createdAt,
-        password,
-        username,
+  const updateCommentDataContext = useCallback(
+    (updateCommentProps: CommentDataUpdateProps) =>
+      setCommentData((prevCommentData) => ({
+        ...prevCommentData,
+        ...updateCommentProps,
       })),
     [],
   );
 
   const commentDataValue = useMemo(
-    () => ({ ...commentData, updateCommentData }),
-    [commentData, updateCommentData],
+    () => ({ ...commentData, updateCommentDataContext }),
+    [commentData, updateCommentDataContext],
   );
 
   return (
