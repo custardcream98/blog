@@ -1,6 +1,6 @@
 import { Button } from "src/components/client";
 import { useEditable } from "src/hook";
-import { deleteComment } from "src/lib/firebaseSetup/firebaseApps";
+import { useDeletePostCommentMutation } from "src/request";
 import { CommentEditState } from "src/types/comment";
 
 import { useCommentPostTitleContext } from "../../../context";
@@ -9,7 +9,7 @@ import { useCommentEditorStateSetter } from "../context";
 
 import CommentOverlapWrapper from "./CommentOverlapWrapper";
 
-import { FormEventHandler, useCallback, useEffect, useState } from "react";
+import { type FormEventHandler, useCallback, useEffect, useState } from "react";
 import { utld } from "utility-class-components";
 
 type Props = {
@@ -32,11 +32,14 @@ export default function CheckPasswordState({ stateTo }: Props) {
 
   const [inputPasswordRef, getPasswordVal, clearPasswordInput] = useEditable<HTMLInputElement>();
 
+  const { mutate: mutateDeletePostComment } = useDeletePostCommentMutation();
+
   const handleFormSubmit: FormEventHandler<HTMLFormElement> = useCallback(
-    async (event) => {
+    (event) => {
       event.preventDefault();
 
-      const isPasswordCorrect = password === getPasswordVal();
+      const inputPasswordValue = getPasswordVal();
+      const isPasswordCorrect = password === inputPasswordValue;
 
       if (!isPasswordCorrect) {
         handleShakeAnimationStart();
@@ -46,10 +49,12 @@ export default function CheckPasswordState({ stateTo }: Props) {
 
       if (stateTo === CommentEditState.DELETE) {
         setIsDeleting(true);
-        await deleteComment({
+        mutateDeletePostComment({
           commentId,
+          password: inputPasswordValue,
           title: postTitle,
         });
+
         return;
       }
 
@@ -64,6 +69,7 @@ export default function CheckPasswordState({ stateTo }: Props) {
       commentId,
       postTitle,
       handleShakeAnimationStart,
+      mutateDeletePostComment,
     ],
   );
 

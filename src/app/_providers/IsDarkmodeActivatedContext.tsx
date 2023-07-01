@@ -1,5 +1,3 @@
-import { getIsDarkmodeActivatedOnLocal, setIsDarkmodeActivatedOnLocal } from "src/lib/localStorage";
-
 import {
   createContext,
   type PropsWithChildren,
@@ -32,32 +30,63 @@ export function useSetIsDarkmodeActivatedContext() {
   return useContext(IsDarkmodeActivatedContext);
 }
 
+const LOCALSTORAGE_IS_DARKMODE_ACTIVATED_KEY = "isDarkmodeActivated";
+const MEDIAQUERY_PREFERS_DARK_COLOR_CHEME = "(prefers-color-scheme: dark)";
+
+const getIsDarkmodeActivatedOnLocal = (): boolean => {
+  const isDarkmodeActivatedOnLocal =
+    localStorage.getItem(LOCALSTORAGE_IS_DARKMODE_ACTIVATED_KEY) ?? undefined;
+
+  if (!isDarkmodeActivatedOnLocal) {
+    const { matches: isUserPrefersDarkColorScheme } = window.matchMedia(
+      MEDIAQUERY_PREFERS_DARK_COLOR_CHEME,
+    );
+
+    localStorage.setItem(
+      LOCALSTORAGE_IS_DARKMODE_ACTIVATED_KEY,
+      JSON.stringify(isUserPrefersDarkColorScheme),
+    );
+
+    return isUserPrefersDarkColorScheme;
+  }
+
+  return JSON.parse(isDarkmodeActivatedOnLocal);
+};
+
+const setIsDarkmodeActivatedOnLocal = (target: boolean) => {
+  localStorage.setItem(LOCALSTORAGE_IS_DARKMODE_ACTIVATED_KEY, JSON.stringify(target));
+};
+
 const DARKMODE_CLASS_NAME = "dark";
+const setIsDarkmodeActivatedOnRootElement = (
+  $root: HTMLElement | null,
+  isDarkmodeActivated: boolean,
+) => {
+  if (!$root) {
+    return;
+  }
+
+  if (isDarkmodeActivated) {
+    $root.classList.add(DARKMODE_CLASS_NAME);
+  } else {
+    $root.classList.remove(DARKMODE_CLASS_NAME);
+  }
+};
+
 export function IsDarkmodeActivatedContextProvider({ children }: PropsWithChildren) {
   const [isDarkmodeActivated, setIsDarkmodeActivated] = useState(true);
   const $root = useRef<HTMLElement | null>(null);
 
-  const setIsDarkmodeActivatedOnRootElement = useCallback((isDarkmodeActivated: boolean) => {
-    if (isDarkmodeActivated) {
-      $root.current?.classList.add(DARKMODE_CLASS_NAME);
-    } else {
-      $root.current?.classList.remove(DARKMODE_CLASS_NAME);
-    }
+  const setIsDarkmodeActivatedToggle = useCallback((target?: boolean) => {
+    setIsDarkmodeActivated((prev) => {
+      const nextValue = typeof target === "boolean" ? target : !prev;
+
+      setIsDarkmodeActivatedOnLocal(nextValue);
+      setIsDarkmodeActivatedOnRootElement($root.current, nextValue);
+
+      return nextValue;
+    });
   }, []);
-
-  const setIsDarkmodeActivatedToggle = useCallback(
-    (target?: boolean) => {
-      setIsDarkmodeActivated((prev) => {
-        const nextValue = typeof target === "boolean" ? target : !prev;
-
-        setIsDarkmodeActivatedOnLocal(nextValue);
-        setIsDarkmodeActivatedOnRootElement(nextValue);
-
-        return nextValue;
-      });
-    },
-    [setIsDarkmodeActivatedOnRootElement],
-  );
 
   const setIsDarkmodeActivatedTrue = useCallback(() => {
     setIsDarkmodeActivatedToggle(true);
@@ -87,10 +116,10 @@ export function IsDarkmodeActivatedContextProvider({ children }: PropsWithChildr
     $root.current = document.documentElement;
 
     if (!isDarkmodeActivatedOnLocal) {
-      setIsDarkmodeActivatedOnRootElement(false);
+      setIsDarkmodeActivatedOnRootElement($root.current, false);
       setIsDarkmodeActivated(false);
     }
-  }, [setIsDarkmodeActivatedOnRootElement]);
+  }, []);
 
   return (
     <IsDarkmodeActivatedContext.Provider value={isDarkmodeActivatedContextValue}>

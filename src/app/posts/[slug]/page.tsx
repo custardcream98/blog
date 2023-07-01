@@ -1,14 +1,13 @@
 import { getAllPosts, getPostBySlug } from "src/app/data";
 import { Container } from "src/components";
 import { FONT_D2_CODING, FONT_NOTO_SERIF_KR } from "src/fonts";
-import { createPostDoc } from "src/lib/firebaseSetup/firebaseApps";
 import { PostMDX } from "src/lib/mdx";
 import generateRSSFeed from "src/lib/rss";
 import { getAllOgImages } from "src/lib/thumbnails/ogImage";
 
 import { Comments } from "./_client";
 import { PostTitle, PrevNextPost } from "./_components";
-import { getPrevNextPosts } from "./data";
+import { createPostDoc, getPrevNextPosts } from "./data";
 import type { PostPageParams } from "./types";
 
 import { utld } from "utility-class-components";

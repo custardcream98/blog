@@ -1,5 +1,8 @@
+import "server-only";
+
 import { type Bucket } from "@google-cloud/storage";
 import { type App as FirebaseAdminApp, cert, getApps, initializeApp } from "firebase-admin/app";
+import { type Firestore, getFirestore } from "firebase-admin/firestore";
 import { getStorage } from "firebase-admin/storage";
 
 const credential = cert({
@@ -21,10 +24,12 @@ export class ServerSideFirebaseApp {
 
   public adminApp: FirebaseAdminApp;
   public adminBucket: Bucket;
+  public adminFirestore: Firestore;
 
   constructor(adminApp: FirebaseAdminApp) {
     this.adminApp = adminApp;
     this.adminBucket = getStorage(adminApp).bucket();
+    this.adminFirestore = getFirestore(adminApp);
   }
 
   static initialize() {

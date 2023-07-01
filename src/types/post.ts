@@ -1,5 +1,10 @@
 import type { Categoires } from "src/constants/categoryTheme";
 
+export type PostData = {
+  likes: number;
+  views: string[];
+};
+
 export type CoverImage = {
   lightThumbnail: string;
   darkThumbnail: string;

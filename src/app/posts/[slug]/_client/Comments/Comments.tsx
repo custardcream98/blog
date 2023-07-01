@@ -1,4 +1,4 @@
-import { useComments } from "../_hooks";
+import { useGetPostCommentsQuery } from "src/request";
 
 import { CommentsSection } from "./CommentsSection";
 
@@ -7,7 +7,8 @@ type CommentsProps = {
 };
 
 export function Comments({ postTitle }: CommentsProps) {
-  const comments = useComments(postTitle);
+  const { data } = useGetPostCommentsQuery(postTitle);
+  const comments = data ? data.comments : [];
 
   return (
     <CommentsSection postTitle={postTitle}>

@@ -1,4 +1,4 @@
-import { getSearchedPostCardData } from "./getSearchedPostCardData";
+import { getSearchedPostCardData } from "../axios";
 
 import { useQuery } from "@tanstack/react-query";
 

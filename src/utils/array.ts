@@ -8,3 +8,13 @@ export const generateNumberArray = (length: number, startsWith = 0) => {
 export const calculateLoopedIndex = (currentIndex: number, offset: number, length: number) => {
   return (currentIndex + offset + length) % length;
 };
+
+export const sortObjectArray = <T extends Record<string, any>>(
+  array: T[],
+  keyToCompare: keyof T,
+  order: "ASC" | "DESC" = "ASC",
+) => {
+  return [...array].sort((a, b) => {
+    return order === "ASC" ? a[keyToCompare] - b[keyToCompare] : b[keyToCompare] - a[keyToCompare];
+  });
+};

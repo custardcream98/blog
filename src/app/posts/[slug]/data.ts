@@ -1,6 +1,8 @@
 import "server-only";
 
+import { getDoc, getPostDocRef, setDoc } from "src/app/api/(firebase)/_utils";
 import { getAllPosts } from "src/app/data";
+import { encodeToPercentString } from "src/utils";
 
 export interface PrevNextPosts {
   prevTitle?: string;
@@ -29,4 +31,17 @@ export const getPrevNextPosts = async (slug: string): Promise<PrevNextPosts> => 
     prevSlug: prevPost?.slug,
     prevTitle: prevPost?.title,
   };
+};
+
+const DEFAULT_POST_DOC_DATA = { likes: 0, views: [] };
+
+export const createPostDoc = async (title: string) => {
+  const encodedTitle = encodeToPercentString(title);
+
+  const postDocRef = getPostDocRef(encodedTitle);
+  const { exists: isDocExists } = await getDoc(postDocRef);
+
+  if (!isDocExists) {
+    await setDoc(postDocRef, DEFAULT_POST_DOC_DATA);
+  }
 };

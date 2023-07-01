@@ -5,11 +5,11 @@ import { useCommentForm } from "../_hooks";
 import { useCallback, useState } from "react";
 import { ud, utld } from "utility-class-components";
 
-type Props = {
+type CommentFormProps = {
   height?: string;
   isForEdit?: boolean;
 };
-export default function CommentForm({ height, isForEdit = false }: Props) {
+export default function CommentForm({ height, isForEdit = false }: CommentFormProps) {
   const { usernameRef, passwordRef, commentRef, isLoading, handleCommentSubmit } =
     useCommentForm(isForEdit);
 
@@ -33,9 +33,10 @@ export default function CommentForm({ height, isForEdit = false }: Props) {
         autoCapitalize='off'
         spellCheck={false}
         required
+        disabled={isLoading}
       />
       <label className='sr-only' htmlFor='input-password'>
-        비밀번호를 입력해주세요.
+        {isForEdit ? "비밀번호" : "비밀번호를 입력해주세요."}
       </label>
       <InputPassword
         ref={passwordRef}
@@ -48,6 +49,7 @@ export default function CommentForm({ height, isForEdit = false }: Props) {
         autoCapitalize='off'
         spellCheck={false}
         required
+        disabled={isForEdit || isLoading}
       />
       <label className='sr-only' htmlFor='textarea-comment'>
         댓글을 입력해주세요.
@@ -64,6 +66,7 @@ export default function CommentForm({ height, isForEdit = false }: Props) {
         autoCapitalize='off'
         spellCheck={false}
         required
+        disabled={isLoading}
       />
       <SubmitCommentButton type='submit' width='70px' height='30px' isLoading={isLoading}>
         {isForEdit ? "수정하기" : "댓글 달기"}
@@ -135,6 +138,11 @@ const editableStyle = ud`
   dark:(
     bg-bg-dark
     text-default-dark
+  )
+
+  disabled:(
+    bg-default-sub-light
+    dark:bg-default-sub-dark
   )
 `;
 

@@ -1,16 +1,20 @@
 import { sendMail } from "src/lib/nodemailer";
 import type { AlertSWResponse } from "src/types/alertSW";
+import { getRequestBody } from "src/utils";
 
+import { StatusCodes } from "http-status-codes";
 import { NextResponse } from "next/server";
 
+type RequestBody = { postTitle: string; username: string; comment: string; linkToPost: string };
+
 export async function POST(request: Request): Promise<NextResponse<AlertSWResponse>> {
-  const { postTitle, username, comment, linkToPost } = await request.json();
+  const { postTitle, username, comment, linkToPost } = await getRequestBody<RequestBody>(request);
 
   const receiverEmailAddress = process.env.EMAIL_RECEIVER;
   if (!receiverEmailAddress) {
     return NextResponse.json(
       { message: "이메일 전송 실패 (Receiver가 없습니다.)" },
-      { status: 500 },
+      { status: StatusCodes.INTERNAL_SERVER_ERROR },
     );
   }
 

@@ -1,7 +1,8 @@
 import type { SearchedPostCardDataRaw } from "src/types/searchedPosts";
 
+import { normalizeSearchedPosts } from "../normalizers";
+
 import { nextApi } from "./axios";
-import { normalizeSearchedPosts } from "./normalizeSearchedPosts";
 
 const GET_SEARCHED_POSTS_URL = "/search";
 
