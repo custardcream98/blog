@@ -17,7 +17,7 @@ type SearchParams = {
 export function GET(request: Request) {
   const { q } = parseSearchParams<SearchParams>(request.url);
 
-  if (typeof q === "undefined") {
+  if (q === undefined) {
     return NextResponse.json("잘못된 요청입니다.", { status: StatusCodes.BAD_REQUEST });
   }
 

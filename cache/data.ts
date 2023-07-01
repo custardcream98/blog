@@ -48,7 +48,7 @@ export const getPostBySlug = <Field extends PostMeta[]>(
         ...postMeta,
         content,
       };
-    } else if (typeof data[field] !== "undefined") {
+    } else if (data[field] !== undefined) {
       return {
         ...postMeta,
         [field]: data[field],

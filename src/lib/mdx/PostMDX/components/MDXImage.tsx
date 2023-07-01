@@ -12,8 +12,8 @@ export function MDXImage({
   ...props
 }: Omit<ComponentProps<"img">, "placeholder">) {
   const resolvedRef = typeof ref === "string" ? null : ref;
-  const resolvedWidth = typeof width === "undefined" ? undefined : safeNumber(width);
-  const resolvedHeight = typeof height === "undefined" ? undefined : safeNumber(height);
+  const resolvedWidth = width === undefined ? undefined : safeNumber(width);
+  const resolvedHeight = height === undefined ? undefined : safeNumber(height);
 
   return src ? (
     <NextImage

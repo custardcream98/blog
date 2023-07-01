@@ -16,7 +16,7 @@ export function ViewsLikesCounter({ title }: ViewsLikesCounterProps) {
   const isViewCountLoaded = viewsData !== undefined;
 
   const { likeCount, isLiked, handleLikeClick } = useLikeCount(title);
-  const isLikeCountLoaded = typeof likeCount !== "undefined";
+  const isLikeCountLoaded = likeCount !== undefined;
 
   return (
     <Container>
