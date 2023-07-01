@@ -18,15 +18,14 @@ export const postPostComment = async ({
   comment,
   username,
 }: PostPostCommentRequest) => {
-  const response = await nextApi.post<NextApiResponse<{ comments: CommentData; created: string }>>(
-    POST_POST_COMMENT_URL,
-    {
-      comment,
-      password,
-      title,
-      username,
-    },
-  );
+  const response = await nextApi.post<
+    NextApiResponse<{ comments: CommentData[]; created: string }>
+  >(POST_POST_COMMENT_URL, {
+    comment,
+    password,
+    title,
+    username,
+  });
 
   return normalizeNextApiResponse(response.data);
 };
