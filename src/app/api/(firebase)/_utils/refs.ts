@@ -1,4 +1,4 @@
-import { ServerSideFirebaseApp } from "src/lib/firebaseSetup/server";
+import { ServerSideFirebaseApp } from "src/lib/firebase";
 import type { CommentData } from "src/types/comment";
 import type { PostData } from "src/types/post";
 

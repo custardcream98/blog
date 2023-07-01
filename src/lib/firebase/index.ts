@@ -1,3 +1,5 @@
+import "server-only";
+
 import { type Bucket } from "@google-cloud/storage";
 import { type App as FirebaseAdminApp, cert, getApps, initializeApp } from "firebase-admin/app";
 import { type Firestore, getFirestore } from "firebase-admin/firestore";

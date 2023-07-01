@@ -1,4 +1,4 @@
-import { ServerSideFirebaseApp } from "src/lib/firebaseSetup/server";
+import { ServerSideFirebaseApp } from "src/lib/firebase";
 import { generateThumbnailBuffer } from "src/lib/thumbnails/generateThumbnail";
 import Template from "src/lib/thumbnails/Template";
 import type { CoverImage } from "src/types/post";
