@@ -6,3 +6,4 @@ export * from "./usePatchPostLikesMutation";
 export * from "./useGetPostCommentsQuery";
 export * from "./usePostPostCommentMutation";
 export * from "./useDeletePostCommentMutation";
+export * from "./usePatchPostCommentMutation";
