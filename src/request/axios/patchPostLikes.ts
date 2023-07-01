@@ -1,6 +1,7 @@
-import type { NextApiResponse } from "./_types";
+import type { NextApiResponse } from "../_types";
+import { normalizeNextApiResponse } from "../normalizers";
+
 import { nextApi } from "./axios";
-import { normalizeNextApiResponse } from "./normalizeNextApiResponse";
 
 const PATCH_POST_LIKES_URL = "/post/likes";
 

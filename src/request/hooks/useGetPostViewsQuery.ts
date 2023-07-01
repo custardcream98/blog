@@ -1,6 +1,6 @@
 import { useLocalStorageState } from "src/hook";
 
-import { getPostViews } from "./getPostViews";
+import { getPostViews } from "../axios";
 
 import { useQuery } from "@tanstack/react-query";
 import { useEffect } from "react";

@@ -1,4 +1,4 @@
-import { getPostComments } from "./getPostComments";
+import { getPostComments } from "../axios";
 
 import { useQuery } from "@tanstack/react-query";
 

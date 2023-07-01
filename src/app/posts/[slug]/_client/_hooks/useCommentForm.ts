@@ -4,8 +4,7 @@ import {
   usePostAlertSWMutation,
   usePostPostCommentMutation,
 } from "src/request";
-import { type PatchPostCommentRequest } from "src/request/patchPostComment";
-import { type PostPostCommentRequest } from "src/request/postPostComment";
+import { type PatchPostCommentRequest, type PostPostCommentRequest } from "src/request/axios";
 import { CommentEditState } from "src/types/comment";
 import { getCurrentURL } from "src/utils";
 

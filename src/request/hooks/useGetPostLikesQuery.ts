@@ -1,4 +1,4 @@
-import { getPostLikes } from "./getPostLikes";
+import { getPostLikes } from "../axios";
 
 import { useQuery } from "@tanstack/react-query";
 

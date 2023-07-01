@@ -1,4 +1,4 @@
-import { postAlertSW } from "./postAlertSW";
+import { postAlertSW } from "../axios";
 
 import { useMutation } from "@tanstack/react-query";
 

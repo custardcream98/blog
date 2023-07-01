@@ -1,8 +1,9 @@
 import type { CommentData } from "src/types/comment";
 
-import type { NextApiResponse } from "./_types";
+import type { NextApiResponse } from "../_types";
+import { normalizeNextApiResponse } from "../normalizers";
+
 import { nextApi } from "./axios";
-import { normalizeNextApiResponse } from "./normalizeNextApiResponse";
 
 const POST_POST_COMMENT_URL = "/post/comments";
 

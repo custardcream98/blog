@@ -1,4 +1,4 @@
-import { type PatchPostCommentRequest } from "src/request/patchPostComment";
+import { type PatchPostCommentRequest } from "src/request/axios";
 import type { ICommentDataProps } from "src/types/comment";
 
 import {

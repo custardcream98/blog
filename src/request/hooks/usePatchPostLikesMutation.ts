@@ -1,4 +1,5 @@
-import { patchPostLikes } from "./patchPostLikes";
+import { patchPostLikes } from "../axios";
+
 import { getUseGetPostLikesQueryKey } from "./useGetPostLikesQuery";
 
 import { useMutation, useQueryClient } from "@tanstack/react-query";

@@ -1,6 +1,7 @@
-import type { NextApiResponse } from "./_types";
+import type { NextApiResponse } from "../_types";
+import { normalizeNextApiResponse } from "../normalizers";
+
 import { nextApi } from "./axios";
-import { normalizeNextApiResponse } from "./normalizeNextApiResponse";
 
 const GET_POST_VIEWS_URL = "/post/views";
 

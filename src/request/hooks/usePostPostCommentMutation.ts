@@ -1,16 +1,17 @@
-import { patchPostComment } from "./patchPostComment";
+import { postPostComment } from "../axios";
+
 import { getUseGetPostCommentsQueryKey } from "./useGetPostCommentsQuery";
 
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 
-const USE_PATCH_POST_COMMENT_MUTATION_KEY = ["patchPostComment"];
+const USE_POST_POST_COMMENT_MUTATION_KEY = ["postPostComment"];
 
-export const usePatchPostCommentMutation = () => {
+export const usePostPostCommentMutation = () => {
   const queryClient = useQueryClient();
 
   return useMutation({
-    mutationFn: patchPostComment,
-    mutationKey: USE_PATCH_POST_COMMENT_MUTATION_KEY,
+    mutationFn: postPostComment,
+    mutationKey: USE_POST_POST_COMMENT_MUTATION_KEY,
     onSuccess: (data, { title }) => {
       const useGetPostCommentsQueryKey = getUseGetPostCommentsQueryKey(title);
       queryClient.setQueryData(useGetPostCommentsQueryKey, { comments: data.comments });
