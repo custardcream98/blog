@@ -20,10 +20,12 @@ export function ViewsLikesCounter({ title }: ViewsLikesCounterProps) {
 
   return (
     <Container>
-      <CounterContainer>
-        <HiEye title='조회수' size={15} className={SUB_TEXT_COLOR} />
-        {isViewCountLoaded && <CounterValue>{viewsData.views}</CounterValue>}
-      </CounterContainer>
+      {isViewCountLoaded && (
+        <CounterContainer>
+          <HiEye title='조회수' size={15} className={SUB_TEXT_COLOR} />
+          <CounterValue>{viewsData.views}</CounterValue>
+        </CounterContainer>
+      )}
       {isLikeCountLoaded && (
         <LikeBtn type='button' onClick={handleLikeClick} $isLiked={isLiked}>
           <IconContext.Provider value={LIKE_ICON_STYLE_CONTEXT}>
