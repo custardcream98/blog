@@ -2,14 +2,15 @@ import { ServerSideFirebaseApp } from "src/lib/firebase";
 import type { CommentData } from "src/types/comment";
 import type { PostData } from "src/types/post";
 
-import { Collections } from "./constants";
-
 import { type CollectionReference } from "firebase-admin/firestore";
 
 const firestore = ServerSideFirebaseApp.instance.adminFirestore;
 
+const POSTS_COLLECTION_KEY = "posts";
+const COMMENTS_COLLECTION_KEY = "comments";
+
 export const postsCollectionRef = firestore.collection(
-  Collections.POSTS,
+  POSTS_COLLECTION_KEY,
 ) as CollectionReference<PostData>;
 
 export const getPostDocRef = (postTitle: string) => {
@@ -18,7 +19,7 @@ export const getPostDocRef = (postTitle: string) => {
 
 export const getCommentsCollectionRef = (postTitle: string) => {
   const postDocRef = getPostDocRef(postTitle);
-  return postDocRef.collection(Collections.COMMENTS) as CollectionReference<
+  return postDocRef.collection(COMMENTS_COLLECTION_KEY) as CollectionReference<
     Omit<CommentData, "id">
   >;
 };
