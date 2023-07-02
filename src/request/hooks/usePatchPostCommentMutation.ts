@@ -1,6 +1,5 @@
 import { patchPostComment } from "../axios";
-
-import { getUseGetPostCommentsQueryKey } from "./useGetPostCommentsQuery";
+import { getUseGetPostCommentsQueryKey } from "../query-keys";
 
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 

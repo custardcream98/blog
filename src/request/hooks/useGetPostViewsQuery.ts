@@ -1,14 +1,12 @@
 import { useLocalStorageState } from "src/hook";
 
 import { getPostViews } from "../axios";
+import { getUseGetPostViewsQueryKey } from "../query-keys";
 
 import { useQuery } from "@tanstack/react-query";
 import { useEffect } from "react";
 
-const USE_GET_POST_VIEWS_QUERY_KEY = "views";
 const LOCALSTORAGE_LAST_VIEWED_KEY = "lastViewed";
-
-const getUseGetPostViewsQueryKey = (title: string) => [USE_GET_POST_VIEWS_QUERY_KEY, title];
 
 export const useGetPostViewsQuery = (title: string) => {
   const LOCALSTORAGE_KEY = `${LOCALSTORAGE_LAST_VIEWED_KEY}-${title}`;
@@ -20,6 +18,7 @@ export const useGetPostViewsQuery = (title: string) => {
     cacheTime: 0,
     queryFn: () => getPostViews({ title, viewedAt }),
     queryKey: getUseGetPostViewsQueryKey(title),
+    refetchOnMount: "always",
   });
 
   useEffect(() => {
