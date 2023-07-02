@@ -57,3 +57,13 @@ export async function GET(request: Request): Promise<NextResponse> {
     data: { isIncreased: isViewCountShouldBeIncreased, views: views.length },
   });
 }
+
+export const getPostViewsForHydration = async (title: string) => {
+  const encodedTitle = encodeToPercentString(title);
+  const postDocRef = getPostDocRef(encodedTitle);
+  const postDoc = await getDoc(postDocRef);
+
+  const { views } = getDocData(postDoc);
+
+  return { views: views.length };
+};

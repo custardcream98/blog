@@ -31,6 +31,15 @@ export const getComments = async (
   return comments;
 };
 
+export const getPostCommentsForHydration = async (title: string) => {
+  const encodedTitle = encodeToPercentString(title);
+
+  const commentsCollectionRef = getCommentsCollectionRef(encodedTitle);
+  const comments = await getComments(commentsCollectionRef);
+
+  return { comments };
+};
+
 export async function GET(request: Request): Promise<NextResponse> {
   const { title } = parseSearchParams<TitleRequest>(request.url);
 
