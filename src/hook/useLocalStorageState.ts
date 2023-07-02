@@ -1,4 +1,6 @@
-import { type Dispatch, type SetStateAction, useCallback, useState } from "react";
+import { type Dispatch, type SetStateAction, useCallback, useEffect, useState } from "react";
+
+const isBrowser = typeof window !== "undefined";
 
 const getLocalStorageValue = <T>(key: string) => {
   try {
@@ -15,13 +17,30 @@ export const useLocalStorageState = <T>(
   initialValue: T,
 ): [storedValue: T, setValue: Dispatch<SetStateAction<T>>] => {
   const [storedValue, setStoredValue] = useState<T>(() => {
-    try {
-      const localStorageValue = getLocalStorageValue<T>(key);
-      return localStorageValue ?? initialValue;
-    } catch (error) {
-      return initialValue;
+    if (isBrowser) {
+      try {
+        const localStorageValue = getLocalStorageValue<T>(key);
+        return localStorageValue ?? initialValue;
+      } catch (error) {
+        return initialValue;
+      }
     }
+    return initialValue;
   });
+
+  useEffect(() => {
+    const localStorageListener = (event: StorageEvent) => {
+      if (event.storageArea === localStorage && event.key === key) {
+        setStoredValue(getLocalStorageValue<T>(key) ?? initialValue);
+      }
+    };
+
+    window.addEventListener("storage", localStorageListener);
+
+    return () => {
+      window.removeEventListener("storage", localStorageListener);
+    };
+  }, [initialValue, key]);
 
   const setValue: Dispatch<SetStateAction<T>> = useCallback(
     (value) => {
