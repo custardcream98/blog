@@ -4,7 +4,6 @@ import { getPostViews } from "../axios";
 import { getUseGetPostViewsQueryKey } from "../query-keys";
 
 import { useQuery } from "@tanstack/react-query";
-import { useEffect } from "react";
 
 const LOCALSTORAGE_LAST_VIEWED_KEY = "lastViewed";
 
@@ -14,24 +13,15 @@ export const useGetPostViewsQuery = (title: string) => {
     LOCALSTORAGE_KEY,
     undefined,
   );
-  const { data, ...rest } = useQuery({
+  return useQuery({
     cacheTime: 0,
+    onSuccess: ({ isIncreased }) => {
+      if (isIncreased) {
+        setViewedAt(Date.now());
+      }
+    },
     queryFn: () => getPostViews({ title, viewedAt }),
     queryKey: getUseGetPostViewsQueryKey(title),
     refetchOnMount: "always",
   });
-
-  useEffect(() => {
-    if (!data) {
-      return;
-    }
-
-    const { isIncreased } = data;
-
-    if (isIncreased) {
-      setViewedAt(Date.now());
-    }
-  }, [data, setViewedAt]);
-
-  return { data, ...rest };
 };
