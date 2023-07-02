@@ -17,16 +17,19 @@ export async function HydratedPostData({ title, children }: PropsWithChildren<{ 
   await queryClient.prefetchQuery({
     queryFn: () => getPostLikesForHydration(title),
     queryKey: getUseGetPostLikesQueryKey(title),
+    staleTime: 0,
   });
 
   await queryClient.prefetchQuery({
     queryFn: () => getPostViewsForHydration(title),
     queryKey: getUseGetPostViewsQueryKey(title),
+    staleTime: 0,
   });
 
   await queryClient.prefetchQuery({
     queryFn: () => getPostCommentsForHydration(title),
     queryKey: getUseGetPostCommentsQueryKey(title),
+    staleTime: 0,
   });
 
   const dehydratedState = dehydrate(queryClient);
