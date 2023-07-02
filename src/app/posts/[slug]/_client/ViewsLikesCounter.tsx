@@ -2,7 +2,6 @@ import { useGetPostViewsQuery } from "src/request";
 
 import { useLikeCount } from "./_hooks";
 
-import { IconContext } from "react-icons";
 import { BsHeart, BsHeartFill } from "react-icons/bs";
 import { HiEye } from "react-icons/hi";
 import { utld } from "utility-class-components";
@@ -28,13 +27,11 @@ export function ViewsLikesCounter({ title }: ViewsLikesCounterProps) {
       )}
       {isLikeCountLoaded && (
         <LikeBtn type='button' onClick={handleLikeClick} $isLiked={isLiked}>
-          <IconContext.Provider value={LIKE_ICON_STYLE_CONTEXT}>
-            {isLiked ? (
-              <BsHeartFill title='좋아요 버튼' className={HEART_COLOR} />
-            ) : (
-              <BsHeart title='좋아요 버튼' className={SUB_TEXT_COLOR} />
-            )}
-          </IconContext.Provider>
+          {isLiked ? (
+            <BsHeartFill title='좋아요 버튼' width={16} height={16} strokeWidth={1} />
+          ) : (
+            <BsHeart title='좋아요 버튼' width={16} height={16} strokeWidth={1} />
+          )}
           <LikeValue $isLiked={isLiked}>{likeCount}</LikeValue>
         </LikeBtn>
       )}
@@ -44,13 +41,6 @@ export function ViewsLikesCounter({ title }: ViewsLikesCounterProps) {
 
 const HEART_COLOR = "text-[#c33434]";
 const SUB_TEXT_COLOR = "text-default-sub-light dark:text-default-sub-dark";
-const LIKE_ICON_STYLE_CONTEXT = {
-  size: "1em",
-  style: {
-    strokeWidth: "0.7px",
-    verticalAlign: "middle",
-  },
-};
 
 const Container = utld.div`
   flex
