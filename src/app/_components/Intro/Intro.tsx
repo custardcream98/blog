@@ -1,3 +1,5 @@
+import ProfileImage from "./profile.webp";
+
 import Image from "next/image";
 
 export function Intro() {
@@ -15,11 +17,11 @@ export function Intro() {
           <span>만들고 싶으면 만들어야지.</span>
         </p>
         <Image
-          src='/static/img/profile.webp'
+          src={ProfileImage}
           alt='개발자 박시우의 프로필 이미지입니다.'
-          width={90}
-          height={90}
-          className='ml-[0.7rem] block h-[4.0625rem] w-[4.0625rem] rounded-full border-2 border-solid border-default-sub-light dark:border-default-sub-dark pc:ml-[1rem] pc:h-[5.625rem] pc:w-[5.625rem]	'
+          className='ml-[0.7rem] block h-[4.0625rem] w-[4.0625rem] rounded-full border-2 border-solid border-default-sub-light dark:border-default-sub-dark pc:ml-[1rem] pc:h-[5.625rem] pc:w-[5.625rem]'
+          placeholder='blur'
+          priority
         />
       </div>
     </div>
