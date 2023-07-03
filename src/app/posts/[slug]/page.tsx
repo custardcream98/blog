@@ -51,7 +51,6 @@ export default async function PostsDynamicPage({ params: { slug } }: PostPagePar
 
   return (
     <PostContainer>
-      {/* @ts-expect-error Async Server Component */}
       <HydratedPostData title={title}>
         <PostSection>
           <PostTitle
