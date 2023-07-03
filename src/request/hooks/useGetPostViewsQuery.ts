@@ -5,6 +5,7 @@ import { getUseGetPostViewsQueryKey } from "../query-keys";
 
 import { useQuery } from "@tanstack/react-query";
 
+const REFETCH_INTERVAL = 5_000;
 const LOCALSTORAGE_LAST_VIEWED_KEY = "lastViewed";
 
 export const useGetPostViewsQuery = (title: string) => {
@@ -14,7 +15,6 @@ export const useGetPostViewsQuery = (title: string) => {
     undefined,
   );
   return useQuery({
-    cacheTime: 0,
     onSuccess: ({ isIncreased }) => {
       if (isIncreased) {
         setViewedAt(Date.now());
@@ -22,6 +22,7 @@ export const useGetPostViewsQuery = (title: string) => {
     },
     queryFn: () => getPostViews({ title, viewedAt }),
     queryKey: getUseGetPostViewsQueryKey(title),
+    refetchInterval: REFETCH_INTERVAL,
     refetchOnMount: "always",
   });
 };

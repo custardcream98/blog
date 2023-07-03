@@ -6,15 +6,16 @@ import {
   getUseGetPostLikesQueryKey,
   getUseGetPostViewsQueryKey,
 } from "src/request/query-keys";
-import { getQueryClient } from "src/request/queryClient";
 
-import { dehydrate, Hydrate } from "@tanstack/react-query";
-import { type PropsWithChildren } from "react";
+import { dehydrate, Hydrate, QueryClient } from "@tanstack/react-query";
+import { cache, type PropsWithChildren } from "react";
+
+const getQueryClientOnServerSide = cache(() => {
+  return new QueryClient();
+});
 
 export async function HydratedPostData({ title, children }: PropsWithChildren<{ title: string }>) {
-  const queryClient = getQueryClient();
-
-  await queryClient.invalidateQueries();
+  const queryClient = getQueryClientOnServerSide();
 
   await queryClient.prefetchQuery({
     queryFn: () => getPostLikesForHydration(title),
