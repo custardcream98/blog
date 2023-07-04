@@ -36,3 +36,4 @@ export const LinkDecorated = utld(Link)`
 export * from "./CategoryBadges";
 export * from "./DateSpan";
 export * from "./LogoTitleSpan";
+export * from "./QuerySuspense";

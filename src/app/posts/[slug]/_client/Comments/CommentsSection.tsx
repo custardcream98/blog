@@ -1,14 +1,17 @@
+import { useGetPostCommentsQuery } from "src/request";
+
 import CommentCard from "./CommentCard";
-import { CommentFormWithOpenButton } from "./CommentForm";
-import CommentPostTitleContextProvider from "./context";
+import CommentPostTitleContextProvider, { useCommentPostTitleContext } from "./context";
 
 import type { PropsWithChildren } from "react";
 import { utld } from "utility-class-components";
 
+export { CommentFormWithOpenButton as CommentsSectionForm } from "./CommentForm";
+
 type Props = PropsWithChildren<{
   postTitle: string;
 }>;
-function CommentsSectionWrapper({ children, postTitle }: Props) {
+export function CommentsSection({ children, postTitle }: Props) {
   return (
     <CommentPostTitleContextProvider postTitle={postTitle}>
       <Wrapper>{children}</Wrapper>
@@ -21,6 +24,14 @@ const Wrapper = utld.section`
   flex-col
   w-full
 `;
+
+export function CommentsSectionTitle() {
+  const postTitle = useCommentPostTitleContext();
+  const { data } = useGetPostCommentsQuery(postTitle);
+  const comments = data ? data.comments : [];
+
+  return <Title>Comments({comments.length})</Title>;
+}
 
 const Title = utld.h3`
   w-full
@@ -35,13 +46,16 @@ const Title = utld.h3`
   border-solid
 `;
 
-function CommentsList({ children }: PropsWithChildren) {
-  return <ol>{children}</ol>;
-}
+export function CommentsList() {
+  const postTitle = useCommentPostTitleContext();
+  const { data } = useGetPostCommentsQuery(postTitle, true);
+  const comments = data ? data.comments : [];
 
-export const CommentsSection = Object.assign(CommentsSectionWrapper, {
-  Form: CommentFormWithOpenButton,
-  Item: CommentCard,
-  List: CommentsList,
-  Title,
-});
+  return (
+    <ol>
+      {comments.map((commentData) => (
+        <CommentCard key={commentData.id} commentId={commentData.id} {...commentData} />
+      ))}
+    </ol>
+  );
+}
