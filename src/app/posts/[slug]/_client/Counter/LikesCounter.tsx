@@ -12,6 +12,8 @@ export function LikesCounter({ title }: LikesCounterProps) {
   const { likeCount, isLiked, handleLikeClick } = useLikeCount(title);
   const isLikeCountLoaded = likeCount !== undefined;
 
+  if (!isLikeCountLoaded) return null;
+
   return (
     <LikeBtn type='button' onClick={handleLikeClick} $isLiked={isLiked}>
       {isLiked ? (

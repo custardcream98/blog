@@ -8,7 +8,6 @@ import { getAllOgImages } from "src/lib/thumbnails/ogImage";
 import { Comments } from "./_client";
 import { PostTitle, PrevNextPost } from "./_components";
 import { createPostDoc, getPrevNextPosts } from "./data";
-import { HydratedPostData } from "./hydrate";
 import type { PostPageParams } from "./types";
 
 import { utld } from "utility-class-components";
@@ -51,20 +50,20 @@ export default async function PostsDynamicPage({ params: { slug } }: PostPagePar
 
   return (
     <PostContainer>
-      <HydratedPostData title={title}>
-        <PostSection>
-          <PostTitle
-            coverImage={coverImage}
-            title={title}
-            category={category}
-            date={date}
-            series={series}
-          />
-          <PostMDX source={content} />
-        </PostSection>
-        <PrevNextPost key={slug} {...prevNextPosts} />
+      <PostSection>
+        <PostTitle
+          coverImage={coverImage}
+          title={title}
+          category={category}
+          date={date}
+          series={series}
+        />
+        <PostMDX source={content} />
+      </PostSection>
+      <PrevNextPost key={slug} {...prevNextPosts} />
+      {(process.env.BLOG_ENV === "query" || process.env.NODE_ENV === "production") && (
         <Comments postTitle={postTitleForComments} />
-      </HydratedPostData>
+      )}
     </PostContainer>
   );
 }

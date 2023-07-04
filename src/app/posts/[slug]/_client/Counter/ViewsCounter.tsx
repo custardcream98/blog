@@ -11,6 +11,8 @@ export function ViewsCounter({ title }: ViewsCounterProps) {
   const { data: viewsData } = useGetPostViewsQuery(title);
   const isViewCountLoaded = viewsData !== undefined;
 
+  if (!isViewCountLoaded) return null;
+
   return (
     <CounterContainer>
       <StyledHiEye title='조회수' size={15} />
