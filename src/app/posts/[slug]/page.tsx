@@ -5,8 +5,7 @@ import { PostMDX } from "src/lib/mdx";
 import generateRSSFeed from "src/lib/rss";
 import { getAllOgImages } from "src/lib/thumbnails/ogImage";
 
-import { Comments } from "./_client";
-import { PostTitle, PrevNextPost } from "./_components";
+import { Comments, PostTitle, PrevNextPost } from "./_components";
 import { createPostDoc, getPrevNextPosts } from "./data";
 import type { PostPageParams } from "./types";
 
