@@ -1,8 +1,8 @@
 import { CategoryBadges, DateSpan, LinkDecorated } from "src/components";
 import { type Categoires } from "src/constants/categoryTheme";
-import { CoverImage } from "src/types/post";
+import type { CoverImage } from "src/types/post";
 
-import { PostActions, PostThumbnail, ViewsLikesCounter } from "../../_client";
+import { LikesCounter, PostActions, PostThumbnail, ViewsCounter } from "../../_client";
 
 import { utld } from "utility-class-components";
 
@@ -32,7 +32,12 @@ export function PostTitle({ coverImage, title, category, date, series }: PostTit
               ))}
             </CategoryBadges>
           )}
-          <ViewsLikesCounter key={title} title={title} />
+          {(process.env.BLOG_ENV === "query" || process.env.NODE_ENV === "production") && (
+            <ViewsLikesCounterContainer>
+              <ViewsCounter title={title} />
+              <LikesCounter title={title} />
+            </ViewsLikesCounterContainer>
+          )}
         </BadgeViewsLikesCounterContainer>
       </Container>
 
@@ -91,4 +96,10 @@ const BadgeViewsLikesCounterContainer = utld.div`
   flex
   justify-between
   items-center
+`;
+
+const ViewsLikesCounterContainer = utld.div`
+  flex
+  items-center
+  h-[3.643rem]
 `;
