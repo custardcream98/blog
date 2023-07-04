@@ -5,7 +5,7 @@ import { normalizeNextApiResponse } from "../normalizers";
 
 import { nextApi } from "./axios";
 
-const DELETE_POST_COMMENT_URL = "/post/comments/delete";
+const DELETE_POST_COMMENT_URL = "/post/comments";
 
 export type DeletePostCommentRequest = {
   title: string;
@@ -17,12 +17,14 @@ export const deletePostComment = async ({
   password,
   commentId,
 }: DeletePostCommentRequest) => {
-  const response = await nextApi.post<
+  const response = await nextApi.delete<
     NextApiResponse<{ comments: CommentData[]; deletedAt: number }>
   >(DELETE_POST_COMMENT_URL, {
-    commentId,
-    password,
-    title,
+    data: {
+      commentId,
+      password,
+      title,
+    },
   });
 
   return normalizeNextApiResponse(response.data);

@@ -7,14 +7,6 @@ import { FieldValue } from "firebase-admin/firestore";
 import { StatusCodes } from "http-status-codes";
 import { NextResponse } from "next/server";
 
-export const getPostLikesForHydration = async (title: string) => {
-  const encodedTitle = encodeToPercentString(title);
-  const postDocRef = getPostDocRef(encodedTitle);
-  const postDoc = await getDoc(postDocRef);
-
-  return getDocData(postDoc);
-};
-
 export async function GET(request: Request): Promise<NextResponse> {
   const { title } = parseSearchParams<TitleRequest>(request.url);
 

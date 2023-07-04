@@ -9,6 +9,7 @@ import {
 import type { TitleRequest } from "../../_types";
 import {
   addDoc,
+  deleteDoc,
   getCollection,
   getCommentDocRef,
   getCommentsCollectionRef,
@@ -21,23 +22,12 @@ import { type CollectionReference } from "firebase-admin/firestore";
 import { StatusCodes } from "http-status-codes";
 import { NextResponse } from "next/server";
 
-export const getComments = async (
-  commentsCollectionRef: CollectionReference<Omit<CommentData, "id">>,
-) => {
+const getComments = async (commentsCollectionRef: CollectionReference<Omit<CommentData, "id">>) => {
   const commentSnapshot = await getCollection(commentsCollectionRef);
   const commentsUnordered = commentSnapshot.docs.map((doc) => ({ ...getDocData(doc), id: doc.id }));
   const comments = sortObjectArray(commentsUnordered, "createdAt");
 
   return comments;
-};
-
-export const getPostCommentsForHydration = async (title: string) => {
-  const encodedTitle = encodeToPercentString(title);
-
-  const commentsCollectionRef = getCommentsCollectionRef(encodedTitle);
-  const comments = await getComments(commentsCollectionRef);
-
-  return { comments };
 };
 
 export async function GET(request: Request): Promise<NextResponse> {
@@ -134,4 +124,41 @@ export async function PATCH(request: Request): Promise<NextResponse> {
   const comments = await getComments(commentsCollectionRef);
 
   return NextResponse.json({ data: { comments, updatedAt: result.writeTime.toMillis() } });
+}
+
+export type DeleteCommentRequestBody = {
+  commentId: string;
+  title: string;
+  password: string;
+};
+
+export async function DELETE(request: Request): Promise<NextResponse> {
+  const { commentId, title, password } = await getRequestBody<DeleteCommentRequestBody>(request);
+
+  if (!commentId || !title || !password) {
+    return NextResponse.json(
+      { message: "잘못된 요청입니다. (commentId 혹은 title 혹은 password가 없습니다.)" },
+      { status: StatusCodes.BAD_REQUEST },
+    );
+  }
+
+  const encodedTitle = encodeToPercentString(title);
+  const commentDocRef = getCommentDocRef(encodedTitle, commentId);
+  const commentDoc = await getDoc(commentDocRef);
+  const commentDocData = getDocData(commentDoc);
+
+  const isPasswordInvalid = commentDocData.password !== password;
+  if (isPasswordInvalid) {
+    return NextResponse.json(
+      { message: "잘못된 요청입니다. (password가 일치하지 않습니다.)" },
+      { status: StatusCodes.BAD_REQUEST },
+    );
+  }
+
+  const result = await deleteDoc(commentDocRef);
+
+  const commentsCollectionRef = getCommentsCollectionRef(encodedTitle);
+  const comments = await getComments(commentsCollectionRef);
+
+  return NextResponse.json({ data: { comments, deletedAt: result.writeTime.toMillis() } });
 }
