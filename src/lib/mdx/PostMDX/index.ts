@@ -1,1 +1,1 @@
-export * from "./PostMDX";
+export * from "./compilePostMDX";

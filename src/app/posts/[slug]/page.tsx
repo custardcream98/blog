@@ -1,7 +1,7 @@
 import { getAllPosts, getPostBySlug } from "src/app/data";
 import { Container } from "src/components";
 import { FONT_D2_CODING, FONT_NOTO_SERIF_KR } from "src/fonts";
-import { PostMDX } from "src/lib/mdx";
+import { compilePostMDX } from "src/lib/mdx";
 import generateRSSFeed from "src/lib/rss";
 import { getAllOgImages } from "src/lib/thumbnails/ogImage";
 
@@ -47,6 +47,8 @@ export default async function PostsDynamicPage({ params: { slug } }: PostPagePar
 
   const postTitleForComments = title.replaceAll("/", ",");
 
+  const postContent = await compilePostMDX(content);
+
   return (
     <PostContainer>
       <PostSection>
@@ -57,7 +59,7 @@ export default async function PostsDynamicPage({ params: { slug } }: PostPagePar
           date={date}
           series={series}
         />
-        <PostMDX source={content} />
+        {postContent}
       </PostSection>
       <PrevNextPost key={slug} {...prevNextPosts} />
       {(process.env.BLOG_ENV === "query" || process.env.NODE_ENV === "production") && (
