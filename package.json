@@ -4,6 +4,7 @@
   "private": true,
   "scripts": {
     "dev": "next dev",
+    "dev:query": "BLOG_ENV=query next dev",
     "build": "next build",
     "start": "next start",
     "format": "prettier --write .",
