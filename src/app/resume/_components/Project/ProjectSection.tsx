@@ -22,13 +22,16 @@ function Item({ title, shortDescription, stacks, links, period, team, descriptio
 
       <ResumePeriod from={period.from} to={period.to} />
 
-      <S.ProjectShortDescription>{shortDescription}</S.ProjectShortDescription>
-
       <S.ProjectDescriptionList>
         {descriptions.map((description) => (
-          <S.ProjectDescriptionItem key={description}>{description}</S.ProjectDescriptionItem>
+          <S.ProjectDescriptionItem
+            key={description}
+            dangerouslySetInnerHTML={{ __html: description }}
+          />
         ))}
       </S.ProjectDescriptionList>
+
+      <S.ProjectShortDescription dangerouslySetInnerHTML={{ __html: shortDescription }} />
 
       <ResumeLinksList>
         {links.map((link) => (

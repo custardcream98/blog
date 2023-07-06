@@ -17,14 +17,22 @@ function Item({ company, period, position, shortDescription, descriptions, links
   return (
     <S.SectionItemBordered>
       <S.ProjectTitle>{company}</S.ProjectTitle>
+
       <ResumePeriod {...period} />
-      <S.ProjectShortDescription>{position}</S.ProjectShortDescription>
-      <S.ProjectShortDescription>{shortDescription}</S.ProjectShortDescription>
+
+      <S.ProjectShortDescription className='!mt-1'>{position}</S.ProjectShortDescription>
+
       <S.ProjectDescriptionList>
         {descriptions.map((description) => (
-          <S.ProjectDescriptionItem key={description}>{description}</S.ProjectDescriptionItem>
+          <S.ProjectDescriptionItem
+            key={description}
+            dangerouslySetInnerHTML={{ __html: description }}
+          />
         ))}
       </S.ProjectDescriptionList>
+
+      <S.ProjectShortDescription dangerouslySetInnerHTML={{ __html: shortDescription }} />
+
       <ResumeLinksList>
         {links.map((link) => (
           <li key={link.name}>
