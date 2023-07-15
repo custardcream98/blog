@@ -24,6 +24,7 @@ const opensources: Project[] = [
       "예를 들어, <code>utld.div` bg-red-500 `;</code> 처럼 컴포넌트를 선언할 수 있습니다.",
       "기존 컴포넌트에 className Prop을 주는 방식으로 스타일을 입히면서도, 기존 컴포넌트가 받을 수 있는 Prop을 타입 시스템이 인식하도록 정교한 타입 시스템을 구현했습니다.",
       "BundlePhobia 기준 <strong>3.8KB의 작은 번들 사이즈</strong>를 달성했습니다.",
+      "총 다운로드 수 1,400회를 달성했습니다.",
     ],
     links: [
       {
