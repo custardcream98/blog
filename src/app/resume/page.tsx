@@ -2,7 +2,7 @@ import { CareersSection, IntroduceSection, ProjectSection, ResumeSection, S } fr
 
 import "./style.css";
 
-import { careers, educations, experiences, projects } from "fixtures/resume";
+import { careers, educations, experiences, opensources, projects } from "fixtures/resume";
 import { utld } from "utility-class-components";
 
 export { metadata } from "./metadata";
@@ -25,6 +25,11 @@ export default function ResumePage() {
           <CareersSection.Item key={career.company} {...career} />
         ))}
       </CareersSection>
+      <ProjectSection title='오픈소스 기여'>
+        {opensources.map((opensource) => (
+          <ProjectSection.Item key={opensource.title} {...opensource} />
+        ))}
+      </ProjectSection>
       <ProjectSection>
         {projects.map((project) => (
           <ProjectSection.Item key={project.title} {...project} />

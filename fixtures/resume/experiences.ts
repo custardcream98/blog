@@ -12,15 +12,16 @@ const experiences: ResumeSectionData[] = [
   },
   {
     descriptions: [
-      "정기적으로 Frontend Tech Talk을 진행하고 있습니다.",
+      "정기적으로 Frontend Tech Talk을 진행했습니다.",
       "신입 멤버 지원서를 효율적으로 관리할 수 있는 웹 페이지를 Next.js 활용해 개발했습니다.",
       "Confluence, Slack, Gather 등의 커뮤니케이션 툴을 활용해 Daily Scrum, Sprint 회고, Kick Off, CPU Meeting 등을 주도했습니다.",
     ],
     period: {
       from: "2022-03",
+      to: "2023-02",
     },
     points: [
-      "Frontend 팀의 Core Member로서 커뮤니티를 이끌고 있습니다. ",
+      "Frontend 팀의 Core Member로서 커뮤니티를 이끌었습니다. ",
       "Data/ML 팀 Core Member로 활동하기도 했습니다.",
     ],
     title: "Google Developer Student Clubs UOS",

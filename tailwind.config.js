@@ -122,6 +122,7 @@ module.exports = {
       },
     },
     fontFamily: {
+      d2coding: ["var(--font-d2coding)"],
       mono: ["var(--font-source-code-pro)"],
       sans: ["var(--font-noto-sans-kr)"],
       serif: ["var(--font-noto-serif-kr)"],

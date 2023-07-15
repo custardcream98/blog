@@ -3,64 +3,9 @@ import { Project } from "src/types/resume";
 const projects: Project[] = [
   {
     descriptions: [
-      "1주간 연습용으로 조금 개발해보는 프로젝트였으나, 두 명이 추가로 개발을 진행해 완성 및 배포했습니다. CSO님을 비롯한 사내 임직원분들께 좋은 반응을 얻었습니다.",
-      "덕분에 단기간에 새로운 기술 스택(Vue.js)을 익히고 실무에 임할 수 있었습니다.",
-    ],
-    links: [
-      {
-        name: "GitHub",
-        url: "https://github.com/custardcream98/mamma",
-      },
-      {
-        name: "서비스 링크",
-        url: "https://mamma.vercel.app/",
-      },
-    ],
-    period: {
-      from: "2023-03",
-      to: "2023-04",
-    },
-    shortDescription:
-      "Wavve Tech Internship 기간 동안 새로운 기술 스택에 빠르게 적응하기 위해 시작했던 토이 프로젝트입니다. 콘텐츠웨이브 사내에서 공유되고 있는 맛집 데이터를 기반으로 랜덤하게 레스토랑을 추천해주고, 리뷰와 새로운 레스토랑을 등록 및 검색할 수 있는 서비스입니다.",
-    stacks: ["Vue.js", "TypeScript", "Vue Query", "UnoCSS"],
-    team: "5인 프로젝트 (기여도 80%)",
-    title: "Mamma",
-  },
-  {
-    descriptions: [
-      "Rollup을 사용해 번들링, node pacakge로 배포했습니다.",
-      "Storybook을 사용해 컴포넌트를 시각적으로 확인할 수 있도록 했습니다.",
-      "컴포넌트별 유닛 테스트를 작성했습니다.",
-      "디자인 시스템을 설계 및 개발하고 있습니다.",
-    ],
-    links: [
-      {
-        name: "GitHub",
-        url: "https://github.com/custardcream98/custard-ui",
-      },
-      {
-        name: "Storybook",
-        url: "https://custardcream98.github.io/custard-ui",
-      },
-      {
-        name: "npm 배포",
-        url: "https://www.npmjs.com/package/custard-ui",
-      },
-    ],
-    period: {
-      from: "2023-02",
-    },
-    shortDescription:
-      "저만의 React Component Library를 만들어보고 싶어 시작한 프로젝트입니다. 토이 프로젝트에서 개발한 컴포넌트들을 모으고 있습니다.",
-    stacks: ["React.js", "TypeScript", "Emotion", "Jest", "Storybook"],
-    team: "개인 프로젝트",
-    title: "custard-ui",
-  },
-  {
-    descriptions: [
-      "서버와의 비동기 통신 시 사용되는 반복되는 패턴을 분리, useAPI 커스텀 훅을 설계 및 개발해 팀 내에서 좋은 평가를 받았습니다.",
-      "유지보수가 용이한 구조의 컴포넌트를 설계하기 위해 고민했고, 컴파운드 컴포넌트 패턴을 주도적으로 도입했습니다.",
-      "SVG 파일의 반복적인 import문을 자동으로 생성하는 스크립트를 작성해 팀원들의 작업 효율을 높였습니다.",
+      "서버와의 비동기 통신 시 사용되는 반복되는 패턴을 분리, <strong>useAPI 커스텀 훅을 설계 및 개발해 팀 내에서 좋은 평가</strong>를 받았습니다.",
+      "<strong>유지보수가 용이한 구조의 컴포넌트를 설계</strong>하기 위해 고민했고, 컴파운드 컴포넌트 패턴을 주도적으로 도입했습니다.",
+      "SVG 파일의 반복적인 import문을 자동으로 생성하는 스크립트를 작성해 팀원들의 <strong>작업 효율</strong>을 높였습니다.",
     ],
     links: [
       {
@@ -89,7 +34,7 @@ const projects: Project[] = [
   {
     descriptions: [
       "remark를 활용해 마크다운으로 작성한 포스트를 정적 웹사이트로 빌드합니다. ",
-      "Lighthouse 기준 Accessibility, SEO 점수 100점을 유지하고 있습니다. 그 결과 Google Search Console 기준 총 노출 수 11,330회, 총 클릭 수 1,100회, 평균 게재순위 14.6위를 달성했습니다.",
+      "Lighthouse 기준 <strong>Accessibility, SEO 점수 100점</strong>을 유지하고 있습니다. 그 결과 Google Search Console 기준 <strong>총 노출 수 17,270회, 총 클릭 수 1,613회</strong>를 달성했습니다.",
       "블로그 내 게시물 검색 기능을 구현했으며, API Call 최적화 및 어뷰징 방지를 위해 디바운싱을 적용하는 등 지속해서 기능을 개선 및 추가하고 있습니다.",
       "Conditional Rendering이 일어나는 컴포넌트의 구조는 어떻게 설계하는 것이 좋을지 고민하는 등 좋은 코드 작성을 위해 노력하고 있습니다.",
       "댓글 등록 알람 메일링 API, 썸네일 자동 생성 API를 개발했습니다.",
@@ -100,7 +45,7 @@ const projects: Project[] = [
         url: "https://github.com/custardcream98/blog-from-beginning-to-end",
       },
       {
-        name: "블로그 링크 (지금 보고 계시는 이 블로그!)",
+        name: "블로그 링크",
         url: "https://shiwoo.dev",
       },
       {

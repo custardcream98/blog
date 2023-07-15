@@ -1,4 +1,5 @@
 import { Container as DefaultContainer } from "src/components";
+import { FONT_D2_CODING } from "src/fonts";
 
 import { ud, utld } from "utility-class-components";
 
@@ -11,6 +12,8 @@ export const Container = utld(DefaultContainer)`
     pt-0
     pb-8
   )
+
+  ${FONT_D2_CODING.variable}
 `;
 
 export const Section = utld.section`
@@ -129,6 +132,18 @@ export const ProjectDescriptionItem = utld.li`
   print:(
     my-[0.2rem]
     ml-[0.2rem]
+  )
+
+  [&_strong]:(
+    text-resume-text-strong-light
+    dark:text-resume-text-strong-dark
+  )
+
+  [&_code]:(
+    font-normal
+    font-d2coding
+    text-resume-text-strong-light
+    dark:text-resume-text-strong-dark
   )
 `;
 
