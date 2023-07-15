@@ -68,7 +68,7 @@ const ContactList = utld.ul`
   [&>li:last-child]:hidden
 
   print:(
-    mt-4
+    mt-3
     [&>li:last-child]:inline-block
   )
 `;
