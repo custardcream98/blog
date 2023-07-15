@@ -12,9 +12,10 @@ function IntroduceSection() {
         <strong>꼭 해결해야만 직성이 풀리는 성격</strong>입니다.
       </IntroduceP>
       <IntroduceP>
-        <strong>기술 이야기 나누기를 아주 좋아합니다.</strong> Google Student Clubs UOS에서
-        프론트엔드 팀 코어 멤버로서 활동하며 데일리 스크럼과 주기적인 테크톡을 진행하였습니다.
-        프론트엔드 기술과 관련된 아티클을 나누고 싶어 직접 오픈카톡방을 운영중이기도 합니다.
+        <strong>기술 이야기 나누기를 아주 좋아합니다.</strong> Google Developer Student Clubs
+        UOS에서 프론트엔드 팀 코어 멤버로서 활동하며 데일리 스크럼과 주기적인 테크톡을
+        진행하였습니다. 프론트엔드 기술과 관련된 인사이트를 나누고 싶어 직접 60여 명이 있는
+        오픈카톡방을 운영중이기도 합니다.
       </IntroduceP>
       <IntroduceP>
         <strong>좋은 커뮤니케이션 방법과 협력 방법을 항상 고민합니다.</strong> 부트캠프에서 회고조

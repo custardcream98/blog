@@ -1,4 +1,5 @@
 import { Container as DefaultContainer } from "src/components";
+import { FONT_D2_CODING } from "src/fonts";
 
 import { ud, utld } from "utility-class-components";
 
@@ -11,6 +12,8 @@ export const Container = utld(DefaultContainer)`
     pt-0
     pb-8
   )
+
+  ${FONT_D2_CODING.variable}
 `;
 
 export const Section = utld.section`
@@ -53,7 +56,7 @@ export const SectionItemBordered = utld(SectionItem)`
 `;
 
 export const ProjectTitle = utld.h4`
-  text-[1.1rem]
+  text-[1.3rem]
   font-normal
   mb-2
 
@@ -81,21 +84,24 @@ export const ProjectTeam = utld.span`
 `;
 
 export const ProjectShortDescription = utld.p`
-  mt-4
+  mt-6
 
   font-light
-  text-[0.9rem]
 
   leading-[1.6]
 
   tracking-[0.04rem]
+
+  [&_strong]:(
+    text-resume-text-strong-light
+    dark:text-resume-text-strong-dark
+  )
 `;
 
 export const ProjectDescriptionList = utld.ul`
-  mt-6
+  mt-4
 
   font-light
-  text-[0.9rem]
 
   tracking-[0.03rem]
   leading-[1.5]
@@ -111,6 +117,11 @@ export const ProjectDescriptionList = utld.ul`
     text-resume-accent-light
     dark:text-resume-accent-dark
   )
+
+  [&_strong]:(
+    text-resume-text-strong-light
+    dark:text-resume-text-strong-dark
+  )
 `;
 
 export const ProjectDescriptionItem = utld.li`
@@ -122,6 +133,18 @@ export const ProjectDescriptionItem = utld.li`
     my-[0.2rem]
     ml-[0.2rem]
   )
+
+  [&_strong]:(
+    text-resume-text-strong-light
+    dark:text-resume-text-strong-dark
+  )
+
+  [&_code]:(
+    font-normal
+    font-d2coding
+    text-resume-text-strong-light
+    dark:text-resume-text-strong-dark
+  )
 `;
 
 export const ProjectStacks = utld.ul`
@@ -132,7 +155,7 @@ export const ProjectStacks = utld.ul`
 
 export const ProjectStack = utld.li`
   font-light
-  text-[0.8rem]
+  text-[0.9rem]
 
   py-[0.2rem]
   px-[0.4rem]

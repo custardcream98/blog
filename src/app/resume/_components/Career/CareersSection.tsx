@@ -14,24 +14,38 @@ function Section({ children }: PropsWithChildren) {
 }
 
 function Item({ company, period, position, shortDescription, descriptions, links }: Career) {
+  const isLinksExist = links.length !== 0;
+
   return (
     <S.SectionItemBordered>
       <S.ProjectTitle>{company}</S.ProjectTitle>
+
       <ResumePeriod {...period} />
-      <S.ProjectShortDescription>{position}</S.ProjectShortDescription>
-      <S.ProjectShortDescription>{shortDescription}</S.ProjectShortDescription>
+
+      <S.ProjectShortDescription className='!mt-1'>{position}</S.ProjectShortDescription>
+
       <S.ProjectDescriptionList>
         {descriptions.map((description) => (
-          <S.ProjectDescriptionItem key={description}>{description}</S.ProjectDescriptionItem>
+          <S.ProjectDescriptionItem
+            key={description}
+            dangerouslySetInnerHTML={{ __html: description }}
+          />
         ))}
       </S.ProjectDescriptionList>
-      <ResumeLinksList>
-        {links.map((link) => (
-          <li key={link.name}>
-            <ResumeLink {...link} />
-          </li>
-        ))}
-      </ResumeLinksList>
+
+      {shortDescription && (
+        <S.ProjectShortDescription dangerouslySetInnerHTML={{ __html: shortDescription }} />
+      )}
+
+      {isLinksExist && (
+        <ResumeLinksList>
+          {links.map((link) => (
+            <li key={link.name}>
+              <ResumeLink {...link} />
+            </li>
+          ))}
+        </ResumeLinksList>
+      )}
     </S.SectionItemBordered>
   );
 }

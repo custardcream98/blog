@@ -22,8 +22,6 @@ function Item({ title, links, period, descriptions, points }: ResumeSectionData)
 
       <ResumePeriod from={period.from} to={period.to} />
 
-      {points && points.map((point) => <SectionItemP key={point}>{point}</SectionItemP>)}
-
       {descriptions && (
         <SectionItemDescriptionList>
           {descriptions.map((description) => (
@@ -31,6 +29,8 @@ function Item({ title, links, period, descriptions, points }: ResumeSectionData)
           ))}
         </SectionItemDescriptionList>
       )}
+
+      {points && points.map((point) => <SectionItemP key={point}>{point}</SectionItemP>)}
 
       {links && (
         <ResumeLinksList>

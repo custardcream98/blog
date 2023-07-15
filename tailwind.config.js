@@ -67,7 +67,7 @@ module.exports = {
           },
         },
         resume: {
-          accent: { dark: "#ffea00", light: "#ffbb00" },
+          accent: { dark: "#ffea00", light: "#d9730d" },
           badge: {
             bg: { dark: "#ffffff22", light: "#eee" },
             text: { dark: "#ffffff99", light: "#666" },
@@ -76,12 +76,12 @@ module.exports = {
             dark: "#ccc",
             dim: {
               dark: "#858585",
-              light: "#aaa",
+              light: "#585858",
             },
-            light: "#616161",
+            light: "#43423b",
             strong: {
               dark: "#fff",
-              light: "#333",
+              light: "#d9730d",
             },
           },
         },
@@ -122,6 +122,7 @@ module.exports = {
       },
     },
     fontFamily: {
+      d2coding: ["var(--font-d2coding)"],
       mono: ["var(--font-source-code-pro)"],
       sans: ["var(--font-noto-sans-kr)"],
       serif: ["var(--font-noto-serif-kr)"],
