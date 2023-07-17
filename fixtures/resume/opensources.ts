@@ -6,12 +6,29 @@ const opensources: Project[] = [
     links: [
       {
         name: "GitHub PR",
+        url: "https://github.com/TanStack/query/pull/5670",
+      },
+    ],
+    period: {
+      from: "2023-07",
+      to: "2023-07",
+    },
+    shortDescription:
+      "비동기 Server Component 사용시 타입 에러가 발생하는 이슈에 대한 공식 문서의 설명을 Next.js에서 권장하는 방법으로 업데이트했습니다.",
+    stacks: [],
+    title: "TanStack/query",
+  },
+  {
+    descriptions: [],
+    links: [
+      {
+        name: "GitHub PR",
         url: "https://github.com/chakra-ui/panda/pull/997",
       },
     ],
     period: {
-      from: "2023-05",
-      to: "2023-05",
+      from: "2023-07",
+      to: "2023-07",
     },
     shortDescription:
       "빌드시 스타일을 생성하는 라이브러리인 chakra-ui팀의 라이브러리입니다. <strong>스타일 토큰 생성 관련 기여</strong>를 했으며, 이슈를 올려주신 분의 감사 인사를 받기도 했습니다.",
