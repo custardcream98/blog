@@ -17,12 +17,12 @@ function IntroduceSection() {
         진행하였습니다. 프론트엔드 기술과 관련된 인사이트를 나누고 싶어 직접 60여 명이 있는
         오픈카톡방을 운영중이기도 합니다.
       </IntroduceP>
-      <IntroduceP>
+      {/* <IntroduceP>
         <strong>좋은 커뮤니케이션 방법과 협력 방법을 항상 고민합니다.</strong> 부트캠프에서 회고조
         조장, 팀 프로젝트 리드를 맡아 프로젝트의 성공을 이끌었고, 도움이 필요한 동료를 위해 직접
         특강을 열기도 했습니다. Wavve Tech Internship에서 Agile 방법론을 적용해 협업하고, 팀원들과
         함께 팀의 문화를 만들어가는 것을 즐겼습니다.
-      </IntroduceP>
+      </IntroduceP> */}
       <ContactList>
         <li>
           <ResumeLink name='custardcream@kakao.com' url='mailto:custardcream@kakao.com' />

@@ -56,7 +56,7 @@
 
 @layer component {
   .text-gradient-intro {
-    @apply text-fill-transparent inline-block bg-intro bg-[200%_auto] bg-clip-text;
+    @apply text-fill-transparent inline-block bg-intro bg-[200%_auto] bg-clip-text print:bg-[300%_auto];
   }
 }
 

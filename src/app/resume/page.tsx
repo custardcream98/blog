@@ -13,7 +13,7 @@ export default function ResumePage() {
       <MainTitle>
         <span className='line'>안녕하세요,</span>
         {
-          <strong className='text-gradient-intro animate-bg-gradient font-semibold'>
+          <strong className='text-gradient-intro animate-bg-gradient font-semibold print:animate-none'>
             주니어 프론트엔드 개발자 박시우
           </strong>
         }

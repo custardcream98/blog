@@ -22,7 +22,7 @@ export const Section = utld.section`
   dark:text-resume-text-dark
 
   print:(
-    my-8
+    my-6
     w-full
     last:break-inside-avoid-page
   )
@@ -32,6 +32,11 @@ export const SectionTitle = utld.h3`
   text-[1.7rem]
   font-semibold
   mb-[1.7rem]
+
+  print:(
+    text-[1.3rem]
+    mb-[1.3rem]
+  )
 `;
 
 export const SectionItemList = utld.ul``;
@@ -42,7 +47,7 @@ export const SectionItem = utld.li`
 
   print:(
     mt-8
-    [&+&]:mt-8
+    [&+&]:mt-10
     relative
     break-inside-avoid
   )
@@ -62,6 +67,11 @@ export const ProjectTitle = utld.h4`
 
   break-keep
   leading-[1.2]
+
+  print:(
+    text-[1.1rem]
+    mb-1
+  )
 `;
 
 export const dimTextStyle = ud`
@@ -96,6 +106,8 @@ export const ProjectShortDescription = utld.p`
     text-resume-text-strong-light
     dark:text-resume-text-strong-dark
   )
+
+  print:mt-3
 `;
 
 export const ProjectDescriptionList = utld.ul`
@@ -106,7 +118,7 @@ export const ProjectDescriptionList = utld.ul`
   tracking-[0.03rem]
   leading-[1.5]
 
-  print:mt-2
+  print:mt-3
 
   marker:(
     content-['-']
@@ -130,7 +142,7 @@ export const ProjectDescriptionItem = utld.li`
   pl-[0.6rem]
 
   print:(
-    my-[0.2rem]
+    my-2
     ml-[0.2rem]
   )
 
