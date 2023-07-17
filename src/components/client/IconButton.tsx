@@ -21,7 +21,7 @@ export const IconButton = forwardRef<HTMLButtonElement, IconButtonProps>(
 
     return createElement(
       buttonAs ?? "button",
-      { ref, ...props },
+      { "aria-label": title, ref, ...props },
       <Icon className='text-default-light dark:text-default-dark' size={size} title={title} />,
     );
   },

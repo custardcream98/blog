@@ -12,8 +12,7 @@ export function DarkmodeSwitch() {
 
   return (
     <article>
-      <Button onClick={setIsDarkmodeActivatedToggle}>
-        <span className='sr-only'>다크모드 스위치</span>
+      <Button onClick={setIsDarkmodeActivatedToggle} aria-label='다크모드 스위치'>
         <IconContext.Provider value={ICON_CONTEXT}>
           {isDarkmodeActivated ? <BsFillMoonFill color='#e5c704' /> : <ImSun color='#e5c704' />}
         </IconContext.Provider>
