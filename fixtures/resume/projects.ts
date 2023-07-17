@@ -34,7 +34,7 @@ const projects: Project[] = [
   },
   {
     descriptions: [
-      "remark를 활용해 마크다운으로 작성한 포스트를 정적 웹사이트로 빌드합니다. ",
+      "remark를 활용해 Markdown을 Static Site로 빌드하다가, 더 동적인 블로깅을 위해 React Component를 활용할 수 있는 MDX를 사용하도록 개선했습니다.",
       "Lighthouse 기준 <strong>Accessibility, SEO 점수 100점</strong>을 유지하고 있습니다. 그 결과 Google Search Console 기준 <strong>총 노출 수 17,270회, 총 클릭 수 1,613회</strong>를 달성했습니다.",
       "복잡한 형태의 Conditional Rendering이 일어나는 댓글 컴포넌트를 객체를 사용한 설계로 리팩토링해 코드 가독성을 높였습니다.",
       "댓글 등록 알람 메일링 API, 썸네일 자동 생성 API를 개발했습니다.",
