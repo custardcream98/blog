@@ -24,6 +24,7 @@ export const Section = utld.section`
   print:(
     my-6
     w-full
+    text-resume-text-print
     last:break-inside-avoid-page
   )
 `;
