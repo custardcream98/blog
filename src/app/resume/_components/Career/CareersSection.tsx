@@ -4,9 +4,9 @@ import { ResumeLink, ResumeLinksList, ResumePeriod, S } from "..";
 
 import { type PropsWithChildren } from "react";
 
-function Section({ children }: PropsWithChildren) {
+function Section({ className, children }: PropsWithChildren<{ className?: string }>) {
   return (
-    <S.Section>
+    <S.Section className={className}>
       <S.SectionTitle>경력</S.SectionTitle>
       <S.SectionItemList>{children}</S.SectionItemList>
     </S.Section>

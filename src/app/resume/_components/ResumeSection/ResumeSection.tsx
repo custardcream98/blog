@@ -6,9 +6,13 @@ import { SectionItemDescriptionList, SectionItemP, SectionItemTitle } from "./st
 
 import { type PropsWithChildren } from "react";
 
-function Section({ sectionTitle, children }: PropsWithChildren<{ sectionTitle: string }>) {
+function Section({
+  sectionTitle,
+  className,
+  children,
+}: PropsWithChildren<{ sectionTitle: string; className?: string }>) {
   return (
-    <S.Section>
+    <S.Section className={className}>
       <S.SectionTitle>{sectionTitle}</S.SectionTitle>
       <S.SectionItemList>{children}</S.SectionItemList>
     </S.Section>

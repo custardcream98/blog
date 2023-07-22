@@ -1,40 +1,44 @@
+import { compileResumeMDX } from "src/lib/mdx";
 import { Project } from "src/types/resume";
 
 import { ResumeLink, ResumeLinksList, ResumePeriod, S } from "..";
 
 import { type PropsWithChildren } from "react";
 
-function Section({ title, children }: PropsWithChildren<{ title?: string }>) {
+function Section({
+  title,
+  className,
+  children,
+}: PropsWithChildren<{ title: string; className?: string }>) {
   return (
-    <S.Section>
-      <S.SectionTitle>{title ?? "프로젝트"}</S.SectionTitle>
+    <S.Section className={className}>
+      <S.SectionTitle>{title}</S.SectionTitle>
       <S.SectionItemList>{children}</S.SectionItemList>
     </S.Section>
   );
 }
 
-function Item({ title, shortDescription, stacks, links, period, team, descriptions }: Project) {
+async function Item({
+  title,
+  shortDescription,
+  stacks,
+  links,
+  period,
+  team,
+  description,
+}: Project) {
   const isStacksExist = stacks.length !== 0;
-  const isDescriptionsExist = descriptions.length !== 0;
+  const descriptionContent = description ? await compileResumeMDX(description) : null;
 
   return (
-    <S.SectionItemBordered>
+    <S.SectionItemBordered className='print:[&+&]:!mt-20'>
       <S.ProjectTitle>{title}</S.ProjectTitle>
 
       {team && <S.ProjectTeam>{team}</S.ProjectTeam>}
 
       <ResumePeriod from={period.from} to={period.to} />
 
-      {isDescriptionsExist && (
-        <S.ProjectDescriptionList>
-          {descriptions.map((description) => (
-            <S.ProjectDescriptionItem
-              key={description}
-              dangerouslySetInnerHTML={{ __html: description }}
-            />
-          ))}
-        </S.ProjectDescriptionList>
-      )}
+      {descriptionContent}
 
       <S.ProjectShortDescription dangerouslySetInnerHTML={{ __html: shortDescription }} />
 

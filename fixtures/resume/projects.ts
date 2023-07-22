@@ -2,12 +2,145 @@ import { Project } from "src/types/resume";
 
 const projects: Project[] = [
   {
-    descriptions: [
-      "서버와의 비동기 통신 시 사용되는 반복되는 패턴을 분리, <strong>useAPI 커스텀 훅을 설계 및 개발해 팀 내에서 좋은 평가</strong>를 받았습니다.",
-      "유지보수가 용이한 구조의 컴포넌트를 설계하기 위해 고민했고, <strong>컴파운드 컴포넌트 패턴을 주도적으로 도입</strong>했습니다.",
-      "SVG 파일의 반복적인 import문을 자동으로 생성하는 스크립트를 작성해 팀원들의 작업 효율을 높였습니다.",
-      "<strong>동료 피드백 만점</strong>을 받았으며, 합당한 이유와 주장을 갖고 있으면서도 상황에 따라 유연하게 팀을 이끌어간다는 평을 받았습니다.",
+    description:
+      // utility-class-components 프로젝트로 밀고 블로그 위로 올리고 스내피를 맨 아래로
+      // 스내피는 고민한 부분을 볼드처리 해봐라. 동료 피드백은 TS대신 JSDoc을 전파한 내용을 적어줘라. 팀원들에게 전파한 내용을 적어라. 내가 하고 싶은 기술이 있음에도 팀원들 좋자고 바꾼 내용을 담아봐라. 팀원과의 융합 능력 어필
+      // 스내피에서 추상화를 진행해서 팀원이 쓰기 편하게 만들어준 내용인 useAPI => 이런 식으로 어필. 팀워크 리더십을 중점으로 어필하되, 이런 기술적인 부분도 어필.
+      // 그런데 이거 만드는 시간에 전반적인 지식 전달을 하는게 좋지 않았을까 싶다는 내용도 드러내면 좋을거같음.
+      `
+      ~~~tsx
+      import { utld, ud } from "utility-class-components";
+
+      const Container = utld.div<{ $isRed: boolean }>\`
+        flex
+        text-bold
+
+        \${({ $isRed }) => $isRed && "text-red-500"}
+      \`;
+
+      function Page() {
+        return <Container $isRed={true}>AWESOME!!</Container>;
+      }
+      ~~~
+       * BundlePhobia 기준 **3.8KB의 작은 번들 사이즈**를 달성했습니다.
+       * 총 다운로드 수 1,400회를 달성했습니다.
+    `,
+    links: [
+      {
+        name: "GitHub",
+        url: "https://github.com/custardcream98/utility-class-components",
+      },
+      {
+        name: "npm 배포",
+        url: "https://www.npmjs.com/package/utility-class-components",
+      },
     ],
+    period: {
+      from: "2023-05",
+    },
+    shortDescription:
+      "개인 블로그를 Next.js 13 버전의 App Router로 마이그레이션 하며 개발한 라이브러리입니다. 대부분의 CSS in JS 라이브러리는 React Context API를 사용해 Server Component에서 사용하기 어려웠기에, TailwindCSS로 스타일링 라이브러리를 바꾸며 '유틸리티 클래스를 CSS in JS처럼 다룰 수 있으면 좋겠다'는 아이디어에서 시작했습니다. 이 프로젝트를 통해 Server Component의 사용에 대해 깊게 고민했고, 덕분에 오픈소스 프로젝트(chakra-ui/panda, TanStack/query)에 기여하는 소중한 경험을 할 수 있었습니다.",
+    stacks: ["React.js", "TypeScript"],
+    team: "개인 프로젝트",
+    title: "utility-class-components",
+  },
+  {
+    description: `
+     * Next.js 12버전으로 시작했던 프로젝트를 13으로 업그레이드 하며, Server Component 스타일링을 더 편하게 하기 위해 **utility-class-components 라이브러리를 개발**했습니다.
+     * Firebase SDK를 직접 사용하다가 API Route로 리팩토링 하며 **React Query와 Suspense를 활용해 로딩 및 에러 처리 로직을 개선**했습니다.
+     * Lighthouse 기준 **Accessibility, SEO 점수 100점**을 유지하고 있습니다. 그 결과 Google Search Console 기준 **총 노출 수 17,270회, 총 클릭 수 1,613회**를 달성했습니다.
+     * remark를 활용해 Markdown을 Static Site로 빌드하다가, 더 동적인 블로깅을 위해 React Component를 활용할 수 있는 MDX를 사용하도록 개선했습니다.
+     * 복잡한 형태의 Conditional Rendering이 일어나는 댓글 컴포넌트를 객체를 사용한 설계로 리팩토링해 코드 가독성을 높였습니다.
+     * 블로그 내 게시물 검색 기능을 구현했으며, API Call 최적화 및 어뷰징 방지를 위해 디바운싱을 적용하는 등 지속해서 기능을 개선 및 추가하고 있습니다.
+    `,
+    links: [
+      {
+        name: "GitHub",
+        url: "https://github.com/custardcream98/blog-from-beginning-to-end",
+      },
+      {
+        name: "블로그 링크",
+        url: "https://shiwoo.dev",
+      },
+      {
+        name: "추천글: 댓글 컴포넌트 리팩토링하기",
+        url: "https://shiwoo.dev/posts/%EB%8C%93%EA%B8%80%20%EC%BB%B4%ED%8F%AC%EB%84%8C%ED%8A%B8%20%EB%A6%AC%ED%8C%A9%ED%86%A0%EB%A7%81%ED%95%98%EA%B8%B0",
+      },
+    ],
+    period: {
+      from: "2022-08",
+    },
+    shortDescription:
+      "저만의 색깔을 나타낼 수 있도록 모든 부분을 직접 개발한 블로그입니다. 지속해서 리팩토링하며 컴포넌트 설계의 테스트베드로 활용하고 있습니다.", // TODO: 세 줄 요약으로 바꾸기
+    stacks: ["Next.js", "TypeScript", "styled-components", "Node.js", "Firebase"],
+    team: "개인 프로젝트",
+    title: "기술 블로그",
+  },
+
+  {
+    description: `
+     * Storybook을 사용해 컴포넌트를 시각적으로 확인할 수 있도록 했습니다.
+     * 컴포넌트별 유닛 테스트를 작성했습니다.
+     * 디자인 시스템을 설계 및 개발하고 있습니다.
+    `,
+    links: [
+      {
+        name: "GitHub",
+        url: "https://github.com/custardcream98/custard-ui",
+      },
+      {
+        name: "Storybook",
+        url: "https://custardcream98.github.io/custard-ui",
+      },
+      {
+        name: "npm 배포",
+        url: "https://www.npmjs.com/package/custard-ui",
+      },
+    ],
+    period: {
+      from: "2023-02",
+    },
+    shortDescription:
+      "저만의 React Component Library를 만들어보고 싶어 시작한 프로젝트입니다. 토이 프로젝트에서 개발한 컴포넌트들을 모으고 있습니다.",
+    stacks: ["React.js", "TypeScript", "Emotion", "Jest", "Storybook"],
+    team: "개인 프로젝트",
+    title: "custard-ui",
+  },
+  {
+    description: `
+    * 현재 카카오톡 봇은 **약 500여 명의 MAU**를 기록하고 있습니다. 
+    * 거래소별로 다른 API 명세에 대응하기 위한 normalizer를 구조적으로 설계했습니다. 
+    * NFT 프로젝트 커뮤니티 관리를 위한 이벤트 기능, NFT 정보 검색 및 보유 중인 NFT 조회 기능을 탑재한 디스코드 봇을 개발해 **약 2,800여 명의 사용자가 있는 디스코드 서버에서 실사용**됐습니다. 
+    * 사용자 피드백을 받으며 서비스의 유지보수와 기능 추가를 지속적으로 진행하고 있습니다.
+    `,
+    links: [
+      {
+        name: "카카오톡 봇 기능 설명",
+        url: "https://blog.naver.com/sg05098/222596637921",
+      },
+      {
+        name: "봇 카카오톡 오픈 프로필",
+        url: "https://open.kakao.com/o/s9uGYgPd",
+      },
+    ],
+    period: {
+      from: "2021-06",
+    },
+    shortDescription:
+      "블록체인에 관심을 가져 개발한 챗봇입니다. 코인 가격 조회, NFT 가격 조회 등 20 ~ 30가지의 블록체인 투자 관련 기능을 가진 카카오톡 봇과, NFT 커뮤니티 관리를 위한 디스코드 봇입니다.",
+    stacks: ["Node.js"],
+    team: "개인 프로젝트",
+    title: "카카오톡, 디스코드 챗봇",
+  },
+  {
+    description: `
+      ~~~ts
+      const [isLoading, data, error, fetch] = useAPI(req.post.remove);
+      ~~~
+      * **팀원이 비동기 통신과 에러 핸들링을 편하게 할 수 있도록 useAPI 커스텀 훅을 개발**해 팀 내에서 좋은 평가를 받았습니다.
+      * 팀 전원의 실력 향상을 위해 프로젝트 시작 전 공동 학습을 주도했습니다.
+      * 합당한 이유와 주장을 갖고 있으면서도 상황에 따라 유연하게 팀을 이끌어간다는 동료 피드백을 받았습니다.
+    `,
     links: [
       {
         name: "GitHub",
@@ -31,121 +164,6 @@ const projects: Project[] = [
     stacks: ["React.js", "JavaScript", "styled-components"],
     team: "4인 프로젝트 (기여도 40%)",
     title: "Snappy",
-  },
-  {
-    descriptions: [
-      "remark를 활용해 Markdown을 Static Site로 빌드하다가, 더 동적인 블로깅을 위해 React Component를 활용할 수 있는 MDX를 사용하도록 개선했습니다.",
-      "Lighthouse 기준 <strong>Accessibility, SEO 점수 100점</strong>을 유지하고 있습니다. 그 결과 Google Search Console 기준 <strong>총 노출 수 17,270회, 총 클릭 수 1,613회</strong>를 달성했습니다.",
-      "복잡한 형태의 Conditional Rendering이 일어나는 댓글 컴포넌트를 객체를 사용한 설계로 리팩토링해 코드 가독성을 높였습니다.",
-      "댓글 등록 알람 메일링 API, 썸네일 자동 생성 API를 개발했습니다.",
-      "Firebase SDK를 직접 사용하다가 API Route로 리팩토링 하며 <strong>React Query와 Suspense를 활용해 로딩 및 에러 처리 로직을 개선</strong>했습니다.",
-      "Next.js 12버전으로 시작했던 프로젝트를 13으로 업그레이드 하며, Server Component에 대한 이해와 함께 <strong>utility-class-components 라이브러리를 개발</strong>했습니다.",
-      "블로그 내 게시물 검색 기능을 구현했으며, API Call 최적화 및 어뷰징 방지를 위해 디바운싱을 적용하는 등 지속해서 기능을 개선 및 추가하고 있습니다.",
-    ],
-    links: [
-      {
-        name: "GitHub",
-        url: "https://github.com/custardcream98/blog-from-beginning-to-end",
-      },
-      {
-        name: "블로그 링크",
-        url: "https://shiwoo.dev",
-      },
-      {
-        name: "추천글: 댓글 컴포넌트 리팩토링하기",
-        url: "https://shiwoo.dev/posts/%EB%8C%93%EA%B8%80%20%EC%BB%B4%ED%8F%AC%EB%84%8C%ED%8A%B8%20%EB%A6%AC%ED%8C%A9%ED%86%A0%EB%A7%81%ED%95%98%EA%B8%B0",
-      },
-    ],
-    period: {
-      from: "2022-08",
-    },
-    shortDescription:
-      "저만의 색깔을 나타낼 수 있도록 모든 부분을 직접 개발한 블로그입니다. SEO를 고려해 SSG가 가능한 Next.js를 사용했고, 댓글 등록 알람을 받고 싶어 메일링 API를 개발해 적용하기도 했습니다. 지속해서 리팩토링하며 컴포넌트 설계의 테스트베드로 활용하고 있습니다.",
-    stacks: ["Next.js", "TypeScript", "styled-components", "Node.js", "Firebase"],
-    team: "개인 프로젝트",
-    title: "기술 블로그",
-  },
-  // {
-  //   descriptions: [
-  //     "슬라이더를 움직일 때마다 유효성을 검증하고, 유효하지 않으면 GNB에 표현 및 해당 문항으로 이동할 수 있는 링크 제공을 위해 recoil을 활용, 전역 상태를 관리했습니다.",
-  //     "복잡한 유효성 검증 로직을 테스트하기 위해 Cypress를 활용, e2e 테스트를 진행했습니다.",
-  //     "타 언어(Python)로 개발된 유효성 검증 로직을 TypeScript로 포팅하고, 비효율적인 로직 리팩토링을 진행해 코드의 가독성을 높였습니다.",
-  //     "여러 depth로 구성된 설문 폼의 구조에 유연하게 대응할 수 있도록 JSON으로 관리하고, 이를 기반으로 빌드할 수 있게 DFS 알고리즘을 활용하고자 하는 등 설계에 신경을 썼습니다.",
-  //   ],
-  //   links: [
-  //     {
-  //       name: "GitHub",
-  //       url: "https://github.com/custardcream98/goodrider-interview-web",
-  //     },
-  //     {
-  //       name: "설문 폼 링크",
-  //       url: "https://goodrider-interview-web.vercel.app/",
-  //     },
-  //     {
-  //       name: "추천글: 복잡하게 구성된 if문 리팩토링하기",
-  //       url: "https://shiwoo.dev/posts/%EB%B3%B5%EC%9E%A1%ED%95%98%EA%B2%8C%20%EA%B5%AC%EC%84%B1%EB%90%9C%20if%EB%AC%B8%20%EB%A6%AC%ED%8C%A9%ED%86%A0%EB%A7%81%ED%95%98%EA%B8%B0",
-  //     },
-  //   ],
-  //   period: {
-  //     from: "2022-06",
-  //     to: "2022-10",
-  //   },
-  //   shortDescription:
-  //     "이륜차 운전자의 운전 습관 개선을 위해 '착한 운전자 점수' 채점 기준을 마련하고자 진행된 연구과제용 설문 폼입니다. AHP 분석법이라는 특수한 형태의 설문을 위해, 슬라이더를 움직이면 실시간으로 유효성을 검증하는 복잡한 로직이 담긴 컴포넌트를 개발했습니다.",
-  //   stacks: ["Next.js", "TypeScript", "Recoil", "Cypress", "Tailwind"],
-  //   team: "개인 프로젝트 - 서울시립대학교 공간 데이터베이스 연구실 연구과제",
-  //   title: "착한 이륜차 운전자 평가 모델 개발용 설문 폼",
-  // },
-  // {
-  //   descriptions: [
-  //     "직관적인 일정 관리를 위해 스크롤이 가능한 수직 타임라인에 드래그 앤 드롭으로 일정 블록의 순서를 바꾸거나 삭제하고, 길게 누르며 드래그해 일정 블록의 지속 시간을 변경할 수 있는 위젯을 구현했습니다.",
-  //     "순서와 경로가 담긴 스케줄 데이터를 효율적으로 다룰 수 있도록 Frontend / Backend 양측에서 Serializer, Deserialzer를 개발했습니다.",
-  //   ],
-  //   links: [
-  //     {
-  //       name: "GitHub",
-  //       url: "https://github.com/Dayplan-it/Dayplan.it",
-  //     },
-  //     {
-  //       name: "작품 설명",
-  //       url: "https://uos-urbanscience.org/archives/uos_portfolio/%eb%8f%99%ec%84%a0%ec%9d%84-%ea%b3%a0%eb%a0%a4%ed%95%9c-all-in-one-%ec%9d%bc%ec%a0%95-%ec%8a%a4%ec%bc%80%ec%a4%84%eb%a7%81-%ec%84%9c%eb%b9%84%ec%8a%a4",
-  //     },
-  //   ],
-  //   period: {
-  //     from: "2022-01",
-  //     to: "2022-05",
-  //   },
-  //   shortDescription:
-  //     "졸업 작품으로 개발한 동선 기반 일정 관리 크로스플랫폼 어플리케이션입니다. 장소를 정하려면 동선 이동 일정을 정해야 하고, 반대로 동선을 알려면 장소가 결정돼야 하는 모순을 해결하고자 했습니다. 열심히 임한 덕분에 도시과학대학장상을 수상하는 등 좋은 평가를 받았습니다.",
-  //   stacks: ["Flutter", "Django", "PostgreSQL", "Dart", "Python"],
-  //   team: "2인 프로젝트 (기여도 50%, 풀스택 개발)",
-  //   title: "Dayplan.it",
-  // },
-  {
-    descriptions: [
-      "현재 카카오톡 봇은 <strong>약 500여 명의 MAU</strong>를 기록하고 있습니다.",
-      "거래소별로 다른 API 명세에 대응하기 위한 normalizer를 구조적으로 설계했습니다.",
-      "NFT 프로젝트 커뮤니티 관리를 위한 이벤트 기능, NFT 정보 검색 및 보유 중인 NFT 조회 기능을 탑재한 디스코드 봇을 개발해 <strong>약 2,800여 명의 사용자가 있는 디스코드 서버에서 실사용</strong>됐습니다.",
-      "사용자 피드백을 받으며 서비스의 유지보수와 기능 추가를 지속적으로 진행하고 있습니다.",
-    ],
-    links: [
-      {
-        name: "카카오톡 봇 기능 설명",
-        url: "https://blog.naver.com/sg05098/222596637921",
-      },
-      {
-        name: "봇 카카오톡 오픈 프로필",
-        url: "https://open.kakao.com/o/s9uGYgPd",
-      },
-    ],
-    period: {
-      from: "2021-06",
-    },
-    shortDescription:
-      "블록체인에 관심을 가져 개발한 챗봇입니다. 코인 가격 조회, NFT 가격 조회 등 20 ~ 30가지의 블록체인 투자 관련 기능을 가진 카카오톡 봇과, NFT 커뮤니티 관리를 위한 디스코드 봇입니다.",
-    stacks: ["Node.js"],
-    team: "개인 프로젝트",
-    title: "카카오톡, 디스코드 챗봇",
   },
 ];
 

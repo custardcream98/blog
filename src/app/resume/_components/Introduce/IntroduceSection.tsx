@@ -8,8 +8,11 @@ function IntroduceSection() {
     <S.Section>
       <h3 className='sr-only'>자기 소개</h3>
       <IntroduceP>
-        졸업작품 어플리케이션 개발에 매일 3시간만 자며 매달렸을 만큼 아무리 사소한 문제라도{" "}
-        <strong>꼭 해결해야만 직성이 풀리는 성격</strong>입니다.
+        저는 <strong>오픈소스에 기여하는 개발자</strong>입니다. React Server Component를 효과적으로
+        사용하려면 빌드타임에 스타일이 결정돼야 한다는 점 때문에 TailwindCSS를 사용했는데, 유틸리티
+        클래스 스타일 라이브러리를 사용하며 아쉬웠던 점을 보완하기 위해
+        &apos;uility-class-components&apos; 라이브러리를 개발했습니다. 해당 이슈에 꾸준히 관심을
+        가지고 있었던 덕분에 chakra-ui/panda, TanStack/query에 기여하기도 했습니다.
       </IntroduceP>
       <IntroduceP>
         <strong>기술 이야기 나누기를 아주 좋아합니다.</strong> Google Developer Student Clubs
@@ -17,12 +20,6 @@ function IntroduceSection() {
         진행하였습니다. 프론트엔드 기술과 관련된 인사이트를 나누고 싶어 직접 60여 명이 있는
         오픈카톡방을 운영중이기도 합니다.
       </IntroduceP>
-      {/* <IntroduceP>
-        <strong>좋은 커뮤니케이션 방법과 협력 방법을 항상 고민합니다.</strong> 부트캠프에서 회고조
-        조장, 팀 프로젝트 리드를 맡아 프로젝트의 성공을 이끌었고, 도움이 필요한 동료를 위해 직접
-        특강을 열기도 했습니다. Wavve Tech Internship에서 Agile 방법론을 적용해 협업하고, 팀원들과
-        함께 팀의 문화를 만들어가는 것을 즐겼습니다.
-      </IntroduceP> */}
       <ContactList>
         <li>
           <ResumeLink name='custardcream@kakao.com' url='mailto:custardcream@kakao.com' />

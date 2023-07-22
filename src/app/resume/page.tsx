@@ -20,22 +20,22 @@ export default function ResumePage() {
         입니다.
       </MainTitle>
       <IntroduceSection />
-      <CareersSection>
-        {careers.map((career) => (
-          <CareersSection.Item key={career.company} {...career} />
-        ))}
-      </CareersSection>
-      <ProjectSection title='오픈소스 기여'>
-        {opensources.map((opensource) => (
-          <ProjectSection.Item key={opensource.title} {...opensource} />
-        ))}
-      </ProjectSection>
-      <ProjectSection>
+      <ProjectSection title='프로젝트' className='print:mt-44'>
         {projects.map((project) => (
           <ProjectSection.Item key={project.title} {...project} />
         ))}
       </ProjectSection>
-      <ResumeSection sectionTitle='경험'>
+      <ProjectSection title='오픈소스 컨트리뷰션' className='print:mt-24'>
+        {opensources.map((opensource) => (
+          <ProjectSection.Item key={opensource.title} {...opensource} />
+        ))}
+      </ProjectSection>
+      <CareersSection className='print:mt-24'>
+        {careers.map((career) => (
+          <CareersSection.Item key={career.company} {...career} />
+        ))}
+      </CareersSection>
+      <ResumeSection sectionTitle='경험' className=' print:break-inside-avoid'>
         {experiences.map((experience) => (
           <ResumeSection.Item key={experience.title} {...experience} />
         ))}

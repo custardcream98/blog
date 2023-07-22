@@ -18,7 +18,7 @@ export type Project = {
   team?: ProjectTeam;
   shortDescription: string;
   links: ResumeLink[];
-  descriptions: string[];
+  description: string;
   stacks: string[];
 };
 

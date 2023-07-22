@@ -47,8 +47,8 @@ export const SectionItem = utld.li`
   [&+&]:mt-28
 
   print:(
-    mt-8
-    [&+&]:mt-10
+    mt-4
+    [&+&]:mt-8
     relative
     break-inside-avoid
   )

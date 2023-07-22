@@ -12,7 +12,7 @@ export function ResumeLink({ url, name }: ResumeLink) {
   );
 }
 
-export const iconClickableStyle = ud`
+const iconClickableStyle = ud`
   text-[0.9rem]
   font-light
 
