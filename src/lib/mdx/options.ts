@@ -49,3 +49,19 @@ export const postMDXOptionsForCache: SerializeOptions = {
   mdxOptions: { remarkPlugins: [remarkGfm] },
   parseFrontmatter: true,
 };
+
+export const resumeMDXOptions: SerializeOptions = {
+  mdxOptions: {
+    rehypePlugins: [
+      [
+        externalLink,
+        {
+          target: "_blank",
+        },
+      ],
+      [rehypePrettyCode, REHYPE_PRETTY_CODE_OPTOINS],
+    ],
+    remarkPlugins: [remarkGfm],
+  },
+  parseFrontmatter: false,
+};
