@@ -1,9 +1,8 @@
 import { useSetIsDarkmodeActivatedContext } from "src/app/_providers";
 import { PrinterSvg } from "src/components/Svgs";
 
-import { iconClickableStyle } from "../_components/ResumeLink";
-
 import { useCallback } from "react";
+import { ud } from "utility-class-components";
 
 export function PrintButton() {
   const { isDarkmodeActivated, setIsDarkmodeActivatedFalse } = useSetIsDarkmodeActivatedContext();
@@ -25,3 +24,46 @@ export function PrintButton() {
     </button>
   );
 }
+
+const iconClickableStyle = ud`
+  text-[0.9rem]
+  font-light
+
+  border-t-[0]
+  border-r-[0]
+  border-l-[0]
+  border-b
+  border-solid
+  border-resume-text-light
+  dark:border-resume-text-dark
+  break-keep
+
+  transition-colors
+  ease-in-out
+  duration-200
+
+  [&>span]:mr-[0.2rem]
+
+  [&_svg]:(
+    inline-block
+    mr-1
+    fill-resume-text-light
+    dark:fill-resume-text-dark
+    transition-[fill]
+    ease-in-out
+    duration-200
+    hover:fill-resume-accent-light
+    dark:hover:fill-resume-accent-dark
+
+    w-[0.95rem]
+    h-[0.95rem]
+  )
+
+  hover:(
+    text-resume-accent-light
+    dark:text-resume-accent-dark
+
+    border-resume-accent-light
+    dark:border-resume-accent-dark
+  )
+`;
