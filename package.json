@@ -18,11 +18,6 @@
     "analyze": "ANALYZE=true next build"
   },
   "dependencies": {
-    "@fontsource/nanum-myeongjo": "^4.5.9",
-    "@fontsource/noto-sans": "^4.5.11",
-    "@fontsource/noto-sans-kr": "^4.5.12",
-    "@fontsource/poppins": "^4.5.10",
-    "@fontsource/source-code-pro": "^4.5.14",
     "@jsdevtools/rehype-toc": "^3.0.2",
     "@tanstack/react-query": "^4.29.15",
     "@tanstack/react-query-devtools": "^4.29.15",
