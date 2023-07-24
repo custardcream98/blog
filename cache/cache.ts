@@ -24,7 +24,7 @@ const generateCache = async () => {
   const postsCache: CachePost[] = await Promise.all(
     postsData.map(async ({ slug, title, content, date }) => {
       const { content: mdxContent } = await compileMDXForCache(content);
-      const { document: cacheDocument } = new JSDOM(renderToStaticMarkup(mdxContent as any)).window; // NOTE: @types/react-dom type issue로 인해 any로 cast함. 추후 수정 필요
+      const { document: cacheDocument } = new JSDOM(renderToStaticMarkup(mdxContent)).window;
       const elements = cacheDocument.querySelectorAll("h1, h2, h3, h4, h5, h6, p, ol, ul");
 
       let extractedContent = "";
