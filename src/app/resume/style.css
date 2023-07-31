@@ -1,3 +1,9 @@
+@media (max-width: 800px ) {
+  html {
+    font-size: 14px;
+  }
+}
+
 @media only print {
   html {
     font-size: 11px;

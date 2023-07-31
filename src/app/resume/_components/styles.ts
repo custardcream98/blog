@@ -20,10 +20,10 @@ export const Section = utld.section`
   my-16
   text-resume-text-light
   dark:text-resume-text-dark
+  w-full
 
   print:(
     my-6
-    w-full
     text-resume-text-print
     last:break-inside-avoid-page
   )
