@@ -7,11 +7,14 @@ import { getAllOgImages } from "src/lib/thumbnails/ogImage";
 
 import { Comments, PostTitle, PrevNextPost } from "./_components";
 import { createPostDoc, getPrevNextPosts } from "./data";
+import { HydratedPostData } from "./hydrate";
 import type { PostPageParams } from "./types";
 
 import { utld } from "utility-class-components";
 
 export { generateMetadata } from "./metadata";
+
+export const dynamic = "force-dynamic";
 
 const createAllPostDocs = (posts: { title: string }[]) =>
   Promise.all(posts.map((post) => createPostDoc(post.title)));
@@ -50,22 +53,24 @@ export default async function PostsDynamicPage({ params: { slug } }: PostPagePar
   const postContent = await compilePostMDX(content);
 
   return (
-    <PostContainer>
-      <PostSection>
-        <PostTitle
-          coverImage={coverImage}
-          title={title}
-          category={category}
-          date={date}
-          series={series}
-        />
-        {postContent}
-      </PostSection>
-      <PrevNextPost key={slug} {...prevNextPosts} />
-      {(process.env.BLOG_ENV === "query" || process.env.NODE_ENV === "production") && (
-        <Comments postTitle={postTitleForComments} />
-      )}
-    </PostContainer>
+    <HydratedPostData title={title} titleForComments={postTitleForComments}>
+      <PostContainer>
+        <PostSection>
+          <PostTitle
+            coverImage={coverImage}
+            title={title}
+            category={category}
+            date={date}
+            series={series}
+          />
+          {postContent}
+        </PostSection>
+        <PrevNextPost key={slug} {...prevNextPosts} />
+        {(process.env.BLOG_ENV === "query" || process.env.NODE_ENV === "production") && (
+          <Comments postTitle={postTitleForComments} />
+        )}
+      </PostContainer>
+    </HydratedPostData>
   );
 }
 

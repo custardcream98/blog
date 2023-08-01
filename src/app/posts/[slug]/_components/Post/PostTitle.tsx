@@ -40,7 +40,6 @@ export function PostTitle({ coverImage, title, category, date, series }: PostTit
           )}
         </BadgeViewsLikesCounterContainer>
       </Container>
-
       <PostThumbnail title={title} {...coverImage} />
     </>
   );
