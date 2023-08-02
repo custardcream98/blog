@@ -20,25 +20,19 @@ const increaseViewCount = async (postDocRef: DocumentReference<PostData>, curren
   return result;
 };
 
-export async function GET(request: Request): Promise<NextResponse> {
-  const { title, viewedAt } = parseSearchParams<GetViewsRequest>(request.url);
-
-  if (!title) {
-    return NextResponse.json(
-      { message: "잘못된 요청입니다. (title이 없습니다.)" },
-      { status: StatusCodes.BAD_REQUEST },
-    );
-  }
-
+export const getPostViewsOnServerSide = async ({
+  title,
+  viewedAt,
+}: {
+  title: string;
+  viewedAt?: string;
+}) => {
   const encodedTitle = encodeToPercentString(title);
   const postDocRef = getPostDocRef(encodedTitle);
 
   const isPostDocExist = (await getDoc(postDocRef)).exists;
   if (!isPostDocExist) {
-    return NextResponse.json(
-      { message: "존재하지 않는 Post Doc 입니다." },
-      { status: StatusCodes.NOT_FOUND },
-    );
+    throw new Error("Not Found Post Doc");
   }
 
   const parsedViewedAt = Number(viewedAt);
@@ -53,7 +47,36 @@ export async function GET(request: Request): Promise<NextResponse> {
   const postDoc = await getDoc(postDocRef);
   const { views } = getDocData(postDoc);
 
-  return NextResponse.json({
-    data: { isIncreased: isViewCountShouldBeIncreased, views: views.length },
-  });
+  return { isViewCountShouldBeIncreased, views: views.length };
+};
+
+export async function GET(request: Request): Promise<NextResponse> {
+  const { title, viewedAt } = parseSearchParams<GetViewsRequest>(request.url);
+
+  if (!title) {
+    return NextResponse.json(
+      { message: "잘못된 요청입니다. (title이 없습니다.)" },
+      { status: StatusCodes.BAD_REQUEST },
+    );
+  }
+
+  try {
+    const { views, isViewCountShouldBeIncreased } = await getPostViewsOnServerSide({
+      title,
+      viewedAt,
+    });
+
+    return NextResponse.json({
+      data: { isIncreased: isViewCountShouldBeIncreased, views },
+    });
+  } catch (error) {
+    if (error instanceof Error) {
+      return NextResponse.json({ message: error.message }, { status: StatusCodes.BAD_REQUEST });
+    }
+
+    return NextResponse.json(
+      { message: "알 수 없는 에러가 발생했습니다." },
+      { status: StatusCodes.INTERNAL_SERVER_ERROR },
+    );
+  }
 }

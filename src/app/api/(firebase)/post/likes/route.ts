@@ -7,6 +7,14 @@ import { FieldValue } from "firebase-admin/firestore";
 import { StatusCodes } from "http-status-codes";
 import { NextResponse } from "next/server";
 
+export const getPostLikesOnServerSide = async ({ title }: { title: string }) => {
+  const encodedTitle = encodeToPercentString(title);
+  const postDocRef = getPostDocRef(encodedTitle);
+  const postDoc = await getDoc(postDocRef);
+
+  return getDocData(postDoc);
+};
+
 export async function GET(request: Request): Promise<NextResponse> {
   const { title } = parseSearchParams<TitleRequest>(request.url);
 
@@ -17,11 +25,7 @@ export async function GET(request: Request): Promise<NextResponse> {
     );
   }
 
-  const encodedTitle = encodeToPercentString(title);
-  const postDocRef = getPostDocRef(encodedTitle);
-  const postDoc = await getDoc(postDocRef);
-
-  const { likes } = getDocData(postDoc);
+  const { likes } = await getPostLikesOnServerSide({ title });
 
   return NextResponse.json({ data: { likes } });
 }
