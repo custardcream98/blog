@@ -1,54 +1,14 @@
-import type { PostData } from "src/types/post";
-import { encodeToPercentString, parseSearchParams } from "src/utils";
+import { getPostViewsOnServerSide } from "src/lib/firebase/data/views";
+import { parseSearchParams } from "src/utils";
 
 import type { TitleRequest } from "../../_types";
-import { getDoc, getDocData, getPostDocRef, updateDoc } from "../../_utils";
 
-import { type DocumentReference, FieldValue } from "firebase-admin/firestore";
 import { StatusCodes } from "http-status-codes";
 import { NextResponse } from "next/server";
 
 type GetViewsRequest = {
   viewedAt: number;
 } & TitleRequest;
-
-const VIEW_COUNT_INTERVAL = 1_200_000; // 20 minutes
-
-const increaseViewCount = async (postDocRef: DocumentReference<PostData>, currentTime: number) => {
-  const result = await updateDoc(postDocRef, { views: FieldValue.arrayUnion(currentTime) });
-
-  return result;
-};
-
-export const getPostViewsOnServerSide = async ({
-  title,
-  viewedAt,
-}: {
-  title: string;
-  viewedAt?: string;
-}) => {
-  const encodedTitle = encodeToPercentString(title);
-  const postDocRef = getPostDocRef(encodedTitle);
-
-  const isPostDocExist = (await getDoc(postDocRef)).exists;
-  if (!isPostDocExist) {
-    throw new Error("Not Found Post Doc");
-  }
-
-  const parsedViewedAt = Number(viewedAt);
-  const currentTime = Date.now();
-  const isViewCountShouldBeIncreased =
-    isNaN(parsedViewedAt) || currentTime - parsedViewedAt > VIEW_COUNT_INTERVAL;
-
-  if (isViewCountShouldBeIncreased) {
-    await increaseViewCount(postDocRef, currentTime);
-  }
-
-  const postDoc = await getDoc(postDocRef);
-  const { views } = getDocData(postDoc);
-
-  return { isViewCountShouldBeIncreased, views: views.length };
-};
 
 export async function GET(request: Request): Promise<NextResponse> {
   const { title, viewedAt } = parseSearchParams<GetViewsRequest>(request.url);

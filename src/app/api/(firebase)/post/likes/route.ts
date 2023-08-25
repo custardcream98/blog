@@ -1,19 +1,12 @@
+import { getDoc, getDocData, getPostDocRef, updateDoc } from "src/lib/firebase/_utils";
+import { getPostLikesOnServerSide } from "src/lib/firebase/data/likes";
 import { encodeToPercentString, getRequestBody, parseSearchParams } from "src/utils";
 
 import { TitleRequest } from "../../_types";
-import { getDoc, getDocData, getPostDocRef, updateDoc } from "../../_utils";
 
 import { FieldValue } from "firebase-admin/firestore";
 import { StatusCodes } from "http-status-codes";
 import { NextResponse } from "next/server";
-
-export const getPostLikesOnServerSide = async ({ title }: { title: string }) => {
-  const encodedTitle = encodeToPercentString(title);
-  const postDocRef = getPostDocRef(encodedTitle);
-  const postDoc = await getDoc(postDocRef);
-
-  return getDocData(postDoc);
-};
 
 export async function GET(request: Request): Promise<NextResponse> {
   const { title } = parseSearchParams<TitleRequest>(request.url);

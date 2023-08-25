@@ -1,43 +1,20 @@
-import type { CommentData } from "src/types/comment";
-import {
-  encodeToPercentString,
-  getRequestBody,
-  parseSearchParams,
-  sortObjectArray,
-} from "src/utils";
-
-import type { TitleRequest } from "../../_types";
 import {
   addDoc,
   deleteDoc,
-  getCollection,
   getCommentDocRef,
   getCommentsCollectionRef,
   getDoc,
   getDocData,
   updateDoc,
-} from "../../_utils";
+} from "src/lib/firebase/_utils";
+import { getComments, getPostCommentsOnServerSide } from "src/lib/firebase/data/comments";
+import type { CommentData } from "src/types/comment";
+import { encodeToPercentString, getRequestBody, parseSearchParams } from "src/utils";
 
-import { type CollectionReference } from "firebase-admin/firestore";
+import type { TitleRequest } from "../../_types";
+
 import { StatusCodes } from "http-status-codes";
 import { NextResponse } from "next/server";
-
-const getComments = async (commentsCollectionRef: CollectionReference<Omit<CommentData, "id">>) => {
-  const commentSnapshot = await getCollection(commentsCollectionRef);
-  const commentsUnordered = commentSnapshot.docs.map((doc) => ({ ...getDocData(doc), id: doc.id }));
-  const comments = sortObjectArray(commentsUnordered, "createdAt");
-
-  return comments;
-};
-
-export const getPostCommentsOnServerSide = async ({ title }: { title: string }) => {
-  const encodedTitle = encodeToPercentString(title);
-
-  const commentsCollectionRef = getCommentsCollectionRef(encodedTitle);
-  const comments = await getComments(commentsCollectionRef);
-
-  return { comments };
-};
 
 export async function GET(request: Request): Promise<NextResponse> {
   const { title } = parseSearchParams<TitleRequest>(request.url);
