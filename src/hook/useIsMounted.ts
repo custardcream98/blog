@@ -7,6 +7,7 @@ export const useIsMounted = () => {
   const [mounted, setMounted] = useState(false);
 
   useEffect(() => {
+    if (typeof window === "undefined") return;
     setMounted(true);
   }, []);
 
