@@ -3,9 +3,8 @@ import commentEditorStateChildrenMap from "./StateMap";
 
 function CommentEditorContainer() {
   const editState = useCommentEditState();
-  const State = commentEditorStateChildrenMap[editState];
 
-  return <State />;
+  return commentEditorStateChildrenMap[editState];
 }
 
 export default CommentEditorContainer;
