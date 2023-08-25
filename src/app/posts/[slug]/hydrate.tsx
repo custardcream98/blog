@@ -1,7 +1,6 @@
-import { getPostCommentsOnServerSide } from "src/app/api/(firebase)/post/comments/route";
-import { getPostLikesOnServerSide } from "src/app/api/(firebase)/post/likes/route";
-import { getPostViewsOnServerSide } from "src/app/api/(firebase)/post/views/route";
-import { HydrateQueryClient } from "src/components/client";
+import { getPostCommentsOnServerSide } from "src/lib/firebase/data/comments";
+import { getPostLikesOnServerSide } from "src/lib/firebase/data/likes";
+import { getPostViewsOnServerSide } from "src/lib/firebase/data/views";
 import {
   getUseGetPostCommentsQueryKey,
   getUseGetPostLikesQueryKey,
@@ -9,7 +8,7 @@ import {
 } from "src/request/query-keys";
 import { getServerSideQueryClient } from "src/request/queryClient";
 
-import { dehydrate } from "@tanstack/react-query";
+import { dehydrate, HydrationBoundary } from "@tanstack/react-query";
 import { PropsWithChildren } from "react";
 
 export const HydratePostQueryClient = async ({
@@ -18,21 +17,29 @@ export const HydratePostQueryClient = async ({
   titleForComments,
 }: PropsWithChildren<{ title: string; titleForComments: string }>) => {
   const queryClient = getServerSideQueryClient();
-  await queryClient.prefetchQuery(getUseGetPostViewsQueryKey(title), async () => {
-    const result = await getPostViewsOnServerSide({ title, viewedAt: Date.now().toString() });
-    return {
-      isIncreased: result.isViewCountShouldBeIncreased,
-      views: result.views,
-    };
+
+  await queryClient.prefetchQuery({
+    queryFn: async () => {
+      const result = await getPostViewsOnServerSide({ title, viewedAt: Date.now().toString() });
+      return {
+        isIncreased: result.isViewCountShouldBeIncreased,
+        views: result.views,
+      };
+    },
+    queryKey: getUseGetPostViewsQueryKey(title),
   });
-  await queryClient.prefetchQuery(getUseGetPostLikesQueryKey(title), () =>
-    getPostLikesOnServerSide({ title }),
-  );
-  await queryClient.prefetchQuery(getUseGetPostCommentsQueryKey(titleForComments), () =>
-    getPostCommentsOnServerSide({ title: titleForComments }),
-  );
+
+  await queryClient.prefetchQuery({
+    queryFn: () => getPostLikesOnServerSide({ title }),
+    queryKey: getUseGetPostLikesQueryKey(title),
+  });
+
+  await queryClient.prefetchQuery({
+    queryFn: () => getPostCommentsOnServerSide({ title: titleForComments }),
+    queryKey: getUseGetPostCommentsQueryKey(titleForComments),
+  });
 
   const dehydratedState = dehydrate(queryClient);
 
-  return <HydrateQueryClient state={dehydratedState}>{children}</HydrateQueryClient>;
+  return <HydrationBoundary state={dehydratedState}>{children}</HydrationBoundary>;
 };

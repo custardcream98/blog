@@ -1,4 +1,4 @@
-import { useGetPostViewsQuery } from "src/request";
+import { useViewsCount } from "../_hooks";
 
 import { HiEye } from "react-icons/hi";
 import { utld } from "utility-class-components";
@@ -8,15 +8,14 @@ type ViewsCounterProps = {
 };
 
 export function ViewsCounter({ title }: ViewsCounterProps) {
-  const { data: viewsData } = useGetPostViewsQuery(title);
-  const isViewCountLoaded = viewsData !== undefined;
+  const { views, isLoading } = useViewsCount(title);
 
-  if (!isViewCountLoaded) return null;
+  if (isLoading) return null;
 
   return (
     <CounterContainer>
       <StyledHiEye title='조회수' size={15} />
-      {isViewCountLoaded && <CounterValue>{viewsData.views}</CounterValue>}
+      <CounterValue>{views}</CounterValue>
     </CounterContainer>
   );
 }

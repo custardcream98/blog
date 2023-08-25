@@ -28,11 +28,9 @@ export default function CheckPasswordState({ stateTo }: Props) {
     setIsAnimatingShake(false);
   }, []);
 
-  const [isDeleting, setIsDeleting] = useState(false);
-
   const [inputPasswordRef, getPasswordVal, clearPasswordInput] = useEditable<HTMLInputElement>();
 
-  const { mutate: mutateDeletePostComment } = useDeletePostCommentMutation();
+  const { mutate: mutateDeletePostComment, isPending: isDeleting } = useDeletePostCommentMutation();
 
   const handleFormSubmit: FormEventHandler<HTMLFormElement> = useCallback(
     (event) => {
@@ -48,7 +46,6 @@ export default function CheckPasswordState({ stateTo }: Props) {
       }
 
       if (stateTo === CommentEditState.DELETE) {
-        setIsDeleting(true);
         mutateDeletePostComment({
           commentId,
           password: inputPasswordValue,

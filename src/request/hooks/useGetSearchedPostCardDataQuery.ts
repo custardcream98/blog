@@ -8,7 +8,7 @@ const STALE_TIME = 60_000_000; // an hour
 
 export const useGetSearchedPostCardDataQuery = (query: string) => {
   return useQuery({
-    cacheTime: CACHE_TIME,
+    gcTime: CACHE_TIME,
 
     queryFn: () => getSearchedPostCardData(query),
 

@@ -5,11 +5,10 @@ import { useQuery } from "@tanstack/react-query";
 
 const REFETCH_INTERVAL = 10_000;
 
-export const useGetPostCommentsQuery = (title: string, suspense = false) => {
+export const useGetPostCommentsQuery = (title: string) => {
   return useQuery({
     queryFn: () => getPostComments({ title }),
     queryKey: getUseGetPostCommentsQueryKey(title),
     refetchInterval: REFETCH_INTERVAL,
-    suspense,
   });
 };
