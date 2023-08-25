@@ -1,7 +1,7 @@
 import "server-only";
 
-import { getDoc, getPostDocRef, setDoc } from "src/app/api/(firebase)/_utils";
 import { getAllPosts } from "src/app/data";
+import { getDoc, getPostDocRef, setDoc } from "src/lib/firebase/_utils";
 import { encodeToPercentString } from "src/utils";
 
 export interface PrevNextPosts {
