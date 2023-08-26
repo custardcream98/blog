@@ -30,6 +30,15 @@ const getComments = async (commentsCollectionRef: CollectionReference<Omit<Comme
   return comments;
 };
 
+export const getPostCommentsOnServerSide = async ({ title }: { title: string }) => {
+  const encodedTitle = encodeToPercentString(title);
+
+  const commentsCollectionRef = getCommentsCollectionRef(encodedTitle);
+  const comments = await getComments(commentsCollectionRef);
+
+  return { comments };
+};
+
 export async function GET(request: Request): Promise<NextResponse> {
   const { title } = parseSearchParams<TitleRequest>(request.url);
 
@@ -40,10 +49,7 @@ export async function GET(request: Request): Promise<NextResponse> {
     );
   }
 
-  const encodedTitle = encodeToPercentString(title);
-
-  const commentsCollectionRef = getCommentsCollectionRef(encodedTitle);
-  const comments = await getComments(commentsCollectionRef);
+  const { comments } = await getPostCommentsOnServerSide({ title });
 
   return NextResponse.json({ data: { comments } });
 }
