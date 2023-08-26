@@ -14,7 +14,7 @@ import { utld } from "utility-class-components";
 
 export { generateMetadata } from "./metadata";
 
-export const revalidate = 1; // 3rd party library인 RQ의 QueryClient cache의 cacheTime을 조절하기 위해 사용
+export const revalidate = 0; // 3rd party library인 RQ의 QueryClient cache의 cacheTime을 조절하기 위해 사용
 // TODO: 추후 각 3rd party request마다 revalidate를 다르게 하는 기능이 Next에 추가되면 변경 필요
 
 const createAllPostDocs = (posts: { title: string }[]) =>
