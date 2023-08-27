@@ -9,7 +9,10 @@ export const getComments = async (
   commentsCollectionRef: CollectionReference<Omit<CommentData, "id">>,
 ) => {
   const commentSnapshot = await getCollection(commentsCollectionRef);
-  const commentsUnordered = commentSnapshot.docs.map((doc) => ({ ...getDocData(doc), id: doc.id }));
+  const commentsUnordered: CommentData[] = commentSnapshot.docs.map((doc) => ({
+    ...getDocData(doc),
+    id: doc.id,
+  }));
   const comments = sortObjectArray(commentsUnordered, "createdAt");
 
   return comments;
