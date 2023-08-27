@@ -48,7 +48,7 @@ const Title = utld.h3`
 
 export function CommentsList() {
   const postTitle = useCommentPostTitleContext();
-  const { data } = useGetPostCommentsQuery(postTitle, true);
+  const { data } = useGetPostCommentsQuery(postTitle);
   const comments = data ? data.comments : [];
 
   return (

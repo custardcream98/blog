@@ -2,3 +2,4 @@
 
 export * from "./useCommentForm";
 export * from "./useLikeCount";
+export * from "./useViewCount";

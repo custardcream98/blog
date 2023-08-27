@@ -15,14 +15,14 @@ export function LikesCounter({ title }: LikesCounterProps) {
   if (!isLikeCountLoaded) return null;
 
   return (
-    <LikeBtn type='button' onClick={handleLikeClick} $isLiked={isLiked}>
+    <LikeButton type='button' onClick={handleLikeClick} $isLiked={isLiked}>
       {isLiked ? (
         <BsHeartFill title='좋아요 버튼' width={16} height={16} strokeWidth={1} />
       ) : (
         <BsHeart title='좋아요 버튼' width={16} height={16} strokeWidth={1} />
       )}
       {isLikeCountLoaded && <LikeValue $isLiked={isLiked}>{likeCount}</LikeValue>}
-    </LikeBtn>
+    </LikeButton>
   );
 }
 
@@ -31,7 +31,7 @@ const SUB_TEXT_COLOR = "text-default-sub-light dark:text-default-sub-dark";
 type LikeValueProps = {
   $isLiked: boolean;
 };
-const LikeBtn = utld.button<LikeValueProps>`
+const LikeButton = utld.button<LikeValueProps>`
   ml-3
   pt-[0.2rem]
   min-w-[2.3125rem]
