@@ -18,7 +18,7 @@ export default function RootLayout({ children }: PropsWithChildren) {
   return (
     <html lang='ko' className='dark scroll-smooth'>
       <head>
-        <link rel='icon' type='image/png' href='../static/icon.png' />
+        <link rel='icon' type='image/png' href='/static/icon.png' />
         <meta
           name='google-site-verification'
           content='uEQH_kf2TBUnEK9r0_FjuR-nICr97lyWeNkTlQJt1XI'

@@ -6,19 +6,16 @@ import EditState from "./EditState";
 import OptionOpenedState from "./OptionOpenedState";
 
 const commentEditorStateChildrenMap: {
-  [key in CommentEditState]: () => JSX.Element;
+  [key in CommentEditState]: React.ReactNode;
 } = {
-  [CommentEditState.DEFAULT]: DefaultState,
-  [CommentEditState.OPTION_OPENED]: OptionOpenedState,
-  [CommentEditState.CHECK_PASSWORD_EDIT]: () => (
-    <CheckPasswordState stateTo={CommentEditState.EDIT} />
-  ),
-  [CommentEditState.CHECK_PASSWORD_DELETE]: () => (
+  [CommentEditState.DEFAULT]: <DefaultState />,
+  [CommentEditState.OPTION_OPENED]: <OptionOpenedState />,
+  [CommentEditState.CHECK_PASSWORD_EDIT]: <CheckPasswordState stateTo={CommentEditState.EDIT} />,
+  [CommentEditState.CHECK_PASSWORD_DELETE]: (
     <CheckPasswordState stateTo={CommentEditState.DELETE} />
   ),
-  [CommentEditState.EDIT]: EditState,
-  // eslint-disable-next-line react/jsx-no-useless-fragment
-  [CommentEditState.DELETE]: () => <></>,
+  [CommentEditState.EDIT]: <EditState />,
+  [CommentEditState.DELETE]: null,
 };
 
 export default commentEditorStateChildrenMap;

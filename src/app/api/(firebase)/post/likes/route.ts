@@ -1,7 +1,8 @@
+import { getDoc, getDocData, getPostDocRef, updateDoc } from "src/lib/firebase/_utils";
+import { getPostLikesOnServerSide } from "src/lib/firebase/data/likes";
 import { encodeToPercentString, getRequestBody, parseSearchParams } from "src/utils";
 
 import { TitleRequest } from "../../_types";
-import { getDoc, getDocData, getPostDocRef, updateDoc } from "../../_utils";
 
 import { FieldValue } from "firebase-admin/firestore";
 import { StatusCodes } from "http-status-codes";
@@ -17,11 +18,7 @@ export async function GET(request: Request): Promise<NextResponse> {
     );
   }
 
-  const encodedTitle = encodeToPercentString(title);
-  const postDocRef = getPostDocRef(encodedTitle);
-  const postDoc = await getDoc(postDocRef);
-
-  const { likes } = getDocData(postDoc);
+  const { likes } = await getPostLikesOnServerSide({ title });
 
   return NextResponse.json({ data: { likes } });
 }

@@ -1,4 +1,6 @@
 export function ClientLogger() {
+  if (typeof window === "undefined") return null;
+
   console.clear();
 
   console.log("%c안녕하세요👋", "font-family: 'Noto Sans'; font-size: 16px; font-weight: 300");
@@ -18,6 +20,5 @@ export function ClientLogger() {
     "font-family: 'Noto Sans'; font-size: 15px; font-weight: 500",
   );
 
-  // eslint-disable-next-line react/jsx-no-useless-fragment
-  return <></>;
+  return null;
 }
