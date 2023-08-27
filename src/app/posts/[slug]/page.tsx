@@ -41,27 +41,8 @@ export const generateStaticParams = async () => {
   }));
 };
 
-const getQueryClient = cache(() => new QueryClient());
-
-export default async function PostsDynamicPage({ params: { slug } }: PostPageParams) {
-  const { coverImage, title, category, date, series, content } = await getPostBySlug(slug, [
-    "title",
-    "date",
-    "slug",
-    "excerpt",
-    "content",
-    "category",
-    "series",
-    "coverImage",
-  ]);
-
-  const prevNextPosts = await getPrevNextPosts(slug);
-
-  const postTitleForComments = title.replaceAll("/", ",");
-
-  const postContent = await compilePostMDX(content);
-
-  const queryClient = getQueryClient();
+const getDehydratedState = cache(async (title: string, postTitleForComments: string) => {
+  const queryClient = new QueryClient();
 
   await queryClient.prefetchQuery({
     queryFn: async () => {
@@ -89,6 +70,31 @@ export default async function PostsDynamicPage({ params: { slug } }: PostPagePar
   });
 
   const dehydratedState = dehydrate(queryClient);
+
+  queryClient.clear();
+
+  return dehydratedState;
+});
+
+export default async function PostsDynamicPage({ params: { slug } }: PostPageParams) {
+  const { coverImage, title, category, date, series, content } = await getPostBySlug(slug, [
+    "title",
+    "date",
+    "slug",
+    "excerpt",
+    "content",
+    "category",
+    "series",
+    "coverImage",
+  ]);
+
+  const prevNextPosts = await getPrevNextPosts(slug);
+
+  const postTitleForComments = title.replaceAll("/", ",");
+
+  const postContent = await compilePostMDX(content);
+
+  const dehydratedState = await getDehydratedState(title, postTitleForComments);
 
   return (
     <PostContainer>
