@@ -33,7 +33,7 @@ export function PostTitle({ coverImage, title, category, date, series }: PostTit
             </CategoryBadges>
           )}
           {(process.env.BLOG_ENV === "query" || process.env.NODE_ENV === "production") && (
-            <ViewsLikesCounterContainer>
+            <ViewsLikesCounterContainer key={title}>
               <ViewsCounter title={title} />
               <LikesCounter title={title} />
             </ViewsLikesCounterContainer>
