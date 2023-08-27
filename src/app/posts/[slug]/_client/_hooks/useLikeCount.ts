@@ -11,7 +11,7 @@ export const useLikeCount = (postTitle: string) => {
   const { data: likesData } = useGetPostLikesQuery(postTitle);
   const likeCount = likesData ? likesData.likes : undefined;
 
-  const { mutate: mutatePatchPostLikes } = usePatchPostLikesMutation();
+  const { mutate: mutatePatchPostLikes, isLoading: isPatchingLike } = usePatchPostLikesMutation();
 
   useLayoutEffect(() => {
     const isLikedLocalStorageValue = localStorage.getItem(localStorageKey);
@@ -34,5 +34,5 @@ export const useLikeCount = (postTitle: string) => {
     });
   }, [postTitle, localStorageKey, mutatePatchPostLikes, setIsLiked]);
 
-  return { handleLikeClick, isLiked, likeCount };
+  return { handleLikeClick, isLiked, isPatchingLike, likeCount };
 };

@@ -1,5 +1,7 @@
 import { useGetPostViewsQuery } from "src/request";
 
+import { LoadingIndicator } from "./LoadingIndicator";
+
 import { HiEye } from "react-icons/hi";
 import { utld } from "utility-class-components";
 
@@ -9,14 +11,12 @@ type ViewsCounterProps = {
 
 export function ViewsCounter({ title }: ViewsCounterProps) {
   const { data: viewsData } = useGetPostViewsQuery(title);
-  const isViewCountLoaded = viewsData !== undefined;
-
-  if (!isViewCountLoaded) return null;
+  const isViewCountLoaded = viewsData?.views !== undefined;
 
   return (
     <CounterContainer>
-      <StyledHiEye title='조회수' size={15} />
-      {isViewCountLoaded && <CounterValue>{viewsData.views}</CounterValue>}
+      <StyledHiEye title='조회수' size={15} className='mr-1' />
+      {isViewCountLoaded ? <CounterValue>{viewsData.views}</CounterValue> : <LoadingIndicator />}
     </CounterContainer>
   );
 }
@@ -31,11 +31,19 @@ const CounterContainer = utld.em`
   flex
   items-center
 
-  min-w-[2.3125rem]
+  min-w-[4rem]
+
+  px-2
+  rounded-full
+
+  border-[1px]
+  border-solid
+  border-text-default-light
+  dark:border-text-default-dark
 `;
 
 const CounterValue = utld.span`
-  ml-[0.3rem]
+  mx-auto
   text-[1rem]
   font-light
 
