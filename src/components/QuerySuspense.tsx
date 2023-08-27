@@ -15,6 +15,12 @@ export type QuerySuspenseProps = React.PropsWithChildren<
 >;
 
 export function QuerySuspense({ children, loadingFallback, ...props }: QuerySuspenseProps) {
+  const isServer = typeof window === "undefined";
+
+  if (isServer) {
+    return null;
+  }
+
   return (
     <QueryErrorResetBoundary>
       {({ reset }) => (
