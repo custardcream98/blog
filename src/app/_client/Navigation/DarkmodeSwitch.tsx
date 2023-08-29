@@ -7,11 +7,11 @@ import { utld } from "utility-class-components";
 
 const ICON_CONTEXT = { size: "90%" };
 
-export function DarkmodeSwitch() {
+export function DarkmodeSwitch({ className }: { className?: string }) {
   const { setIsDarkmodeActivatedToggle, isDarkmodeActivated } = useSetIsDarkmodeActivatedContext();
 
   return (
-    <article>
+    <article className={className}>
       <Button onClick={setIsDarkmodeActivatedToggle} aria-label='다크모드 스위치'>
         <IconContext.Provider value={ICON_CONTEXT}>
           {isDarkmodeActivated ? <BsFillMoonFill color='#e5c704' /> : <ImSun color='#e5c704' />}
@@ -22,9 +22,6 @@ export function DarkmodeSwitch() {
 }
 
 const Button = utld.button`
-  absolute
-  right-[-2.1875rem]
-
   flex
   justify-center
   items-center
@@ -42,11 +39,8 @@ const Button = utld.button`
   active:scale-[0.8]
 
   mobile:(
-    fixed
     w-[2.1875rem]
     h-[2.1875rem]
-    bottom-[1.25rem]
-    right-[1.25rem]
     p-[0.375rem]
     
     backdrop-blur-md

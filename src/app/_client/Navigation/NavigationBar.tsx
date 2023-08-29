@@ -22,7 +22,7 @@ export function NavigationBar({
       <Link href='/'>
         <H1>
           <LogoSvg className='h-4 w-4 text-default-light dark:text-default-dark' />
-          <StyledLogoTitleSpan>shiwoo.dev</StyledLogoTitleSpan>
+          <LogoTitleSpan className='ml-[0.4375rem] small:sr-only'>shiwoo.dev</LogoTitleSpan>
           <span className='sr-only'>: FE 개발자 박시우의 기술 블로그</span>
         </H1>
       </Link>
@@ -33,7 +33,8 @@ export function NavigationBar({
           <NavList.Item href='/series'>Series</NavList.Item>
           <NavList.Item href='/resume'>About</NavList.Item>
         </NavList>
-        <StyledResponsiveIconButton
+        <ResponsiveIconButton
+          className='ml-1'
           title='검색 버튼입니다.'
           type='button'
           mobileSize='22px'
@@ -41,7 +42,7 @@ export function NavigationBar({
           icon={HiSearch}
           onClick={onSearchButtonClick}
         />
-        {!isMobile && <DarkmodeSwitch />}
+        {!isMobile && <DarkmodeSwitch className='absolute right-[-2.1875rem]' />}
       </NavItemWrapper>
     </Nav>
   );
@@ -70,14 +71,4 @@ const H1 = utld.h1`
 
 const NavItemWrapper = utld.div`
   flex
-`;
-
-const StyledResponsiveIconButton = utld(ResponsiveIconButton)`
-  ml-1
-`;
-
-const StyledLogoTitleSpan = utld(LogoTitleSpan)`
-  ml-[0.4375rem]
-
-  small:sr-only
 `;

@@ -57,7 +57,7 @@ export function Navigation() {
         <NavigationBar onSearchButtonClick={toggleSearchbar} />
         <Searchbar isSearchbarOn={isSearchbarOn} onSearchbarClose={toggleSearchbar} />
       </Container>
-      {isMobile && <DarkmodeSwitch />}
+      {isMobile && <DarkmodeSwitch className='fixed bottom-5 right-5' />}
     </Header>
   );
 }
