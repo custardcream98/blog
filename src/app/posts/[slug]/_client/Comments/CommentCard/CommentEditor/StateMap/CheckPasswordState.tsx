@@ -9,7 +9,7 @@ import { useCommentEditorStateSetter } from "../context";
 
 import CommentOverlapWrapper from "./CommentOverlapWrapper";
 
-import { type FormEventHandler, useCallback, useEffect, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import { utld } from "utility-class-components";
 
 type Props = {
@@ -34,7 +34,7 @@ export default function CheckPasswordState({ stateTo }: Props) {
 
   const { mutate: mutateDeletePostComment } = useDeletePostCommentMutation();
 
-  const handleFormSubmit: FormEventHandler<HTMLFormElement> = useCallback(
+  const handleFormSubmit: React.FormEventHandler<HTMLFormElement> = useCallback(
     (event) => {
       event.preventDefault();
 

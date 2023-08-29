@@ -1,6 +1,6 @@
 import { useIsMobie } from "src/hook";
 
-import { type ComponentPropsWithoutRef, createElement, forwardRef } from "react";
+import { createElement, forwardRef } from "react";
 import { IconType } from "react-icons";
 import { utld } from "utility-class-components";
 
@@ -13,7 +13,7 @@ type IconButtonProps = {
   buttonAs?: ClickableComponents;
   href?: string;
   target?: string;
-} & ComponentPropsWithoutRef<"button">;
+} & React.ComponentPropsWithoutRef<"button">;
 
 export const IconButton = forwardRef<HTMLButtonElement, IconButtonProps>(
   function IconButtonForwardRef({ icon, title, size = "1rem", buttonAs, ...props }, ref) {

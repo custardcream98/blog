@@ -4,13 +4,11 @@ import { Project } from "src/types/resume";
 
 import { ResumeLink, ResumeLinksList, ResumePeriod, S } from "..";
 
-import { type PropsWithChildren } from "react";
-
 function Section({
   title,
   className,
   children,
-}: PropsWithChildren<PropsWithClassName<{ title: string }>>) {
+}: React.PropsWithChildren<PropsWithClassName<{ title: string }>>) {
   return (
     <S.Section className={className}>
       <S.SectionTitle>{title}</S.SectionTitle>

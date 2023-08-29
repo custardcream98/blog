@@ -5,13 +5,11 @@ import { ResumeLink, ResumeLinksList, ResumePeriod, S } from "..";
 
 import { SectionItemDescriptionList, SectionItemP, SectionItemTitle } from "./styles";
 
-import { type PropsWithChildren } from "react";
-
 function Section({
   sectionTitle,
   className,
   children,
-}: PropsWithChildren<PropsWithClassName<{ sectionTitle: string }>>) {
+}: React.PropsWithChildren<PropsWithClassName<{ sectionTitle: string }>>) {
   return (
     <S.Section className={className}>
       <S.SectionTitle>{sectionTitle}</S.SectionTitle>

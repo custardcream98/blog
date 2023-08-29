@@ -2,10 +2,10 @@ import { LinkDecorated } from "src/components";
 
 import { parseUrl } from "next/dist/shared/lib/router/utils/parse-url";
 import { usePathname } from "next/navigation";
-import { type PropsWithChildren, useMemo } from "react";
+import { useMemo } from "react";
 import { utld } from "utility-class-components";
 
-type NavItemProps = PropsWithChildren<{
+type NavItemProps = React.PropsWithChildren<{
   href: string;
 }>;
 

@@ -9,12 +9,11 @@ import "./style.css";
 
 import Script from "next/script";
 import DevportImage from "public/static/ad/devport.png";
-import { type PropsWithChildren } from "react";
 import { utld } from "utility-class-components";
 
 export { metadata } from "./metadata";
 
-export default function RootLayout({ children }: PropsWithChildren) {
+export default function RootLayout({ children }: React.PropsWithChildren) {
   return (
     <html lang='ko' className='dark scroll-smooth'>
       <head>

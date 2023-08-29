@@ -1,4 +1,4 @@
-import { createContext, type PropsWithChildren, useContext } from "react";
+import { createContext, useContext } from "react";
 
 const CommentPostTitleContext = createContext("");
 
@@ -7,7 +7,7 @@ export const useCommentPostTitleContext = () => {
   return postTitle;
 };
 
-type Props = PropsWithChildren<{
+type Props = React.PropsWithChildren<{
   postTitle: string;
 }>;
 function CommentPostTitleContextProvider({ children, postTitle }: Props) {

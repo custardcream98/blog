@@ -1,4 +1,4 @@
-import { type Dispatch, type SetStateAction, useCallback, useEffect, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 
 const isBrowser = typeof window !== "undefined";
 
@@ -15,7 +15,7 @@ const getLocalStorageValue = <T>(key: string) => {
 export const useLocalStorageState = <T>(
   key: string,
   initialValue: T,
-): [storedValue: T, setValue: Dispatch<SetStateAction<T>>] => {
+): [storedValue: T, setValue: React.Dispatch<React.SetStateAction<T>>] => {
   const [storedValue, setStoredValue] = useState<T>(() => {
     if (isBrowser) {
       try {
@@ -42,7 +42,7 @@ export const useLocalStorageState = <T>(
     };
   }, [initialValue, key]);
 
-  const setValue: Dispatch<SetStateAction<T>> = useCallback(
+  const setValue: React.Dispatch<React.SetStateAction<T>> = useCallback(
     (value) => {
       setStoredValue((prevValue) => {
         const nextValue = value instanceof Function ? value(prevValue) : value;

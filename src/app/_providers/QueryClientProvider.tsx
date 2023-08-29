@@ -1,8 +1,8 @@
 import { QueryClient, QueryClientProvider as RQQueryClientProvider } from "@tanstack/react-query";
 import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
-import { type PropsWithChildren, useMemo } from "react";
+import { useMemo } from "react";
 
-export function QueryClientProvider({ children }: PropsWithChildren) {
+export function QueryClientProvider({ children }: React.PropsWithChildren) {
   const queryClient = useMemo(() => {
     return new QueryClient();
   }, []);
