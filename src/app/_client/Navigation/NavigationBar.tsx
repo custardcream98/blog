@@ -22,7 +22,7 @@ export function NavigationBar({
       <Link href='/'>
         <H1>
           <LogoSvg className='h-4 w-4 text-default-light dark:text-default-dark' />
-          <LogoTitleSpan className='ml-[0.4375rem] small:sr-only'>shiwoo.dev</LogoTitleSpan>
+          <LogoTitleSpan className='ml-[0.4375rem] small:sr-only' />
           <span className='sr-only'>: FE 개발자 박시우의 기술 블로그</span>
         </H1>
       </Link>

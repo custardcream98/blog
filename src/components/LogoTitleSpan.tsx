@@ -1,6 +1,10 @@
 import { utld } from "utility-class-components";
 
-export const LogoTitleSpan = utld.span`
+export function LogoTitleSpan({ className }: { className?: string }) {
+  return <Span className={className}>shiwoo.dev</Span>;
+}
+
+const Span = utld.span`
   text-[1rem]
   font-mono
   font-extrabold

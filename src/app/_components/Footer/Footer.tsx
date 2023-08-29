@@ -50,18 +50,13 @@ const AddressUl = utld.ul`
   [&>li+li]:pl-[0.7rem]
 `;
 
-const StyledLogoTitleSpan = utld(LogoTitleSpan)`
-  block
-  mb-[0.3rem]
-`;
-
 export function Footer() {
   const YEAR = new Date().getFullYear();
 
   return (
     <Container>
       <Small>
-        <StyledLogoTitleSpan>shiwoo.dev</StyledLogoTitleSpan>
+        <LogoTitleSpan className='mb-[0.3rem] block' />
         &copy; {YEAR} custardcream98. All rights reserved.
       </Small>
       <Address>
