@@ -1,10 +1,11 @@
+import type { PropsWithClassName } from "src/types/props";
 import type { Career } from "src/types/resume";
 
 import { ResumeLink, ResumeLinksList, ResumePeriod, S } from "..";
 
 import { type PropsWithChildren } from "react";
 
-function Section({ className, children }: PropsWithChildren<{ className?: string }>) {
+function Section({ className, children }: PropsWithChildren<PropsWithClassName>) {
   return (
     <S.Section className={className}>
       <S.SectionTitle>경력</S.SectionTitle>

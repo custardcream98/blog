@@ -1,4 +1,5 @@
 import { compileResumeMDX } from "src/lib/mdx";
+import type { PropsWithClassName } from "src/types/props";
 import { Project } from "src/types/resume";
 
 import { ResumeLink, ResumeLinksList, ResumePeriod, S } from "..";
@@ -9,7 +10,7 @@ function Section({
   title,
   className,
   children,
-}: PropsWithChildren<{ title: string; className?: string }>) {
+}: PropsWithChildren<PropsWithClassName<{ title: string }>>) {
   return (
     <S.Section className={className}>
       <S.SectionTitle>{title}</S.SectionTitle>

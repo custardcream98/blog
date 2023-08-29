@@ -1,6 +1,8 @@
+import type { PropsWithClassName } from "src/types/props";
+
 import { utld } from "utility-class-components";
 
-export function LogoTitleSpan({ className }: { className?: string }) {
+export function LogoTitleSpan({ className }: PropsWithClassName) {
   return <Span className={className}>shiwoo.dev</Span>;
 }
 

@@ -1,3 +1,4 @@
+import type { PropsWithClassName } from "src/types/props";
 import type { ResumeSectionData } from "src/types/resume";
 
 import { ResumeLink, ResumeLinksList, ResumePeriod, S } from "..";
@@ -10,7 +11,7 @@ function Section({
   sectionTitle,
   className,
   children,
-}: PropsWithChildren<{ sectionTitle: string; className?: string }>) {
+}: PropsWithChildren<PropsWithClassName<{ sectionTitle: string }>>) {
   return (
     <S.Section className={className}>
       <S.SectionTitle>{sectionTitle}</S.SectionTitle>

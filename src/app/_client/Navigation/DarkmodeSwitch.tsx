@@ -1,4 +1,5 @@
 import { useSetIsDarkmodeActivatedContext } from "src/app/_providers";
+import type { PropsWithClassName } from "src/types/props";
 
 import { IconContext } from "react-icons";
 import { BsFillMoonFill } from "react-icons/bs";
@@ -7,7 +8,7 @@ import { utld } from "utility-class-components";
 
 const ICON_CONTEXT = { size: "90%" };
 
-export function DarkmodeSwitch({ className }: { className?: string }) {
+export function DarkmodeSwitch({ className }: PropsWithClassName) {
   const { setIsDarkmodeActivatedToggle, isDarkmodeActivated } = useSetIsDarkmodeActivatedContext();
 
   return (

@@ -1,4 +1,6 @@
-export function ShareSvg({ className, title }: { className?: string; title?: string }) {
+import type { PropsWithClassName } from "src/types/props";
+
+export function ShareSvg({ className, title }: PropsWithClassName<{ title?: string }>) {
   return (
     <svg
       xmlns='http://www.w3.org/2000/svg'
