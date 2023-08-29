@@ -50,10 +50,10 @@ const Button = utld.button`
     p-[0.375rem]
     
     backdrop-blur-md
-    rounded-[50%]
+    rounded-full
     bg-nav-bg-light
     dark:bg-nav-bg-dark
-    shadow-md
+    shadow
     shadow-default-light
     dark:shadow-default-dark
   )
