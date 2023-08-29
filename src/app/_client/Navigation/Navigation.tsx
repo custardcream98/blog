@@ -1,7 +1,7 @@
 import { LogoTitleSpan } from "src/components";
 import { ResponsiveIconButton } from "src/components/client";
 import { LogoSvg } from "src/components/Svgs";
-import { useWindowSize } from "src/hook";
+import { useWindowScrollEvent, useWindowSize } from "src/hook";
 
 import { Searchbar } from "../Searchbar";
 
@@ -27,7 +27,7 @@ export function Navigation() {
   const navRef = useRef<HTMLDivElement>(null);
   const lastScrollTopRef = useRef(0);
 
-  const onScroll = useCallback(() => {
+  const handleWindowScroll = useCallback(() => {
     if (!navRef.current) {
       return;
     }
@@ -49,18 +49,10 @@ export function Navigation() {
     lastScrollTopRef.current = currentScrollTop;
   }, []);
 
-  useEffect(() => {
-    if (!isPostRoute) {
-      return;
-    }
-
-    window.addEventListener("touchmove", onScroll);
-    window.addEventListener("scroll", onScroll);
-    return () => {
-      window.removeEventListener("touchmove", onScroll);
-      window.removeEventListener("scroll", onScroll);
-    };
-  }, [isPostRoute, onScroll]);
+  useWindowScrollEvent({
+    disabled: !isPostRoute,
+    onScroll: handleWindowScroll,
+  });
 
   useEffect(() => {
     if (!navRef.current) {
