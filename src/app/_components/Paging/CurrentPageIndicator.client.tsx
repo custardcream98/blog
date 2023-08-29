@@ -1,6 +1,6 @@
 "use client";
 
-import { useWindowSize } from "src/hook";
+import { useIsMobie } from "src/hook";
 
 import { useMemo } from "react";
 import { utld } from "utility-class-components";
@@ -10,8 +10,7 @@ type CurrentPageIndicatorProps = {
 };
 
 export function CurrentPageIndicator({ currentPage = 1 }: CurrentPageIndicatorProps) {
-  const { width } = useWindowSize();
-  const isMobile = width < 800;
+  const isMobile = useIsMobie();
   const indicatorStyle = useMemo(() => {
     const indicatorWidthWithMargin = isMobile ? 1.7 : 2;
     const currentIndicatorLocation = (currentPage - 1) * indicatorWidthWithMargin;

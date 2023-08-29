@@ -1,4 +1,4 @@
-import { useWindowSize } from "src/hook";
+import { useIsMobie } from "src/hook";
 
 import { type ComponentPropsWithoutRef, createElement, forwardRef } from "react";
 import { IconType } from "react-icons";
@@ -34,8 +34,7 @@ export const ResponsiveIconButton = forwardRef<
     desktopSize: string;
   }
 >(function ResponsiveIconButtonForwardRef({ icon, title, mobileSize, desktopSize, ...props }, ref) {
-  const { width } = useWindowSize();
-  const isMobile = width <= 800;
+  const isMobile = useIsMobie();
 
   return (
     <StyledResponsiveIconButton
