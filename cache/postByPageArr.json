@@ -1,6 +1,13 @@
 [
   [
     {
+      "category": ["Next.js"],
+      "date": "2023-09-26",
+      "excerpt": "CSS-in-JS와 서버 컴포넌트는 왜 공존하기 어려운지 알아보고, 이를 해결하기 위해 styled-components를 Tailwind CSS로 마이그레이션한 경험을 공유합니다.",
+      "slug": "next-13-and-css-in-js",
+      "title": "CSS-in-JS와 서버 컴포넌트"
+    },
+    {
       "category": ["thoughts"],
       "date": "2023-07-10",
       "excerpt": "GPT는 개발자를 대체할 수 있을까요? 주니어 개발자로서의 제 생각을 정리해봅니다.",
@@ -27,16 +34,16 @@
       "excerpt": "콘텐츠웨이브에서 개발자로서 첫 발을 내딛게 됐습니다!! 인턴 합격을 기념하며 짧은 취준기를 회고해 봤습니다.",
       "slug": "contentwave-intern-job-hunt",
       "title": "콘텐츠웨이브 Web Developer 인턴 합격하기까지 짧은 취준기 회고"
-    },
+    }
+  ],
+  [
     {
       "category": ["React.js", "TypeScript"],
       "date": "2023-01-25",
       "excerpt": "댓글 컴포넌트를 리팩토링 하며 효율적인 컴포넌트 설계란 무엇인지 고민했습니다.",
       "slug": "refactor-comment-component",
       "title": "댓글 컴포넌트 리팩토링하기"
-    }
-  ],
-  [
+    },
     {
       "category": ["etc"],
       "date": "2023-01-15",
@@ -64,16 +71,16 @@
       "excerpt": "\"코드를 서로 나누고 피드백을 주고받는 공간이 있었으면 좋겠다!\"는 생각으로 Share it! 이라는 커뮤니티를 개발했는데, 어떻게 하면 더 빠른 로드 시간을 달성할 수 있을지 고민했습니다.",
       "slug": "optimize-shareit-performance",
       "title": "개인 프로젝트 Share it!의 성능 최적화하기"
-    },
+    }
+  ],
+  [
     {
       "category": ["etc"],
       "date": "2022-11-14",
       "excerpt": "4주만에 적는 회고록",
       "slug": "likelion-frontend-week11",
       "title": "멋사 프론트엔드 스쿨 11주차 회고"
-    }
-  ],
-  [
+    },
     {
       "category": ["TypeScript"],
       "date": "2022-11-05",
@@ -101,16 +108,16 @@
       "excerpt": "코테 준비 본격적으로 시작한 주!",
       "slug": "likelion-frontend-week7",
       "title": "멋사 프론트엔드 스쿨 7주차 회고"
-    },
+    }
+  ],
+  [
     {
       "category": ["JavaScript"],
       "date": "2022-10-05",
       "excerpt": "true == 'true'는 false인 이유가 뭘까요? 자바스크립트 동등 연산자(==)의 작동 방식을 제대로 알아봤습니다.",
       "slug": "js-equality-implicit-conv",
       "title": "자바스크립트 동등 연산자(==)의 암시적 변환 작동 방식"
-    }
-  ],
-  [
+    },
     {
       "category": ["etc"],
       "date": "2022-10-03",
@@ -138,16 +145,16 @@
       "excerpt": "벌써 한 달이나 지났네요... 시간 참 빠르다",
       "slug": "likelion-frontend-week4",
       "title": "멋사 프론트엔드 스쿨 4주차 회고"
-    },
+    }
+  ],
+  [
     {
       "category": ["CSS"],
       "date": "2022-09-22T16:37:00+09:00",
       "excerpt": "실무에서 사용되는 여러 CSS 테크닉들을 익혔습니다.",
       "slug": "css-practical-techniques",
       "title": "CSS 실무 테크닉"
-    }
-  ],
-  [
+    },
     {
       "category": ["etc"],
       "date": "2022-09-18",
@@ -175,16 +182,16 @@
       "excerpt": "자바스크립트의 변수를 간단히 알아봅니다.",
       "slug": "deep-dive-ch4-variables",
       "title": "딥다이브 4장: 변수"
-    },
+    }
+  ],
+  [
     {
       "category": ["JavaScript"],
       "date": "2022-09-12T17:09:00+09:00",
       "excerpt": "자바스크립트를 할줄은 알지만 기초가 부족하기에 완전히 바닥부터 다시 한번 자세하게 공부해보려고 합니다. [모던 자바스크립트 Deep Dive] 책을 읽으며 공부한 내용을 정리하겠습니다! ",
       "slug": "deep-dive-start-js-intro",
       "title": "딥다이브 시작: 자바스크립트 intro"
-    }
-  ],
-  [
+    },
     {
       "category": ["etc"],
       "date": "2022-09-12",
@@ -212,16 +219,16 @@
       "excerpt": "멋사 프론트엔드 스쿨에서의 첫 주를 돌아봤습니다.",
       "slug": "likelion-frontend-week1",
       "title": "멋사 프론트엔드 스쿨 1주차 회고"
-    },
+    }
+  ],
+  [
     {
       "category": ["CSS"],
       "date": "2022-09-02",
       "excerpt": "CSS 기본기를 다지는 시간을 가졌습니다!",
       "slug": "review-css-basics",
       "title": "CSS 기본 다지기"
-    }
-  ],
-  [
+    },
     {
       "category": ["Git"],
       "date": "2022-09-01",
@@ -249,16 +256,16 @@
       "excerpt": "Frontend 개발자가 되기 위해 기본기도 다지고, 앞으로 있을 기술 면접을 대비해 중요한 개념들을 질문, 답변의 형태로 정리했습니다.",
       "slug": "review-frontend-fundamentals-cs",
       "title": "Frontend 기본기 다지기 - CS편"
-    },
+    }
+  ],
+  [
     {
       "category": ["etc"],
       "date": "2022-08-16",
       "excerpt": "Visual Studio Code는 제가 가장 좋아하는 IDE입니다. VSC의 '단축키'를 정리했습니다. 단축키는 생산성에 아주아주 큰 영향을 미치니, 꼭 알아두시길 바랍니다.",
       "slug": "useful-vsc-shortcuts",
       "title": "유용한 VSC 단축키 정리"
-    }
-  ],
-  [
+    },
     {
       "category": ["JavaScript"],
       "date": "2022-08-15T22:30:00+09:00",
@@ -286,16 +293,16 @@
       "excerpt": "블로그의 썸네일과 Open Graph Image를 매번 만드는 것은 여간 귀찮은 일이 아닙니다. Heroku, React, Express로 이 이미지를 자동으로 생성하는 api를 개발해봤습니다.",
       "slug": "react-express-og-gen",
       "title": "Heroku + React + Express로 Open Graph Image, Thumbnail Generator 개발하기"
-    },
+    }
+  ],
+  [
     {
       "category": ["Next.js"],
       "date": "2022-08-06T17:23:00+09:00",
       "excerpt": "블로그를 검색엔진에 노출시키기 위해 sitemap을 생성하는 코드를 추가하겠습니다.",
       "slug": "nextjs-blog-sitemap",
       "title": "Next.js 블로그에 sitemap 생성하기"
-    }
-  ],
-  [
+    },
     {
       "category": ["Next.js", "styled-components"],
       "date": "2022-08-05",
@@ -323,7 +330,9 @@
       "excerpt": "코딩테스트를 준비하며 정리한 유용한 Python3 문법 / 모듈들입니다.",
       "slug": "python3-syntax-summary",
       "title": "코테용 Python3 문법 / 모듈 정리"
-    },
+    }
+  ],
+  [
     {
       "category": ["Next.js", "JavaScript"],
       "coverImage": "/static/img/Next.js로 블로그 개발하기/thumbnail.png",
