@@ -175,7 +175,7 @@
 .post-content div[data-rehype-pretty-code-fragment] pre code {
   display: grid;
   padding: 0;
-  font-size: calc(var(--main-font-size) * 0.8);
+  font-size: var(--main-font-size);
 
   counter-reset: codeblock;
 }
@@ -244,6 +244,10 @@
   display: block;
   margin: calc(var(--main-heading-margin) * 0.1) 0;
   padding-left: 1rem;
+}
+
+.post-content ol > li > p:first-child {
+  display: inline;
 }
 
 .post-content ul > li {
