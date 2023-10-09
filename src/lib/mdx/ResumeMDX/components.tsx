@@ -1,5 +1,3 @@
-import { FONT_D2_CODING } from "src/fonts";
-
 import { type MDXRemoteProps } from "next-mdx-remote/rsc";
 import { utld } from "utility-class-components";
 
@@ -16,7 +14,7 @@ const Ul = utld.ul`
   marker:(
     content-['-']
 
-    text-[1rem]
+    text-[1em]
     font-semibold
 
     text-resume-accent-light
@@ -44,7 +42,4 @@ export const resumeComponents: MDXRemoteProps["components"] = {
   li: ({ children }) => <Li>{children}</Li>,
   strong: ({ children }) => <Strong>{children}</Strong>,
   ul: ({ children }) => <Ul>{children}</Ul>,
-  wrapper: ({ children }) => (
-    <div className={`resume-container ${FONT_D2_CODING.variable}`}>{children}</div>
-  ),
 };

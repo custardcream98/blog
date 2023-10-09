@@ -9,7 +9,7 @@ export { metadata } from "./metadata";
 
 export default function ResumePage() {
   return (
-    <S.Container>
+    <S.Container className='resume-container'>
       <MainTitle>
         <span className='line'>안녕하세요,</span>
         {
