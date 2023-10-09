@@ -2,10 +2,23 @@ import { Career } from "src/types/resume";
 
 const careers: Career[] = [
   {
+    company: "구름",
+    descriptions: [
+      "goormEXP 스쿼드에서 프론트엔드 개발자로 근무하고 있습니다.",
+      "<strong>Goorm Design System</strong>의 유지보수 및 개발을 진행하고 있습니다.",
+      "<strong>간트 차트</strong>를 개발하고 있습니다. Windowing 기법을 활용해 성능을 최적화하고 있으며, 태스크 바의 드래그 앤 드롭이 가능합니다.",
+    ],
+    links: [],
+    period: {
+      from: "2023-07",
+    },
+    position: "Frontend Developer",
+  },
+  {
     company: "콘텐츠웨이브",
     descriptions: [
-      "컴포넌트와 데이터 로드 로직의 결합도가 지나치게 높아 재사용이 어려운 컴포넌트의 Data & Domain, ViewModel과 View 레이어를 분리해 개선했습니다.",
-      "협업의 효율성을 높이고 커뮤니케이션 비용을 줄이기 위해 테스트 코드를 작성,<strong> 80% 이상의 커버리지를 달성</strong>했습니다.",
+      // "컴포넌트와 데이터 로드 로직의 결합도가 지나치게 높아 재사용이 어려운 컴포넌트의 Data & Domain, ViewModel과 View 레이어를 분리해 개선했습니다.",
+      "협업의 효율성을 높이고 커뮤니케이션 비용을 줄이기 위해 테스트 코드를 작성, <strong>80% 이상의 커버리지를 달성</strong>했습니다.",
       "꾸준한 토론을 통해 더 많은 생각을 나누고자 노력했습니다. <strong>두 달만에 GitLab 기준 400회 이상의 Activity</strong>를 기록했습니다.",
     ],
     links: [],
