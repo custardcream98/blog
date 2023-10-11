@@ -13,7 +13,7 @@ const careers: Career[] = [
     period: {
       from: "2023-07",
     },
-    position: "Frontend Developer",
+    position: "Frontend Engineer",
   },
   {
     company: "콘텐츠웨이브",
