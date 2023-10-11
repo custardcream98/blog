@@ -18,25 +18,29 @@ export default function RootLayout({ children }: React.PropsWithChildren) {
     <html lang='ko' className='dark scroll-smooth'>
       <head>
         <link rel='icon' type='image/png' href='/static/icon.png' />
-        <meta
-          name='google-site-verification'
-          content='uEQH_kf2TBUnEK9r0_FjuR-nICr97lyWeNkTlQJt1XI'
-        />
-        <meta name='naver-site-verification' content='f97b3212948a936aa8bb8d14b7f84ba8d01f9cc1' />
-        {
-          // 구글 Analytics
-        }
-        <Script
-          strategy='afterInteractive'
-          async
-          src={`https://www.googletagmanager.com/gtag/js?id=${process.env.NEXT_PUBLIC_GOOGLE_ANALYTICS_ID}`}
-        />
-        <Script id='google-analytics' strategy='afterInteractive'>
-          {`window.dataLayer = window.dataLayer || [];
-            function gtag(){dataLayer.push(arguments);}
-            gtag('js', new Date());
-            gtag('config', '${process.env.NEXT_PUBLIC_GOOGLE_ANALYTICS_ID}');`}
-        </Script>
+        {process.env.NODE_ENV === "production" && (
+          <>
+            <meta
+              name='google-site-verification'
+              content='uEQH_kf2TBUnEK9r0_FjuR-nICr97lyWeNkTlQJt1XI'
+            />
+            <meta
+              name='naver-site-verification'
+              content='f97b3212948a936aa8bb8d14b7f84ba8d01f9cc1'
+            />
+            <Script
+              strategy='afterInteractive'
+              async
+              src={`https://www.googletagmanager.com/gtag/js?id=${process.env.NEXT_PUBLIC_GOOGLE_ANALYTICS_ID}`}
+            />
+            <Script id='google-analytics' strategy='afterInteractive'>
+              {`window.dataLayer = window.dataLayer || [];
+              function gtag(){dataLayer.push(arguments);}
+              gtag('js', new Date());
+              gtag('config', '${process.env.NEXT_PUBLIC_GOOGLE_ANALYTICS_ID}');`}
+            </Script>
+          </>
+        )}
       </head>
       <Body>
         <RootProvider>
