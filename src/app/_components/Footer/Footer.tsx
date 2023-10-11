@@ -57,7 +57,7 @@ export function Footer() {
     <Container>
       <Small>
         <LogoTitleSpan className='mb-[0.3rem] block' />
-        &copy; {YEAR} custardcream98. All rights reserved.
+        &copy; {YEAR} Shi Woo, Park (custardcream98). All rights reserved.
       </Small>
       <Address>
         <AddressUl>
