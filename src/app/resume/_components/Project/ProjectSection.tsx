@@ -25,12 +25,13 @@ async function Item({
   period,
   team,
   description,
-}: Project) {
+  className,
+}: PropsWithClassName<Project>) {
   const isStacksExist = stacks.length !== 0;
   const descriptionContent = description ? await compileResumeMDX(description) : null;
 
   return (
-    <S.SectionItemBordered className='print:[&+&]:!mt-20'>
+    <S.SectionItemBordered className={className}>
       <S.ProjectTitle>{title}</S.ProjectTitle>
 
       {team && <S.ProjectTeam>{team}</S.ProjectTeam>}

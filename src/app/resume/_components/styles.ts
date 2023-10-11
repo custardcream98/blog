@@ -6,80 +6,79 @@ import { ud, utld } from "utility-class-components";
 export const Container = utld(DefaultContainer)`
   !items-start
 
-  pt-24
+  pt-[6em]
 
   print:(
     pt-0
-    pb-8
+    pb-[2em]
   )
 
   ${FONT_D2_CODING.variable}
 `;
 
 export const Section = utld.section`
-  my-16
+  my-[4em]
   text-resume-text-light
   dark:text-resume-text-dark
   w-full
 
   print:(
-    my-6
+    my-[1.5em]
     text-resume-text-print
-    last:break-inside-avoid-page
   )
 `;
 
 export const SectionTitle = utld.h3`
-  text-[1.7rem]
+  text-[1.7em]
   font-semibold
-  mb-[1.7rem]
+  mb-[1.7em]
 
   print:(
-    text-[1.3rem]
-    mb-[1.3rem]
+    text-[1.3em]
+    mb-[1.3em]
   )
 `;
 
 export const SectionItemList = utld.ul``;
 
 export const SectionItem = utld.li`
-  mt-12
-  [&+&]:mt-28
+  mt-[3em]
+  [&+&]:mt-[7em]
 
   print:(
-    mt-4
-    [&+&]:mt-8
+    mt-[1em]
+    [&+&]:mt-[2em]
     relative
     break-inside-avoid
   )
 `;
 
 export const SectionItemBordered = utld(SectionItem)`
-  pl-4
+  pl-[1em]
   border-l
   border-solid
   border-[#ccc]
 `;
 
 export const ProjectTitle = utld.h4`
-  text-[1.3rem]
+  text-[1.3em]
   font-normal
-  mb-2
+  mb-[0.5em]
 
   break-keep
   leading-[1.2]
 
   print:(
-    text-[1.1rem]
-    mb-1
+    text-[1.1em]
+    mb-[0.25em]
   )
 `;
 
 export const dimTextStyle = ud`
-  text-[0.9rem]
+  text-[0.9em]
   font-light
 
-  tracking-[0.02rem]
+  tracking-[0.02em]
 
   text-resume-text-dim-light
   dark:text-resume-text-dim-dark
@@ -89,42 +88,42 @@ export const ProjectTeam = utld.span`
   ${dimTextStyle}
 
   block
-  mb-[0.2rem]
+  mb-[0.2em]
   break-keep
   leading-[1.2]
 `;
 
 export const ProjectShortDescription = utld.p`
-  mt-6
+  mt-[1.5em]
 
   font-light
 
   leading-[1.6]
 
-  tracking-[0.04rem]
+  tracking-[0.04em]
 
   [&_strong]:(
     text-resume-text-strong-light
     dark:text-resume-text-strong-dark
   )
 
-  print:mt-3
+  print:mt-[0.75em]
 `;
 
 export const ProjectDescriptionList = utld.ul`
-  mt-4
+  mt-[1em]
 
   font-light
 
-  tracking-[0.03rem]
+  tracking-[0.03em]
   leading-[1.5]
 
-  print:mt-3
+  print:mt-[0.75em]
 
   marker:(
     content-['-']
 
-    text-[1rem]
+    text-[1em]
     font-semibold
 
     text-resume-accent-light
@@ -138,13 +137,13 @@ export const ProjectDescriptionList = utld.ul`
 `;
 
 export const ProjectDescriptionItem = utld.li`
-  my-[0.4rem]
-  ml-[0.4rem]
-  pl-[0.6rem]
+  my-[0.4em]
+  ml-[0.4em]
+  pl-[0.6em]
 
   print:(
-    my-2
-    ml-[0.2rem]
+    my-[0.2em]
+    ml-[0.3em]
   )
 
   [&_strong]:(
@@ -163,17 +162,17 @@ export const ProjectDescriptionItem = utld.li`
 export const ProjectStacks = utld.ul`
   flex
   flex-wrap
-  gap-[0.3125rem]
+  gap-[0.3125em]
 `;
 
 export const ProjectStack = utld.li`
   font-light
-  text-[0.9rem]
+  text-[0.9em]
 
-  py-[0.2rem]
-  px-[0.4rem]
+  py-[0.2em]
+  px-[0.4em]
 
-  rounded-[0.2rem]
+  rounded-[0.2em]
 
   text-resume-badge-text-light
   dark:text-resume-badge-text-dark

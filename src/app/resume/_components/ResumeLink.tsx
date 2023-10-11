@@ -1,11 +1,12 @@
 import { LinkSvg } from "src/components/Svgs";
+import type { PropsWithClassName } from "src/types/props";
 import type { ResumeLink } from "src/types/resume";
 
 import { ud, utld } from "utility-class-components";
 
-export function ResumeLink({ url, name }: ResumeLink) {
+export function ResumeLink({ url, name, className }: PropsWithClassName<ResumeLink>) {
   return (
-    <StyledResumeLink href={url} target='_blank' rel='noopener noreferrer'>
+    <StyledResumeLink className={className} href={url} target='_blank' rel='noopener noreferrer'>
       <LinkSvg />
       {name}
     </StyledResumeLink>
@@ -13,7 +14,7 @@ export function ResumeLink({ url, name }: ResumeLink) {
 }
 
 const iconClickableStyle = ud`
-  text-[0.9rem]
+  text-[0.9em]
   font-light
 
   border-t-[0]
@@ -29,7 +30,7 @@ const iconClickableStyle = ud`
   ease-in-out
   duration-200
 
-  [&>span]:mr-[0.2rem]
+  [&>span]:mr-[0.2em]
 
   [&_svg]:(
     inline-block
@@ -42,8 +43,8 @@ const iconClickableStyle = ud`
     hover:fill-resume-accent-light
     dark:hover:fill-resume-accent-dark
 
-    w-[0.95rem]
-    h-[0.95rem]
+    w-[0.95em]
+    h-[0.95em]
   )
 
   hover:(
@@ -62,16 +63,16 @@ const StyledResumeLink = utld.a`
 export const ResumeLinksList = utld.ul`
   flex
   flex-wrap
-  gap-[0.625rem]
+  gap-[0.625em]
 
-  mb-[0.8rem]
-  mt-4
+  mb-[0.8em]
+  mt-[1em]
   [ul+&]:mt-8
 
   print:(
-    mt-[0.8rem]
-    [ul+&]:mt-[0.8rem]
+    mt-[0.8em]
+    [ul+&]:mt-[0.8em]
 
-    last:mt-2
+    last:mt-[0.5em]
   )
 `;

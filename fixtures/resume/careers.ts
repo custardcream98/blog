@@ -7,6 +7,7 @@ const careers: Career[] = [
       "goormEXP 스쿼드에서 프론트엔드 개발자로 근무하고 있습니다.",
       "<strong>Goorm Design System</strong>의 유지보수 및 개발을 진행하고 있습니다.",
       "<strong>간트 차트</strong>를 개발하고 있습니다. Windowing 기법을 활용해 성능을 최적화하고 있으며, 태스크 바의 드래그 앤 드롭이 가능합니다.",
+      "goormEXP 랜딩 페이지를 한 스프린트만에 개발했을 정도로 <strong>높은 퍼포먼스를 유지</strong>하고 있습니다.",
     ],
     links: [],
     period: {
@@ -20,6 +21,7 @@ const careers: Career[] = [
       // "컴포넌트와 데이터 로드 로직의 결합도가 지나치게 높아 재사용이 어려운 컴포넌트의 Data & Domain, ViewModel과 View 레이어를 분리해 개선했습니다.",
       "협업의 효율성을 높이고 커뮤니케이션 비용을 줄이기 위해 테스트 코드를 작성, <strong>80% 이상의 커버리지를 달성</strong>했습니다.",
       "꾸준한 토론을 통해 더 많은 생각을 나누고자 노력했습니다. <strong>두 달만에 GitLab 기준 400회 이상의 Activity</strong>를 기록했습니다.",
+      "라이브 시청 중 타 유저의 반응을 실시간으로 볼 수 있도록 하는 'Play Reaction' 프로젝트에 참여했습니다. 프로젝트의 기획부터 구현까지 전반적인 부분에 기여했습니다.",
     ],
     links: [],
     period: {

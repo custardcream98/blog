@@ -16,12 +16,12 @@ function Item({ company, period, position, shortDescription, descriptions, links
   const isLinksExist = links.length !== 0;
 
   return (
-    <S.SectionItemBordered>
+    <S.SectionItemBordered className='print:[&+&]:!mt-[4em]'>
       <S.ProjectTitle>{company}</S.ProjectTitle>
 
       <ResumePeriod {...period} />
 
-      <S.ProjectShortDescription className='!mt-1'>{position}</S.ProjectShortDescription>
+      <S.ProjectShortDescription className='!mt-[0.25rem]'>{position}</S.ProjectShortDescription>
 
       <S.ProjectDescriptionList>
         {descriptions.map((description) => (

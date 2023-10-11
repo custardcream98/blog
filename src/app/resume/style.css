@@ -51,7 +51,7 @@
 }
 
 div[data-rehype-pretty-code-fragment] {
-  margin: 1rem 0;
+  margin: 1em 0;
   background-color: var(--post-element-background-color);
   border-radius: 4px;
   overflow-x: auto;
@@ -61,10 +61,10 @@ div[data-rehype-pretty-code-fragment] {
 div[data-rehype-pretty-code-fragment] pre code {
   display: grid;
 
-  padding: 1rem;
+  padding: 1em;
   font-size: 0.9em;
 
-  letter-spacing: 0.03rem;
+  letter-spacing: 0.03em;
 
   counter-reset: codeblock;
 
@@ -75,7 +75,7 @@ div[data-rehype-pretty-code-fragment] pre code .line {
   display: block;
   margin-top: 0;
   margin-bottom: 0;
-  padding-right: 1rem;
+  padding-right: 1em;
 }
 
 div[data-rehype-pretty-code-fragment] pre code .line[data-highlighted-line] {

@@ -21,14 +21,26 @@ function IntroduceSection() {
         오픈카톡방을 운영중이기도 합니다.
       </IntroduceP>
       <ContactList>
-        <li>
-          <ResumeLink name='custardcream@kakao.com' url='mailto:custardcream@kakao.com' />
+        <li className='inline-block print:hidden'>
+          <ResumeLink name='이메일' url='mailto:custardcream@kakao.com' />
         </li>
-        <li>
+        <li className='inline-block print:hidden'>
           <ResumeLink name='GitHub' url='https://github.com/custardcream98' />
         </li>
-        <li>
-          <ResumeLink name='블로그' url='https://shiwoo.dev' />
+        <li className='inline-block print:hidden'>
+          <ResumeLink name='포트폴리오' url='https://1drv.ms/p/s!AuUWTcQUIRa453uvR0QHsbUGYRbA' />
+        </li>
+        <li className='hidden print:inline-block'>
+          <ResumeLink name='custardcream@kakao.com' url='https://shiwoo.dev' />
+        </li>
+        <li className='hidden print:inline-block'>
+          <ResumeLink
+            name='https://github.com/custardcream98'
+            url='https://github.com/custardcream98'
+          />
+        </li>
+        <li className='hidden print:inline-block'>
+          <ResumeLink name='https://shiwoo.dev' url='https://shiwoo.dev' />
         </li>
       </ContactList>
       <ButtonWrapper>
@@ -40,10 +52,10 @@ function IntroduceSection() {
 }
 
 const IntroduceP = utld.p`
-  mt-[1.2rem]
+  mt-[1.2em]
   leading-[1.7]
   font-light
-  tracking-[0.03rem]
+  tracking-[0.03em]
 
   [&>strong]:(
     font-normal
@@ -54,26 +66,21 @@ const IntroduceP = utld.p`
 
 const ContactList = utld.ul`
   ml-auto
-  mt-10
+  mt-[2.5em]
 
   w-fit
 
   font-light
 
-  [&>li]:inline-block
-  [&>li+li]:ml-4
-  [&>li:last-child]:hidden
+  [&>li+li]:ml-[1em]
 
-  print:(
-    mt-3
-    [&>li:last-child]:inline-block
-  )
+  print:mt-[0.75em]
 `;
 
 const ButtonWrapper = utld.aside`
   w-fit
   ml-auto
-  mt-2
+  mt-[0.5em]
 
   [&_button]:(
     p-0
@@ -81,7 +88,7 @@ const ButtonWrapper = utld.aside`
     dark:text-resume-text-dark
   )
 
-  [&_button+button]:ml-4
+  [&_button+button]:ml-[1em]
 
   print:hidden
 `;

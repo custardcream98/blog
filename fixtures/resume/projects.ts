@@ -48,10 +48,11 @@ const projects: Project[] = [
     description: `
      * Next.js 12버전으로 시작했던 프로젝트를 13으로 업그레이드 하며, Server Component 스타일링을 더 편하게 하기 위해 **utility-class-components 라이브러리를 개발**했습니다.
      * Firebase SDK를 직접 사용하다가 API Route로 리팩토링 하며 **React Query와 Suspense를 활용해 로딩 및 에러 처리 로직을 개선**했습니다.
-     * Lighthouse 기준 **Accessibility, SEO 점수 100점**을 유지하고 있습니다. 그 결과 Google Search Console 기준 **총 노출 수 17,270회, 총 클릭 수 1,613회**를 달성했습니다.
+     * Lighthouse 기준 **Accessibility, SEO 점수 100점**을 유지하고 있습니다. 그 결과 Google Search Console 기준 **총 노출 수 22,930회, 총 클릭 수 2,029회**를 달성했습니다.
      * remark를 활용해 Markdown을 Static Site로 빌드하다가, 더 동적인 블로깅을 위해 React Component를 활용할 수 있는 MDX를 사용하도록 개선했습니다.
      * 복잡한 형태의 Conditional Rendering이 일어나는 댓글 컴포넌트를 객체를 사용한 설계로 리팩토링해 코드 가독성을 높였습니다.
      * 블로그 내 게시물 검색 기능을 구현했으며, API Call 최적화 및 어뷰징 방지를 위해 디바운싱을 적용하는 등 지속해서 기능을 개선 및 추가하고 있습니다.
+     * 게시물의 썸네일을 자동으로 생성합니다.
     `,
     links: [
       {
@@ -63,8 +64,8 @@ const projects: Project[] = [
         url: "https://shiwoo.dev",
       },
       {
-        name: "추천글: 댓글 컴포넌트 리팩토링하기",
-        url: "https://shiwoo.dev/posts/%EB%8C%93%EA%B8%80%20%EC%BB%B4%ED%8F%AC%EB%84%8C%ED%8A%B8%20%EB%A6%AC%ED%8C%A9%ED%86%A0%EB%A7%81%ED%95%98%EA%B8%B0",
+        name: "추천글: CSS-in-JS와 서버 컴포넌트",
+        url: "https://shiwoo.dev/posts/next-13-and-css-in-js",
       },
     ],
     period: {
@@ -160,7 +161,7 @@ const projects: Project[] = [
       to: "2023-01",
     },
     shortDescription:
-      "스냅 사진사와 이용자를 매칭하는 SNS 서비스입니다. 네 명의 프론트엔드 개발자로 구성된 팀에서 리더를 맡았으며, Live Share 등의 툴을 사용해 페어 프로그래밍을 주로 진행했습니다. TypeScript에 익숙치 않은 팀원들을 위해 JavaScript를 사용하는 대신, JSDoc을 적극적으로 활용해 개발 경험을 향상하고자 노력했습니다.",
+      "스냅 사진사와 이용자를 매칭하는 SNS 서비스입니다. 부트캠프에서 주어진 API를 활용해 개발한 프로젝트로, 네 명의 프론트엔드 개발자로 구성된 팀에서 리더를 맡았으며, Live Share 등의 툴을 사용해 페어 프로그래밍을 주로 진행했습니다. TypeScript에 익숙치 않은 팀원들을 위해 JavaScript를 사용하는 대신, JSDoc을 적극적으로 활용해 개발 경험을 향상하고자 노력했습니다.",
     stacks: ["React.js", "JavaScript", "styled-components"],
     team: "4인 프로젝트 (기여도 40%)",
     title: "Snappy",

@@ -35,16 +35,16 @@ export const ResumePeriodContainer = utld.span`
   ${dimTextStyle}
 
   inline-block
-  my-[0.2rem]
+  my-[0.2em]
 
   [&>time:first-child+time::before]:(
     content-['~']
-    mx-[0.3rem]
+    mx-[0.3em]
   )
 
   [&>time:first-child+span::before]:(
     content-['~']
-    mx-[0.3rem]
+    mx-[0.3em]
   )
 
   print:(

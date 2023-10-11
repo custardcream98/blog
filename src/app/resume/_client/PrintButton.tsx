@@ -26,7 +26,7 @@ export function PrintButton() {
 }
 
 const iconClickableStyle = ud`
-  text-[0.9rem]
+  text-[0.9em]
   font-light
 
   border-t-[0]
@@ -42,7 +42,7 @@ const iconClickableStyle = ud`
   ease-in-out
   duration-200
 
-  [&>span]:mr-[0.2rem]
+  [&>span]:mr-[0.2em]
 
   [&_svg]:(
     inline-block
@@ -55,8 +55,8 @@ const iconClickableStyle = ud`
     hover:fill-resume-accent-light
     dark:hover:fill-resume-accent-dark
 
-    w-[0.95rem]
-    h-[0.95rem]
+    w-[0.95em]
+    h-[0.95em]
   )
 
   hover:(

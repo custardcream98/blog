@@ -2,14 +2,14 @@ import { type MDXRemoteProps } from "next-mdx-remote/rsc";
 import { utld } from "utility-class-components";
 
 const Ul = utld.ul`
-  mt-4
+  mt-[1em]
 
   font-light
 
-  tracking-[0.03rem]
+  tracking-[0.03em]
   leading-[1.5]
 
-  print:mt-3
+  print:mt-[0.75em]
 
   marker:(
     content-['-']
@@ -23,13 +23,13 @@ const Ul = utld.ul`
 `;
 
 const Li = utld.li`
-  my-[0.4rem]
-  ml-[0.4rem]
-  pl-[0.6rem]
+  my-[0.4em]
+  ml-[0.4em]
+  pl-[0.6em]
 
   print:(
-    my-2
-    ml-[0.2rem]
+    my-[0.3em]
+    ml-[0.2em]
   )
 `;
 

@@ -21,26 +21,34 @@ export default function ResumePage() {
       </MainTitle>
       <IntroduceSection />
       <ProjectSection title='프로젝트' className='print:mt-44'>
-        {projects.map((project) => (
-          <ProjectSection.Item key={project.title} {...project} />
+        {projects.map((project, index) => (
+          <ProjectSection.Item
+            key={project.title}
+            className={[1, 2, 3].includes(index) ? "print:!mt-[10em]" : ""}
+            {...project}
+          />
         ))}
       </ProjectSection>
-      <ProjectSection title='오픈소스 컨트리뷰션' className='print:mt-24'>
-        {opensources.map((opensource) => (
-          <ProjectSection.Item key={opensource.title} {...opensource} />
+      <ProjectSection title='오픈소스 컨트리뷰션' className='print:pt-4'>
+        {opensources.map((opensource, index) => (
+          <ProjectSection.Item
+            key={opensource.title}
+            className={[1].includes(index) ? "print:!mt-[4em]" : ""}
+            {...opensource}
+          />
         ))}
       </ProjectSection>
-      <CareersSection className='print:mt-24'>
+      <CareersSection className='break-inside-avoid print:pt-4'>
         {careers.map((career) => (
           <CareersSection.Item key={career.company} {...career} />
         ))}
       </CareersSection>
-      <ResumeSection sectionTitle='경험' className=' print:break-inside-avoid'>
+      <ResumeSection sectionTitle='경험' className='break-inside-avoid'>
         {experiences.map((experience) => (
           <ResumeSection.Item key={experience.title} {...experience} />
         ))}
       </ResumeSection>
-      <ResumeSection sectionTitle='교육 및 자격증'>
+      <ResumeSection sectionTitle='교육 및 자격증' className='print:pt-4'>
         {educations.map((educations) => (
           <ResumeSection.Item key={educations.title} {...educations} />
         ))}
@@ -50,14 +58,14 @@ export default function ResumePage() {
 }
 
 const MainTitle = utld.h2`
-  text-[2rem]
+  text-[2em]
   font-light
   leading-[1.5]
 
   break-keep
 
   print:(
-    text-[1.5rem]
+    text-[1.5em]
     mt-[1cm]
   )
 
