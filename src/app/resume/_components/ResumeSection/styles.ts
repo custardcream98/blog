@@ -19,15 +19,18 @@ export const SectionItemP = utld.p`
   )
 `;
 
-export const SectionItemTitle = utld.h3`
+export const SectionItemTitle = utld.h4`
   text-[1.3em]
   font-normal
-  leading-[1.2]
-  
-  mt-[0.8em]
-  mb-2
+  mb-[0.5em]
 
   break-keep
+  leading-[1.2]
+
+  print:(
+    text-[1.1em]
+    mb-[0.25em]
+  )
 `;
 
 export const SectionItemDescriptionList = utld(ProjectDescriptionList)`
