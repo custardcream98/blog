@@ -5,6 +5,7 @@ import { type Element } from "hast";
 import { type SerializeOptions } from "next-mdx-remote/dist/types";
 import rehypePrettyCode, { type Options as RehypePrettyCodeOptions } from "rehype-pretty-code";
 import rehypeSlug from "rehype-slug";
+import remarkFrontmatter from "remark-frontmatter";
 import remarkGfm from "remark-gfm";
 
 const REHYPE_PRETTY_CODE_OPTOINS: Partial<RehypePrettyCodeOptions> = {
@@ -40,9 +41,9 @@ export const postMDXOptions: SerializeOptions = {
       [headingToStartFrom, { startFrom: 3 }],
       [imageSize, { mdxJsxElementTagName: ["img", "NextImage"] }],
     ],
-    remarkPlugins: [remarkGfm],
+    remarkPlugins: [remarkFrontmatter, remarkGfm],
   },
-  parseFrontmatter: true,
+  // postMDX의 frontmatter는 remark plugin으로 처리합니다.
 };
 
 export const postMDXOptionsForCache: SerializeOptions = {

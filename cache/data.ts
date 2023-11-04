@@ -1,16 +1,19 @@
 import { PostMeta } from "src/app/data";
+import { compileMDXForCache } from "src/lib/mdx";
 import type PostType from "src/types/post";
 
 import fs from "fs";
-import matter from "gray-matter";
 import path from "path";
 
 const DIRECTORY_POSTS = path.join(process.cwd(), "_posts");
 
-const getPostFileData = (slug: string) => {
+const getPostFile = async (slug: string) => {
   const fullPath = path.join(DIRECTORY_POSTS, `${slug}.mdx`);
   const file = fs.readFileSync(fullPath, "utf8");
-  return matter(file);
+
+  const { content, frontmatter } = await compileMDXForCache(file);
+
+  return { content, data: frontmatter };
 };
 
 export const getPostSlugs = () => {
@@ -20,22 +23,27 @@ export const getPostSlugs = () => {
     .map((dir) => dir.replace(/\.mdx$/, ""));
 };
 
-export const getAllPosts = <Field extends PostMeta[]>(fields: Field) => {
+export const getAllPosts = async <Field extends PostMeta[]>(fields: Field) => {
   const slugs = getPostSlugs();
-  const posts = slugs
-    .map((slug) => getPostBySlug(slug, fields))
-    .sort((post1, post2) => new Date(post2.date).getTime() - new Date(post1.date).getTime());
+  const posts = await Promise.all(slugs.map((slug) => getPostBySlug(slug, fields)));
+  const sortedPosts = posts.sort(
+    (post1, post2) => new Date(post2.date).getTime() - new Date(post1.date).getTime(),
+  );
 
-  return posts;
+  return sortedPosts;
 };
 
-type PostByFields<Fields extends PostMeta> = Pick<PostType, "date" | Fields>;
+type Change<T, U extends keyof T, V> = Omit<T, U> & { [K in U]: V };
+type PostByFields<Fields extends PostMeta> = Pick<
+  Change<PostType, "content", React.ReactElement<any, string | React.JSXElementConstructor<any>>>,
+  "date" | Fields
+>;
 
-export const getPostBySlug = <Field extends PostMeta[]>(
+export const getPostBySlug = async <Field extends PostMeta[]>(
   slug: string,
   fields: Field,
-): PostByFields<Field[number]> => {
-  const { data, content } = getPostFileData(slug);
+): Promise<PostByFields<Field[number]>> => {
+  const { data, content } = await getPostFile(slug);
 
   const postMeta = fields.reduce((postMeta, field) => {
     if (field === "slug") {
@@ -56,8 +64,6 @@ export const getPostBySlug = <Field extends PostMeta[]>(
     }
     return postMeta;
   }, {} as PostByFields<Field[number]>);
-
-  postMeta.date = data.date;
 
   return postMeta;
 };

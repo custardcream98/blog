@@ -1,4 +1,3 @@
-import { compileMDXForCache } from "src/lib/mdx/compileMDX";
 import type { CachePost } from "src/types/cache";
 import type { PostTypeWithoutContent } from "src/types/post";
 
@@ -11,7 +10,7 @@ import { renderToStaticMarkup } from "react-dom/server";
 const POST_PER_PAGE = 5;
 
 const generateCache = async () => {
-  const postsData = getAllPosts([
+  const postsData = await getAllPosts([
     "slug",
     "title",
     "content",
@@ -21,24 +20,21 @@ const generateCache = async () => {
     "category",
   ]);
 
-  const postsCache: CachePost[] = await Promise.all(
-    postsData.map(async ({ slug, title, content, date }) => {
-      const { content: mdxContent } = await compileMDXForCache(content);
-      const { document: cacheDocument } = new JSDOM(renderToStaticMarkup(mdxContent)).window;
-      const elements = cacheDocument.querySelectorAll("h1, h2, h3, h4, h5, h6, p, ol, ul");
+  const postsCache: CachePost[] = postsData.map(({ slug, title, content, date }) => {
+    const { document: cacheDocument } = new JSDOM(renderToStaticMarkup(content)).window;
+    const elements = cacheDocument.querySelectorAll("h1, h2, h3, h4, h5, h6, p, ol, ul");
 
-      let extractedContent = "";
+    let extractedContent = "";
 
-      elements.forEach((ele) => (extractedContent += ele.textContent?.replaceAll("\n", "") + " "));
+    elements.forEach((ele) => (extractedContent += ele.textContent?.replaceAll("\n", "") + " "));
 
-      return {
-        content: extractedContent,
-        date,
-        slug,
-        title,
-      };
-    }),
-  );
+    return {
+      content: extractedContent,
+      date,
+      slug,
+      title,
+    };
+  });
 
   postsCache.sort((post1, post2) => post1.content.length - post2.content.length);
 
