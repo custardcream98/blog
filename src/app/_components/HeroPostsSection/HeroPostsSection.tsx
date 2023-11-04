@@ -18,7 +18,7 @@ export function HeroPostsSection({ page }: { page?: string }) {
 
   return (
     <Container id={POSTS_SECTION_ID}>
-      <h2 className='sr-only'>{"<Posts />"}</h2>
+      <h2 className='sr-only'>Posts</h2>
       <HeroPostList>
         {posts.map((post, i) => (
           <HeroPost
