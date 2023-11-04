@@ -48,6 +48,13 @@ const educations: ResumeSectionData[] = [
   },
   {
     period: {
+      from: "2023-09",
+      to: "2023-09",
+    },
+    title: "TOEIC Speaking Advanced Low",
+  },
+  {
+    period: {
       from: "2017-03",
       to: "2024-02",
     },
