@@ -34,8 +34,7 @@ export function Paging({ currentPage = 1 }: PagingProps) {
             query: { page: prevPageNumber },
           }}
         >
-          <span className='sr-only'>이전 글</span>
-          <MdOutlineKeyboardArrowLeft size='1.5rem' />
+          <MdOutlineKeyboardArrowLeft title='이전 글' size='1.5rem' />
         </LeftArrow>
       )}
       <PagenumList>
@@ -64,8 +63,7 @@ export function Paging({ currentPage = 1 }: PagingProps) {
             query: { page: nextPageNumber },
           }}
         >
-          <span className='sr-only'>다음 글</span>
-          <MdOutlineKeyboardArrowRight size='1.5rem' />
+          <MdOutlineKeyboardArrowRight title='다음 글' size='1.5rem' />
         </RightArrow>
       )}
     </Container>
