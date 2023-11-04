@@ -2,6 +2,13 @@ import type { ResumeSectionData } from "src/types/resume";
 
 const experiences: ResumeSectionData[] = [
   {
+    period: { from: "2023-10", to: "2023-10" },
+    points: [
+      "중소벤처기업부 주관 벤처 스타트업 아카데미 교육과정에서 최우수 성적을 거둬 장관상을 수상했습니다.",
+    ],
+    title: "벤처 스타트업 아카데미 장관상",
+  },
+  {
     period: {
       from: "2022-10",
       to: "2022-11",
@@ -41,17 +48,17 @@ const experiences: ResumeSectionData[] = [
     ],
     title: "부트캠프 우수 수료생",
   },
-  {
-    links: [
-      {
-        name: "수상 이력서",
-        url: "https://custardcream98.github.io/resume/",
-      },
-    ],
-    period: { from: "2022-10", to: "2022-10" },
-    points: ["멋쟁이사자처럼 FE School 주최 WEB 이력서 경진대회에서 최우수상을 수상했습니다."],
-    title: "WEB 이력서 경진대회",
-  },
+  // {
+  //   links: [
+  //     {
+  //       name: "수상 이력서",
+  //       url: "https://custardcream98.github.io/resume/",
+  //     },
+  //   ],
+  //   period: { from: "2022-10", to: "2022-10" },
+  //   points: ["멋쟁이사자처럼 FE School 주최 WEB 이력서 경진대회에서 최우수상을 수상했습니다."],
+  //   title: "WEB 이력서 경진대회",
+  // },
   {
     period: { from: "2022-05", to: "2022-05" },
     points: [
