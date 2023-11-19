@@ -9,7 +9,7 @@ import { Comments, PostTitle, PrevNextPost } from "./_components";
 import { createPostDoc, getPrevNextPosts } from "./data";
 import type { PostPageParams } from "./types";
 
-import "src/lib/mdx/postMDX/post.css";
+import "src/lib/mdx/PostMDX/post.css";
 
 import { utld } from "utility-class-components";
 
