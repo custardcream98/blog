@@ -1,6 +1,13 @@
 [
   [
     {
+      "category": ["React.js"],
+      "date": "2023-11-19",
+      "excerpt": "Context API와 전역 상태 관리 라이브러리에 대해 고찰해보고 직접 구현해봅니다.",
+      "slug": "global-state-management",
+      "title": "리액트 전역 상태 관리 라이브러리 개발해보기"
+    },
+    {
       "category": ["Next.js"],
       "date": "2023-09-26",
       "excerpt": "CSS-in-JS와 서버 컴포넌트는 왜 공존하기 어려운지 알아보고, 이를 해결하기 위해 styled-components를 Tailwind CSS로 마이그레이션한 경험을 공유합니다.",
@@ -27,16 +34,16 @@
       "excerpt": "Array.includes() 메서드에 넣을 수 있는 값의 타입은 제 생각과 달랐습니다. 어떻게 하면 더 논리적인 타입을 사용해 대응할 수 있을까요?",
       "slug": "includes-type-consider",
       "title": "includes의 타입은 어떻게 대응하는게 좋을까"
-    },
+    }
+  ],
+  [
     {
       "category": ["etc"],
       "date": "2023-03-03",
       "excerpt": "콘텐츠웨이브에서 개발자로서 첫 발을 내딛게 됐습니다!! 인턴 합격을 기념하며 짧은 취준기를 회고해 봤습니다.",
       "slug": "contentwave-intern-job-hunt",
       "title": "콘텐츠웨이브 Web Developer 인턴 합격하기까지 짧은 취준기 회고"
-    }
-  ],
-  [
+    },
     {
       "category": ["React.js", "TypeScript"],
       "date": "2023-01-25",
@@ -64,16 +71,16 @@
       "excerpt": "점점 포스트 수가 많아져서 뿌듯하긴 한데, 가끔 제가 쓴 글을 찾기가 어렵더라고요. 그래서 이번엔 검색 기능을 직접 구현해보기로 했습니다.",
       "slug": "blog-search-feature-part1",
       "title": "블로그에 검색 기능을 구현해보자 1"
-    },
+    }
+  ],
+  [
     {
       "category": ["React.js", "CSS"],
       "date": "2022-11-23",
       "excerpt": "\"코드를 서로 나누고 피드백을 주고받는 공간이 있었으면 좋겠다!\"는 생각으로 Share it! 이라는 커뮤니티를 개발했는데, 어떻게 하면 더 빠른 로드 시간을 달성할 수 있을지 고민했습니다.",
       "slug": "optimize-shareit-performance",
       "title": "개인 프로젝트 Share it!의 성능 최적화하기"
-    }
-  ],
-  [
+    },
     {
       "category": ["etc"],
       "date": "2022-11-14",
@@ -101,16 +108,16 @@
       "excerpt": "Mixed Content 에러를 알아보고 해결했습니다.",
       "slug": "nextjs-mixed-content-proxy",
       "title": "Next.js에서 Mixed Content 에러 해결하기 (feat. Proxy)"
-    },
+    }
+  ],
+  [
     {
       "category": ["etc"],
       "date": "2022-10-17",
       "excerpt": "코테 준비 본격적으로 시작한 주!",
       "slug": "likelion-frontend-week7",
       "title": "멋사 프론트엔드 스쿨 7주차 회고"
-    }
-  ],
-  [
+    },
     {
       "category": ["JavaScript"],
       "date": "2022-10-05",
@@ -138,16 +145,16 @@
       "excerpt": "Scalable Vector Graphics의 사용법을 간략하게 정리했습니다.",
       "slug": "svg-usage-summary",
       "title": "SVG 사용법 정리"
-    },
+    }
+  ],
+  [
     {
       "category": ["etc"],
       "date": "2022-09-25",
       "excerpt": "벌써 한 달이나 지났네요... 시간 참 빠르다",
       "slug": "likelion-frontend-week4",
       "title": "멋사 프론트엔드 스쿨 4주차 회고"
-    }
-  ],
-  [
+    },
     {
       "category": ["CSS"],
       "date": "2022-09-22T16:37:00+09:00",
@@ -175,16 +182,16 @@
       "excerpt": "'값(value)', '표현식(expression)', '문(statement)' 등의 정확한 정의가 무엇인지 알아봅니다.",
       "slug": "deep-dive-ch5",
       "title": "딥다이브 5장: 표현식과 문"
-    },
+    }
+  ],
+  [
     {
       "category": ["JavaScript"],
       "date": "2022-09-12T17:09:00+09:00",
       "excerpt": "자바스크립트의 변수를 간단히 알아봅니다.",
       "slug": "deep-dive-ch4-variables",
       "title": "딥다이브 4장: 변수"
-    }
-  ],
-  [
+    },
     {
       "category": ["JavaScript"],
       "date": "2022-09-12T17:09:00+09:00",
@@ -212,16 +219,16 @@
       "excerpt": "HTML Living Standard를 확실히 공부하고 Semantic HTML을 향해 한발짝 더 나가봤습니다!",
       "slug": "html-living-standard-part1",
       "title": "HTML Living Standard 1"
-    },
+    }
+  ],
+  [
     {
       "category": ["etc"],
       "date": "2022-09-04T01:00:00+09:00",
       "excerpt": "멋사 프론트엔드 스쿨에서의 첫 주를 돌아봤습니다.",
       "slug": "likelion-frontend-week1",
       "title": "멋사 프론트엔드 스쿨 1주차 회고"
-    }
-  ],
-  [
+    },
     {
       "category": ["CSS"],
       "date": "2022-09-02",
@@ -249,16 +256,16 @@
       "excerpt": "멋쟁이 사자처럼에서 진행하는 프론트엔드 스쿨 부트캠프 3기에 최종 합격했습니다. 앞으로 4달 간 오로지 코딩 공부에 전념할 예정입니다!",
       "slug": "likelion-frontend-final-acceptance",
       "title": "멋쟁이 사자처럼 프론트엔드 스쿨 3기에 최종 합격하기까지"
-    },
+    }
+  ],
+  [
     {
       "category": ["JavaScript", "React.js"],
       "date": "2022-08-20",
       "excerpt": "Frontend 개발자가 되기 위해 기본기도 다지고, 앞으로 있을 기술 면접을 대비해 중요한 개념들을 질문, 답변의 형태로 정리했습니다.",
       "slug": "review-frontend-fundamentals-cs",
       "title": "Frontend 기본기 다지기 - CS편"
-    }
-  ],
-  [
+    },
     {
       "category": ["etc"],
       "date": "2022-08-16",
@@ -286,16 +293,16 @@
       "excerpt": "블로그를 Deploy 할 때마다 자동으로 썸네일, OG 이미지를 생성해 Firebase Store에 올리는 방법으로 해결했습니다.",
       "slug": "og-image-thumbnail-gen",
       "title": "Open Graph Image, Thumbnail Generator 완성"
-    },
+    }
+  ],
+  [
     {
       "category": ["React.js", "TypeScript", "Express.js"],
       "date": "2022-08-09",
       "excerpt": "블로그의 썸네일과 Open Graph Image를 매번 만드는 것은 여간 귀찮은 일이 아닙니다. Heroku, React, Express로 이 이미지를 자동으로 생성하는 api를 개발해봤습니다.",
       "slug": "react-express-og-gen",
       "title": "Heroku + React + Express로 Open Graph Image, Thumbnail Generator 개발하기"
-    }
-  ],
-  [
+    },
     {
       "category": ["Next.js"],
       "date": "2022-08-06T17:23:00+09:00",
@@ -323,19 +330,18 @@
       "excerpt": "React.js에서 TypeScript를 사용할 때 다른 컴포넌트를 감싸는 컴포넌트는 어떻게 선언할 수 있을까요?",
       "slug": "react-ts-container",
       "title": "React + TypeScript Container Component 만드는법"
-    },
+    }
+  ],
+  [
     {
       "category": ["Python", "Coding Test"],
       "date": "2022-08-01",
       "excerpt": "코딩테스트를 준비하며 정리한 유용한 Python3 문법 / 모듈들입니다.",
       "slug": "python3-syntax-summary",
       "title": "코테용 Python3 문법 / 모듈 정리"
-    }
-  ],
-  [
+    },
     {
       "category": ["Next.js", "JavaScript"],
-      "coverImage": "/static/img/Next.js로 블로그 개발하기/thumbnail.png",
       "date": "2022-07-31",
       "excerpt": "이전까지 방치돼있던 제 jekyll을 이용한 블로그를 싹 지우고, 완전히 처음부터 모든 것을 만들어 보려 합니다.",
       "slug": "nextjs-blog-dev",
