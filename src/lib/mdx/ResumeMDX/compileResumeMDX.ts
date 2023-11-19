@@ -1,5 +1,3 @@
-import "server-only";
-
 import { resumeMDXOptions } from "../options";
 
 import { resumeComponents } from "./components";

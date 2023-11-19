@@ -9,6 +9,8 @@ import { Comments, PostTitle, PrevNextPost } from "./_components";
 import { createPostDoc, getPrevNextPosts } from "./data";
 import type { PostPageParams } from "./types";
 
+import "src/lib/mdx/postMDX/post.css";
+
 import { utld } from "utility-class-components";
 
 export { generateMetadata } from "./metadata";
