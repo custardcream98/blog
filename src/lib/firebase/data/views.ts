@@ -3,6 +3,8 @@ import { encodeToPercentString } from "src/utils";
 
 import { getDoc, getDocData, getPostDocRef, updateDoc } from "../_utils";
 
+import { initializePost } from "./initialize/post";
+
 import { type DocumentReference, FieldValue } from "firebase-admin/firestore";
 
 const VIEW_COUNT_INTERVAL = 1_200_000; // 20 minutes
@@ -20,13 +22,10 @@ export const getPostViewsOnServerSide = async ({
   title: string;
   viewedAt?: string;
 }) => {
+  await initializePost(title);
+
   const encodedTitle = encodeToPercentString(title);
   const postDocRef = getPostDocRef(encodedTitle);
-
-  const isPostDocExist = (await getDoc(postDocRef)).exists;
-  if (!isPostDocExist) {
-    throw new Error("Not Found Post Doc");
-  }
 
   const parsedViewedAt = Number(viewedAt);
   const currentTime = Date.now();
