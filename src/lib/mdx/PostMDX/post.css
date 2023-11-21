@@ -7,7 +7,9 @@
   --accent-color: #0070f3;
   --background-color: #fcfcfc;
   --sub-text-color: #8c8c8c;
-  --code-line-highlighted: #ffa50024;
+  --code-line-highlighted-background: #f5e4e4;
+  --code-line-highlighted-number-background-color: #f4c7c9;
+  --code-line-highlighted-border-color: #ef6c73;
   -ms-text-size-adjust: 100%;
   -webkit-text-size-adjust: 100%;
 
@@ -37,7 +39,9 @@
   --accent-color: #3b96ff;
   --background-color: #121212;
   --sub-text-color: #b1b1b1;
-  --code-line-highlighted: #ffa5002b;
+  --code-line-highlighted-background: #302b26;
+  --code-line-highlighted-number-background-color: #2e2109;
+  --code-line-highlighted-border-color: #aa7c21;
 }
 
 :is(.dark .post-content) pre[data-theme="light"],
@@ -220,7 +224,11 @@
 }
 
 .post-content div[data-rehype-pretty-code-fragment] pre code .line[data-highlighted-line] {
-  background-color: var(--code-line-highlighted);
+  background-color: var(--code-line-highlighted-background);
+}
+.post-content div[data-rehype-pretty-code-fragment] pre code .line[data-highlighted-line]::before {
+  border-left: 2px solid var(--code-line-highlighted-border-color);
+  background-color: var(--code-line-highlighted-number-background-color);
 }
 
 .post-content img {
