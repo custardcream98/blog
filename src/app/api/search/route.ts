@@ -1,4 +1,4 @@
-import getFuzzyPostData from "src/lib/fuzzy";
+import { getFuzzyPostData } from "src/lib/fuzzy";
 import type { SearchedPostCardDataRaw } from "src/types/searchedPosts";
 import { parseSearchParams } from "src/utils";
 
@@ -14,7 +14,7 @@ type SearchParams = {
   q: string;
 };
 
-export function GET(request: Request) {
+export async function GET(request: Request) {
   const { q } = parseSearchParams<SearchParams>(request.url);
 
   if (q === undefined) {
@@ -25,7 +25,7 @@ export function GET(request: Request) {
     console.log("요청 query: " + q);
   }
 
-  const results = q ? getFuzzyPostData(q).slice(0, 5) : [];
+  const results = q ? (await getFuzzyPostData(q)).slice(0, 5) : [];
   const slicedResults: SearchedPostCardDataRaw[] = [];
 
   results.forEach((result) => {

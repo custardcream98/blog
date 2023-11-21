@@ -50,21 +50,13 @@ function createFuzzyMatcher(input: string) {
   return new RegExp(pattern);
 }
 
-const TIMEOUT = 500;
-
 const findFuzzyPostData = (option: "title" | "content", regex: RegExp, exclude?: Set<string>) => {
-  const searchStarted = Date.now();
-
   const results = [];
   for (const postData of CacheDB) {
     if (exclude?.has(postData.slug)) {
       continue;
     }
     const match = postData[option].match(regex);
-
-    if (Date.now() - searchStarted > TIMEOUT) {
-      throw Error("Timeout!");
-    }
 
     if (!match || match.index === undefined || match[0].length > 50) {
       continue;
@@ -86,25 +78,31 @@ const findFuzzyPostData = (option: "title" | "content", regex: RegExp, exclude?:
   return results;
 };
 
-export default function getFuzzyPostData(query: string): SearchedPostCardDataRaw[] {
+const TIMEOUT = 500;
+const findFuzzyPostDataAsync = (
+  option: "title" | "content",
+  regex: RegExp,
+  exclude?: Set<string>,
+) => {
+  return Promise.race([
+    new Promise<SearchedPostCardDataRaw[]>((resolve) =>
+      resolve(findFuzzyPostData(option, regex, exclude)),
+    ),
+    new Promise<SearchedPostCardDataRaw[]>((resolve) => setTimeout(() => resolve([]), TIMEOUT)),
+  ]);
+};
+
+export async function getFuzzyPostData(query: string): Promise<SearchedPostCardDataRaw[]> {
   const regex = createFuzzyMatcher(query);
   const fuzzyByTitle = findFuzzyPostData("title", regex);
 
-  try {
-    const fuzzyByContent = findFuzzyPostData(
-      "content",
-      regex,
-      new Set(fuzzyByTitle.map((data) => data.slug)),
-    );
+  const fuzzyByContent = await findFuzzyPostDataAsync(
+    "content",
+    regex,
+    new Set(fuzzyByTitle.map((data) => data.slug)),
+  );
 
-    return [...fuzzyByTitle, ...fuzzyByContent]
-      .sort((post1, post2) => new Date(post2.date).getTime() - new Date(post1.date).getTime())
-      .sort((post1, post2) => post1.matchLength - post2.matchLength);
-  } catch (error) {
-    console.log("Timeout! title 탐색 결과만 리턴합니다.");
-
-    return fuzzyByTitle
-      .sort((post1, post2) => new Date(post2.date).getTime() - new Date(post1.date).getTime())
-      .sort((post1, post2) => post1.matchLength - post2.matchLength);
-  }
+  return [...fuzzyByTitle, ...fuzzyByContent]
+    .sort((post1, post2) => new Date(post2.date).getTime() - new Date(post1.date).getTime())
+    .sort((post1, post2) => post1.matchLength - post2.matchLength);
 }
