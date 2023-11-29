@@ -1,11 +1,13 @@
 /** @type {import('next').NextConfig} */
 module.exports = {
   compress: true,
-  experimental: {
-    appDir: true,
-  },
   images: {
-    domains: ["storage.googleapis.com"],
+    remotePatterns: [
+      {
+        hostname: "storage.googleapis.com",
+        protocol: "https",
+      },
+    ],
   },
   staticPageGenerationTimeout: 100000,
 };
