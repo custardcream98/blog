@@ -1,12 +1,12 @@
-import HASH_REVERSERSED_MAP from "cache/hashReversedSlug.json";
+import HASH_REVERSED_MAP from "cache/hashReversedSlug.json";
 import SLUG_MAP from "cache/slug.json";
 import { type NextRequest, NextResponse } from "next/server";
 
 const HTTP_STATUS_CODE_MOVED_PERMANENTLY = 308;
 
 const isKoreanSlug = (target: string): target is keyof typeof SLUG_MAP => target in SLUG_MAP;
-const isHashedSlug = (target: string): target is keyof typeof HASH_REVERSERSED_MAP =>
-  target in HASH_REVERSERSED_MAP;
+const isHashedSlug = (target: string): target is keyof typeof HASH_REVERSED_MAP =>
+  target in HASH_REVERSED_MAP;
 
 /**
  * Post Slug를 한글 => hash값 => 영어로 변경함에 따라
@@ -30,7 +30,7 @@ export function middleware(request: NextRequest) {
     );
   } else if (isHashedSlug(decodedSlug)) {
     return NextResponse.redirect(
-      new URL(`/posts/${HASH_REVERSERSED_MAP[decodedSlug]}`, baseUrl),
+      new URL(`/posts/${HASH_REVERSED_MAP[decodedSlug]}`, baseUrl),
       HTTP_STATUS_CODE_MOVED_PERMANENTLY,
     );
   }
