@@ -1,0 +1,798 @@
+---
+title: "리액트 클린코딩"
+excerpt: "리액트를 사용할 때 '클린 코드'를 작성하려면 어떻게 해야 할까요?"
+date: "2023-12-03"
+category: ["React.js"]
+---
+
+> 리액트를 사용할 때 '클린 코드'를 작성하려면 어떻게 해야 할까요?
+
+엔지니어는 항상 제한된 자원을 가지고 최적의 정답을 찾으려고 노력합니다. 유지 보수가 쉽고 확장성이 좋은 코드를 작성하려는 시도도 이런 노력의 일부라고 할 수 있겠죠. *클린 코드*가 그토록 유명해진 이유도 이런 욕심을 누구나 가지고 있기 때문이 아닐까요?
+
+한 편, 프론트엔드 개발에는 정해진 답이 없습니다. 버튼 하나를 만들더라도 정말 다양한 방법을 사용할 수 있고, 그 중 어떤 방법이 가장 좋은 방법인지는 개발자의 판단에 달려있습니다. 프론트엔드 개발은 정답이 없는 문제를 해결하는 과정이라고 할 수 있습니다.
+
+덕분에 적당한 근거와 기준을 가지지 않는다면 금새 혼란에 빠진 코드가 나오곤 합니다. 나중에야 어떻게 되든 지금 당장 에러를 뿜더라도 동작만 하면 상관 없다는 생각이 드는 순간 코드는 점점 더 나락으로 빠져듭니다. 이런 점이 프론트엔드 개발의 어려운 점이자 매력이라고 생각합니다.
+
+사용자와 바로 마주하는 개발이기 때문에 가장 빈번하게 수정이 일어나는 곳도 프론트엔드입니다. 프론트엔드 코드의 수명은 상대적으로 매우 짧기에 처음 작성하는 개발자조차 본인의 코드에 애착을 버리기 쉽상이고, 그렇게 나온 코드는 누구나 보기 싫어하는 코드가 되어버립니다. 이렇게 탄생한 코드에 변경이 필요하면 있는 것을 수정하는 것보다 처음부터 다시 만드는 것이 더 빠를 때도 많습니다.
+
+이런 이유로 프론트엔드 개발은 개발자의 역량과 치밀한 생각이 더욱 더 빛을 발하는 영역이기도 합니다.
+
+그래서 더 효율적인 작업 능률을 가진 개발자로 거듭나고자 지금까지 리액트를 다루며 제가 생각한 점을 정리해보고, 나중에 다시 돌아와서 과거의 나와 얼마나 생각이 얼마나 달라졌을지 비교해보며 나만의 리액트 가이드라인을 찾아보고 싶다는 생각이 들었습니다.
+
+다소 어그로성이 짙은 제목입니다. 이번 글의 내용은 제 생각과 경험을 녹여낸 것일 뿐이고 이 글을 읽고계신 분의 생각과 다를 수 있습니다. 여러분의 의견도 많이 나눠주셨으면 좋겠습니다.
+
+# 가이드
+
+## 시작하기에 앞서
+
+### Rules of Hooks는 꼭 숙지합시다.
+
+클린 코드 이전에 먼저 런타임 에러는 피해야겠죠? [Rules of Hooks](https://ko.reactjs.org/docs/hooks-rules.html)를 아직 읽어본 적 없으시다면 꼭 확인해보세요.
+
+### 제발 한국인이면 IntelliSense 씁시다.
+
+IDE는 개발자의 생산성을 다양한 방법으로 높여줍니다. 저는 VSCode를 사용하는데 VSCode에는 *Trigger Suggest*라는 [자동 완성(IntelliSense) 기능](https://code.visualstudio.com/docs/editor/intellisense)이 있습니다. 이 기능을 사용하면 IDE가 코드의 맥락을 분석해서 자동으로 사용할 수 있는 값을 제안해줍니다.
+
+<figure className='w-fit'>
+  <NextImage
+    src='/static/img/react-clean-code/trigger-suggest.gif'
+    alt='trigger-suggest 기능 사용 예시'
+  />
+  <figcaption>VSC가 아니여도 비슷한 기능은 IDE라면 대부분 있습니다.</figcaption>
+</figure>
+
+덕분에 '여기엔 어떤게 올 수 있는지' 고민하고 코드를 뒤적이는 시간을 비약적으로 줄일 수 있습니다. 저는 이 기능이 DX에 매우 매우 큰 역할을 한다고 생각합니다.
+
+이걸 잘 쓰는건 물론이고, 제가 작성하는 코드도 suggestion이 잘 나오도록 하는 것이 중요합니다. 처음엔 성가실지 몰라도 한 번 제대로 해두면 미래의 나와 내 팀원이 편해집니다. 내가 지금 작성하는 코드의 인터페이스가 이상하지는 않은지 자연스럽게 점검할 수 있는 기회를 주기도 합니다.
+
+클린 코드에 대한 얘기를 하는 글에 이 내용이 들어간 이유는 바로 다음 항목에 나옵니다.
+
+### 타입스크립트 사용은 필수입니다.
+
+타입스크립트는 개발자의 실수를 줄여주고 코드의 짜임새를 높여줍니다. 그러나 이런 원론적인 이유에 더해 리액트에서 타입스크립트를 사용하는 것이 필수인 이유가 있습니다.
+
+```jsx
+const Button = ({ className, children, ...props }) => (
+  <button className={`${className} ${style.button}`} {...props}>
+    {children}
+  </button>
+);
+```
+
+버튼에 스타일을 입힌 `Button` 컴포넌트를 자바스크립트로 작성했습니다.
+
+`props`로 prop들을 묶어주고, `button` 요소에 전달해줘서 단순히 스타일만 입히고, 사용단에서 얼마든지 필요한 prop을 줄 수 있도록 잘 작성된 코드입니다.
+
+```jsx
+const App = () => {
+  const [count, setCount] = useState(0);
+
+  const handleCountUpClick = () => {
+    setCount(count + 1);
+  };
+
+  return (
+    <div>
+      <Button onClick={handleCountUpClick}>Count Up</Button>
+      <p>{count}</p>
+    </div>
+  );
+};
+```
+
+이렇게 자유자재로 필요한 prop을 넘길 수 있죠.
+
+이번에는 `Button` 컴포넌트의 구현을 전혀 모르는 동료 개발자가 제 컴포넌트를 사용하려 한다고 생각해볼까요? `Button`에는 어떤 prop을 넘겨줄 수 있는걸까요?
+
+버튼이라는 네이밍을 가지고 있기 때문에 `onClick` 등등을 넘길 수 있겠구나 짐작하기는 쉽습니다. 그러나 아무리 그래도 찝찝하고, 지레 짐작해 넘겼다가 근처에서 에러라도 발생하면 애꿎은 `Button` 컴포넌트만 탓하며 결국 `Button`의 구현부를 뒤져보게 될겁니다.
+
+이런 상황을 방지하기 위해 `Button` 컴포넌트의 인터페이스를 명확하게 정의해두는 것이 좋습니다. 그리고 이런 인터페이스를 정의하는 가장 좋은 방법은 타입스크립트를 사용하는 것입니다.
+
+```tsx {1}
+const Button = ({ className, children, ...props }: React.ComponentPropsWithoutRef<"button">) => (
+  <button className={`${className} ${style.button}`} {...props}>
+    {children}
+  </button>
+);
+```
+
+prop 타입 정의 때문에 코드는 길어졌지만 컴포넌트의 인터페이스가 명확히 정해졌습니다. 이제 IDE의 타입스크립트 타입 추론 엔진 덕분에 `Button`이 어떤 것을 받고, 어떤 것을 리턴하는지 자동 완성을 통해 쉽게 알 수 있습니다.
+
+<NextImage
+  src='/static/img/react-clean-code/button-props.gif'
+  alt='Button 컴포넌트 IntelliSense 예시'
+/>
+
+## Props
+
+### 함수 Prop은 이벤트 핸들러입니다.
+
+버튼을 누르면 카운터가 올라가도록 코드를 짜볼까요?
+
+```jsx {6,13}
+const App = () => {
+  const [count, setCount] = useState(0);
+
+  return (
+    <div>
+      <Button setCount={setCount}>Count Up</Button>
+      <p>{count}</p>
+    </div>
+  );
+};
+
+const Button = ({ setCount, children }) => (
+  <button onClick={() => setCount(count + 1)}>{children}</button>
+);
+```
+
+간단합니다. `Button` 컴포넌트에 `setCount` prop을 넘겨주고, `Button`의 `onClick` 이벤트 핸들러에서 넘겨받은 `setCount`를 호출했습니다.
+
+그런데 이번에는 버튼을 누를 때 카운트가 2 올라가야 하는 부분이 추가됐다고 해봅시다. 저 `Button` 컴포넌트는 재사용할 수 있을까요?
+
+못하죠. 이미 `onClick`에 `() => setCount(count + 1){:js}`를 넣어버렸으니까요.
+
+**리액트 컴포넌트에서 함수 Prop을 받아야 한다면 사실 이벤트 핸들러를 받아야 하는건 아녔을까 다시 생각해보세요.**
+
+`Button` 컴포넌트 입장에서 알아야 하는건 '카운트를 set한다'가 아니라 '내가 클릭됐을 때 해야 할 일이 무엇인지'입니다. 그렇다면 이렇게 바꾸면 어떨까요?
+
+```jsx {6,7,13}
+const App = () => {
+  const [count, setCount] = useState(0);
+
+  return (
+    <div>
+      <Button onClick={() => setCount(count + 1)}>Count 1 Up</Button>
+      <Button onClick={() => setCount(count + 2)}>Count 2 Up</Button>
+      <p>{count}</p>
+    </div>
+  );
+};
+
+const Button = ({ onClick, children }) => <button onClick={onClick}>{children}</button>;
+```
+
+이제 눌리면 카운트를 2 올리는 버튼을 만들 수 있게 됐습니다. 3 올리는 버튼도 만들 수 있고... 어떤 일이든 할 수 있게 됐네요!
+
+### ReactNode 타입을 적극적으로 사용해주세요.
+
+리액트에서는 각 노드가 어떤 타입이 될 수 있는지 정의한 `ReactNode` 타입을 제공합니다.
+
+```tsx
+type ReactNode =
+  | ReactElement
+  | string
+  | number
+  | Iterable<ReactNode>
+  | ReactPortal
+  | boolean
+  | null
+  | undefined;
+```
+
+보시다시피 상당히 유한 타입입니다. 이 타입을 활용하면 더 확장성 좋은 컴포넌트를 쉽게 만들 수 있습니다.
+
+예를 들어 공통 스타일이 들어가는 섹션을 표현하기 위해 `Section` 컴포넌트를 만들었다고 해봅시다.
+
+```tsx
+const Section = ({ title, content }: { title: string; content: string }) => (
+  <section>
+    <h2>{title}</h2>
+    <p>{content}</p>
+  </section>
+);
+```
+
+```tsx
+<Section title='1. 안녕하세요' content='반갑습니당' />
+```
+
+그런데, `content`에 이미지가 들어가는 경우가 추가됐습니다. 그럼 기존의 `Section` 컴포넌트는 어떻게 바꾸는게 좋을까요?
+
+```tsx
+const Section = ({
+  title,
+  content,
+  contentImageSrc,
+}: {
+  title: string;
+  content: string;
+  contentImageSrc?: string;
+}) => (
+  <section>
+    <h2>{title}</h2>
+    <p>
+      {content}
+      {contentImageSrc && <img src={contentImageSrc} alt='content' />}
+    </p>
+  </section>
+);
+```
+
+추가된 요구사항에 대응은 할 수 있었지만, 더 많은 기능이 필요할 때마다 이렇게 붙여나가야 할까요?
+
+`content`를 `string`이 아니라 `ReactNode` 타입으로 받았다면 이런 문제는 없었을겁니다.
+
+```tsx {1}
+const Section = ({ title, content }: { title: string; content: React.ReactNode }) => (
+  <section>
+    <h2>{title}</h2>
+    <p>{content}</p>
+  </section>
+);
+```
+
+```tsx
+<Section
+  title='1. 안녕하세요'
+  content={
+    <>
+      <img src='...' alt='프로필 사진' />
+      컨텐츠
+    </>
+  }
+/>
+```
+
+`ReactNode` 타입은 컴포넌트에 '구멍'을 뚫어줍니다. 그 구멍이 무엇을 받을 수 있을지는 가능한 한 제한하지 않는 것이 좋습니다.
+
+컴포넌트는 자리만 마련해 줄 뿐, 그 곳에 무엇이 들어갈지는 사용하는 쪽에서 결정할 수 있도록 해야 합니다. 그래야 컴포넌트가 더욱 유연해집니다.
+
+**부모 컴포넌트로부터 전달받은 것을 보여줘야 할 때는 `ReactNode` 타입으로 받아올 수 있을지 다시 한 번 고민해봅시다.**
+
+> 반면, Prop의 타입을 제한해야 하는 경우도 있습니다. 예를 들어 나이를 보여주는 `AgeCard` 컴포넌트가 있다고 해보면,
+>
+> `const AgeCard = ({ age }: { age: number }) => <div>{age}살</div>;{:tsx}`
+>
+> 이런 식으로 타입을 제한하는 것이 좋습니다. `age`가 더 유한 타입이었다면 `"10" | 10 | "10살"{:ts}` 등등 다양하게 넣을 수 있었을 것이고, 의도한대로 보여주기 어려웠을 겁니다.
+
+#### children은 사랑입니다.
+
+앞서 봤던 `Section` 컴포넌트는 `children`을 사용하면 더욱 깔끔해집니다.
+
+```tsx {1}
+const Section = ({ title, children }: { title: string; children: React.ReactNode }) => (
+  <section>
+    <h2>{title}</h2>
+    <p>{children}</p>
+  </section>
+);
+```
+
+```tsx
+<Section title='1. 안녕하세요'>
+  <img src='...' alt='프로필 사진' />
+  컨텐츠
+</Section>
+```
+
+`section` 요소로 컨텐츠를 감싼다는 표현이 명확하게 나타납니다. `childeren`을 적극적으로 활용합시다.
+
+> 리액트에서 제공하는 `PropsWithChildren` 타입을 활용하면 더 편하게 사용할 수 있습니다.
+>
+> ```tsx
+> const Section = ({ title, children }: React.PropsWithChildren<{ title: string }>) => (
+>   <section>
+>     <h2>{title}</h2>
+>     <p>{children}</p>
+>   </section>
+> );
+> ```
+
+## Components
+
+### bottom-up 개발에 Storybook만한 도구가 없습니다.
+
+개발해야 하는 페이지가 주어지면 top-down으로 개발하려는 욕구가 생깁니다. 그러나 **리액트는 컴포넌트 기반 개발을 위한 도구**입니다.
+
+페이지의 컴포넌트 단위를 먼저 정의해보고 작업을 시작해보세요. 컴포넌트를 추상화하고 개발하면 할수록 공통 컴포넌트가 쌓이며 개발 속도가 올라가는 것을 느낄 수 있습니다.
+
+컴포넌트 단위 개발이 가능하려면 컴포넌트적 사고방식이 필요합니다. 이를 위해서는 외부와 완전히 격리된 공간에 그 컴포넌트를 그려보는 것이 좋습니다.
+
+이럴 때 사용할 수 있는 최고의 친구는 Storybook입니다. Storybook을 활용해 철저한 컴포넌트 단위 개발이 이뤄진다면 자연스럽게 컴포넌트의 재사용성이 높아지고, 컴포넌트의 인터페이스가 명확해지며, 컴포넌트의 테스트가 쉬워집니다.
+
+내 컴포넌트는 Storybook에서 렌더링하기 너무 어렵다고요? 그럼 그 컴포넌트에서 로직을 분리하고, 컴포넌트를 더 작은 단위로 쪼개보세요. 이 과정을 통해 더 잘게 쪼개야 할지, 아니면 그대로 두어도 될지도 자연스럽게 판단할 수 있습니다.
+
+### UI와 로직은 이심이체입니다.
+
+값이 50 미만이면 빨간색, 50 이상이면 초록색으로 숫자를 보여주는 컴포넌트가 있습니다.
+
+```tsx
+const NumberDisplay = ({ target }: { target: number }) => {
+  const color = target < 50 ? "red" : "green";
+
+  return (
+    <div
+      style={{
+        color,
+      }}
+    >
+      {target}
+    </div>
+  );
+};
+```
+
+이 컴포넌트는 UI와 로직이 섞여있습니다. 이런 컴포넌트는 재사용성이 떨어집니다. 예를 들어 값이 30 미만이면 빨간색을 보여줘야 하는 부분에서는 이 컴포넌트를 사용할 수 없겠죠.
+
+**숫자의 색을 달리 보여준다는 UI와, 값의 크고 작음을 판단하는 로직이 한 컴포넌트로 결합돼있기 때문**입니다.
+
+UI와 로직을 분리해야 합니다.
+
+```tsx
+const NumberDisplayUI = ({ target, color }: { target: number; color: "red" | "green" }) => (
+  <div
+    style={{
+      color,
+    }}
+  >
+    {target}
+  </div>
+);
+
+const App = () => {
+  const target = 45;
+  const color1 = target < 50 ? "red" : "green";
+  const color2 = target < 30 ? "red" : "green";
+
+  return (
+    <>
+      <NumberDisplayUI target={target} color={color} />
+      <NumberDisplayUI target={target} color={color2} />
+    </>
+  );
+};
+```
+
+`NumberDisplayUI` 컴포넌트는 숫자를 특정 색으로 보여준다는 역할만을 담당하고, 어떤 색으로 보여주어야 할지는 사용하는 부모 컴포넌트에서 결정합니다.
+
+> `NumberDisplayUI`같이 UI만 담당하는 컴포넌트는 최대한 도메인 용어를 사용하지 않는게 좋습니다. `color` Prop의 타입을 `"red" | "green"{:ts}`이 아니라 `"good" | "bad"{:ts}`로 받았다면 확장성이 떨어지는 선택이라는 뜻입니다. UI를 담당하는 컴포넌트라면 온전히 UI에만 집중하는게 어떨까요?
+
+### DOM API를 존중해서 예측 가능한 컴포넌트를 만들어주세요.
+
+브라우저가 기본적으로 제공해주는 DOM API는 어떤 라이브러리나 프레임워크를 쓰더라도 변하지 않습니다. 따라서 모든 프론트엔드 개발자가 공통적으로 익히고, 익숙하게 사용하는 API입니다.
+
+이 DOM API를 존중하면 구현을 보지 않고도 동작을 예측할 수 있는 컴포넌트를 만들 수 있습니다.
+
+```tsx
+const Input = ({ inputPlaceholder }: { inputPlaceholder?: string }) => {
+  return <input placeholder={inputPlaceholder} />;
+};
+```
+
+`Input` 컴포넌트는 이름에서 알 수 있듯 `input` 요소를 사용하기 위한 컴포넌트입니다. 그러나, DOM API를 존중하지 않고 `inputPlaceholder`라는 `Input` 컴포넌트만의 특별한 Prop 이름을 사용했습니다.
+
+이런 이름짓기는 다른 개발자를 혼란에 빠뜨립니다. `Input`의 구현부를 보지 않은 사람은 `placeholder`와 `inputPlaceholder`가 똑같이 동작할 것이라고 기대하기 어려울겁니다. 나만의 특별한 API를 새로 만들지 말고, DOM API처럼 모든 개발자가 공유하는 인터페이스를 존중합시다.
+
+이벤트 핸들러를 사용할 때는 더욱 주의해야 합니다.
+
+```tsx
+const Button = ({ onClick }: { onClick?: () => void }) => {
+  const handleClick = () => {
+    console.log("버튼이 클릭됐습니다.");
+    onClick?.();
+  };
+
+  return <button onClick={handleClick}>버튼</button>;
+};
+```
+
+`onClick`이라는 네이밍을 유지한 점은 훌륭하지만, 이벤트 핸들러임에도 이벤트 객체를 인자로 넘겨주지 않고 있습니다. `React.MouseEvent<HTMLButtonElement>{:ts}` 타입의 이벤트 객체를 넘겨줘야 동작을 예측하기 더 좋은 컴포넌트가 됩니다.
+
+```tsx
+const Button = ({ onClick }: { onClick?: React.MouseEventHandler<HTMLButtonElement> }) => {
+  const handleClick: React.MouseEventHandler<HTMLButtonElement> = (event) => {
+    console.log("버튼이 클릭됐습니다.");
+    onClick?.(event);
+  };
+
+  return <button onClick={handleClick}>버튼</button>;
+};
+```
+
+더 나아가서, 굳이 특정 Prop만 받아야 할 지도 한 번 고민해보세요. `Button` 컴포넌트는 `onClick` 이벤트 핸들러만 받을 수 있어야 할까요?
+
+```tsx
+const Button = ({ onClick, ...props }: React.ComponentPropsWithoutRef<"button">) => {
+  const handleClick: React.MouseEventHandler<HTMLButtonElement> = (event) => {
+    console.log("버튼이 클릭됐습니다.");
+    onClick?.(event);
+  };
+
+  return <button onClick={handleClick} {...props} />;
+};
+```
+
+`React.ComponentProps{:ts}` 타입을 활용하면 더욱 더 예측 가능한 컴포넌트를 쉽게 만들 수 있습니다. DOM API를 존중하면서도 내 컴포넌트의 한계를 더 높이 끌어올리는 일석 이조의 효과를 누리게 됐네요.
+
+`useImperativeHandle`을 불가피하게 사용해야 될 때도 DOM API 존중해주기를 잊지 마세요.
+
+```jsx {8-16}
+const CustomInput = React.forwardRef(function CustomInput(props, ref) {
+  const inputRef = useRef(null);
+
+  useImperativeHandle(
+    ref,
+    () => {
+      return {
+        // BAD
+        // activateFocus() {
+        //   inputRef.current.focus();
+        // },
+
+        // GOOD
+        focus() {
+          inputRef.current.focus();
+        },
+      };
+    },
+    [],
+  );
+
+  return <input {...props} ref={inputRef} />;
+});
+```
+
+### 그 상태, 꼭 거기 있어야 했을까요?
+
+```jsx
+const HomePage = () => {
+  const [count, setCount] = React.useState(0);
+
+  return (
+    <div>
+      <p>{count}</p>
+      <button onClick={() => setCount(count + 1)}>Count Up</button>
+      <OtherComponent1>
+      <OtherComponent2>
+      <OtherComponent3>
+    </div>
+  );
+}
+```
+
+`HomePage` 컴포넌트는 카운터를 보여주는 역할도 하고, 페이지 컴포넌트로서 `OtherComponent1`, `OtherComponent2`, `OtherComponent3`를 렌더링하는 역할도 합니다.
+
+버튼이 눌릴 때 바뀌어야 하는건 6번째 줄의 `<p>{count}</p>{:jsx}` 뿐이지만 이 설계대로면 버튼이 눌릴 때마다 `count`와 아무 관련 없는 `OtherComponent`들도 리렌더링됩니다.
+
+**상태를 선언할 때는 그 상태를 기준으로 관심사를 분리한다는 생각으로 컴포넌트를 나눠야 합니다.**
+
+```jsx
+const HomePage = () => {
+  return (
+    <div>
+      <Counter />
+      <OtherComponent1>
+      <OtherComponent2>
+      <OtherComponent3>
+    </div>
+  );
+}
+
+const Counter = () => {
+  const [count, setCount] = React.useState(0);
+
+  return (
+    <div>
+      <p>{count}</p>
+      <button onClick={() => setCount(count + 1)}>Count Up</button>
+    </div>
+  );
+}
+```
+
+리액트는 렌더링 패스에서 그 컴포넌트에 주어진 상태값만을 기반으로 UI에 어떤 것을 보여줄지 결정합니다. 이 근본을 잊지 말고, '이 부분을 그릴 때는 어떤 데이터가 필요할까' 항상 고민하고 컴포넌트를 분리합시다.
+
+## Hooks
+
+### 그 상태, 꼭 리액트로 관리해야 했을까요?
+
+`form` 요소는 리액트로 다룰 때 굉장히 까다롭습니다. 리액트는 부모에서 자식으로 상태를 넘겨주는 단방향 데이터 흐름을 가지고 있지만, `form`은 `submit` 이벤트가 발생하면 자식에서 부모로 데이터를 넘겨줘야 합니다.
+
+```tsx
+const ProfileForm = () => {
+  const [name, setName] = React.useState("");
+  const [age, setAge] = React.useState(0);
+
+  const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
+    event.preventDefault();
+    postProfile(name, age);
+  };
+
+  return (
+    <form onSubmit={handleSubmit}>
+      <input
+        type='text'
+        value={name}
+        onChange={(event) => {
+          setName(event.target.value);
+        }}
+      />
+      <input
+        type='number'
+        value={age}
+        onChange={(event) => {
+          setAge(Number(event.target.value));
+        }}
+      />
+      <button type='submit'>제출</button>
+    </form>
+  );
+};
+```
+
+두 개의 `input`을 만들기 위해 상태를 두 개나 선언해야 했습니다. 값을 입력할 때마다 리렌더링을 일으키기까지 하겠죠.
+
+굳이 리액트를 사용하지 않고 DOM API 본연의 기능을 사용했다면 훨씬 간단했을겁니다.
+
+```tsx {4-6, 12-13}
+const ProfileForm = () => {
+  const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
+    event.preventDefault();
+    const formData = new FormData(event.currentTarget);
+    const name = formData.get("name") as string;
+    const age = formData.get("age") as string;
+    postProfile(name, age);
+  };
+
+  return (
+    <form onSubmit={handleSubmit}>
+      <input type='text' name='name' />
+      <input type='number' name='age' />
+      <button type='submit'>제출</button>
+    </form>
+  );
+};
+```
+
+리액트는 내게 주어진 수많은 도구중 하나일 뿐이라는 점을 명심합시다. **리액트 개발자에게 주어진 도구는 리액트만 있는게 아닙니다!**
+
+### 상태값을 새로 선언하지 마세요.
+
+```tsx
+const Counter = () => {
+  const [count, setCount] = React.useState(0);
+  const [countPlus2, setCountPlus2] = React.useState(0);
+
+  React.useEffect(() => {
+    setCountPlus2(count + 2);
+  }, [count]);
+
+  return (
+    <div>
+      <button onClick={() => setCount(count + 1)}>Count Up</button>
+      <div>카운트: {count}</div>
+      <div>카운트 + 2: {countPlus2}</div>
+    </div>
+  );
+};
+```
+
+`count`가 올라갈 때마다 `count`에 2를 더한 값을 표현하고 싶어 `countPlus2`라는 상태를 선언했습니다. 그리고 `useEffect`를 사용해 `count`가 바뀔 때마다 `countPlus2`를 업데이트했습니다.
+
+하지만 이 경우 `countPlus2`는 불필요하게 추가 선언된 상태입니다. `count`가 바뀔 때마다 `countPlus2`를 업데이트하는 대신, `countPlus2`를 `count`를 기반으로 계산해보세요.
+
+```tsx
+const Counter = () => {
+  const [count, setCount] = React.useState(0);
+
+  return (
+    <div>
+      <button onClick={() => setCount(count + 1)}>Count Up</button>
+      <div>카운트: {count}</div>
+      <div>카운트 + 2: {count + 2}</div>
+    </div>
+  );
+};
+```
+
+**특정 상태값이 바뀔 때 바뀌어야 하는 값이 있다면, 그건 새로운 상태가 아니라 그저 파생된 값일 가능성이 큽니다.**
+
+### 상태값이 많아지면 reducer를 사용하세요.
+
+상황에 따라서는 매우 많은 상태가 어쩔수 없이 필요할수도 있습니다. 그럴땐 `useReducer`를 사용해보세요.
+
+```ts
+type State = {
+  count: number;
+  countPlus2: number;
+};
+
+type Action = { type: "SET_COUNT"; payload: number };
+
+const reducer = (state: State, action: Action): State => {
+  switch (action.type) {
+    case "SET_COUNT":
+      return {
+        ...state,
+        count: action.payload,
+        countPlus2: action.payload + 2,
+      };
+    default:
+      return state;
+  }
+};
+
+// 사용단에서...
+const [{ count, countPlus2 }, dispatch] = React.useReducer(reducer, {
+  count: 0,
+  countPlus2: 0,
+});
+```
+
+reducer를 사용하면 상태값의 변화를 순수 함수로 관리할 수 있게 해주기 때문에 로직을 파악하기 쉽고, 테스트하기도 좋아집니다.
+
+> 물론, *과연 이 많은 상태들이 꼭 하나의 컴포넌트에 모여있어야 했을까*를 먼저 고민해보는게 좋겠죠!
+
+### 이펙트는 외부 API와 리액트를 연결하기 위해 사용하는 도구입니다.
+
+`useEffect` 사용의 유혹은 모든 초보 리액트 개발자를 괴롭힙니다. 이름만 보면 마치 어떤 상태가 바뀔 때 주고 싶은 이펙트를 쓰라고 만든 함수처럼 보이죠.
+
+사실 `useEffect`를 그런 식으로 사용하면 컴포넌트의 복잡도가 겉잡을 수 없이 높아집니다.
+
+```tsx
+const [state1, setState1] = React.useState(0);
+const [state2, setState2] = React.useState(0);
+const [state3, setState3] = React.useState(0);
+
+React.useEffect(() => {
+  // state1이 바뀔 때마다 실행되는 이펙트
+  setState2(state1 + 1);
+}, [state1]);
+
+React.useEffect(() => {
+  // state2가 바뀔 때마다 실행되는 이펙트
+  setState3(state2 + 1);
+}, [state2]);
+```
+
+이런 코드가 있다면 `state1`이 바뀔 때 `state2`가 바뀌고, `state2`가 바뀔 때 `state3`가 바뀐다는 사실을 한 눈에 알아내기 어렵습니다. 이 이펙트들이 여러 줄, 여러 컴포넌트에 산재해있다면 상태값의 변화를 추적하기는 거의 불가능해질지도 모릅니다.
+
+**이펙트는 가능한 한 리액트와 리액트 외부의 세계를 연결하는 역할로만 사용합시다.**
+
+```tsx
+const [state1, setState1] = React.useState(0);
+React.useEffect(() => {
+  // 리액트 외부의 세계인 'window' 객체와 연결되는 이펙트
+
+  const timeoutId = window.setTimeout(() => {
+    setState1(state1 + 1);
+  }, 1000);
+
+  return () => {
+    window.clearTimeout(timeoutId);
+  };
+}, []);
+```
+
+> 이펙트의 올바른 사용에 대한 얘기는 이미 많이 논의된 분야입니다. 저는 개인적으로 Dan Abramov의 [이 글](https://overreacted.io/a-complete-guide-to-useeffect/)을 강추합니다.
+
+## Context
+
+### Context API 사용을 주저하지 마세요.
+
+리액트의 Context API를 상태 관리를 위한 도구라는 틀에 박혀 생각하면 안됩니다. 컨텍스트는 직역하면 *문맥*이죠. 말 그대로 특정 컴포넌트 트리에 필요한 문맥을 정의하는 역할을 하는게 Context입니다.
+
+다시 말해 자식 컴포넌트들이 의존해야 하는 값을 제공해준다는 것이죠.
+
+```tsx
+const UserProfile = () => {
+  const { name, age } = useQuery({
+    queryKey: ["user", "profile"],
+    queryFn: () => fetchUser(),
+  });
+
+  return (
+    <div>
+      <div>이름: {name}</div>
+      <div>나이: {age}</div>
+    </div>
+  );
+};
+```
+
+사용자의 이름과 나이를 보여주는 `UserProfile` 컴포넌트가 있다고 해봅시다. 이 컴포넌트는 react-query를 사용해 데이터를 불러오고 있습니다.
+
+이 컴포넌트를 이대로 둔다면 `UserProfile`로는 특정 사용자의 정보만 보여줄 수 있습니다. 하지만 이렇게 컨텍스트로 정보를 담아준다면 훨씬 유연한 컴포넌트를 만들 수 있습니다.
+
+```tsx
+const UserProfileContext = React.createContext<{
+  name: string;
+  age: number;
+}>({
+  name: "",
+  age: 0,
+});
+
+const UserProfile = () => {
+  const { name, age } = React.useContext(UserProfileContext);
+
+  return (
+    <div>
+      <div>이름: {name}</div>
+      <div>나이: {age}</div>
+    </div>
+  );
+};
+```
+
+`UserProfile` 컴포넌트는 이제 데이터가 어디서 어떻게 생성되든 전혀 신경쓰지 않아도 됩니다. 컨텍스트에서 원하는 값을 받아 보여주는 역할만 합니다.
+
+덕분에 이렇게 다양한 형태의 컨텍스트를 만들어 컴포넌트를 재사용 할 수 있게 됐습니다.
+
+```tsx
+const UserAProfileProvider = ({ children }) => {
+  const { name, age } = useQuery({
+    queryKey: ["user", "profile", "A"],
+    queryFn: () =>
+      fetchUser({
+        userId: "A",
+      }),
+  });
+
+  return (
+    <UserProfileContext.Provider value={{ name, age }}>{children}</UserProfileContext.Provider>
+  );
+};
+
+const UserBProfileProvider = ({ children }) => {
+  const { name, age } = useQuery({
+    queryKey: ["user", "profile", "B"],
+    queryFn: () =>
+      fetchUser({
+        userId: "B",
+      }),
+  });
+
+  return (
+    <UserProfileContext.Provider value={{ name, age }}>{children}</UserProfileContext.Provider>
+  );
+};
+```
+
+'이런건 Prop으로 해도 되는것 아닌가'하는 의문이 드실 수 있습니다. 그러나, Context API를 사용하면 책임별로 레이어가 자연스럽게 분리되는 효과를 누릴 수 있다는 장점이 있습니다.
+
+```tsx
+const App = () => {
+  return (
+    <>
+      <UserAProfileProvider>
+        <UserProfile />
+      </UserAProfileProvider>
+      <UserBProfileProvider>
+        <UserProfile />
+      </UserBProfileProvider>
+    </>
+  );
+};
+```
+
+이런 App을 마주했을 때 만약 B 유저의 프로필이 제대로 나오고 있지 않다면 `UserBProfileProvider`만 확인해보면 된다는 점이 JSX 구조로부터 쉽게 유추됩니다.
+
+`Suspense`와 `ErrorBoundary`를 사용한다면 이 장점은 더 두드러집니다.
+
+```tsx
+const App = () => {
+  return (
+    <UserProfileErrorBoundary>
+      <UserProfileSuspense>
+        <UserAProfileProvider>
+          <UserProfile />
+        </UserAProfileProvider>
+      </UserProfileSuspense>
+    </UserProfileErrorBoundary>
+  );
+};
+```
+
+각 레이어가 에러 처리, 로딩 처리, 데이터 생성, UI 등의 책임을 분리해 갖고 있다는 점이 잘 드러납니다.
+
+**Context API를 상태 관리 관점이 아닌 의존성 주입의 도구로 활용해보세요.**
+
+> 이 방법이 무조건 좋다는 것은 절대 아닙니다. 엔지니어의 판단에 따라 상황에 맞는 구조를 사용해야 합니다.
+
+# 정답은 없습니다.
+
+모든 개발에는 정답이 없습니다. 위 가이드들을 따를지는 엔지니어의 선택에 달려있습니다. '왜 그렇게 했는가'에 대답만 할 수 있다면 어떻게 하더라도 답이 될 수 있습니다.
+
+항상 틀에 얽매이지 않고 열린 사고로 엔지니어링을 할 수 있도록 노력해야겠습니다.
