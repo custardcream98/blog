@@ -443,12 +443,12 @@ const HomePage = () => {
     <div>
       <p>{count}</p>
       <button onClick={() => setCount(count + 1)}>Count Up</button>
-      <OtherComponent1>
-      <OtherComponent2>
-      <OtherComponent3>
+      <OtherComponent1 />
+      <OtherComponent2 />
+      <OtherComponent3 />
     </div>
   );
-}
+};
 ```
 
 `HomePage` 컴포넌트는 카운터를 보여주는 역할도 하고, 페이지 컴포넌트로서 `OtherComponent1`, `OtherComponent2`, `OtherComponent3`를 렌더링하는 역할도 합니다.
@@ -462,12 +462,12 @@ const HomePage = () => {
   return (
     <div>
       <Counter />
-      <OtherComponent1>
-      <OtherComponent2>
-      <OtherComponent3>
+      <OtherComponent1 />
+      <OtherComponent2 />
+      <OtherComponent3 />
     </div>
   );
-}
+};
 
 const Counter = () => {
   const [count, setCount] = React.useState(0);
@@ -478,7 +478,7 @@ const Counter = () => {
       <button onClick={() => setCount(count + 1)}>Count Up</button>
     </div>
   );
-}
+};
 ```
 
 리액트는 렌더링 패스에서 그 컴포넌트에 주어진 상태값만을 기반으로 UI에 어떤 것을 보여줄지 결정합니다. 이 근본을 잊지 말고, '이 부분을 그릴 때는 어떤 데이터가 필요할까' 항상 고민하고 컴포넌트를 분리합시다.
