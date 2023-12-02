@@ -164,6 +164,14 @@
   margin: calc(var(--paragraph-margin) * 2 / 3) 0 var(--paragraph-margin);
 }
 
+.post-content p:last-child,
+.post-content blockquote:last-child,
+.post-content div:last-child,
+.post-content figure:last-child,
+.post-content image:last-child {
+  margin-bottom: 0;
+}
+
 .post-content blockquote {
   padding: 1.5rem;
   border-left: 0.2rem solid #f9bf00;
