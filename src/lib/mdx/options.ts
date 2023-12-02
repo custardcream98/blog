@@ -1,7 +1,6 @@
 import { externalLink, headingToStartFrom, imageSize } from "./plugin";
 
 import rehypeToc from "@jsdevtools/rehype-toc";
-import { type Element } from "hast";
 import { type SerializeOptions } from "next-mdx-remote/dist/types";
 import rehypePrettyCode, { type Options as RehypePrettyCodeOptions } from "rehype-pretty-code";
 import rehypeSlug from "rehype-slug";
@@ -9,13 +8,13 @@ import remarkFrontmatter from "remark-frontmatter";
 import remarkGfm from "remark-gfm";
 
 const REHYPE_PRETTY_CODE_OPTOINS: Partial<RehypePrettyCodeOptions> = {
-  onVisitHighlightedLine(node: Element) {
+  onVisitHighlightedLine(node: any) {
     if (!node.properties) {
       node.properties = {};
     }
     node.properties["data-highlighted-line"] = true;
   },
-  onVisitLine(node: Element) {
+  onVisitLine(node: any) {
     if (node.children.length === 0) {
       node.children = [{ type: "text", value: " " }];
     }

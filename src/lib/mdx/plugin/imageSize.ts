@@ -1,8 +1,6 @@
 import fs from "fs";
-import { type Root } from "hast";
 import sizeOf from "image-size";
 import path from "path";
-import { type Plugin } from "unified";
 import { visit } from "unist-util-visit";
 
 const ROOT_PATH = path.join(process.cwd(), "public");
@@ -25,17 +23,13 @@ type ImgMdxJsxElement = {
   }[];
 };
 
-type ImgSizeOptions = {
-  mdxJsxElementTagName?: string[];
-};
-
 /**
  * Plugin to add image dimensions to `img` tags
  */
-export const imageSize: Plugin<[ImgSizeOptions?], Root> = (options) => {
+export const imageSize = (options: any) => {
   const mdxJsxElementTagNameSet = new Set(options?.mdxJsxElementTagName ?? ["img"]);
 
-  return (tree: Root) => {
+  return (tree: any) => {
     visit(tree, (node) => {
       if (node.type === "element" && node.tagName === "img" && node.properties) {
         if ("src" in node.properties) {

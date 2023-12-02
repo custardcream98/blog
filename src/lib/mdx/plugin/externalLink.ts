@@ -1,13 +1,12 @@
-import { type Properties, type Root } from "hast";
-import { type Plugin } from "unified";
+// TODO: 플러그인 타입 정의
+
 import { visit } from "unist-util-visit";
 
-export type ExternalLinkOptions = Properties;
 /**
  * Plugin to add some properties to all links except hash links.
  */
-export const externalLink: Plugin<[ExternalLinkOptions?], Root> = (options = {}) => {
-  return (tree) => {
+export const externalLink = (options = {}) => {
+  return (tree: any) => {
     visit(tree, "element", (node) => {
       if (node.tagName === "a" && !!node.properties) {
         if ("href" in node.properties) {
