@@ -1,6 +1,5 @@
 import "server-only";
 
-import { type Bucket } from "@google-cloud/storage";
 import { type App as FirebaseAdminApp, cert, getApps, initializeApp } from "firebase-admin/app";
 import { type Firestore, getFirestore } from "firebase-admin/firestore";
 import { getStorage } from "firebase-admin/storage";
@@ -23,7 +22,7 @@ export class ServerSideFirebaseApp {
   }
 
   public adminApp: FirebaseAdminApp;
-  public adminBucket: Bucket;
+  public adminBucket: ReturnType<ReturnType<typeof getStorage>["bucket"]>;
   public adminFirestore: Firestore;
 
   constructor(adminApp: FirebaseAdminApp) {
