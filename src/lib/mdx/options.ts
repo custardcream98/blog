@@ -7,7 +7,7 @@ import rehypeSlug from "rehype-slug";
 import remarkFrontmatter from "remark-frontmatter";
 import remarkGfm from "remark-gfm";
 
-const REHYPE_PRETTY_CODE_OPTOINS: Partial<RehypePrettyCodeOptions> = {
+const REHYPE_PRETTY_CODE_OPTIONS: Partial<RehypePrettyCodeOptions> = {
   onVisitHighlightedLine(node: any) {
     if (!node.properties) {
       node.properties = {};
@@ -36,7 +36,7 @@ export const postMDXOptions: SerializeOptions = {
       ],
       rehypeSlug,
       rehypeToc,
-      [rehypePrettyCode, REHYPE_PRETTY_CODE_OPTOINS],
+      [rehypePrettyCode, REHYPE_PRETTY_CODE_OPTIONS],
       [headingToStartFrom, { startFrom: 3 }],
       [imageSize, { mdxJsxElementTagName: ["img", "NextImage"] }],
     ],
@@ -59,7 +59,7 @@ export const resumeMDXOptions: SerializeOptions = {
           target: "_blank",
         },
       ],
-      [rehypePrettyCode, REHYPE_PRETTY_CODE_OPTOINS],
+      [rehypePrettyCode, REHYPE_PRETTY_CODE_OPTIONS],
     ],
     remarkPlugins: [remarkGfm],
   },
