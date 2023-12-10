@@ -2,6 +2,31 @@ import { Project } from "src/types/resume";
 
 const projects: Project[] = [
   {
+    description: `
+    * goormEXP의 메인 랜딩 페이지를 한 스프린트만에 개발했을 정도로 **높은 퍼포먼스를 유지**하고 있습니다.
+    * goormEXP에 **스토리북을 도입을 건의, 개발 환경을 구축**했습니다.
+    * 프로젝트의 개발 퍼포먼스 향상을 위해 **ESLint Custom Rule을 개발, 도입**했습니다.
+    * 사내 공통 라이브러리, **Goorm Design System의 유지보수 및 개발**을 맡고 있습니다.
+        * Bootstrap을 변형해 사용하고 있던 Goormstrap을 GDS 모노레포에 통합, GitHub Action을 통한 테스트 버전 배포 방법을 구축하는 등 DX를 개선했습니다.
+        * 간트 차트 라이브러리를 개발했습니다. Windowing 기법을 활용해 성능을 최적화했으며, 태스크 바의 드래그 앤 드롭이 가능합니다.
+    `,
+    links: [
+      {
+        name: "서비스",
+        url: "https://exp.goorm.io",
+      },
+    ],
+    period: {
+      from: "2023-07",
+    },
+    shortDescription:
+      "게이미피케이션을 통해 구성원의 퍼포먼스를 이끌어내는 플랫폼인 goormEXP, 구름 전사적으로 사용하는 Goorm Design System의 유지보수 및 개발을 맡고 있습니다.",
+    stacks: ["Next.js", "Rollup", "Storybook", "Monorepo"],
+    team: "구름, goormEXP SQD",
+    title: "goormEXP, Goorm Design System",
+  },
+
+  {
     description:
       // utility-class-components 프로젝트로 밀고 블로그 위로 올리고 스내피를 맨 아래로
       // 스내피는 고민한 부분을 볼드처리 해봐라. 동료 피드백은 TS대신 JSDoc을 전파한 내용을 적어줘라. 팀원들에게 전파한 내용을 적어라. 내가 하고 싶은 기술이 있음에도 팀원들 좋자고 바꾼 내용을 담아봐라. 팀원과의 융합 능력 어필
@@ -78,35 +103,36 @@ const projects: Project[] = [
     title: "기술 블로그",
   },
 
-  {
-    description: `
-     * Storybook을 사용해 컴포넌트를 시각적으로 확인할 수 있도록 했습니다.
-     * 컴포넌트별 유닛 테스트를 작성했습니다.
-     * 디자인 시스템을 설계 및 개발하고 있습니다.
-    `,
-    links: [
-      {
-        name: "GitHub",
-        url: "https://github.com/custardcream98/custard-ui",
-      },
-      {
-        name: "Storybook",
-        url: "https://custardcream98.github.io/custard-ui",
-      },
-      {
-        name: "npm 배포",
-        url: "https://www.npmjs.com/package/custard-ui",
-      },
-    ],
-    period: {
-      from: "2023-02",
-    },
-    shortDescription:
-      "저만의 React Component Library를 만들어보고 싶어 시작한 프로젝트입니다. 토이 프로젝트에서 개발한 컴포넌트들을 모으고 있습니다.",
-    stacks: ["React.js", "TypeScript", "Emotion", "Jest", "Storybook"],
-    team: "개인 프로젝트",
-    title: "custard-ui",
-  },
+  // {
+  //   description: `
+  //    * Storybook을 사용해 컴포넌트를 시각적으로 확인할 수 있도록 했습니다.
+  //    * 컴포넌트별 유닛 테스트를 작성했습니다.
+  //    * 디자인 시스템을 설계 및 개발하고 있습니다.
+  //   `,
+  //   links: [
+  //     {
+  //       name: "GitHub",
+  //       url: "https://github.com/custardcream98/custard-ui",
+  //     },
+  //     {
+  //       name: "Storybook",
+  //       url: "https://custardcream98.github.io/custard-ui",
+  //     },
+  //     {
+  //       name: "npm 배포",
+  //       url: "https://www.npmjs.com/package/custard-ui",
+  //     },
+  //   ],
+  //   period: {
+  //     from: "2023-02",
+  //   },
+  //   shortDescription:
+  //     "저만의 React Component Library를 만들어보고 싶어 시작한 프로젝트입니다. 토이 프로젝트에서 개발한 컴포넌트들을 모으고 있습니다.",
+  //   stacks: ["React.js", "TypeScript", "Emotion", "Jest", "Storybook"],
+  //   team: "개인 프로젝트",
+  //   title: "custard-ui",
+  // },
+
   {
     description: `
     * 현재 카카오톡 봇은 **약 500여 명의 MAU**를 기록하고 있습니다. 
@@ -133,39 +159,39 @@ const projects: Project[] = [
     team: "개인 프로젝트",
     title: "카카오톡, 디스코드 챗봇",
   },
-  {
-    description: `
-      ~~~ts
-      const [isLoading, data, error, fetch] = useAPI(req.post.remove);
-      ~~~
-      * **팀원이 비동기 통신과 에러 핸들링을 편하게 할 수 있도록 useAPI 커스텀 훅을 개발**해 팀 내에서 좋은 평가를 받았습니다.
-      * 팀 전원의 실력 향상을 위해 프로젝트 시작 전 공동 학습을 주도했습니다.
-      * 합당한 이유와 주장을 갖고 있으면서도 상황에 따라 유연하게 팀을 이끌어간다는 동료 피드백을 받았습니다.
-    `,
-    links: [
-      {
-        name: "GitHub",
-        url: "https://github.com/likelion-devone/snappy",
-      },
-      {
-        name: "발표 영상",
-        url: "https://www.youtube.com/watch?v=PkcPliZGZ_0",
-      },
-      {
-        name: "발표 자료",
-        url: "https://www.icloud.com/keynote/010JUfnE6aCei9AuFDNTjTmvw#%EB%8D%B0%EB%B8%8C%EC%9B%90",
-      },
-    ],
-    period: {
-      from: "2022-12",
-      to: "2023-01",
-    },
-    shortDescription:
-      "스냅 사진사와 이용자를 매칭하는 SNS 서비스입니다. 부트캠프에서 주어진 API를 활용해 개발한 프로젝트로, 네 명의 프론트엔드 개발자로 구성된 팀에서 리더를 맡았으며, Live Share 등의 툴을 사용해 페어 프로그래밍을 주로 진행했습니다. TypeScript에 익숙치 않은 팀원들을 위해 JavaScript를 사용하는 대신, JSDoc을 적극적으로 활용해 개발 경험을 향상하고자 노력했습니다.",
-    stacks: ["React.js", "JavaScript", "styled-components"],
-    team: "4인 프로젝트 (기여도 40%)",
-    title: "Snappy",
-  },
+  // {
+  //   description: `
+  //     ~~~ts
+  //     const [isLoading, data, error, fetch] = useAPI(req.post.remove);
+  //     ~~~
+  //     * **팀원이 비동기 통신과 에러 핸들링을 편하게 할 수 있도록 useAPI 커스텀 훅을 개발**해 팀 내에서 좋은 평가를 받았습니다.
+  //     * 팀 전원의 실력 향상을 위해 프로젝트 시작 전 공동 학습을 주도했습니다.
+  //     * 합당한 이유와 주장을 갖고 있으면서도 상황에 따라 유연하게 팀을 이끌어간다는 동료 피드백을 받았습니다.
+  //   `,
+  //   links: [
+  //     {
+  //       name: "GitHub",
+  //       url: "https://github.com/likelion-devone/snappy",
+  //     },
+  //     {
+  //       name: "발표 영상",
+  //       url: "https://www.youtube.com/watch?v=PkcPliZGZ_0",
+  //     },
+  //     {
+  //       name: "발표 자료",
+  //       url: "https://www.icloud.com/keynote/010JUfnE6aCei9AuFDNTjTmvw#%EB%8D%B0%EB%B8%8C%EC%9B%90",
+  //     },
+  //   ],
+  //   period: {
+  //     from: "2022-12",
+  //     to: "2023-01",
+  //   },
+  //   shortDescription:
+  //     "스냅 사진사와 이용자를 매칭하는 SNS 서비스입니다. 부트캠프에서 주어진 API를 활용해 개발한 프로젝트로, 네 명의 프론트엔드 개발자로 구성된 팀에서 리더를 맡았으며, Live Share 등의 툴을 사용해 페어 프로그래밍을 주로 진행했습니다. TypeScript에 익숙치 않은 팀원들을 위해 JavaScript를 사용하는 대신, JSDoc을 적극적으로 활용해 개발 경험을 향상하고자 노력했습니다.",
+  //   stacks: ["React.js", "JavaScript", "styled-components"],
+  //   team: "4인 프로젝트 (기여도 40%)",
+  //   title: "Snappy",
+  // },
 ];
 
 export default projects;

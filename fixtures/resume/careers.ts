@@ -4,10 +4,10 @@ const careers: Career[] = [
   {
     company: "구름",
     descriptions: [
-      "goormEXP 스쿼드에서 프론트엔드 개발자로 근무하고 있습니다.",
-      "<strong>Goorm Design System</strong>의 유지보수 및 개발을 진행하고 있습니다.",
-      "<strong>간트 차트</strong>를 개발하고 있습니다. Windowing 기법을 활용해 성능을 최적화하고 있으며, 태스크 바의 드래그 앤 드롭이 가능합니다.",
-      "goormEXP 랜딩 페이지를 한 스프린트만에 개발했을 정도로 <strong>높은 퍼포먼스를 유지</strong>하고 있습니다.",
+      "goormEXP SQD 소속으로 <strong>게이미피케이션을 통해 구성원의 퍼포먼스를 이끌어내는 플랫폼인 goormEXP</strong>와 구름 전사적으로 사용하는 <strong>Goorm Design System</strong>의 유지보수 및 개발을 맡고 있습니다.",
+      // "<strong>Goorm Design System</strong>의 유지보수 및 개발을 진행하고 있습니다.",
+      // "<strong>간트 차트</strong>를 개발하고 있습니다. Windowing 기법을 활용해 성능을 최적화하고 있으며, 태스크 바의 드래그 앤 드롭이 가능합니다.",
+      // "goormEXP 랜딩 페이지를 한 스프린트만에 개발했을 정도로 <strong>높은 퍼포먼스를 유지</strong>하고 있습니다.",
     ],
     links: [],
     period: {
