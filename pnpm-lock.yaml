@@ -18,6 +18,9 @@ dependencies:
   '@tanstack/react-query-devtools':
     specifier: ^4.29.15
     version: 4.29.15(@tanstack/react-query@4.29.15)(react-dom@18.2.0)(react@18.2.0)
+  '@vercel/speed-insights':
+    specifier: ^1.0.1
+    version: 1.0.1
   axios:
     specifier: ^0.27.2
     version: 0.27.2
@@ -2074,6 +2077,11 @@ packages:
       '@typescript-eslint/types': 5.59.9
       eslint-visitor-keys: 3.4.3
     dev: true
+
+  /@vercel/speed-insights@1.0.1:
+    resolution: {integrity: sha512-cm8KTTsDgS1AbWsgIEZuMoyPUjclzeqJihyLp0tnA21B/x9iTE8hu2S5zM+/DBzihuHxWL1dx9pCWk22ctMFWQ==}
+    requiresBuild: true
+    dev: false
 
   /abab@2.0.6:
     resolution: {integrity: sha512-j2afSsaIENvHZN2B8GOpF566vZ5WVk5opAiMTvWgaQT8DkbOqsTfvNAvHoRGU2zzP8cPoqys+xHTRDWW8L+/BA==}

@@ -7,6 +7,7 @@ import { RootProvider } from "./_providers";
 
 import "./style.css";
 
+import { SpeedInsights } from "@vercel/speed-insights/next";
 import Script from "next/script";
 import DevportImage from "public/static/ad/devport.png";
 import { utld } from "utility-class-components";
@@ -29,8 +30,8 @@ export default function RootLayout({ children }: React.PropsWithChildren) {
               content='f97b3212948a936aa8bb8d14b7f84ba8d01f9cc1'
             />
             <Script
+              id='google-analytics-script'
               strategy='afterInteractive'
-              async
               src={`https://www.googletagmanager.com/gtag/js?id=${process.env.NEXT_PUBLIC_GOOGLE_ANALYTICS_ID}`}
             />
             <Script id='google-analytics' strategy='afterInteractive'>
@@ -57,6 +58,7 @@ export default function RootLayout({ children }: React.PropsWithChildren) {
           />
         </RootProvider>
         <ClientLogger />
+        <SpeedInsights />
       </Body>
     </html>
   );
