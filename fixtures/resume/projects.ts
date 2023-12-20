@@ -5,7 +5,7 @@ const projects: Project[] = [
     description: `
     * goormEXP의 메인 인덱스 페이지를 한 스프린트만에 개발했을 정도로 높은 퍼포먼스를 유지하고 있습니다.
     * **Storybook 도입을 건의, 개발 환경을 구축**하고, **TypeScript으로의 마이그레이션을 진행**하고 있습니다.
-    * 프로젝트의 개발 퍼포먼스 향상을 위해 **ESLint Custom Rule을 개발, 도입**하고 Lint Rule을 구조화했습니다.
+    * 불필요한 작업을 최소화하기 위해 수정이 필요한 곳의 autofix가 가능한 **ESLint Custom Rule을 개발, 도입**하고 Lint Rule을 구조화했습니다.
     `,
     links: [
       {
