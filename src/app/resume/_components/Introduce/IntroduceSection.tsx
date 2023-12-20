@@ -15,10 +15,11 @@ function IntroduceSection() {
         가지고 있었던 덕분에 chakra-ui/panda, TanStack/query에 기여하기도 했습니다.
       </IntroduceP>
       <IntroduceP>
-        <strong>기술 이야기 나누기를 아주 좋아합니다.</strong> Google Developer Student Clubs
-        UOS에서 프론트엔드 팀 코어 멤버로서 활동하며 데일리 스크럼과 주기적인 테크톡을
-        진행하였습니다. 프론트엔드 기술과 관련된 인사이트를 나누고 싶어 직접 60여 명이 있는
-        오픈카톡방을 운영중이기도 합니다.
+        <strong>팀의 생산성을 개선하는 데에 큰 관심을 가지고 있습니다.</strong> 사내에서 Bootstrap을
+        커스텀해 사용하고 있던 스타일시트 빌드 프로젝트가 지나치게 노후화돼 유지 보수에 어려움이
+        있다는 점을 인지하고, Goorm Design System 모노레포로 프로젝트를 옮겨오는 작업을
+        진행했습니다. 또한, GitHub Actions를 활용해 테스트 배포가 가능하도록 함으로써 DX를
+        개선했습니다.
       </IntroduceP>
       <ContactList>
         <li className='inline-block print:hidden'>
