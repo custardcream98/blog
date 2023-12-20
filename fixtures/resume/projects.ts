@@ -3,16 +3,13 @@ import { Project } from "src/types/resume";
 const projects: Project[] = [
   {
     description: `
-    * goormEXP의 메인 랜딩 페이지를 한 스프린트만에 개발했을 정도로 **높은 퍼포먼스를 유지**하고 있습니다.
-    * goormEXP에 **스토리북을 도입을 건의, 개발 환경을 구축**했습니다.
-    * 프로젝트의 개발 퍼포먼스 향상을 위해 **ESLint Custom Rule을 개발, 도입**했습니다.
-    * 사내 공통 라이브러리, **Goorm Design System의 유지보수 및 개발**을 맡고 있습니다.
-        * Bootstrap을 변형해 사용하고 있던 Goormstrap을 GDS 모노레포에 통합, GitHub Action을 통한 테스트 버전 배포 방법을 구축하는 등 DX를 개선했습니다.
-        * 간트 차트 라이브러리를 개발했습니다. Windowing 기법을 활용해 성능을 최적화했으며, 태스크 바의 드래그 앤 드롭이 가능합니다.
+    * goormEXP의 메인 인덱스 페이지를 한 스프린트만에 개발했을 정도로 높은 퍼포먼스를 유지하고 있습니다.
+    * **Storybook 도입을 건의, 개발 환경을 구축**하고, **TypeScript으로의 마이그레이션을 진행**하고 있습니다.
+    * 프로젝트의 개발 퍼포먼스 향상을 위해 **ESLint Custom Rule을 개발, 도입**하고 Lint Rule을 구조화했습니다.
     `,
     links: [
       {
-        name: "서비스",
+        name: "goormEXP 메인 인덱스 페이지",
         url: "https://exp.goorm.io",
       },
     ],
@@ -20,10 +17,27 @@ const projects: Project[] = [
       from: "2023-07",
     },
     shortDescription:
-      "게이미피케이션을 통해 구성원의 퍼포먼스를 이끌어내는 플랫폼인 goormEXP, 구름 전사적으로 사용하는 Goorm Design System의 유지보수 및 개발을 맡고 있습니다.",
-    stacks: ["Next.js", "Rollup", "Storybook", "Monorepo"],
+      "게이미피케이션을 통해 구성원의 퍼포먼스를 이끌어내는 플랫폼인 goormEXP의 유지보수 및 개발을 맡고 있습니다. 팀의 프론트엔트 개발 환경 개선에 주력하고 있습니다.",
+    stacks: ["Next.js", "Storybook", "TypeScript", "ESLint"],
     team: "구름, goormEXP SQD",
-    title: "goormEXP, Goorm Design System",
+    title: "goormEXP",
+  },
+
+  {
+    description: `
+    * Bootstrap을 변형해 사용하고 있던 goormstrap을 GDS 모노레포에 통합, GitHub Actions를 통한 테스트 버전 배포 방법을 구축하는 등 DX를 개선했습니다.
+    * JS로 작성된 기존의 GDS를 TypeScript로 마이그레이션하는 작업을 진행하고 있습니다.
+    * 굉장히 복잡한 인터렉션이 필요한 **간트 차트 라이브러리를 개발**했습니다. Windowing 기법을 활용해 성능을 최적화했으며, 태스크 바의 드래그 앤 드롭이 가능합니다.
+    `,
+    links: [],
+    period: {
+      from: "2023-07",
+    },
+    shortDescription:
+      "사내 디자인 시스템 라이브러리인 Goorm Design System의 유지보수 및 개발을 맡고 있습니다.",
+    stacks: ["React.js", "TypeScript", "Monorepo", "Rollup", "Sass"],
+    team: "구름",
+    title: "Goorm Design System (GDS)",
   },
 
   {
@@ -48,7 +62,6 @@ const projects: Project[] = [
       }
       ~~~
        * BundlePhobia 기준 **3.8KB의 작은 번들 사이즈**를 달성했습니다.
-       * 총 다운로드 수 1,400회를 달성했습니다.
     `,
     links: [
       {
@@ -64,7 +77,7 @@ const projects: Project[] = [
       from: "2023-05",
     },
     shortDescription:
-      "개인 블로그를 Next.js 13 버전의 App Router로 마이그레이션 하며 개발한 라이브러리입니다. 대부분의 CSS in JS 라이브러리는 React Context API를 사용해 Server Component에서 사용하기 어려웠기에, TailwindCSS로 스타일링 라이브러리를 바꾸며 '유틸리티 클래스를 CSS in JS처럼 다룰 수 있으면 좋겠다'는 아이디어에서 시작했습니다. 이 프로젝트를 통해 Server Component의 사용에 대해 깊게 고민했고, 덕분에 오픈소스 프로젝트(chakra-ui/panda, TanStack/query)에 기여하는 소중한 경험을 할 수 있었습니다.",
+      "개인 블로그를 Next.js 13 버전의 App Router로 마이그레이션 하며 개발한 라이브러리입니다. 대부분의 CSS in JS 라이브러리는 React Context API를 사용해 React Server Component(RSC)에서 사용하기 어려웠기에, TailwindCSS로 스타일링 라이브러리를 바꾸며 '유틸리티 클래스를 CSS in JS처럼 다룰 수 있으면 좋겠다'는 아이디어에서 시작했습니다. 이 프로젝트를 통해 RSC의 사용에 대해 깊게 고민했고, 덕분에 오픈소스 프로젝트(chakra-ui/panda, TanStack/query)에 기여하는 소중한 경험을 할 수 있었습니다.",
     stacks: ["React.js", "TypeScript"],
     team: "개인 프로젝트",
     title: "utility-class-components",
@@ -73,8 +86,7 @@ const projects: Project[] = [
     description: `
      * Next.js 12버전으로 시작했던 프로젝트를 13으로 업그레이드 하며, Server Component 스타일링을 더 편하게 하기 위해 **utility-class-components 라이브러리를 개발**했습니다.
      * Firebase SDK를 직접 사용하다가 API Route로 리팩토링 하며 **React Query와 Suspense를 활용해 로딩 및 에러 처리 로직을 개선**했습니다.
-     * Lighthouse 기준 **Accessibility, SEO 점수 100점**을 유지하고 있습니다. 그 결과 Google Search Console 기준 **총 노출 수 22,930회, 총 클릭 수 2,029회**를 달성했습니다.
-     * remark를 활용해 Markdown을 Static Site로 빌드하다가, 더 동적인 블로깅을 위해 React Component를 활용할 수 있는 MDX를 사용하도록 개선했습니다.
+     * Lighthouse 기준 **Accessibility, SEO 점수 100점**을 유지하고 있습니다.
      * 복잡한 형태의 Conditional Rendering이 일어나는 댓글 컴포넌트를 객체를 사용한 설계로 리팩토링해 코드 가독성을 높였습니다.
      * 블로그 내 게시물 검색 기능을 구현했으며, API Call 최적화 및 어뷰징 방지를 위해 디바운싱을 적용하는 등 지속해서 기능을 개선 및 추가하고 있습니다.
      * 게시물의 썸네일을 자동으로 생성합니다.
@@ -135,7 +147,7 @@ const projects: Project[] = [
 
   {
     description: `
-    * 현재 카카오톡 봇은 **약 500여 명의 MAU**를 기록하고 있습니다. 
+    * 현재 카카오톡 봇은 **약 700여 명의 MAU**를 기록하고 있습니다. 
     * 거래소별로 다른 API 명세에 대응하기 위한 normalizer를 구조적으로 설계했습니다. 
     * NFT 프로젝트 커뮤니티 관리를 위한 이벤트 기능, NFT 정보 검색 및 보유 중인 NFT 조회 기능을 탑재한 디스코드 봇을 개발해 **약 2,800여 명의 사용자가 있는 디스코드 서버에서 실사용**됐습니다. 
     * 사용자 피드백을 받으며 서비스의 유지보수와 기능 추가를 지속적으로 진행하고 있습니다.
