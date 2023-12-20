@@ -75,6 +75,7 @@ const projects: Project[] = [
     ],
     period: {
       from: "2023-05",
+      to: "2023-06",
     },
     shortDescription:
       "개인 블로그를 Next.js 13 버전의 App Router로 마이그레이션 하며 개발한 라이브러리입니다. 대부분의 CSS in JS 라이브러리는 React Context API를 사용해 React Server Component(RSC)에서 사용하기 어려웠기에, TailwindCSS로 스타일링 라이브러리를 바꾸며 '유틸리티 클래스를 CSS in JS처럼 다룰 수 있으면 좋겠다'는 아이디어에서 시작했습니다. 이 프로젝트를 통해 RSC의 사용에 대해 깊게 고민했고, 덕분에 오픈소스 프로젝트(chakra-ui/panda, TanStack/query)에 기여하는 소중한 경험을 할 수 있었습니다.",
