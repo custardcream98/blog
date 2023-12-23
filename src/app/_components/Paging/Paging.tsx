@@ -1,4 +1,4 @@
-import { POSTS_SECTION_ID } from "src/app/page";
+import { POSTS_SECTION_ID } from "src/app/constants";
 import { generateNumberArray } from "src/utils";
 
 import { CurrentPageIndicator } from "./CurrentPageIndicator.client";

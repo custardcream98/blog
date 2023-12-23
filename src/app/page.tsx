@@ -3,6 +3,7 @@ import { Container } from "src/components";
 import { HeroPostItem } from "./_components/HeroPostsListItem";
 import { Paging } from "./_components/Paging";
 import { Intro } from "./_components";
+import { POSTS_SECTION_ID } from "./constants";
 
 import PostByPageArr from "cache/postByPageArr.json";
 import { utld } from "utility-class-components";
@@ -14,8 +15,6 @@ type HomePageProps = {
 };
 
 const PAGE_SCALE = PostByPageArr.length;
-
-export const POSTS_SECTION_ID = "post-cards-section";
 
 export default function HomePage({ searchParams: { page = "1" } }: HomePageProps) {
   const parsedPage = parseInt(page, 10);
