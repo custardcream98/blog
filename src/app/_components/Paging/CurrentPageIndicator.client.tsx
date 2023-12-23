@@ -6,19 +6,19 @@ import { useMemo } from "react";
 import { utld } from "utility-class-components";
 
 type CurrentPageIndicatorProps = {
-  currentPage?: number;
+  position?: number;
 };
 
-export function CurrentPageIndicator({ currentPage = 1 }: CurrentPageIndicatorProps) {
+export function CurrentPageIndicator({ position = 1 }: CurrentPageIndicatorProps) {
   const isMobile = useIsMobie();
   const indicatorStyle = useMemo(() => {
     const indicatorWidthWithMargin = isMobile ? 1.7 : 2;
-    const currentIndicatorLocation = (currentPage - 1) * indicatorWidthWithMargin;
+    const currentIndicatorLocation = (position - 1) * indicatorWidthWithMargin;
 
     return {
       transform: `translateX(${currentIndicatorLocation}rem)`,
     };
-  }, [currentPage, isMobile]);
+  }, [position, isMobile]);
 
   return <Indicator style={indicatorStyle} />;
 }

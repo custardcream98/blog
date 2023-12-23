@@ -6,11 +6,28 @@ import { CurrentPageIndicator } from "./CurrentPageIndicator.client";
 
 import PostByPageArr from "cache/postByPageArr.json";
 import Link from "next/link";
-import { MdOutlineKeyboardArrowLeft, MdOutlineKeyboardArrowRight } from "react-icons/md";
+import {
+  MdOutlineKeyboardArrowLeft,
+  MdOutlineKeyboardArrowRight,
+  MdOutlineKeyboardDoubleArrowLeft,
+  MdOutlineKeyboardDoubleArrowRight,
+} from "react-icons/md";
 import { ud, utld } from "utility-class-components";
 
 const PAGE_SCALE = PostByPageArr.length;
+const PAGE_NUMBER_SCALE = 5;
 const PAGES_ARRAY = generateNumberArray(PAGE_SCALE, 1);
+const slicePageNumbers = (currentPage: number) => {
+  if (currentPage <= 3) {
+    return PAGES_ARRAY.slice(0, PAGE_NUMBER_SCALE);
+  }
+
+  if (currentPage >= PAGE_SCALE - 2) {
+    return PAGES_ARRAY.slice(PAGE_SCALE - PAGE_NUMBER_SCALE);
+  }
+
+  return PAGES_ARRAY.slice(currentPage - 3, currentPage + 2);
+};
 
 type PagingProps = {
   currentPage?: number;
@@ -21,50 +38,78 @@ export function Paging({ currentPage = 1 }: PagingProps) {
   const isLastPage = currentPage === PAGE_SCALE;
   const prevPageNumber = currentPage - 1;
   const nextPageNumber = currentPage + 1;
+  const lastPageNumber = PAGE_SCALE;
+  const pageNumbers = slicePageNumbers(currentPage);
 
   return (
     <Container>
-      <CurrentPageIndicator currentPage={currentPage} />
       {!isFirstPage && (
-        <LeftArrow
-          scroll={false}
-          href={{
-            hash: POSTS_SECTION_ID,
-            pathname: "/",
-            query: { page: prevPageNumber },
-          }}
-        >
-          <MdOutlineKeyboardArrowLeft title='이전 글' size='1.5rem' />
-        </LeftArrow>
+        <>
+          <StyledLink
+            scroll={false}
+            href={{
+              hash: POSTS_SECTION_ID,
+              pathname: "/",
+              query: { page: 1 },
+            }}
+          >
+            <MdOutlineKeyboardDoubleArrowLeft title='첫 글' size='1.5rem' />
+          </StyledLink>
+          <StyledLink
+            scroll={false}
+            href={{
+              hash: POSTS_SECTION_ID,
+              pathname: "/",
+              query: { page: prevPageNumber },
+            }}
+          >
+            <MdOutlineKeyboardArrowLeft title='이전 글' size='1.5rem' />
+          </StyledLink>
+        </>
       )}
-      <PagenumList>
-        {PAGES_ARRAY.map((pageNum) => (
-          <li key={pageNum}>
-            <Pagenum
-              scroll={false}
-              href={{
-                hash: POSTS_SECTION_ID,
-                pathname: "/",
-                query: { page: pageNum },
-              }}
-              $isSelectedPage={pageNum === currentPage}
-            >
-              {pageNum}
-            </Pagenum>
-          </li>
-        ))}
-      </PagenumList>
+      <Container>
+        <CurrentPageIndicator position={pageNumbers.indexOf(currentPage) + 1} />
+        <PagenumList>
+          {pageNumbers.map((pageNum) => (
+            <li key={pageNum}>
+              <Pagenum
+                scroll={false}
+                href={{
+                  hash: POSTS_SECTION_ID,
+                  pathname: "/",
+                  query: { page: pageNum },
+                }}
+                $isSelectedPage={pageNum === currentPage}
+              >
+                {pageNum}
+              </Pagenum>
+            </li>
+          ))}
+        </PagenumList>
+      </Container>
       {!isLastPage && (
-        <RightArrow
-          scroll={false}
-          href={{
-            hash: POSTS_SECTION_ID,
-            pathname: "/",
-            query: { page: nextPageNumber },
-          }}
-        >
-          <MdOutlineKeyboardArrowRight title='다음 글' size='1.5rem' />
-        </RightArrow>
+        <>
+          <StyledLink
+            scroll={false}
+            href={{
+              hash: POSTS_SECTION_ID,
+              pathname: "/",
+              query: { page: nextPageNumber },
+            }}
+          >
+            <MdOutlineKeyboardArrowRight title='다음 글' size='1.5rem' />
+          </StyledLink>
+          <StyledLink
+            scroll={false}
+            href={{
+              hash: POSTS_SECTION_ID,
+              pathname: "/",
+              query: { page: lastPageNumber },
+            }}
+          >
+            <MdOutlineKeyboardDoubleArrowRight title='마지막 글' size='1.5rem' />
+          </StyledLink>
+        </>
       )}
     </Container>
   );
@@ -110,16 +155,6 @@ const StyledLink = utld(Link)`
 const PagenumList = utld.ol`
   flex
   items-center
-`;
-
-const LeftArrow = utld(StyledLink)`
-  absolute
-  left-[-1.875rem]
-`;
-
-const RightArrow = utld(StyledLink)`
-  absolute
-  right-[-1.875rem]
 `;
 
 const Pagenum = utld(StyledLink)<{

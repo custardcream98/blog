@@ -2,7 +2,7 @@ import { Container } from "src/components";
 
 import { Paging } from "../Paging";
 
-import { HeroPost } from "./HeroPost";
+import { HeroPostItem } from "./HeroPostsListItem";
 
 import PostByPageArr from "cache/postByPageArr.json";
 import { utld } from "utility-class-components";
@@ -20,16 +20,8 @@ export function HeroPostsSection({ page }: { page?: string }) {
     <Container id={POSTS_SECTION_ID}>
       <h2 className='sr-only'>Posts</h2>
       <HeroPostList>
-        {posts.map((post, i) => (
-          <HeroPost
-            key={post.slug}
-            index={i}
-            maxPostCount={posts.length}
-            title={post.title}
-            date={post.date}
-            excerpt={post.excerpt}
-            slug={post.slug}
-          />
+        {posts.map((post) => (
+          <HeroPostItem key={post.slug} {...post} />
         ))}
       </HeroPostList>
       <Paging currentPage={validPage} />
@@ -38,6 +30,5 @@ export function HeroPostsSection({ page }: { page?: string }) {
 }
 
 const HeroPostList = utld.ol`
-  min-h-[37rem]
-  mobile:min-h-[32.9375rem]
+  pb-24
 `;
