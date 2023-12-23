@@ -1,7 +1,7 @@
 import { LogoTitleSpan } from "src/components";
 import { ResponsiveIconButton } from "src/components/client";
 import { LogoSvg } from "src/components/Svgs";
-import { useIsMobie } from "src/hook";
+import { useIsMobile } from "src/hook";
 
 import { DarkmodeSwitch } from "./DarkmodeSwitch";
 import { NavList } from "./NavList";
@@ -15,7 +15,7 @@ export function NavigationBar({
 }: {
   onSearchButtonClick: React.MouseEventHandler<HTMLButtonElement>;
 }) {
-  const isMobile = useIsMobie();
+  const isMobile = useIsMobile();
 
   return (
     <Nav>

@@ -1,4 +1,4 @@
-import { useIsMobie, useWindowScrollEvent } from "src/hook";
+import { useIsMobile, useWindowScrollEvent } from "src/hook";
 
 import { Searchbar } from "../Searchbar";
 
@@ -16,7 +16,7 @@ export function Navigation() {
   const [isSearchbarOn, setIsSearchbarOn] = useState(false);
   const toggleSearchbar = useCallback(() => setIsSearchbarOn((prev) => !prev), []);
 
-  const isMobile = useIsMobie();
+  const isMobile = useIsMobile();
 
   const pathname = usePathname();
   const isPostRoute = useMemo(() => /\/posts\//g.test(pathname ?? ""), [pathname]);
