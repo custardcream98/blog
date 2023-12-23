@@ -1,6 +1,5 @@
+import { POSTS_SECTION_ID } from "src/app/page";
 import { generateNumberArray } from "src/utils";
-
-import { POSTS_SECTION_ID } from "../HeroPostsSection";
 
 import { CurrentPageIndicator } from "./CurrentPageIndicator.client";
 
@@ -46,7 +45,6 @@ export function Paging({ currentPage = 1 }: PagingProps) {
       {!isFirstPage && (
         <>
           <StyledLink
-            scroll={false}
             href={{
               hash: POSTS_SECTION_ID,
               pathname: "/",
@@ -56,7 +54,6 @@ export function Paging({ currentPage = 1 }: PagingProps) {
             <MdOutlineKeyboardDoubleArrowLeft title='첫 글' size='1.5rem' />
           </StyledLink>
           <StyledLink
-            scroll={false}
             href={{
               hash: POSTS_SECTION_ID,
               pathname: "/",
@@ -73,7 +70,6 @@ export function Paging({ currentPage = 1 }: PagingProps) {
           {pageNumbers.map((pageNum) => (
             <li key={pageNum}>
               <Pagenum
-                scroll={false}
                 href={{
                   hash: POSTS_SECTION_ID,
                   pathname: "/",
@@ -90,7 +86,6 @@ export function Paging({ currentPage = 1 }: PagingProps) {
       {!isLastPage && (
         <>
           <StyledLink
-            scroll={false}
             href={{
               hash: POSTS_SECTION_ID,
               pathname: "/",
@@ -100,7 +95,6 @@ export function Paging({ currentPage = 1 }: PagingProps) {
             <MdOutlineKeyboardArrowRight title='다음 글' size='1.5rem' />
           </StyledLink>
           <StyledLink
-            scroll={false}
             href={{
               hash: POSTS_SECTION_ID,
               pathname: "/",
