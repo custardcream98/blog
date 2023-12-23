@@ -1,3 +1,5 @@
+import { dateToString } from "src/utils";
+
 import Link from "next/link";
 import { utld } from "utility-class-components";
 
@@ -9,13 +11,7 @@ type HeroPostItemProps = {
 };
 
 export function HeroPostItem({ date, excerpt, slug, title }: HeroPostItemProps) {
-  const formattedDate = new Date(date)
-    .toLocaleDateString("ko", {
-      day: "numeric",
-      month: "numeric",
-      year: "numeric",
-    })
-    .split("T")[0];
+  const formattedDate = dateToString(new Date(date));
 
   return (
     <HeroPostItemWrapper key={slug}>
