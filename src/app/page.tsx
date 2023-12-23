@@ -17,9 +17,9 @@ const PAGE_SCALE = PostByPageArr.length;
 
 export const POSTS_SECTION_ID = "post-cards-section";
 
-export default function HomePage({ searchParams: { page } }: HomePageProps) {
-  const parsedPage = page ? parseInt(page, 10) : 1;
-  const validPage = parsedPage < 0 ? 1 : parsedPage > PAGE_SCALE ? PAGE_SCALE : parsedPage;
+export default function HomePage({ searchParams: { page = "1" } }: HomePageProps) {
+  const parsedPage = parseInt(page, 10);
+  const validPage = isNaN(parsedPage) ? 1 : Math.min(Math.max(parsedPage, 1), PAGE_SCALE);
   const pageIndex = validPage - 1;
   const posts = PostByPageArr[pageIndex];
 
