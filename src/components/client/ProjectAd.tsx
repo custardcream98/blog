@@ -12,8 +12,8 @@ import { ud, utld } from "utility-class-components";
 
 type NoticeProps = {
   projectName: string;
-  projectLink: string;
-  repositoryLink: string;
+  projectLink?: string;
+  repositoryLink?: string;
   projectImage: StaticImageData;
 };
 
@@ -42,7 +42,7 @@ export function ProjectAd({ projectName, projectLink, repositoryLink, projectIma
         <ProjectAdName>{projectName}</ProjectAdName>
       </ProjectAdContent>
       <ClickablesWrapper>
-        {!isMobile && (
+        {!!repositoryLink && !isMobile && (
           <ProjectAdGithub
             icon={BsGithub}
             title='레포지토리 링크'
@@ -52,14 +52,26 @@ export function ProjectAd({ projectName, projectLink, repositoryLink, projectIma
             target='_blank'
           />
         )}
-        <ProjectLink href={projectLink} target='_blank'>
-          <ExternalLinkSvg
-            svgTitle='프로젝트 링크'
-            width={iconSize}
-            height={iconSize}
-            className='text-default-light hover:text-accent-light dark:text-default-dark hover:dark:text-accent-dark'
-          />
-        </ProjectLink>
+        {!!repositoryLink && isMobile && !projectLink && (
+          <ProjectLink href={repositoryLink} target='_blank'>
+            <ExternalLinkSvg
+              svgTitle='레포지토리 링크'
+              width={iconSize}
+              height={iconSize}
+              className='text-default-light hover:text-accent-light dark:text-default-dark hover:dark:text-accent-dark'
+            />
+          </ProjectLink>
+        )}
+        {!!projectLink && (
+          <ProjectLink href={projectLink} target='_blank'>
+            <ExternalLinkSvg
+              svgTitle='프로젝트 링크'
+              width={iconSize}
+              height={iconSize}
+              className='text-default-light hover:text-accent-light dark:text-default-dark hover:dark:text-accent-dark'
+            />
+          </ProjectLink>
+        )}
         <CloseButton
           icon={RiCloseFill}
           title='프로젝트 광고 닫기'

@@ -9,7 +9,8 @@ import "./style.css";
 
 import { SpeedInsights } from "@vercel/speed-insights/next";
 import Script from "next/script";
-import DevportImage from "public/static/ad/devport.png";
+// import DevportImage from "public/static/ad/devport.png";
+import JarvisLogoImage from "public/static/ad/jarvis-logo.png";
 import { utld } from "utility-class-components";
 
 export { metadata } from "./metadata";
@@ -50,11 +51,16 @@ export default function RootLayout({ children }: React.PropsWithChildren) {
             <Main>{children}</Main>
             <Footer />
           </Wrapper>
-          <ProjectAd
+          {/* <ProjectAd
             projectName='이력서 기반 예상 면접 질문 생성기'
             projectLink='https://devport.swygbro.com/'
             repositoryLink='https://github.com/custardcream98/DevPort'
             projectImage={DevportImage}
+          /> */}
+          <ProjectAd
+            projectName='이 프로젝트 뭐지? Jarvis에게 물어보세요!'
+            repositoryLink='https://github.com/custardcream98/vscode-jarvis'
+            projectImage={JarvisLogoImage}
           />
         </RootProvider>
         <ClientLogger />
