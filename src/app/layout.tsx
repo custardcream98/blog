@@ -58,7 +58,12 @@ export default function RootLayout({ children }: React.PropsWithChildren) {
             projectImage={DevportImage}
           /> */}
           <ProjectAd
-            projectName='이 프로젝트 뭐지? Jarvis에게 물어보세요!'
+            projectName={
+              <>
+                <span>이 프로젝트 뭐지? </span>
+                <span className='ad:block'>Jarvis에게 물어보세요.</span>
+              </>
+            }
             repositoryLink='https://github.com/custardcream98/vscode-jarvis'
             projectImage={JarvisLogoImage}
           />
