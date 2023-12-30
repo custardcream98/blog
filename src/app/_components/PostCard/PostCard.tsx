@@ -9,7 +9,7 @@ export function PostCard({ slug, title, date, category }: PostCardProps) {
   return (
     <Container>
       <LinkDecoratedForCate href={`/posts/${slug}`}>{title}</LinkDecoratedForCate>
-      <DateSpan date={date} />
+      <DateSpan dateTime={date} />
       <CategoryBadges>
         {category.map((category) => (
           <CategoryBadges.Badge key={category} category={category} />

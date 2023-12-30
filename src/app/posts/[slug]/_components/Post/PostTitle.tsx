@@ -21,7 +21,7 @@ export function PostTitle({ coverImage, title, category, date, series }: PostTit
         {series && <SeriesName href={`/series/${encodeURIComponent(series)}`}>{series}</SeriesName>}
         <Title>{title}</Title>
         <DateActionWrapper>
-          <DateSpanforTitle date={date} />
+          <DateSpanforTitle dateTime={date} />
           <PostActions />
         </DateActionWrapper>
         <BadgeViewsLikesCounterContainer>

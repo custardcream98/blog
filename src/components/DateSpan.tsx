@@ -1,3 +1,4 @@
+import type { Simplify } from "src/types/helper";
 import { dateToString } from "src/utils";
 
 import { utld } from "utility-class-components";
@@ -11,11 +12,18 @@ const DateSpanStyle = utld.time`
   dark:text-default-sub-dark
 `;
 
-type Props = {
-  date: string | number | Date;
-};
+type DateSpanProps = Simplify<
+  Omit<React.ComponentPropsWithoutRef<"time">, "dateTime" | "children"> & {
+    dateTime: string | number;
+  }
+>;
 
-export function DateSpan({ date, ...props }: Props) {
-  const dateString = dateToString(new Date(date));
-  return <DateSpanStyle {...props}>{dateString}</DateSpanStyle>;
+export function DateSpan({ dateTime, ...props }: DateSpanProps) {
+  const date = new Date(dateTime);
+  const dateString = dateToString(date);
+  return (
+    <DateSpanStyle dateTime={date.toISOString()} {...props}>
+      {dateString}
+    </DateSpanStyle>
+  );
 }

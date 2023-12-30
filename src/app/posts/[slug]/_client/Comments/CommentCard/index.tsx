@@ -16,7 +16,7 @@ function UserInfo({ username, createdAt }: UserInfoProps) {
   return (
     <UserInfoWrapper>
       <Username>{username}</Username>
-      <CommentDate date={createdAt} />
+      <CommentDate dateTime={createdAt} />
     </UserInfoWrapper>
   );
 }
