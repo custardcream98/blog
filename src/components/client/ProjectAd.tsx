@@ -11,7 +11,7 @@ import { RiCloseFill } from "react-icons/ri";
 import { ud, utld } from "utility-class-components";
 
 type NoticeProps = {
-  projectName: string;
+  projectName: React.ReactNode;
   projectLink?: string;
   repositoryLink?: string;
   projectImage: StaticImageData;
@@ -31,12 +31,7 @@ export function ProjectAd({ projectName, projectLink, repositoryLink, projectIma
 
   return (
     <Wrapper $isMounted={isMounted} $isClosed={isClosed}>
-      <ProjectAdImage
-        src={projectImage}
-        alt={projectName + " 아이콘 이미지"}
-        width={50}
-        height={50}
-      />
+      <ProjectAdImage src={projectImage} alt='' width={50} height={50} />
       <ProjectAdContent>
         <ProjectAdTitle>제가 개발한 서비스 구경하고 가세요!</ProjectAdTitle>
         <ProjectAdName>{projectName}</ProjectAdName>
