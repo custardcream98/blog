@@ -33,7 +33,7 @@ const experiences: ResumeSectionData[] = [
   {
     descriptions: [
       "인천시 생활폐기물 발생량 분석 및 예측 모델 개발 연구, 착한 이륜차 운전자 평가 시스템 개발 연구에 참여했습니다.",
-      "Web Devloper로서 연구에 필요한 설문 폼을 개발했습니다.",
+      "Web Developer로서 연구에 필요한 설문 폼을 개발했습니다.",
     ],
     period: {
       from: "2021-06",
