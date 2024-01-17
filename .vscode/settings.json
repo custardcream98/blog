@@ -7,8 +7,8 @@
   "tailwindCSS.lint.cssConflict": "ignore",
   "tailwindCSS.colorDecorators": true,
   "editor.codeActionsOnSave": {
-    "source.fixAll.eslint": true,
-    "source.fixAll": true
+    "source.fixAll.eslint": "always",
+    "source.fixAll": "always"
   },
   "editor.colorDecorators": true
 }
