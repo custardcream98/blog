@@ -1,3 +1,4 @@
+/** @type {import('eslint').ESLint.ConfigData} */
 module.exports = {
   env: {
     browser: true,
@@ -11,7 +12,12 @@ module.exports = {
     "plugin:prettier/recommended",
   ],
   ignorePatterns: ["node_modules/"],
-  overrides: [],
+  overrides: [
+    {
+      extends: ["plugin:storybook/recommended"],
+      files: ["*.stories.tsx", "*.stories.mdx"],
+    },
+  ],
   parser: "@typescript-eslint/parser",
   parserOptions: {
     createDefaultProgram: true,
