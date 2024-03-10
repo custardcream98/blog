@@ -25,6 +25,7 @@ export function Button({ children, width, height, isLoading, onClick, ...props }
         width,
       }}
       $isLoading={isLoading}
+      disabled={isLoading}
       onClick={handleClick}
       {...props}
     >

@@ -6,9 +6,13 @@ export interface CommentData {
   username: string;
 }
 
-type ICommentDataProps = Omit<CommentData, "id"> & {
+export type CommentDataWithoutPassword = Omit<CommentData, "password">;
+
+export type CommentDataContextType = Omit<CommentData, "id"> & {
   commentId: string;
 };
+
+type ICommentDataProps = Omit<CommentDataContextType, "password">;
 
 enum CommentEditState {
   DEFAULT,

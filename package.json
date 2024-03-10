@@ -15,7 +15,9 @@
     "cache": "tsx --tsconfig ./tsconfig.node.json ./cache/cache.ts && prettier --write ./cache/*",
     "slug": "tsx --tsconfig ./tsconfig.node.json ./cache/convert.ts && prettier --write ./cache/*",
     "prepare": "husky install",
-    "analyze": "ANALYZE=true next build"
+    "analyze": "ANALYZE=true next build",
+    "storybook": "storybook dev -p 6006",
+    "build:storybook": "storybook build"
   },
   "dependencies": {
     "@jsdevtools/rehype-toc": "^3.0.2",
@@ -41,6 +43,14 @@
   "devDependencies": {
     "@babel/core": "^7.22.9",
     "@next/env": "^13.4.12",
+    "@storybook/addon-essentials": "^7.6.13",
+    "@storybook/addon-interactions": "^7.6.13",
+    "@storybook/addon-links": "^7.6.13",
+    "@storybook/addon-themes": "^7.6.14",
+    "@storybook/blocks": "^7.6.13",
+    "@storybook/nextjs": "^7.6.13",
+    "@storybook/react": "^7.6.13",
+    "@storybook/test": "^7.6.13",
     "@testing-library/dom": "^9.3.1",
     "@testing-library/jest-dom": "^5.16.5",
     "@testing-library/react": "^14.0.0",
@@ -63,6 +73,7 @@
     "eslint-plugin-prettier": "^4.2.1",
     "eslint-plugin-simple-import-sort": "^10.0.0",
     "eslint-plugin-sort-keys-fix": "^1.1.2",
+    "eslint-plugin-storybook": "^0.6.15",
     "gray-matter": "^4.0.3",
     "husky": "^8.0.3",
     "image-size": "^1.0.2",
@@ -80,6 +91,7 @@
     "remark-gfm": "^3.0.1",
     "server-only": "^0.0.1",
     "shiki": "^0.10.1",
+    "storybook": "^7.6.13",
     "tailwindcss": "^3.3.2",
     "tsx": "^3.12.7",
     "typescript": "5.1.6"

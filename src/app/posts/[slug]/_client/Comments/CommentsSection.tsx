@@ -1,29 +1,11 @@
 import { useGetPostCommentsQuery } from "src/request";
 
 import CommentCard from "./CommentCard";
-import CommentPostTitleContextProvider, { useCommentPostTitleContext } from "./context";
+import { useCommentPostTitleContext } from "./CommentsSection.new";
 
-import type { PropsWithChildren } from "react";
 import { utld } from "utility-class-components";
 
 export { CommentFormWithOpenButton as CommentsSectionForm } from "./CommentForm";
-
-type Props = PropsWithChildren<{
-  postTitle: string;
-}>;
-export function CommentsSection({ children, postTitle }: Props) {
-  return (
-    <CommentPostTitleContextProvider postTitle={postTitle}>
-      <Wrapper>{children}</Wrapper>
-    </CommentPostTitleContextProvider>
-  );
-}
-
-const Wrapper = utld.section`
-  flex
-  flex-col
-  w-full
-`;
 
 export function CommentsSectionTitle() {
   const postTitle = useCommentPostTitleContext();

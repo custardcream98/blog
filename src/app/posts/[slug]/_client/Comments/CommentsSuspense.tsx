@@ -1,11 +1,14 @@
 import { QuerySuspense } from "src/components";
 
 import { CommentsFallback } from "./CommentsFallback";
-import { CommentsLodingSpinner } from "./CommentsLodingSpinner";
+import { CommentsLoadingSpinner } from "./CommentsLoadingSpinner";
 
 export function CommentsSuspense({ children }: React.PropsWithChildren) {
   return (
-    <QuerySuspense FallbackComponent={CommentsFallback} loadingFallback={<CommentsLodingSpinner />}>
+    <QuerySuspense
+      FallbackComponent={CommentsFallback}
+      loadingFallback={<CommentsLoadingSpinner />}
+    >
       {children}
     </QuerySuspense>
   );

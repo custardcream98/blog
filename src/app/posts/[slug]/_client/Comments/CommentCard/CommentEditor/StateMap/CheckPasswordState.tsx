@@ -1,14 +1,15 @@
 import { Button } from "src/components/client";
 import { useEditable } from "src/hook";
-import { useDeletePostCommentMutation } from "src/request";
+import { useDeletePostCommentMutation, usePostPostCommentPassword } from "src/request";
 import { CommentEditState } from "src/types/comment";
 
-import { useCommentPostTitleContext } from "../../../context";
+import { useCommentPostTitleContext } from "../../../CommentsSection.new";
 import { useCommentDataContext } from "../../context";
 import { useCommentEditorStateSetter } from "../context";
 
 import CommentOverlapWrapper from "./CommentOverlapWrapper";
 
+import { useIsMutating } from "@tanstack/react-query";
 import { useCallback, useEffect, useState } from "react";
 import { utld } from "utility-class-components";
 
@@ -18,7 +19,7 @@ type Props = {
 export default function CheckPasswordState({ stateTo }: Props) {
   const { changeStateTo } = useCommentEditorStateSetter();
   const postTitle = useCommentPostTitleContext();
-  const { commentId, password } = useCommentDataContext();
+  const { commentId, initializePassword } = useCommentDataContext();
   const [errorMessage, setErrorMessage] = useState("");
   const [isAnimatingShake, setIsAnimatingShake] = useState(false);
   const handleShakeAnimationStart = useCallback(() => {
@@ -28,18 +29,30 @@ export default function CheckPasswordState({ stateTo }: Props) {
     setIsAnimatingShake(false);
   }, []);
 
-  const [isDeleting, setIsDeleting] = useState(false);
-
   const [inputPasswordRef, getPasswordVal, clearPasswordInput] = useEditable<HTMLInputElement>();
 
   const { mutate: mutateDeletePostComment } = useDeletePostCommentMutation();
 
+  const { mutateAsync: mutatePostPostCommentPassword } = usePostPostCommentPassword();
+
+  const mutationCount = useIsMutating();
+  const isMutating = mutationCount > 0;
+
   const handleFormSubmit: React.FormEventHandler<HTMLFormElement> = useCallback(
-    (event) => {
+    async (event) => {
       event.preventDefault();
 
       const inputPasswordValue = getPasswordVal();
-      const isPasswordCorrect = password === inputPasswordValue;
+
+      if (!inputPasswordValue) {
+        return;
+      }
+
+      const { isValid: isPasswordCorrect } = await mutatePostPostCommentPassword({
+        commentId,
+        password: inputPasswordValue,
+        postTitle,
+      });
 
       if (!isPasswordCorrect) {
         handleShakeAnimationStart();
@@ -48,7 +61,6 @@ export default function CheckPasswordState({ stateTo }: Props) {
       }
 
       if (stateTo === CommentEditState.DELETE) {
-        setIsDeleting(true);
         mutateDeletePostComment({
           commentId,
           password: inputPasswordValue,
@@ -58,10 +70,11 @@ export default function CheckPasswordState({ stateTo }: Props) {
         return;
       }
 
+      initializePassword(inputPasswordValue);
+
       return changeStateTo(stateTo);
     },
     [
-      password,
       getPasswordVal,
       clearPasswordInput,
       stateTo,
@@ -70,6 +83,8 @@ export default function CheckPasswordState({ stateTo }: Props) {
       postTitle,
       handleShakeAnimationStart,
       mutateDeletePostComment,
+      mutatePostPostCommentPassword,
+      initializePassword,
     ],
   );
 
@@ -97,7 +112,7 @@ export default function CheckPasswordState({ stateTo }: Props) {
             spellCheck={false}
             required
           />
-          <SubmitButton type='submit' width='40px' height='25px' isLoading={isDeleting}>
+          <SubmitButton type='submit' width='40px' height='25px' isLoading={isMutating}>
             입력
           </SubmitButton>
           {errorMessage && (

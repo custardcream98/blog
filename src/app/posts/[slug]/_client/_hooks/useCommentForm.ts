@@ -10,7 +10,7 @@ import { getCurrentURL } from "src/utils";
 
 import { useCommentEditorStateSetter } from "../Comments/CommentCard/CommentEditor/context";
 import { useCommentDataContext } from "../Comments/CommentCard/context";
-import { useCommentPostTitleContext } from "../Comments/context";
+import { useCommentPostTitleContext } from "../Comments/CommentsSection.new";
 
 import { useCallback } from "react";
 
