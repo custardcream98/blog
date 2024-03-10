@@ -1,4 +1,4 @@
-import type { CommentData } from "src/types/comment";
+import type { CommentDataWithoutPassword } from "src/types/comment";
 
 import type { NextApiResponse } from "../_types";
 import { normalizeNextApiResponse } from "../normalizers";
@@ -11,7 +11,7 @@ export type GetPostCommentsRequest = {
   title: string;
 };
 export const getPostComments = async ({ title }: GetPostCommentsRequest) => {
-  const response = await nextApi.get<NextApiResponse<{ comments: CommentData[] }>>(
+  const response = await nextApi.get<NextApiResponse<{ comments: CommentDataWithoutPassword[] }>>(
     GET_POST_COMMENTS_URL,
     {
       params: { title },

@@ -1,5 +1,5 @@
 import { type PatchPostCommentRequest } from "src/request/axios";
-import type { ICommentDataProps } from "src/types/comment";
+import type { CommentDataContextType, ICommentDataProps } from "src/types/comment";
 
 import {
   createContext,
@@ -11,17 +11,19 @@ import {
 } from "react";
 
 type CommentDataUpdateProps = Omit<PatchPostCommentRequest, "title" | "password" | "commentId">;
-interface ICommentDataContext extends ICommentDataProps {
+interface CommentDataContext extends CommentDataContextType {
+  password: string;
+  initializePassword: (password: string) => void;
   updateCommentDataContext: ({ comment, username }: CommentDataUpdateProps) => void;
 }
 
-const CommentDataContext = createContext<ICommentDataContext>({
+const CommentDataContext = createContext<CommentDataContext>({
   comment: "",
   commentId: "",
   createdAt: 0,
+  initializePassword: () => null,
   password: "",
-  // eslint-disable-next-line @typescript-eslint/no-empty-function
-  updateCommentDataContext: () => {},
+  updateCommentDataContext: () => null,
   username: "",
 });
 
@@ -31,7 +33,14 @@ const useCommentDataContext = () => {
 };
 
 function CommentDataContextProvider({ children, ...props }: PropsWithChildren<ICommentDataProps>) {
-  const [commentData, setCommentData] = useState<ICommentDataProps>(props);
+  const [commentData, setCommentData] = useState<
+    ICommentDataProps & {
+      password: string;
+    }
+  >({
+    ...props,
+    password: "",
+  });
 
   const updateCommentDataContext = useCallback(
     (updateCommentProps: CommentDataUpdateProps) =>
@@ -42,9 +51,18 @@ function CommentDataContextProvider({ children, ...props }: PropsWithChildren<IC
     [],
   );
 
+  const initializePassword = useCallback(
+    (password: string) =>
+      setCommentData((prevCommentData) => ({
+        ...prevCommentData,
+        password,
+      })),
+    [],
+  );
+
   const commentDataValue = useMemo(
-    () => ({ ...commentData, updateCommentDataContext }),
-    [commentData, updateCommentDataContext],
+    () => ({ ...commentData, initializePassword, updateCommentDataContext }),
+    [commentData, initializePassword, updateCommentDataContext],
   );
 
   return (

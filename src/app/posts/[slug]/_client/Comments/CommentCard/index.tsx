@@ -26,7 +26,6 @@ export default function CommentCard({
   comment,
   createdAt,
   username,
-  password,
 }: ICommentDataProps) {
   return (
     <CommentDataContextProvider
@@ -34,7 +33,6 @@ export default function CommentCard({
       comment={comment}
       createdAt={createdAt}
       username={username}
-      password={password}
     >
       <CommentEditorStateContextProvider>
         <Wrapper>

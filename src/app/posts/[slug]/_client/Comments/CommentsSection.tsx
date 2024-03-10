@@ -1,7 +1,7 @@
 import { useGetPostCommentsQuery } from "src/request";
 
 import CommentCard from "./CommentCard";
-import { useCommentPostTitleContext } from "./context";
+import { useCommentPostTitleContext } from "./CommentsSection.new";
 
 import { utld } from "utility-class-components";
 

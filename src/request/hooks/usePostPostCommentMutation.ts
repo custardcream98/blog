@@ -1,4 +1,4 @@
-import { postPostComment } from "../axios";
+import { postPostComment, postPostCommentPassword } from "../axios";
 import { getUseGetPostCommentsQueryKey } from "../query-keys";
 
 import { useMutation, useQueryClient } from "@tanstack/react-query";
@@ -16,4 +16,8 @@ export const usePostPostCommentMutation = () => {
       queryClient.setQueryData(useGetPostCommentsQueryKey, { comments: data.comments });
     },
   });
+};
+
+export const usePostPostCommentPassword = () => {
+  return useMutation(postPostCommentPassword);
 };
