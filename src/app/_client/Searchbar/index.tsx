@@ -177,7 +177,7 @@ const SearchbarForm = utld.form<SearchbarFormProps>`
   transition-all
   duration-[200ms]
 
-  ${({ $isSearchbarOn }) => ($isSearchbarOn ? "" : "translate-y-[-105%]")}
+  ${({ $isSearchbarOn }) => !$isSearchbarOn && "translate-y-[-105%]"}
 
   bg-bg-light
   dark:bg-bg-dark
