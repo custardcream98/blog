@@ -21,7 +21,6 @@ export class PuppeteerBrowser {
         height,
         width,
       },
-      headless: "new",
     });
 
     const page = await browser.newPage();
