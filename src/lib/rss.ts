@@ -1,16 +1,18 @@
 import { getAllPosts } from "src/app/data";
 import { METADATA_DEFAULT_IMAGE, METADATA_DEFAULT_TITLE } from "src/app/sharedMetadata";
 
+import { config } from "./config";
+
 import { Feed, type FeedOptions } from "feed";
 import fs from "fs";
 
 const getFullUrl = (url: string) => {
-  return process.env.NEXT_PUBLIC_HOST + url;
+  return config.DEPLOYMENT_URL + url;
 };
 
 const generateRSSFeed = async (coverImages: string[]) => {
-  if (!process.env.NEXT_PUBLIC_HOST) {
-    throw new Error("NEXT_PUBLIC_HOST is not defined");
+  if (!config.DEPLOYMENT_URL) {
+    throw new Error("DEPLOYMENT_URL is not defined");
   }
 
   const allPosts = await getAllPosts(["title", "slug", "excerpt", "date", "coverImage"]);
@@ -24,10 +26,10 @@ const generateRSSFeed = async (coverImages: string[]) => {
       rss2: getFullUrl("/rss.xml"),
     },
     generator: "custardcream98",
-    id: process.env.NEXT_PUBLIC_HOST,
+    id: config.DEPLOYMENT_URL,
     image: METADATA_DEFAULT_IMAGE.url,
     language: "ko",
-    link: process.env.NEXT_PUBLIC_HOST,
+    link: config.DEPLOYMENT_URL,
     title: METADATA_DEFAULT_TITLE,
   };
 

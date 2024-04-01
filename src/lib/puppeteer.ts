@@ -59,7 +59,7 @@ export class PuppeteerBrowser {
       type: "webp",
     });
 
-    return image as Buffer;
+    return image;
   }
 
   static async close() {

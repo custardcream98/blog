@@ -23,8 +23,8 @@ export const generateStaticParams = async () => {
 
   if (process.env.NODE_ENV === "production") {
     const coverImages = await getAllOgImages(posts.map((post) => post.title));
-    const darkTumbnails = coverImages.map(({ darkThumbnail }) => darkThumbnail);
-    await generateRSSFeed(darkTumbnails);
+    const darkThumbnails = coverImages.map(({ darkThumbnail }) => darkThumbnail);
+    await generateRSSFeed(darkThumbnails);
     await createAllPostDocs(posts);
   }
 
