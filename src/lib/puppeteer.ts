@@ -21,6 +21,7 @@ export class PuppeteerBrowser {
         height,
         width,
       },
+      headless: "new",
     });
 
     const page = await browser.newPage();
@@ -59,7 +60,7 @@ export class PuppeteerBrowser {
       type: "webp",
     });
 
-    return image as Buffer;
+    return image;
   }
 
   static async close() {

@@ -27,7 +27,7 @@ export const wrapHtmlString = (htmlString: string) => {
 export const htmlStringToBuffer = async (content: string) => {
   const image = await PuppeteerBrowser.getScreenshot(content);
 
-  return image as Buffer;
+  return image;
 };
 
 export const generateThumbnailBuffer = async (template: JSX.Element) => {
