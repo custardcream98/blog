@@ -164,6 +164,10 @@
   margin: calc(var(--paragraph-margin) * 2 / 3) 0 var(--paragraph-margin);
 }
 
+.post-content li p {
+  margin: calc(var(--paragraph-margin) * 0.5) 0 calc(var(--paragraph-margin) * 0.5);
+}
+
 .post-content p:last-child,
 .post-content blockquote:last-child,
 .post-content div:last-child,
