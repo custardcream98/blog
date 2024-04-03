@@ -1,4 +1,7 @@
-import { ClientLogger, ProjectAd } from "src/components/client";
+import {
+  ClientLogger,
+  // ProjectAd
+} from "src/components/client";
 import { FONT_NOTO_SANS_KR, FONT_POPPINS, FONT_SOURCE_CODE_PRO } from "src/fonts";
 
 import { Navigation } from "./_client";
@@ -10,7 +13,7 @@ import "./style.css";
 import { SpeedInsights } from "@vercel/speed-insights/next";
 import Script from "next/script";
 // import DevportImage from "public/static/ad/devport.png";
-import JarvisLogoImage from "public/static/ad/jarvis-logo.png";
+// import JarvisLogoImage from "public/static/ad/jarvis-logo.png";
 import { utld } from "utility-class-components";
 
 export { metadata } from "./metadata";
@@ -57,7 +60,7 @@ export default function RootLayout({ children }: React.PropsWithChildren) {
             repositoryLink='https://github.com/custardcream98/DevPort'
             projectImage={DevportImage}
           /> */}
-          <ProjectAd
+          {/* <ProjectAd
             projectName={
               <>
                 <span>이 프로젝트 뭐지? </span>
@@ -66,7 +69,7 @@ export default function RootLayout({ children }: React.PropsWithChildren) {
             }
             repositoryLink='https://github.com/custardcream98/vscode-jarvis'
             projectImage={JarvisLogoImage}
-          />
+          /> */}
         </RootProvider>
         <ClientLogger />
         <SpeedInsights />
