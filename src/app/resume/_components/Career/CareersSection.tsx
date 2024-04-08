@@ -14,6 +14,7 @@ function Section({ className, children }: React.PropsWithChildren<PropsWithClass
 
 function Item({ company, period, position, shortDescription, descriptions, links }: Career) {
   const isLinksExist = links.length !== 0;
+  const isDescriptionsExist = descriptions.length !== 0;
 
   return (
     <S.SectionItemBordered className='print:[&+&]:!mt-[4em]'>
@@ -23,16 +24,18 @@ function Item({ company, period, position, shortDescription, descriptions, links
 
       <S.ProjectShortDescription className='!mt-[0.25rem]'>{position}</S.ProjectShortDescription>
 
-      <S.ProjectDescriptionList>
-        {descriptions.map((description) => (
-          <S.ProjectDescriptionItem
-            key={description}
-            dangerouslySetInnerHTML={{ __html: description }}
-          />
-        ))}
-      </S.ProjectDescriptionList>
+      {isDescriptionsExist && (
+        <S.ProjectDescriptionList>
+          {descriptions.map((description) => (
+            <S.ProjectDescriptionItem
+              key={description}
+              dangerouslySetInnerHTML={{ __html: description }}
+            />
+          ))}
+        </S.ProjectDescriptionList>
+      )}
 
-      {shortDescription && (
+      {!!shortDescription && (
         <S.ProjectShortDescription dangerouslySetInnerHTML={{ __html: shortDescription }} />
       )}
 

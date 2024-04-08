@@ -28,13 +28,15 @@ async function Item({
   className,
 }: PropsWithClassName<Project>) {
   const isStacksExist = stacks.length !== 0;
+  const isLinksExist = links.length !== 0;
+
   const descriptionContent = description ? await compileResumeMDX(description) : null;
 
   return (
     <S.SectionItemBordered className={className}>
       <S.ProjectTitle>{title}</S.ProjectTitle>
 
-      {team && <S.ProjectTeam>{team}</S.ProjectTeam>}
+      {!!team && <S.ProjectTeam>{team}</S.ProjectTeam>}
 
       <ResumePeriod from={period.from} to={period.to} />
 
@@ -42,13 +44,15 @@ async function Item({
 
       <S.ProjectShortDescription dangerouslySetInnerHTML={{ __html: shortDescription }} />
 
-      <ResumeLinksList>
-        {links.map((link) => (
-          <li key={link.name}>
-            <ResumeLink {...link} />
-          </li>
-        ))}
-      </ResumeLinksList>
+      {isLinksExist && (
+        <ResumeLinksList>
+          {links.map((link) => (
+            <li key={link.name}>
+              <ResumeLink {...link} />
+            </li>
+          ))}
+        </ResumeLinksList>
+      )}
 
       {isStacksExist && (
         <S.ProjectStacks>

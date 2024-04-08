@@ -19,13 +19,17 @@ function Section({
 }
 
 function Item({ title, links, period, descriptions, points }: ResumeSectionData) {
+  const isDescriptionsExist = !!descriptions && descriptions.length !== 0;
+  const isPointsExist = !!points && points.length !== 0;
+  const isLinksExist = !!links && links.length !== 0;
+
   return (
     <S.SectionItem>
       <SectionItemTitle>{title}</SectionItemTitle>
 
       <ResumePeriod from={period.from} to={period.to} />
 
-      {descriptions && (
+      {isDescriptionsExist && (
         <SectionItemDescriptionList>
           {descriptions.map((description) => (
             <S.ProjectDescriptionItem key={description}>{description}</S.ProjectDescriptionItem>
@@ -33,9 +37,9 @@ function Item({ title, links, period, descriptions, points }: ResumeSectionData)
         </SectionItemDescriptionList>
       )}
 
-      {points && points.map((point) => <SectionItemP key={point}>{point}</SectionItemP>)}
+      {isPointsExist && points.map((point) => <SectionItemP key={point}>{point}</SectionItemP>)}
 
-      {links && (
+      {isLinksExist && (
         <ResumeLinksList>
           {links.map((link) => (
             <li key={link.name}>
