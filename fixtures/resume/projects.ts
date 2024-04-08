@@ -3,14 +3,14 @@ import { Project } from "src/types/resume";
 const projects: Project[] = [
   {
     description: `
-    * goormEXP의 메인 인덱스 페이지를 한 스프린트만에 개발했을 정도로 높은 퍼포먼스를 유지하고 있습니다.
-    * **Storybook 도입을 건의, 개발 환경을 구축**하고, **TypeScript으로의 마이그레이션을 진행**하고 있습니다.
+    * goormEXP의 메인 랜딩 페이지를 한 스프린트만에 개발했을 정도로 높은 퍼포먼스를 유지하고 있습니다.
+    * **Storybook 도입을 건의, 개발 환경을 구축**하고, **TypeScript으로의 마이그레이션을 주도**했습니다..
     * 불필요한 작업을 최소화하기 위해 수정이 필요한 곳의 autofix가 가능한 **ESLint Custom Rule을 개발, 도입**하고 Lint Rule을 구조화했습니다.
-    * SSR / SSG 환경에서 다국어 지원을 대응하고 있습니다.
+    * SSR / SSG 환경에서 다국어 지원을 대응했습니다.
     `,
     links: [
       {
-        name: "goormEXP 메인 인덱스 페이지",
+        name: "goormEXP 메인 랜딩 페이지",
         url: "https://exp.goorm.io",
       },
     ],
@@ -18,7 +18,7 @@ const projects: Project[] = [
       from: "2023-07",
     },
     shortDescription:
-      "게이미피케이션을 통해 구성원의 퍼포먼스를 이끌어내는 플랫폼인 goormEXP의 유지보수 및 개발을 맡고 있습니다. 팀의 프론트엔트 개발 환경 개선에 주력하고 있습니다.",
+      "게이미피케이션을 통해 구성원의 퍼포먼스를 이끌어내는 플랫폼인 goormEXP의 유지보수 및 개발을 맡았습니다. 팀의 프론트엔트 개발 환경 개선에 주력했습니다.",
     stacks: ["Next.js", "Storybook", "TypeScript", "ESLint"],
     team: "구름, goormEXP SQD",
     title: "goormEXP",
@@ -27,7 +27,7 @@ const projects: Project[] = [
   {
     description: `
     * Bootstrap을 변형해 사용하고 있던 goormstrap을 GDS 모노레포에 통합, GitHub Actions를 통한 테스트 버전 배포 방법을 구축하는 등 DX를 개선했습니다.
-    * JS로 작성된 기존의 GDS를 TypeScript로 마이그레이션하는 작업을 진행하고 있습니다.
+    * JS로 작성된 기존의 GDS를 TypeScript로 마이그레이션하는 작업에 기여했습니다.
     * 굉장히 복잡한 인터렉션이 필요한 **간트 차트 라이브러리를 개발**했습니다. Windowing 기법을 활용해 성능을 최적화했으며, 태스크 바의 드래그 앤 드롭이 가능합니다.
     `,
     links: [],
@@ -35,7 +35,7 @@ const projects: Project[] = [
       from: "2023-07",
     },
     shortDescription:
-      "사내 디자인 시스템 라이브러리인 Goorm Design System의 유지보수 및 개발을 맡고 있습니다.",
+      "사내 디자인 시스템 라이브러리인 Goorm Design System의 유지보수 및 개발을 맡았습니다.",
     stacks: ["React.js", "TypeScript", "Monorepo", "Rollup", "Sass"],
     team: "구름",
     title: "Goorm Design System (GDS)",
