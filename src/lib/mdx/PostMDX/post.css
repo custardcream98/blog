@@ -193,11 +193,11 @@
 
 .post-content code,
 .post-content tt {
-  font-family: var(--font-d2-coding);
+  font-family: var(--font-d2coding);
   padding: 0 0.4em;
   margin: 0;
   font-size: 0.85em;
-  vertical-align: 0.0725em;
+  vertical-align: 0.0375em;
   color: #cb9b22;
 }
 
