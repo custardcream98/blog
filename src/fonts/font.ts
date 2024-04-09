@@ -90,6 +90,7 @@ export const FONT_PRETENDARD = localFont({
     "Segoe UI Emoji",
     "sans-serif",
   ],
+  preload: true,
   src: "./Pretendard/PretendardVariable.woff2",
   style: "normal",
   variable: "--font-pretendard",
@@ -99,6 +100,7 @@ export const FONT_D2_CODING = localFont({
   adjustFontFallback: "Arial",
   display: "swap",
   fallback: ["D2Coding", "Courier New", "Courier", "monospace"],
+  preload: true,
   src: "./D2Coding/d2coding-subset.woff2",
   variable: "--font-d2coding",
 });
