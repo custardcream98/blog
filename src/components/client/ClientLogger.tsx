@@ -1,12 +1,12 @@
 export function ClientLogger() {
-  if (typeof window === "undefined") return null;
+  if (typeof window === "undefined" || process.env.NODE_ENV === "development") return null;
 
   console.clear();
 
   console.log("%c안녕하세요👋", "font-family: 'Noto Sans'; font-size: 16px; font-weight: 300");
 
   console.log(
-    "%c주니어 프론트엔드 개발자",
+    "%c프론트엔드 개발자",
     "display: inline-block; font-family: 'Noto Sans'; font-size: 24px; font-weight: 800; color: #0938F0;",
   );
 
