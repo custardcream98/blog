@@ -107,6 +107,11 @@ export function Searchbar({
     onSearchbarClose();
   }, [onSearchbarClose]);
 
+  const handleSearchResultClick = useCallback(() => {
+    closeResults();
+    onSearchResultClick();
+  }, [closeResults, onSearchResultClick]);
+
   return (
     <SearchbarForm
       autoComplete='off'
@@ -157,7 +162,7 @@ export function Searchbar({
                 }
                 resultDateNode={<SearchResults.ItemDate>{data.date}</SearchResults.ItemDate>}
                 isLast={index === searchedPostsCardData.length - 1}
-                onClick={onSearchResultClick}
+                onClick={handleSearchResultClick}
               />
             ))}
           </SearchResults>
