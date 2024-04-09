@@ -2,7 +2,7 @@ import React from "react";
 import { utld } from "utility-class-components";
 import { withThemeByClassName } from "@storybook/addon-themes";
 
-import { FONT_NOTO_SANS_KR, FONT_POPPINS, FONT_SOURCE_CODE_PRO } from "../src/fonts";
+import { FONT_PRETENDARD, FONT_POPPINS, FONT_D2_CODING, FONT_NOTO_SERIF_KR } from "../src/fonts";
 
 import "../src/app/style.css";
 
@@ -28,7 +28,12 @@ const preview: Preview = {
   ],
 };
 
-const FONTS = [FONT_NOTO_SANS_KR.variable, FONT_POPPINS.variable, FONT_SOURCE_CODE_PRO.variable];
+const FONTS = [
+  FONT_PRETENDARD.variable,
+  FONT_POPPINS.variable,
+  FONT_D2_CODING.variable,
+  FONT_NOTO_SERIF_KR.variable,
+];
 
 const Body = utld.body`
   font-sans

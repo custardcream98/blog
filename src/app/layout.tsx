@@ -2,7 +2,7 @@ import {
   ClientLogger,
   // ProjectAd
 } from "src/components/client";
-import { FONT_NOTO_SANS_KR, FONT_POPPINS, FONT_SOURCE_CODE_PRO } from "src/fonts";
+import { FONT_D2_CODING, FONT_POPPINS, FONT_PRETENDARD } from "src/fonts";
 
 import { Navigation } from "./_client";
 import { Footer } from "./_components";
@@ -78,7 +78,7 @@ export default function RootLayout({ children }: React.PropsWithChildren) {
   );
 }
 
-const FONTS = [FONT_NOTO_SANS_KR.variable, FONT_POPPINS.variable, FONT_SOURCE_CODE_PRO.variable];
+const FONTS = [FONT_PRETENDARD.variable, FONT_POPPINS.variable, FONT_D2_CODING.variable];
 
 const Body = utld.body`
   font-sans

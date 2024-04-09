@@ -5,13 +5,13 @@ import Image from "next/image";
 export function Intro() {
   return (
     <div className='mx-auto mb-[2rem] mt-[5rem] flex w-[90vw] max-w-800 flex-col'>
-      <p className='font-title text-[2rem] font-semibold leading-[1.3] pc:text-[3.5rem]'>
+      <p className='font-poppins text-[2rem] font-semibold leading-[1.3] pc:text-[3.5rem]'>
         Dedicated to{" "}
         <em className='text-gradient-intro h-[2.5rem] animate-bg-gradient pc:h-auto'>Coding.</em>
       </p>
       <div className='mt-[5rem] flex items-center self-end'>
         <p className='text-[0.7rem] leading-1.2 text-default-sub-light dark:text-default-sub-dark pc:text-[1rem]'>
-          <strong className='mb-[0.3rem] block font-title text-[0.9rem] font-semibold text-default-light dark:text-default-dark pc:mb-[0.5rem] pc:text-[1.2rem]'>
+          <strong className='font-poppins mb-[0.3rem] block text-[0.9rem] font-semibold text-default-light dark:text-default-dark pc:mb-[0.5rem] pc:text-[1.2rem]'>
             Shi Woo, Park
           </strong>
           <span>만들고 싶으면 만들어야지.</span>

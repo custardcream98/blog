@@ -124,10 +124,9 @@ module.exports = {
     },
     fontFamily: {
       d2coding: ["var(--font-d2coding)"],
-      mono: ["var(--font-source-code-pro)"],
-      sans: ["var(--font-noto-sans-kr)"],
+      poppins: ["var(--font-poppins)"],
+      sans: ["var(--font-pretendard)"],
       serif: ["var(--font-noto-serif-kr)"],
-      title: ["var(--font-poppins)"],
     },
     lineHeight: {
       1.2: "1.2",

@@ -1,5 +1,4 @@
 import { Container as DefaultContainer } from "src/components";
-import { FONT_D2_CODING } from "src/fonts";
 
 import { ud, utld } from "utility-class-components";
 
@@ -12,8 +11,6 @@ export const Container = utld(DefaultContainer)`
     pt-0
     pb-[2em]
   )
-
-  ${FONT_D2_CODING.variable}
 `;
 
 export const Section = utld.section`

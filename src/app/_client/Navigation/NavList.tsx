@@ -32,7 +32,6 @@ const Nav = utld.ul`
   mr-8
 
   font-medium
-  font-title
 
   mobile:(
     gap-2

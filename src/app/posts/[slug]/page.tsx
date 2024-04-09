@@ -1,6 +1,6 @@
 import { getAllPosts, getPostBySlug } from "src/app/data";
 import { Container } from "src/components";
-import { FONT_D2_CODING, FONT_NOTO_SERIF_KR } from "src/fonts";
+import { FONT_NOTO_SERIF_KR } from "src/fonts";
 import { compilePostMDX } from "src/lib/mdx";
 import generateRSSFeed from "src/lib/rss";
 import { getAllOgImages } from "src/lib/thumbnails/ogImage";
@@ -71,12 +71,10 @@ export default async function PostsDynamicPage({ params: { slug } }: PostPagePar
   );
 }
 
-const FONTS = [FONT_D2_CODING.variable, FONT_NOTO_SERIF_KR.variable];
-
 const PostContainer = utld(Container)`
   !max-w-[42.5rem]
 
-  ${FONTS}
+  ${FONT_NOTO_SERIF_KR.variable}
 `;
 
 const PostSection = utld.section`

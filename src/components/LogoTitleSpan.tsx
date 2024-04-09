@@ -8,7 +8,6 @@ export function LogoTitleSpan({ className }: PropsWithClassName) {
 
 const Span = utld.span`
   text-[1rem]
-  font-mono
   font-extrabold
   tracking-[-0.03rem]
 

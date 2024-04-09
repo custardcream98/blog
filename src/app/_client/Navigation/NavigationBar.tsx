@@ -65,8 +65,6 @@ const H1 = utld.h1`
   flex
   justify-start
   items-center
-
-  font-mono
 `;
 
 const NavItemWrapper = utld.div`
