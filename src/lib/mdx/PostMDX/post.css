@@ -1,5 +1,5 @@
 .post-content {
-  --main-font-size: 1rem;
+  --main-font-size: 1.125rem;
   --main-heading-margin: 14rem;
   --paragraph-margin: 3rem;
   --toc-item-margin: 0.25rem;
@@ -68,7 +68,7 @@
 
 @media (max-width: 800px) {
   .post-content {
-    --main-font-size: 0.9rem;
+    --main-font-size: 1rem;
   }
 }
 
@@ -211,7 +211,7 @@
 .post-content div[data-rehype-pretty-code-fragment] pre code {
   display: grid;
   padding: 0;
-  font-size: var(--main-font-size);
+  font-size: calc(var(--main-font-size) * 0.9);
 
   counter-reset: codeblock;
 }
