@@ -60,7 +60,7 @@ export const FONT_POPPINS = Poppins({
 export const FONT_NOTO_SERIF_KR = localFont({
   adjustFontFallback: "Times New Roman",
   display: "swap",
-  fallback: ["serif"],
+  fallback: ["Noto Serif KR", "Times New Roman", "Times", "Noto Serif", "serif"],
   preload: true,
   src: [
     {
