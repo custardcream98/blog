@@ -15,7 +15,7 @@ import localFont from "next/font/local";
 
 export const FONT_POPPINS = Poppins({
   display: "swap",
-  fallback: ["sans-serif"],
+  fallback: ["Poppins", "Arial", "Helvetica", "sans-serif"],
   preload: true,
   subsets: ["latin"],
   variable: "--font-poppins",
@@ -60,7 +60,7 @@ export const FONT_POPPINS = Poppins({
 export const FONT_NOTO_SERIF_KR = localFont({
   adjustFontFallback: "Times New Roman",
   display: "swap",
-  fallback: ["Noto Serif KR", "Times New Roman", "Times", "Noto Serif", "serif"],
+  fallback: ["Noto Serif KR", "Noto Serif", "Times New Roman", "Times", "serif"],
   preload: true,
   src: [
     {
