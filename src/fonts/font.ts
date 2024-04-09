@@ -98,7 +98,7 @@ export const FONT_PRETENDARD = localFont({
 export const FONT_D2_CODING = localFont({
   adjustFontFallback: "Arial",
   display: "swap",
-  fallback: ["monospace"],
+  fallback: ["D2Coding", "Courier New", "Courier", "monospace"],
   src: "./D2Coding/d2coding-subset.woff2",
   variable: "--font-d2coding",
 });
