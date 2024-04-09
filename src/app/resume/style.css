@@ -67,8 +67,6 @@ div[data-rehype-pretty-code-fragment] pre code {
   letter-spacing: 0.03em;
 
   counter-reset: codeblock;
-
-  font-family: var(--font-d2-coding);
 }
 
 div[data-rehype-pretty-code-fragment] pre code .line {
