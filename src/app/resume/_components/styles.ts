@@ -159,6 +159,14 @@ export const ProjectStacks = utld.ul`
   flex
   flex-wrap
   gap-[0.3125em]
+
+  mt-[1em]
+  [ul+&]:mt-0
+
+  print:(
+    mt-[0.8em]
+    [ul+&]:mt-0
+  )
 `;
 
 export const ProjectStack = utld.li`
