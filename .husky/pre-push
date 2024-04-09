@@ -1,9 +1,16 @@
 #!/usr/bin/env sh
 . "$(dirname -- "$0")/_/husky.sh"
 
-npm run cache && git add ./cache/cache.json && git add ./cache/postByPageArr.json
+pnpm run cache && git add ./cache/cache.json && git add ./cache/postByPageArr.json
 
 if [[ `git diff --name-only --cached` ]]
 then
-  git commit -m"Chore: 포스트 검색용 cache 갱신"
+  git commit -m"chore(post): 포스트 검색용 cache 갱신"
+fi
+
+pnpm run lint:fix && git add .
+
+if [[ `git diff --name-only --cached` ]]
+then
+  git commit -m"chore(style): lint fix"
 fi
