@@ -150,7 +150,6 @@ export const ProjectDescriptionItem = utld.li`
 
   [&_code]:(
     font-normal
-    font-d2coding
     text-resume-text-strong-light
     dark:text-resume-text-strong-dark
   )

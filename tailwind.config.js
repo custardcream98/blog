@@ -123,7 +123,7 @@ module.exports = {
       },
     },
     fontFamily: {
-      d2coding: ["var(--font-d2coding)"],
+      mono: ["var(--font-d2coding)"],
       poppins: ["var(--font-poppins)"],
       sans: ["var(--font-pretendard)"],
       serif: ["var(--font-noto-serif-kr)"],
