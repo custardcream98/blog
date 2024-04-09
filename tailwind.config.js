@@ -57,6 +57,7 @@ module.exports = {
         },
         nav: {
           bg: { dark: "#6a6a6a14", light: "#e7e7e767" },
+          "bg-no-transparent": { dark: "#191919", light: "#f3f3f3" },
         },
         post: {
           element: {

@@ -29,9 +29,14 @@ const TAB_AND_ARROW_KEYS = new Set([TAB_KEY, ARROW_UP_KEY, ARROW_DOWN_KEY]);
 type SearchbarProps = {
   isSearchbarOn: boolean;
   onSearchbarClose: () => void;
+  onSearchResultClick: () => void;
 };
 
-export function Searchbar({ isSearchbarOn, onSearchbarClose }: SearchbarProps) {
+export function Searchbar({
+  isSearchbarOn,
+  onSearchbarClose,
+  onSearchResultClick,
+}: SearchbarProps) {
   const [searchInput, setSearchInput] = useState("");
   const handleInputChange = useCallback((event: ChangeEvent<HTMLInputElement>) => {
     event.preventDefault();
@@ -152,7 +157,7 @@ export function Searchbar({ isSearchbarOn, onSearchbarClose }: SearchbarProps) {
                 }
                 resultDateNode={<SearchResults.ItemDate>{data.date}</SearchResults.ItemDate>}
                 isLast={index === searchedPostsCardData.length - 1}
-                onClick={closeResults}
+                onClick={onSearchResultClick}
               />
             ))}
           </SearchResults>

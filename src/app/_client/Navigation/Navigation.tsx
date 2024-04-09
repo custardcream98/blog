@@ -1,8 +1,7 @@
-import { useIsMobile, useWindowScrollEvent } from "src/hook";
+import { useWindowScrollEvent } from "src/hook";
 
 import { Searchbar } from "../Searchbar";
 
-import { DarkmodeSwitch } from "./DarkmodeSwitch";
 import { NavigationBar } from "./NavigationBar";
 
 import { usePathname } from "next/navigation";
@@ -15,8 +14,6 @@ const SCROLL_THRESHOLD = 25; // 0 ~ 50
 export function Navigation() {
   const [isSearchbarOn, setIsSearchbarOn] = useState(false);
   const toggleSearchbar = useCallback(() => setIsSearchbarOn((prev) => !prev), []);
-
-  const isMobile = useIsMobile();
 
   const pathname = usePathname();
   const isPostRoute = useMemo(() => /\/posts\//g.test(pathname ?? ""), [pathname]);
@@ -51,13 +48,32 @@ export function Navigation() {
     onScroll: handleWindowScroll,
   });
 
+  const [isMobileHamburgerMenuOpened, setIsMobileHamburgerMenuOpened] = useState(false);
+
+  const handleMobileHamburgerMenuButtonClick = useCallback(
+    () => setIsMobileHamburgerMenuOpened((prev) => !prev),
+    [],
+  );
+
+  const handleSearchResultClick = useCallback(() => {
+    setIsMobileHamburgerMenuOpened(false);
+    setIsSearchbarOn(false);
+  }, []);
+
   return (
     <Header>
       <Container $isNavbarOn={isNavbarOn}>
-        <NavigationBar onSearchButtonClick={toggleSearchbar} />
-        <Searchbar isSearchbarOn={isSearchbarOn} onSearchbarClose={toggleSearchbar} />
+        <NavigationBar
+          onSearchButtonClick={toggleSearchbar}
+          isMobileHamburgerMenuOpened={isMobileHamburgerMenuOpened}
+          onMobileHamburgerMenuButtonClick={handleMobileHamburgerMenuButtonClick}
+        />
+        <Searchbar
+          isSearchbarOn={isSearchbarOn}
+          onSearchbarClose={toggleSearchbar}
+          onSearchResultClick={handleSearchResultClick}
+        />
       </Container>
-      {isMobile && <DarkmodeSwitch className='fixed bottom-5 right-5' />}
     </Header>
   );
 }

@@ -1,22 +1,26 @@
+import { POSTS_SECTION_ID } from "src/app/constants";
 import { LogoTitleSpan } from "src/components";
-import { ResponsiveIconButton } from "src/components/client";
+import { IconButton, ResponsiveIconButton } from "src/components/client";
 import { LogoSvg } from "src/components/Svgs";
-import { useIsMobile } from "src/hook";
 
 import { DarkmodeSwitch } from "./DarkmodeSwitch";
 import { NavList } from "./NavList";
 
 import Link from "next/link";
+import React from "react";
 import { HiSearch } from "react-icons/hi";
+import { RxHamburgerMenu } from "react-icons/rx";
 import { utld } from "utility-class-components";
 
-export function NavigationBar({
+function NavigationBarPresentational({
   onSearchButtonClick,
+  isMobileHamburgerMenuOpened,
+  onMobileHamburgerMenuButtonClick,
 }: {
   onSearchButtonClick: React.MouseEventHandler<HTMLButtonElement>;
+  isMobileHamburgerMenuOpened: boolean;
+  onMobileHamburgerMenuButtonClick: () => void;
 }) {
-  const isMobile = useIsMobile();
-
   return (
     <Nav>
       <Link href='/'>
@@ -26,15 +30,25 @@ export function NavigationBar({
           <span className='sr-only'>: FE 개발자 박시우의 기술 블로그</span>
         </H1>
       </Link>
-      <NavItemWrapper>
-        <NavList>
-          <NavList.Item href='/#post-cards-section'>Posts</NavList.Item>
+      <IconButton
+        type='button'
+        className='hidden mobile:block'
+        icon={RxHamburgerMenu}
+        title='메뉴 열기 버튼입니다.'
+        onClick={onMobileHamburgerMenuButtonClick}
+      />
+      <MenuWrapper $isMenuOpened={isMobileHamburgerMenuOpened}>
+        <NavList
+          onClick={isMobileHamburgerMenuOpened ? onMobileHamburgerMenuButtonClick : undefined}
+          className='mobile:order-3 mobile:flex-col mobile:items-end mobile:gap-4'
+        >
+          <NavList.Item href={`/#${POSTS_SECTION_ID}`}>Posts</NavList.Item>
           <NavList.Item href='/categories'>Categories</NavList.Item>
           <NavList.Item href='/series'>Series</NavList.Item>
           <NavList.Item href='/resume'>About</NavList.Item>
         </NavList>
         <ResponsiveIconButton
-          className='ml-1'
+          className='ml-1 mobile:order-1'
           title='검색 버튼입니다.'
           type='button'
           mobileSize='22px'
@@ -42,11 +56,13 @@ export function NavigationBar({
           icon={HiSearch}
           onClick={onSearchButtonClick}
         />
-        {!isMobile && <DarkmodeSwitch className='absolute right-[-2.1875rem]' />}
-      </NavItemWrapper>
+        <DarkmodeSwitch className='absolute right-[-2.1875rem] mobile:relative mobile:right-0 mobile:order-2' />
+      </MenuWrapper>
     </Nav>
   );
 }
+
+export const NavigationBar = React.memo(NavigationBarPresentational);
 
 const Nav = utld.nav`
   relative
@@ -67,6 +83,36 @@ const H1 = utld.h1`
   items-center
 `;
 
-const NavItemWrapper = utld.div`
+const MenuWrapper = utld.div<{
+  $isMenuOpened: boolean;
+}>`
   flex
+
+  mobile:(
+    py-4
+    pr-[5vw]
+
+    fixed
+    top-nav
+    -right-full
+    
+    h-full
+    w-full
+
+    bg-nav-bg-no-transparent-light
+    dark:bg-nav-bg-no-transparent-dark
+
+    transition-transform
+    duration-500
+    ease-in-out
+    transform
+
+    flex-col
+
+    items-end
+
+    gap-4
+  )
+
+  ${(props) => (props.$isMenuOpened ? "mobile:-translate-x-full" : "mobile:translate-x-0")}
 `;
