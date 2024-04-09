@@ -26,7 +26,7 @@ function NavigationBarPresentational({
       <Link href='/'>
         <H1>
           <LogoSvg className='h-4 w-4 text-default-light dark:text-default-dark' />
-          <LogoTitleSpan className='ml-[0.4375rem] small:sr-only' />
+          <LogoTitleSpan className='ml-[0.4375rem]' />
           <span className='sr-only'>: FE 개발자 박시우의 기술 블로그</span>
         </H1>
       </Link>
