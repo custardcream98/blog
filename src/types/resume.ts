@@ -34,7 +34,13 @@ export type Career = {
 export type ResumeSectionData = {
   title: string;
   period: Period;
+  /**
+   * 문구, 줄글로 표현됨
+   */
   points?: string[];
+  /**
+   * 불렛 포인트로 표현됨
+   */
   descriptions?: string[];
   links?: ResumeLink[];
 };
