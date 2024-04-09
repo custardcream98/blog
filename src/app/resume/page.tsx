@@ -20,7 +20,7 @@ export default function ResumePage() {
         입니다.
       </MainTitle>
       <IntroduceSection />
-      <ProjectSection title='프로젝트' className='print:mt-44'>
+      <ProjectSection title='프로젝트' className='print:mt-40'>
         {projects.map((project, index) => (
           <ProjectSection.Item
             key={project.title}
@@ -29,7 +29,7 @@ export default function ResumePage() {
           />
         ))}
       </ProjectSection>
-      <ProjectSection title='오픈소스 컨트리뷰션' className='print:pt-4'>
+      <ProjectSection title='오픈소스 컨트리뷰션' className='break-inside-avoid'>
         {opensources.map((opensource, index) => (
           <ProjectSection.Item
             key={opensource.title}
@@ -48,7 +48,7 @@ export default function ResumePage() {
           <ResumeSection.Item key={experience.title} {...experience} />
         ))}
       </ResumeSection>
-      <ResumeSection sectionTitle='교육 및 자격증' className='print:pt-4'>
+      <ResumeSection sectionTitle='교육 및 자격증' className='break-inside-avoid print:pt-4'>
         {educations.map((educations) => (
           <ResumeSection.Item key={educations.title} {...educations} />
         ))}
