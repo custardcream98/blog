@@ -7,7 +7,7 @@ import { DarkmodeSwitch } from "./DarkmodeSwitch";
 import { NavList } from "./NavList";
 
 import Link from "next/link";
-import React from "react";
+import React, { useEffect } from "react";
 import { HiSearch } from "react-icons/hi";
 import { RxHamburgerMenu } from "react-icons/rx";
 import { utld } from "utility-class-components";
@@ -21,6 +21,19 @@ function NavigationBarPresentational({
   isMobileHamburgerMenuOpened: boolean;
   onMobileHamburgerMenuButtonClick: () => void;
 }) {
+  /**
+   * Prevent scrolling when the mobile hamburger menu is opened.
+   */
+  useEffect(() => {
+    if (!isMobileHamburgerMenuOpened) return;
+
+    document.body.style.overflow = "hidden";
+
+    return () => {
+      document.body.style.overflow = "";
+    };
+  }, [isMobileHamburgerMenuOpened, onMobileHamburgerMenuButtonClick]);
+
   return (
     <Nav>
       <Link href='/'>
