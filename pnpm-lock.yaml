@@ -64,8 +64,8 @@ dependencies:
     specifier: ^5.0.0
     version: 5.0.0
   utility-class-components:
-    specifier: ^0.3.0-alpha.0
-    version: 0.3.0-alpha.0(react@18.2.0)
+    specifier: ^0.2.5
+    version: 0.2.5(react@18.2.0)
 
 devDependencies:
   '@babel/core':
@@ -15354,8 +15354,8 @@ packages:
     resolution: {integrity: sha512-Z0DbgELS9/L/75wZbro8xAnT50pBVFQZ+hUEueGDU5FN51YSCYM+jdxsfCiHjwNP/4LCDD0i/graKpeBnOXKRA==}
     dev: true
 
-  /utility-class-components@0.3.0-alpha.0(react@18.2.0):
-    resolution: {integrity: sha512-PNJM3qHVBaaqWb73znIRfGqAgIbHJoO3wB2YWiCs/XKxQBXsxMVuei5M81dTB3OkDU20rU3Dyn1jB/igGw1d3w==}
+  /utility-class-components@0.2.5(react@18.2.0):
+    resolution: {integrity: sha512-7fdNry5puI1kps9keWk6FWGhZOH+OWuGfw8l7bweRw7uT9YmKvm4qWNsSOf/2vsOnlZu2CHy176oURv5FB/jeg==}
     peerDependencies:
       react: '>= 17.0.0'
     dependencies:
