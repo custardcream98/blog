@@ -6,7 +6,7 @@ import { NavigationBar } from "./NavigationBar";
 
 import { usePathname } from "next/navigation";
 import { useCallback, useEffect, useMemo, useRef, useState } from "react";
-import { ud, utld } from "utility-class-components";
+import { utld } from "utility-class-components";
 
 const NAVIGATION_HEIGHT = 50; // px
 const SCROLL_THRESHOLD = 25; // 0 ~ 50
@@ -108,9 +108,5 @@ const Container = utld.div<{
     -z-10
   )
 
-  ${({ $isNavbarOn }) =>
-    !$isNavbarOn &&
-    ud`
-      translate-y-[-3.125rem]
-    `}
+  ${({ $isNavbarOn }) => !$isNavbarOn && "translate-y-[-3.125rem]"}
 `;
