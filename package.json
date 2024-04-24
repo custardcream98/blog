@@ -39,7 +39,7 @@
     "react-icons": "^4.9.0",
     "react-loader-spinner": "^5.3.4",
     "unist-util-visit": "^5.0.0",
-    "utility-class-components": "^0.2.4"
+    "utility-class-components": "^0.2.5"
   },
   "devDependencies": {
     "@babel/core": "^7.22.9",

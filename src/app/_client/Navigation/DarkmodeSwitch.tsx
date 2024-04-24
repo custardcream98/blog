@@ -38,19 +38,4 @@ const Button = utld.button`
 
   hover:scale-[1.1]
   active:scale-[0.8]
-
-  `;
-
-// mobile:(
-//   w-[2.1875rem]
-//   h-[2.1875rem]
-//   p-[0.375rem]
-
-//   backdrop-blur-md
-//   rounded-full
-//   bg-nav-bg-light
-//   dark:bg-nav-bg-dark
-//   shadow
-//   shadow-default-light
-//   dark:shadow-default-dark
-// )
+`;
