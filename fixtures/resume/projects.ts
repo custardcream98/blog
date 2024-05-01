@@ -16,6 +16,7 @@ const projects: Project[] = [
     ],
     period: {
       from: "2023-07",
+      to: "2024-04",
     },
     shortDescription:
       "게이미피케이션을 통해 구성원의 퍼포먼스를 이끌어내는 플랫폼인 goormEXP의 유지보수 및 개발을 맡았습니다. 팀의 프론트엔트 개발 환경 개선에 주력했습니다.",
@@ -33,6 +34,7 @@ const projects: Project[] = [
     links: [],
     period: {
       from: "2023-07",
+      to: "2024-04",
     },
     shortDescription:
       "사내 디자인 시스템 라이브러리인 Goorm Design System의 유지보수 및 개발을 맡았습니다.",
