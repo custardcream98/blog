@@ -1,12 +1,12 @@
-import React from "react";
-import { utld } from "utility-class-components";
-import { withThemeByClassName } from "@storybook/addon-themes";
+import React from "react"
+import { utld } from "utility-class-components"
+import { withThemeByClassName } from "@storybook/addon-themes"
 
-import { FONT_PRETENDARD, FONT_POPPINS, FONT_D2_CODING, FONT_NOTO_SERIF_KR } from "../src/fonts";
+import { FONT_PRETENDARD, FONT_POPPINS, FONT_D2_CODING, FONT_NOTO_SERIF_KR } from "../src/fonts"
 
-import "../src/app/style.css";
+import "../src/app/style.css"
 
-import type { Preview, ReactRenderer } from "@storybook/react";
+import type { Preview, ReactRenderer } from "@storybook/react"
 
 const preview: Preview = {
   parameters: {
@@ -26,14 +26,14 @@ const preview: Preview = {
       </Body>
     ),
   ],
-};
+}
 
 const FONTS = [
   FONT_PRETENDARD.variable,
   FONT_POPPINS.variable,
   FONT_D2_CODING.variable,
   FONT_NOTO_SERIF_KR.variable,
-];
+]
 
 const Body = utld.body`
   font-sans
@@ -48,6 +48,6 @@ const Body = utld.body`
   print:bg-transparent
 
   ${FONTS}
-`;
+`
 
-export default preview;
+export default preview

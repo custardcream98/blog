@@ -1,7 +1,7 @@
-import type { PropsWithClassName } from "src/types/props";
-import type { Career } from "src/types/resume";
+import type { PropsWithClassName } from "src/types/props"
+import type { Career } from "src/types/resume"
 
-import { ResumeLink, ResumeLinksList, ResumePeriod, S } from "..";
+import { ResumeLink, ResumeLinksList, ResumePeriod, S } from ".."
 
 function Section({ className, children }: React.PropsWithChildren<PropsWithClassName>) {
   return (
@@ -9,12 +9,12 @@ function Section({ className, children }: React.PropsWithChildren<PropsWithClass
       <S.SectionTitle>경력</S.SectionTitle>
       <S.SectionItemList>{children}</S.SectionItemList>
     </S.Section>
-  );
+  )
 }
 
 function Item({ company, period, position, shortDescription, descriptions, links }: Career) {
-  const isLinksExist = links.length !== 0;
-  const isDescriptionsExist = descriptions.length !== 0;
+  const isLinksExist = links.length !== 0
+  const isDescriptionsExist = descriptions.length !== 0
 
   return (
     <S.SectionItemBordered className='print:[&+&]:!mt-[4em]'>
@@ -49,9 +49,9 @@ function Item({ company, period, position, shortDescription, descriptions, links
         </ResumeLinksList>
       )}
     </S.SectionItemBordered>
-  );
+  )
 }
 
-const CareersSection = Object.assign(Section, { Item });
+const CareersSection = Object.assign(Section, { Item })
 
-export default CareersSection;
+export default CareersSection

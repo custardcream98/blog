@@ -1,9 +1,9 @@
-import { CategoryBadges, DateSpan, LinkDecorated } from "src/components";
-import type PostType from "src/types/post";
+import { CategoryBadges, DateSpan, LinkDecorated } from "src/components"
+import type PostType from "src/types/post"
 
-import { utld } from "utility-class-components";
+import { utld } from "utility-class-components"
 
-type PostCardProps = Pick<PostType, "slug" | "title" | "date" | "category">;
+type PostCardProps = Pick<PostType, "slug" | "title" | "date" | "category">
 
 export function PostCard({ slug, title, date, category }: PostCardProps) {
   return (
@@ -16,7 +16,7 @@ export function PostCard({ slug, title, date, category }: PostCardProps) {
         ))}
       </CategoryBadges>
     </Container>
-  );
+  )
 }
 
 const Container = utld.li`
@@ -25,7 +25,7 @@ const Container = utld.li`
   border-solid
   border-default-sub-light
   dark:border-default-sub-dark
-`;
+`
 
 const LinkDecoratedForCate = utld(LinkDecorated)`
   block
@@ -33,4 +33,4 @@ const LinkDecoratedForCate = utld(LinkDecorated)`
   font-bold
   leading-[1.2]
   pb-[0.2rem]
-`;
+`

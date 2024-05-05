@@ -1,13 +1,13 @@
-import { ExternalLinkSvg } from "src/components/Svgs";
-import { addToClipboard, getCurrentURL } from "src/utils";
+import { ExternalLinkSvg } from "src/components/Svgs"
+import { addToClipboard, getCurrentURL } from "src/utils"
 
-import { utld } from "utility-class-components";
+import { utld } from "utility-class-components"
 
 const handleCopyPostLink = async () => {
-  const currentPostURL = getCurrentURL();
-  await addToClipboard(currentPostURL);
-  alert("포스트 URL을 복사했습니다 😄");
-};
+  const currentPostURL = getCurrentURL()
+  await addToClipboard(currentPostURL)
+  alert("포스트 URL을 복사했습니다 😄")
+}
 
 export function PostActions() {
   return (
@@ -15,7 +15,7 @@ export function PostActions() {
       <StyledExternalLinkSvg />
       URL 복사하기
     </Button>
-  );
+  )
 }
 
 const Button = utld.button`
@@ -25,7 +25,7 @@ dark:text-default-sub-dark
 
   flex
   items-center
-`;
+`
 
 const StyledExternalLinkSvg = utld(ExternalLinkSvg)`
   text-default-sub-light
@@ -34,4 +34,4 @@ const StyledExternalLinkSvg = utld(ExternalLinkSvg)`
   w-4
   h-4
   mr-2
-`;
+`

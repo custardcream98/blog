@@ -1,46 +1,46 @@
-import type { DateYYMM } from "./string";
+import type { DateYYMM } from "./string"
 
 export type Period = {
-  from: DateYYMM;
-  to?: DateYYMM;
-};
+  from: DateYYMM
+  to?: DateYYMM
+}
 
 export type ResumeLink = {
-  name: string;
-  url: string;
-};
+  name: string
+  url: string
+}
 
-export type ProjectTeam = string;
+export type ProjectTeam = string
 
 export type Project = {
-  title: string;
-  period: Period;
-  team?: ProjectTeam;
-  shortDescription: string;
-  links: ResumeLink[];
-  description: string;
-  stacks: string[];
-};
+  title: string
+  period: Period
+  team?: ProjectTeam
+  shortDescription: string
+  links: ResumeLink[]
+  description: string
+  stacks: string[]
+}
 
 export type Career = {
-  company: string;
-  period: Period;
-  position: string;
-  shortDescription?: string;
-  descriptions: string[];
-  links: ResumeLink[];
-};
+  company: string
+  period: Period
+  position: string
+  shortDescription?: string
+  descriptions: string[]
+  links: ResumeLink[]
+}
 
 export type ResumeSectionData = {
-  title: string;
-  period: Period;
+  title: string
+  period: Period
   /**
    * 문구, 줄글로 표현됨
    */
-  points?: string[];
+  points?: string[]
   /**
    * 불렛 포인트로 표현됨
    */
-  descriptions?: string[];
-  links?: ResumeLink[];
-};
+  descriptions?: string[]
+  links?: ResumeLink[]
+}

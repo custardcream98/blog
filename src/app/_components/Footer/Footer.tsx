@@ -1,6 +1,6 @@
-import { LinkDecorated, LogoTitleSpan } from "src/components";
+import { LinkDecorated, LogoTitleSpan } from "src/components"
 
-import { utld } from "utility-class-components";
+import { utld } from "utility-class-components"
 
 const Container = utld.footer`
   print:hidden
@@ -27,16 +27,16 @@ const Container = utld.footer`
 
     w-[90vw]
   )
-`;
+`
 
 const Small = utld.small`
   text-default-sub-light
   dark:text-default-sub-dark
-`;
+`
 
 const Address = utld.address`
   mobile:mt-[0.7rem]
-`;
+`
 
 const AddressUl = utld.ul`
   flex
@@ -48,10 +48,10 @@ const AddressUl = utld.ul`
   )
 
   [&>li+li]:pl-[0.7rem]
-`;
+`
 
 export function Footer() {
-  const YEAR = new Date().getFullYear();
+  const YEAR = new Date().getFullYear()
 
   return (
     <Container>
@@ -87,5 +87,5 @@ export function Footer() {
         </AddressUl>
       </Address>
     </Container>
-  );
+  )
 }

@@ -1,15 +1,15 @@
-import { IconButton } from "src/components/client";
-import { CommentEditState } from "src/types/comment";
+import { IconButton } from "src/components/client"
+import { CommentEditState } from "src/types/comment"
 
-import { useCommentEditorStateSetter } from "../context";
+import { useCommentEditorStateSetter } from "../context"
 
-import { AiFillEdit } from "react-icons/ai";
-import { IoMdClose } from "react-icons/io";
-import { MdDelete } from "react-icons/md";
-import { utld } from "utility-class-components";
+import { AiFillEdit } from "react-icons/ai"
+import { IoMdClose } from "react-icons/io"
+import { MdDelete } from "react-icons/md"
+import { utld } from "utility-class-components"
 
 function OptionOpenedState() {
-  const { getStateSetter } = useCommentEditorStateSetter();
+  const { getStateSetter } = useCommentEditorStateSetter()
 
   return (
     <Wrapper>
@@ -29,7 +29,7 @@ function OptionOpenedState() {
         onClick={getStateSetter(CommentEditState.DEFAULT)}
       />
     </Wrapper>
-  );
+  )
 }
 
 const Wrapper = utld.div`
@@ -39,6 +39,6 @@ const Wrapper = utld.div`
   animate-show
 
   [&>button]:ml-[0.2rem]
-`;
+`
 
-export default OptionOpenedState;
+export default OptionOpenedState

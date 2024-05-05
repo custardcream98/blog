@@ -1,9 +1,9 @@
-import type { Period } from "src/types/resume";
-import { convertYYMMToKorean } from "src/utils";
+import type { Period } from "src/types/resume"
+import { convertYYMMToKorean } from "src/utils"
 
-import { dimTextStyle } from "./styles";
+import { dimTextStyle } from "./styles"
 
-import { utld } from "utility-class-components";
+import { utld } from "utility-class-components"
 
 export function ResumePeriod({ from, to }: Period) {
   if (to) {
@@ -12,7 +12,7 @@ export function ResumePeriod({ from, to }: Period) {
         <ResumePeriodContainer>
           <time dateTime={from}>{convertYYMMToKorean(from)}</time>
         </ResumePeriodContainer>
-      );
+      )
     }
 
     return (
@@ -20,7 +20,7 @@ export function ResumePeriod({ from, to }: Period) {
         <time dateTime={from}>{convertYYMMToKorean(from)}</time>
         <time dateTime={to}>{convertYYMMToKorean(to)}</time>
       </ResumePeriodContainer>
-    );
+    )
   }
 
   return (
@@ -28,7 +28,7 @@ export function ResumePeriod({ from, to }: Period) {
       <time dateTime={from}>{convertYYMMToKorean(from)}</time>
       <span>진행중</span>
     </ResumePeriodContainer>
-  );
+  )
 }
 
 export const ResumePeriodContainer = utld.span`
@@ -52,4 +52,4 @@ export const ResumePeriodContainer = utld.span`
     top-0
     right-0
   )
-`;
+`

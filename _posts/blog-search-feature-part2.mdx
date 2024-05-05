@@ -37,9 +37,9 @@ series: "Troubleshooting"
 ```ts
 useEffect(() => {
   inputRef.current.addEventListener("keydown", () => {
-    console.log("이벤트!");
-  });
-}, []);
+    console.log("이벤트!")
+  })
+}, [])
 ```
 
 ![기본 이벤트](/static/img/블로그에_검색_기능을_구현해보자/normal_event.gif)
@@ -50,16 +50,16 @@ useEffect(() => {
 
 ```ts
 useEffect(() => {
-  let inputTimeout: NodeJS.Timeout | null;
+  let inputTimeout: NodeJS.Timeout | null
   inputRef.current.addEventListener("keydown", () => {
     if (!inputTimeout) {
       inputTimeout = setTimeout(() => {
-        inputTimeout = null;
-        console.log("이벤트!");
-      }, 500);
+        inputTimeout = null
+        console.log("이벤트!")
+      }, 500)
     }
-  });
-}, []);
+  })
+}, [])
 ```
 
 ![Throttle 이벤트](/static/img/블로그에_검색_기능을_구현해보자/throttle_event.gif)
@@ -71,11 +71,11 @@ useEffect(() => {
 ```ts
 useEffect(() => {
   const inputTimeout = setTimeout(() => {
-    console.log("이벤트!");
-  }, 500);
+    console.log("이벤트!")
+  }, 500)
 
-  return () => clearTimeout(inputTimeout);
-}, [searchInput]);
+  return () => clearTimeout(inputTimeout)
+}, [searchInput])
 // input 요소에 입력되는 값은 searchInput이라는 State로 관리합니다.
 ```
 
@@ -93,22 +93,22 @@ export const searchPosts = (query: string): Promise<SearchedPost[]> =>
     .get(`https://${process.env.NEXT_PUBLIC_HOST}/api/search`, {
       params: { q: query },
     })
-    .then((res) => res.data);
+    .then((res) => res.data)
 
 // Searchbar.tsx
 useEffect(() => {
   if (!searchInput) {
-    return;
+    return
   }
 
   const inputTimeout = setTimeout(async () => {
-    const searchedData = await searchPosts(searchInput);
+    const searchedData = await searchPosts(searchInput)
 
-    setSearchResults(searchedData);
-  }, 500);
+    setSearchResults(searchedData)
+  }, 500)
 
-  return () => clearTimeout(inputTimeout);
-}, [searchInput]);
+  return () => clearTimeout(inputTimeout)
+}, [searchInput])
 ```
 
 쿼리 param을 넘겨서 탐색 결과를 받아옵니다. 이후 이 데이터를 가지고 데이터를 갱신합니다.
@@ -131,22 +131,22 @@ Fuzzy Search를 진행하는 함수는 동기 함수인데, 어떻게 하면 실
 
 ```ts
 export default async function getFuzzyPostDataRace(query: string) {
-  let timer;
+  let timer
   let result = await Promise.race([
     getFuzzyPostData(query, false),
     new Promise((resolve) => {
-      timer = setTimeout(() => resolve("timeout"), 200);
+      timer = setTimeout(() => resolve("timeout"), 200)
     }),
-  ]);
+  ])
 
   if (result === "timeout") {
-    console.log("타임아웃!");
+    console.log("타임아웃!")
 
-    clearTimeout(timer);
-    return await getFuzzyPostData(query, true);
+    clearTimeout(timer)
+    return await getFuzzyPostData(query, true)
   }
 
-  return result as SearchedPost[];
+  return result as SearchedPost[]
 }
 ```
 
@@ -162,40 +162,40 @@ export default async function getFuzzyPostDataRace(query: string) {
 // fuzzy.ts
 
 // 해결한 코드 (간략하게 적음)
-const TIMEOUT = 400;
+const TIMEOUT = 400
 
 const findFuzzyPostData = (option: "title" | "content", regex: RegExp) => {
-  const searchStarted = Date.now(); // 시작 시간
+  const searchStarted = Date.now() // 시작 시간
 
-  let results = [];
+  let results = []
   for (const postData of CacheDB) {
-    const match = postData[option].match(regex); // 시간이 오래 걸리는 line
+    const match = postData[option].match(regex) // 시간이 오래 걸리는 line
 
     if (Date.now() - searchStarted > TIMEOUT) {
       // TIMEOUT보다 더 오래 걸렸다면 Error를 throw
-      throw Error("Timeout!");
+      throw Error("Timeout!")
     }
 
-    results.push("필요한 데이터, 여기에서는 생략");
+    results.push("필요한 데이터, 여기에서는 생략")
   }
 
-  return results;
-};
+  return results
+}
 
 export default function getFuzzyPostData(query: string): SearchedPost[] {
-  const regex = createFuzzyMatcher(query);
-  const fuzzyByTitle = findFuzzyPostData("title", regex);
+  const regex = createFuzzyMatcher(query)
+  const fuzzyByTitle = findFuzzyPostData("title", regex)
 
   try {
-    const fuzzyByContent = findFuzzyPostData("content", regex);
+    const fuzzyByContent = findFuzzyPostData("content", regex)
 
     return [...fuzzyByTitle, ...fuzzyByContent].sort(
       (post1, post2) => post1.matchLength - post2.matchLength,
-    );
+    )
   } catch (error) {
-    console.log("Timeout! title 탐색 결과만 리턴합니다.");
+    console.log("Timeout! title 탐색 결과만 리턴합니다.")
 
-    return fuzzyByTitle.sort((post1, post2) => post1.matchLength - post2.matchLength);
+    return fuzzyByTitle.sort((post1, post2) => post1.matchLength - post2.matchLength)
   }
 }
 ```
@@ -232,7 +232,7 @@ Hobby 계정(무료 계정)에 제공하는 최대 Timeout은 10초라고 하니
 ```ts
 // cache.ts
 
-postsCache.sort((post1, post2) => post1.content.length - post2.content.length);
+postsCache.sort((post1, post2) => post1.content.length - post2.content.length)
 ```
 
 이후 `npm run cache`로 새 캐시를 생성해 다시 테스트해보니 일단 문제가 됐던 'ㅂㄹㄱ에 검색 기능을 구현해보자'라는 문구에 대한 문제는 해결됐습니다.

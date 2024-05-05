@@ -1,15 +1,15 @@
-import type { SearchedPostCardDataRaw } from "src/types/searchedPosts";
+import type { SearchedPostCardDataRaw } from "src/types/searchedPosts"
 
-import { normalizeSearchedPosts } from "../normalizers";
+import { normalizeSearchedPosts } from "../normalizers"
 
-import { nextApi } from "./axios";
+import { nextApi } from "./axios"
 
-const GET_SEARCHED_POSTS_URL = "/search";
+const GET_SEARCHED_POSTS_URL = "/search"
 
 export const getSearchedPostCardData = async (query: string) => {
   const response = await nextApi.get<SearchedPostCardDataRaw[]>(GET_SEARCHED_POSTS_URL, {
     params: { q: query },
-  });
+  })
 
-  return normalizeSearchedPosts(response.data);
-};
+  return normalizeSearchedPosts(response.data)
+}

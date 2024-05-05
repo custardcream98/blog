@@ -1,7 +1,7 @@
-import { CopyLinkButton, PrintButton } from "../../_client";
-import { ResumeLink, S } from "..";
+import { CopyLinkButton, PrintButton } from "../../_client"
+import { ResumeLink, S } from ".."
 
-import { utld } from "utility-class-components";
+import { utld } from "utility-class-components"
 
 function IntroduceSection() {
   return (
@@ -49,7 +49,7 @@ function IntroduceSection() {
         <CopyLinkButton />
       </ButtonWrapper>
     </S.Section>
-  );
+  )
 }
 
 const IntroduceP = utld.p`
@@ -63,7 +63,7 @@ const IntroduceP = utld.p`
     text-resume-text-strong-light
     dark:text-resume-text-strong-dark
   )
-`;
+`
 
 const ContactList = utld.ul`
   ml-auto
@@ -76,7 +76,7 @@ const ContactList = utld.ul`
   [&>li+li]:ml-[1em]
 
   print:mt-[0.75em]
-`;
+`
 
 const ButtonWrapper = utld.aside`
   w-fit
@@ -92,6 +92,6 @@ const ButtonWrapper = utld.aside`
   [&_button+button]:ml-[1em]
 
   print:hidden
-`;
+`
 
-export default IntroduceSection;
+export default IntroduceSection

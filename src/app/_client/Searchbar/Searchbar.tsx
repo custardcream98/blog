@@ -1,10 +1,10 @@
-import { useDebouncedValue, useDelayedFocus } from "src/hook";
-import { useGetSearchedPostCardDataQuery } from "src/request";
-import { calculateLoopedIndex, preventDefaultEvent } from "src/utils";
+import { useDebouncedValue, useDelayedFocus } from "src/hook"
+import { useGetSearchedPostCardDataQuery } from "src/request"
+import { calculateLoopedIndex, preventDefaultEvent } from "src/utils"
 
-import { SearchbarCloseButton } from "./SearchbarCloseButton";
-import { RESULT_LINK_CLASSNAME } from "./SearchResultCard";
-import { SearchResults } from "./SearchResults";
+import { SearchbarCloseButton } from "./SearchbarCloseButton"
+import { RESULT_LINK_CLASSNAME } from "./SearchResultCard"
+import { SearchResults } from "./SearchResults"
 
 import {
   type ChangeEvent,
@@ -13,51 +13,51 @@ import {
   useEffect,
   useRef,
   useState,
-} from "react";
-import { RiCloseFill } from "react-icons/ri";
-import { utld } from "utility-class-components";
+} from "react"
+import { RiCloseFill } from "react-icons/ri"
+import { utld } from "utility-class-components"
 
-const SEARCH_INPUT_DEBOUNCE_DELAY = 300;
+const SEARCH_INPUT_DEBOUNCE_DELAY = 300
 
-const TRANSITION_DURATION = 200;
-const TAB_KEY = "Tab";
-const ARROW_UP_KEY = "ArrowUp";
-const ARROW_DOWN_KEY = "ArrowDown";
+const TRANSITION_DURATION = 200
+const TAB_KEY = "Tab"
+const ARROW_UP_KEY = "ArrowUp"
+const ARROW_DOWN_KEY = "ArrowDown"
 
-const TAB_AND_ARROW_KEYS = new Set([TAB_KEY, ARROW_UP_KEY, ARROW_DOWN_KEY]);
+const TAB_AND_ARROW_KEYS = new Set([TAB_KEY, ARROW_UP_KEY, ARROW_DOWN_KEY])
 
 type SearchbarProps = {
-  isSearchbarOn: boolean;
-  onSearchbarClose: () => void;
-  onSearchResultClick: () => void;
-};
+  isSearchbarOn: boolean
+  onSearchbarClose: () => void
+  onSearchResultClick: () => void
+}
 
 export function Searchbar({
   isSearchbarOn,
   onSearchbarClose,
   onSearchResultClick,
 }: SearchbarProps) {
-  const [searchInput, setSearchInput] = useState("");
+  const [searchInput, setSearchInput] = useState("")
   const handleInputChange = useCallback((event: ChangeEvent<HTMLInputElement>) => {
-    event.preventDefault();
-    setSearchInput(event.currentTarget.value);
-  }, []);
-  const debouncedSearchInput = useDebouncedValue(searchInput, SEARCH_INPUT_DEBOUNCE_DELAY);
+    event.preventDefault()
+    setSearchInput(event.currentTarget.value)
+  }, [])
+  const debouncedSearchInput = useDebouncedValue(searchInput, SEARCH_INPUT_DEBOUNCE_DELAY)
   const { isLoading: isSearchedPostsCardDataLoading, data: searchedPostsCardData } =
-    useGetSearchedPostCardDataQuery(!searchInput ? searchInput : debouncedSearchInput);
+    useGetSearchedPostCardDataQuery(!searchInput ? searchInput : debouncedSearchInput)
   const isSearchedPostsCardDataEmpty =
-    isSearchedPostsCardDataLoading || !searchedPostsCardData || searchedPostsCardData.length === 0;
+    isSearchedPostsCardDataLoading || !searchedPostsCardData || searchedPostsCardData.length === 0
 
-  const inputRef = useRef<HTMLInputElement>(null);
-  const focusOnSearchInput = useDelayedFocus(inputRef, TRANSITION_DURATION);
+  const inputRef = useRef<HTMLInputElement>(null)
+  const focusOnSearchInput = useDelayedFocus(inputRef, TRANSITION_DURATION)
   useEffect(() => {
     if (isSearchbarOn) {
-      focusOnSearchInput();
+      focusOnSearchInput()
     }
-  }, [isSearchbarOn, focusOnSearchInput]);
+  }, [isSearchbarOn, focusOnSearchInput])
 
-  const searchResultsListRef = useRef<HTMLOListElement>(null);
-  const buttonCloseSearchbarRef = useRef<HTMLButtonElement>(null);
+  const searchResultsListRef = useRef<HTMLOListElement>(null)
+  const buttonCloseSearchbarRef = useRef<HTMLButtonElement>(null)
   const getTabbableElements = useCallback(() => {
     return [
       inputRef.current,
@@ -67,50 +67,50 @@ export function Searchbar({
           `.${RESULT_LINK_CLASSNAME}`,
         ) as NodeListOf<HTMLAnchorElement>,
       ),
-    ];
-  }, []);
-  const isSearchInputComposingRef = useRef(false);
+    ]
+  }, [])
+  const isSearchInputComposingRef = useRef(false)
   const handleCompositionStart = useCallback(() => {
-    isSearchInputComposingRef.current = true;
-  }, []);
+    isSearchInputComposingRef.current = true
+  }, [])
   const handleCompositionEnd = useCallback(() => {
-    isSearchInputComposingRef.current = false;
-  }, []);
+    isSearchInputComposingRef.current = false
+  }, [])
   const handleTabArrow = useCallback(
     (event: KeyboardEvent) => {
       if (isSearchInputComposingRef.current) {
-        return;
+        return
       }
 
-      const { key } = event;
+      const { key } = event
       if (!TAB_AND_ARROW_KEYS.has(key)) {
-        return;
+        return
       }
-      event.preventDefault();
+      event.preventDefault()
 
-      const tabIterables = getTabbableElements();
-      const currentFocusIndex = tabIterables.indexOf(document.activeElement as HTMLInputElement);
+      const tabIterables = getTabbableElements()
+      const currentFocusIndex = tabIterables.indexOf(document.activeElement as HTMLInputElement)
 
       if (currentFocusIndex === -1) {
-        return;
+        return
       }
 
-      const offset = key === ARROW_UP_KEY ? -1 : 1;
-      const nextFocusIndex = calculateLoopedIndex(currentFocusIndex, offset, tabIterables.length);
-      tabIterables[nextFocusIndex]?.focus();
+      const offset = key === ARROW_UP_KEY ? -1 : 1
+      const nextFocusIndex = calculateLoopedIndex(currentFocusIndex, offset, tabIterables.length)
+      tabIterables[nextFocusIndex]?.focus()
     },
     [getTabbableElements],
-  );
+  )
 
   const closeResults = useCallback(() => {
-    setSearchInput("");
-    onSearchbarClose();
-  }, [onSearchbarClose]);
+    setSearchInput("")
+    onSearchbarClose()
+  }, [onSearchbarClose])
 
   const handleSearchResultClick = useCallback(() => {
-    closeResults();
-    onSearchResultClick();
-  }, [closeResults, onSearchResultClick]);
+    closeResults()
+    onSearchResultClick()
+  }, [closeResults, onSearchResultClick])
 
   return (
     <SearchbarForm
@@ -169,12 +169,12 @@ export function Searchbar({
         )}
       </SearchbarWrapper>
     </SearchbarForm>
-  );
+  )
 }
 
 type SearchbarFormProps = {
-  $isSearchbarOn: boolean;
-};
+  $isSearchbarOn: boolean
+}
 const SearchbarForm = utld.form<SearchbarFormProps>`
   w-full
   h-full
@@ -191,7 +191,7 @@ const SearchbarForm = utld.form<SearchbarFormProps>`
 
   bg-bg-light
   dark:bg-bg-dark
-`;
+`
 
 const SearchbarWrapper = utld.div`
   relative
@@ -204,7 +204,7 @@ const SearchbarWrapper = utld.div`
   flex
   justify-center
   items-center
-`;
+`
 
 const SearchbarInput = utld.input`
   w-full
@@ -227,7 +227,7 @@ const SearchbarInput = utld.input`
     !outline-none
     rounded-full
   )
-`;
+`
 
 const SearchbarInputGradientBorder = utld.div`
   w-full
@@ -244,4 +244,4 @@ const SearchbarInputGradientBorder = utld.div`
     to-accent-light
     animate-bg-gradient
   )
-`;
+`

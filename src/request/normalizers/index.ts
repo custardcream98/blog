@@ -1,2 +1,2 @@
-export * from "./normalizeNextApiResponse";
-export * from "./normalizeSearchedPosts";
+export * from "./normalizeNextApiResponse"
+export * from "./normalizeSearchedPosts"

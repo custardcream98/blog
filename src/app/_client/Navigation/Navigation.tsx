@@ -1,64 +1,64 @@
-import { useWindowScrollEvent } from "src/hook";
+import { useWindowScrollEvent } from "src/hook"
 
-import { Searchbar } from "../Searchbar";
+import { Searchbar } from "../Searchbar"
 
-import { NavigationBar } from "./NavigationBar";
+import { NavigationBar } from "./NavigationBar"
 
-import { usePathname } from "next/navigation";
-import { useCallback, useEffect, useMemo, useRef, useState } from "react";
-import { utld } from "utility-class-components";
+import { usePathname } from "next/navigation"
+import { useCallback, useEffect, useMemo, useRef, useState } from "react"
+import { utld } from "utility-class-components"
 
-const NAVIGATION_HEIGHT = 50; // px
-const SCROLL_THRESHOLD = 25; // 0 ~ 50
+const NAVIGATION_HEIGHT = 50 // px
+const SCROLL_THRESHOLD = 25 // 0 ~ 50
 
 export function Navigation() {
-  const [isSearchbarOn, setIsSearchbarOn] = useState(false);
-  const toggleSearchbar = useCallback(() => setIsSearchbarOn((prev) => !prev), []);
+  const [isSearchbarOn, setIsSearchbarOn] = useState(false)
+  const toggleSearchbar = useCallback(() => setIsSearchbarOn((prev) => !prev), [])
 
-  const pathname = usePathname();
-  const isPostRoute = useMemo(() => /\/posts\//g.test(pathname ?? ""), [pathname]);
+  const pathname = usePathname()
+  const isPostRoute = useMemo(() => /\/posts\//g.test(pathname ?? ""), [pathname])
 
-  const lastScrollTopRef = useRef(0);
-  const [isNavbarOn, setIsNavbarOn] = useState(true);
+  const lastScrollTopRef = useRef(0)
+  const [isNavbarOn, setIsNavbarOn] = useState(true)
   useEffect(() => {
     if (!isPostRoute) {
-      setIsNavbarOn(true);
-      lastScrollTopRef.current = 0;
+      setIsNavbarOn(true)
+      lastScrollTopRef.current = 0
     }
-  }, [isPostRoute]);
+  }, [isPostRoute])
 
   const handleWindowScroll = useCallback(() => {
-    const { scrollTop: currentScrollTop } = window.document.documentElement;
+    const { scrollTop: currentScrollTop } = window.document.documentElement
 
     if (currentScrollTop < NAVIGATION_HEIGHT) {
-      return setIsNavbarOn(true);
+      return setIsNavbarOn(true)
     }
 
     if (lastScrollTopRef.current < currentScrollTop) {
-      setIsNavbarOn(false);
+      setIsNavbarOn(false)
     } else if (lastScrollTopRef.current - SCROLL_THRESHOLD > currentScrollTop) {
-      setIsNavbarOn(true);
+      setIsNavbarOn(true)
     }
 
-    lastScrollTopRef.current = currentScrollTop;
-  }, []);
+    lastScrollTopRef.current = currentScrollTop
+  }, [])
 
   useWindowScrollEvent({
     disabled: !isPostRoute,
     onScroll: handleWindowScroll,
-  });
+  })
 
-  const [isMobileHamburgerMenuOpened, setIsMobileHamburgerMenuOpened] = useState(false);
+  const [isMobileHamburgerMenuOpened, setIsMobileHamburgerMenuOpened] = useState(false)
 
   const handleMobileHamburgerMenuButtonClick = useCallback(
     () => setIsMobileHamburgerMenuOpened((prev) => !prev),
     [],
-  );
+  )
 
   const handleSearchResultClick = useCallback(() => {
-    setIsMobileHamburgerMenuOpened(false);
-    setIsSearchbarOn(false);
-  }, []);
+    setIsMobileHamburgerMenuOpened(false)
+    setIsSearchbarOn(false)
+  }, [])
 
   return (
     <Header>
@@ -75,17 +75,17 @@ export function Navigation() {
         />
       </Container>
     </Header>
-  );
+  )
 }
 
 const Header = utld.header`
   h-nav
   w-full
   print:hidden
-`;
+`
 
 const Container = utld.div<{
-  $isNavbarOn: boolean;
+  $isNavbarOn: boolean
 }>`
   w-full
 
@@ -109,4 +109,4 @@ const Container = utld.div<{
   )
 
   ${({ $isNavbarOn }) => !$isNavbarOn && "translate-y-[-3.125rem]"}
-`;
+`

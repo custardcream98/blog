@@ -1,14 +1,14 @@
-import { ExternalLinkSvg } from "src/components/Svgs";
-import { addToClipboard } from "src/utils";
+import { ExternalLinkSvg } from "src/components/Svgs"
+import { addToClipboard } from "src/utils"
 
-import { ud } from "utility-class-components";
+import { ud } from "utility-class-components"
 
-const RESUME_LINK = "https://shiwoo.dev/resume";
+const RESUME_LINK = "https://shiwoo.dev/resume"
 
 const handleCopyResumeLink = async () => {
-  await addToClipboard(RESUME_LINK);
-  alert("이력서 링크를 복사했습니다 😄");
-};
+  await addToClipboard(RESUME_LINK)
+  alert("이력서 링크를 복사했습니다 😄")
+}
 
 export function CopyLinkButton() {
   return (
@@ -16,7 +16,7 @@ export function CopyLinkButton() {
       <ExternalLinkSvg className='!fill-none' />
       링크 복사하기
     </button>
-  );
+  )
 }
 
 const iconClickableStyle = ud`
@@ -60,4 +60,4 @@ const iconClickableStyle = ud`
     border-resume-accent-light
     dark:border-resume-accent-dark
   )
-`;
+`

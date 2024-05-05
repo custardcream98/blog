@@ -1,9 +1,9 @@
-import type { PropsWithClassName } from "src/types/props";
+import type { PropsWithClassName } from "src/types/props"
 
-import { utld } from "utility-class-components";
+import { utld } from "utility-class-components"
 
 export function LogoTitleSpan({ className }: PropsWithClassName) {
-  return <Span className={className}>shiwoo.dev</Span>;
+  return <Span className={className}>shiwoo.dev</Span>
 }
 
 const Span = utld.span`
@@ -15,4 +15,4 @@ const Span = utld.span`
   dark:text-default-dark
 
   mobile:text-[0.9rem]
-`;
+`

@@ -1,8 +1,8 @@
-import { compileResumeMDX } from "src/lib/mdx";
-import type { PropsWithClassName } from "src/types/props";
-import { Project } from "src/types/resume";
+import { compileResumeMDX } from "src/lib/mdx"
+import type { PropsWithClassName } from "src/types/props"
+import { Project } from "src/types/resume"
 
-import { ResumeLink, ResumeLinksList, ResumePeriod, S } from "..";
+import { ResumeLink, ResumeLinksList, ResumePeriod, S } from ".."
 
 function Section({
   title,
@@ -14,7 +14,7 @@ function Section({
       <S.SectionTitle>{title}</S.SectionTitle>
       <S.SectionItemList>{children}</S.SectionItemList>
     </S.Section>
-  );
+  )
 }
 
 async function Item({
@@ -27,10 +27,10 @@ async function Item({
   description,
   className,
 }: PropsWithClassName<Project>) {
-  const isStacksExist = stacks.length !== 0;
-  const isLinksExist = links.length !== 0;
+  const isStacksExist = stacks.length !== 0
+  const isLinksExist = links.length !== 0
 
-  const descriptionContent = description ? await compileResumeMDX(description) : null;
+  const descriptionContent = description ? await compileResumeMDX(description) : null
 
   return (
     <S.SectionItemBordered className={className}>
@@ -62,11 +62,11 @@ async function Item({
         </S.ProjectStacks>
       )}
     </S.SectionItemBordered>
-  );
+  )
 }
 
 const Projects = Object.assign(Section, {
   Item,
-});
+})
 
-export default Projects;
+export default Projects

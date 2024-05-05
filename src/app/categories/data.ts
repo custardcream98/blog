@@ -1,5 +1,5 @@
-import "server-only";
+import "server-only"
 
-import categoryTheme, { type Categoires } from "src/constants/categoryTheme";
+import categoryTheme, { type Categoires } from "src/constants/categoryTheme"
 
-export const CATEGORIES = Object.keys(categoryTheme) as Categoires[];
+export const CATEGORIES = Object.keys(categoryTheme) as Categoires[]

@@ -76,18 +76,18 @@ category: ["CSS"]
   </ul>
 </article>
 <script>
-  const btn = document.querySelector(".btn-select");
-  const list = document.querySelector(".list-selectives");
+  const btn = document.querySelector(".btn-select")
+  const list = document.querySelector(".list-selectives")
 
   btn.addEventListener("click", () => {
-    btn.classList.toggle("on");
-  });
+    btn.classList.toggle("on")
+  })
 
   list.addEventListener("click", (event) => {
     if (event.target.nodeName === "BUTTON") {
-      btn.classList.remove("on");
+      btn.classList.remove("on")
     }
-  });
+  })
 </script>
 ```
 

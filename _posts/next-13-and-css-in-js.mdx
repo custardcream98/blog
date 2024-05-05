@@ -43,20 +43,20 @@ styled-components 라이브러리는 이런 과정을 거쳐서 동작합니다.
      background-color: orange;
 
      width: ${({ $buttonWidth }) => $buttonWidth}px;
-   `;
+   `
    ```
 
    ```js
-   counter++;
-   const componentId = hash(counter);
+   counter++
+   const componentId = hash(counter)
    ```
 
 2. `Button`의 tagged template을 평가합니다.
 
    ```jsx
    const App = () => {
-     return <Button $buttonWidth={50}>버튼</Button>;
-   };
+     return <Button $buttonWidth={50}>버튼</Button>
+   }
    ```
 
    이 경우엔 `$buttonWidth={50}`을 줬으니 이렇게 될겁니다.
@@ -69,19 +69,19 @@ styled-components 라이브러리는 이런 과정을 거쳐서 동작합니다.
      background-color: orange;
    
      width: 50px;
-   `;
+   `
    ```
 
 3. 앞서 생성했던 컴포넌트 ID와 평가된 CSS를 가지고 해시를 생성합니다. 이 해시는 곧 `className`이 됩니다. [실제 구현 코드](https://github.com/styled-components/styled-components/blob/cb9b8c1555485ec44778082007f8cc86c4348937/packages/styled-components/src/utils/hash.ts)를 보면 djb2라는 hashing function을 쓰고 있습니다.
 
    ```js
-   const className = hash(componentId + evaluatedCSS);
+   const className = hash(componentId + evaluatedCSS)
    ```
 
    이렇게 생성된 `className`을 state로 저장합니다.
 
    ```js
-   const [generatedClassName, setGeneratedClassName] = useState(className);
+   const [generatedClassName, setGeneratedClassName] = useState(className)
    ```
 
    `generatedClassName`은 state이므로, 변경되면 바뀐 className을 가지고 컴포넌트가 리렌더링됩니다.
@@ -89,7 +89,7 @@ styled-components 라이브러리는 이런 과정을 거쳐서 동작합니다.
 4. [stylis](https://github.com/thysultan/stylis)같은 CSS 프로세서를 사용해 스타일시트로 변환합니다.
 
    ```js
-   const styleSheet = stylis(`.${generatedClassName}`, evaluatedCSS);
+   const styleSheet = stylis(`.${generatedClassName}`, evaluatedCSS)
    ```
 
    정확히 말하면 preprocessor인데, 이 친구 덕분에 nesting이나 vendor prefix 같은 기능을 사용할 수 있습니다.
@@ -127,8 +127,8 @@ styled-components 라이브러리는 이런 과정을 거쳐서 동작합니다.
 
    ```jsx
    const Button = ({ className, generatedClassName }) => {
-     return <button className={className + " " + generatedClassName}>버튼</button>;
-   };
+     return <button className={className + " " + generatedClassName}>버튼</button>
+   }
    ```
 
 많이 간추린 설명이지만, CSS-in-JS 라이브러리는 대략 이렇게 돌아갑니다. 이 모든 과정이 *런타임*때 이뤄지는 것이죠.
@@ -160,16 +160,16 @@ styled-components 라이브러리는 이런 과정을 거쳐서 동작합니다.
 간단한 예시로 좀 더 보겠습니다.
 
 ```jsx
-import styled from "styled-components";
+import styled from "styled-components"
 
 const Box = styled.div`
   width: 200px;
   height: 200px;
   background-color: orange;
-`;
+`
 
 export default function Home() {
-  return <Box></Box>;
+  return <Box></Box>
 }
 ```
 
@@ -225,9 +225,9 @@ export default function Home() {
 React.js를 이용한 SSR은 내부적으로 `ReactDOMServer.renderToString`을 사용합니다. 이 함수는 컴포넌트를 렌더링하고, 그 결과물을 문자열로 반환합니다.
 
 ```jsx
-import ReactDOMServer from "react-dom/server";
+import ReactDOMServer from "react-dom/server"
 
-const html = ReactDOMServer.renderToString(<App />);
+const html = ReactDOMServer.renderToString(<App />)
 ```
 
 > 최근엔 `renderToPipableStream` 같은 메서드로 바뀌긴 했는데, 이건 서버 컴포넌트와 관련된 얘기라 일단 넘어가겠습니다.
@@ -275,14 +275,14 @@ DEV 환경에서는 DOM API로 스타일 스트링을 주입하고, **프로덕�
 
 ```js
 document.createElement("style").innerHTML =
-  ".bXfiY { width: 200px; height: 200px; background-color: orange; }";
+  ".bXfiY { width: 200px; height: 200px; background-color: orange; }"
 ```
 
 이렇게 넣었던 스타일을
 
 ```js
-const styleSheet = document.createElement("style").sheet;
-styleSheet.insertRule(".bXfiY { width: 200px; height: 200px; background-color: orange; }");
+const styleSheet = document.createElement("style").sheet
+styleSheet.insertRule(".bXfiY { width: 200px; height: 200px; background-color: orange; }")
 ```
 
 이런식으로 넣었다는 말입니다. 런타임 성능을 위해 최대한 압축하고자 이렇게 했다는데, 정말 성능 차이가 나는지는 모르겠지만 재밌는 방법인것 같아요.
@@ -298,12 +298,12 @@ styleSheet.insertRule(".bXfiY { width: 200px; height: 200px; background-color: o
 [물론 방법은 있습니다.](https://styled-components.com/docs/advanced#server-side-rendering) 서버 사이드에서 미리 모든 스타일을 모아서 하나의 스타일시트를 만들고 SSR된 HTML에 쓱 껴넣어주면 됩니다.
 
 ```jsx
-import ReactDOMServer from "react-dom/server";
-import { ServerStyleSheet } from "styled-components";
+import ReactDOMServer from "react-dom/server"
+import { ServerStyleSheet } from "styled-components"
 
-const sheet = new ServerStyleSheet();
-const html = ReactDOMServer.renderToString(sheet.collectStyles(<App />));
-const styleElement = sheet.getStyleElement();
+const sheet = new ServerStyleSheet()
+const html = ReactDOMServer.renderToString(sheet.collectStyles(<App />))
+const styleElement = sheet.getStyleElement()
 // ...
 ```
 
@@ -335,10 +335,10 @@ React.js 18 버전부터는 서버에서 async 컴포넌트를 만들어 쓸 수
 
 ```jsx
 const Component = async () => {
-  const data = await fetch("https://example.com/api").then((response) => response.json());
+  const data = await fetch("https://example.com/api").then((response) => response.json())
 
-  return <div>{data}</div>;
-};
+  return <div>{data}</div>
+}
 ```
 
 하지만 그렇다고 서버에서 데이터를 모두 불러올 때까지 기다릴 수는 없겠죠. 이 부분을 보완하기 위해 React는 서버에서 데이터를 불러오고 있는 컴포넌트에 대해서도 `Suspense`가 가능하게끔 구현됐습니다. 서버로부터 데이터를 [stream](https://nodejs.org/api/stream.html#writable-streams)으로 점진적으로 가져오는 건데, 일단 suspense된 부분을 fallback 컴포넌트로 채운 상태로 서버에서 먼저 보내주고, 데이터를 모두 불러왔다면 suspense된 부분을 갈아끼우는 `<script>` 요소를 보내주는 식으로 동작합니다. (앞서 잠깐 언급했던 `renderToPipableStream` 메서드가 이런 역할을 합니다.) 자세한 내용은 [React 메인테이너의 discussion](https://github.com/reactwg/react-18/discussions/37)에 정말 잘 설명돼 있습니다.
@@ -377,41 +377,38 @@ const theme = {
     primary: "orange",
     secondary: "blue",
   },
-};
+}
 
 const Button = styled.button`
   padding: 0.5rem 1rem;
   border-radius: 0.25rem;
   color: white;
   background-color: ${({ theme }) => theme.colors.primary};
-`;
+`
 
 const App = () => {
   return (
     <ThemeProvider theme={theme}>
       <Button>버튼</Button>
     </ThemeProvider>
-  );
-};
+  )
+}
 ```
 
 `ThemeProvider`를 통해 주입된 테마를 `styled.button`의 tagged template에서 사용한 예시입니다.
 
 ```tsx
-export const ThemeContext = React.createContext<DefaultTheme | undefined>(undefined);
+export const ThemeContext = React.createContext<DefaultTheme | undefined>(undefined)
 
 export default function ThemeProvider(props: Props): JSX.Element | null {
-  const outerTheme = React.useContext(ThemeContext);
-  const themeContext = useMemo(
-    () => mergeTheme(props.theme, outerTheme),
-    [props.theme, outerTheme],
-  );
+  const outerTheme = React.useContext(ThemeContext)
+  const themeContext = useMemo(() => mergeTheme(props.theme, outerTheme), [props.theme, outerTheme])
 
   if (!props.children) {
-    return null;
+    return null
   }
 
-  return <ThemeContext.Provider value={themeContext}>{props.children}</ThemeContext.Provider>;
+  return <ThemeContext.Provider value={themeContext}>{props.children}</ThemeContext.Provider>
 }
 ```
 
@@ -430,11 +427,11 @@ Next.js 공식 문서에서는 CSS Modules와 Tailwind CSS 이렇게 두가지�
 저는 제 개인적인 취향에 따라 Tailwind CSS를 선택했고, 조금이나마 편리하게 마이그레이션 하기 위해 styled-components와 최대한 비슷한 인터페이스를 가지도록 [간단한 text concat 라이브러리를 직접 만들어 사용](https://github.com/custardcream98/utility-class-components)하고 있습니다.
 
 ```tsx
-import { utld, ud } from "utility-class-components";
+import { utld, ud } from "utility-class-components"
 
 const boxStyle = ud`
   bg-red-200
-`;
+`
 
 const Container = utld.div<{ $isRed: boolean }>`
   w-32
@@ -443,10 +440,10 @@ const Container = utld.div<{ $isRed: boolean }>`
   ${boxStyle}
 
   ${({ $isRed }) => $isRed && "text-red-500"}
-`;
+`
 
 function Page() {
-  return <Container $isRed={true}>AWESOME!!</Container>;
+  return <Container $isRed={true}>AWESOME!!</Container>
 }
 ```
 

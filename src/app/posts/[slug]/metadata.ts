@@ -1,9 +1,9 @@
-import { getPostBySlug } from "src/app/data";
-import { sharedMetadata } from "src/app/sharedMetadata";
+import { getPostBySlug } from "src/app/data"
+import { sharedMetadata } from "src/app/sharedMetadata"
 
-import type { PostPageParams } from "./types";
+import type { PostPageParams } from "./types"
 
-import { type Metadata } from "next";
+import { type Metadata } from "next"
 
 export const generateMetadata = async ({ params: { slug } }: PostPageParams): Promise<Metadata> => {
   const { title, date, excerpt, coverImage, category, series } = await getPostBySlug(slug, [
@@ -14,17 +14,17 @@ export const generateMetadata = async ({ params: { slug } }: PostPageParams): Pr
     "coverImage",
     "category",
     "series",
-  ]);
+  ])
 
-  const META_TITLE = title;
-  const META_DESCRIPTION = excerpt;
-  const META_KEYWORDS = series ? [...category, series] : category;
+  const META_TITLE = title
+  const META_DESCRIPTION = excerpt
+  const META_KEYWORDS = series ? [...category, series] : category
   const META_IMAGE = {
     alt: `${title} 포스트 썸네일`,
     height: 630,
     url: coverImage.darkThumbnail,
     width: 1200,
-  };
+  }
 
   return {
     ...sharedMetadata,
@@ -55,5 +55,5 @@ export const generateMetadata = async ({ params: { slug } }: PostPageParams): Pr
         absolute: META_TITLE,
       },
     },
-  };
-};
+  }
+}

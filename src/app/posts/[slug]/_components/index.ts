@@ -1,2 +1,2 @@
-export * from "./Post";
-export * from "./Comments";
+export * from "./Post"
+export * from "./Comments"

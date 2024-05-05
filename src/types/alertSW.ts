@@ -1,3 +1,3 @@
 export type AlertSWResponse = {
-  message: string;
-};
+  message: string
+}

@@ -1,15 +1,15 @@
-import { useSetIsDarkmodeActivatedContext } from "src/app/_providers";
-import type { PropsWithClassName } from "src/types/props";
+import { useSetIsDarkmodeActivatedContext } from "src/app/_providers"
+import type { PropsWithClassName } from "src/types/props"
 
-import { IconContext } from "react-icons";
-import { BsFillMoonFill } from "react-icons/bs";
-import { ImSun } from "react-icons/im";
-import { utld } from "utility-class-components";
+import { IconContext } from "react-icons"
+import { BsFillMoonFill } from "react-icons/bs"
+import { ImSun } from "react-icons/im"
+import { utld } from "utility-class-components"
 
-const ICON_CONTEXT = { size: "90%" };
+const ICON_CONTEXT = { size: "90%" }
 
 export function DarkmodeSwitch({ className }: PropsWithClassName) {
-  const { setIsDarkmodeActivatedToggle, isDarkmodeActivated } = useSetIsDarkmodeActivatedContext();
+  const { setIsDarkmodeActivatedToggle, isDarkmodeActivated } = useSetIsDarkmodeActivatedContext()
 
   return (
     <article className={className}>
@@ -19,7 +19,7 @@ export function DarkmodeSwitch({ className }: PropsWithClassName) {
         </IconContext.Provider>
       </Button>
     </article>
-  );
+  )
 }
 
 const Button = utld.button`
@@ -38,4 +38,4 @@ const Button = utld.button`
 
   hover:scale-[1.1]
   active:scale-[0.8]
-`;
+`

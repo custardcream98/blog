@@ -1,21 +1,21 @@
-import { ExternalLinkSvg } from "src/components/Svgs";
+import { ExternalLinkSvg } from "src/components/Svgs"
 
-import { cssOutlineOnFocus } from "../Navigation/styles";
+import { cssOutlineOnFocus } from "../Navigation/styles"
 
-import Link from "next/link";
-import type { ComponentPropsWithoutRef, ReactNode } from "react";
-import { utld } from "utility-class-components";
+import Link from "next/link"
+import type { ComponentPropsWithoutRef, ReactNode } from "react"
+import { utld } from "utility-class-components"
 
-export const RESULT_LINK_CLASSNAME = "result-link";
+export const RESULT_LINK_CLASSNAME = "result-link"
 
 type SearchResultCardProps = ComponentPropsWithoutRef<"a"> & {
-  resultTitle: string;
-  resultTitleNode: ReactNode;
-  resultDateNode: ReactNode;
-  contentNode: ReactNode;
-  slug: string;
-  isLast: boolean;
-};
+  resultTitle: string
+  resultTitleNode: ReactNode
+  resultDateNode: ReactNode
+  contentNode: ReactNode
+  slug: string
+  isLast: boolean
+}
 
 function SearchResultCard({
   resultTitle,
@@ -42,18 +42,18 @@ function SearchResultCard({
         </ResultContentWrapper>
       </StyledLink>
     </ResultCardItem>
-  );
+  )
 }
 
 type ResultCardItemProps = {
-  $isLast: boolean;
-};
+  $isLast: boolean
+}
 const ResultCardItem = utld.li<ResultCardItemProps>`
   py-5
 
   ${({ $isLast }) =>
     !$isLast && "border-b border-solid border-default-sub-light dark:border-default-dark"}
-`;
+`
 
 export const SearchResultCardTitle = utld.strong`
   block
@@ -65,7 +65,7 @@ export const SearchResultCardTitle = utld.strong`
     text-[0.9rem]
     mb-[0.3125rem]
   )
-`;
+`
 
 export const SearchResultCardContent = utld.p`
   leading-[1.4]
@@ -77,7 +77,7 @@ export const SearchResultCardContent = utld.p`
     text-[0.8rem]
     leading-[1.5]
   )
-`;
+`
 
 export const SearchResultCardDate = utld.time`
   text-[0.8rem]
@@ -85,7 +85,7 @@ export const SearchResultCardDate = utld.time`
   whitespace-nowrap
   
   mobile:text-[0.7rem]
-`;
+`
 
 const StyledLink = utld(Link)`
   block
@@ -106,7 +106,7 @@ const StyledLink = utld(Link)`
   )
 
   ${cssOutlineOnFocus}
-`;
+`
 
 const ResultTitleWrapper = utld.div`
   flex
@@ -115,10 +115,10 @@ const ResultTitleWrapper = utld.div`
     flex-col
     mb-[0.625rem]
   )
-`;
+`
 
 const ResultContentWrapper = utld.div`
   flex
-`;
+`
 
-export default SearchResultCard;
+export default SearchResultCard

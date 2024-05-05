@@ -1,1 +1,1 @@
-export * from "./HeroPostsListItem";
+export * from "./HeroPostsListItem"

@@ -1,3 +1,3 @@
 export const getCurrentURL = () => {
-  return window.location.href;
-};
+  return window.location.href
+}

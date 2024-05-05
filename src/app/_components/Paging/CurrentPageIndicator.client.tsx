@@ -1,26 +1,26 @@
-"use client";
+"use client"
 
-import { useIsMobile } from "src/hook";
+import { useIsMobile } from "src/hook"
 
-import { useMemo } from "react";
-import { utld } from "utility-class-components";
+import { useMemo } from "react"
+import { utld } from "utility-class-components"
 
 type CurrentPageIndicatorProps = {
-  position?: number;
-};
+  position?: number
+}
 
 export function CurrentPageIndicator({ position = 1 }: CurrentPageIndicatorProps) {
-  const isMobile = useIsMobile();
+  const isMobile = useIsMobile()
   const indicatorStyle = useMemo(() => {
-    const indicatorWidthWithMargin = isMobile ? 1.7 : 2;
-    const currentIndicatorLocation = (position - 1) * indicatorWidthWithMargin;
+    const indicatorWidthWithMargin = isMobile ? 1.7 : 2
+    const currentIndicatorLocation = (position - 1) * indicatorWidthWithMargin
 
     return {
       transform: `translateX(${currentIndicatorLocation}rem)`,
-    };
-  }, [position, isMobile]);
+    }
+  }, [position, isMobile])
 
-  return <Indicator style={indicatorStyle} />;
+  return <Indicator style={indicatorStyle} />
 }
 
 const Indicator = utld.div`
@@ -38,4 +38,4 @@ const Indicator = utld.div`
 
   transition-transform
   duration-500
-`;
+`

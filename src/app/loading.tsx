@@ -1,13 +1,13 @@
-import { PageLoadingSpinner } from "./_client";
+import { PageLoadingSpinner } from "./_client"
 
-import { utld } from "utility-class-components";
+import { utld } from "utility-class-components"
 
 export default function PageSkeleton() {
   return (
     <PageContainer>
       <PageLoadingSpinner />
     </PageContainer>
-  );
+  )
 }
 
 const PageContainer = utld.div`
@@ -16,4 +16,4 @@ const PageContainer = utld.div`
   justify-center
 
   translate-y-[calc(50vh-50px-50%)]
-`;
+`

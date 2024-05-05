@@ -56,7 +56,7 @@ const Button = ({ className, children, ...props }) => (
   <button className={`${className} ${style.button}`} {...props}>
     {children}
   </button>
-);
+)
 ```
 
 버튼에 스타일을 입힌 `Button` 컴포넌트를 자바스크립트로 작성했습니다.
@@ -65,19 +65,19 @@ const Button = ({ className, children, ...props }) => (
 
 ```jsx
 const App = () => {
-  const [count, setCount] = useState(0);
+  const [count, setCount] = useState(0)
 
   const handleCountUpClick = () => {
-    setCount(count + 1);
-  };
+    setCount(count + 1)
+  }
 
   return (
     <div>
       <Button onClick={handleCountUpClick}>Count Up</Button>
       <p>{count}</p>
     </div>
-  );
-};
+  )
+}
 ```
 
 이렇게 자유자재로 필요한 prop을 넘길 수 있죠.
@@ -93,7 +93,7 @@ const Button = ({ className, children, ...props }: React.ComponentPropsWithoutRe
   <button className={`${className} ${style.button}`} {...props}>
     {children}
   </button>
-);
+)
 ```
 
 prop 타입 정의 때문에 코드는 길어졌지만 컴포넌트의 인터페이스가 명확히 정해졌습니다. 이제 IDE의 타입스크립트 타입 추론 엔진 덕분에 `Button`이 어떤 것을 받고, 어떤 것을 리턴하는지 자동 완성을 통해 쉽게 알 수 있습니다.
@@ -111,19 +111,19 @@ prop 타입 정의 때문에 코드는 길어졌지만 컴포넌트의 인터페
 
 ```jsx {6,13}
 const App = () => {
-  const [count, setCount] = useState(0);
+  const [count, setCount] = useState(0)
 
   return (
     <div>
       <Button setCount={setCount}>Count Up</Button>
       <p>{count}</p>
     </div>
-  );
-};
+  )
+}
 
 const Button = ({ setCount, children }) => (
   <button onClick={() => setCount(count + 1)}>{children}</button>
-);
+)
 ```
 
 간단합니다. `Button` 컴포넌트에 `setCount` prop을 넘겨주고, `Button`의 `onClick` 이벤트 핸들러에서 넘겨받은 `setCount`를 호출했습니다.
@@ -138,7 +138,7 @@ const Button = ({ setCount, children }) => (
 
 ```jsx {6,7,13}
 const App = () => {
-  const [count, setCount] = useState(0);
+  const [count, setCount] = useState(0)
 
   return (
     <div>
@@ -146,10 +146,10 @@ const App = () => {
       <Button onClick={() => setCount(count + 2)}>Count 2 Up</Button>
       <p>{count}</p>
     </div>
-  );
-};
+  )
+}
 
-const Button = ({ onClick, children }) => <button onClick={onClick}>{children}</button>;
+const Button = ({ onClick, children }) => <button onClick={onClick}>{children}</button>
 ```
 
 이제 눌리면 카운트를 2 올리는 버튼을 만들 수 있게 됐습니다. 3 올리는 버튼도 만들 수 있고... 어떤 일이든 할 수 있게 됐네요!
@@ -167,7 +167,7 @@ type ReactNode =
   | ReactPortal
   | boolean
   | null
-  | undefined;
+  | undefined
 ```
 
 보시다시피 상당히 유한 타입입니다. 이 타입을 활용하면 더 확장성 좋은 컴포넌트를 쉽게 만들 수 있습니다.
@@ -180,7 +180,7 @@ const Section = ({ title, content }: { title: string; content: string }) => (
     <h2>{title}</h2>
     <p>{content}</p>
   </section>
-);
+)
 ```
 
 ```tsx
@@ -195,9 +195,9 @@ const Section = ({
   content,
   contentImageSrc,
 }: {
-  title: string;
-  content: string;
-  contentImageSrc?: string;
+  title: string
+  content: string
+  contentImageSrc?: string
 }) => (
   <section>
     <h2>{title}</h2>
@@ -206,7 +206,7 @@ const Section = ({
       {contentImageSrc && <img src={contentImageSrc} alt='content' />}
     </p>
   </section>
-);
+)
 ```
 
 추가된 요구사항에 대응은 할 수 있었지만, 더 많은 기능이 필요할 때마다 이렇게 붙여나가야 할까요?
@@ -219,7 +219,7 @@ const Section = ({ title, content }: { title: string; content: React.ReactNode }
     <h2>{title}</h2>
     <p>{content}</p>
   </section>
-);
+)
 ```
 
 ```tsx
@@ -256,7 +256,7 @@ const Section = ({ title, children }: { title: string; children: React.ReactNode
     <h2>{title}</h2>
     <p>{children}</p>
   </section>
-);
+)
 ```
 
 ```tsx
@@ -276,7 +276,7 @@ const Section = ({ title, children }: { title: string; children: React.ReactNode
 >     <h2>{title}</h2>
 >     <p>{children}</p>
 >   </section>
-> );
+> )
 > ```
 
 ## Components
@@ -299,7 +299,7 @@ const Section = ({ title, children }: { title: string; children: React.ReactNode
 
 ```tsx
 const NumberDisplay = ({ target }: { target: number }) => {
-  const color = target < 50 ? "red" : "green";
+  const color = target < 50 ? "red" : "green"
 
   return (
     <div
@@ -309,8 +309,8 @@ const NumberDisplay = ({ target }: { target: number }) => {
     >
       {target}
     </div>
-  );
-};
+  )
+}
 ```
 
 이 컴포넌트는 UI와 로직이 섞여있습니다. 이런 컴포넌트는 재사용성이 떨어집니다. 예를 들어 값이 30 미만이면 빨간색을 보여줘야 하는 부분에서는 이 컴포넌트를 사용할 수 없겠죠.
@@ -328,20 +328,20 @@ const NumberDisplayUI = ({ target, color }: { target: number; color: "red" | "gr
   >
     {target}
   </div>
-);
+)
 
 const App = () => {
-  const target = 45;
-  const color1 = target < 50 ? "red" : "green";
-  const color2 = target < 30 ? "red" : "green";
+  const target = 45
+  const color1 = target < 50 ? "red" : "green"
+  const color2 = target < 30 ? "red" : "green"
 
   return (
     <>
       <NumberDisplayUI target={target} color={color} />
       <NumberDisplayUI target={target} color={color2} />
     </>
-  );
-};
+  )
+}
 ```
 
 `NumberDisplayUI` 컴포넌트는 숫자를 특정 색으로 보여준다는 역할만을 담당하고, 어떤 색으로 보여주어야 할지는 사용하는 부모 컴포넌트에서 결정합니다.
@@ -356,8 +356,8 @@ const App = () => {
 
 ```tsx
 const Input = ({ inputPlaceholder }: { inputPlaceholder?: string }) => {
-  return <input placeholder={inputPlaceholder} />;
-};
+  return <input placeholder={inputPlaceholder} />
+}
 ```
 
 `Input` 컴포넌트는 이름에서 알 수 있듯 `input` 요소를 사용하기 위한 컴포넌트입니다. 그러나, DOM API를 존중하지 않고 `inputPlaceholder`라는 `Input` 컴포넌트만의 특별한 Prop 이름을 사용했습니다.
@@ -369,12 +369,12 @@ const Input = ({ inputPlaceholder }: { inputPlaceholder?: string }) => {
 ```tsx
 const Button = ({ onClick }: { onClick?: () => void }) => {
   const handleClick = () => {
-    console.log("버튼이 클릭됐습니다.");
-    onClick?.();
-  };
+    console.log("버튼이 클릭됐습니다.")
+    onClick?.()
+  }
 
-  return <button onClick={handleClick}>버튼</button>;
-};
+  return <button onClick={handleClick}>버튼</button>
+}
 ```
 
 `onClick`이라는 네이밍을 유지한 점은 훌륭하지만, 이벤트 핸들러임에도 이벤트 객체를 인자로 넘겨주지 않고 있습니다. `React.MouseEvent<HTMLButtonElement>{:ts}` 타입의 이벤트 객체를 넘겨줘야 동작을 예측하기 더 좋은 컴포넌트가 됩니다.
@@ -382,12 +382,12 @@ const Button = ({ onClick }: { onClick?: () => void }) => {
 ```tsx
 const Button = ({ onClick }: { onClick?: React.MouseEventHandler<HTMLButtonElement> }) => {
   const handleClick: React.MouseEventHandler<HTMLButtonElement> = (event) => {
-    console.log("버튼이 클릭됐습니다.");
-    onClick?.(event);
-  };
+    console.log("버튼이 클릭됐습니다.")
+    onClick?.(event)
+  }
 
-  return <button onClick={handleClick}>버튼</button>;
-};
+  return <button onClick={handleClick}>버튼</button>
+}
 ```
 
 더 나아가서, 굳이 특정 Prop만 받아야 할 지도 한 번 고민해보세요. `Button` 컴포넌트는 `onClick` 이벤트 핸들러만 받을 수 있어야 할까요?
@@ -395,12 +395,12 @@ const Button = ({ onClick }: { onClick?: React.MouseEventHandler<HTMLButtonEleme
 ```tsx
 const Button = ({ onClick, ...props }: React.ComponentPropsWithoutRef<"button">) => {
   const handleClick: React.MouseEventHandler<HTMLButtonElement> = (event) => {
-    console.log("버튼이 클릭됐습니다.");
-    onClick?.(event);
-  };
+    console.log("버튼이 클릭됐습니다.")
+    onClick?.(event)
+  }
 
-  return <button onClick={handleClick} {...props} />;
-};
+  return <button onClick={handleClick} {...props} />
+}
 ```
 
 `React.ComponentProps{:ts}` 타입을 활용하면 더욱 더 예측 가능한 컴포넌트를 쉽게 만들 수 있습니다. DOM API를 존중하면서도 내 컴포넌트의 한계를 더 높이 끌어올리는 일석 이조의 효과를 누리게 됐네요.
@@ -409,7 +409,7 @@ const Button = ({ onClick, ...props }: React.ComponentPropsWithoutRef<"button">)
 
 ```jsx {8-16}
 const CustomInput = React.forwardRef(function CustomInput(props, ref) {
-  const inputRef = useRef(null);
+  const inputRef = useRef(null)
 
   useImperativeHandle(
     ref,
@@ -422,22 +422,22 @@ const CustomInput = React.forwardRef(function CustomInput(props, ref) {
 
         // GOOD
         focus() {
-          inputRef.current.focus();
+          inputRef.current.focus()
         },
-      };
+      }
     },
     [],
-  );
+  )
 
-  return <input {...props} ref={inputRef} />;
-});
+  return <input {...props} ref={inputRef} />
+})
 ```
 
 ### 그 상태, 꼭 거기 있어야 했을까요?
 
 ```jsx
 const HomePage = () => {
-  const [count, setCount] = React.useState(0);
+  const [count, setCount] = React.useState(0)
 
   return (
     <div>
@@ -447,8 +447,8 @@ const HomePage = () => {
       <OtherComponent2 />
       <OtherComponent3 />
     </div>
-  );
-};
+  )
+}
 ```
 
 `HomePage` 컴포넌트는 카운터를 보여주는 역할도 하고, 페이지 컴포넌트로서 `OtherComponent1`, `OtherComponent2`, `OtherComponent3`를 렌더링하는 역할도 합니다.
@@ -466,19 +466,19 @@ const HomePage = () => {
       <OtherComponent2 />
       <OtherComponent3 />
     </div>
-  );
-};
+  )
+}
 
 const Counter = () => {
-  const [count, setCount] = React.useState(0);
+  const [count, setCount] = React.useState(0)
 
   return (
     <div>
       <p>{count}</p>
       <button onClick={() => setCount(count + 1)}>Count Up</button>
     </div>
-  );
-};
+  )
+}
 ```
 
 리액트는 렌더링 패스에서 그 컴포넌트에 주어진 상태값만을 기반으로 UI에 어떤 것을 보여줄지 결정합니다. 이 근본을 잊지 말고, '이 부분을 그릴 때는 어떤 데이터가 필요할까' 항상 고민하고 컴포넌트를 분리합시다.
@@ -491,13 +491,13 @@ const Counter = () => {
 
 ```tsx
 const ProfileForm = () => {
-  const [name, setName] = React.useState("");
-  const [age, setAge] = React.useState(0);
+  const [name, setName] = React.useState("")
+  const [age, setAge] = React.useState(0)
 
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
-    event.preventDefault();
-    postProfile(name, age);
-  };
+    event.preventDefault()
+    postProfile(name, age)
+  }
 
   return (
     <form onSubmit={handleSubmit}>
@@ -505,20 +505,20 @@ const ProfileForm = () => {
         type='text'
         value={name}
         onChange={(event) => {
-          setName(event.target.value);
+          setName(event.target.value)
         }}
       />
       <input
         type='number'
         value={age}
         onChange={(event) => {
-          setAge(Number(event.target.value));
+          setAge(Number(event.target.value))
         }}
       />
       <button type='submit'>제출</button>
     </form>
-  );
-};
+  )
+}
 ```
 
 두 개의 `input`을 만들기 위해 상태를 두 개나 선언해야 했습니다. 값을 입력할 때마다 리렌더링을 일으키기까지 하겠죠.
@@ -528,12 +528,12 @@ const ProfileForm = () => {
 ```tsx {4-6, 12-13}
 const ProfileForm = () => {
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
-    event.preventDefault();
-    const formData = new FormData(event.currentTarget);
-    const name = formData.get("name") as string;
-    const age = formData.get("age") as string;
-    postProfile(name, age);
-  };
+    event.preventDefault()
+    const formData = new FormData(event.currentTarget)
+    const name = formData.get("name") as string
+    const age = formData.get("age") as string
+    postProfile(name, age)
+  }
 
   return (
     <form onSubmit={handleSubmit}>
@@ -541,8 +541,8 @@ const ProfileForm = () => {
       <input type='number' name='age' />
       <button type='submit'>제출</button>
     </form>
-  );
-};
+  )
+}
 ```
 
 리액트는 내게 주어진 수많은 도구중 하나일 뿐이라는 점을 명심합시다. **리액트 개발자에게 주어진 도구는 리액트만 있는게 아닙니다!**
@@ -551,12 +551,12 @@ const ProfileForm = () => {
 
 ```tsx
 const Counter = () => {
-  const [count, setCount] = React.useState(0);
-  const [countPlus2, setCountPlus2] = React.useState(0);
+  const [count, setCount] = React.useState(0)
+  const [countPlus2, setCountPlus2] = React.useState(0)
 
   React.useEffect(() => {
-    setCountPlus2(count + 2);
-  }, [count]);
+    setCountPlus2(count + 2)
+  }, [count])
 
   return (
     <div>
@@ -564,8 +564,8 @@ const Counter = () => {
       <div>카운트: {count}</div>
       <div>카운트 + 2: {countPlus2}</div>
     </div>
-  );
-};
+  )
+}
 ```
 
 `count`가 올라갈 때마다 `count`에 2를 더한 값을 표현하고 싶어 `countPlus2`라는 상태를 선언했습니다. 그리고 `useEffect`를 사용해 `count`가 바뀔 때마다 `countPlus2`를 업데이트했습니다.
@@ -574,7 +574,7 @@ const Counter = () => {
 
 ```tsx
 const Counter = () => {
-  const [count, setCount] = React.useState(0);
+  const [count, setCount] = React.useState(0)
 
   return (
     <div>
@@ -582,8 +582,8 @@ const Counter = () => {
       <div>카운트: {count}</div>
       <div>카운트 + 2: {count + 2}</div>
     </div>
-  );
-};
+  )
+}
 ```
 
 **특정 상태값이 바뀔 때 바뀌어야 하는 값이 있다면, 그건 새로운 상태가 아니라 그저 파생된 값일 가능성이 큽니다.**
@@ -594,11 +594,11 @@ const Counter = () => {
 
 ```ts
 type State = {
-  count: number;
-  countPlus2: number;
-};
+  count: number
+  countPlus2: number
+}
 
-type Action = { type: "SET_COUNT"; payload: number };
+type Action = { type: "SET_COUNT"; payload: number }
 
 const reducer = (state: State, action: Action): State => {
   switch (action.type) {
@@ -607,17 +607,17 @@ const reducer = (state: State, action: Action): State => {
         ...state,
         count: action.payload,
         countPlus2: action.payload + 2,
-      };
+      }
     default:
-      return state;
+      return state
   }
-};
+}
 
 // 사용단에서...
 const [{ count, countPlus2 }, dispatch] = React.useReducer(reducer, {
   count: 0,
   countPlus2: 0,
-});
+})
 ```
 
 reducer를 사용하면 상태값의 변화를 순수 함수로 관리할 수 있게 해주기 때문에 로직을 파악하기 쉽고, 테스트하기도 좋아집니다.
@@ -631,19 +631,19 @@ reducer를 사용하면 상태값의 변화를 순수 함수로 관리할 수 �
 사실 `useEffect`를 그런 식으로 사용하면 컴포넌트의 복잡도가 겉잡을 수 없이 높아집니다.
 
 ```tsx
-const [state1, setState1] = React.useState(0);
-const [state2, setState2] = React.useState(0);
-const [state3, setState3] = React.useState(0);
+const [state1, setState1] = React.useState(0)
+const [state2, setState2] = React.useState(0)
+const [state3, setState3] = React.useState(0)
 
 React.useEffect(() => {
   // state1이 바뀔 때마다 실행되는 이펙트
-  setState2(state1 + 1);
-}, [state1]);
+  setState2(state1 + 1)
+}, [state1])
 
 React.useEffect(() => {
   // state2가 바뀔 때마다 실행되는 이펙트
-  setState3(state2 + 1);
-}, [state2]);
+  setState3(state2 + 1)
+}, [state2])
 ```
 
 이런 코드가 있다면 `state1`이 바뀔 때 `state2`가 바뀌고, `state2`가 바뀔 때 `state3`가 바뀐다는 사실을 한 눈에 알아내기 어렵습니다. 이 이펙트들이 여러 줄, 여러 컴포넌트에 산재해있다면 상태값의 변화를 추적하기는 거의 불가능해질지도 모릅니다.
@@ -651,18 +651,18 @@ React.useEffect(() => {
 **이펙트는 가능한 한 리액트와 리액트 외부의 세계를 연결하는 역할로만 사용합시다.**
 
 ```tsx
-const [state1, setState1] = React.useState(0);
+const [state1, setState1] = React.useState(0)
 React.useEffect(() => {
   // 리액트 외부의 세계인 'window' 객체와 연결되는 이펙트
 
   const timeoutId = window.setTimeout(() => {
-    setState1(state1 + 1);
-  }, 1000);
+    setState1(state1 + 1)
+  }, 1000)
 
   return () => {
-    window.clearTimeout(timeoutId);
-  };
-}, []);
+    window.clearTimeout(timeoutId)
+  }
+}, [])
 ```
 
 > 이펙트의 올바른 사용에 대한 얘기는 이미 많이 논의된 분야입니다. 저는 개인적으로 Dan Abramov의 [이 글](https://overreacted.io/a-complete-guide-to-useeffect/)을 강추합니다.
@@ -680,15 +680,15 @@ const UserProfile = () => {
   const { name, age } = useQuery({
     queryKey: ["user", "profile"],
     queryFn: () => fetchUser(),
-  });
+  })
 
   return (
     <div>
       <div>이름: {name}</div>
       <div>나이: {age}</div>
     </div>
-  );
-};
+  )
+}
 ```
 
 사용자의 이름과 나이를 보여주는 `UserProfile` 컴포넌트가 있다고 해봅시다. 이 컴포넌트는 react-query를 사용해 데이터를 불러오고 있습니다.
@@ -697,23 +697,23 @@ const UserProfile = () => {
 
 ```tsx
 const UserProfileContext = React.createContext<{
-  name: string;
-  age: number;
+  name: string
+  age: number
 }>({
   name: "",
   age: 0,
-});
+})
 
 const UserProfile = () => {
-  const { name, age } = React.useContext(UserProfileContext);
+  const { name, age } = React.useContext(UserProfileContext)
 
   return (
     <div>
       <div>이름: {name}</div>
       <div>나이: {age}</div>
     </div>
-  );
-};
+  )
+}
 ```
 
 `UserProfile` 컴포넌트는 이제 데이터가 어디서 어떻게 생성되든 전혀 신경쓰지 않아도 됩니다. 컨텍스트에서 원하는 값을 받아 보여주는 역할만 합니다.
@@ -728,12 +728,10 @@ const UserAProfileProvider = ({ children }) => {
       fetchUser({
         userId: "A",
       }),
-  });
+  })
 
-  return (
-    <UserProfileContext.Provider value={{ name, age }}>{children}</UserProfileContext.Provider>
-  );
-};
+  return <UserProfileContext.Provider value={{ name, age }}>{children}</UserProfileContext.Provider>
+}
 
 const UserBProfileProvider = ({ children }) => {
   const { name, age } = useQuery({
@@ -742,12 +740,10 @@ const UserBProfileProvider = ({ children }) => {
       fetchUser({
         userId: "B",
       }),
-  });
+  })
 
-  return (
-    <UserProfileContext.Provider value={{ name, age }}>{children}</UserProfileContext.Provider>
-  );
-};
+  return <UserProfileContext.Provider value={{ name, age }}>{children}</UserProfileContext.Provider>
+}
 ```
 
 '이런건 Prop으로 해도 되는것 아닌가'하는 의문이 드실 수 있습니다. 그러나, Context API를 사용하면 책임별로 레이어가 자연스럽게 분리되는 효과를 누릴 수 있다는 장점이 있습니다.
@@ -763,8 +759,8 @@ const App = () => {
         <UserProfile />
       </UserBProfileProvider>
     </>
-  );
-};
+  )
+}
 ```
 
 이런 App을 마주했을 때 만약 B 유저의 프로필이 제대로 나오고 있지 않다면 `UserBProfileProvider`만 확인해보면 된다는 점이 JSX 구조로부터 쉽게 유추됩니다.
@@ -781,8 +777,8 @@ const App = () => {
         </UserAProfileProvider>
       </UserProfileSuspense>
     </UserProfileErrorBoundary>
-  );
-};
+  )
+}
 ```
 
 각 레이어가 에러 처리, 로딩 처리, 데이터 생성, UI 등의 책임을 분리해 갖고 있다는 점이 잘 드러납니다.

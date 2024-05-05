@@ -1,6 +1,6 @@
-import { ProjectDescriptionList } from "../styles";
+import { ProjectDescriptionList } from "../styles"
 
-import { utld } from "utility-class-components";
+import { utld } from "utility-class-components"
 
 export const SectionItemP = utld.p`
   font-light
@@ -17,7 +17,7 @@ export const SectionItemP = utld.p`
     mt-2
     last-of-type:mb-2
   )
-`;
+`
 
 export const SectionItemTitle = utld.h4`
   text-[1.3em]
@@ -31,10 +31,10 @@ export const SectionItemTitle = utld.h4`
     text-[1.1em]
     mb-[0.25em]
   )
-`;
+`
 
 export const SectionItemDescriptionList = utld(ProjectDescriptionList)`
   !mt-2
 
   print:!mt-0
-`;
+`

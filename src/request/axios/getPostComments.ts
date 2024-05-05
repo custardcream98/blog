@@ -1,22 +1,22 @@
-import type { CommentDataWithoutPassword } from "src/types/comment";
+import type { CommentDataWithoutPassword } from "src/types/comment"
 
-import type { NextApiResponse } from "../_types";
-import { normalizeNextApiResponse } from "../normalizers";
+import type { NextApiResponse } from "../_types"
+import { normalizeNextApiResponse } from "../normalizers"
 
-import { nextApi } from "./axios";
+import { nextApi } from "./axios"
 
-const GET_POST_COMMENTS_URL = "/post/comments";
+const GET_POST_COMMENTS_URL = "/post/comments"
 
 export type GetPostCommentsRequest = {
-  title: string;
-};
+  title: string
+}
 export const getPostComments = async ({ title }: GetPostCommentsRequest) => {
   const response = await nextApi.get<NextApiResponse<{ comments: CommentDataWithoutPassword[] }>>(
     GET_POST_COMMENTS_URL,
     {
       params: { title },
     },
-  );
+  )
 
-  return normalizeNextApiResponse(response.data);
-};
+  return normalizeNextApiResponse(response.data)
+}

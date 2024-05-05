@@ -14,8 +14,8 @@ const categoryTheme = {
   "styled-components": "border-[#c40ed1] text-[#c40ed1] bg-[#c40ed14e]",
   thoughts:
     "border-[#1c1c1c] text-[#1c1c1c] bg-[#9797970d] dark:border-[#e8e8e8] dark:text-[#e8e8e8]",
-};
+}
 
-export type Categoires = keyof typeof categoryTheme;
+export type Categoires = keyof typeof categoryTheme
 
-export default categoryTheme;
+export default categoryTheme

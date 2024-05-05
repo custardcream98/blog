@@ -1,7 +1,7 @@
-import { QuerySuspense } from "src/components";
+import { QuerySuspense } from "src/components"
 
-import { CommentsFallback } from "./CommentsFallback";
-import { CommentsLoadingSpinner } from "./CommentsLoadingSpinner";
+import { CommentsFallback } from "./CommentsFallback"
+import { CommentsLoadingSpinner } from "./CommentsLoadingSpinner"
 
 export function CommentsSuspense({ children }: React.PropsWithChildren) {
   return (
@@ -11,5 +11,5 @@ export function CommentsSuspense({ children }: React.PropsWithChildren) {
     >
       {children}
     </QuerySuspense>
-  );
+  )
 }

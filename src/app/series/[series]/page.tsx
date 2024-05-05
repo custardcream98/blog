@@ -1,27 +1,27 @@
-import { PostCard } from "src/app/_components";
-import { Container, Title } from "src/components";
+import { PostCard } from "src/app/_components"
+import { Container, Title } from "src/components"
 
-import { getSeries } from "../data";
+import { getSeries } from "../data"
 
-import { getPostBySeries } from "./data";
-import type { SeriesPageParams } from "./types";
+import { getPostBySeries } from "./data"
+import type { SeriesPageParams } from "./types"
 
-import { utld } from "utility-class-components";
+import { utld } from "utility-class-components"
 
-export { generateMetadata } from "./metadata";
+export { generateMetadata } from "./metadata"
 
 export const generateStaticParams = async () => {
-  const SERIES_COUNT_MAP = await getSeries();
-  const SERIES = Object.keys(SERIES_COUNT_MAP);
+  const SERIES_COUNT_MAP = await getSeries()
+  const SERIES = Object.keys(SERIES_COUNT_MAP)
 
   return SERIES.map((series) => ({
     series,
-  }));
-};
+  }))
+}
 
 export default async function SeriesDynamicPage({ params: { series } }: SeriesPageParams) {
-  const decodedSeries = decodeURIComponent(series);
-  const posts = await getPostBySeries(decodedSeries);
+  const decodedSeries = decodeURIComponent(series)
+  const posts = await getPostBySeries(decodedSeries)
 
   return (
     <SeriesContainer>
@@ -32,13 +32,13 @@ export default async function SeriesDynamicPage({ params: { series } }: SeriesPa
         ))}
       </ol>
     </SeriesContainer>
-  );
+  )
 }
 
 const SeriesContainer = utld(Container)`
   !block
-`;
+`
 
 const SeriesTitle = utld(Title)`
   inline-block
-`;
+`

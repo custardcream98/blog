@@ -1,19 +1,19 @@
-import type { CommentData } from "src/types/comment";
+import type { CommentData } from "src/types/comment"
 
-import type { NextApiResponse } from "../_types";
-import { normalizeNextApiResponse } from "../normalizers";
+import type { NextApiResponse } from "../_types"
+import { normalizeNextApiResponse } from "../normalizers"
 
-import { nextApi } from "./axios";
+import { nextApi } from "./axios"
 
-const PATCH_POST_COMMENT_URL = "/post/comments";
+const PATCH_POST_COMMENT_URL = "/post/comments"
 
 export type PatchPostCommentRequest = {
-  title: string;
-  password: string;
-  commentId: string;
-  comment?: string;
-  username?: string;
-};
+  title: string
+  password: string
+  commentId: string
+  comment?: string
+  username?: string
+}
 export const patchPostComment = async ({
   title,
   password,
@@ -27,7 +27,7 @@ export const patchPostComment = async ({
     password,
     title,
     ...restData,
-  });
+  })
 
-  return normalizeNextApiResponse(response.data);
-};
+  return normalizeNextApiResponse(response.data)
+}

@@ -51,7 +51,7 @@ const UserContextProvider = ({ children }) => {
 
 ```jsx
 const UserDisplay = () => {
-  const { name, age, setUser } = React.useContext(UserContext);
+  const { name, age, setUser } = React.useContext(UserContext)
 
   return (
     <div>
@@ -59,8 +59,8 @@ const UserDisplay = () => {
       <p>{age}</p>
       <button onClick={() => setUser({ name: "John", age: 20 })}>Set User</button>
     </div>
-  );
-};
+  )
+}
 ```
 
 다만, Context API는 '잘 사용하려면' 약간 까다롭습니다. 위의 `UserContextProvider`에서 `value` 객체는 매 렌더링마다 새로 생성됩니다. Context Provider는 얕은 비교만 수행하기 때문에 해당 컨텍스트의 값이 바뀌지 않았더라도 컨텍스트를 참조하는 모든 컴포넌트가 리렌더링 됩니다. 따라서 `UserContextProvider`의 부모 컴포넌트가 리렌더링되면 관련 없는 컴포넌트의 불필요한 리렌더링이 발생할 수 있습니다.
@@ -69,7 +69,7 @@ const UserDisplay = () => {
 
 ```jsx
 const UserContextProvider = ({ children }) => {
-  const [user, setUser] = React.useState(DEFAULT_USER);
+  const [user, setUser] = React.useState(DEFAULT_USER)
 
   const value = React.useMemo(
     () => ({
@@ -77,10 +77,10 @@ const UserContextProvider = ({ children }) => {
       setUser,
     }),
     [user],
-  );
+  )
 
-  return <UserContext.Provider value={value}>{children}</UserContext.Provider>;
-};
+  return <UserContext.Provider value={value}>{children}</UserContext.Provider>
+}
 ```
 
 또는 `React.memo`를 써서 Context Provider 자체의 리렌더링을 막는것도 방법입니다.
@@ -89,14 +89,14 @@ const UserContextProvider = ({ children }) => {
 
 ```jsx
 const UserNameDisplay = () => {
-  const { name } = React.useContext(UserContext);
+  const { name } = React.useContext(UserContext)
 
   return (
     <div>
       <p>{name}</p>
     </div>
-  );
-};
+  )
+}
 ```
 
 위 컴포넌트는 `UserContext`에서 주는 값 중 `name`만을 사용하고 있음에도 불구하고, `age`만 변경되어도 리렌더링 됩니다.
@@ -142,28 +142,28 @@ const UserSetterContext = React.createContext({
 ```js
 const store = React.useRef({
   state: new Map(),
-});
+})
 ```
 
 이 `store`는 Context API를 통해 리액트 컴포넌트들이 공유할 수 있도록 합니다.
 
 ```jsx
-const StoreContext = React.createContext(store);
+const StoreContext = React.createContext(store)
 
 const StoreRoot = ({ children }) => {
   const store = React.useRef({
     state: new Map(),
-  });
-  return <StoreContext.Provider value={store}>{children}</StoreContext.Provider>;
-};
+  })
+  return <StoreContext.Provider value={store}>{children}</StoreContext.Provider>
+}
 ```
 
 앱의 루트에 `StoreRoot`를 감싸주면 이 앱 어디에서든 접근할 수 있는 전역 상태가 준비됩니다.
 
 ```jsx
 const App = () => {
-  return <StoreRoot>{/* ... */}</StoreRoot>;
-};
+  return <StoreRoot>{/* ... */}</StoreRoot>
+}
 ```
 
 ## 전역 상태가 바뀔 때 컴포넌트를 어떻게 리렌더링할 것인가
@@ -181,32 +181,32 @@ const App = () => {
 
 ```ts
 type StoreNode<T> = {
-  key: string;
-  value: T;
-  subscribers: Set<() => void>;
-  subscribe: (callback: () => void) => () => void;
-  emitChange: () => void;
-};
+  key: string
+  value: T
+  subscribers: Set<() => void>
+  subscribe: (callback: () => void) => () => void
+  emitChange: () => void
+}
 ```
 
 이제 `StoreNode`를 생성하는 함수인 `addStoreNode`를 만들어봅시다.
 
 ```ts
 const addStoreNode = <T>(key: string, initialValue: T): StoreNode<T> => {
-  const subscribers = new Set<() => void>();
-  const value = initialValue;
+  const subscribers = new Set<() => void>()
+  const value = initialValue
 
   const subscribe = (callback: () => void) => {
-    subscribers.add(callback);
+    subscribers.add(callback)
 
     return () => {
-      subscribers.delete(callback);
-    }; // unsubscribe 함수를 반환합니다.
-  };
+      subscribers.delete(callback)
+    } // unsubscribe 함수를 반환합니다.
+  }
 
   const emitChange = () => {
-    subscribers.forEach((callback) => callback());
-  };
+    subscribers.forEach((callback) => callback())
+  }
 
   return {
     key,
@@ -214,27 +214,27 @@ const addStoreNode = <T>(key: string, initialValue: T): StoreNode<T> => {
     subscribers,
     subscribe,
     emitChange,
-  };
-};
+  }
+}
 ```
 
 이렇게 하면 아래와 같이 간편한 API가 완성됩니다.
 
 ```ts
-const storeNode = addStoreNode("userName", "Shi Woo, Park");
+const storeNode = addStoreNode("userName", "Shi Woo, Park")
 
 const callback = () => {
-  console.log("userName이 바뀌었습니다.");
-};
+  console.log("userName이 바뀌었습니다.")
+}
 
 // 전역 상태에 구독하기
-const unsubscribe = storeNode.subscribe(callback);
+const unsubscribe = storeNode.subscribe(callback)
 
 // 전역 상태 값 변경 후 구독자들에게 알리기
-storeNode.emitChange();
+storeNode.emitChange()
 
 // 구독 취소하기
-unsubscribe();
+unsubscribe()
 ```
 
 ### 특정 전역 상태가 바뀌었을 때 '구독'한 컴포넌트를 리렌더링하는 기능
@@ -243,9 +243,9 @@ unsubscribe();
 
 ```ts
 const useForceUpdate = () => {
-  const [, setState] = React.useState({});
-  return React.useCallback(() => setState({}));
-};
+  const [, setState] = React.useState({})
+  return React.useCallback(() => setState({}))
+}
 ```
 
 > 대부분의 라이브러리는 사실 리액트에서 제공하는 `useSyncExternalStore` 훅을 사용하고 있습니다. 여기에서는 데이터 흐름을 직접 제어하며 원리를 이해하기 위해 강제로 리렌더링을 일으키는 훅을 사용합니다.
@@ -254,25 +254,25 @@ const useForceUpdate = () => {
 
 ```ts
 const useStoreNodeGetter = <T>(storeNode: StoreNode<T>): T => {
-  const forceUpdate = useForceUpdate();
-  const storeRef = React.useContext(StoreContext); // 전역 상태가 담기는 객체 컨텍스트
+  const forceUpdate = useForceUpdate()
+  const storeRef = React.useContext(StoreContext) // 전역 상태가 담기는 객체 컨텍스트
 
   React.useEffect(() => {
-    const store = storeRef.current;
+    const store = storeRef.current
 
     if (!store.state.has(storeNode.key)) {
       // 아직 전역 상태로 등록되지 않은 노드라면
       // 지금 추가해줍니다.
-      store.state.set(storeNode.key, storeNode);
+      store.state.set(storeNode.key, storeNode)
     }
 
-    const unsubscribe = storeNode.subscribe(forceUpdate);
+    const unsubscribe = storeNode.subscribe(forceUpdate)
 
-    return unsubscribe;
-  }, [storeNode, forceUpdate, storeRef]);
+    return unsubscribe
+  }, [storeNode, forceUpdate, storeRef])
 
-  return storeRef.current.state.get(storeNode.key)?.value ?? storeNode.value;
-};
+  return storeRef.current.state.get(storeNode.key)?.value ?? storeNode.value
+}
 ```
 
 `forceUpdate`가 실행되는 순간 이 Hook을 사용중인 컴포넌트는 리렌더링 됩니다. 19번째 줄에서 리턴되는 값은 리렌더링마다 다시 평가되므로 자연스럽게 최신 상태를 가져올 수 있습니다.
@@ -281,24 +281,24 @@ const useStoreNodeGetter = <T>(storeNode: StoreNode<T>): T => {
 
 ```ts
 const useStoreNodeSetter = <T>(storeNode: StoreNode<T>): ((newValue: T) => void) => {
-  const storeRef = React.useContext(StoreContext);
+  const storeRef = React.useContext(StoreContext)
 
   return React.useCallback(
     (newValue: T) => {
-      const store = storeRef.current;
+      const store = storeRef.current
 
       if (!store.state.has(storeNode.key)) {
-        store.state.set(storeNode.key, storeNode);
+        store.state.set(storeNode.key, storeNode)
       }
 
-      const existingNode = store.state.get(storeNode.key) as StoreNode<T>;
+      const existingNode = store.state.get(storeNode.key) as StoreNode<T>
 
-      existingNode.value = newValue;
-      existingNode.emitChange(); // 구독자들에게 알립니다.
+      existingNode.value = newValue
+      existingNode.emitChange() // 구독자들에게 알립니다.
     },
     [storeNode, storeRef],
-  );
-};
+  )
+}
 ```
 
 ## selector 구현
@@ -313,23 +313,23 @@ selector는 전역 상태를 읽고, 그 상태를 가공하여 새로운 값을
 const store = React.useRef({
   state: new Map(),
   selectors: new Map(),
-});
+})
 ```
 
 selector 관련 타입은 이렇게 선언했습니다.
 
 ```ts
-export type Selector<T> = ({ get }: { get: <U>(node: StoreNode<U>) => U }) => T;
+export type Selector<T> = ({ get }: { get: <U>(node: StoreNode<U>) => U }) => T
 
 export type SelectorNode<T> = {
-  key: string;
-  selector: Selector<T>;
-  value: T;
-  _dependencies: Set<string>;
-  _subscribers: Set<() => void>;
-  subscribe: (callback: () => void) => () => void;
-  emitChange: () => void;
-};
+  key: string
+  selector: Selector<T>
+  value: T
+  _dependencies: Set<string>
+  _subscribers: Set<() => void>
+  subscribe: (callback: () => void) => () => void
+  emitChange: () => void
+}
 ```
 
 selector가 의존하는 전역 상태를 `_dependencies`에 담고, selector의 리턴값을 `value`에 담습니다.
@@ -340,22 +340,22 @@ selector가 의존하는 전역 상태를 `_dependencies`에 담고, selector의
 
 ```ts
 const addStoreSelectorNode = <T>(key: string, selector: Selector<T>): StoreSelectorNode<T> => {
-  const _dependencies = new Set<string>();
-  const _subscribers = new Set<() => void>();
+  const _dependencies = new Set<string>()
+  const _subscribers = new Set<() => void>()
 
   const emitChange = () => {
     _subscribers.forEach((callback) => {
-      callback();
-    });
-  };
+      callback()
+    })
+  }
 
   const subscribe = (callback: () => void) => {
-    _subscribers.add(callback);
+    _subscribers.add(callback)
 
     return () => {
-      _subscribers.delete(callback);
-    }; // unsubscribe 함수를 반환합니다.
-  };
+      _subscribers.delete(callback)
+    } // unsubscribe 함수를 반환합니다.
+  }
 
   return {
     key,
@@ -365,8 +365,8 @@ const addStoreSelectorNode = <T>(key: string, selector: Selector<T>): StoreSelec
     value: undefined as T, // 나중에 selector를 실행하면서 값이 할당됩니다.
     emitChange,
     subscribe,
-  };
-};
+  }
+}
 ```
 
 아직 `selector`를 실행하지는 않았으므로 `value`는 `undefined`입니다. 이 부분에서 `value`의 초기값을 어떻게 처리할까 고민했는데, Selector Node를 선언한 것 만으로 `selector`가 실행된다면 문제가 생길 수 있다고 생각해 이렇게 처리했습니다.
@@ -374,28 +374,28 @@ const addStoreSelectorNode = <T>(key: string, selector: Selector<T>): StoreSelec
 다음으로 `StoreSelectorNode`의 값을 사용하도록 도와주는 `useStoreSelectorNode`입니다.
 
 ```ts
-const isServer = typeof window === "undefined";
+const isServer = typeof window === "undefined"
 
 const useStoreSelectorNode = <T>(selectorNode: SelectorNode<T>) => {
-  const storeRef = React.useContext(StoreContext); // 전역 상태가 담기는 객체 컨텍스트
-  const forceUpdate = useForceUpdate();
+  const storeRef = React.useContext(StoreContext) // 전역 상태가 담기는 객체 컨텍스트
+  const forceUpdate = useForceUpdate()
 
   React.useLayoutEffect(() => {
-    const store = storeRef.current;
+    const store = storeRef.current
 
-    const storeSelectorNode = store.selectors.get(key);
+    const storeSelectorNode = store.selectors.get(key)
 
     if (!storeSelectorNode) {
-      return;
+      return
     }
 
-    const unsubscribe = storeSelectorNode.subscribe(forceUpdate);
+    const unsubscribe = storeSelectorNode.subscribe(forceUpdate)
 
-    return unsubscribe;
-  }, [forceUpdate, selectorNode, storeRef]);
+    return unsubscribe
+  }, [forceUpdate, selectorNode, storeRef])
 
-  return storeRef.current.selectors.get(selectorNode.key)?.value; // 리턴 타입은 T | undefined
-};
+  return storeRef.current.selectors.get(selectorNode.key)?.value // 리턴 타입은 T | undefined
+}
 ```
 
 여기까지는 `useStoreNode`와 크게 다른 부분은 없습니다. `useStoreNode`때와 마찬가지로, `forceUpdate`가 실행되면 리턴문이 다시 평가되기 때문에 최신 상태를 가져올 수 있습니다.
@@ -406,55 +406,55 @@ const useStoreSelectorNode = <T>(selectorNode: SelectorNode<T>) => {
 const registerSelectorNode = async <T>(store: Store, selectorNode: SelectorNode<T>) => {
   if (store.selectors.has(selectorNode.key)) {
     // 이미 등록된 selector라면 무시합니다.
-    return;
+    return
   }
 
-  const dependencies = new Set<StoreNodeKey>();
-  store.selectors.set(selectorNode.key, selectorNode);
+  const dependencies = new Set<StoreNodeKey>()
+  store.selectors.set(selectorNode.key, selectorNode)
 
   const initialValue = selectorNode.selector({
     get: (node) => {
       // 의존하는 전역 상태를 dependencies에 담습니다.
-      dependencies.add(node.key);
+      dependencies.add(node.key)
 
-      return store.state.get(node.key);
+      return store.state.get(node.key)
     },
-  });
+  })
 
   store._selectors.set(selectorNode.key, {
     ...selectorNode,
     _dependencies: dependencies,
     subscribers: new Set(),
     value: initialValue,
-  });
+  })
 
-  return;
-};
+  return
+}
 ```
 
 selector의 초기값을 평가하고, 의존하고 있는 전역 상태의 `Set`인 `dependencies`를 만들어 `Store` 객체에 등록합니다. 이렇게 정의된 `registerSelectorNode`를 `useStoreSelectorNode`에서 호출하면 됩니다.
 
 ```ts {10-12}
 const useStoreSelectorNode = <T>(selectorNode: SelectorNode<T>) => {
-  const storeRef = React.useContext(StoreContext);
-  const forceUpdate = useForceUpdate();
+  const storeRef = React.useContext(StoreContext)
+  const forceUpdate = useForceUpdate()
 
   React.useLayoutEffect(() => {
-    const store = storeRef.current;
+    const store = storeRef.current
 
-    const storeSelectorNode = store.selectors.get(key);
+    const storeSelectorNode = store.selectors.get(key)
 
     if (!storeSelectorNode) {
-      registerSelectorNode(store, selectorNode);
+      registerSelectorNode(store, selectorNode)
     }
 
-    const unsubscribe = storeSelectorNode.subscribe(forceUpdate);
+    const unsubscribe = storeSelectorNode.subscribe(forceUpdate)
 
-    return unsubscribe;
-  }, [forceUpdate, selectorNode, storeRef]);
+    return unsubscribe
+  }, [forceUpdate, selectorNode, storeRef])
 
-  return storeRef.current.selectors.get(selectorNode.key)?.value;
-};
+  return storeRef.current.selectors.get(selectorNode.key)?.value
+}
 ```
 
 ### selector 구현
@@ -465,25 +465,25 @@ selector 함수는 전역 상태가 바뀔 때 실행되면 되므로, `useStore
 
 ```ts {17-35}
 const useStoreNodeSetter = <T>(storeNode: StoreNode<T>): ((newValue: T) => void) => {
-  const storeRef = React.useContext(StoreContext);
+  const storeRef = React.useContext(StoreContext)
 
   return React.useCallback(
     (newValue: T) => {
-      const store = storeRef.current;
+      const store = storeRef.current
 
       if (!store.state.has(storeNode.key)) {
-        store.state.set(storeNode.key, storeNode);
+        store.state.set(storeNode.key, storeNode)
       }
 
-      const existingNode = store.state.get(storeNode.key) as StoreNode<T>;
+      const existingNode = store.state.get(storeNode.key) as StoreNode<T>
 
-      existingNode.value = newValue;
-      existingNode.emitChange();
+      existingNode.value = newValue
+      existingNode.emitChange()
 
       // selector를 트리거합니다.
       store.selectors.forEach((selectorNode) => {
         if (!selectorNode._dependencies.has(storeNode.key)) {
-          return;
+          return
         }
 
         // selector가 의존하는 전역 상태가 바뀌었으므로
@@ -492,17 +492,17 @@ const useStoreNodeSetter = <T>(storeNode: StoreNode<T>): ((newValue: T) => void)
         const newValue = selectorNode.selector({
           get: (node) => {
             // getter 구현체
-            return store.state.get(node.key);
+            return store.state.get(node.key)
           },
-        });
+        })
 
-        selectorNode.value = newValue;
-        selectorNode.emitChange(); // selector의 구독자들에게 알립니다.
-      });
+        selectorNode.value = newValue
+        selectorNode.emitChange() // selector의 구독자들에게 알립니다.
+      })
     },
     [storeNode, storeRef],
-  );
-};
+  )
+}
 ```
 
 ### async selector 구현
@@ -512,7 +512,7 @@ const useStoreNodeSetter = <T>(storeNode: StoreNode<T>): ((newValue: T) => void)
 먼저 `Selector` 타입이 `Promise`도 리턴할 수 있도록 변경합니다.
 
 ```ts
-export type Selector<T> = ({ get }: { get: <U>(node: StoreNode<U>) => U }) => T | Promise<T>;
+export type Selector<T> = ({ get }: { get: <U>(node: StoreNode<U>) => U }) => T | Promise<T>
 ```
 
 이제 register시 비동기 처리를 추가합니다.
@@ -520,86 +520,86 @@ export type Selector<T> = ({ get }: { get: <U>(node: StoreNode<U>) => U }) => T 
 ```ts {17-29}
 const registerSelectorNode = async <T>(store: Store, selectorNode: SelectorNode<T>) => {
   if (store.selectors.has(selectorNode.key)) {
-    return;
+    return
   }
 
-  const dependencies = new Set<StoreNodeKey>();
-  store.selectors.set(selectorNode.key, selectorNode);
+  const dependencies = new Set<StoreNodeKey>()
+  store.selectors.set(selectorNode.key, selectorNode)
 
   const initialValue = selectorNode.selector({
     get: (node) => {
-      dependencies.add(node.key);
+      dependencies.add(node.key)
 
-      return store.state.get(node.key);
+      return store.state.get(node.key)
     },
-  });
+  })
 
   if (initialValue instanceof Promise) {
     // 비동기 selector라면
     // 초기값을 기다립니다.
-    selectorNode.value = await initialValue;
+    selectorNode.value = await initialValue
   } else {
-    selectorNode.value = initialValue;
+    selectorNode.value = initialValue
   }
 
   store._selectors.set(selectorNode.key, {
     ...selectorNode,
     _dependencies: dependencies,
     subscribers: new Set(),
-  });
+  })
 
-  return;
-};
+  return
+}
 ```
 
 `selector`를 트리거할 때도 비동기 처리를 고려해야 합니다.
 
 ```ts {28-37}
 const useStoreNodeSetter = <T>(storeNode: StoreNode<T>): ((newValue: T) => void) => {
-  const storeRef = React.useContext(StoreContext);
+  const storeRef = React.useContext(StoreContext)
 
   return React.useCallback(
     (newValue: T) => {
-      const store = storeRef.current;
+      const store = storeRef.current
 
       if (!store.state.has(storeNode.key)) {
-        store.state.set(storeNode.key, storeNode);
+        store.state.set(storeNode.key, storeNode)
       }
 
-      const existingNode = store.state.get(storeNode.key) as StoreNode<T>;
+      const existingNode = store.state.get(storeNode.key) as StoreNode<T>
 
-      existingNode.value = newValue;
-      existingNode.emitChange();
+      existingNode.value = newValue
+      existingNode.emitChange()
 
       store.selectors.forEach((selectorNode) => {
         if (!selectorNode._dependencies.has(storeNode.key)) {
-          return;
+          return
         }
 
         const newValue = selectorNode.selector({
           get: (node) => {
-            return store.state.get(node.key);
+            return store.state.get(node.key)
           },
-        });
+        })
 
         if (newValue instanceof Promise) {
           // 비동기 selector라면
           // 값이 로드되기를 기다립니다.
           newValue.then((resolvedValue) => {
-            selectorNode.value = resolvedValue;
-            selectorNode.emitChange();
-          });
+            selectorNode.value = resolvedValue
+            selectorNode.emitChange()
+          })
 
-          return;
+          return
         }
 
-        selectorNode.value = newValue;
-        selectorNode.emitChange();
-      });
+        selectorNode.value = newValue
+        selectorNode.emitChange()
+      })
     },
     [storeNode, storeRef],
-  );
-};
+  )
+}
 ```
 
 ### 상태가 바뀌지 않았다면 리렌더링을 하지 않도록 최적화
@@ -608,66 +608,66 @@ const useStoreNodeSetter = <T>(storeNode: StoreNode<T>): ((newValue: T) => void)
 
 ```ts {14-20, 38-42, 51-53}
 const useStoreNodeSetter = <T>(storeNode: StoreNode<T>): ((newValue: T) => void) => {
-  const storeRef = React.useContext(StoreContext);
+  const storeRef = React.useContext(StoreContext)
 
   return React.useCallback(
     (newValue: T) => {
-      const store = storeRef.current;
+      const store = storeRef.current
 
       if (!store.state.has(storeNode.key)) {
-        store.state.set(storeNode.key, storeNode);
+        store.state.set(storeNode.key, storeNode)
       }
 
-      const existingNode = store.state.get(storeNode.key) as StoreNode<T>;
+      const existingNode = store.state.get(storeNode.key) as StoreNode<T>
 
       if (existingNode.value === newValue) {
         // 값이 바뀌지 않았다면
         // 아무것도 하지 않습니다.
         // 덕분에 이 StoreNode를 구독중인 컴포넌트의 불필요한 리렌더링이 방지되며
         // selector의 불필요한 실행도 방지됩니다.
-        return;
+        return
       }
 
-      existingNode.value = newValue;
-      existingNode.emitChange();
+      existingNode.value = newValue
+      existingNode.emitChange()
 
       store.selectors.forEach((selectorNode) => {
         if (!selectorNode._dependencies.has(storeNode.key)) {
-          return;
+          return
         }
 
         const newValue = selectorNode.selector({
           get: (node) => {
-            return store.state.get(node.key);
+            return store.state.get(node.key)
           },
-        });
+        })
 
         if (newValue instanceof Promise) {
           newValue.then((resolvedValue) => {
             if (selectorNode.value === resolvedValue) {
               // 마찬가지로 값이 바뀌지 않았다면
               // 아무것도 하지 않습니다.
-              return;
+              return
             }
 
-            selectorNode.value = resolvedValue;
-            selectorNode.emitChange();
-          });
+            selectorNode.value = resolvedValue
+            selectorNode.emitChange()
+          })
 
-          return;
+          return
         }
 
         if (selectorNode.value === newValue) {
-          return;
+          return
         }
 
-        selectorNode.value = newValue;
-        selectorNode.emitChange();
-      });
+        selectorNode.value = newValue
+        selectorNode.emitChange()
+      })
     },
     [storeNode, storeRef],
-  );
-};
+  )
+}
 ```
 
 리액트 내부 구현중에도 비슷한 로직이 있는데, 거기에서 차용한 아이디어입니다.

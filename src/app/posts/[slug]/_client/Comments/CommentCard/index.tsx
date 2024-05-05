@@ -1,16 +1,16 @@
-import { DateSpan } from "src/components";
-import type { ICommentDataProps } from "src/types/comment";
+import { DateSpan } from "src/components"
+import type { ICommentDataProps } from "src/types/comment"
 
-import CommentEditorStateContextProvider from "./CommentEditor/context";
-import CommentEditor from "./CommentEditor";
-import { CommentDataContextProvider } from "./context";
+import CommentEditorStateContextProvider from "./CommentEditor/context"
+import CommentEditor from "./CommentEditor"
+import { CommentDataContextProvider } from "./context"
 
-import { utld } from "utility-class-components";
+import { utld } from "utility-class-components"
 
 type UserInfoProps = {
-  username: string;
-  createdAt: number;
-};
+  username: string
+  createdAt: number
+}
 
 function UserInfo({ username, createdAt }: UserInfoProps) {
   return (
@@ -18,7 +18,7 @@ function UserInfo({ username, createdAt }: UserInfoProps) {
       <Username>{username}</Username>
       <CommentDate dateTime={createdAt} />
     </UserInfoWrapper>
-  );
+  )
 }
 
 export default function CommentCard({
@@ -44,7 +44,7 @@ export default function CommentCard({
         </Wrapper>
       </CommentEditorStateContextProvider>
     </CommentDataContextProvider>
-  );
+  )
 }
 
 const Wrapper = utld.li`
@@ -59,7 +59,7 @@ const Wrapper = utld.li`
   overflow-hidden
 
   last:border-none
-`;
+`
 
 const Content = utld.p`
   text-[0.9rem]
@@ -67,11 +67,11 @@ const Content = utld.p`
   font-light
 
   mobile:text-[0.8rem]
-`;
+`
 
 const UserInfoWrapper = utld.p`
   flex-1
-`;
+`
 
 const Username = utld.strong`
   block
@@ -83,12 +83,12 @@ const Username = utld.strong`
   overflow-ellipsis
 
   mobile:text-[0.8rem]
-`;
+`
 
 const CommentDate = utld(DateSpan)`
   text-[0.6rem]
   mobile:text-[0.5rem]
-`;
+`
 
 const CommentTopWrapper = utld.div`
   flex
@@ -97,4 +97,4 @@ const CommentTopWrapper = utld.div`
   items-center
 
   mb-2
-`;
+`

@@ -10,4 +10,4 @@ module.exports = {
     ],
   },
   staticPageGenerationTimeout: 100000,
-};
+}

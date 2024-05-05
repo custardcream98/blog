@@ -15,10 +15,10 @@ TypeScript에서 prop으로 children Component를 받을 수 있게 하면 됩�
 
 ```tsx
 type Props = {
-  children: string | JSX.Element | JSX.Element[];
-};
+  children: string | JSX.Element | JSX.Element[]
+}
 
-const Layout = ({ children }: Props) => <Parent>{children}</Parent>;
+const Layout = ({ children }: Props) => <Parent>{children}</Parent>
 ```
 
 ## 사용
@@ -28,7 +28,7 @@ const Page = () => (
   <Layout>
     <Children />
   </Layout>
-);
+)
 ```
 
 아주 간단하죠!😃

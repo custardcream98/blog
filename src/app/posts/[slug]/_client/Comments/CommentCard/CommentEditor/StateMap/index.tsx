@@ -1,12 +1,12 @@
-import { CommentEditState } from "src/types/comment";
+import { CommentEditState } from "src/types/comment"
 
-import CheckPasswordState from "./CheckPasswordState";
-import DefaultState from "./DefaultState";
-import EditState from "./EditState";
-import OptionOpenedState from "./OptionOpenedState";
+import CheckPasswordState from "./CheckPasswordState"
+import DefaultState from "./DefaultState"
+import EditState from "./EditState"
+import OptionOpenedState from "./OptionOpenedState"
 
 const commentEditorStateChildrenMap: {
-  [key in CommentEditState]: React.ReactNode;
+  [key in CommentEditState]: React.ReactNode
 } = {
   [CommentEditState.DEFAULT]: <DefaultState />,
   [CommentEditState.OPTION_OPENED]: <OptionOpenedState />,
@@ -16,6 +16,6 @@ const commentEditorStateChildrenMap: {
   ),
   [CommentEditState.EDIT]: <EditState />,
   [CommentEditState.DELETE]: null,
-};
+}
 
-export default commentEditorStateChildrenMap;
+export default commentEditorStateChildrenMap

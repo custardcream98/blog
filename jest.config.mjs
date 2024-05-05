@@ -1,6 +1,6 @@
-import nextJest from "next/jest.js";
+import nextJest from "next/jest.js"
 
-const createJestConfig = nextJest({ dir: "./" });
+const createJestConfig = nextJest({ dir: "./" })
 
 /** @type {import('jest').Config} */
 const jestConfig = {
@@ -9,6 +9,6 @@ const jestConfig = {
   testEnvironment: "jest-environment-jsdom",
 
   testMatch: ["<rootDir>/src/*/**/__tests__/*.spec.{ts,tsx}"],
-};
+}
 
-export default createJestConfig(jestConfig);
+export default createJestConfig(jestConfig)

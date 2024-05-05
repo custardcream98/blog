@@ -1,4 +1,4 @@
-import type { ResumeSectionData } from "src/types/resume";
+import type { ResumeSectionData } from "src/types/resume"
 
 const experiences: ResumeSectionData[] = [
   {
@@ -66,6 +66,6 @@ const experiences: ResumeSectionData[] = [
     ],
     title: "제 36회 도시과학대학 공동작품전",
   },
-];
+]
 
-export default experiences;
+export default experiences

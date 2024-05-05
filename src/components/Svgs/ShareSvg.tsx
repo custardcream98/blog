@@ -1,4 +1,4 @@
-import type { PropsWithClassName } from "src/types/props";
+import type { PropsWithClassName } from "src/types/props"
 
 export function ShareSvg({ className, title }: PropsWithClassName<{ title?: string }>) {
   return (
@@ -17,5 +17,5 @@ export function ShareSvg({ className, title }: PropsWithClassName<{ title?: stri
         clip-rule='evenodd'
       />
     </svg>
-  );
+  )
 }

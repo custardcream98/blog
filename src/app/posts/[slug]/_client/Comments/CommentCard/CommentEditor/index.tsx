@@ -1,10 +1,10 @@
-import { useCommentEditState } from "./context";
-import commentEditorStateChildrenMap from "./StateMap";
+import { useCommentEditState } from "./context"
+import commentEditorStateChildrenMap from "./StateMap"
 
 function CommentEditorContainer() {
-  const editState = useCommentEditState();
+  const editState = useCommentEditState()
 
-  return commentEditorStateChildrenMap[editState];
+  return commentEditorStateChildrenMap[editState]
 }
 
-export default CommentEditorContainer;
+export default CommentEditorContainer

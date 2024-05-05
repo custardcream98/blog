@@ -66,9 +66,9 @@ var name = "shiwoo";
 변수의 선언과 할당은 한 문으로 축약해 표현할 수 있지만, 주의할 점은 **실제 실행될때는 변수의 선언과 할당 시점이 다르다**는 것입니다.
 
 ```js
-console.log(name); // undefined
-var name = "박시우";
-console.log(name); // 박시우
+console.log(name) // undefined
+var name = "박시우"
+console.log(name) // 박시우
 ```
 
 runtime 전에 `name`이 선언되므로 코드는 `ReferenceError` 없이 잘 실행됩니다.
@@ -76,19 +76,19 @@ runtime 전에 `name`이 선언되므로 코드는 `ReferenceError` 없이 잘 �
 그렇다면 여기에서 두 `console.log`는 각각 어떤 내용을 출력할까요?
 
 ```js
-console.log(name);
-name = "박시우";
-var name;
-console.log(name);
+console.log(name)
+name = "박시우"
+var name
+console.log(name)
 ```
 
 이는 아래 순서로 실행된다고 생각하면 쉽게 예측할 수 있습니다.
 
 ```js
-var name;
-console.log(name); // undefined
-name = "박시우";
-console.log(name); // 박시우
+var name
+console.log(name) // undefined
+name = "박시우"
+console.log(name) // 박시우
 ```
 
 ## 값의 재할당(reassignment)
@@ -96,8 +96,8 @@ console.log(name); // 박시우
 `let`이나 `var` 키워드로 선언된 변수의 값은 재할당 될 수 있습니다.
 
 ```js
-var x = 10;
-x = 20;
+var x = 10
+x = 20
 ```
 
 위 코드가 실행되면, `x` 값은 `undefined`가 할당되고, 다음으로 `10`이 먼저 재할당됐다가 `20`이 재할당됩니다. 이 때 재할당 되는 값은 먼저 할당된 값이 저장돼 있던 메모리 공간에 덮어쓰는 것이 아니라, 새로운 메모리 공간을 확보하고 거기에 새로 할당된 값을 저장합니다. 매핑 정보가 사라진 `undefined`와 `10`은 가비지 콜렉터에 의해 자동으로 해제됩니다. (언제 해제될지는 예측할 수 없습니다.)
@@ -110,18 +110,18 @@ x = 20;
 
 ```js
 // camelCase
-var myName;
+var myName
 
 // snake_case
-var my_name;
+var my_name
 
 // PascalCase
-var MyName;
+var MyName
 
 // typeHungarianCase
-var strMyName; // 타입과 식별자를 함께 사용
-var $element = document.getElementById("element"); // DOM 노드 앞에 $
-var observable$ = fromEvent(document, "click"); // RxJS Observable
+var strMyName // 타입과 식별자를 함께 사용
+var $element = document.getElementById("element") // DOM 노드 앞에 $
+var observable$ = fromEvent(document, "click") // RxJS Observable
 ```
 
 일반적으로 변수나 함수의 이름에는 `camelCase`를, 생성자 함수나 클래스 이름에는 `PascalCase`를 사용합니다.

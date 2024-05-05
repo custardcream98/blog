@@ -1,2 +1,2 @@
-export * from "./PostThumbnail";
-export * from "./PostActions";
+export * from "./PostThumbnail"
+export * from "./PostActions"

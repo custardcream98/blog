@@ -1,5 +1,5 @@
 // eslint-disable-next-line @typescript-eslint/no-var-requires
-const { transformGroupSelector } = require("utility-class-components");
+const { transformGroupSelector } = require("utility-class-components")
 
 /** @type {import('tailwindcss').Config} */
 module.exports = {
@@ -7,12 +7,12 @@ module.exports = {
     files: ["./src/**/*.{js,ts,jsx,tsx}", "./_posts/**/*.{md,mdx}"],
     transform: {
       ts: (code) => {
-        code = transformGroupSelector(code);
-        return code;
+        code = transformGroupSelector(code)
+        return code
       },
       tsx: (code) => {
-        code = transformGroupSelector(code);
-        return code;
+        code = transformGroupSelector(code)
+        return code
       },
     },
   },
@@ -142,4 +142,4 @@ module.exports = {
       pc: "800px",
     },
   },
-};
+}

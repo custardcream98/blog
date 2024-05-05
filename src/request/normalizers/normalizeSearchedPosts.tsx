@@ -1,6 +1,6 @@
-import type { SearchedPostCardData, SearchedPostCardDataRaw } from "src/types/searchedPosts";
+import type { SearchedPostCardData, SearchedPostCardDataRaw } from "src/types/searchedPosts"
 
-import { utld } from "utility-class-components";
+import { utld } from "utility-class-components"
 
 const ResultsMark = utld.mark`
   bg-accent-light
@@ -9,7 +9,7 @@ const ResultsMark = utld.mark`
   px-[0.1875rem]
 
   rounded-[0.3125rem]
-`;
+`
 
 export const normalizeSearchedPosts = (
   searchedPosts: SearchedPostCardDataRaw[],
@@ -28,7 +28,7 @@ export const normalizeSearchedPosts = (
             </>
           ),
           ...res,
-        };
+        }
       }
 
       return {
@@ -42,9 +42,9 @@ export const normalizeSearchedPosts = (
         title,
         titleNode: title,
         ...res,
-      };
+      }
     },
-  );
+  )
 
-  return searchedResultCardsData;
-};
+  return searchedResultCardsData
+}

@@ -25,9 +25,9 @@ category: ["Next.js", "Firebase"]
 Heroku에서 `puppeteer`로 생성한 스크린샷 이미지를 `Firebase Store`로 업로드할 때 `Buffer` 타입을 어떻게 Storage 서버로 전달할 지 고민하는 부분에서 조금 헤맸습니다.
 
 ```ts
-const image = await page.screenshot({ type: "webp" });
+const image = await page.screenshot({ type: "webp" })
 
-await uploadBytes(storageRef, (image as Buffer).buffer);
+await uploadBytes(storageRef, (image as Buffer).buffer)
 ```
 
 `Firebase`에서 제공하는 `uploadBytes()`함수는 `ArrayBuffer`를 업로드 할 수 있습니다. 따라서 `Buffer`를 `ArrayBuffer`로 바꾸면 됩니다.

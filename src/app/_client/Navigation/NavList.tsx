@@ -1,19 +1,19 @@
-import { LinkDecorated } from "src/components";
+import { LinkDecorated } from "src/components"
 
-import { parseUrl } from "next/dist/shared/lib/router/utils/parse-url";
-import { usePathname } from "next/navigation";
-import { useMemo } from "react";
-import { utld } from "utility-class-components";
+import { parseUrl } from "next/dist/shared/lib/router/utils/parse-url"
+import { usePathname } from "next/navigation"
+import { useMemo } from "react"
+import { utld } from "utility-class-components"
 
 type NavItemProps = React.PropsWithChildren<{
-  href: string;
-}>;
+  href: string
+}>
 
 function NavItem({ href, children }: NavItemProps) {
-  const currentPathname = usePathname();
-  const pathname = useMemo(() => parseUrl(href).pathname, [href]);
+  const currentPathname = usePathname()
+  const pathname = useMemo(() => parseUrl(href).pathname, [href])
 
-  const isActive = currentPathname === pathname;
+  const isActive = currentPathname === pathname
 
   return (
     <NavItemLi>
@@ -21,7 +21,7 @@ function NavItem({ href, children }: NavItemProps) {
         {children}
       </NavItemLinkDecorated>
     </NavItemLi>
-  );
+  )
 }
 
 const Nav = utld.ul`
@@ -37,10 +37,10 @@ const Nav = utld.ul`
     gap-2
     mr-2
   )
-`;
+`
 
 const NavItemLinkDecorated = utld(LinkDecorated)<{
-  $isActive: boolean;
+  $isActive: boolean
 }>`
   text-[1rem]
 
@@ -50,13 +50,13 @@ const NavItemLinkDecorated = utld(LinkDecorated)<{
     $isActive
       ? "text-default-light dark:text-default-dark"
       : "text-default-sub-light dark:text-default-sub-dark"}
-`;
+`
 
 const NavItemLi = utld.li`
   flex
   items-center
-`;
+`
 
 export const NavList = Object.assign(Nav, {
   Item: NavItem,
-});
+})

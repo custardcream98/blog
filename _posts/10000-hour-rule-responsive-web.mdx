@@ -913,16 +913,16 @@ JS에서 `.activated` 클래스를 부여하거나 삭제해 애니메이션을 
  * @param {string} classNames
  * @returns {HTMLCollectionOf<Element>} 요소 Collection
  */
-const getByClass = (classNames) => document.getElementsByClassName(classNames);
+const getByClass = (classNames) => document.getElementsByClassName(classNames)
 
-const $ruleForm = getByClass("rule-form-js")[0];
-const $inputTarget = getByClass("rule-form__input-target-js")[0];
-const $inputHours = getByClass("rule-form__input-hours-js")[0];
-const $resultTarget = getByClass("result__target-js")[0];
-const $resultDays = getByClass("result__days-js")[0];
-const $shareBtn = getByClass("share-link-js")[0];
-const $modalOpenerBtn = getByClass("cheerup-modal__opener-js")[0];
-const $modalWrapper = getByClass("cheerup-modal__wrapper-js")[0];
+const $ruleForm = getByClass("rule-form-js")[0]
+const $inputTarget = getByClass("rule-form__input-target-js")[0]
+const $inputHours = getByClass("rule-form__input-hours-js")[0]
+const $resultTarget = getByClass("result__target-js")[0]
+const $resultDays = getByClass("result__days-js")[0]
+const $shareBtn = getByClass("share-link-js")[0]
+const $modalOpenerBtn = getByClass("cheerup-modal__opener-js")[0]
+const $modalWrapper = getByClass("cheerup-modal__wrapper-js")[0]
 ```
 
 지금 보니까 너무 부끄러운 코드인데,,, 우선 멘토님 피드백을 보겠습니다.
@@ -948,39 +948,39 @@ const $modalWrapper = getByClass("cheerup-modal__wrapper-js")[0];
  * @param {string} selector
  * @returns {Element}
  */
-const getBySelector = (selector) => document.querySelector(selector);
+const getBySelector = (selector) => document.querySelector(selector)
 
-const $ruleForm = getBySelector(".rule-form-js");
-const $inputTarget = getBySelector(".rule-form__input-target-js");
-const $inputHours = getBySelector(".rule-form__input-hours-js");
-const $resultTarget = getBySelector(".result__target-js");
-const $resultDays = getBySelector(".result__days-js");
-const $shareBtn = getBySelector(".share-link-js");
-const $modalOpenerBtn = getBySelector(".cheerup-modal__opener-js");
-const $modalWrapper = getBySelector(".cheerup-modal__wrapper-js");
+const $ruleForm = getBySelector(".rule-form-js")
+const $inputTarget = getBySelector(".rule-form__input-target-js")
+const $inputHours = getBySelector(".rule-form__input-hours-js")
+const $resultTarget = getBySelector(".result__target-js")
+const $resultDays = getBySelector(".result__days-js")
+const $shareBtn = getBySelector(".share-link-js")
+const $modalOpenerBtn = getBySelector(".cheerup-modal__opener-js")
+const $modalWrapper = getBySelector(".cheerup-modal__wrapper-js")
 ```
 
 ## EventListener
 
 ```js
-$ruleForm.addEventListener("submit", getAndShowResults);
-$shareBtn.addEventListener("click", copyShareLink);
-$modalOpenerBtn.addEventListener("click", openModal);
-$modalWrapper.addEventListener("click", closeModal);
+$ruleForm.addEventListener("submit", getAndShowResults)
+$shareBtn.addEventListener("click", copyShareLink)
+$modalOpenerBtn.addEventListener("click", openModal)
+$modalWrapper.addEventListener("click", closeModal)
 
-$modalWrapper.addEventListener("wheel", preventScroll, { passive: false });
+$modalWrapper.addEventListener("wheel", preventScroll, { passive: false })
 $modalWrapper.addEventListener("touchmove", preventScroll, {
   passive: false,
-});
+})
 
 /**
  * modal 배경 스크롤을 방지하기 위한 함수
  * @param {Event} event
  */
 function preventScroll(event) {
-  event.preventDefault();
-  event.stopPropagation();
-  return false;
+  event.preventDefault()
+  event.stopPropagation()
+  return false
 }
 ```
 
@@ -997,8 +997,8 @@ function preventScroll(event) {
  * @param {SubmitEvent} event
  */
 function getAndShowResults(event) {
-  const targetVal = $inputTarget.value;
-  const hoursVal = parseFloat($inputHours.value);
+  const targetVal = $inputTarget.value
+  const hoursVal = parseFloat($inputHours.value)
   // 각 입력값을 불러옵니다.
   // 시간은 float으로 형변환합니다.
 
@@ -1006,14 +1006,14 @@ function getAndShowResults(event) {
   // 각 값에 대해 JS에서 추가로 검사할 필요는 없습니다.
 
   // 결과가 들어갈 곳을 채웁니다.
-  $resultTarget.textContent = targetVal;
-  $resultDays.textContent = calDaysForTarget(hoursVal);
+  $resultTarget.textContent = targetVal
+  $resultDays.textContent = calDaysForTarget(hoursVal)
 
   // 결과로 자동 스크롤
-  $resultTarget.scrollIntoView({ behavior: "smooth" });
+  $resultTarget.scrollIntoView({ behavior: "smooth" })
 
   // default action의 작동을 막습니다.
-  event.preventDefault();
+  event.preventDefault()
 }
 
 /**
@@ -1022,7 +1022,7 @@ function getAndShowResults(event) {
  * @return {string} 1만 시간까지 걸리는 일 수
  */
 function calDaysForTarget(hoursPerDay) {
-  return Math.round(10000 / hoursPerDay).toString();
+  return Math.round(10000 / hoursPerDay).toString()
 }
 ```
 
@@ -1084,12 +1084,12 @@ function calDaysForTarget(hoursPerDay) {
  * @param {Element} element
  */
 function toggleActivation(element) {
-  const state = element.classList.contains("activated");
-  const classToRemove = state ? "activated" : "deactivated";
-  const classToAdd = state ? "deactivated" : "activated";
+  const state = element.classList.contains("activated")
+  const classToRemove = state ? "activated" : "deactivated"
+  const classToAdd = state ? "deactivated" : "activated"
 
-  element.classList.remove(classToRemove);
-  element.classList.add(classToAdd);
+  element.classList.remove(classToRemove)
+  element.classList.add(classToAdd)
 }
 
 /**
@@ -1098,32 +1098,32 @@ function toggleActivation(element) {
  * @param {SubmitEvent} event
  */
 function getAndShowResults(event) {
-  const targetVal = $inputTarget.value;
-  const hoursVal = parseFloat($inputHours.value);
+  const targetVal = $inputTarget.value
+  const hoursVal = parseFloat($inputHours.value)
   // 각 입력값을 불러옵니다.
   // 시간은 float으로 형변환합니다.
 
   /* 유효성 검사 */
   if (targetVal === "" || hoursVal === NaN) {
-    return;
+    return
   }
 
   // 결과가 들어갈 곳을 채웁니다.
-  $resultTarget.textContent = targetVal;
-  $resultDays.textContent = calDaysForTarget(hoursVal);
+  $resultTarget.textContent = targetVal
+  $resultDays.textContent = calDaysForTarget(hoursVal)
 
   // 가려져 있던 결과 section을 보여줍니다.
-  if ($resultSection.classList.contains("deactivated")) toggleActivation($resultSection);
+  if ($resultSection.classList.contains("deactivated")) toggleActivation($resultSection)
 
   // 결과로 자동 스크롤
-  $resultTarget.scrollIntoView({ behavior: "smooth" });
+  $resultTarget.scrollIntoView({ behavior: "smooth" })
 
   // input의 입력값을 초기화합니다.
-  $inputTarget.value = "";
-  $inputHours.value = "";
+  $inputTarget.value = ""
+  $inputHours.value = ""
 
   // default action의 작동을 막습니다.
-  event.preventDefault();
+  event.preventDefault()
 }
 ```
 
@@ -1138,10 +1138,10 @@ function getAndShowResults(event) {
  * 모달 창을 열거나 닫는 함수
  * @returns {none}
  */
-const toggleModalActivation = () => toggleActivation($modalWrapper);
+const toggleModalActivation = () => toggleActivation($modalWrapper)
 
-$modalOpenerBtn.addEventListener("click", toggleModalActivation);
-$modalWrapper.addEventListener("click", toggleModalActivation);
+$modalOpenerBtn.addEventListener("click", toggleModalActivation)
+$modalWrapper.addEventListener("click", toggleModalActivation)
 ```
 
 앞서 수정한 코드에 이어서 수정한 내용입니다.
@@ -1162,12 +1162,12 @@ $modalWrapper.addEventListener("click", toggleModalActivation);
  */
 async function copyShareLink(event) {
   // event를 일으킨 요소에서 data attribute를 통해 복사할 링크를 가져옵니다.
-  const link = event.target.dataset.copiedlink;
+  const link = event.target.dataset.copiedlink
 
   // writeText 메소드는 비동기적으로 작동합니다.
-  await navigator.clipboard.writeText(link);
+  await navigator.clipboard.writeText(link)
 
-  window.alert("🙌 링크가 복사됐습니다 🙌\n친구에게 공유해보세요 😁👍");
+  window.alert("🙌 링크가 복사됐습니다 🙌\n친구에게 공유해보세요 😁👍")
 }
 ```
 

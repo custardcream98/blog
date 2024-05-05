@@ -30,41 +30,41 @@ category: ["React.js", "Next.js"]
 ```ts
 // cache/cache.ts
 
-import fs from "fs";
-import { JSDOM } from "jsdom";
+import fs from "fs"
+import { JSDOM } from "jsdom"
 
-import { markdownToHtmlForCache } from "../lib/utils/markdownToHtml";
-import { getAllPosts } from "../lib/utils/posts";
-import { CachePost } from "./type";
+import { markdownToHtmlForCache } from "../lib/utils/markdownToHtml"
+import { getAllPosts } from "../lib/utils/posts"
+import { CachePost } from "./type"
 
-const postsData = getAllPosts(["slug", "title", "content"]);
+const postsData = getAllPosts(["slug", "title", "content"])
 
-(async () => {
+;(async () => {
   const postsCache: CachePost[] = await Promise.all(
     postsData.map(async ({ slug, title, content }) => {
-      const cacheHTML = await markdownToHtmlForCache(content);
-      const { document } = new JSDOM(cacheHTML).window;
-      const elements = document.querySelectorAll("h1, h2, h3, h4, h5, h6, p, ol, ul");
+      const cacheHTML = await markdownToHtmlForCache(content)
+      const { document } = new JSDOM(cacheHTML).window
+      const elements = document.querySelectorAll("h1, h2, h3, h4, h5, h6, p, ol, ul")
 
-      let extractedContent = "";
+      let extractedContent = ""
 
-      elements.forEach((ele) => (extractedContent += ele.textContent));
+      elements.forEach((ele) => (extractedContent += ele.textContent))
 
       return {
         slug,
         title,
         content: extractedContent,
-      };
+      }
     }),
-  );
+  )
 
   fs.writeFile(`./cache/cache.json`, JSON.stringify(postsCache), (error) => {
     if (error) {
-      console.error(error);
+      console.error(error)
     }
-    console.log("캐시 생성 완료");
-  });
-})();
+    console.log("캐시 생성 완료")
+  })
+})()
 ```
 
 우선 파일 내용을 읽어와야 합니다. 저는 이미 마크다운을 읽고 HTML로 파싱하는 함수를 만들어 쓰고 있었으므로, 해당 함수들을 활용해 HTML로 파싱된 내용을 불러옵니다.
@@ -129,18 +129,18 @@ Fuzzy 알고리즘은 이를 구현할 때 쓸 수 있는 방법중 하나입니
 // utils/fuzzy.ts
 
 // 태곤님의 createFuzzyMatcher()
-const regex = createFuzzyMatcher(query);
+const regex = createFuzzyMatcher(query)
 
 const findFuzzyPostData = (option: "title" | "content", regex: RegExp) => {
-  let results = [];
+  let results = []
   for (const postData of CacheDB) {
-    const match = postData[option].match(regex);
+    const match = postData[option].match(regex)
 
     if (!match || match.index === undefined || match[0].length > 50) {
-      continue;
+      continue
     }
 
-    const index = match.index;
+    const index = match.index
 
     results.push({
       ...postData,
@@ -151,20 +151,20 @@ const findFuzzyPostData = (option: "title" | "content", regex: RegExp) => {
       ],
       matchLength: match[0].length,
       matchedOne: option,
-    });
+    })
   }
 
-  return results;
-};
+  return results
+}
 
 export default function getFuzzyPostData(query: string) {
-  const regex = createFuzzyMatcher(query);
+  const regex = createFuzzyMatcher(query)
   const result = [
     ...findFuzzyPostData("title", regex),
     ...findFuzzyPostData("content", regex),
-  ].sort((post1, post2) => post2.matchLength - post1.matchLength);
+  ].sort((post1, post2) => post2.matchLength - post1.matchLength)
 
-  return result;
+  return result
 }
 ```
 
@@ -176,16 +176,16 @@ export default function getFuzzyPostData(query: string) {
 
 ```ts
 export default async function searchAPI(req: NextApiRequest, res: NextApiResponse) {
-  const { q } = req.query;
+  const { q } = req.query
 
   if (req.method !== "GET" || typeof q !== "string") {
-    return res.status(400).json({ message: "잘못된 요청입니다." });
+    return res.status(400).json({ message: "잘못된 요청입니다." })
   }
-  console.log(q);
+  console.log(q)
 
-  const results = q ? getFuzzyPostData(q) : [];
+  const results = q ? getFuzzyPostData(q) : []
 
-  return res.status(200).setHeader("Content-Type", "application/json").json(results);
+  return res.status(200).setHeader("Content-Type", "application/json").json(results)
 }
 ```
 

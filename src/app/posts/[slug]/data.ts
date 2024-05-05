@@ -1,27 +1,27 @@
-import "server-only";
+import "server-only"
 
-import { getAllPosts } from "src/app/data";
-import { getDoc, getPostDocRef, setDoc } from "src/lib/firebase/_utils";
-import { encodeToPercentString } from "src/utils";
+import { getAllPosts } from "src/app/data"
+import { getDoc, getPostDocRef, setDoc } from "src/lib/firebase/_utils"
+import { encodeToPercentString } from "src/utils"
 
 export interface PrevNextPosts {
-  prevTitle?: string;
-  prevSlug?: string;
-  prevExcerpt?: string;
-  nextTitle?: string;
-  nextSlug?: string;
-  nextExcerpt?: string;
+  prevTitle?: string
+  prevSlug?: string
+  prevExcerpt?: string
+  nextTitle?: string
+  nextSlug?: string
+  nextExcerpt?: string
 }
 
 export const getPrevNextPosts = async (slug: string): Promise<PrevNextPosts> => {
-  const posts = await getAllPosts(["title", "slug", "excerpt"]);
+  const posts = await getAllPosts(["title", "slug", "excerpt"])
 
-  const index = posts.findIndex((p) => p.slug === slug);
-  const isLatestPost = index === 0;
-  const isOldestPost = posts.length - 1 === index;
+  const index = posts.findIndex((p) => p.slug === slug)
+  const isLatestPost = index === 0
+  const isOldestPost = posts.length - 1 === index
 
-  const prevPost = !isOldestPost ? posts[index + 1] : null;
-  const nextPost = !isLatestPost ? posts[index - 1] : null;
+  const prevPost = !isOldestPost ? posts[index + 1] : null
+  const nextPost = !isLatestPost ? posts[index - 1] : null
 
   return {
     nextExcerpt: nextPost?.excerpt,
@@ -30,18 +30,18 @@ export const getPrevNextPosts = async (slug: string): Promise<PrevNextPosts> => 
     prevExcerpt: prevPost?.excerpt,
     prevSlug: prevPost?.slug,
     prevTitle: prevPost?.title,
-  };
-};
+  }
+}
 
-const DEFAULT_POST_DOC_DATA = { likes: 0, views: [] };
+const DEFAULT_POST_DOC_DATA = { likes: 0, views: [] }
 
 export const createPostDoc = async (title: string) => {
-  const encodedTitle = encodeToPercentString(title);
+  const encodedTitle = encodeToPercentString(title)
 
-  const postDocRef = getPostDocRef(encodedTitle);
-  const { exists: isDocExists } = await getDoc(postDocRef);
+  const postDocRef = getPostDocRef(encodedTitle)
+  const { exists: isDocExists } = await getDoc(postDocRef)
 
   if (!isDocExists) {
-    await setDoc(postDocRef, DEFAULT_POST_DOC_DATA);
+    await setDoc(postDocRef, DEFAULT_POST_DOC_DATA)
   }
-};
+}

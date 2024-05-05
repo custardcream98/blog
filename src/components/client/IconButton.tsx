@@ -1,40 +1,40 @@
-import { useIsMobile } from "src/hook";
+import { useIsMobile } from "src/hook"
 
-import { createElement, forwardRef } from "react";
-import { IconType } from "react-icons";
-import { utld } from "utility-class-components";
+import { createElement, forwardRef } from "react"
+import { IconType } from "react-icons"
+import { utld } from "utility-class-components"
 
-type ClickableComponents = "a" | "button";
+type ClickableComponents = "a" | "button"
 
 type IconButtonProps = {
-  icon: IconType;
-  title: string;
-  size?: string | number;
-  buttonAs?: ClickableComponents;
-  href?: string;
-  target?: string;
-} & React.ComponentPropsWithoutRef<"button">;
+  icon: IconType
+  title: string
+  size?: string | number
+  buttonAs?: ClickableComponents
+  href?: string
+  target?: string
+} & React.ComponentPropsWithoutRef<"button">
 
 export const IconButton = forwardRef<HTMLButtonElement, IconButtonProps>(
   function IconButtonForwardRef({ icon, title, size = "1rem", buttonAs, ...props }, ref) {
-    const Icon = icon;
+    const Icon = icon
 
     return createElement(
       buttonAs ?? "button",
       { "aria-label": title, ref, ...props },
       <Icon className='text-default-light dark:text-default-dark' size={size} title={title} />,
-    );
+    )
   },
-);
+)
 
 export const ResponsiveIconButton = forwardRef<
   HTMLButtonElement,
   Omit<IconButtonProps, "size"> & {
-    mobileSize: string;
-    desktopSize: string;
+    mobileSize: string
+    desktopSize: string
   }
 >(function ResponsiveIconButtonForwardRef({ icon, title, mobileSize, desktopSize, ...props }, ref) {
-  const isMobile = useIsMobile();
+  const isMobile = useIsMobile()
 
   return (
     <StyledResponsiveIconButton
@@ -45,12 +45,12 @@ export const ResponsiveIconButton = forwardRef<
       icon={icon}
       {...props}
     />
-  );
-});
+  )
+})
 
 const StyledResponsiveIconButton = utld(IconButton)`
   mobile:(
     w-[1.375rem]
     h-[1.375rem]
   )
-`;
+`

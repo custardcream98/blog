@@ -4,11 +4,11 @@ import {
   CommentsSectionForm,
   CommentsSectionTitle,
   CommentsSuspense,
-} from "../../_client";
+} from "../../_client"
 
 type CommentsProps = {
-  postTitle: string;
-};
+  postTitle: string
+}
 
 export function Comments({ postTitle }: CommentsProps) {
   return (
@@ -19,5 +19,5 @@ export function Comments({ postTitle }: CommentsProps) {
         <CommentsList />
       </CommentsSuspense>
     </CommentsSection>
-  );
+  )
 }

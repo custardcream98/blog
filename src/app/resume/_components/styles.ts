@@ -1,6 +1,6 @@
-import { Container as DefaultContainer } from "src/components";
+import { Container as DefaultContainer } from "src/components"
 
-import { ud, utld } from "utility-class-components";
+import { ud, utld } from "utility-class-components"
 
 export const Container = utld(DefaultContainer)`
   !items-start
@@ -11,7 +11,7 @@ export const Container = utld(DefaultContainer)`
     pt-0
     pb-[2em]
   )
-`;
+`
 
 export const Section = utld.section`
   my-[4em]
@@ -23,7 +23,7 @@ export const Section = utld.section`
     my-[1.5em]
     text-resume-text-print
   )
-`;
+`
 
 export const SectionTitle = utld.h3`
   text-[1.7em]
@@ -34,9 +34,9 @@ export const SectionTitle = utld.h3`
     text-[1.3em]
     mb-[1.3em]
   )
-`;
+`
 
-export const SectionItemList = utld.ul``;
+export const SectionItemList = utld.ul``
 
 export const SectionItem = utld.li`
   mt-[3em]
@@ -48,14 +48,14 @@ export const SectionItem = utld.li`
     relative
     break-inside-avoid
   )
-`;
+`
 
 export const SectionItemBordered = utld(SectionItem)`
   pl-[1em]
   border-l
   border-solid
   border-[#ccc]
-`;
+`
 
 export const ProjectTitle = utld.h4`
   text-[1.3em]
@@ -69,7 +69,7 @@ export const ProjectTitle = utld.h4`
     text-[1.1em]
     mb-[0.25em]
   )
-`;
+`
 
 export const dimTextStyle = ud`
   text-[0.9em]
@@ -79,7 +79,7 @@ export const dimTextStyle = ud`
 
   text-resume-text-dim-light
   dark:text-resume-text-dim-dark
-`;
+`
 
 export const ProjectTeam = utld.span`
   ${dimTextStyle}
@@ -88,7 +88,7 @@ export const ProjectTeam = utld.span`
   mb-[0.2em]
   break-keep
   leading-[1.2]
-`;
+`
 
 export const ProjectShortDescription = utld.p`
   mt-[1.5em]
@@ -105,7 +105,7 @@ export const ProjectShortDescription = utld.p`
   )
 
   print:mt-[0.75em]
-`;
+`
 
 export const ProjectDescriptionList = utld.ul`
   mt-[1em]
@@ -131,7 +131,7 @@ export const ProjectDescriptionList = utld.ul`
     text-resume-text-strong-light
     dark:text-resume-text-strong-dark
   )
-`;
+`
 
 export const ProjectDescriptionItem = utld.li`
   my-[0.4em]
@@ -153,7 +153,7 @@ export const ProjectDescriptionItem = utld.li`
     text-resume-text-strong-light
     dark:text-resume-text-strong-dark
   )
-`;
+`
 
 export const ProjectStacks = utld.ul`
   flex
@@ -167,7 +167,7 @@ export const ProjectStacks = utld.ul`
     mt-[0.8em]
     [ul+&]:mt-0
   )
-`;
+`
 
 export const ProjectStack = utld.li`
   font-light
@@ -183,4 +183,4 @@ export const ProjectStack = utld.li`
 
   bg-resume-badge-bg-light
   dark:bg-resume-badge-bg-dark
-`;
+`

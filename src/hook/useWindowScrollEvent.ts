@@ -1,22 +1,22 @@
-import { useEffect } from "react";
+import { useEffect } from "react"
 
 export const useWindowScrollEvent = ({
   onScroll,
   disabled = false,
 }: {
-  onScroll: (ev: Event | TouchEvent) => any;
-  disabled?: boolean;
+  onScroll: (ev: Event | TouchEvent) => any
+  disabled?: boolean
 }) => {
   useEffect(() => {
     if (disabled) {
-      return;
+      return
     }
 
-    window.addEventListener("touchmove", onScroll);
-    window.addEventListener("scroll", onScroll);
+    window.addEventListener("touchmove", onScroll)
+    window.addEventListener("scroll", onScroll)
     return () => {
-      window.removeEventListener("touchmove", onScroll);
-      window.removeEventListener("scroll", onScroll);
-    };
-  }, [onScroll, disabled]);
-};
+      window.removeEventListener("touchmove", onScroll)
+      window.removeEventListener("scroll", onScroll)
+    }
+  }, [onScroll, disabled])
+}

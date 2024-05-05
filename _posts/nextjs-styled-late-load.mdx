@@ -30,27 +30,27 @@ npm i -D babel-plugin-styled-components
 기존에 이미 만들어뒀던 `_document.tsx`에 아래 코드를 추가합니다. `_document.tsx`는 `<html>`태그나 `<body>`태그에 접근할 수 있도록 해줍니다. 번들러로 처음 만들었을 때는 없는데, 커스텀이 필요할 때 생성합니다. 저는 Google Fonts를 로드하는 부분 때문에 미리 만들어뒀었습니다.
 
 ```tsx
-import { ServerStyleSheet } from "styled-components";
+import { ServerStyleSheet } from "styled-components"
 
 MyDocument.getInitialProps = async (ctx: DocumentContext) => {
-  const sheet = new ServerStyleSheet();
-  const originalRenderPage = ctx.renderPage;
+  const sheet = new ServerStyleSheet()
+  const originalRenderPage = ctx.renderPage
 
   try {
     ctx.renderPage = () =>
       originalRenderPage({
         enhanceApp: (App) => (props) => sheet.collectStyles(<App {...props} />),
-      });
+      })
 
-    const initialProps = await Document.getInitialProps(ctx);
+    const initialProps = await Document.getInitialProps(ctx)
     return {
       ...initialProps,
       styles: [initialProps.styles, sheet.getStyleElement()],
-    };
+    }
   } finally {
-    sheet.seal();
+    sheet.seal()
   }
-};
+}
 ```
 
 `MyDocument` 클래스(`Document`를 상속하는 클래스입니다)의 `getInitialProps()` 함수를 정의합니다. 여기에서 `ServerStyleSheet`를 생성해 모든 페이지에 대해 스타일을 모으고, `<App>`에 prop으로 넘겨주는 식입니다.
@@ -70,7 +70,7 @@ export default class MyDocument extends Document {
           <NextScript />
         </body>
       </Html>
-    );
+    )
   }
 }
 ```

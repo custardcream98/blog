@@ -11,17 +11,17 @@ series: "Troubleshooting"
 # 코드
 
 ```ts
-const RESTAURANT_TYPES = ["한식", "일식", "양식"] as const;
+const RESTAURANT_TYPES = ["한식", "일식", "양식"] as const
 
-type RestaurantType = (typeof RESTAURANT_TYPES)[number];
+type RestaurantType = (typeof RESTAURANT_TYPES)[number]
 
 const isRestaurantType = (str: unknown): str is RestaurantType => {
   if (typeof str !== "string") {
-    return false;
+    return false
   }
 
-  return RESTAURANT_TYPES.includes(str);
-};
+  return RESTAURANT_TYPES.includes(str)
+}
 ```
 
 `RESTAURANT_TYPES`라는 `ReadonlyArray`를 선언하고, 이를 활용해 `RestaurantType`을 선언했습니다.
@@ -37,7 +37,7 @@ const isRestaurantType = (str: unknown): str is RestaurantType => {
 ```ts
 // es2016에 정의돼 있는 타입
 interface Array<T> {
-  includes(searchElement: T, fromIndex?: number): boolean;
+  includes(searchElement: T, fromIndex?: number): boolean
 }
 ```
 
@@ -59,7 +59,7 @@ interface Array<T> {
 // @types/array.d.ts
 
 interface Array {
-  includes(searchElement: any, fromIndex?: number): boolean;
+  includes(searchElement: any, fromIndex?: number): boolean
 }
 ```
 
@@ -74,17 +74,17 @@ interface Array {
 조금 더 안전하게 처리하려면 결국엔 아래같은 방법이 그나마 유효할겁니다.
 
 ```ts
-const RESTAURANT_TYPES = ["한식", "일식", "양식"] as const;
+const RESTAURANT_TYPES = ["한식", "일식", "양식"] as const
 
-type RestaurantType = (typeof RESTAURANT_TYPES)[number];
+type RestaurantType = (typeof RESTAURANT_TYPES)[number]
 
 const isRestaurantType = (str: unknown): str is RestaurantType => {
   if (typeof str !== "string") {
-    return false;
+    return false
   }
 
-  return RESTAURANT_TYPES.includes(str as RestaurantType);
-};
+  return RESTAURANT_TYPES.includes(str as RestaurantType)
+}
 ```
 
 다만 이렇게 할 경우 `str`이 `"한식" | "일식" | "양식"` 타입이 맞다고 단언하고 진행된 결과이므로 논리적으로는 옳지 않은 선택이라는 생각이 듭니다. 위 코드 만으로는 `str`이 `string` 타입이라는 점만 보장됩니다. (물론 결과적으로 얻고자 하는건 얻을 수 있긴 하지만요.)
@@ -94,17 +94,17 @@ const isRestaurantType = (str: unknown): str is RestaurantType => {
 그래서 나온 결과는 아래와 같습니다.
 
 ```ts
-const RESTAURANT_TYPES = ["한식", "일식", "양식"] as const;
+const RESTAURANT_TYPES = ["한식", "일식", "양식"] as const
 
-type RestaurantType = (typeof RESTAURANT_TYPES)[number];
+type RestaurantType = (typeof RESTAURANT_TYPES)[number]
 
 const isRestaurantType = (str: unknown): str is RestaurantType => {
   if (typeof str !== "string") {
-    return false;
+    return false
   }
 
-  return (RESTAURANT_TYPES as ReadonlyArray<string>).includes(str);
-};
+  return (RESTAURANT_TYPES as ReadonlyArray<string>).includes(str)
+}
 ```
 
 타입 단언이 들어가있긴 하지만, `RESTAURANT_TYPES`는 `ReadonlyArray<string>` 타입이라는 점은 확실하게 보장된 사실이므로 논리적 비약이 없는 코드입니다.

@@ -1,18 +1,18 @@
-import { CategoryBadges, DateSpan, LinkDecorated } from "src/components";
-import { type Categoires } from "src/constants/categoryTheme";
-import type { CoverImage } from "src/types/post";
+import { CategoryBadges, DateSpan, LinkDecorated } from "src/components"
+import { type Categoires } from "src/constants/categoryTheme"
+import type { CoverImage } from "src/types/post"
 
-import { LikesCounter, PostActions, PostThumbnail, ViewsCounter } from "../../_client";
+import { LikesCounter, PostActions, PostThumbnail, ViewsCounter } from "../../_client"
 
-import { utld } from "utility-class-components";
+import { utld } from "utility-class-components"
 
 type PostTitleProps = {
-  coverImage: CoverImage;
-  title: string;
-  category?: Categoires[];
-  date: string;
-  series?: string;
-};
+  coverImage: CoverImage
+  title: string
+  category?: Categoires[]
+  date: string
+  series?: string
+}
 
 export function PostTitle({ coverImage, title, category, date, series }: PostTitleProps) {
   return (
@@ -43,7 +43,7 @@ export function PostTitle({ coverImage, title, category, date, series }: PostTit
 
       <PostThumbnail title={title} {...coverImage} />
     </>
-  );
+  )
 }
 
 const Container = utld.div`
@@ -58,7 +58,7 @@ const Container = utld.div`
   border-b-[3px]
   border-solid
   border-[#25282c]
-`;
+`
 
 const Title = utld.h2`
   text-default-light
@@ -69,7 +69,7 @@ const Title = utld.h2`
   leading-[1.25]
 
   break-keep
-`;
+`
 
 const SeriesName = utld(LinkDecorated)`
   w-fit
@@ -77,7 +77,7 @@ const SeriesName = utld(LinkDecorated)`
   text-[1rem]
   text-default-sub-light
   dark:text-default-sub-dark
-`;
+`
 
 const DateActionWrapper = utld.div`
   flex
@@ -85,21 +85,21 @@ const DateActionWrapper = utld.div`
   justify-between
 
   mt-[1.1rem]
-`;
+`
 
 const DateSpanforTitle = utld(DateSpan)`
   !font-normal
   !mt-0
-`;
+`
 
 const BadgeViewsLikesCounterContainer = utld.div`
   flex
   justify-between
   items-center
-`;
+`
 
 const ViewsLikesCounterContainer = utld.div`
   flex
   items-center
   h-[3.643rem]
-`;
+`

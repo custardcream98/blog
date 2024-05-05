@@ -1,4 +1,4 @@
-import { ud } from "utility-class-components";
+import { ud } from "utility-class-components"
 
 export const cssOutlineOnFocus = ud`
   focus:outline
@@ -9,4 +9,4 @@ export const cssOutlineOnFocus = ud`
     outline-offset-2
     rounded-[0.25rem]
   )
-`;
+`

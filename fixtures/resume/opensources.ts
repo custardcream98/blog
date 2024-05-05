@@ -1,4 +1,4 @@
-import { Project } from "src/types/resume";
+import { Project } from "src/types/resume"
 
 // 글자 색 검은색으로!!
 
@@ -59,6 +59,6 @@ const opensources: Project[] = [
     stacks: [],
     title: "TanStack/query",
   },
-];
+]
 
-export default opensources;
+export default opensources

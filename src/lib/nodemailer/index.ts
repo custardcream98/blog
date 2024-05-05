@@ -1,4 +1,4 @@
-import nodemailer from "nodemailer";
+import nodemailer from "nodemailer"
 
 const TRANSPORT = {
   auth: {
@@ -9,44 +9,44 @@ const TRANSPORT = {
   port: parseInt(process.env.EMAIL_PORT as string, 10),
   secure: true,
   service: process.env.EMAIL_SERVICE,
-} as const;
+} as const
 
 type Email = {
-  receiverEmailAddress: string;
-  title: string;
-  content: string;
-};
+  receiverEmailAddress: string
+  title: string
+  content: string
+}
 export const sendMail = async ({ receiverEmailAddress, title, content }: Email) => {
-  const transporter = nodemailer.createTransport(TRANSPORT);
+  const transporter = nodemailer.createTransport(TRANSPORT)
 
   await new Promise((resolve, reject) => {
     transporter.verify((error, success) => {
       if (error) {
-        console.log(error);
-        reject(error);
+        console.log(error)
+        reject(error)
       } else {
-        console.log("nodemailer transporter 유효함");
-        resolve(success);
+        console.log("nodemailer transporter 유효함")
+        resolve(success)
       }
-    });
-  });
+    })
+  })
 
   const message = {
     from: process.env.EMAIL_SENDER,
     html: content,
     subject: title,
     to: receiverEmailAddress,
-  };
+  }
 
   await new Promise((resolve, reject) => {
     transporter.sendMail(message, function (error, info) {
       if (error) {
-        console.log(error);
-        reject(error);
+        console.log(error)
+        reject(error)
       } else {
-        console.log("Email sent: " + info.response);
-        resolve(info);
+        console.log("Email sent: " + info.response)
+        resolve(info)
       }
-    });
-  });
-};
+    })
+  })
+}

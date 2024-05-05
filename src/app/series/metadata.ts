@@ -1,14 +1,14 @@
-import { sharedMetadata } from "../sharedMetadata";
+import { sharedMetadata } from "../sharedMetadata"
 
-import { getSeries } from "./data";
+import { getSeries } from "./data"
 
-import { type Metadata } from "next";
+import { type Metadata } from "next"
 
-const META_TITLE = "Series";
+const META_TITLE = "Series"
 
 export const generateMetadata = async (): Promise<Metadata> => {
-  const SERIES_COUNT_MAP = await getSeries();
-  const SERIES = Object.keys(SERIES_COUNT_MAP);
+  const SERIES_COUNT_MAP = await getSeries()
+  const SERIES = Object.keys(SERIES_COUNT_MAP)
 
   return {
     ...sharedMetadata,
@@ -25,5 +25,5 @@ export const generateMetadata = async (): Promise<Metadata> => {
       ...sharedMetadata.twitter,
       title: META_TITLE,
     },
-  };
-};
+  }
+}

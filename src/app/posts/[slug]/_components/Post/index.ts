@@ -1,2 +1,2 @@
-export * from "./PrevNextPost";
-export * from "./PostTitle";
+export * from "./PrevNextPost"
+export * from "./PostTitle"

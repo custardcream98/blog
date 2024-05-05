@@ -1,12 +1,12 @@
-import { sharedMetadata } from "src/app/sharedMetadata";
+import { sharedMetadata } from "src/app/sharedMetadata"
 
-import { SeriesPageParams } from "./types";
+import { SeriesPageParams } from "./types"
 
-import { type Metadata } from "next";
+import { type Metadata } from "next"
 
 export const generateMetadata = ({ params: { series } }: SeriesPageParams): Metadata => {
-  const parsedSeries = decodeURIComponent(series);
-  const META_TITLE = `시리즈 - ${parsedSeries}`;
+  const parsedSeries = decodeURIComponent(series)
+  const META_TITLE = `시리즈 - ${parsedSeries}`
 
   return {
     ...sharedMetadata,
@@ -22,5 +22,5 @@ export const generateMetadata = ({ params: { series } }: SeriesPageParams): Meta
       ...sharedMetadata.twitter,
       title: META_TITLE,
     },
-  };
-};
+  }
+}

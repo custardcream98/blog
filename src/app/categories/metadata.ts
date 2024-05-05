@@ -1,10 +1,10 @@
-import { sharedMetadata } from "../sharedMetadata";
+import { sharedMetadata } from "../sharedMetadata"
 
-import { CATEGORIES } from "./data";
+import { CATEGORIES } from "./data"
 
-import { type Metadata } from "next";
+import { type Metadata } from "next"
 
-const META_TITLE = "Categories";
+const META_TITLE = "Categories"
 
 export const metadata: Metadata = {
   ...sharedMetadata,
@@ -21,4 +21,4 @@ export const metadata: Metadata = {
     ...sharedMetadata.twitter,
     title: META_TITLE,
   },
-};
+}

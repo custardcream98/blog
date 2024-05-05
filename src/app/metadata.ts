@@ -1,6 +1,6 @@
-import { METADATA_DEFAULT_TITLE, METADATA_DEFAULT_URL, sharedMetadata } from "./sharedMetadata";
+import { METADATA_DEFAULT_TITLE, METADATA_DEFAULT_URL, sharedMetadata } from "./sharedMetadata"
 
-import { type Metadata } from "next";
+import { type Metadata } from "next"
 
 export const metadata: Metadata = {
   ...sharedMetadata,
@@ -32,4 +32,4 @@ export const metadata: Metadata = {
       template: `${METADATA_DEFAULT_TITLE}: %s`,
     },
   },
-};
+}

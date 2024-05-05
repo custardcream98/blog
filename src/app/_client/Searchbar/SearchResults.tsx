@@ -2,9 +2,9 @@ import SearchResultCard, {
   SearchResultCardContent,
   SearchResultCardDate,
   SearchResultCardTitle,
-} from "./SearchResultCard";
+} from "./SearchResultCard"
 
-import { utld } from "utility-class-components";
+import { utld } from "utility-class-components"
 
 const ResultsWrapper = utld.ol`
   absolute
@@ -17,11 +17,11 @@ const ResultsWrapper = utld.ol`
 
   px-[0.9375rem]
   rounded-lg
-`;
+`
 
 export const SearchResults = Object.assign(ResultsWrapper, {
   Item: SearchResultCard,
   ItemContent: SearchResultCardContent,
   ItemDate: SearchResultCardDate,
   ItemTitle: SearchResultCardTitle,
-});
+})

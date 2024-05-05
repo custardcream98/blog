@@ -1,9 +1,9 @@
-import type { PropsWithClassName } from "src/types/props";
-import type { ResumeSectionData } from "src/types/resume";
+import type { PropsWithClassName } from "src/types/props"
+import type { ResumeSectionData } from "src/types/resume"
 
-import { ResumeLink, ResumeLinksList, ResumePeriod, S } from "..";
+import { ResumeLink, ResumeLinksList, ResumePeriod, S } from ".."
 
-import { SectionItemDescriptionList, SectionItemP, SectionItemTitle } from "./styles";
+import { SectionItemDescriptionList, SectionItemP, SectionItemTitle } from "./styles"
 
 function Section({
   sectionTitle,
@@ -15,13 +15,13 @@ function Section({
       <S.SectionTitle>{sectionTitle}</S.SectionTitle>
       <S.SectionItemList>{children}</S.SectionItemList>
     </S.Section>
-  );
+  )
 }
 
 function Item({ title, links, period, descriptions, points }: ResumeSectionData) {
-  const isDescriptionsExist = !!descriptions && descriptions.length !== 0;
-  const isPointsExist = !!points && points.length !== 0;
-  const isLinksExist = !!links && links.length !== 0;
+  const isDescriptionsExist = !!descriptions && descriptions.length !== 0
+  const isPointsExist = !!points && points.length !== 0
+  const isLinksExist = !!links && links.length !== 0
 
   return (
     <S.SectionItem>
@@ -49,11 +49,11 @@ function Item({ title, links, period, descriptions, points }: ResumeSectionData)
         </ResumeLinksList>
       )}
     </S.SectionItem>
-  );
+  )
 }
 
 const ResumeSection = Object.assign(Section, {
   Item,
-});
+})
 
-export default ResumeSection;
+export default ResumeSection

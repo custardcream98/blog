@@ -1,4 +1,4 @@
-import { ResumeSectionData } from "src/types/resume";
+import { ResumeSectionData } from "src/types/resume"
 
 const educations: ResumeSectionData[] = [
   {
@@ -60,6 +60,6 @@ const educations: ResumeSectionData[] = [
     },
     title: "서울시립대학교 공간정보공학과 학부과정",
   },
-];
+]
 
-export default educations;
+export default educations

@@ -1,7 +1,7 @@
-import { safeNumber } from "src/utils";
+import { safeNumber } from "src/utils"
 
-import NextImage from "next/image";
-import { ComponentProps } from "react";
+import NextImage from "next/image"
+import { ComponentProps } from "react"
 
 export function MDXImage({
   src,
@@ -11,9 +11,9 @@ export function MDXImage({
   ref,
   ...props
 }: Omit<ComponentProps<"img">, "placeholder">) {
-  const resolvedRef = typeof ref === "string" ? null : ref;
-  const resolvedWidth = width === undefined ? undefined : safeNumber(width);
-  const resolvedHeight = height === undefined ? undefined : safeNumber(height);
+  const resolvedRef = typeof ref === "string" ? null : ref
+  const resolvedWidth = width === undefined ? undefined : safeNumber(width)
+  const resolvedHeight = height === undefined ? undefined : safeNumber(height)
 
   return src ? (
     <NextImage
@@ -26,5 +26,5 @@ export function MDXImage({
       quality={100}
       {...props}
     />
-  ) : null;
+  ) : null
 }

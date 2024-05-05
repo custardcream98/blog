@@ -1,2 +1,2 @@
-export * from "./LikesCounter";
-export * from "./ViewsCounter";
+export * from "./LikesCounter"
+export * from "./ViewsCounter"

@@ -1,8 +1,8 @@
 import {
   Poppins,
   // Source_Code_Pro
-} from "next/font/google";
-import localFont from "next/font/local";
+} from "next/font/google"
+import localFont from "next/font/local"
 
 // export const FONT_SOURCE_CODE_PRO = Source_Code_Pro({
 //   display: "swap",
@@ -20,7 +20,7 @@ export const FONT_POPPINS = Poppins({
   subsets: ["latin"],
   variable: "--font-poppins",
   weight: ["500", "600"],
-});
+})
 
 // export const FONT_NOTO_SANS_KR = localFont({
 //   adjustFontFallback: "Arial",
@@ -70,7 +70,7 @@ export const FONT_NOTO_SERIF_KR = localFont({
     },
   ],
   variable: "--font-noto-serif-kr",
-});
+})
 
 export const FONT_PRETENDARD = localFont({
   adjustFontFallback: "Arial",
@@ -94,7 +94,7 @@ export const FONT_PRETENDARD = localFont({
   src: "./Pretendard/PretendardVariable.woff2",
   style: "normal",
   variable: "--font-pretendard",
-});
+})
 
 export const FONT_D2_CODING = localFont({
   adjustFontFallback: "Arial",
@@ -103,4 +103,4 @@ export const FONT_D2_CODING = localFont({
   preload: true,
   src: "./D2Coding/d2coding-subset.woff2",
   variable: "--font-d2coding",
-});
+})

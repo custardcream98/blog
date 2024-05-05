@@ -1,4 +1,4 @@
-import { Rings } from "react-loader-spinner";
+import { Rings } from "react-loader-spinner"
 
 export function LoadingIndicator() {
   return (
@@ -7,5 +7,5 @@ export function LoadingIndicator() {
       width={24}
       height={24}
     />
-  );
+  )
 }

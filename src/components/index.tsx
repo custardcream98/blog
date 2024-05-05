@@ -1,5 +1,5 @@
-import Link from "next/link";
-import { utld } from "utility-class-components";
+import Link from "next/link"
+import { utld } from "utility-class-components"
 
 export const Container = utld.section`
   mx-auto
@@ -12,7 +12,7 @@ export const Container = utld.section`
   items-center
 
   [&>h2:target]:scroll-mt-[5rem]
-`;
+`
 
 export const Title = utld.h2`
   my-8
@@ -21,7 +21,7 @@ export const Title = utld.h2`
   
   text-[1.4rem]
   font-bold
-`;
+`
 
 export const LinkDecorated = utld(Link)`
   break-keep
@@ -31,9 +31,9 @@ export const LinkDecorated = utld(Link)`
   duration-200
 
   hover:(text-accent-light dark:text-accent-dark)
-`;
+`
 
-export * from "./CategoryBadges";
-export * from "./DateSpan";
-export * from "./LogoTitleSpan";
-export * from "./QuerySuspense";
+export * from "./CategoryBadges"
+export * from "./DateSpan"
+export * from "./LogoTitleSpan"
+export * from "./QuerySuspense"

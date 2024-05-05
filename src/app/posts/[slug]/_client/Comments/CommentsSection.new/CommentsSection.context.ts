@@ -1,8 +1,8 @@
-import React, { useContext } from "react";
+import React, { useContext } from "react"
 
-export const CommentPostTitleContext = React.createContext("");
+export const CommentPostTitleContext = React.createContext("")
 
 export const useCommentPostTitleContext = () => {
-  const postTitle = useContext(CommentPostTitleContext);
-  return postTitle;
-};
+  const postTitle = useContext(CommentPostTitleContext)
+  return postTitle
+}

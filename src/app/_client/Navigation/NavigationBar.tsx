@@ -1,38 +1,38 @@
-import { POSTS_SECTION_ID } from "src/app/constants";
-import { LogoTitleSpan } from "src/components";
-import { IconButton, ResponsiveIconButton } from "src/components/client";
-import { LogoSvg } from "src/components/Svgs";
+import { POSTS_SECTION_ID } from "src/app/constants"
+import { LogoTitleSpan } from "src/components"
+import { IconButton, ResponsiveIconButton } from "src/components/client"
+import { LogoSvg } from "src/components/Svgs"
 
-import { DarkmodeSwitch } from "./DarkmodeSwitch";
-import { NavList } from "./NavList";
+import { DarkmodeSwitch } from "./DarkmodeSwitch"
+import { NavList } from "./NavList"
 
-import Link from "next/link";
-import React, { useEffect } from "react";
-import { HiSearch } from "react-icons/hi";
-import { RxHamburgerMenu } from "react-icons/rx";
-import { utld } from "utility-class-components";
+import Link from "next/link"
+import React, { useEffect } from "react"
+import { HiSearch } from "react-icons/hi"
+import { RxHamburgerMenu } from "react-icons/rx"
+import { utld } from "utility-class-components"
 
 function NavigationBarPresentational({
   onSearchButtonClick,
   isMobileHamburgerMenuOpened,
   onMobileHamburgerMenuButtonClick,
 }: {
-  onSearchButtonClick: React.MouseEventHandler<HTMLButtonElement>;
-  isMobileHamburgerMenuOpened: boolean;
-  onMobileHamburgerMenuButtonClick: () => void;
+  onSearchButtonClick: React.MouseEventHandler<HTMLButtonElement>
+  isMobileHamburgerMenuOpened: boolean
+  onMobileHamburgerMenuButtonClick: () => void
 }) {
   /**
    * Prevent scrolling when the mobile hamburger menu is opened.
    */
   useEffect(() => {
-    if (!isMobileHamburgerMenuOpened) return;
+    if (!isMobileHamburgerMenuOpened) return
 
-    document.body.style.overflow = "hidden";
+    document.body.style.overflow = "hidden"
 
     return () => {
-      document.body.style.overflow = "";
-    };
-  }, [isMobileHamburgerMenuOpened, onMobileHamburgerMenuButtonClick]);
+      document.body.style.overflow = ""
+    }
+  }, [isMobileHamburgerMenuOpened, onMobileHamburgerMenuButtonClick])
 
   return (
     <Nav>
@@ -72,10 +72,10 @@ function NavigationBarPresentational({
         <DarkmodeSwitch className='absolute right-[-2.1875rem] mobile:relative mobile:right-0 mobile:order-2' />
       </MenuWrapper>
     </Nav>
-  );
+  )
 }
 
-export const NavigationBar = React.memo(NavigationBarPresentational);
+export const NavigationBar = React.memo(NavigationBarPresentational)
 
 const Nav = utld.nav`
   relative
@@ -88,16 +88,16 @@ const Nav = utld.nav`
   items-center
 
   mobile:w-[90vw]
-`;
+`
 
 const H1 = utld.h1`
   flex
   justify-start
   items-center
-`;
+`
 
 const MenuWrapper = utld.div<{
-  $isMenuOpened: boolean;
+  $isMenuOpened: boolean
 }>`
   flex
 
@@ -128,4 +128,4 @@ const MenuWrapper = utld.div<{
   )
 
   ${(props) => (props.$isMenuOpened ? "mobile:-translate-x-full" : "mobile:translate-x-0")}
-`;
+`

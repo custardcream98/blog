@@ -1,18 +1,18 @@
 export interface CommentData {
-  id: string;
-  comment: string;
-  createdAt: number;
-  password: string;
-  username: string;
+  id: string
+  comment: string
+  createdAt: number
+  password: string
+  username: string
 }
 
-export type CommentDataWithoutPassword = Omit<CommentData, "password">;
+export type CommentDataWithoutPassword = Omit<CommentData, "password">
 
 export type CommentDataContextType = Omit<CommentData, "id"> & {
-  commentId: string;
-};
+  commentId: string
+}
 
-type ICommentDataProps = Omit<CommentDataContextType, "password">;
+type ICommentDataProps = Omit<CommentDataContextType, "password">
 
 enum CommentEditState {
   DEFAULT,
@@ -24,9 +24,9 @@ enum CommentEditState {
 }
 
 interface ICommentEditorStateContext {
-  editState: CommentEditState;
-  changeStateTo: (state: CommentEditState) => void;
+  editState: CommentEditState
+  changeStateTo: (state: CommentEditState) => void
 }
 
-export { CommentEditState };
-export type { ICommentDataProps, ICommentEditorStateContext };
+export { CommentEditState }
+export type { ICommentDataProps, ICommentEditorStateContext }

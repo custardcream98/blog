@@ -1,17 +1,17 @@
-import { Button } from "src/components/client";
+import { Button } from "src/components/client"
 
-import { useCommentForm } from "../_hooks";
+import { useCommentForm } from "../_hooks"
 
-import { useCallback, useState } from "react";
-import { ud, utld } from "utility-class-components";
+import { useCallback, useState } from "react"
+import { ud, utld } from "utility-class-components"
 
 type CommentFormProps = {
-  height?: string;
-  isForEdit?: boolean;
-};
+  height?: string
+  isForEdit?: boolean
+}
 export default function CommentForm({ height, isForEdit = false }: CommentFormProps) {
   const { usernameRef, passwordRef, commentRef, isLoading, handleCommentSubmit } =
-    useCommentForm(isForEdit);
+    useCommentForm(isForEdit)
 
   return (
     <StyledForm
@@ -72,23 +72,23 @@ export default function CommentForm({ height, isForEdit = false }: CommentFormPr
         {isForEdit ? "수정하기" : "댓글 달기"}
       </SubmitCommentButton>
     </StyledForm>
-  );
+  )
 }
 
 export function CommentFormWithOpenButton() {
-  const [isFormOpened, setIsFormOpened] = useState(false);
+  const [isFormOpened, setIsFormOpened] = useState(false)
 
-  const openCommentForm = useCallback(() => setIsFormOpened(true), []);
+  const openCommentForm = useCallback(() => setIsFormOpened(true), [])
 
   if (!isFormOpened) {
     return (
       <FormOpenButton type='button' onClick={openCommentForm}>
         댓글을 입력해주세요.
       </FormOpenButton>
-    );
+    )
   }
 
-  return <CommentForm />;
+  return <CommentForm />
 }
 
 const roundedBoxStyle = ud`
@@ -100,7 +100,7 @@ const roundedBoxStyle = ud`
   dark:text-default-dark
 
   rounded-[0.3125rem]
-`;
+`
 
 const StyledForm = utld.form`
   relative
@@ -113,7 +113,7 @@ const StyledForm = utld.form`
   dark:bg-default-sub-dark
 
   ${roundedBoxStyle}
-`;
+`
 
 const FormOpenButton = utld.button`
   w-full
@@ -122,7 +122,7 @@ const FormOpenButton = utld.button`
   font-light
 
   ${roundedBoxStyle}
-`;
+`
 
 const editableStyle = ud`
   p-2
@@ -144,18 +144,18 @@ const editableStyle = ud`
     bg-default-sub-light
     dark:bg-default-sub-dark
   )
-`;
+`
 
 const InputUsername = utld.input`
   w-[calc(50%-0.03125rem)]
   h-[1.875rem]
 
   ${editableStyle}
-`;
+`
 
 const InputPassword = utld(InputUsername)`
   ml-[1px]
-`;
+`
 
 const TextareaContent = utld.textarea`
   block
@@ -171,7 +171,7 @@ const TextareaContent = utld.textarea`
   mobile:text-[0.8rem]
 
   ${editableStyle}
-`;
+`
 
 const SubmitCommentButton = utld(Button)`
   absolute
@@ -180,4 +180,4 @@ const SubmitCommentButton = utld(Button)`
   bottom-[0.3125rem]
 
   text-[0.9rem]
-`;
+`

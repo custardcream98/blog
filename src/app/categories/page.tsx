@@ -1,8 +1,8 @@
-import { CategoryBadges, Container, Title } from "src/components";
+import { CategoryBadges, Container, Title } from "src/components"
 
-import { CATEGORIES } from "./data";
+import { CATEGORIES } from "./data"
 
-export { metadata } from "./metadata";
+export { metadata } from "./metadata"
 
 export default function CategoriesPage() {
   return (
@@ -14,5 +14,5 @@ export default function CategoriesPage() {
         ))}
       </CategoryBadges>
     </Container>
-  );
+  )
 }

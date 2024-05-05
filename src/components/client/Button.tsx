@@ -1,22 +1,22 @@
-import type { ComponentPropsWithoutRef, CSSProperties, MouseEventHandler } from "react";
-import { Rings } from "react-loader-spinner";
-import { utld } from "utility-class-components";
+import type { ComponentPropsWithoutRef, CSSProperties, MouseEventHandler } from "react"
+import { Rings } from "react-loader-spinner"
+import { utld } from "utility-class-components"
 
 type Props = ComponentPropsWithoutRef<"button"> & {
-  width: CSSProperties["width"];
-  height: CSSProperties["height"];
-  isLoading: boolean;
-};
+  width: CSSProperties["width"]
+  height: CSSProperties["height"]
+  isLoading: boolean
+}
 
 export function Button({ children, width, height, isLoading, onClick, ...props }: Props) {
   const handleClick: MouseEventHandler<HTMLButtonElement> = (event) => {
     if (isLoading) {
-      event.preventDefault();
-      return;
+      event.preventDefault()
+      return
     }
 
-    onClick?.(event);
-  };
+    onClick?.(event)
+  }
 
   return (
     <StyledButton
@@ -39,11 +39,11 @@ export function Button({ children, width, height, isLoading, onClick, ...props }
         children
       )}
     </StyledButton>
-  );
+  )
 }
 
 const StyledButton = utld.button<{
-  $isLoading: boolean;
+  $isLoading: boolean
 }>`
   rounded-[5px]
 
@@ -76,4 +76,4 @@ const StyledButton = utld.button<{
   )
 
   ${({ $isLoading }) => $isLoading && "pointer-events-none"}
-`;
+`

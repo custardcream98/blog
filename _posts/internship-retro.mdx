@@ -84,14 +84,14 @@ _개발 능력이 뛰어나고 가진 지식을 나누는 것을 잘 하며, 구
 시니어님의 코드를 보며 감탄했던 부분은 바로 이런 요소들이었습니다. 환경 변수를 로드하는 아주 간단한 코드조차도 시니어님은 항상 방어적으로 작성하셨습니다.
 
 ```js
-const API_KEY = process.env.API_KEY;
+const API_KEY = process.env.API_KEY
 ```
 
 ```js {2-2}
 const getApiKey = () => {
-  return process.env.API_KEY ?? "기본_API_KEY";
-};
-const API_KEY = getApiKey();
+  return process.env.API_KEY ?? "기본_API_KEY"
+}
+const API_KEY = getApiKey()
 ```
 
 위의 두 코드는 같은 동작을 합니다. 그러나, 두번째 코드는 `process.env.API_KEY`가 `undefined`일 경우를 대비해 기본값을 설정해주는 방어적인 코드입니다.
@@ -106,12 +106,12 @@ const API_KEY = getApiKey();
 
 ```ts
 export type StringToIntegerOptions = {
-  base?: number;
-};
+  base?: number
+}
 
 export const stringToInteger = (target: string, options?: StringToIntegerOptions): number => {
-  return parseInt(target, options?.base ?? 10);
-};
+  return parseInt(target, options?.base ?? 10)
+}
 ```
 
 아마 옛날의 저였다면 `StringToIntegerOptions` 타입을 앱의 루트에 위치한 `types` 디렉터리에 넣으려고 했을겁니다. `util-options.ts`라는 파일명을 지어주고 '아 나는 코드를 분리했어!' 하며 만족해했겠죠.

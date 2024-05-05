@@ -1,22 +1,22 @@
 import {
   ClientLogger,
   // ProjectAd
-} from "src/components/client";
-import { FONT_D2_CODING, FONT_POPPINS, FONT_PRETENDARD } from "src/fonts";
+} from "src/components/client"
+import { FONT_D2_CODING, FONT_POPPINS, FONT_PRETENDARD } from "src/fonts"
 
-import { Navigation } from "./_client";
-import { Footer } from "./_components";
-import { RootProvider } from "./_providers";
+import { Navigation } from "./_client"
+import { Footer } from "./_components"
+import { RootProvider } from "./_providers"
 
-import "./style.css";
+import "./style.css"
 
-import { SpeedInsights } from "@vercel/speed-insights/next";
-import Script from "next/script";
+import { SpeedInsights } from "@vercel/speed-insights/next"
+import Script from "next/script"
 // import DevportImage from "public/static/ad/devport.png";
 // import JarvisLogoImage from "public/static/ad/jarvis-logo.png";
-import { utld } from "utility-class-components";
+import { utld } from "utility-class-components"
 
-export { metadata } from "./metadata";
+export { metadata } from "./metadata"
 
 export default function RootLayout({ children }: React.PropsWithChildren) {
   return (
@@ -75,10 +75,10 @@ export default function RootLayout({ children }: React.PropsWithChildren) {
         <SpeedInsights />
       </Body>
     </html>
-  );
+  )
 }
 
-const FONTS = [FONT_PRETENDARD.variable, FONT_POPPINS.variable, FONT_D2_CODING.variable];
+const FONTS = [FONT_PRETENDARD.variable, FONT_POPPINS.variable, FONT_D2_CODING.variable]
 
 const Body = utld.body`
   font-sans
@@ -93,15 +93,15 @@ const Body = utld.body`
   print:bg-transparent
 
   ${FONTS}
-`;
+`
 
 const Wrapper = utld.div`
   flex
   flex-col
   min-h-[calc(100vh-50px)]
-`;
+`
 
 const Main = utld.main`
   flex-1
   print:mt-[-2rem]
-`;
+`

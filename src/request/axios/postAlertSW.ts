@@ -1,17 +1,17 @@
-import type { AlertSWResponse } from "src/types/alertSW";
+import type { AlertSWResponse } from "src/types/alertSW"
 
-import { nextApi } from "./axios";
+import { nextApi } from "./axios"
 
-import https from "https";
+import https from "https"
 
-const POST_MAIL_URL = "/alert-sw";
+const POST_MAIL_URL = "/alert-sw"
 
 export type PostAlertSWRequestBody = {
-  postTitle: string;
-  username: string;
-  comment: string;
-  linkToPost: string;
-};
+  postTitle: string
+  username: string
+  comment: string
+  linkToPost: string
+}
 export const postAlertSW = async ({
   postTitle,
   username,
@@ -29,7 +29,7 @@ export const postAlertSW = async ({
     {
       httpsAgent: new https.Agent({ keepAlive: true }),
     },
-  );
+  )
 
-  return response.data;
-};
+  return response.data
+}

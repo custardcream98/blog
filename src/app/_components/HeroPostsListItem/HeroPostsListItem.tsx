@@ -1,17 +1,17 @@
-import { dateToString } from "src/utils";
+import { dateToString } from "src/utils"
 
-import Link from "next/link";
-import { utld } from "utility-class-components";
+import Link from "next/link"
+import { utld } from "utility-class-components"
 
 type HeroPostItemProps = {
-  date: string;
-  excerpt: string;
-  slug: string;
-  title: string;
-};
+  date: string
+  excerpt: string
+  slug: string
+  title: string
+}
 
 export function HeroPostItem({ date, excerpt, slug, title }: HeroPostItemProps) {
-  const formattedDate = dateToString(new Date(date));
+  const formattedDate = dateToString(new Date(date))
 
   return (
     <HeroPostItemWrapper key={slug}>
@@ -21,14 +21,14 @@ export function HeroPostItem({ date, excerpt, slug, title }: HeroPostItemProps) 
         <HeroPostExcerpt>{excerpt}</HeroPostExcerpt>
       </HeroPostItemLink>
     </HeroPostItemWrapper>
-  );
+  )
 }
 
 const HeroPostItemWrapper = utld.li`
   w-full
 
   [&+&]:mt-10
-`;
+`
 
 const HeroPostItemLink = utld(Link)`
   block
@@ -37,7 +37,7 @@ const HeroPostItemLink = utld(Link)`
   py-8
 
   [&:hover>strong]:text-accent-light
-`;
+`
 
 const HeroPostItemTime = utld.time`
   order-1
@@ -45,7 +45,7 @@ const HeroPostItemTime = utld.time`
   mobile:text-[0.9rem]
   text-[1rem]
   font-light
-`;
+`
 
 const HeroPostItemTitle = utld.strong`
   order-2
@@ -63,10 +63,10 @@ const HeroPostItemTitle = utld.strong`
     mt-1
     mb-2
   )
-`;
+`
 
 const HeroPostExcerpt = utld.p`
   order-3
 
   font-[300]
-`;
+`

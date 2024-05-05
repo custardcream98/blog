@@ -1,63 +1,63 @@
-import { Button } from "src/components/client";
-import { useEditable } from "src/hook";
-import { useDeletePostCommentMutation, usePostPostCommentPassword } from "src/request";
-import { CommentEditState } from "src/types/comment";
+import { Button } from "src/components/client"
+import { useEditable } from "src/hook"
+import { useDeletePostCommentMutation, usePostPostCommentPassword } from "src/request"
+import { CommentEditState } from "src/types/comment"
 
-import { useCommentPostTitleContext } from "../../../CommentsSection.new";
-import { useCommentDataContext } from "../../context";
-import { useCommentEditorStateSetter } from "../context";
+import { useCommentPostTitleContext } from "../../../CommentsSection.new"
+import { useCommentDataContext } from "../../context"
+import { useCommentEditorStateSetter } from "../context"
 
-import CommentOverlapWrapper from "./CommentOverlapWrapper";
+import CommentOverlapWrapper from "./CommentOverlapWrapper"
 
-import { useIsMutating } from "@tanstack/react-query";
-import { useCallback, useEffect, useState } from "react";
-import { utld } from "utility-class-components";
+import { useIsMutating } from "@tanstack/react-query"
+import { useCallback, useEffect, useState } from "react"
+import { utld } from "utility-class-components"
 
 type Props = {
-  stateTo: CommentEditState;
-};
+  stateTo: CommentEditState
+}
 export default function CheckPasswordState({ stateTo }: Props) {
-  const { changeStateTo } = useCommentEditorStateSetter();
-  const postTitle = useCommentPostTitleContext();
-  const { commentId, initializePassword } = useCommentDataContext();
-  const [errorMessage, setErrorMessage] = useState("");
-  const [isAnimatingShake, setIsAnimatingShake] = useState(false);
+  const { changeStateTo } = useCommentEditorStateSetter()
+  const postTitle = useCommentPostTitleContext()
+  const { commentId, initializePassword } = useCommentDataContext()
+  const [errorMessage, setErrorMessage] = useState("")
+  const [isAnimatingShake, setIsAnimatingShake] = useState(false)
   const handleShakeAnimationStart = useCallback(() => {
-    setIsAnimatingShake(true);
-  }, []);
+    setIsAnimatingShake(true)
+  }, [])
   const handleShakeAnimationEnd = useCallback(() => {
-    setIsAnimatingShake(false);
-  }, []);
+    setIsAnimatingShake(false)
+  }, [])
 
-  const [inputPasswordRef, getPasswordVal, clearPasswordInput] = useEditable<HTMLInputElement>();
+  const [inputPasswordRef, getPasswordVal, clearPasswordInput] = useEditable<HTMLInputElement>()
 
-  const { mutate: mutateDeletePostComment } = useDeletePostCommentMutation();
+  const { mutate: mutateDeletePostComment } = useDeletePostCommentMutation()
 
-  const { mutateAsync: mutatePostPostCommentPassword } = usePostPostCommentPassword();
+  const { mutateAsync: mutatePostPostCommentPassword } = usePostPostCommentPassword()
 
-  const mutationCount = useIsMutating();
-  const isMutating = mutationCount > 0;
+  const mutationCount = useIsMutating()
+  const isMutating = mutationCount > 0
 
   const handleFormSubmit: React.FormEventHandler<HTMLFormElement> = useCallback(
     async (event) => {
-      event.preventDefault();
+      event.preventDefault()
 
-      const inputPasswordValue = getPasswordVal();
+      const inputPasswordValue = getPasswordVal()
 
       if (!inputPasswordValue) {
-        return;
+        return
       }
 
       const { isValid: isPasswordCorrect } = await mutatePostPostCommentPassword({
         commentId,
         password: inputPasswordValue,
         postTitle,
-      });
+      })
 
       if (!isPasswordCorrect) {
-        handleShakeAnimationStart();
-        clearPasswordInput();
-        return setErrorMessage("비밀번호가 틀렸습니다.");
+        handleShakeAnimationStart()
+        clearPasswordInput()
+        return setErrorMessage("비밀번호가 틀렸습니다.")
       }
 
       if (stateTo === CommentEditState.DELETE) {
@@ -65,14 +65,14 @@ export default function CheckPasswordState({ stateTo }: Props) {
           commentId,
           password: inputPasswordValue,
           title: postTitle,
-        });
+        })
 
-        return;
+        return
       }
 
-      initializePassword(inputPasswordValue);
+      initializePassword(inputPasswordValue)
 
-      return changeStateTo(stateTo);
+      return changeStateTo(stateTo)
     },
     [
       getPasswordVal,
@@ -86,15 +86,15 @@ export default function CheckPasswordState({ stateTo }: Props) {
       mutatePostPostCommentPassword,
       initializePassword,
     ],
-  );
+  )
 
   useEffect(() => {
     const timeoutId = setTimeout(() => {
-      inputPasswordRef.current?.focus();
-    }, 200);
+      inputPasswordRef.current?.focus()
+    }, 200)
 
-    return () => clearTimeout(timeoutId);
-  }, [inputPasswordRef]);
+    return () => clearTimeout(timeoutId)
+  }, [inputPasswordRef])
 
   return (
     <CommentOverlapWrapper closer={<CommentOverlapWrapper.CloseButtonWithIcon />}>
@@ -126,22 +126,22 @@ export default function CheckPasswordState({ stateTo }: Props) {
         </InputWrapper>
       </Form>
     </CommentOverlapWrapper>
-  );
+  )
 }
 
 const InputWrapper = utld.div`
   relative
-`;
+`
 
 const Form = utld.form`
   relative
   text-[0.9rem]
-`;
+`
 const Label = utld.label`
   block
 
   mb-[0.4rem]
-`;
+`
 const Input = utld.input`
   rounded-[5px]
 
@@ -156,14 +156,14 @@ const Input = utld.input`
   border
   border-default-light
   dark:border-default-dark
-`;
+`
 
 const SubmitButton = utld(Button)`
   absolute
   left-[12.8125rem]
-`;
+`
 
-type ErrorMessageProps = { $isAnimatingShake: boolean };
+type ErrorMessageProps = { $isAnimatingShake: boolean }
 
 const ErrorMessage = utld.span<ErrorMessageProps>`
   absolute
@@ -174,4 +174,4 @@ const ErrorMessage = utld.span<ErrorMessageProps>`
   text-[0.8rem]
 
   ${({ $isAnimatingShake }) => $isAnimatingShake && "animate-shake"}
-`;
+`

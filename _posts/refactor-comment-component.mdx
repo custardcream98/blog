@@ -39,13 +39,13 @@ series: "Refactoring"
 
 ```tsx
 const Comments = ({ title }: Props) => {
-  const [comments, setComments] = useState<ICommentData[]>([]);
+  const [comments, setComments] = useState<ICommentData[]>([])
 
   useEffect(() => {
-    const unSubscribeComments = getComments(title, setComments);
+    const unSubscribeComments = getComments(title, setComments)
 
-    return () => unSubscribeComments();
-  }, [title]);
+    return () => unSubscribeComments()
+  }, [title])
 
   return (
     <Container>
@@ -57,8 +57,8 @@ const Comments = ({ title }: Props) => {
         )}
       </ol>
     </Container>
-  );
-};
+  )
+}
 ```
 
 댓글 작성, 수정, 삭제시 firebase에서 docRef를 선언하기 위해 포스트 제목을 나타내는 `title: string` 값이 필요합니다. 이는 `Commants` 컴포넌트에서 받아 다시 `CommentForm`과 각 `CommentCard`에 prop으로 전달하고 있습니다.
@@ -73,8 +73,8 @@ const CommentPostTitleContextProvider = ({ children, postTitle }: Props) => {
     <CommentPostTitleContext.Provider value={{ postTitle }}>
       {children}
     </CommentPostTitleContext.Provider>
-  );
-};
+  )
+}
 ```
 
 prop으로 `title`을 받고 이를 context provider로 감싸주는 간단한 컴포넌트입니다. 댓글 컴포넌트를 리팩토링하면서 이렇게 Context API를 여러겹 사용했는데, 그럴 때마다 저는 **provider 역할의 컴포넌트를 따로 선언해서 context 관리를 분리**하고자 했습니다.
@@ -83,19 +83,19 @@ prop으로 `title`을 받고 이를 context provider로 감싸주는 간단한 �
 
 ```tsx
 export const useCommentPostTitleContext = () => {
-  const { postTitle } = useContext(CommentPostTitleContext);
-  return postTitle;
-};
+  const { postTitle } = useContext(CommentPostTitleContext)
+  return postTitle
+}
 ```
 
 ### React TypeScript에서 Children을 가지고 있는 컴포넌트의 타입
 
 ```tsx
-import { PropsWithChildren } from "react";
+import { PropsWithChildren } from "react"
 
 type Props = PropsWithChildren<{
-  postTitle: string;
-}>;
+  postTitle: string
+}>
 ```
 
 `CommentPostTitleContextProvider` 컴포넌트의 `Prop` 타입은 이렇게 선언했습니다. 이런 식으로 `react` 라이브러리에는 타입스크립트에서 유용하게 사용할 수 있는 타입을 다양하게 제공해줍니다. [이 cheet sheet](https://www.saltycrane.com/cheat-sheets/typescript/react/latest/#react)를 참고해주세요.
@@ -119,7 +119,7 @@ export default function Post({ post }: Props) {
         <Comments title={post.title} />
       </PostContainer>
     </>
-  );
+  )
 }
 ```
 
@@ -152,7 +152,7 @@ export default function Post({ post }: Props) {
         </Comments>
       </PostContainer>
     </>
-  );
+  )
 }
 ```
 
@@ -166,16 +166,16 @@ export default function Post({ post }: Props) {
 
 ```ts
 const useComments = (postTitle: string) => {
-  const [comments, setComments] = useState<ICommentData[]>([]);
+  const [comments, setComments] = useState<ICommentData[]>([])
 
   useEffect(() => {
-    const unSubscribeComments = getComments(postTitle, setComments);
+    const unSubscribeComments = getComments(postTitle, setComments)
 
-    return () => unSubscribeComments();
-  }, [postTitle]);
+    return () => unSubscribeComments()
+  }, [postTitle])
 
-  return comments;
-};
+  return comments
+}
 ```
 
 덕분에 자연스럽게 **댓글 데이터를 가지고 오는 로직과, 댓글의 모습을 나타내는 UI를 분리**하는 성과를 얻을 수 있었습니다. 이런 요소 하나 하나가 유지보수성을 높이는 데 큰 도움이 될겁니다.
@@ -227,8 +227,8 @@ const CommentCard = ({ comment, title }: Props) => {
         </>
       )}
     </Container>
-  );
-};
+  )
+}
 ```
 
 실제 코드를 그대로 옮겨오면 너무 끔찍해서 많이 생략했는데도 이정도입니다. 러프하게 설명하면 이런 구조입니다.
@@ -245,23 +245,23 @@ const CommentCard = ({ comment, title }: Props) => {
 
 ```ts
 const onClick = useCallback(async (event: React.MouseEvent<HTMLButtonElement>) => {
-  event.preventDefault();
-  event.stopPropagation();
+  event.preventDefault()
+  event.stopPropagation()
 
   switch (event.currentTarget.name) {
     case "edit":
-      setIsEditing(true);
-      break;
+      setIsEditing(true)
+      break
     case "delete":
-      setIsDeleting(true);
-      break;
+      setIsDeleting(true)
+      break
     case "cancel":
-      setIsEditing(false);
-      setIsPasswordCorrect(false);
-      setIsDeleting(false);
-      setPassword("");
+      setIsEditing(false)
+      setIsPasswordCorrect(false)
+      setIsDeleting(false)
+      setPassword("")
   }
-}, []);
+}, [])
 ```
 
 이 함수 하나만으로 수정, 삭제, 취소의 세가지 로직을 처리하고 있는겁니다. 이런 구조때문에 로직을 파악하고 수정하기 매우 어려웠습니다.
@@ -283,13 +283,13 @@ const onClick = useCallback(async (event: React.MouseEvent<HTMLButtonElement>) =
 
 ```tsx
 const CommentEditorContainer = () => {
-  const editState = useCommentEditState();
-  const State = commentEditorStateChildrenMap[editState];
+  const editState = useCommentEditState()
+  const State = commentEditorStateChildrenMap[editState]
 
-  return <State />;
-};
+  return <State />
+}
 
-export default CommentEditorContainer;
+export default CommentEditorContainer
 ```
 
 우선 현재 상태값을 Context API로 관리하고, 이 context를 `useCommentEditState`라는 커스텀 훅으로 사용합니다. 그리고 이 상태값에 맞는 컴포넌트를 `commentEditorStateChildrenMap`이라는 객체에서 찾아와 렌더링하도록 했습니다.
@@ -300,7 +300,7 @@ export default CommentEditorContainer;
 
 ```tsx
 const commentEditorStateChildrenMap: {
-  [key in CommentEditState]: () => JSX.Element;
+  [key in CommentEditState]: () => JSX.Element
 } = {
   [CommentEditState.DEFAULT]: DefaultState,
   [CommentEditState.OPTION_OPENED]: OptionOpenedState,
@@ -312,7 +312,7 @@ const commentEditorStateChildrenMap: {
   ),
   [CommentEditState.EDIT]: EditState,
   [CommentEditState.DELETE]: () => <></>,
-};
+}
 ```
 
 `CheckPasswordState` 컴포넌트의 재활용을 위해 비밀번호 확인이 수정을 위한 것인지 삭제를 위한 것인지를 나타내는 `stateTo` prop을 넘기도록 설계했습니다. 이제 각 컴포넌트에 수정, 삭제 등의 로직을 분리해 작성할 수 있게 됐습니다.
@@ -321,7 +321,7 @@ const commentEditorStateChildrenMap: {
 
 ```tsx
 const DefaultState = () => {
-  const { getStateSetter } = useCommentEditorStateSetter();
+  const { getStateSetter } = useCommentEditorStateSetter()
 
   return (
     <IconButton
@@ -329,8 +329,8 @@ const DefaultState = () => {
       title='댓글 옵션 보기 버튼입니다.'
       onClick={getStateSetter(CommentEditState.OPTION_OPENED)}
     />
-  );
-};
+  )
+}
 ```
 
 ## 재사용성이 높은 버튼 컴포넌트 개발하기
@@ -347,21 +347,21 @@ const DefaultState = () => {
 
 ```tsx
 type StyleProps = {
-  width: string;
-  height: string;
-  isLoading: boolean;
-};
-type Props = ComponentPropsWithoutRef<"button"> & StyleProps & { isLoading?: boolean };
+  width: string
+  height: string
+  isLoading: boolean
+}
+type Props = ComponentPropsWithoutRef<"button"> & StyleProps & { isLoading?: boolean }
 const Button = ({ children, width, height, isLoading, onClick, ...props }: Props) => {
-  const { subTextColor } = useTheme();
+  const { subTextColor } = useTheme()
   const handleClick: MouseEventHandler<HTMLButtonElement> = (event) => {
     if (isLoading) {
-      event.preventDefault();
-      return;
+      event.preventDefault()
+      return
     }
 
-    onClick?.(event);
-  };
+    onClick?.(event)
+  }
 
   return (
     <StyledButton
@@ -373,8 +373,8 @@ const Button = ({ children, width, height, isLoading, onClick, ...props }: Props
     >
       {isLoading ? <Rings color={subTextColor} width={width} height={width} /> : children}
     </StyledButton>
-  );
-};
+  )
+}
 ```
 
 우선 `button` 요소에 넘길 수 있는 prop을 가져오기 위해 `react` 라이브러리에서 제공하는 `ComponentPropsWithoutRef` 타입을 사용했습니다. 제네릭으로 `"button"`이라는 string을 넘기면 됩니다.
@@ -389,24 +389,24 @@ const Button = ({ children, width, height, isLoading, onClick, ...props }: Props
 
 ```tsx
 type Props = {
-  icon: IconType;
-  title: string;
-  size?: string;
-} & ComponentPropsWithoutRef<"button">;
+  icon: IconType
+  title: string
+  size?: string
+} & ComponentPropsWithoutRef<"button">
 
 const IconButton = forwardRef<HTMLButtonElement, Props>(function IconButtonForwardRef(
   { icon, title, size = "1rem", ...props },
   ref,
 ) {
-  const Icon = icon;
-  const { textColor } = useTheme();
+  const Icon = icon
+  const { textColor } = useTheme()
 
   return (
     <Button ref={ref} {...props}>
       <Icon color={textColor} size={size} title={title} />
     </Button>
-  );
-});
+  )
+})
 ```
 
 이번에는 `ref`가 필요해서 `forwardRef`를 사용했습니다.
@@ -416,11 +416,11 @@ const IconButton = forwardRef<HTMLButtonElement, Props>(function IconButtonForwa
 덕분에 이렇게 사용할 수 있게 됐습니다.
 
 ```tsx
-import { FiMoreVertical } from "react-icons/fi";
+import { FiMoreVertical } from "react-icons/fi"
 
 const Sample = () => {
-  return <IconButton icon={FiMoreVertical} title='SVG 요소 title' onClick={() => {}} />;
-};
+  return <IconButton icon={FiMoreVertical} title='SVG 요소 title' onClick={() => {}} />
+}
 ```
 
 # Wrapup

@@ -58,8 +58,8 @@ npm i firebase
 저는 아래와 같이 `firebase`와 `firestore`를 initialize하는 코드를 추가했습니다.
 
 ```ts
-import { initializeApp } from "firebase/app";
-import { getFirestore } from "firebase/firestore";
+import { initializeApp } from "firebase/app"
+import { getFirestore } from "firebase/firestore"
 
 const firebaseConfig = {
   apiKey: process.env.NEXT_PUBLIC_API_KEY,
@@ -68,11 +68,11 @@ const firebaseConfig = {
   storageBucket: process.env.NEXT_PUBLIC_STORAGE_BUCKET,
   messagingSenderId: process.env.NEXT_PUBLIC_MESSAGING_SENDER_ID,
   appId: process.env.NEXT_PUBLIC_APP_ID,
-};
+}
 
-initializeApp(firebaseConfig);
+initializeApp(firebaseConfig)
 
-export const fireStore = getFirestore();
+export const fireStore = getFirestore()
 ```
 
 `firebaseConfig`에 들어갈 환경변수들은 `.env`로 관리합니다. 추후 Vercel에서 배포할 때 Vercel에 환경변수들을 추가해주면 됩니다. 개발 환경을 위해 로컬에도 `.env`파일을 root 디렉토리에 두었습니다.
@@ -85,14 +85,14 @@ export const fireStore = getFirestore();
 
 ```ts
 const onSubmit = async (event: React.ChangeEvent<HTMLFormElement>) => {
-  const commentCollectionRef = collection(fireStore, COLLECTION_POSTS, title, COLLECTION_COMMENTS);
+  const commentCollectionRef = collection(fireStore, COLLECTION_POSTS, title, COLLECTION_COMMENTS)
   await addDoc(commentCollectionRef, {
     createdAt: Date.now(),
     password,
     comment,
     username,
-  });
-};
+  })
+}
 ```
 
 눈여겨 보실 부분은 `commentCollectionRef`입니다. `collection`, `doc`, `collection`, ... 이 반복돼 `collection reference`를 선언하고, 여기에 추가할 `doc`을 `object`형태로 넘겨주면 됩니다.
@@ -100,9 +100,9 @@ const onSubmit = async (event: React.ChangeEvent<HTMLFormElement>) => {
 삭제나 수정 또한 간단합니다.
 
 ```ts
-const commentDocRef = doc(fireStore, COLLECTION_POSTS, title, COLLECTION_COMMENTS, comment.id);
-await deleteDoc(commentDocRef); // doc 삭제
-await updateDoc(commentDocRef, { comment: commentText }); // doc 수정
+const commentDocRef = doc(fireStore, COLLECTION_POSTS, title, COLLECTION_COMMENTS, comment.id)
+await deleteDoc(commentDocRef) // doc 삭제
+await updateDoc(commentDocRef, { comment: commentText }) // doc 수정
 ```
 
 생성과는 달리 `collection`이 아닌 특정 `doc`에 대한 레퍼런스를 선언하고, `deleteDoc()`, `updateDoc()` 함수를 사용하면 됩니다. `updateDoc()`에서는 수정되는 `data`만 `object`에 넣어주면 됩니다. (기존에 없던 `key`에 대한 데이터여도 `updateDoc()`을 이용해 추가할 수 있습니다.)
@@ -113,24 +113,24 @@ await updateDoc(commentDocRef, { comment: commentText }); // doc 수정
 
 ```ts
 interface ICommentData {
-  id: string;
-  comment: string;
-  createdAt: number;
-  password: string;
-  username: string;
+  id: string
+  comment: string
+  createdAt: number
+  password: string
+  username: string
 }
 
-const [comments, setComments] = useState<ICommentData[]>([]);
+const [comments, setComments] = useState<ICommentData[]>([])
 
 useEffect(() => {
   onSnapshot(collection(fireStore, COLLECTION_POSTS, title, COLLECTION_COMMENTS), (snapshot) => {
-    const commentsArr: ICommentData[] = [];
+    const commentsArr: ICommentData[] = []
     snapshot.docs
       .sort((post1, post2) => (post1.data().createdAt > post2.data().createdAt ? -1 : 1))
-      .map((doc) => commentsArr.push({ ...(doc.data() as ICommentData), id: doc.id }));
-    setComments((_) => [...commentsArr]);
-  });
-}, []);
+      .map((doc) => commentsArr.push({ ...(doc.data() as ICommentData), id: doc.id }))
+    setComments((_) => [...commentsArr])
+  })
+}, [])
 ```
 
 `onSnapshot()` 함수로 실시간 업데이트하길 원하는 `collection`을 지정하면 됩니다. 저는 거기에 더해 댓글을 생성시간순으로 정렬하고, 랜덤으로 생성된 `doc`의 `id`를 추가로 읽어왔습니다.

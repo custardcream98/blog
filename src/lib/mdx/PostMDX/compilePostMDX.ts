@@ -1,15 +1,15 @@
-import { postMDXOptions } from "../options";
+import { postMDXOptions } from "../options"
 
-import { postComponents } from "./components";
+import { postComponents } from "./components"
 
-import { compileMDX, type MDXRemoteProps } from "next-mdx-remote/rsc";
+import { compileMDX, type MDXRemoteProps } from "next-mdx-remote/rsc"
 
 export const compilePostMDX = async (source: MDXRemoteProps["source"]) => {
   const { content } = await compileMDX({
     components: postComponents,
     options: postMDXOptions,
     source,
-  });
+  })
 
-  return content;
-};
+  return content
+}

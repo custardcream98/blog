@@ -1,5 +1,5 @@
-import { type MDXRemoteProps } from "next-mdx-remote/rsc";
-import { utld } from "utility-class-components";
+import { type MDXRemoteProps } from "next-mdx-remote/rsc"
+import { utld } from "utility-class-components"
 
 const Ul = utld.ul`
   mt-[1em]
@@ -20,7 +20,7 @@ const Ul = utld.ul`
     text-resume-accent-light
     dark:text-resume-accent-dark
   )
-`;
+`
 
 const Li = utld.li`
   my-[0.4em]
@@ -31,15 +31,15 @@ const Li = utld.li`
     my-[0.3em]
     ml-[0.2em]
   )
-`;
+`
 
 const Strong = utld.strong`
   text-resume-text-strong-light
   dark:text-resume-text-strong-dark
-`;
+`
 
 export const resumeComponents: MDXRemoteProps["components"] = {
   li: ({ children }) => <Li>{children}</Li>,
   strong: ({ children }) => <Strong>{children}</Strong>,
   ul: ({ children }) => <Ul>{children}</Ul>,
-};
+}

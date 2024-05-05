@@ -1,4 +1,4 @@
-import { Project } from "src/types/resume";
+import { Project } from "src/types/resume"
 
 const projects: Project[] = [
   {
@@ -209,6 +209,6 @@ const projects: Project[] = [
   //   team: "4인 프로젝트 (기여도 40%)",
   //   title: "Snappy",
   // },
-];
+]
 
-export default projects;
+export default projects

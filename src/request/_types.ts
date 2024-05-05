@@ -1,3 +1,3 @@
 export interface NextApiResponse<T> {
-  data: T;
+  data: T
 }

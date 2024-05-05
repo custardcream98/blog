@@ -1,15 +1,15 @@
-import { type PrevNextPosts } from "../../data";
+import { type PrevNextPosts } from "../../data"
 
-import Link from "next/link";
-import { utld } from "utility-class-components";
+import Link from "next/link"
+import { utld } from "utility-class-components"
 
-type PrevNextPostFormationType = "both" | "prev-only" | "next-only";
+type PrevNextPostFormationType = "both" | "prev-only" | "next-only"
 
-type PrevNextPostProps = PrevNextPosts;
+type PrevNextPostProps = PrevNextPosts
 
 export function PrevNextPost({ prevSlug, prevTitle, nextSlug, nextTitle }: PrevNextPostProps) {
   const formation: PrevNextPostFormationType =
-    prevTitle && nextTitle ? "both" : prevTitle ? "prev-only" : "next-only";
+    prevTitle && nextTitle ? "both" : prevTitle ? "prev-only" : "next-only"
 
   return (
     <Container $formation={formation}>
@@ -26,11 +26,11 @@ export function PrevNextPost({ prevSlug, prevTitle, nextSlug, nextTitle }: PrevN
         </LinkWrapper>
       )}
     </Container>
-  );
+  )
 }
 
 const Container = utld.aside<{
-  $formation: PrevNextPostFormationType;
+  $formation: PrevNextPostFormationType
 }>`
   w-full
   mt-24
@@ -44,7 +44,7 @@ const Container = utld.aside<{
   mobile:gap-2
 
   ${({ $formation }) => $formation === "next-only" && "text-right"}
-`;
+`
 
 const LinkWrapper = utld(Link)`
   w-full
@@ -75,4 +75,4 @@ const LinkWrapper = utld(Link)`
     text-accent-light
     dark:text-accent-dark
   )
-`;
+`

@@ -44,12 +44,12 @@ category: ["JavaScript"]
   <body>
     <div id="root">Hello World</div>
     <script>
-      const root = document.getElementById("root");
+      const root = document.getElementById("root")
 
       async function getCoinListData() {
-        const res = await fetch("https://api.coinpaprika.com/v1/coins");
-        const coins = await res.json();
-        return coins;
+        const res = await fetch("https://api.coinpaprika.com/v1/coins")
+        const coins = await res.json()
+        return coins
       }
     </script>
   </body>
@@ -67,24 +67,24 @@ root에 코인 목록을 넣고싶다고 가정해보겠습니다. `<ul>` elemen
 가장 간단한 방법은 그냥 직접 html을 작성해서 innerHTML로 넣어주는거겠죠. 이렇게요!
 
 ```js
-const root = document.getElementById("root");
+const root = document.getElementById("root")
 root.innerHTML = `
   <h1 class='ir'>코인 리스트</h1>
   <ul class='coins-list'></ul>
-`;
+`
 ```
 
 하지만 이렇게 작성하면 코드의 일관성을 유지하기 어렵고, 모듈화를 통한 컴포넌트의 재사용을 할 수 없다는 단점이 있습니다. 때문에 아래의 방법처럼 작성합니다.
 
 ```js
-const coinPageHeader = document.createElement("h1");
-coinPageHeader.setAttribute("class", "ir");
-coinPageHeader.innerText = "코인 리스트";
-root.appendChild(coinPageHeader);
+const coinPageHeader = document.createElement("h1")
+coinPageHeader.setAttribute("class", "ir")
+coinPageHeader.innerText = "코인 리스트"
+root.appendChild(coinPageHeader)
 
-const coinsList = document.createElement("ul");
-coinsList.setAttribute("class", "coins-list");
-root.appendChild(coinsList);
+const coinsList = document.createElement("ul")
+coinsList.setAttribute("class", "coins-list")
+root.appendChild(coinsList)
 ```
 
 추후 css작업을 위한 클래스명을 적절히 부여하며 api를 사용해 10위까지의 코인이 보이는 메인 페이지 코드를 완성하겠습니다.
@@ -112,11 +112,11 @@ css 작업을 하기 전이라 보기 별로지만 코인 이름, 심볼, 순위
 먼저, `router.js`를 아래처럼 작성합니다.
 
 ```js
-import home from "./home.js";
+import home from "./home.js"
 
 export function initialRoute(element) {
-  home(element);
-  window.onpopstate = () => home(element);
+  home(element)
+  window.onpopstate = () => home(element)
 }
 ```
 
@@ -127,124 +127,124 @@ export function initialRoute(element) {
 **home.js**
 
 ```js
-import coinDetail from "./coinDetail.js";
+import coinDetail from "./coinDetail.js"
 
 async function getCoinListData() {
-  const res = await fetch("https://api.coinpaprika.com/v1/coins");
-  const coins = await res.json();
+  const res = await fetch("https://api.coinpaprika.com/v1/coins")
+  const coins = await res.json()
 
-  return coins;
+  return coins
 }
 
 export default function render(rootElement) {
   getCoinListData().then((coinsListData) => {
-    rootElement.innerText = "";
+    rootElement.innerText = ""
 
-    const coinPageHeader = document.createElement("h1");
-    coinPageHeader.setAttribute("class", "ir");
-    coinPageHeader.innerText = "코인 리스트";
-    rootElement.appendChild(coinPageHeader);
+    const coinPageHeader = document.createElement("h1")
+    coinPageHeader.setAttribute("class", "ir")
+    coinPageHeader.innerText = "코인 리스트"
+    rootElement.appendChild(coinPageHeader)
 
-    const coinsList = document.createElement("ul");
-    coinsList.setAttribute("class", "coins-list");
+    const coinsList = document.createElement("ul")
+    coinsList.setAttribute("class", "coins-list")
 
     coinsListData.slice(0, 10).forEach((coin) => {
-      const coinListItem = document.createElement("li");
-      coinListItem.setAttribute("class", "coin__list");
+      const coinListItem = document.createElement("li")
+      coinListItem.setAttribute("class", "coin__list")
 
-      const coinCard = document.createElement("div");
-      coinCard.setAttribute("class", "coin__card");
-      const titleContainer = document.createElement("div");
-      titleContainer.setAttribute("class", "coin__title__container");
-      const rankContainer = document.createElement("div");
-      rankContainer.setAttribute("class", "coin__rank__container");
-      const title = document.createElement("span");
-      title.setAttribute("class", "coin__title");
-      const symbol = document.createElement("span");
-      symbol.setAttribute("class", "coin__symbol");
-      const rank = document.createElement("span");
-      rank.setAttribute("class", "coin__rank");
+      const coinCard = document.createElement("div")
+      coinCard.setAttribute("class", "coin__card")
+      const titleContainer = document.createElement("div")
+      titleContainer.setAttribute("class", "coin__title__container")
+      const rankContainer = document.createElement("div")
+      rankContainer.setAttribute("class", "coin__rank__container")
+      const title = document.createElement("span")
+      title.setAttribute("class", "coin__title")
+      const symbol = document.createElement("span")
+      symbol.setAttribute("class", "coin__symbol")
+      const rank = document.createElement("span")
+      rank.setAttribute("class", "coin__rank")
 
-      titleContainer.appendChild(title);
-      titleContainer.appendChild(symbol);
-      rankContainer.appendChild(rank);
+      titleContainer.appendChild(title)
+      titleContainer.appendChild(symbol)
+      rankContainer.appendChild(rank)
 
-      coinCard.appendChild(titleContainer);
-      coinCard.appendChild(rankContainer);
+      coinCard.appendChild(titleContainer)
+      coinCard.appendChild(rankContainer)
 
-      coinListItem.appendChild(coinCard);
+      coinListItem.appendChild(coinCard)
 
-      coinsList.appendChild(coinListItem);
+      coinsList.appendChild(coinListItem)
 
-      title.innerText = coin.name;
-      symbol.innerText = coin.symbol;
-      rank.innerText = coin.rank;
+      title.innerText = coin.name
+      symbol.innerText = coin.symbol
+      rank.innerText = coin.rank
 
       coinCard.addEventListener("click", () => {
         window.history.pushState(
           {},
           `/coins/${coin.id}`,
           window.location.origin + `/coins/${coin.id}`,
-        );
+        )
 
-        coinDetail(rootElement, coin.id);
-      });
-    });
+        coinDetail(rootElement, coin.id)
+      })
+    })
 
-    rootElement.appendChild(coinsList);
-  });
+    rootElement.appendChild(coinsList)
+  })
 }
 ```
 
 **coinDetail.js**
 
 ```js
-import home from "./home.js";
+import home from "./home.js"
 
 async function getCoinData(coinId) {
-  const res = await fetch(`https://api.coinpaprika.com/v1/tickers/${coinId}`);
-  const coins = await res.json();
+  const res = await fetch(`https://api.coinpaprika.com/v1/tickers/${coinId}`)
+  const coins = await res.json()
 
-  return coins;
+  return coins
 }
 
 export default function render(rootElement, coinId) {
   getCoinData(coinId).then((coinData) => {
-    rootElement.innerText = "";
-    rootElement.innerHtml = "";
+    rootElement.innerText = ""
+    rootElement.innerHtml = ""
 
-    const backBtn = document.createElement("button");
-    backBtn.setAttribute("class", "back");
-    backBtn.innerText = "홈으로";
+    const backBtn = document.createElement("button")
+    backBtn.setAttribute("class", "back")
+    backBtn.innerText = "홈으로"
 
     backBtn.onclick = () => {
-      window.history.pushState({}, `/`, window.location.origin);
-      home(rootElement);
-    };
+      window.history.pushState({}, `/`, window.location.origin)
+      home(rootElement)
+    }
 
-    const coinCard = document.createElement("div");
-    coinCard.setAttribute("class", "detail__card");
-    const titleContainer = document.createElement("div");
-    titleContainer.setAttribute("class", "detail__title__container");
-    const priceContainer = document.createElement("div");
-    priceContainer.setAttribute("class", "detail__price__container");
-    const title = document.createElement("span");
-    title.setAttribute("class", "detail__title");
-    const price = document.createElement("span");
-    price.setAttribute("class", "detail__price");
+    const coinCard = document.createElement("div")
+    coinCard.setAttribute("class", "detail__card")
+    const titleContainer = document.createElement("div")
+    titleContainer.setAttribute("class", "detail__title__container")
+    const priceContainer = document.createElement("div")
+    priceContainer.setAttribute("class", "detail__price__container")
+    const title = document.createElement("span")
+    title.setAttribute("class", "detail__title")
+    const price = document.createElement("span")
+    price.setAttribute("class", "detail__price")
 
-    titleContainer.appendChild(title);
-    priceContainer.appendChild(price);
+    titleContainer.appendChild(title)
+    priceContainer.appendChild(price)
 
-    coinCard.appendChild(titleContainer);
-    coinCard.appendChild(priceContainer);
+    coinCard.appendChild(titleContainer)
+    coinCard.appendChild(priceContainer)
 
-    rootElement.appendChild(backBtn);
-    rootElement.appendChild(coinCard);
+    rootElement.appendChild(backBtn)
+    rootElement.appendChild(coinCard)
 
-    title.innerText = coinData.name;
-    price.innerText = coinData.quotes.USD.price.toFixed(2) + " USD";
-  });
+    title.innerText = coinData.name
+    price.innerText = coinData.quotes.USD.price.toFixed(2) + " USD"
+  })
 }
 ```
 

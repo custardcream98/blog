@@ -1,1 +1,1 @@
-export type DateYYMM = `${number}-${number}`;
+export type DateYYMM = `${number}-${number}`

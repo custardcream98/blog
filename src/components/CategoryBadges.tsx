@@ -1,7 +1,7 @@
-import categoryTheme, { type Categoires } from "src/constants/categoryTheme";
+import categoryTheme, { type Categoires } from "src/constants/categoryTheme"
 
-import Link from "next/link";
-import { utld } from "utility-class-components";
+import Link from "next/link"
+import { utld } from "utility-class-components"
 
 const StyledLink = utld(Link)`
   block
@@ -18,7 +18,7 @@ const StyledLink = utld(Link)`
   border-solid
 
   flex-nowrap
-`;
+`
 
 const CategoryBadgesWrapper = utld.ul`
   flex
@@ -26,14 +26,14 @@ const CategoryBadgesWrapper = utld.ul`
 
   mx-[-0.3rem]
   my-[0.7rem]
-`;
+`
 
 type Props = {
-  category: Categoires;
-};
+  category: Categoires
+}
 
 function Badge({ category }: Props) {
-  const style = categoryTheme[category];
+  const style = categoryTheme[category]
 
   return (
     <li>
@@ -46,7 +46,7 @@ function Badge({ category }: Props) {
         {category}
       </StyledLink>
     </li>
-  );
+  )
 }
 
-export const CategoryBadges = Object.assign(CategoryBadgesWrapper, { Badge });
+export const CategoryBadges = Object.assign(CategoryBadgesWrapper, { Badge })

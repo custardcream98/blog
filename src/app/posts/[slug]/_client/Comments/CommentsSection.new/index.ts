@@ -1,2 +1,2 @@
-export * from "./CommentsSection";
-export * from "./CommentsSection.context";
+export * from "./CommentsSection"
+export * from "./CommentsSection.context"

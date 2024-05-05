@@ -28,9 +28,9 @@ webpack을 이해하려면 webpack이 개발되기 전의 상황을 보아야 �
   <body>
     <div class="root"></div>
     <script type="module">
-      import hello from "./src/hello.js";
-      import world from "./src/world.js";
-      document.querySelector("#root").innerHTML = hello.word;
+      import hello from "./src/hello.js"
+      import world from "./src/world.js"
+      document.querySelector("#root").innerHTML = hello.word
     </script>
   </body>
 </html>
@@ -39,15 +39,15 @@ webpack을 이해하려면 webpack이 개발되기 전의 상황을 보아야 �
 **src/hello.js**
 
 ```js
-const word = "Hello";
-export default word;
+const word = "Hello"
+export default word
 ```
 
 **src/world.js**
 
 ```js
-const word = "World";
-export default word;
+const word = "World"
+export default word
 ```
 
 webpack이 없었을 때 모듈을 export, import하던 방법입니다. 각각의 자바스크립트에서 명시적으로 export해야만 word라는 변수를 사용할 수 있습니다. 여기에는 두가지 문제가 있습니다.
@@ -72,8 +72,8 @@ webpack의 configuration file을 그럼 실제로 한번 보겠습니다.
 **webpack.config.js**
 
 ```js
-const HtmlWebpackPlugin = require("html-webpack-plugin");
-const path = require("path");
+const HtmlWebpackPlugin = require("html-webpack-plugin")
+const path = require("path")
 
 module.exports = {
   entry: ["./webpack/진입점/파일.js"],
@@ -85,7 +85,7 @@ module.exports = {
     rules: [{ test: /\.css$/, use: ["style-loader", "css-loader"] }],
   },
   plugins: [new HtmlWebpackPlugin()],
-};
+}
 ```
 
 ## entry

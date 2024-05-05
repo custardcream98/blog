@@ -1,11 +1,11 @@
-import { CareersSection, IntroduceSection, ProjectSection, ResumeSection, S } from "./_components";
+import { CareersSection, IntroduceSection, ProjectSection, ResumeSection, S } from "./_components"
 
-import "./style.css";
+import "./style.css"
 
-import { careers, educations, experiences, opensources, projects } from "fixtures/resume";
-import { utld } from "utility-class-components";
+import { careers, educations, experiences, opensources, projects } from "fixtures/resume"
+import { utld } from "utility-class-components"
 
-export { metadata } from "./metadata";
+export { metadata } from "./metadata"
 
 export default function ResumePage() {
   return (
@@ -54,7 +54,7 @@ export default function ResumePage() {
         ))}
       </ResumeSection>
     </S.Container>
-  );
+  )
 }
 
 const MainTitle = utld.h2`
@@ -70,4 +70,4 @@ const MainTitle = utld.h2`
   )
 
   [&>.line]:block
-`;
+`

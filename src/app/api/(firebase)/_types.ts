@@ -1,1 +1,1 @@
-export type TitleRequest = { title: string };
+export type TitleRequest = { title: string }

@@ -1,8 +1,8 @@
-import { LinkSvg } from "src/components/Svgs";
-import type { PropsWithClassName } from "src/types/props";
-import type { ResumeLink } from "src/types/resume";
+import { LinkSvg } from "src/components/Svgs"
+import type { PropsWithClassName } from "src/types/props"
+import type { ResumeLink } from "src/types/resume"
 
-import { ud, utld } from "utility-class-components";
+import { ud, utld } from "utility-class-components"
 
 export function ResumeLink({ url, name, className }: PropsWithClassName<ResumeLink>) {
   return (
@@ -10,7 +10,7 @@ export function ResumeLink({ url, name, className }: PropsWithClassName<ResumeLi
       <LinkSvg />
       {name}
     </StyledResumeLink>
-  );
+  )
 }
 
 const iconClickableStyle = ud`
@@ -54,11 +54,11 @@ const iconClickableStyle = ud`
     border-resume-accent-light
     dark:border-resume-accent-dark
   )
-`;
+`
 
 const StyledResumeLink = utld.a`
   ${iconClickableStyle}
-`;
+`
 
 export const ResumeLinksList = utld.ul`
   flex
@@ -75,4 +75,4 @@ export const ResumeLinksList = utld.ul`
 
     last:mt-[0.5em]
   )
-`;
+`

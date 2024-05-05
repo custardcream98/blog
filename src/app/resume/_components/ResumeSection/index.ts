@@ -1,1 +1,1 @@
-export { default as ResumeSection } from "./ResumeSection";
+export { default as ResumeSection } from "./ResumeSection"

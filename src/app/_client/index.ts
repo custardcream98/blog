@@ -1,4 +1,4 @@
-"use client";
+"use client"
 
-export * from "./Navigation";
-export * from "./PageLoadingSpinner";
+export * from "./Navigation"
+export * from "./PageLoadingSpinner"

@@ -1,7 +1,7 @@
-import type { Categoires } from "src/constants/categoryTheme";
+import type { Categoires } from "src/constants/categoryTheme"
 
 export type CategoryPageParams = {
   params: {
-    category: Categoires;
-  };
-};
+    category: Categoires
+  }
+}

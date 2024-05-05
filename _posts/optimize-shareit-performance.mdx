@@ -62,16 +62,16 @@ category: ["React.js", "CSS"]
 
 ```js
 // 일반적인 import문
-import OtherComponent from "./OtherComponent";
+import OtherComponent from "./OtherComponent"
 
 // 레이지 로딩
-const OtherComponent = React.lazy(() => import("./OtherComponent"));
+const OtherComponent = React.lazy(() => import("./OtherComponent"))
 ```
 
 ```js
-import React, { Suspense } from "react";
+import React, { Suspense } from "react"
 
-const OtherComponent = React.lazy(() => import("./OtherComponent"));
+const OtherComponent = React.lazy(() => import("./OtherComponent"))
 
 function MyComponent() {
   return (
@@ -80,7 +80,7 @@ function MyComponent() {
         <OtherComponent />
       </Suspense>
     </div>
-  );
+  )
 }
 ```
 
@@ -89,13 +89,13 @@ function MyComponent() {
 이를 활용해 아주 간편하게 lazy loading을 구현할 수 있었습니다. Router에서 아래처럼 사용했습니다.
 
 ```tsx
-const HomePage = lazy(() => import("./Home"));
-const ProfilePage = lazy(() => import("./Profile"));
-const PostNewPage = lazy(() => import("./Post/New"));
-const LoginPage = lazy(() => import("./Auth"));
-const PostByPostIdPage = lazy(() => import("./Post/[postId]"));
-const PostEditPage = lazy(() => import("./Post/Edit"));
-const MyPostsPage = lazy(() => import("./Profile/Myposts"));
+const HomePage = lazy(() => import("./Home"))
+const ProfilePage = lazy(() => import("./Profile"))
+const PostNewPage = lazy(() => import("./Post/New"))
+const LoginPage = lazy(() => import("./Auth"))
+const PostByPostIdPage = lazy(() => import("./Post/[postId]"))
+const PostEditPage = lazy(() => import("./Post/Edit"))
+const MyPostsPage = lazy(() => import("./Profile/Myposts"))
 
 const AppRouter = () => {
   return (
@@ -106,8 +106,8 @@ const AppRouter = () => {
       </Main>
       <Footer />
     </Router>
-  );
-};
+  )
+}
 ```
 
 ## 개선 결과

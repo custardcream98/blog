@@ -110,4 +110,4 @@ module.exports = {
     "sort-keys-fix/sort-keys-fix": "warn",
     "space-before-blocks": ["error"],
   },
-};
+}

@@ -1,12 +1,12 @@
-import { sharedMetadata } from "src/app/sharedMetadata";
+import { sharedMetadata } from "src/app/sharedMetadata"
 
-import type { CategoryPageParams } from "./types";
+import type { CategoryPageParams } from "./types"
 
-import { type Metadata } from "next";
+import { type Metadata } from "next"
 
 export const generateMetadata = ({ params: { category } }: CategoryPageParams): Metadata => {
-  const parsedCategory = decodeURIComponent(category);
-  const META_TITLE = `카테고리 - ${parsedCategory}`;
+  const parsedCategory = decodeURIComponent(category)
+  const META_TITLE = `카테고리 - ${parsedCategory}`
 
   return {
     ...sharedMetadata,
@@ -22,5 +22,5 @@ export const generateMetadata = ({ params: { category } }: CategoryPageParams): 
       ...sharedMetadata.twitter,
       title: META_TITLE,
     },
-  };
-};
+  }
+}

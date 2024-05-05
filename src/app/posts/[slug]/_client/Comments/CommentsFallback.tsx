@@ -1,5 +1,5 @@
-import { type FallbackProps } from "react-error-boundary";
-import { utld } from "utility-class-components";
+import { type FallbackProps } from "react-error-boundary"
+import { utld } from "utility-class-components"
 
 export function CommentsFallback({ resetErrorBoundary }: FallbackProps) {
   return (
@@ -9,7 +9,7 @@ export function CommentsFallback({ resetErrorBoundary }: FallbackProps) {
         다시 시도하기
       </Button>
     </div>
-  );
+  )
 }
 
 const Button = utld.button`
@@ -37,4 +37,4 @@ const Button = utld.button`
     dark:text-accent-dark
     scale-[1.05]
   )
-`;
+`

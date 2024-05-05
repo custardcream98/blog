@@ -1,28 +1,28 @@
-import { useSetIsDarkmodeActivatedContext } from "src/app/_providers";
-import { PrinterSvg } from "src/components/Svgs";
+import { useSetIsDarkmodeActivatedContext } from "src/app/_providers"
+import { PrinterSvg } from "src/components/Svgs"
 
-import { useCallback } from "react";
-import { ud } from "utility-class-components";
+import { useCallback } from "react"
+import { ud } from "utility-class-components"
 
 export function PrintButton() {
-  const { isDarkmodeActivated, setIsDarkmodeActivatedFalse } = useSetIsDarkmodeActivatedContext();
+  const { isDarkmodeActivated, setIsDarkmodeActivatedFalse } = useSetIsDarkmodeActivatedContext()
 
   const handlePrint = useCallback(async () => {
     if (isDarkmodeActivated) {
-      setIsDarkmodeActivatedFalse();
+      setIsDarkmodeActivatedFalse()
 
-      await new Promise((resolve) => setTimeout(resolve, 500));
+      await new Promise((resolve) => setTimeout(resolve, 500))
     }
 
-    window.print();
-  }, [isDarkmodeActivated, setIsDarkmodeActivatedFalse]);
+    window.print()
+  }, [isDarkmodeActivated, setIsDarkmodeActivatedFalse])
 
   return (
     <button type='button' onClick={handlePrint} className={iconClickableStyle}>
       <PrinterSvg />
       프린트하기
     </button>
-  );
+  )
 }
 
 const iconClickableStyle = ud`
@@ -66,4 +66,4 @@ const iconClickableStyle = ud`
     border-resume-accent-light
     dark:border-resume-accent-dark
   )
-`;
+`

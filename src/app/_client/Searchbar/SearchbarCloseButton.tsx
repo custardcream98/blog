@@ -1,8 +1,8 @@
-import { ResponsiveIconButton } from "src/components/client";
+import { ResponsiveIconButton } from "src/components/client"
 
-import { cssOutlineOnFocus } from "../Navigation/styles";
+import { cssOutlineOnFocus } from "../Navigation/styles"
 
-import { utld } from "utility-class-components";
+import { utld } from "utility-class-components"
 
 export const SearchbarCloseButton = utld(ResponsiveIconButton)`
   absolute
@@ -10,4 +10,4 @@ export const SearchbarCloseButton = utld(ResponsiveIconButton)`
   right-0
 
   ${cssOutlineOnFocus}
-`;
+`

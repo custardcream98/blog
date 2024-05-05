@@ -1,1 +1,1 @@
-export * from "./compileResumeMDX";
+export * from "./compileResumeMDX"

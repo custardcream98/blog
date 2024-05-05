@@ -1,14 +1,14 @@
-import { Container, LinkDecorated, Title } from "src/components";
+import { Container, LinkDecorated, Title } from "src/components"
 
-import { getSeries } from "./data";
+import { getSeries } from "./data"
 
-import { utld } from "utility-class-components";
+import { utld } from "utility-class-components"
 
-export { generateMetadata } from "./metadata";
+export { generateMetadata } from "./metadata"
 
 export default async function SeriesPage() {
-  const SERIES_COUNT_MAP = await getSeries();
-  const SERIES = Object.keys(SERIES_COUNT_MAP);
+  const SERIES_COUNT_MAP = await getSeries()
+  const SERIES = Object.keys(SERIES_COUNT_MAP)
 
   return (
     <Container>
@@ -23,7 +23,7 @@ export default async function SeriesPage() {
         ))}
       </SeriesList>
     </Container>
-  );
+  )
 }
 
 const SeriesListItem = utld.li`
@@ -34,8 +34,8 @@ const SeriesListItem = utld.li`
 
   text-default-light
   dark:text-default-dark
-`;
+`
 
 const SeriesList = utld.ul`
   w-full
-`;
+`

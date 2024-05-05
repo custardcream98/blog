@@ -1,14 +1,14 @@
-import { postMDXOptions, postMDXOptionsForCache } from "./options";
+import { postMDXOptions, postMDXOptionsForCache } from "./options"
 
-import { compileMDX as NMRcompileMDX } from "next-mdx-remote/rsc";
+import { compileMDX as NMRcompileMDX } from "next-mdx-remote/rsc"
 
 export const compileMDX = async (source: string) => {
   const mdxSource = await NMRcompileMDX({
     options: postMDXOptions,
     source,
-  });
-  return mdxSource;
-};
+  })
+  return mdxSource
+}
 
 export const compileMDXForCache = async (source: string) => {
   const mdxSource = await NMRcompileMDX({
@@ -17,6 +17,6 @@ export const compileMDXForCache = async (source: string) => {
     },
     options: postMDXOptionsForCache,
     source,
-  });
-  return mdxSource;
-};
+  })
+  return mdxSource
+}

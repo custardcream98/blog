@@ -1,4 +1,4 @@
-import { PuppeteerBrowser } from "../puppeteer";
+import { PuppeteerBrowser } from "../puppeteer"
 
 export const wrapHtmlString = (htmlString: string) => {
   return `
@@ -21,20 +21,20 @@ export const wrapHtmlString = (htmlString: string) => {
   <body>
     ${htmlString}
   </body>
-  `;
-};
+  `
+}
 
 export const htmlStringToBuffer = async (content: string) => {
-  const image = await PuppeteerBrowser.getScreenshot(content);
+  const image = await PuppeteerBrowser.getScreenshot(content)
 
-  return image;
-};
+  return image
+}
 
 export const generateThumbnailBuffer = async (template: JSX.Element) => {
-  const ReactDOMServer = (await import("react-dom/server")).default;
-  const htmlString = ReactDOMServer.renderToString(template);
+  const ReactDOMServer = (await import("react-dom/server")).default
+  const htmlString = ReactDOMServer.renderToString(template)
 
-  const buffer = await htmlStringToBuffer(wrapHtmlString(htmlString));
+  const buffer = await htmlStringToBuffer(wrapHtmlString(htmlString))
 
-  return buffer;
-};
+  return buffer
+}

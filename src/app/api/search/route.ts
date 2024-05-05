@@ -1,32 +1,32 @@
-import { getFuzzyPostData } from "src/lib/fuzzy";
-import type { SearchedPostCardDataRaw } from "src/types/searchedPosts";
-import { parseSearchParams } from "src/utils";
+import { getFuzzyPostData } from "src/lib/fuzzy"
+import type { SearchedPostCardDataRaw } from "src/types/searchedPosts"
+import { parseSearchParams } from "src/utils"
 
-import { StatusCodes } from "http-status-codes";
-import { NextResponse } from "next/server";
+import { StatusCodes } from "http-status-codes"
+import { NextResponse } from "next/server"
 
-const MAX_CONTENT_LENGTH = 100;
+const MAX_CONTENT_LENGTH = 100
 const koDtf = new Intl.DateTimeFormat("ko", {
   dateStyle: "short",
-});
+})
 
 type SearchParams = {
-  q: string;
-};
+  q: string
+}
 
 export async function GET(request: Request) {
-  const { q } = parseSearchParams<SearchParams>(request.url);
+  const { q } = parseSearchParams<SearchParams>(request.url)
 
   if (q === undefined) {
-    return NextResponse.json("잘못된 요청입니다.", { status: StatusCodes.BAD_REQUEST });
+    return NextResponse.json("잘못된 요청입니다.", { status: StatusCodes.BAD_REQUEST })
   }
 
   if (process.env.NODE_ENV === "development") {
-    console.log("요청 query: " + q);
+    console.log("요청 query: " + q)
   }
 
-  const results = q ? (await getFuzzyPostData(q)).slice(0, 5) : [];
-  const slicedResults: SearchedPostCardDataRaw[] = [];
+  const results = q ? (await getFuzzyPostData(q)).slice(0, 5) : []
+  const slicedResults: SearchedPostCardDataRaw[] = []
 
   results.forEach((result) => {
     if (typeof result.title === "object") {
@@ -34,14 +34,14 @@ export async function GET(request: Request) {
         ...result,
         content: result.content.slice(0, MAX_CONTENT_LENGTH) + "...",
         date: koDtf.format(new Date(result.date)),
-      });
+      })
     } else {
-      const leftContentLength = MAX_CONTENT_LENGTH - result.content[1].length;
+      const leftContentLength = MAX_CONTENT_LENGTH - result.content[1].length
       const beforeMatchContentLength =
         Math.round(leftContentLength / 2) <= result.content[0].length
           ? Math.round(leftContentLength / 2)
-          : result.content[0].length;
-      const afterMatchContentLength = leftContentLength - beforeMatchContentLength;
+          : result.content[0].length
+      const afterMatchContentLength = leftContentLength - beforeMatchContentLength
 
       slicedResults.push({
         ...result,
@@ -52,13 +52,13 @@ export async function GET(request: Request) {
           result.content[2].slice(0, afterMatchContentLength) + (afterMatchContentLength && "..."),
         ],
         date: koDtf.format(new Date(result.date)),
-      });
+      })
     }
-  });
+  })
 
   if (process.env.NODE_ENV === "development") {
-    console.log("탐색 끝, 응답합니다.");
+    console.log("탐색 끝, 응답합니다.")
   }
 
-  return NextResponse.json(slicedResults);
+  return NextResponse.json(slicedResults)
 }

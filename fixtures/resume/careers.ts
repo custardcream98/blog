@@ -1,4 +1,4 @@
-import { Career } from "src/types/resume";
+import { Career } from "src/types/resume"
 
 const careers: Career[] = [
   {
@@ -43,6 +43,6 @@ const careers: Career[] = [
     // shortDescription:
     //   "팀의 구성원으로서 내가 아니라 다른 사람이 이해하기 좋은 코드를 작성해야 하고, 다른 팀원이 내 코드를 어떻게 사용하더라도 문제없이 돌아갈 수 있도록 <strong>'방어적 코딩'</strong>을 해야 한다는 점을 깨달았습니다. 또한, 테크 스펙 설계나 테스트 작성이 협업 수단으로서 가지는 의미를 알 수 있었습니다.",
   },
-];
+]
 
-export default careers;
+export default careers

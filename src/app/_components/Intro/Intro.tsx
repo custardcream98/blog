@@ -1,6 +1,6 @@
-import ProfileImage from "./profile.webp";
+import ProfileImage from "./profile.webp"
 
-import Image from "next/image";
+import Image from "next/image"
 
 export function Intro() {
   return (
@@ -25,5 +25,5 @@ export function Intro() {
         />
       </div>
     </div>
-  );
+  )
 }
