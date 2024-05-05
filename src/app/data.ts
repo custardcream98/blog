@@ -45,25 +45,28 @@ export const getPostBySlug = async <Field extends PostMeta[]>(
 ): Promise<PostByFields<Field[number]>> => {
   const { data, content } = getPostFileData(slug)
 
-  const postMeta = fields.reduce((postMeta, field) => {
-    if (field === "slug") {
-      return {
-        ...postMeta,
-        slug,
+  const postMeta = fields.reduce(
+    (postMeta, field) => {
+      if (field === "slug") {
+        return {
+          ...postMeta,
+          slug,
+        }
+      } else if (field === "content") {
+        return {
+          ...postMeta,
+          content,
+        }
+      } else if (data[field] !== undefined) {
+        return {
+          ...postMeta,
+          [field]: data[field],
+        }
       }
-    } else if (field === "content") {
-      return {
-        ...postMeta,
-        content,
-      }
-    } else if (data[field] !== undefined) {
-      return {
-        ...postMeta,
-        [field]: data[field],
-      }
-    }
-    return postMeta
-  }, {} as PostByFields<Field[number]>)
+      return postMeta
+    },
+    {} as PostByFields<Field[number]>,
+  )
 
   if (hasField(postMeta, "coverImage", fields)) {
     postMeta.coverImage = await getOgImage(data.title)

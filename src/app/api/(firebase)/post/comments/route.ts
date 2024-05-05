@@ -38,9 +38,8 @@ export type PostCommentRequestBody = {
   username: string
 }
 export async function POST(request: Request): Promise<NextResponse> {
-  const { title, password, comment, username } = await getRequestBody<PostCommentRequestBody>(
-    request,
-  )
+  const { title, password, comment, username } =
+    await getRequestBody<PostCommentRequestBody>(request)
 
   if (!title || !password || !comment || !username) {
     return NextResponse.json(
@@ -77,9 +76,8 @@ export type PatchCommentRequestBody = PostCommentRequestBody & {
   id: string
 }
 export async function PATCH(request: Request): Promise<NextResponse> {
-  const { id, title, password, ...restData } = await getRequestBody<PatchCommentRequestBody>(
-    request,
-  )
+  const { id, title, password, ...restData } =
+    await getRequestBody<PatchCommentRequestBody>(request)
 
   if (!id || !title || !password) {
     return NextResponse.json(

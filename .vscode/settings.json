@@ -10,5 +10,6 @@
     "source.fixAll.eslint": "always",
     "source.fixAll": "always"
   },
-  "editor.colorDecorators": true
+  "editor.colorDecorators": true,
+  "typescript.tsdk": "node_modules/typescript/lib"
 }
