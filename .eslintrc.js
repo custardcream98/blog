@@ -5,12 +5,7 @@ module.exports = {
     es2021: true,
     node: true,
   },
-  extends: [
-    "eslint:recommended",
-    "next",
-    "plugin:@typescript-eslint/recommended",
-    "plugin:prettier/recommended",
-  ],
+  extends: ["eslint:recommended", "next", "plugin:@typescript-eslint/recommended"],
   ignorePatterns: ["node_modules/"],
   overrides: [
     {
@@ -23,7 +18,7 @@ module.exports = {
     createDefaultProgram: true,
     project: "./tsconfig.json",
   },
-  plugins: ["@typescript-eslint", "sort-keys-fix", "simple-import-sort", "import", "prettier"],
+  plugins: ["@typescript-eslint", "sort-keys-fix", "simple-import-sort", "import"],
   rules: {
     "@typescript-eslint/no-explicit-any": "off",
     "@typescript-eslint/no-unused-vars": [
@@ -50,7 +45,6 @@ module.exports = {
     "no-duplicate-imports": ["error"],
     "no-self-compare": ["error"],
     "no-unmodified-loop-condition": ["error"],
-    "prettier/prettier": "error",
     quotes: ["error", "double", { avoidEscape: true }],
     radix: ["error"],
     "react-hooks/exhaustive-deps": "warn",
