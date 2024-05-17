@@ -1,7 +1,4 @@
-import {
-  ClientLogger,
-  // ProjectAd
-} from "src/components/client"
+import { ClientLogger, ProjectAd } from "src/components/client"
 import { FONT_D2_CODING, FONT_POPPINS, FONT_PRETENDARD } from "src/fonts"
 
 import { Navigation } from "./_client"
@@ -14,6 +11,7 @@ import { SpeedInsights } from "@vercel/speed-insights/next"
 import Script from "next/script"
 // import DevportImage from "public/static/ad/devport.png";
 // import JarvisLogoImage from "public/static/ad/jarvis-logo.png";
+import HantypeImage from "public/static/ad/hantype.png"
 import { utld } from "utility-class-components"
 
 export { metadata } from "./metadata"
@@ -70,6 +68,17 @@ export default function RootLayout({ children }: React.PropsWithChildren) {
             repositoryLink='https://github.com/custardcream98/vscode-jarvis'
             projectImage={JarvisLogoImage}
           /> */}
+          <ProjectAd
+            projectName={
+              <>
+                <span>심플 한글 타자 연습 </span>
+                <span className='ad:block'>한,타자</span>
+              </>
+            }
+            projectLink='https://hantype.shiwoo.dev/'
+            repositoryLink='https://github.com/custardcream98/han-type'
+            projectImage={HantypeImage}
+          />
         </RootProvider>
         <ClientLogger />
         <SpeedInsights />
