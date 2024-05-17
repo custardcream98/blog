@@ -148,6 +148,7 @@ const ProjectAdName = utld.p`
 
 const ProjectAdImage = utld(Image)`
   object-cover
+  rounded-lg
 `
 
 const ProjectLink = utld.a`
