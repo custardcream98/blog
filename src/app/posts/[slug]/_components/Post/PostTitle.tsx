@@ -22,7 +22,7 @@ export function PostTitle({ coverImage, title, category, date, series }: PostTit
         <Title>{title}</Title>
         <DateActionWrapper>
           <DateSpanforTitle dateTime={date} />
-          <PostActions />
+          <PostActions title={title} />
         </DateActionWrapper>
         <BadgeViewsLikesCounterContainer>
           {category && (
