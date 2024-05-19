@@ -12,7 +12,7 @@ const sharePost = ({ url, title, text }: { url: string; title: string; text: str
 
 const generatePostShareHandler = (title: string) => async () => {
   const currentPostURL = getCurrentURL()
-  const shareText = `FE 개발자 박시우의 기술 블로그 포스트\n"${title}" 읽어보세요!`
+  const shareText = `FE 개발자 박시우의 기술 블로그 포스트\n"${title}" 읽어보세요! 👇👇\n`
 
   try {
     sharePost({
@@ -21,7 +21,7 @@ const generatePostShareHandler = (title: string) => async () => {
       url: currentPostURL,
     })
   } catch (e) {
-    await addToClipboard(`${shareText} 👇👇\n${currentPostURL}`)
+    await addToClipboard(`${shareText}${currentPostURL}`)
     alert("📋 포스트 링크가 복사됐습니다!")
   }
 }
