@@ -3,10 +3,9 @@ import { addToClipboard, getCurrentURL } from "src/utils"
 
 import { utld } from "utility-class-components"
 
-const sharePost = ({ url, title, text }: { url: string; title: string; text: string }) =>
+const sharePost = ({ url, text }: { url: string; text: string }) =>
   window.navigator.share({
     text,
-    title,
     url,
   })
 
@@ -17,7 +16,6 @@ const generatePostShareHandler = (title: string) => async () => {
   try {
     sharePost({
       text: shareText,
-      title,
       url: currentPostURL,
     })
   } catch (e) {
