@@ -20,7 +20,7 @@ const generatePostShareHandler = (title: string) => async () => {
     })
   } catch (e) {
     await addToClipboard(`${shareText}${currentPostURL}`)
-    alert("📋 포스트 링크가 복사됐습니다!")
+    alert("📋 포스트 공유 링크가 복사됐습니다!")
   }
 }
 
@@ -32,7 +32,7 @@ export function PostActions({ title }: Props) {
   return (
     <Button type='button' onClick={generatePostShareHandler(title)}>
       <StyledExternalLinkSvg />
-      URL 복사하기
+      공유하기
     </Button>
   )
 }
