@@ -2,7 +2,13 @@ import { CareersSection, IntroduceSection, ProjectSection, ResumeSection, S } fr
 
 import "./style.css"
 
-import { careers, educations, experiences, opensources, projects } from "fixtures/resume"
+import {
+  careers,
+  educations,
+  experiences,
+  // opensources,
+  projects,
+} from "fixtures/resume"
 import { utld } from "utility-class-components"
 
 export { metadata } from "./metadata"
@@ -19,17 +25,26 @@ export default function ResumePage() {
         }
         입니다.
       </MainTitle>
+
       <IntroduceSection />
-      <ProjectSection title='프로젝트' className='print:mt-40'>
-        {projects.map((project, index) => (
+
+      <CareersSection className='break-inside-avoid print:pt-2'>
+        {careers.map((career) => (
+          <CareersSection.Item key={career.company} {...career} />
+        ))}
+      </CareersSection>
+
+      <ProjectSection title='프로젝트' className='print:mt-10'>
+        {projects.map((project) => (
           <ProjectSection.Item
             key={project.title}
-            className={[1, 2, 3].includes(index) ? "print:!mt-[10em]" : ""}
+            className='print:break-inside-avoid'
             {...project}
           />
         ))}
       </ProjectSection>
-      <ProjectSection title='오픈소스 컨트리뷰션' className='break-inside-avoid'>
+
+      {/* <ProjectSection title='오픈소스 컨트리뷰션' className='break-inside-avoid'>
         {opensources.map((opensource, index) => (
           <ProjectSection.Item
             key={opensource.title}
@@ -37,17 +52,14 @@ export default function ResumePage() {
             {...opensource}
           />
         ))}
-      </ProjectSection>
-      <CareersSection className='break-inside-avoid print:pt-4'>
-        {careers.map((career) => (
-          <CareersSection.Item key={career.company} {...career} />
-        ))}
-      </CareersSection>
-      <ResumeSection sectionTitle='경험' className='break-inside-avoid'>
+      </ProjectSection> */}
+
+      <ResumeSection sectionTitle='경험'>
         {experiences.map((experience) => (
           <ResumeSection.Item key={experience.title} {...experience} />
         ))}
       </ResumeSection>
+
       <ResumeSection sectionTitle='교육 및 자격증' className='break-inside-avoid print:pt-4'>
         {educations.map((educations) => (
           <ResumeSection.Item key={educations.title} {...educations} />

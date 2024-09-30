@@ -46,10 +46,4 @@ export const ResumePeriodContainer = utld.span`
     content-['~']
     mx-[0.3em]
   )
-
-  print:(
-    absolute
-    top-0
-    right-0
-  )
 `

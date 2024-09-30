@@ -40,13 +40,12 @@ export const SectionItemList = utld.ul``
 
 export const SectionItem = utld.li`
   mt-[3em]
-  [&+&]:mt-[7em]
+  [&+&]:mt-[4em]
 
   print:(
     mt-[1em]
     [&+&]:mt-[2em]
     relative
-    break-inside-avoid
   )
 `
 

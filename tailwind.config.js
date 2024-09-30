@@ -140,6 +140,7 @@ module.exports = {
         max: "800px",
       },
       pc: "800px",
+      resume: "1024px",
     },
   },
 }
