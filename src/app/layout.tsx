@@ -1,3 +1,5 @@
+import "src/mocks"
+
 import { ClientLogger, ProjectAd } from "src/components/client"
 import { FONT_D2_CODING, FONT_POPPINS, FONT_PRETENDARD } from "src/fonts"
 
