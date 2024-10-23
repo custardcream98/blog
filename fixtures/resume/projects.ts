@@ -48,6 +48,7 @@ const projects: Project[] = [
       * **MSW Request Handler 관리를 위한 프레임워크 독립적 DevTools 개발**
       * UI를 통해 핸들러를 관리(추가, 수정, 삭제, 활성화/비활성화, 지연 처리) 할 수 있도록 구현
       * Mock Handler의 import/export 지원을 통해 테스트 환경 설정 간소화
+      * Devtools를 위한 WebSocket 서버를 제공, Request Handler를 JSON 파일 형태로 관리
     `,
     links: [
       {
