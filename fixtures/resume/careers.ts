@@ -5,12 +5,12 @@ const careers: Career[] = [
     company: "자비스앤빌런즈(삼쩜삼)",
     descriptions: [
       "Individual Income Tax(개인소득세) 사업부 소속으로 <strong>삼쩜삼</strong> 개발",
-      "서비스 주 사용층을 확인해 <strong>Polyfill을 적용, coverage 10%가량 향상</strong>",
+      "서비스 주 사용층을 확인해 <strong>Polyfill 적용, coverage 10%가량 향상</strong>",
       "거대한 <strong>레거시 ts-morph 활용해 효율적으로 수정</strong>",
       "Node, Storybook, Yarn 버전 업그레이드 등 프로젝트 환경 관리",
       "통합 테스트 작성 컨벤션 정립에 기여",
       "디자인 시스템의 dependency 관리 미흡으로 인한 emotion 인스턴스 복수 생성 이슈 도출 및 수정",
-      "5월 한 달간 211만 명의 유료 고객에게 성공적으로 서비스 제공",
+      "디자인 시스템 컴포넌트 개발 및 유지보수",
     ],
     links: [],
     period: {
@@ -22,7 +22,7 @@ const careers: Career[] = [
     company: "구름",
     descriptions: [
       "게이미피케이션을 통해 구성원의 퍼포먼스를 이끌어내는 플랫폼인 goormEXP 개발",
-      "Goorm Design System 유지보수 및 개발",
+      "Goorm Design System(GDS) 개발 및 유지보수",
       "<strong>TypeScript로 마이그레이션 주도</strong>",
       "<strong>Storybook 도입 건의 및 개발 환경 구축</strong>",
       "실무 사용을 위한 <strong>ESLint Custom Rule 개발</strong>",

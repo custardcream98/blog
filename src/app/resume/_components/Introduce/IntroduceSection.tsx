@@ -8,15 +8,16 @@ function IntroduceSection() {
     <S.Section>
       <h3 className='sr-only'>자기 소개</h3>
       <IntroduceP>
-        저는 <strong>오픈소스에 기여하는 개발자</strong>입니다. chakra-ui/panda, TanStack/query 등에
-        작은 기여를 하기도 했으며, 최근에는 실무 중 framer-motion의 커스텀 훅이 무한 렌더링을
-        일으키는 문제를 발견, 해결에 기여한 바 있습니다. 이같이 사용 중인 라이브러리에 문제가 있다면
-        회피하기보다는 직접 수정하려고 노력합니다.
+        저는 <strong>오픈소스에 기여하길 좋아합니다.</strong> chakra-ui/panda, TanStack/query 등에
+        작은 기여를 하기도 했으며, 실무 중 framer-motion의 커스텀 훅이 무한 렌더링을 일으키는 문제를
+        발견, 해결에 기여한 바 있습니다. 이같이 사용 중인 라이브러리에 문제가 있다면 회피하기보다는
+        직접 수정, 이슈라이즈하려고 노력합니다.
       </IntroduceP>
       <IntroduceP>
-        더불어 <strong>업무 생산성을 개선하기 위한 툴 개발</strong>에도 관심이 많습니다. 최근에는
-        MSW Request Handler를 클라이언트에서 편하게 관리할 수 있도록 도와주는 MSW Devtools를 개발
-        중입니다.
+        더불어 <strong>DX를 개선하기 위한 툴 개발</strong>에도 관심이 많습니다. 작지만 수정이
+        까다로워 방치돼있던 레거시 코드들을 자동화 도구로 빠르게 해결했고, ESLint 플러그인도 팀에
+        맞게 직접 개발해 사용하기도 합니다. 최근에는 MSW Request Handler를 클라이언트에서 편하게
+        관리할 수 있도록 도와주는 MSW Devtools를 개발 중입니다.
       </IntroduceP>
       {/* <IntroduceP>
         저는 <strong>오픈소스에 기여하는 개발자</strong>입니다. React Server Component를 효과적으로

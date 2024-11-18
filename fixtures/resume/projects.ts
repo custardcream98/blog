@@ -64,7 +64,7 @@ const projects: Project[] = [
       from: "2024-09",
     },
     shortDescription:
-      "서비스 개발 시 MSW Request Handler 관리에 불편함을 느껴 개발하고 있는 Devtools입니다. QA, 디자이너 등 타 직군과 협업에도 활용할 수 있도록 발전시켜나갈 예정입니다.",
+      "서비스 개발 시 MSW Request Handler 관리에 불편함을 느껴 개발하고 있는 Devtools입니다.",
     stacks: ["React.js", "TypeScript", "Rollup"],
     team: "개인 프로젝트",
     title: "@custardcream/msw-devtools",
