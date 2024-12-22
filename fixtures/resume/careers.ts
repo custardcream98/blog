@@ -5,11 +5,14 @@ const careers: Career[] = [
     company: "자비스앤빌런즈(삼쩜삼)",
     descriptions: [
       "Individual Income Tax(개인소득세) 사업부 소속으로 <strong>삼쩜삼</strong> 개발",
-      "서비스 주 사용층을 확인해 <strong>Polyfill 적용, coverage 10%가량 향상</strong>",
+      [
+        "서비스 주 사용층을 확인해 Polyfill 적용, <strong>coverage 10%가량 향상</strong>",
+        ["user-agent 분석으로 최적의 최소 지원 버전 도출"],
+      ],
       "거대한 <strong>레거시 ts-morph 활용해 효율적으로 수정</strong>",
       "Node, Storybook, Yarn 버전 업그레이드 등 프로젝트 환경 관리",
       "통합 테스트 작성 컨벤션 정립에 기여",
-      "디자인 시스템의 dependency 관리 미흡으로 인한 emotion 인스턴스 복수 생성 이슈 도출 및 수정",
+      // "디자인 시스템의 dependency 관리 미흡으로 인한 emotion 인스턴스 복수 생성 이슈 도출 및 수정",
       "디자인 시스템 컴포넌트 개발 및 유지보수",
     ],
     links: [],

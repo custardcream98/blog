@@ -60,7 +60,7 @@ export default function ResumePage() {
         ))}
       </ResumeSection>
 
-      <ResumeSection sectionTitle='교육 및 자격증' className='break-inside-avoid print:pt-4'>
+      <ResumeSection sectionTitle='교육 및 자격증' className='break-inside-avoid'>
         {educations.map((educations) => (
           <ResumeSection.Item key={educations.title} {...educations} />
         ))}

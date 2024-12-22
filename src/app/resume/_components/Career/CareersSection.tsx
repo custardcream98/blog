@@ -30,7 +30,12 @@ function Item({
   const isDescriptionsExist = descriptions.length !== 0
 
   return (
-    <S.SectionItemBordered className='resume:flex flex-row justify-between print:flex print:[&+&]:!mt-[2em]'>
+    <S.SectionItemBordered
+      className={ud`${[
+        "gap-x-3 print:grid print:grid-cols-[1fr_2fr] resume:grid resume:grid-cols-[1fr_3fr]",
+        "print:[&+&]:!mt-[2em]",
+      ]}`}
+    >
       <div>
         <S.ProjectTitle>{company}</S.ProjectTitle>
 
@@ -41,13 +46,20 @@ function Item({
 
       {isDescriptionsExist && (
         <Ul>
-          {descriptions.map((description) => (
-            <Li
-              key={description}
-              className={ud``}
-              dangerouslySetInnerHTML={{ __html: description }}
-            />
-          ))}
+          {descriptions.map((description) =>
+            typeof description === "string" ? (
+              <Li key={description} dangerouslySetInnerHTML={{ __html: description }} />
+            ) : (
+              <Li key={description[0]}>
+                <span dangerouslySetInnerHTML={{ __html: description[0] }}></span>
+                <Ul>
+                  {description[1].map((d) => (
+                    <Li key={d} dangerouslySetInnerHTML={{ __html: d }} />
+                  ))}
+                </Ul>
+              </Li>
+            ),
+          )}
         </Ul>
       )}
 
@@ -69,21 +81,9 @@ function Item({
 }
 
 const Ul = utld.ul`
-  resume:text-right 
-  print:text-right 
-
   font-light 
   leading-[1.5] 
   tracking-[0.03em] 
-  print:mt-[0.75em]
-
-  resume:marker:(
-    content-none
-  )
-
-  print:marker:(
-    content-none
-  )
 
   marker:(
     content-['-']

@@ -27,7 +27,7 @@ export type Career = {
   period: Period
   position: string
   shortDescription?: string
-  descriptions: string[]
+  descriptions: (string | [string, string[]])[]
   links: ResumeLink[]
 }
 
