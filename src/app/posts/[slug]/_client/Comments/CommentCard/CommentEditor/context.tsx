@@ -3,7 +3,6 @@ import { CommentEditState, type ICommentEditorStateContext } from "src/types/com
 import { createContext, PropsWithChildren, useCallback, useContext, useMemo, useState } from "react"
 
 const CommentEditorStateContext = createContext<ICommentEditorStateContext>({
-  // eslint-disable-next-line @typescript-eslint/no-empty-function
   changeStateTo: () => {},
   editState: CommentEditState.DEFAULT,
 })
