@@ -2,7 +2,7 @@ import { useCallback, useLayoutEffect, useRef } from "react"
 
 export const useEditable = <T extends HTMLInputElement | HTMLTextAreaElement>(
   initialValue?: string,
-): [React.RefObject<T>, () => string | undefined, () => void] => {
+): [React.RefObject<T | null>, () => string | undefined, () => void] => {
   const editableRef = useRef<T>(null)
   useLayoutEffect(() => {
     if (!editableRef.current || !initialValue) return

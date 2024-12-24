@@ -17,7 +17,8 @@ export const generateStaticParams = () => {
   }))
 }
 
-export default async function CategoryDynamicPage({ params: { category } }: CategoryPageParams) {
+export default async function CategoryDynamicPage({ params }: CategoryPageParams) {
+  const { category } = await params
   const decodedCategory = decodeURIComponent(category) as Categoires
   const posts = await getPostByCategory(decodedCategory)
 

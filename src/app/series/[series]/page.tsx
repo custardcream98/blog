@@ -19,7 +19,9 @@ export const generateStaticParams = async () => {
   }))
 }
 
-export default async function SeriesDynamicPage({ params: { series } }: SeriesPageParams) {
+export default async function SeriesDynamicPage({ params }: SeriesPageParams) {
+  const { series } = await params
+
   const decodedSeries = decodeURIComponent(series)
   const posts = await getPostBySeries(decodedSeries)
 

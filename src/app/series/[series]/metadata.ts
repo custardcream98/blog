@@ -4,7 +4,8 @@ import { SeriesPageParams } from "./types"
 
 import { type Metadata } from "next"
 
-export const generateMetadata = ({ params: { series } }: SeriesPageParams): Metadata => {
+export const generateMetadata = async ({ params }: SeriesPageParams): Promise<Metadata> => {
+  const { series } = await params
   const parsedSeries = decodeURIComponent(series)
   const META_TITLE = `시리즈 - ${parsedSeries}`
 

@@ -1,5 +1,7 @@
 import { PuppeteerBrowser } from "../puppeteer"
 
+import type { JSX } from "react";
+
 export const wrapHtmlString = (htmlString: string) => {
   return `
   <style>

@@ -7,7 +7,10 @@ import { PropsWithChildren, ReactElement } from "react"
 import { IoMdClose } from "react-icons/io"
 import { utld } from "utility-class-components"
 
-function CommentOverlapWrapper({ children, closer }: PropsWithChildren<{ closer: ReactElement }>) {
+function CommentOverlapWrapper({
+  children,
+  closer,
+}: PropsWithChildren<{ closer: ReactElement<any> }>) {
   return (
     <Wrapper>
       {children}

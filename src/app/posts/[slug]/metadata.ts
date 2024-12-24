@@ -5,7 +5,8 @@ import type { PostPageParams } from "./types"
 
 import { type Metadata } from "next"
 
-export const generateMetadata = async ({ params: { slug } }: PostPageParams): Promise<Metadata> => {
+export const generateMetadata = async ({ params }: PostPageParams): Promise<Metadata> => {
+  const { slug } = await params
   const { title, date, excerpt, coverImage, category, series } = await getPostBySlug(slug, [
     "title",
     "date",

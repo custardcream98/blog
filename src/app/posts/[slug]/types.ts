@@ -1,5 +1,5 @@
 export type PostPageParams = {
-  params: {
+  params: Promise<{
     slug: string
-  }
+  }>
 }

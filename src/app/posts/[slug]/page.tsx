@@ -33,7 +33,9 @@ export const generateStaticParams = async () => {
   }))
 }
 
-export default async function PostsDynamicPage({ params: { slug } }: PostPageParams) {
+export default async function PostsDynamicPage({ params }: PostPageParams) {
+  const { slug } = await params
+
   const { coverImage, title, category, date, series, content } = await getPostBySlug(slug, [
     "title",
     "date",

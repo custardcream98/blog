@@ -4,7 +4,8 @@ import type { CategoryPageParams } from "./types"
 
 import { type Metadata } from "next"
 
-export const generateMetadata = ({ params: { category } }: CategoryPageParams): Metadata => {
+export const generateMetadata = async ({ params }: CategoryPageParams): Promise<Metadata> => {
+  const { category } = await params
   const parsedCategory = decodeURIComponent(category)
   const META_TITLE = `카테고리 - ${parsedCategory}`
 

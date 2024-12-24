@@ -9,14 +9,20 @@ import PostByPageArr from "cache/postByPageArr.json"
 import { utld } from "utility-class-components"
 
 type HomePageProps = {
-  searchParams: {
+  searchParams: Promise<{
     page?: string
-  }
+  }>
 }
 
 const PAGE_SCALE = PostByPageArr.length
 
-export default function HomePage({ searchParams: { page = "1" } }: HomePageProps) {
+export default async function HomePage(props: HomePageProps) {
+  const searchParams = await props.searchParams;
+
+  const {
+    page = "1"
+  } = searchParams;
+
   const parsedPage = parseInt(page, 10)
   const validPage = isNaN(parsedPage) ? 1 : Math.min(Math.max(parsedPage, 1), PAGE_SCALE)
   const pageIndex = validPage - 1

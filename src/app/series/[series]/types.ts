@@ -1,5 +1,5 @@
 export type SeriesPageParams = {
-  params: {
+  params: Promise<{
     series: string
-  }
+  }>
 }

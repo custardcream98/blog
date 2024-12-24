@@ -3,7 +3,7 @@ import { useCallback } from "react"
 const DEFAULT_DURATION = 200
 
 export const useDelayedFocus = (
-  ref: React.RefObject<HTMLElement>,
+  ref: React.RefObject<HTMLElement | null>,
   delayInMs = DEFAULT_DURATION,
 ) => {
   const focus = useCallback(() => {
