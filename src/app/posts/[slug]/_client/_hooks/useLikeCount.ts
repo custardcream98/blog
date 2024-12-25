@@ -1,6 +1,8 @@
-import { useGetPostLikesQuery, usePatchPostLikesMutation } from "src/request"
+import { usePatchPostLikesMutation } from "src/request"
 
 import { useCallback, useLayoutEffect, useState } from "react"
+import { postQueryOptions } from "src/request/query-keys"
+import { useQuery } from "@tanstack/react-query"
 
 const LOCALSTORAGE_IS_LIKED_KEY = "isLiked"
 const getIsLikedLocalStorageKey = (title: string) => `${LOCALSTORAGE_IS_LIKED_KEY}-${title}`
@@ -8,10 +10,10 @@ const getIsLikedLocalStorageKey = (title: string) => `${LOCALSTORAGE_IS_LIKED_KE
 export const useLikeCount = (postTitle: string) => {
   const localStorageKey = getIsLikedLocalStorageKey(postTitle)
   const [isLiked, setIsLiked] = useState<boolean>(false)
-  const { data: likesData } = useGetPostLikesQuery(postTitle)
+  const { data: likesData } = useQuery(postQueryOptions.getPostLikes({ title: postTitle }))
   const likeCount = likesData ? likesData.likes : undefined
 
-  const { mutate: mutatePatchPostLikes, isLoading: isPatchingLike } = usePatchPostLikesMutation()
+  const { mutate: mutatePatchPostLikes, isPending: isPatchingLike } = usePatchPostLikesMutation()
 
   useLayoutEffect(() => {
     const isLikedLocalStorageValue = localStorage.getItem(localStorageKey)

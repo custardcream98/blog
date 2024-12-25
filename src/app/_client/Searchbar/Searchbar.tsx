@@ -1,5 +1,4 @@
 import { useDebouncedValue, useDelayedFocus } from "src/hook"
-import { useGetSearchedPostCardDataQuery } from "src/request"
 import { calculateLoopedIndex, preventDefaultEvent } from "src/utils"
 
 import { SearchbarCloseButton } from "./SearchbarCloseButton"
@@ -16,6 +15,8 @@ import {
 } from "react"
 import { RiCloseFill } from "react-icons/ri"
 import { utld } from "utility-class-components"
+import { useQuery } from "@tanstack/react-query"
+import { searchQueryOptions } from "src/request/query-keys"
 
 const SEARCH_INPUT_DEBOUNCE_DELAY = 300
 
@@ -43,8 +44,9 @@ export function Searchbar({
     setSearchInput(event.currentTarget.value)
   }, [])
   const debouncedSearchInput = useDebouncedValue(searchInput, SEARCH_INPUT_DEBOUNCE_DELAY)
-  const { isLoading: isSearchedPostsCardDataLoading, data: searchedPostsCardData } =
-    useGetSearchedPostCardDataQuery(!searchInput ? searchInput : debouncedSearchInput)
+  const { isLoading: isSearchedPostsCardDataLoading, data: searchedPostsCardData } = useQuery(
+    searchQueryOptions.getSearch(debouncedSearchInput),
+  )
   const isSearchedPostsCardDataEmpty =
     isSearchedPostsCardDataLoading || !searchedPostsCardData || searchedPostsCardData.length === 0
 

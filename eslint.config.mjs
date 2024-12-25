@@ -6,8 +6,12 @@ const compat = new FlatCompat({
 
 const config = [
   ...compat.config({
-    extends: ["next/core-web-vitals", "next/typescript"],
-    plugins: ["sort-keys-fix", "simple-import-sort"],
+    extends: [
+      "next/core-web-vitals",
+      "next/typescript",
+      "plugin:@tanstack/eslint-plugin-query/recommended",
+    ],
+    plugins: ["sort-keys-fix", "simple-import-sort", "@tanstack/query"],
     rules: {
       "@typescript-eslint/no-explicit-any": "off",
       "@typescript-eslint/no-unused-vars": [

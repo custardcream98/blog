@@ -51,7 +51,7 @@ export const useCommentForm = (isForEdit: boolean) => {
   const title = useCommentPostTitleContext()
 
   const { changeStateTo } = useCommentEditorStateSetter()
-  const { mutateAsync: mutatePatchPostCommentAsync, isLoading: isPostCommentPatching } =
+  const { mutateAsync: mutatePatchPostCommentAsync, isPending: isPostCommentPatching } =
     usePatchPostCommentMutation()
   const handleUpdateComment = useCallback(
     async ({ comment, commentId, password, title, username }: PatchPostCommentRequest) => {
@@ -77,7 +77,7 @@ export const useCommentForm = (isForEdit: boolean) => {
     [changeStateTo, updateCommentDataContext, mutatePatchPostCommentAsync],
   )
 
-  const { mutateAsync: mutatePostPostCommentAsync, isLoading: isPostCommentPosting } =
+  const { mutateAsync: mutatePostPostCommentAsync, isPending: isPostCommentPosting } =
     usePostPostCommentMutation()
   const { mutate: mutatePostAlertSW } = usePostAlertSWMutation()
   const handleAddComment = useCallback(
