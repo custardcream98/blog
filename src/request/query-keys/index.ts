@@ -27,6 +27,8 @@ export const postQueryOptions = {
   getPostViews: (params: GetPostViewsRequest) =>
     queryOptions({
       queryFn: () => getPostViews(params),
+      // params.viewedAt은 의도적으로 쿼리키에서 제외 (유저 개인의 조회 시간 정보임)
+      // eslint-disable-next-line @tanstack/query/exhaustive-deps
       queryKey: [...postQueryOptions.all(), "views", params.title],
       refetchInterval: 10_000,
     }),

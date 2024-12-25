@@ -1,4 +1,5 @@
 import { QuerySuspense } from "src/components"
+
 import { ud, utld } from "utility-class-components"
 
 export const CommentsTitleSuspense = ({ children }: React.PropsWithChildren) => {

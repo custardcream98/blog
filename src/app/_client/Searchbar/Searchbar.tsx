@@ -1,10 +1,12 @@
 import { useDebouncedValue, useDelayedFocus } from "src/hook"
+import { searchQueryOptions } from "src/request/query-keys"
 import { calculateLoopedIndex, preventDefaultEvent } from "src/utils"
 
 import { SearchbarCloseButton } from "./SearchbarCloseButton"
 import { RESULT_LINK_CLASSNAME } from "./SearchResultCard"
 import { SearchResults } from "./SearchResults"
 
+import { useQuery } from "@tanstack/react-query"
 import {
   type ChangeEvent,
   type KeyboardEvent,
@@ -15,8 +17,6 @@ import {
 } from "react"
 import { RiCloseFill } from "react-icons/ri"
 import { utld } from "utility-class-components"
-import { useQuery } from "@tanstack/react-query"
-import { searchQueryOptions } from "src/request/query-keys"
 
 const SEARCH_INPUT_DEBOUNCE_DELAY = 300
 

@@ -1,8 +1,8 @@
 import { usePatchPostLikesMutation } from "src/request"
-
-import { useCallback, useLayoutEffect, useState } from "react"
 import { postQueryOptions } from "src/request/query-keys"
+
 import { useQuery } from "@tanstack/react-query"
+import { useCallback, useLayoutEffect, useState } from "react"
 
 const LOCALSTORAGE_IS_LIKED_KEY = "isLiked"
 const getIsLikedLocalStorageKey = (title: string) => `${LOCALSTORAGE_IS_LIKED_KEY}-${title}`

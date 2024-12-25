@@ -1,9 +1,10 @@
+import { postQueryOptions } from "src/request/query-keys"
+
 import CommentCard from "./CommentCard"
 import { useCommentPostTitleContext } from "./CommentsSection.new"
 
-import { utld } from "utility-class-components"
 import { useSuspenseQuery } from "@tanstack/react-query"
-import { postQueryOptions } from "src/request/query-keys"
+import { utld } from "utility-class-components"
 
 export { CommentFormWithOpenButton as CommentsSectionForm } from "./CommentForm"
 

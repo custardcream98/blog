@@ -1,11 +1,12 @@
+import { useLocalStorageState } from "src/hook"
+import { postQueryOptions } from "src/request/query-keys"
+
 import { LoadingIndicator } from "./LoadingIndicator"
 
+import { useQuery } from "@tanstack/react-query"
+import { useEffect } from "react"
 import { HiEye } from "react-icons/hi"
 import { utld } from "utility-class-components"
-import { useLocalStorageState } from "src/hook"
-import { useQuery } from "@tanstack/react-query"
-import { postQueryOptions } from "src/request/query-keys"
-import { useEffect } from "react"
 
 type ViewsCounterProps = {
   title: string
@@ -70,7 +71,13 @@ export const usePostViews = (title: string) => {
     if (!postViewsQuery.isFetching && !postViewsQuery.isError && postViewsQuery.data?.isIncreased) {
       setViewedAtData((prev) => ({ ...prev, [title]: Date.now() }))
     }
-  }, [postViewsQuery.isFetching, postViewsQuery.isError, postViewsQuery.data])
+  }, [
+    postViewsQuery.isFetching,
+    postViewsQuery.isError,
+    postViewsQuery.data,
+    setViewedAtData,
+    title,
+  ])
 
   return postViewsQuery
 }
