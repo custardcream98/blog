@@ -1,5 +1,5 @@
 import { patchPostLikes } from "../axios"
-import { getUseGetPostLikesQueryKey } from "../query-keys"
+import { postQueryOptions } from "../query-keys"
 
 import { useMutation, useQueryClient } from "@tanstack/react-query"
 
@@ -12,8 +12,7 @@ export const usePatchPostLikesMutation = () => {
     mutationFn: patchPostLikes,
     mutationKey: USE_PATCH_POST_MUTATION_KEY,
     onSuccess: (data, { title }) => {
-      const useGetPostLikesQueryKey = getUseGetPostLikesQueryKey(title)
-      queryClient.setQueryData(useGetPostLikesQueryKey, data)
+      queryClient.setQueryData(postQueryOptions.getPostLikes({ title }).queryKey, data)
     },
   })
 }

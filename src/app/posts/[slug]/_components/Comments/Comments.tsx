@@ -4,6 +4,7 @@ import {
   CommentsSectionForm,
   CommentsSectionTitle,
   CommentsSuspense,
+  CommentsTitleSuspense,
 } from "../../_client"
 
 type CommentsProps = {
@@ -13,7 +14,9 @@ type CommentsProps = {
 export function Comments({ postTitle }: CommentsProps) {
   return (
     <CommentsSection postTitle={postTitle}>
-      <CommentsSectionTitle />
+      <CommentsTitleSuspense>
+        <CommentsSectionTitle />
+      </CommentsTitleSuspense>
       <CommentsSectionForm />
       <CommentsSuspense>
         <CommentsList />

@@ -1,16 +1,17 @@
-import { useGetPostCommentsQuery } from "src/request"
-
 import CommentCard from "./CommentCard"
 import { useCommentPostTitleContext } from "./CommentsSection.new"
 
 import { utld } from "utility-class-components"
+import { useSuspenseQuery } from "@tanstack/react-query"
+import { postQueryOptions } from "src/request/query-keys"
 
 export { CommentFormWithOpenButton as CommentsSectionForm } from "./CommentForm"
 
 export function CommentsSectionTitle() {
-  const postTitle = useCommentPostTitleContext()
-  const { data } = useGetPostCommentsQuery(postTitle)
-  const comments = data ? data.comments : []
+  const title = useCommentPostTitleContext()
+  const {
+    data: { comments },
+  } = useSuspenseQuery(postQueryOptions.getPostComments({ title }))
 
   return <Title>Comments({comments.length})</Title>
 }
@@ -29,9 +30,10 @@ const Title = utld.h3`
 `
 
 export function CommentsList() {
-  const postTitle = useCommentPostTitleContext()
-  const { data } = useGetPostCommentsQuery(postTitle, true)
-  const comments = data ? data.comments : []
+  const title = useCommentPostTitleContext()
+  const {
+    data: { comments },
+  } = useSuspenseQuery(postQueryOptions.getPostComments({ title }))
 
   return (
     <ol>

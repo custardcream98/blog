@@ -1,5 +1,5 @@
 import { patchPostComment } from "../axios"
-import { getUseGetPostCommentsQueryKey } from "../query-keys"
+import { postQueryOptions } from "../query-keys"
 
 import { useMutation, useQueryClient } from "@tanstack/react-query"
 
@@ -12,8 +12,9 @@ export const usePatchPostCommentMutation = () => {
     mutationFn: patchPostComment,
     mutationKey: USE_PATCH_POST_COMMENT_MUTATION_KEY,
     onSuccess: (data, { title }) => {
-      const useGetPostCommentsQueryKey = getUseGetPostCommentsQueryKey(title)
-      queryClient.setQueryData(useGetPostCommentsQueryKey, { comments: data.comments })
+      queryClient.setQueryData(postQueryOptions.getPostComments({ title }).queryKey, {
+        comments: data.comments,
+      })
     },
   })
 }
