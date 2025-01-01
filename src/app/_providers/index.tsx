@@ -7,9 +7,9 @@ import { PropsWithChildren } from "react"
 
 export function RootProvider({ children }: PropsWithChildren) {
   return (
-    <IsDarkmodeActivatedContextProvider>
-      <QueryClientProvider>{children}</QueryClientProvider>
-    </IsDarkmodeActivatedContextProvider>
+    <QueryClientProvider>
+      <IsDarkmodeActivatedContextProvider>{children}</IsDarkmodeActivatedContextProvider>
+    </QueryClientProvider>
   )
 }
 
