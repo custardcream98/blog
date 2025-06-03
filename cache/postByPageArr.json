@@ -2,10 +2,10 @@
   [
     {
       "category": ["React"],
-      "date": "2025-05-29",
-      "excerpt": "RSC는 어떻게 구현 된걸까 궁금하지 않으신가요? 직접 확인해봤습니다.",
+      "date": "2025-06-04",
+      "excerpt": "RSC를 구현한 원리는 무엇일지 알아봅니다.",
       "slug": "how-rsc-works",
-      "title": "React Server Components 구현 원리와 작동 방식"
+      "title": "React Server Components 살펴보기"
     },
     {
       "category": ["React.js", "TypeScript"],
