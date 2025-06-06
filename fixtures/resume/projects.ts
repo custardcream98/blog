@@ -1,6 +1,17 @@
 import { Project } from "src/types/resume"
 
 const projects: Project[] = [
+  {
+    description: `
+      * TanStack/query \`queryClient.setQueryData\` 제네릭 타입 오류 수정 ([링크](https://github.com/TanStack/query/pull/9030))
+      * motion 무한 렌더링 버그 수정 ([링크](https://github.com/motiondivision/motion/pull/2802))
+      * TanStack/query 공식 문서 잘못된 내용 수정 ([링크](https://github.com/TanStack/query/pull/5670))
+      * chakra-ui/panda 스타일 토큰 생성 관련 버그 수정 ([링크](https://github.com/chakra-ui/panda/pull/997))
+    `,
+    shortDescription:
+      "프로젝트 개발 시 자주 사용하는 라이브러리에 대한 이슈를 해결하고 공식 문서를 수정하는 등 오픈소스 프로젝트에 기여했습니다.",
+    title: "오픈소스 프로젝트 기여",
+  },
   // {
   //   description: `
   //   * goormEXP의 메인 랜딩 페이지를 한 스프린트만에 개발했을 정도로 높은 퍼포먼스를 유지했습니다.
@@ -45,10 +56,9 @@ const projects: Project[] = [
 
   {
     description: `
-      * **MSW Request Handler 관리를 위한 프레임워크 독립적 DevTools 개발**
-      * UI를 통해 핸들러를 관리(추가, 수정, 삭제, 활성화/비활성화, 지연 처리) 가능
-      * Mock Handler의 import/export 지원을 통해 테스트 환경 설정 간소화
-      * Devtools를 위한 WebSocket 서버를 제공, Request Handler를 JSON 파일 형태로 관리
+      * **프레임워크 독립적 API 설계**로 React, Vue 등 다양한 프레임워크에서 사용 가능
+      * WebSocket 인터페이스 및 \`serverGuard\` 로직 추상화로 안정적인 JSON 파일 ↔ UI 실시간 동기화 구현
+      * pnpm 모노레포로 UI, CLI 서버, 코어 3패키지 구조 설계
     `,
     links: [
       {
@@ -64,86 +74,86 @@ const projects: Project[] = [
       from: "2024-09",
     },
     shortDescription:
-      "서비스 개발 시 MSW Request Handler 관리에 불편함을 느껴 개발하고 있는 Devtools입니다.",
-    stacks: ["React.js", "TypeScript", "Rollup"],
+      "서비스 개발 시 MSW Request Handler 관리에 불편함을 느껴 개발하고 있는 Devtools입니다. UI를 통해 핸들러를 관리(추가, 수정, 삭제, 활성화/비활성화, 지연 처리)할 수 있습니다.",
+    stacks: ["React.js", "TypeScript", "Rollup", "i18n"],
     team: "개인 프로젝트",
     title: "@custardcream/msw-devtools",
   },
 
-  {
-    // utility-class-components 프로젝트로 밀고 블로그 위로 올리고 스내피를 맨 아래로
-    description:
-      // 스내피는 고민한 부분을 볼드처리 해봐라. 동료 피드백은 TS대신 JSDoc을 전파한 내용을 적어줘라. 팀원들에게 전파한 내용을 적어라. 내가 하고 싶은 기술이 있음에도 팀원들 좋자고 바꾼 내용을 담아봐라. 팀원과의 융합 능력 어필
-      // 스내피에서 추상화를 진행해서 팀원이 쓰기 편하게 만들어준 내용인 useAPI => 이런 식으로 어필. 팀워크 리더십을 중점으로 어필하되, 이런 기술적인 부분도 어필.
-      // 그런데 이거 만드는 시간에 전반적인 지식 전달을 하는게 좋지 않았을까 싶다는 내용도 드러내면 좋을거같음.
-      `
-      ~~~tsx
-      import { utld, ud } from "utility-class-components";
+  // {
+  //   // utility-class-components 프로젝트로 밀고 블로그 위로 올리고 스내피를 맨 아래로
+  //   description:
+  //     // 스내피는 고민한 부분을 볼드처리 해봐라. 동료 피드백은 TS대신 JSDoc을 전파한 내용을 적어줘라. 팀원들에게 전파한 내용을 적어라. 내가 하고 싶은 기술이 있음에도 팀원들 좋자고 바꾼 내용을 담아봐라. 팀원과의 융합 능력 어필
+  //     // 스내피에서 추상화를 진행해서 팀원이 쓰기 편하게 만들어준 내용인 useAPI => 이런 식으로 어필. 팀워크 리더십을 중점으로 어필하되, 이런 기술적인 부분도 어필.
+  //     // 그런데 이거 만드는 시간에 전반적인 지식 전달을 하는게 좋지 않았을까 싶다는 내용도 드러내면 좋을거같음.
+  //     `
+  //     ~~~tsx
+  //     import { utld, ud } from "utility-class-components";
 
-      const Container = utld.div<{ $isRed: boolean }>\`
-        flex
-        text-bold
+  //     const Container = utld.div<{ $isRed: boolean }>\`
+  //       flex
+  //       text-bold
 
-        \${({ $isRed }) => $isRed && "text-red-500"}
-      \`;
+  //       \${({ $isRed }) => $isRed && "text-red-500"}
+  //     \`;
 
-      function Page() {
-        return <Container $isRed={true}>AWESOME!!</Container>;
-      }
-      ~~~
-       * BundlePhobia 기준 **3.8KB의 작은 번들 사이즈** 달성
-    `,
-    links: [
-      {
-        name: "GitHub",
-        url: "https://github.com/custardcream98/utility-class-components",
-      },
-      {
-        name: "npm 배포",
-        url: "https://www.npmjs.com/package/utility-class-components",
-      },
-    ],
-    period: {
-      from: "2023-05",
-      to: "2023-06",
-    },
-    shortDescription:
-      "개인 블로그를 Next.js 13 버전의 App Router로 마이그레이션 하며 개발한 라이브러리입니다. '유틸리티 클래스를 CSS in JS처럼 다룰 수 있으면 좋겠다'는 아이디어에서 시작했습니다.",
-    stacks: ["React.js", "TypeScript"],
-    team: "개인 프로젝트",
-    title: "utility-class-components",
-  },
+  //     function Page() {
+  //       return <Container $isRed={true}>AWESOME!!</Container>;
+  //     }
+  //     ~~~
+  //      * BundlePhobia 기준 **3.8KB의 작은 번들 사이즈** 달성
+  //   `,
+  //   links: [
+  //     {
+  //       name: "GitHub",
+  //       url: "https://github.com/custardcream98/utility-class-components",
+  //     },
+  //     {
+  //       name: "npm 배포",
+  //       url: "https://www.npmjs.com/package/utility-class-components",
+  //     },
+  //   ],
+  //   period: {
+  //     from: "2023-05",
+  //     to: "2023-06",
+  //   },
+  //   shortDescription:
+  //     "개인 블로그를 Next.js 13 버전의 App Router로 마이그레이션 하며 개발한 라이브러리입니다. '유틸리티 클래스를 CSS in JS처럼 다룰 수 있으면 좋겠다'는 아이디어에서 시작했습니다.",
+  //   stacks: ["React.js", "TypeScript"],
+  //   team: "개인 프로젝트",
+  //   title: "utility-class-components",
+  // },
 
-  {
-    description: `
-     * Next.js 12버전으로 시작했던 프로젝트를 13으로 업그레이드 하며, Server Component 스타일링을 더 편하게 하기 위해 **utility-class-components 라이브러리를 개발**
-     * Lighthouse 기준 **Accessibility, SEO 점수 100점**을 유지
-     * 블로그 내 게시물 검색 기능을 구현했으며, API Call 최적화 및 어뷰징 방지를 위해 디바운싱을 적용하는 등 지속해서 기능을 개선 및 추가중
-     * 게시물의 썸네일을 자동으로 생성
-    `,
-    links: [
-      {
-        name: "GitHub",
-        url: "https://github.com/custardcream98/blog-from-beginning-to-end",
-      },
-      {
-        name: "블로그 링크",
-        url: "https://shiwoo.dev",
-      },
-      {
-        name: "추천글: CSS-in-JS와 서버 컴포넌트",
-        url: "https://shiwoo.dev/posts/next-13-and-css-in-js",
-      },
-    ],
-    period: {
-      from: "2022-08",
-    },
-    shortDescription:
-      "저만의 색깔을 나타낼 수 있도록 모든 부분을 직접 개발한 블로그입니다. 지속해서 리팩토링하며 컴포넌트 설계의 테스트베드로 활용하고 있습니다.", // TODO: 세 줄 요약으로 바꾸기
-    stacks: ["Next.js", "TypeScript"],
-    team: "개인 프로젝트",
-    title: "기술 블로그",
-  },
+  // {
+  //   // * Next.js 12버전으로 시작했던 프로젝트를 13으로 업그레이드 하며, Server Component 스타일링을 더 편하게 하기 위해 **utility-class-components 라이브러리를 개발**
+  //   description: `
+  //    * Lighthouse 기준 **Accessibility, SEO 점수 100점**을 유지
+  //    * 블로그 내 게시물 검색 기능을 직접 구현, API Call 최적화 및 어뷰징 방지를 위해 디바운싱을 적용하는 등 지속해서 기능을 개선 및 추가중
+  //    * 게시물의 썸네일을 자동으로 생성
+  //   `,
+  //   links: [
+  //     {
+  //       name: "GitHub",
+  //       url: "https://github.com/custardcream98/blog-from-beginning-to-end",
+  //     },
+  //     {
+  //       name: "블로그 링크",
+  //       url: "https://shiwoo.dev",
+  //     },
+  //     {
+  //       name: "추천글: CSS-in-JS와 서버 컴포넌트",
+  //       url: "https://shiwoo.dev/posts/next-13-and-css-in-js",
+  //     },
+  //   ],
+  //   period: {
+  //     from: "2022-08",
+  //   },
+  //   shortDescription:
+  //     "저만의 색깔을 나타낼 수 있도록 모든 부분을 직접 개발한 블로그입니다. 지속해서 리팩토링하며 컴포넌트 설계의 테스트베드로 활용하고 있습니다.", // TODO: 세 줄 요약으로 바꾸기
+  //   stacks: ["Next.js", "TypeScript"],
+  //   team: "개인 프로젝트",
+  //   title: "기술 블로그",
+  // },
 
   // {
   //   description: `
@@ -174,6 +184,35 @@ const projects: Project[] = [
   //   team: "개인 프로젝트",
   //   title: "custard-ui",
   // },
+
+  {
+    description: `
+   * 복수 거래소 API(Upbit·Bithumb·Binance·CoinGecko 등)를 **타입 안전 resolver 레이어**로 통합, 단일 fetch SDK 제공
+   * 제네릭 Server Component 유틸을 설계해 Suspense · 데이터 패칭 패턴을 연구중
+      ~~~tsx
+      // As Is
+      <Suspense fallback={<div>Loading...</div>}>
+        <CoinListServerComponent />
+      </Suspense>
+
+      // To Be
+      <Suspense fallback={<div>Loading...</div>}>
+        <ServerPromiseConsumer
+          promise={getCoinListData()}
+        >
+          {(data) => <CoinList data={data} />}
+        </ServerPromiseConsumer>
+      </Suspense>
+      ~~~
+  `,
+    links: [{ name: "서비스 링크", url: "https://coinrate.kr" }],
+    period: { from: "2025-05" },
+    shortDescription:
+      "한국 주요 거래소(업비트·빗썸)와 글로벌 지수 데이터를 통합해 한국 프리미엄·환율·거래소별 가격 차이를 실시간으로 보여주는 서비스입니다. Next.js 최신 기능을 실험하며 개발·운영 중입니다.",
+    stacks: ["Next.js", "TypeScript"],
+    team: "개인 프로젝트",
+    title: "coinrate.kr — 실시간 암호화폐 환율 계산기",
+  },
 
   {
     description: `

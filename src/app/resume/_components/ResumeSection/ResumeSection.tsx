@@ -24,7 +24,7 @@ function Item({ title, links, period, descriptions, points }: ResumeSectionData)
   const isLinksExist = !!links && links.length !== 0
 
   return (
-    <S.SectionItem>
+    <S.SectionItem className='break-inside-avoid'>
       <SectionItemTitle>{title}</SectionItemTitle>
 
       <ResumePeriod from={period.from} to={period.to} />

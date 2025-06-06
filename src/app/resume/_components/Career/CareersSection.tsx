@@ -34,6 +34,7 @@ function Item({
       className={ud`${[
         "gap-x-3 print:grid print:grid-cols-[1fr_2fr] resume:grid resume:grid-cols-[1fr_3fr]",
         "print:[&+&]:!mt-[2em]",
+        "break-inside-avoid",
       ]}`}
     >
       <div>

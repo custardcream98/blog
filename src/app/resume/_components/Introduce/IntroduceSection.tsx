@@ -8,16 +8,27 @@ function IntroduceSection() {
     <S.Section>
       <h3 className='sr-only'>자기 소개</h3>
       <IntroduceP>
-        저는 <strong>오픈소스에 기여하길 좋아합니다.</strong> chakra-ui/panda, TanStack/query 등에
-        작은 기여를 하기도 했으며, 실무 중 framer-motion의 커스텀 훅이 무한 렌더링을 일으키는 문제를
-        발견, 해결에 기여한 바 있습니다. 이같이 사용 중인 라이브러리에 문제가 있다면 회피하기보다는
-        직접 수정, 이슈라이즈하려고 노력합니다.
+        <strong>동료와 함께 성장하는 개발자</strong>입니다. 95명 규모의 사내·외 프론트엔드 Slack
+        채널을 직접 운영하며, 주 1회 이상 최신 기술·아키텍처 아티클을 큐레이션해 공유합니다.
+        회의·코드리뷰에서도 문제를 적극적으로 제기하고 대안을 제시해 왔습니다. 덕분에 다면평가에서
+        &quot;기술적 고민을 깊이 하고 학습 내용을 적극 공유&quot;, &quot;어려움에 처한 동료를 먼저
+        돕고 팀워크를 강화&quot;, &quot;호기심과 개선 의지가 탁월&quot;하다는 피드백을 받았습니다.
+      </IntroduceP>
+
+      <IntroduceP>
+        <strong>오픈소스에 적극적으로 기여합니다.</strong> 실무 과정에서 framer-motion 커스텀 훅의
+        무한 렌더링 버그를 발견해 직접 수정 했고, TanStack/query의{" "}
+        <code>queryClient.setQueryData</code> 제네릭 타입 오류를 찾아내어 개선했습니다. 이처럼 사용
+        중인 라이브러리에서 문제가 드러나면 회피하기보다 직접 수정하거나 이슈를 제기해 오픈소스
+        커뮤니티와 함께 품질을 높이고자 노력합니다.
       </IntroduceP>
       <IntroduceP>
-        더불어 <strong>DX를 개선하기 위한 툴 개발</strong>에도 관심이 많습니다. 작지만 수정이
-        까다로워 방치돼있던 레거시 코드들을 자동화 도구로 빠르게 해결했고, ESLint 플러그인도 팀에
-        맞게 직접 개발해 사용하기도 합니다. 최근에는 MSW Request Handler를 클라이언트에서 편하게
-        관리할 수 있도록 도와주는 MSW Devtools를 개발 중입니다.
+        더불어 <strong>DX 향상을 위한 도구 개발</strong>에도 적극적입니다. 수동으로 수정하기
+        번거롭던 레거시 코드를 자동화 스크립트로 정리했으며, 팀 규칙에 맞춘 ESLint 플러그인을 직접
+        제작해 배포했습니다. Sentry · OpenSearch · Amplitude에서 이벤트 로그나 enum을 마우스
+        오버만으로 이해할 수 있도록 설명을 보여주는 Chrome 확장 프로그램을 개발해 비개발 직군까지
+        활용하도록 했습니다. 현재는 MSW Request Handler를 클라이언트에서 직관적으로 관리할 수 있는
+        MSW Devtools를 개발 중입니다.
       </IntroduceP>
       {/* <IntroduceP>
         저는 <strong>오픈소스에 기여하는 개발자</strong>입니다. React Server Component를 효과적으로

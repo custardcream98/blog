@@ -28,7 +28,7 @@ async function Item({
   className,
 }: PropsWithClassName<Project>) {
   // const isStacksExist = stacks.length !== 0
-  const isLinksExist = links.length !== 0
+  const isLinksExist = links && links.length > 0
 
   const descriptionContent = description ? await compileResumeMDX(description) : null
 
@@ -38,7 +38,7 @@ async function Item({
 
       {/* {!!team && <S.ProjectTeam>{team}</S.ProjectTeam>} */}
 
-      <ResumePeriod from={period.from} to={period.to} />
+      {period && <ResumePeriod from={period.from} to={period.to} />}
 
       {descriptionContent}
 
@@ -47,7 +47,7 @@ async function Item({
       {isLinksExist && (
         <ResumeLinksList>
           {links.map((link) => (
-            <li key={link.name}>
+            <li key={link.url}>
               <ResumeLink {...link} />
             </li>
           ))}

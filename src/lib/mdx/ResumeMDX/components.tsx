@@ -38,7 +38,17 @@ const Strong = utld.strong`
   dark:text-resume-text-strong-dark
 `
 
+const A = utld.a`
+  text-resume-accent-light
+  dark:text-resume-accent-dark
+`
+
 export const resumeComponents: MDXRemoteProps["components"] = {
+  a: ({ children, href }) => (
+    <A href={href} target='_blank' rel='noopener noreferrer'>
+      {children}
+    </A>
+  ),
   li: ({ children }) => <Li>{children}</Li>,
   strong: ({ children }) => <Strong>{children}</Strong>,
   ul: ({ children }) => <Ul>{children}</Ul>,

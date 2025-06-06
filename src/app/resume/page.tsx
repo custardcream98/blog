@@ -18,23 +18,21 @@ export default function ResumePage() {
     <S.Container className='resume-container'>
       <MainTitle>
         <span className='line'>안녕하세요,</span>
-        {
-          <strong className='text-gradient-intro animate-bg-gradient font-semibold print:animate-none'>
-            프론트엔드 개발자 박시우
-          </strong>
-        }
+        <strong className='text-gradient-intro animate-bg-gradient font-semibold print:animate-none'>
+          프론트엔드 개발자 박시우
+        </strong>
         입니다.
       </MainTitle>
 
       <IntroduceSection />
 
-      <CareersSection className='break-inside-avoid print:pt-2'>
+      <CareersSection className='print:pt-2'>
         {careers.map((career) => (
           <CareersSection.Item key={career.company} {...career} />
         ))}
       </CareersSection>
 
-      <ProjectSection title='프로젝트' className='print:mt-10'>
+      <ProjectSection title='프로젝트 및 오픈소스 활동' className='print:mt-10'>
         {projects.map((project) => (
           <ProjectSection.Item
             key={project.title}
@@ -60,7 +58,7 @@ export default function ResumePage() {
         ))}
       </ResumeSection>
 
-      <ResumeSection sectionTitle='교육 및 자격증' className='break-inside-avoid'>
+      <ResumeSection sectionTitle='교육 및 자격증'>
         {educations.map((educations) => (
           <ResumeSection.Item key={educations.title} {...educations} />
         ))}

@@ -14,12 +14,12 @@ export type ProjectTeam = string
 
 export type Project = {
   title: string
-  period: Period
+  period?: Period
   team?: ProjectTeam
   shortDescription: string
-  links: ResumeLink[]
+  links?: ResumeLink[]
   description: string
-  stacks: string[]
+  stacks?: string[]
 }
 
 export type Career = {
