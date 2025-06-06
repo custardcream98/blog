@@ -1,6 +1,7 @@
 import "src/mocks"
 
 import { ClientLogger, ProjectAd } from "src/components/client"
+import { GoogleAdSense } from "src/components/GoogleAdSense"
 import { FONT_D2_CODING, FONT_POPPINS, FONT_PRETENDARD } from "src/fonts"
 
 import { Navigation } from "./_client"
@@ -44,6 +45,7 @@ export default function RootLayout({ children }: React.PropsWithChildren) {
               gtag('js', new Date());
               gtag('config', '${process.env.NEXT_PUBLIC_GOOGLE_ANALYTICS_ID}');`}
             </Script>
+            <GoogleAdSense />
           </>
         )}
       </head>
