@@ -51,9 +51,9 @@ function IntroduceSection() {
         <li className='inline-block print:hidden'>
           <ResumeLink name='GitHub' url='https://github.com/custardcream98' />
         </li>
-        <li className='inline-block print:hidden'>
+        {/* <li className='inline-block print:hidden'>
           <ResumeLink name='포트폴리오' url='https://1drv.ms/p/s!AuUWTcQUIRa453uvR0QHsbUGYRbA' />
-        </li>
+        </li> */}
         <li className='hidden print:inline-block'>
           <ResumeLink name='custardcream@kakao.com' url='https://shiwoo.dev' />
         </li>
