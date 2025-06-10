@@ -58,7 +58,7 @@ export default function ResumePage() {
         ))}
       </ResumeSection>
 
-      <ResumeSection sectionTitle='교육 및 자격증'>
+      <ResumeSection sectionTitle='교육 및 자격증' className='print:!mb-0'>
         {educations.map((educations) => (
           <ResumeSection.Item key={educations.title} {...educations} />
         ))}
