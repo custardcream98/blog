@@ -20,14 +20,14 @@ function Section({
 async function Item({
   title,
   shortDescription,
-  // stacks,
+  stacks,
   links,
   period,
   // team,
   description,
   className,
 }: PropsWithClassName<Project>) {
-  // const isStacksExist = stacks.length !== 0
+  const isStacksExist = stacks && stacks.length !== 0
   const isLinksExist = links && links.length > 0
 
   const descriptionContent = description ? await compileResumeMDX(description) : null
@@ -54,13 +54,13 @@ async function Item({
         </ResumeLinksList>
       )}
 
-      {/* {isStacksExist && (
+      {isStacksExist && (
         <S.ProjectStacks>
           {stacks.map((stack) => (
             <S.ProjectStack key={stack}>{stack}</S.ProjectStack>
           ))}
         </S.ProjectStacks>
-      )} */}
+      )}
     </S.SectionItemBordered>
   )
 }

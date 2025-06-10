@@ -29,6 +29,7 @@ export type Career = {
   shortDescription?: string
   descriptions: (string | [string, string[]])[]
   links: ResumeLink[]
+  stacks?: string[]
 }
 
 export type ResumeSectionData = {

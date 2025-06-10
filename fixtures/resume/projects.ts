@@ -75,7 +75,7 @@ const projects: Project[] = [
     },
     shortDescription:
       "서비스 개발 시 MSW Request Handler 관리에 불편함을 느껴 개발하고 있는 Devtools입니다. UI를 통해 핸들러를 관리(추가, 수정, 삭제, 활성화/비활성화, 지연 처리)할 수 있습니다.",
-    stacks: ["React.js", "TypeScript", "Rollup", "i18n"],
+    stacks: ["React", "TypeScript", "Rollup", "i18n"],
     team: "개인 프로젝트",
     title: "@custardcream/msw-devtools",
   },

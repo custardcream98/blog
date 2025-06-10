@@ -24,9 +24,11 @@ function Item({
   position,
   // shortDescription,
   descriptions,
+  stacks,
   // links
 }: Career) {
   // const isLinksExist = links.length !== 0
+  const isStacksExist = stacks && stacks.length !== 0
   const isDescriptionsExist = descriptions.length !== 0
 
   return (
@@ -43,6 +45,14 @@ function Item({
         <ResumePeriod {...period} />
 
         <S.ProjectShortDescription className='!mt-[0.25rem]'>{position}</S.ProjectShortDescription>
+
+        {isStacksExist && (
+          <S.ProjectStacks>
+            {stacks.map((stack) => (
+              <S.ProjectStack key={stack}>{stack}</S.ProjectStack>
+            ))}
+          </S.ProjectStacks>
+        )}
       </div>
 
       {isDescriptionsExist && (
