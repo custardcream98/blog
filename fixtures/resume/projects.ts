@@ -75,7 +75,7 @@ const projects: Project[] = [
     },
     shortDescription:
       "서비스 개발 시 MSW Request Handler 관리에 불편함을 느껴 개발하고 있는 Devtools입니다. UI를 통해 핸들러를 관리(추가, 수정, 삭제, 활성화/비활성화, 지연 처리)할 수 있습니다.",
-    stacks: ["React", "TypeScript", "Rollup", "i18n"],
+    stacks: ["React", "TypeScript", "Tailwind CSS", "Rollup", "i18n"],
     team: "개인 프로젝트",
     title: "@custardcream/msw-devtools",
   },
@@ -209,7 +209,7 @@ const projects: Project[] = [
     period: { from: "2025-05" },
     shortDescription:
       "한국 주요 거래소(업비트·빗썸)와 글로벌 지수 데이터를 통합해 한국 프리미엄·환율·거래소별 가격 차이를 실시간으로 보여주는 서비스입니다. Next.js 최신 기능을 실험하며 개발·운영 중입니다.",
-    stacks: ["Next.js", "TypeScript"],
+    stacks: ["Next.js", "TypeScript", "Tailwind CSS"],
     team: "개인 프로젝트",
     title: "coinrate.kr — 실시간 암호화폐 환율 계산기",
   },
