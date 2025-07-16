@@ -1,0 +1,137 @@
+---
+title: "isPending만으로 따닥을 막을 수 없는 이유"
+excerpt: "React Query의 `useMutation`을 사용할 때 `isPending`으로 요청중 버튼을 `disabled`로 만들어도 중복 호출을 완전히 막을 수는 없는 이유"
+date: "2025-07-16"
+category: ["React.js"]
+---
+
+> React Query의 `useMutation`을 사용할 때 `isPending`으로 요청중 버튼을 `disabled`로 만들어도 중복 호출을 완전히 막을 수는 없는 이유
+
+API 요청과 같은 비동기 작업을 처리할 때, 사용자에게 현재 상태를 알려주는 것은 좋은 UX의 기본입니다. 특히 요청이 처리되는 동안 버튼을 비활성화해서 중복 요청을 막는 것은 거의 국룰처럼 여겨지는 패턴이죠.
+
+저 역시 React Query의 `useMutation`을 사용하면서 `mutation.isPending` 상태를 버튼의 `disabled` 속성에 넣어 사용하고 있었습니다.
+
+```jsx
+const mutation = useMutation({ mutationFn: someApi })
+
+<button disabled={mutation.isPending} onClick={() => mutation.mutate()}>
+  {mutation.isPending ? "처리 중..." : "요청하기"}
+</button>
+```
+
+이렇게 하면 `isPending`이 `true`일 때 버튼이 비활성화되니, 사용자가 버튼을 여러 번 연타해도 요청은 한 번만 갈 거라고 믿고 있었습니다. 대부분의 경우엔 그렇죠.
+
+하지만 아주 드물게 **중복 요청이 발생한 사용자 로그가 발견**됐습니다. 어떻게 `disabled`된 버튼이 다시 눌릴 수 있었을까요?
+
+## 범인은 바로 '업데이트 시점의 차이'
+
+결론부터 말하자면, 우리가 `mutation.mutate()`를 호출하는 시점과 React Query가 `isPending` 상태를 `true`로 업데이트하고 리액트가 리렌더링을 통해 버튼을 `disabled`로 만드는 시점 사이에는 아주 미세한 시간 갭이 존재합니다. 이 갭을 파고들면 중복 요청이 가능해집니다.
+
+이 현상을 재현하기 위해 데모 코드를 만들었습니다. ([전체 데모 코드는 GitHub에서 확인](https://github.com/custardcream98/react-query-update-timing-issue))
+
+데모에서는 중복 호출을 Programmatic하게 재현하도록 세 번의 클릭을 연속으로 실행하도록 했습니다.
+
+```jsx
+const tripleClick = () => {
+  // ① 첫 번째 클릭: 동기 실행
+  buttonRef.current?.click()
+
+  // ② 두 번째 클릭 시도: 마이크로태스크로 실행
+  queueMicrotask(() => {
+    buttonRef.current?.click()
+  })
+
+  // ③ 세 번째 클릭 시도: 매크로태스크로 실행
+  setTimeout(() => {
+    buttonRef.current?.click()
+  }, 0)
+}
+```
+
+[데모](https://custardcream98.github.io/react-query-update-timing-issue/)에서 "Trigger Triple Click" 버튼을 누르면 이 코드가 실행되는데, 콘솔을 열어 확인해보면 API 호출은 **두 번** 일어납니다.
+
+<figure>
+  <NextImage src='/static/img/use-mutation-is-pending/log.png' alt='데모 코드 실행 결과' />
+  <figcaption>
+    두 번째 클릭 시도시 `button.disabled`가 `false`로, API CALL 로그가 두 번 남음
+  </figcaption>
+</figure>
+
+2번과 3번 사이에 리렌더링이 일어났다는 점에도 주목해주세요.
+
+### 1. 이벤트 루프: Macro-task와 Micro-task
+
+잠시 JS 기본 개념 하나 짚어보겠습니다.
+
+자바스크립트 엔진은 여러 작업을 처리하기 위해 Queue를 사용합니다. 중요한 것은 작업의 종류에 따라 처리 우선순위가 다르다는 점입니다.
+
+- **Macro-task**: `setTimeout`, `setInterval`, UI 이벤트(클릭 등), 렌더링
+- **Micro-task**: `Promise.then`, `queueMicrotask`
+
+이벤트 루프는 하나의 매크로태스크를 실행한 후, **큐에 쌓인 모든 마이크로태스크를 전부 실행**하고, 그 다음에야 다음 매크로태스크를 실행합니다. 즉, 마이크로태스크의 우선순위가 더 높습니다.
+
+### 2. React Query의 상태 업데이트: `setTimeout`을 통한 배치 처리
+
+React Query는 내부적으로 **`notifyManager`** 를 구현해 상태 변경 notification을 관리합니다. 공식 문서에도 나와 있듯, `notifyManager`는 기본적으로 **`setTimeout(..., 0)`** 을 사용해 notification을 스케줄링합니다.
+
+> By default, the batch is run with a `setTimeout`
+>
+> _— TanStack Query [Docs](https://tanstack.com/query/latest/docs/reference/notifyManager#:~:text=By%20default%2C%20the%20batch%20is%20run%20with%20a%20setTimeout)_
+
+[코드 확인하기](https://github.com/TanStack/query/blob/4d8bbbfc2c53b676a3503d057872cb34d42772a8/packages/query-core/src/notifyManager.ts#L13)
+
+즉, `mutation.mutate()`가 호출되면 "`isPending`을 `true`로 바꿔 렌더하라" 라는 요청이 바로 처리되는 게 아니라, `setTimeout`을 통해 매크로태스크 큐에 등록된다는 의미입니다. 동기적으로 발생하는 여러 개의 `notify()` 호출을 하나의 `setTimeout` 예약으로 묶어서 관리하기 위해 이렇게 구현되어 있습니다.
+
+참고로 `notifyManager.setScheduler`를 사용해서 `setTimeout` 대신 다른 방법으로 스케줄링 하도록 조정할 수도 있습니다. ([링크](https://tanstack.com/query/latest/docs/reference/notifyManager#notifymanagersetscheduler))
+
+## 시간 순서대로 재구성해보기
+
+"Trigger Triple Click"을 눌렀을 때 무슨 일이 일어나는지 시간 순서대로 따라가 봅시다.
+
+1.  **`tripleClick` 함수 실행 (현재 Task: 이벤트 핸들러이므로 매크로태스크)**
+
+    1.  **첫 번째 클릭 (동기)**: `buttonRef.current.click()`이 호출됩니다.
+
+        - `mutation.mutate()`가 실행됩니다. notification을 위한 콜백을 `notifyManager` 내의 큐에 추가합니다.
+        - React Query의 `notifyManager`는 "리렌더링 하라"는 작업을 `setTimeout`으로 예약합니다. (👉 **매크로태스크 큐에 등록**)
+
+    2.  **두 번째 클릭 시도 (마이크로태스크)**: `queueMicrotask`가 호출됩니다.
+
+        - 콜백 함수는 현재 실행 중인 동기 코드가 모두 끝난 직후, 다음 매크로태스크가 시작되기 전에 실행됩니다. (👉 **마이크로태스크 큐에 등록**)
+
+    3.  **세 번째 클릭 시도 (매크로태스크)**: `setTimeout`이 호출됩니다.
+        - 콜백 함수는 `0ms` 뒤에 실행되도록 예약됩니다. (👉 **매크로태스크 큐에 등록**)
+
+2.  **마이크로태스크 실행**
+
+    - 현재 매크로태스크가 끝났으므로, 이벤트 루프는 마이크로태스크 큐를 확인합니다.
+    - 1-2번에서 예약한 콜백이 실행됩니다. `buttonRef.current.click()`이 다시 호출됩니다.
+    - 이 시점에도 아직 1번에서 예약한 리렌더링 매크로태스크가 실행되기 전이므로, `isPending`은 여전히 `false`입니다. 버튼은 활성화 상태입니다.
+    - `mutation.mutate()`가 **두 번째로** 실행됩니다. `notifyManager` 덕분에 리렌더링은 배치 처리되어, 여기에서는 notification을 위한 콜백만 큐에 추가하고 따로 리렌더링을 예약하지는 않습니다.
+
+3.  **리렌더링**
+
+    - 마이크로태스크 큐가 비워졌습니다. 이제 이벤트 루프는 매크로태스크 큐에서 다음 작업을 가져옵니다.
+    - 1번 클릭으로 예약되었던 리렌더링 작업(정확히 말하면 `notifyManager`의 `flush` 함수 콜)이 실행됩니다.
+    - 덕분에 컴포넌트가 리렌더링되고, `isPending`은 `true`가 되며, 버튼의 `disabled` 속성이 `true`로 바뀝니다.
+
+4.  **세 번째 클릭 실행**
+    - 3번에서 예약한 `setTimeout` 콜백이 실행됩니다.
+    - 하지만 이때는 이미 3번 단계에서 버튼이 비활성화되었으므로, `buttonRef.current.click()`은 아무 효과가 없습니다.
+
+결과적으로, 리렌더링이 일어나기 전의 아주 짧은 틈에 1번(동기)과 2번(마이크로태스크) 클릭이 모두 성공하여 API 호출이 두 번 발생하게 된 것입니다.
+
+## 남은 고민
+
+사실 실제 사용자가 마이크로태스크 수준으로 클릭을 제어하기는 불가능에 가깝습니다. 하지만 이 데모는 **`isPending` 상태 업데이트와 UI 반영 사이에는 틈이 생길 수 있다**는 사실을 명확하게 보여줍니다.
+
+이 문제의 원인이 무엇일지 오랫동안 고민했었는데, 명확하게 파악하니 속이 시원하네요.
+
+이제 남은 것은 **어떻게 막을 것인가?** 하는 문제입니다.
+
+- `useRef`로 플래그를 만들어서 `mutate` 함수가 호출되는 즉시 잠그는 방법
+- `useState`로 별도의 로딩 상태를 만들어서 동기적인 상태 업데이트로 관리하는 방법
+- 혹은 `debounce`나 `throttle`을 사용하는 방법
+- 기본 스케줄러를 `queueMicrotask`로 변경해서 상태 업데이트를 앞당기는 방법 (완벽하진 않겠지만)
+
+어떤 것이 가장 우아한 방법일지는 고민이 됩니다. 하지만 한 가지 확실한 것은, 라이브러리가 제공하는 상태를 맹신하기보다 그 내부 동작 원리를 한 번쯤 들여다보는 것이 얼마나 중요한지 다시 한번 깨달았다는 점입니다.
