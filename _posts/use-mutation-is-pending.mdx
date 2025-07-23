@@ -80,7 +80,7 @@ React Query는 내부적으로 **`notifyManager`** 를 구현해 상태 변경 n
 
 [코드 확인하기](https://github.com/TanStack/query/blob/4d8bbbfc2c53b676a3503d057872cb34d42772a8/packages/query-core/src/notifyManager.ts#L13)
 
-즉, `mutation.mutate()`가 호출되면 "`isPending`을 `true`로 바꿔 렌더하라" 라는 요청이 바로 처리되는 게 아니라, `setTimeout`을 통해 매크로태스크 큐에 등록된다는 의미입니다. 동기적으로 발생하는 여러 개의 `notify()` 호출을 하나의 `setTimeout` 예약으로 묶어서 관리하기 위해 이렇게 구현되어 있습니다.
+즉, `mutation.mutate()`가 호출되면 "`isPending`을 `true`로 바꿨으니 리렌더하라" 라는 요청이 바로 처리되는 게 아니라, `setTimeout`을 통해 매크로태스크 큐에 등록된다는 의미입니다. 동기적으로 발생하는 여러 개의 `notify()` 호출을 하나의 `setTimeout` 예약으로 묶어서 관리하기 위해 이렇게 구현되어 있습니다.
 
 참고로 `notifyManager.setScheduler`를 사용해서 `setTimeout` 대신 다른 방법으로 스케줄링 하도록 조정할 수도 있습니다. ([링크](https://tanstack.com/query/latest/docs/reference/notifyManager#notifymanagersetscheduler))
 
@@ -105,19 +105,19 @@ React Query는 내부적으로 **`notifyManager`** 를 구현해 상태 변경 n
 2.  **마이크로태스크 실행**
 
     - 현재 매크로태스크가 끝났으므로, 이벤트 루프는 마이크로태스크 큐를 확인합니다.
-    - 1-2번에서 예약한 콜백이 실행됩니다. `buttonRef.current.click()`이 다시 호출됩니다.
-    - 이 시점에도 아직 1번에서 예약한 리렌더링 매크로태스크가 실행되기 전이므로, `isPending`은 여전히 `false`입니다. 버튼은 활성화 상태입니다.
+    - 1.2번에서 예약한 콜백이 실행됩니다. `buttonRef.current.click()`이 다시 호출됩니다.
+    - 이 시점에도 아직 1.1번에서 예약한 리렌더링 매크로태스크가 실행되기 전이므로, `isPending`은 여전히 `false`입니다. 버튼은 활성화 상태입니다.
     - `mutation.mutate()`가 **두 번째로** 실행됩니다. `notifyManager` 덕분에 리렌더링은 배치 처리되어, 여기에서는 notification을 위한 콜백만 큐에 추가하고 따로 리렌더링을 예약하지는 않습니다.
 
 3.  **리렌더링**
 
     - 마이크로태스크 큐가 비워졌습니다. 이제 이벤트 루프는 매크로태스크 큐에서 다음 작업을 가져옵니다.
-    - 1번 클릭으로 예약되었던 리렌더링 작업(정확히 말하면 `notifyManager`의 `flush` 함수 콜)이 실행됩니다.
+    - 1.1번 클릭으로 예약되었던 리렌더링 작업(정확히 말하면 `notifyManager`의 `flush` 함수 콜)이 실행됩니다.
     - 덕분에 컴포넌트가 리렌더링되고, `isPending`은 `true`가 되며, 버튼의 `disabled` 속성이 `true`로 바뀝니다.
 
 4.  **세 번째 클릭 실행**
-    - 3번에서 예약한 `setTimeout` 콜백이 실행됩니다.
-    - 하지만 이때는 이미 3번 단계에서 버튼이 비활성화되었으므로, `buttonRef.current.click()`은 아무 효과가 없습니다.
+    - 1.3번에서 예약한 `setTimeout` 콜백이 실행됩니다.
+    - 하지만 이때는 이미 3번 단계로 인해 버튼이 비활성화되었으므로, `buttonRef.current.click()`은 아무 효과가 없습니다.
 
 결과적으로, 리렌더링이 일어나기 전의 아주 짧은 틈에 1번(동기)과 2번(마이크로태스크) 클릭이 모두 성공하여 API 호출이 두 번 발생하게 된 것입니다.
 
@@ -131,7 +131,42 @@ React Query는 내부적으로 **`notifyManager`** 를 구현해 상태 변경 n
 
 - `useRef`로 플래그를 만들어서 `mutate` 함수가 호출되는 즉시 잠그는 방법
 - `useState`로 별도의 로딩 상태를 만들어서 동기적인 상태 업데이트로 관리하는 방법
-- 혹은 `debounce`나 `throttle`을 사용하는 방법
+- `debounce`나 `throttle`을 사용하는 방법
 - 기본 스케줄러를 `queueMicrotask`로 변경해서 상태 업데이트를 앞당기는 방법 (완벽하진 않겠지만)
 
 어떤 것이 가장 우아한 방법일지는 고민이 됩니다. 하지만 한 가지 확실한 것은, 라이브러리가 제공하는 상태를 맹신하기보다 그 내부 동작 원리를 한 번쯤 들여다보는 것이 얼마나 중요한지 다시 한번 깨달았다는 점입니다.
+
+## 보너스: mutation 이후 navigate를 할 때의 로딩처리는?
+
+또 다른 흔한 케이스가 있습니다. API 요청이 성공한 후 페이지를 이동하는 경우입니다.
+
+```ts
+mutation.mutate(null, {
+  onSuccess: () => {
+    navigate("/")
+  },
+})
+```
+
+이게 문제가 되는 이유는 Next.js, React Router 등 대부분의 라우팅 로직들이 경로 이동을 'transition'으로 처리하기 때문입니다. (Next.js의 Link 컴포넌트 [코드](https://github.com/vercel/next.js/blob/3fe3fb79d6efb69d227fef8d0576ec753112cf10/packages/next/src/client/app-dir/link.tsx#L288-L295), React Router의 [commit](https://github.com/remix-run/react-router/pull/10438/files))
+
+**mutation이 완료되어 `isPending`이 `false`가 되는 순간과 실제 페이지 이동이 완료되는 시점 사이**에 또 다른 틈이 생겨버리는 것이죠.
+
+`useTransition`을 사용해 다시 한번 transition으로 감싸면 이 문제를 깔끔하게 해결할 수 있습니다.
+
+```tsx
+const [isRoutePending, startRouteTransition] = useTransition()
+
+const mutation = useMutation({
+  mutationFn: someApi,
+  onSuccess: () => {
+    // 라우트 변경을 transition으로 감싸기
+    startRouteTransition(() => {
+      navigate("/")
+    })
+  },
+})
+
+// 두 상태를 모두 고려한 disabled 처리
+const isButtonDisabled = mutation.isPending || isRoutePending
+```
