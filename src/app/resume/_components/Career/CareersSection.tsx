@@ -1,5 +1,6 @@
-import type { PropsWithClassName } from "src/types/props"
-import type { Career } from "src/types/resume"
+import { ud, utld } from "utility-class-components"
+
+import type { Career } from "@/app/resume/_types"
 
 import {
   // ResumeLink, ResumeLinksList,
@@ -7,9 +8,12 @@ import {
   S,
 } from ".."
 
-import { ud, utld } from "utility-class-components"
-
-function Section({ className, children }: React.PropsWithChildren<PropsWithClassName>) {
+function Section({
+  className,
+  children,
+}: React.PropsWithChildren<{
+  className?: string
+}>) {
   return (
     <S.Section className={className}>
       <S.SectionTitle>경력</S.SectionTitle>
@@ -18,7 +22,7 @@ function Section({ className, children }: React.PropsWithChildren<PropsWithClass
   )
 }
 
-function Item({
+export function CareersSectionItem({
   company,
   period,
   position,
@@ -34,7 +38,7 @@ function Item({
   return (
     <S.SectionItemBordered
       className={ud`${[
-        "gap-x-3 print:grid print:grid-cols-[1fr_2fr] resume:grid resume:grid-cols-[1fr_3fr]",
+        "resume:grid resume:grid-cols-[1fr_3fr] gap-x-3 print:grid print:grid-cols-[1fr_2fr]",
         "print:[&+&]:!mt-[2em]",
         "break-inside-avoid",
       ]}`}
@@ -59,13 +63,13 @@ function Item({
         <Ul>
           {descriptions.map((description) =>
             typeof description === "string" ? (
-              <Li key={description} dangerouslySetInnerHTML={{ __html: description }} />
+              <Li dangerouslySetInnerHTML={{ __html: description }} key={description} />
             ) : (
               <Li key={description[0]}>
                 <span dangerouslySetInnerHTML={{ __html: description[0] }}></span>
                 <Ul>
                   {description[1].map((d) => (
-                    <Li key={d} dangerouslySetInnerHTML={{ __html: d }} />
+                    <Li dangerouslySetInnerHTML={{ __html: d }} key={d} />
                   ))}
                 </Ul>
               </Li>
@@ -129,6 +133,6 @@ const Li = utld.li`
   )
 `
 
-const CareersSection = Object.assign(Section, { Item })
+const CareersSection = Object.assign(Section, { Item: CareersSectionItem })
 
 export default CareersSection

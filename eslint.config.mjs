@@ -1,42 +1,37 @@
-import { FlatCompat } from "@eslint/eslintrc"
+import { dirname } from "path";
+import { fileURLToPath } from "url";
+import { FlatCompat } from "@eslint/eslintrc";
+import perfectionist from "eslint-plugin-perfectionist";
+
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = dirname(__filename);
 
 const compat = new FlatCompat({
-  baseDirectory: import.meta.dirname,
-})
+  baseDirectory: __dirname,
+});
 
-const config = [
-  ...compat.config({
-    extends: [
-      "next/core-web-vitals",
-      "next/typescript",
-      "plugin:@tanstack/eslint-plugin-query/recommended",
-    ],
-    plugins: ["sort-keys-fix", "simple-import-sort", "@tanstack/query"],
-    rules: {
-      "@typescript-eslint/no-explicit-any": "off",
-      "@typescript-eslint/no-unused-vars": [
-        "error",
-        {
-          argsIgnorePattern: "^_",
-          caughtErrors: "none",
-          varsIgnorePattern: "^_",
-        },
-      ],
-      "simple-import-sort/imports": [
-        "error",
-        {
-          groups: [
-            ["^\\u0000"],
-            ["^src(/.*|$)"],
-            ["^\\.\\.(?!/?$)", "^\\.\\./?$"],
-            ["^\\./(?=.*/)(?!/?$)", "^\\.(?!/?$)", "^\\./?$"],
-            ["^.+\\.?(css)$"],
-          ],
-        },
-      ],
-      "sort-keys-fix/sort-keys-fix": "error",
+const eslintConfig = [
+  ...compat.extends("next/core-web-vitals", "next/typescript"),
+  {
+     plugins: {
+      perfectionist,
     },
-  }),
-]
+    rules: {
+      'perfectionist/sort-array-includes': 'error',
+      'perfectionist/sort-exports': 'error',
+      'perfectionist/sort-imports': 'error',
+      'perfectionist/sort-interfaces': 'error',
+      'perfectionist/sort-intersection-types': 'error',
+      'perfectionist/sort-jsx-props': 'error',
+      'perfectionist/sort-named-exports': 'error',
+      'perfectionist/sort-union-types': 'error',
+    },
+    settings: {
+      perfectionist: {
+        type: 'natural',
+      },
+    },
+  }
+];
 
-export default config
+export default eslintConfig;

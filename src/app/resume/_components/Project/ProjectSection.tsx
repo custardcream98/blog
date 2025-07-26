@@ -1,8 +1,11 @@
-import { compileResumeMDX } from "src/lib/mdx"
-import type { PropsWithClassName } from "src/types/props"
-import { Project } from "src/types/resume"
+import { Project } from "@/app/resume/_types"
+import { compileResumeMDX } from "@/lib/mdx"
 
 import { ResumeLink, ResumeLinksList, ResumePeriod, S } from ".."
+
+type PropsWithClassName<T> = T & {
+  className?: string
+}
 
 function Section({
   title,

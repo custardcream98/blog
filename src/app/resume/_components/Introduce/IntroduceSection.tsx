@@ -1,9 +1,9 @@
-import { CopyLinkButton, PrintButton } from "../../_client"
-import { ResumeLink, S } from ".."
-
 import { utld } from "utility-class-components"
 
-function IntroduceSection() {
+import { ResumeLink, S } from ".."
+import { CopyLinkButton, PrintButton } from "../../_client"
+
+export function IntroduceSection() {
   return (
     <S.Section>
       <h3 className='sr-only'>자기 소개</h3>

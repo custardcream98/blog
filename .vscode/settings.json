@@ -1,14 +1,7 @@
 {
-  "tailwindCSS.experimental.classRegex": [
-    ["cva\\(([^)]*)\\)", "[\"'`]([^\"'`]*).*?[\"'`]"],
-    "utld(?:\\.[a-z0-9]*|\\([^)]*\\))(?:<[^>]*>|)`([^`]*)`",
-    "ud`([^`]*)`"
-  ],
-  "tailwindCSS.lint.cssConflict": "ignore",
-  "tailwindCSS.colorDecorators": true,
   "editor.codeActionsOnSave": {
-    "source.fixAll.eslint": "always",
-    "source.fixAll": "always"
+    "source.fixAll.eslint": "explicit",
+    "source.fixAll": "explicit"
   },
   "editor.colorDecorators": true,
   "typescript.tsdk": "node_modules/typescript/lib"

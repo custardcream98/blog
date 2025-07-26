@@ -1,9 +1,10 @@
-import type { Period } from "src/types/resume"
-import { convertYYMMToKorean } from "src/utils"
+import { utld } from "utility-class-components"
+
+import type { Period } from "@/app/resume/_types"
+
+import { convertYYMMToKorean } from "@/utils/string"
 
 import { dimTextStyle } from "./styles"
-
-import { utld } from "utility-class-components"
 
 export function ResumePeriod({ from, to }: Period) {
   if (to) {

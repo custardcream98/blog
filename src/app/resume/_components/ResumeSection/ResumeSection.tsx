@@ -1,9 +1,11 @@
-import type { PropsWithClassName } from "src/types/props"
-import type { ResumeSectionData } from "src/types/resume"
+import type { ResumeSectionData } from "@/app/resume/_types"
 
 import { ResumeLink, ResumeLinksList, ResumePeriod, S } from ".."
-
 import { SectionItemDescriptionList, SectionItemP, SectionItemTitle } from "./styles"
+
+type PropsWithClassName<T> = T & {
+  className?: string
+}
 
 function Section({
   sectionTitle,

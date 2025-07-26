@@ -1,0 +1,9 @@
+@import "tailwindcss";
+
+@theme {
+  --font-mono: var(--font-d2coding);
+  --font-sans: var(--font-pretendard);
+
+  --color-background: #1f1f1f;
+  --color-foreground: #e7e6d1;
+}

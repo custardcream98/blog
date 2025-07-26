@@ -1,12 +1,16 @@
-import { LinkSvg } from "src/components/Svgs"
-import type { PropsWithClassName } from "src/types/props"
-import type { ResumeLink } from "src/types/resume"
-
 import { ud, utld } from "utility-class-components"
+
+import type { ResumeLink } from "@/app/resume/_types"
+
+import { LinkSvg } from "@/assets/svg/LinkSvg"
+
+type PropsWithClassName<T> = T & {
+  className?: string
+}
 
 export function ResumeLink({ url, name, className }: PropsWithClassName<ResumeLink>) {
   return (
-    <StyledResumeLink className={className} href={url} target='_blank' rel='noopener noreferrer'>
+    <StyledResumeLink className={className} href={url} rel='noopener noreferrer' target='_blank'>
       <LinkSvg />
       {name}
     </StyledResumeLink>

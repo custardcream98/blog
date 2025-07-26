@@ -1,6 +1,17 @@
-import { Container as DefaultContainer } from "src/components"
-
 import { ud, utld } from "utility-class-components"
+
+export const DefaultContainer = utld.section`
+  mx-auto
+
+  w-[90vw]
+  max-w-800
+
+  flex
+  flex-col
+  items-center
+
+  [&>h2:target]:scroll-mt-[5rem]
+`
 
 export const Container = utld(DefaultContainer)`
   !items-start

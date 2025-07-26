@@ -1,4 +1,4 @@
-import { DateYYMM } from "src/types/string"
+type DateYYMM = `${string}-${string}`
 
 export const convertYYMMToKorean = (yymm: DateYYMM) => {
   const [year, month] = yymm.split("-")
