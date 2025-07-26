@@ -4,13 +4,13 @@
   "private": true,
   "scripts": {
     "dev": "next dev --turbopack",
-    "build": "next build",
+    "build": "pnpm exec next telemetry disable && next build",
     "start": "next start",
     "format": "prettier --write .",
     "lint": "next lint",
     "lint:fix": "next lint --fix",
     "typecheck": "tsc --noEmit",
-    "prepare": "husky install"
+    "prepare": "husky"
   },
   "dependencies": {
     "@vercel/speed-insights": "^1.2.0",
