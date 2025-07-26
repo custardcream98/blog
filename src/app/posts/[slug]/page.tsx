@@ -7,7 +7,7 @@ import rehypeSlug from "rehype-slug"
 
 import { Time } from "@/components/Time"
 import { externalLink, headingToStartFrom } from "@/lib/mdx-plugin"
-import { getPost } from "@/lib/octokit/blog"
+import { getPost, getPostsList } from "@/lib/octokit/blog"
 
 export { generateMetadata } from "./metadata"
 
@@ -37,6 +37,13 @@ const MDX_OPTIONS: EvaluateOptions = {
     ],
   },
   parseFrontmatter: true,
+}
+
+export const dynamicParams = true
+
+export const generateStaticParams = async () => {
+  const posts = await getPostsList()
+  return posts.map((post) => ({ slug: post.slug }))
 }
 
 export default async function PostPage({ params }: { params: Promise<{ slug: string }> }) {
