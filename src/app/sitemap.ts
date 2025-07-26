@@ -24,5 +24,11 @@ export default async function sitemap() {
       changeFrequency: "monthly",
       priority: 1,
     },
+    {
+      url: "https://shiwoo.dev/about",
+      lastModified: new Date(),
+      changeFrequency: "monthly",
+      priority: 1,
+    },
   ]
 }

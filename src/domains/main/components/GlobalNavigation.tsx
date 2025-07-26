@@ -10,6 +10,10 @@ export const GlobalNavigation = () => {
           shiwoo.dev
         </Link>
       </h1>
+
+      <div className='text-foreground/50 ml-auto flex items-center gap-2 text-sm'>
+        <Link href='/about'>about me</Link>
+      </div>
     </nav>
   )
 }
