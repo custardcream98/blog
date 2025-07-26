@@ -45,7 +45,7 @@ const A = utld.a`
 
 export const resumeComponents: MDXRemoteProps["components"] = {
   a: ({ children, href }) => (
-    <A href={href} target='_blank' rel='noopener noreferrer'>
+    <A href={href} rel='noopener noreferrer' target='_blank'>
       {children}
     </A>
   ),

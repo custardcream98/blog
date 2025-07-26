@@ -1,6 +1,6 @@
-import { ProjectDescriptionList } from "../styles"
-
 import { utld } from "utility-class-components"
+
+import { ProjectDescriptionList } from "../styles"
 
 export const SectionItemP = utld.p`
   font-light

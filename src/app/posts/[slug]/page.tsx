@@ -1,84 +1,77 @@
-import { getAllPosts, getPostBySlug } from "src/app/data"
-import { Container } from "src/components"
-import { FONT_NOTO_SERIF_KR } from "src/fonts"
-import { compilePostMDX } from "src/lib/mdx"
-import generateRSSFeed from "src/lib/rss"
-import { getAllOgImages } from "src/lib/thumbnails/ogImage"
+import { evaluate, EvaluateOptions } from "next-mdx-remote-client/rsc"
 
-import { Comments, PostTitle, PrevNextPost } from "./_components"
-import { createPostDoc, getPrevNextPosts } from "./data"
-import type { PostPageParams } from "./types"
+import "./post.css"
+import Image from "next/image"
+import rehypePrettyCode, { type Options as RehypePrettyCodeOptions } from "rehype-pretty-code"
+import rehypeSlug from "rehype-slug"
 
-import "src/lib/mdx/PostMDX/post.css"
-
-import { utld } from "utility-class-components"
+import { Time } from "@/components/Time"
+import { externalLink, headingToStartFrom } from "@/lib/mdx-plugin"
+import { getPost, getPostsList } from "@/lib/octokit/blog"
 
 export { generateMetadata } from "./metadata"
 
-const createAllPostDocs = (posts: { title: string }[]) =>
-  Promise.all(posts.map((post) => createPostDoc(post.title)))
+const REHYPE_PRETTY_CODE_OPTIONS: Partial<RehypePrettyCodeOptions> = {
+  onVisitHighlightedLine(node) {
+    if (!node.properties) {
+      node.properties = {}
+    }
+    node.properties["data-highlighted-line"] = true
+  },
+  theme: "github-dark" as const,
+}
+
+const MDX_OPTIONS: EvaluateOptions = {
+  mdxOptions: {
+    rehypePlugins: [
+      [
+        externalLink,
+        {
+          target: "_blank",
+          rel: "noopener noreferrer",
+        },
+      ],
+      rehypeSlug,
+      [rehypePrettyCode, REHYPE_PRETTY_CODE_OPTIONS],
+      [headingToStartFrom, { startFrom: 3 }],
+    ],
+  },
+  parseFrontmatter: true,
+}
+
+export const dynamicParams = true
 
 export const generateStaticParams = async () => {
-  const posts = await getAllPosts(["slug", "title"])
+  const posts = await getPostsList()
+  return posts.map((post) => ({ slug: post.slug }))
+}
 
-  if (process.env.NODE_ENV === "production") {
-    const coverImages = await getAllOgImages(posts.map((post) => post.title))
-    const darkThumbnails = coverImages.map(({ darkThumbnail }) => darkThumbnail)
-    await generateRSSFeed(darkThumbnails)
-    await createAllPostDocs(posts)
+export default async function PostPage({ params }: { params: Promise<{ slug: string }> }) {
+  const { slug } = await params
+  const post = await getPost({ slug })
+  const { content, frontmatter } = await evaluate({
+    source: post,
+    options: MDX_OPTIONS,
+    components: {
+      img: Image,
+      wrapper: ({ children }) => <article className='post pt-20 pb-10'>{children}</article>,
+    },
+  })
+
+  const { title, date, excerpt } = frontmatter as {
+    title: string
+    date: string
+    excerpt: string
   }
 
-  return posts.map(({ slug }) => ({
-    slug,
-  }))
-}
-
-export default async function PostsDynamicPage({ params }: PostPageParams) {
-  const { slug } = await params
-
-  const { coverImage, title, category, date, series, content } = await getPostBySlug(slug, [
-    "title",
-    "date",
-    "slug",
-    "excerpt",
-    "content",
-    "category",
-    "series",
-    "coverImage",
-  ])
-
-  const prevNextPosts = await getPrevNextPosts(slug)
-
-  const postTitleForComments = title.replaceAll("/", ",")
-
-  const postContent = await compilePostMDX(content)
-
   return (
-    <PostContainer>
-      <PostSection>
-        <PostTitle
-          coverImage={coverImage}
-          title={title}
-          category={category}
-          date={date}
-          series={series}
-        />
-        {postContent}
-      </PostSection>
-      <PrevNextPost key={slug} {...prevNextPosts} />
-      {(process.env.BLOG_ENV === "query" || process.env.NODE_ENV === "production") && (
-        <Comments postTitle={postTitleForComments} />
-      )}
-    </PostContainer>
+    <>
+      <h2 className='mt-10 text-2xl font-bold'>{title}</h2>
+      <p className='mt-1 text-end text-sm lg:text-start'>
+        <Time date={date} />
+      </p>
+      <p className='text-foreground/70 mt-4 text-sm'>{excerpt}</p>
+      {content}
+    </>
   )
 }
-
-const PostContainer = utld(Container)`
-  !max-w-[42.5rem]
-
-  ${FONT_NOTO_SERIF_KR.variable}
-`
-
-const PostSection = utld.section`
-  w-full
-`

@@ -1,7 +1,7 @@
-import { ExternalLinkSvg } from "src/components/Svgs"
-import { addToClipboard } from "src/utils"
-
 import { ud } from "utility-class-components"
+
+import { ExternalLinkSvg } from "@/assets/svg/ExternalLinkSvg"
+import { addToClipboard } from "@/utils/clipboard"
 
 const RESUME_LINK = "https://shiwoo.dev/resume"
 
@@ -12,7 +12,7 @@ const handleCopyResumeLink = async () => {
 
 export function CopyLinkButton() {
   return (
-    <button type='button' className={iconClickableStyle} onClick={handleCopyResumeLink}>
+    <button className={iconClickableStyle} onClick={handleCopyResumeLink} type='button'>
       <ExternalLinkSvg className='!fill-none' />
       링크 복사하기
     </button>

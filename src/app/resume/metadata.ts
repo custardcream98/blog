@@ -1,10 +1,9 @@
-import { sharedMetadata } from "../sharedMetadata"
-
 import { type Metadata } from "next"
 
+import { sharedMetadata } from "../sharedMetadata"
+
 const META_TITLE = "개발자 박시우 이력서"
-const META_DESCRIPTION =
-  "안녕하세요, 삽질 좋아하는 개발자 박시우입니다. 문제가 생기면 밤을 새서라도 알아내고 해결합니다."
+const META_DESCRIPTION = "프론트엔드 개발자 박시우의 이력서입니다."
 
 export const metadata: Metadata = {
   ...sharedMetadata,
