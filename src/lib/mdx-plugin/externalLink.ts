@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 // TODO: 플러그인 타입 정의
 
 import { visit } from "unist-util-visit"

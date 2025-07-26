@@ -1,3 +1,4 @@
 {
-  "*.{js,jsx,ts,tsx,md,mdx,html,css,scss,sass,json,yml}": ["prettier --write --cache", "pnpm run lint:fix"]
+  "*.{js,jsx,ts,tsx}": ["prettier --write --cache", "eslint --fix"],
+  "*.{md,mdx,html,css,scss,sass,json,yml}": ["prettier --write --cache"]
 }
