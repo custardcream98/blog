@@ -27,12 +27,16 @@ export const getPostsList = cache(async () => {
 })
 
 export const getPostImages = async ({ slug }: { slug: string }) => {
-  const { data } = await octokit.rest.repos.getContent({
-    ...DEFAULT_CONFIG,
-    path: `img/${slug}`,
-  })
+  try {
+    const { data } = await octokit.rest.repos.getContent({
+      ...DEFAULT_CONFIG,
+      path: `img/${slug}`,
+    })
 
-  return data as unknown as { path: string; name: string }[]
+    return data as unknown as { path: string; name: string }[]
+  } catch {
+    return []
+  }
 }
 
 export const getPost = cache(async ({ slug }: { slug: string }) => {
