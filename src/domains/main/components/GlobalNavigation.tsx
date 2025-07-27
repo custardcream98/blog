@@ -5,9 +5,9 @@ export const GlobalNavigation = () => {
   return (
     <nav className='flex w-full py-2'>
       <h1 className='flex items-center gap-2'>
-        <Link className='flex items-center gap-1.5' href='/'>
-          <LogoSvg className='size-5' svgTitle='shiwoo.dev logo' />
-          shiwoo.dev
+        <Link className='flex items-center gap-1 lg:gap-1.5' href='/'>
+          <LogoSvg className='size-4 lg:size-5' svgTitle='shiwoo.dev logo' />
+          <span className='font-mono text-sm lg:text-base'>shiwoo.dev</span>
         </Link>
       </h1>
 
