@@ -6,9 +6,9 @@ import rehypePrettyCode, {
 } from "rehype-pretty-code"
 import rehypeSlug from "rehype-slug"
 
-import { remoteImagePlugin } from "@/lib/mdx/plugin/nextImage"
-
-import { externalLink, headingToStartFrom } from "./plugin"
+import { externalLink } from "@/lib/mdx/plugin/externalLink"
+import { headingToStartFrom } from "@/lib/mdx/plugin/headingToStartFrom"
+import { imgToNextImagePlugin } from "@/lib/mdx/plugin/imgToNextImagePlugin"
 
 const REHYPE_PRETTY_CODE_OPTIONS = {
   onVisitHighlightedLine(node) {
@@ -22,7 +22,7 @@ const REHYPE_PRETTY_CODE_OPTIONS = {
 const getMDXOptions = ({ codeTheme }: { codeTheme?: RehypePrettyCodeTheme }): EvaluateOptions => ({
   mdxOptions: {
     rehypePlugins: [
-      remoteImagePlugin,
+      imgToNextImagePlugin,
       [
         externalLink,
         {
@@ -51,8 +51,7 @@ export const evaluateMDX = async ({
     source,
     options: getMDXOptions({ codeTheme }),
     components: {
-      img: Image,
-      Image: Image, // 플러그인에서 변환된 Image 태그를 위해 추가
+      Image,
       ...components,
     },
   })
