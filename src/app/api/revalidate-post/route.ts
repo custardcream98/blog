@@ -19,6 +19,7 @@ export async function POST(request: NextRequest) {
   }
 
   revalidatePath(`/posts/${slug}`)
+  revalidatePath("/", "page")
 
   return NextResponse.json({
     message: "Revalidated successfully",
