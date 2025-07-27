@@ -59,6 +59,7 @@ export default async function ResumePage() {
       ul: Ul,
       li: Li,
     },
+    codeTheme: "one-light",
   })
 
   return (
