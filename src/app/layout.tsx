@@ -5,8 +5,6 @@ import "./globals.css"
 import Script from "next/script"
 
 import { FONT_D2_CODING, FONT_PRETENDARD } from "@/assets/font"
-import { Footer } from "@/domains/main/components/Footer"
-import { GlobalNavigation } from "@/domains/main/components/GlobalNavigation"
 import { cn } from "@/utils/cn"
 
 export { metadata } from "./metadata"
@@ -32,15 +30,8 @@ export default function RootLayout({ children }: React.PropsWithChildren) {
           </>
         )}
       </head>
-      <body
-        className={cn(
-          "bg-background text-foreground flex min-h-screen flex-col font-sans",
-          "px-4 lg:mx-auto lg:w-200 lg:px-0",
-        )}
-      >
-        <GlobalNavigation />
-        <main className='w-full flex-1'>{children}</main>
-        <Footer />
+      <body className='bg-background text-foreground flex min-h-screen flex-col font-sans'>
+        <div className='w-full flex-1'>{children}</div>
         <SpeedInsights />
       </body>
     </html>

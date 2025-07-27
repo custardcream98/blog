@@ -1,6 +1,6 @@
 import { ud, utld } from "utility-class-components"
 
-import type { Career } from "@/app/resume/_types"
+import { Career } from "@/app/resume/_types"
 
 import {
   // ResumeLink, ResumeLinksList,

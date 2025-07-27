@@ -1,6 +1,6 @@
 import { type Metadata } from "next"
 
-import { sharedMetadata } from "../sharedMetadata"
+import { sharedMetadata } from "@/app/sharedMetadata"
 
 const META_TITLE = "프론트엔드 개발자 박시우"
 const META_DESCRIPTION = "Done is better than perfect 를 모토로 삼고 있습니다."

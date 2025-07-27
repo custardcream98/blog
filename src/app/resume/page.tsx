@@ -19,7 +19,9 @@ import { redirect } from "next/navigation"
 export { metadata } from "./metadata"
 
 export default function ResumePage() {
-  redirect("/resume.pdf")
+  // redirect("/resume.pdf")
+
+  return <div>ResumePage</div>
 
   // return (
   // <S.Container className='resume-container'>
