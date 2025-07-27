@@ -6,7 +6,7 @@ import rehypePrettyCode, {
 } from "rehype-pretty-code"
 import rehypeSlug from "rehype-slug"
 
-import { externalLink, headingToStartFrom } from "@/lib/mdx-plugin"
+import { externalLink, headingToStartFrom } from "./plugin"
 
 const REHYPE_PRETTY_CODE_OPTIONS = {
   onVisitHighlightedLine(node) {

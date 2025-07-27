@@ -1,7 +1,7 @@
 import "./post.css"
 
 import { Time } from "@/components/Time"
-import { evaluateMDX } from "@/lib/evaluateMDX"
+import { evaluateMDX } from "@/lib/mdx/evaluateMDX"
 import { getPost, getPostsList } from "@/lib/octokit/blog"
 
 export { generateMetadata } from "./metadata"

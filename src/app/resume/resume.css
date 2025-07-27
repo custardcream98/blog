@@ -1,0 +1,10 @@
+figure[data-rehype-pretty-code-figure] {
+  border-radius: 0.5rem;
+  overflow: auto;
+}
+
+figure[data-rehype-pretty-code-figure] pre {
+  padding: 0.5em;
+  font-size: 0.85em;
+  line-height: 1.5;
+}

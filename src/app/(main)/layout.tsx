@@ -1,5 +1,5 @@
-import { Footer } from "@/domains/main/components/Footer"
-import { GlobalNavigation } from "@/domains/main/components/GlobalNavigation"
+import { Footer } from "@/components/Footer"
+import { GlobalNavigation } from "@/components/GlobalNavigation"
 
 export default function MainLayout({ children }: React.PropsWithChildren) {
   return (

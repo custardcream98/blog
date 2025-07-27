@@ -64,7 +64,7 @@ export default function AboutPage() {
         <p className='text-foreground/50 text-center text-sm'>
           더 자세한 이력은{" "}
           <Link className='text-foreground/70' href='/resume'>
-            이력서
+            여기
           </Link>
           에서 확인할 수 있습니다.
         </p>
