@@ -1,43 +1,10 @@
-import { evaluate, EvaluateOptions } from "next-mdx-remote-client/rsc"
-
 import "./post.css"
-import Image from "next/image"
-import rehypePrettyCode, { type Options as RehypePrettyCodeOptions } from "rehype-pretty-code"
-import rehypeSlug from "rehype-slug"
 
 import { Time } from "@/components/Time"
-import { externalLink, headingToStartFrom } from "@/lib/mdx-plugin"
+import { evaluateMDX } from "@/lib/evaluateMDX"
 import { getPost, getPostsList } from "@/lib/octokit/blog"
 
 export { generateMetadata } from "./metadata"
-
-const REHYPE_PRETTY_CODE_OPTIONS: Partial<RehypePrettyCodeOptions> = {
-  onVisitHighlightedLine(node) {
-    if (!node.properties) {
-      node.properties = {}
-    }
-    node.properties["data-highlighted-line"] = true
-  },
-  theme: "github-dark" as const,
-}
-
-const MDX_OPTIONS: EvaluateOptions = {
-  mdxOptions: {
-    rehypePlugins: [
-      [
-        externalLink,
-        {
-          target: "_blank",
-          rel: "noopener noreferrer",
-        },
-      ],
-      rehypeSlug,
-      [rehypePrettyCode, REHYPE_PRETTY_CODE_OPTIONS],
-      [headingToStartFrom, { startFrom: 3 }],
-    ],
-  },
-  parseFrontmatter: true,
-}
 
 export const dynamicParams = true
 
@@ -49,11 +16,9 @@ export const generateStaticParams = async () => {
 export default async function PostPage({ params }: { params: Promise<{ slug: string }> }) {
   const { slug } = await params
   const post = await getPost({ slug })
-  const { content, frontmatter } = await evaluate({
+  const { content, frontmatter } = await evaluateMDX({
     source: post,
-    options: MDX_OPTIONS,
     components: {
-      img: Image,
       wrapper: ({ children }) => <article className='post pt-20 pb-10'>{children}</article>,
     },
   })
