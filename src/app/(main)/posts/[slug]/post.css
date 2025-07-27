@@ -6,12 +6,17 @@
   line-height: 1.75;
   color: var(--color-foreground);
   word-break: break-all;
+  font-weight: 300;
 
   --post-margin-x: calc(var(--spacing) * -4);
 }
 
 .post em {
   margin-right: 0.1rem;
+}
+
+.post strong {
+  font-weight: 500;
 }
 
 /* ======================== */
@@ -33,30 +38,30 @@
 
 /* h3 styled as h1 - Main title */
 .post h3 {
-  font-size: 2.25rem;
+  font-size: 1.6rem;
   font-weight: 700;
-  margin-top: 0;
-  margin-bottom: 2rem;
-}
-
-/* h4 styled as h2 - Section title */
-.post h4 {
-  font-size: 1.875rem;
   margin-top: 4rem;
   margin-bottom: 2rem;
   padding-bottom: 0.75rem;
   border-bottom: 1px solid #374151;
 }
 
+/* h4 styled as h2 - Section title */
+.post h4 {
+  font-size: 1.4rem;
+  margin-top: 3rem;
+  margin-bottom: 1.5rem;
+}
+
 /* h5 styled as h3 - Subsection title */
 .post h5 {
-  font-size: 1.5rem;
+  font-size: 1.23rem;
   margin-bottom: 1.5rem;
 }
 
 /* h6 styled as h4 - Minor heading */
 .post h6 {
-  font-size: 1.25rem;
+  font-size: 1.15rem;
 }
 
 /* Paragraphs */
@@ -273,7 +278,7 @@
 
 .post figure[data-rehype-pretty-code-figure] {
   max-width: 100%;
-  margin: 3rem 0;
+  margin: 2rem 0;
   text-align: left;
 }
 
@@ -312,28 +317,6 @@
 /* ======================== */
 
 @media (max-width: 768px) {
-  /* Typography */
-  /* h3 as h1 */
-  .post h3 {
-    font-size: 1.875rem;
-  }
-
-  /* h4 as h2 */
-  .post h4 {
-    font-size: 1.5rem;
-    margin-top: 3rem;
-  }
-
-  /* h5 as h3 */
-  .post h5 {
-    font-size: 1.25rem;
-  }
-
-  /* h6 as h4 */
-  .post h6 {
-    font-size: 1.125rem;
-  }
-
   /* Images */
   .post > img,
   .post > figure {
@@ -354,7 +337,7 @@
 
   /* Code blocks */
   .post > figure > pre {
-    margin: 2.5rem var(--post-margin-x);
+    margin: 0 var(--post-margin-x);
     border-left: none;
     border-right: none;
     border-radius: 0;
