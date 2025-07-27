@@ -17,9 +17,6 @@ const FOOTER_LINKS = [
 
 export const Footer = () => (
   <footer className='flex flex-col items-start gap-1 pt-8 pb-5 lg:flex-row lg:items-center lg:justify-between lg:gap-0'>
-    <span className='text-foreground/50 text-center text-sm'>
-      © 2025 Shi Woo, Park (custardcream98). All rights reserved.
-    </span>
     <ul className='flex shrink-0 items-center gap-2'>
       {FOOTER_LINKS.map((link) => (
         <li key={link.label}>
@@ -29,5 +26,8 @@ export const Footer = () => (
         </li>
       ))}
     </ul>
+    <span className='text-foreground/50 text-center text-sm'>
+      © 2025 Shi Woo, Park (custardcream98). All rights reserved.
+    </span>
   </footer>
 )

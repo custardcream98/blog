@@ -7,7 +7,7 @@
   color: var(--color-foreground);
   word-break: break-all;
 
-  --post-margin-x: calc(var(--spacing) * -2);
+  --post-margin-x: calc(var(--spacing) * -4);
 }
 
 .post em {
