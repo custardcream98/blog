@@ -1,4 +1,4 @@
-import { cache } from "react"
+import { unstable_cache } from "next/cache"
 
 import { octokit } from "./instance"
 
@@ -7,24 +7,30 @@ const DEFAULT_CONFIG = {
   repo: "blog-posts",
 } as const
 
-export const getPostsList = cache(async () => {
-  const { data } = await octokit.rest.repos.getContent({
-    ...DEFAULT_CONFIG,
-    path: "post-list.json",
-    mediaType: {
-      format: "raw",
-    },
-  })
+export const getPostsList = unstable_cache(
+  async () => {
+    const { data } = await octokit.rest.repos.getContent({
+      ...DEFAULT_CONFIG,
+      path: "post-list.json",
+      mediaType: {
+        format: "raw",
+      },
+    })
 
-  return JSON.parse(data as unknown as string) as {
-    slug: string
-    title: string
-    excerpt: string
-    date: string
-    category: string[]
-    series?: string
-  }[]
-})
+    return JSON.parse(data as unknown as string) as {
+      slug: string
+      title: string
+      excerpt: string
+      date: string
+      category: string[]
+      series?: string
+    }[]
+  },
+  ["posts-list"],
+  {
+    tags: ["posts"],
+  },
+)
 
 export const getPostImages = async ({ slug }: { slug: string }) => {
   try {
@@ -39,26 +45,32 @@ export const getPostImages = async ({ slug }: { slug: string }) => {
   }
 }
 
-export const getPost = cache(async ({ slug }: { slug: string }) => {
-  const [{ data }, images] = await Promise.all([
-    octokit.rest.repos.getContent({
-      ...DEFAULT_CONFIG,
-      path: `posts/${slug}.mdx`,
-      mediaType: {
-        format: "raw",
-      },
-    }) as unknown as Promise<{ data: string }>,
-    getPostImages({ slug }),
-  ])
+export const getPost = unstable_cache(
+  async ({ slug }: { slug: string }) => {
+    const [{ data }, images] = await Promise.all([
+      octokit.rest.repos.getContent({
+        ...DEFAULT_CONFIG,
+        path: `posts/${slug}.mdx`,
+        mediaType: {
+          format: "raw",
+        },
+      }) as unknown as Promise<{ data: string }>,
+      getPostImages({ slug }),
+    ])
 
-  let result = data
-  images.forEach(({ path }) => {
-    console.log("path", path)
-    result = result.replaceAll(
-      `/${path}`,
-      `https://storage.googleapis.com/blog-e8ab2.appspot.com/${path}`,
-    )
-  })
+    let result = data
+    images.forEach(({ path }) => {
+      console.log("path", path)
+      result = result.replaceAll(
+        `/${path}`,
+        `https://storage.googleapis.com/blog-e8ab2.appspot.com/${path}`,
+      )
+    })
 
-  return result
-})
+    return result
+  },
+  ["post"],
+  {
+    tags: ["posts"],
+  },
+)
