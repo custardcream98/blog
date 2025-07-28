@@ -71,6 +71,10 @@
   text-align: justify;
 }
 
+.post li p {
+  margin-bottom: 0.25rem;
+}
+
 .post p:last-child {
   margin-bottom: 0;
 }
@@ -126,11 +130,6 @@
 .post li > ul,
 .post li > ol {
   margin: 0.5rem 0;
-}
-
-.post li > p + ul,
-.post li > p + ol {
-  margin-top: -1.5rem;
 }
 
 /* ======================== */
