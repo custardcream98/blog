@@ -26,8 +26,10 @@ export const Footer = () => (
         </li>
       ))}
     </ul>
-    <span className='text-foreground/50 text-center text-sm'>
-      © 2025 Shi Woo, Park (custardcream98). All rights reserved.
+    <span className='text-foreground/50 text-sm lg:text-end'>
+      © 2025 Shi Woo, Park (custardcream98).
+      <br />
+      All rights reserved.
     </span>
   </footer>
 )
