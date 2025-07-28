@@ -19,10 +19,8 @@ export const Post = async ({ slug }: { slug: string }) => {
   }
   return (
     <>
-      <h2 className='mt-10 text-2xl font-bold'>{title}</h2>
-      <p className='mt-1 text-end text-sm lg:text-start'>
-        <Time date={date} />
-      </p>
+      <Time className='mt-10 block text-sm lg:text-start' date={date} />
+      <h2 className='mt-2 text-2xl font-bold'>{title}</h2>
       <p className='text-foreground/70 mt-4 text-sm'>{excerpt}</p>
       {content}
     </>
