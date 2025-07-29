@@ -17,6 +17,7 @@ export const Post = async ({ slug }: { slug: string }) => {
     date: string
     excerpt: string
   }
+
   return (
     <>
       <Time className='mt-10 block text-sm lg:text-start' date={date} />
