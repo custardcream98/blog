@@ -41,8 +41,8 @@ const Thumbnail = ({ title }: { title: null | string }) => {
           }),
         }}
       >
-        <LogoSvg style={{ width: "50px", height: "50px" }} />
-        <div style={{ display: "flex", fontSize: "50px", fontFamily: "D2Coding" }}>shiwoo.dev</div>
+        <LogoSvg style={{ width: "70px", height: "70px" }} />
+        <div style={{ display: "flex", fontSize: "70px", fontFamily: "D2Coding" }}>shiwoo.dev</div>
       </div>
       {title && (
         <div
@@ -51,7 +51,7 @@ const Thumbnail = ({ title }: { title: null | string }) => {
             bottom: "70px",
             left: "70px",
             marginTop: "20px",
-            fontSize: "40px",
+            fontSize: "45px",
             width: "70%",
             wordBreak: "keep-all",
             lineHeight: "1.5",
