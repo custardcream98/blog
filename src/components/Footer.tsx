@@ -1,3 +1,4 @@
+import { CurrentYear } from "@/components/CurrentYear.client"
 import { Link } from "@/components/Link"
 
 const FOOTER_LINKS = [
@@ -27,7 +28,7 @@ export const Footer = () => (
       ))}
     </ul>
     <span className='text-foreground/50 text-sm lg:text-end'>
-      © 2025 Shi Woo, Park (custardcream98).
+      © <CurrentYear /> Shi Woo, Park (custardcream98)
       <br />
       All rights reserved.
     </span>
