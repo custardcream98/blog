@@ -40,24 +40,25 @@ const generateRss = (
         <link>${post.link}</link>
         <guid isPermaLink="false">${post.link}</guid>
         <pubDate>${new Date(`${post.pubDate}T00:00:00+09:00`).toUTCString()}</pubDate>
-        <enclosure url="${post.ogImage}" type="image/png" />
+        <enclosure url="${post.ogImage}" type="image/png" length="0" />
       </item>`
     })
     .join("\n")
 
   return `<?xml version="1.0" encoding="UTF-8"?>
-<rss version="2.0">
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>${METADATA_DEFAULT_TITLE}</title>
     <link>${METADATA_DEFAULT_URL.toString()}</link>
     <description>${METADATA_DEFAULT_DESCRIPTION}</description>
     <language>ko</language>
+    <atom:link rel="self" href="${METADATA_DEFAULT_URL.toString()}rss" type="application/rss+xml" />
     <image>
-      <url>${METADATA_DEFAULT_URL.toString()}opengraph-image</url>
+      <url>${METADATA_DEFAULT_URL.toString()}api/og-image/site</url>
       <title>${METADATA_DEFAULT_TITLE}</title>
       <link>${METADATA_DEFAULT_URL.toString()}</link>
-      <width>1200</width>
-      <height>630</height>
+      <width>144</width>
+      <height>76</height>
     </image>
     <pubDate>${now}</pubDate>
     <lastBuildDate>${now}</lastBuildDate>
