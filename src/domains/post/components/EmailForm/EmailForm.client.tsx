@@ -91,13 +91,20 @@ export const EmailForm = ({ slug, title }: { slug: string; title: string }) => {
   )
 }
 
-const EmailFormContext = React.createContext<{
+const EmailFormContext = React.createContext<null | {
   comment: string
   setComment: (comment: string) => void
-}>({
-  comment: "",
-  setComment: () => {},
-})
+}>(null)
+
+const useEmailFormContext = () => {
+  const context = useContext(EmailFormContext)
+
+  if (context === null) {
+    throw new Error("useEmailFormContext must be used within a EmailFormProvider")
+  }
+
+  return context
+}
 
 const EmailFormProvider = ({
   actionState,
@@ -116,11 +123,11 @@ const EmailFormProvider = ({
 
   const value = useMemo(() => ({ comment, setComment }), [comment, setComment])
 
-  return <EmailFormContext.Provider value={value}>{children}</EmailFormContext.Provider>
+  return <EmailFormContext value={value}>{children}</EmailFormContext>
 }
 
 const CommentTextarea = ({ isPending }: { isPending: boolean }) => {
-  const { comment, setComment } = useContext(EmailFormContext)
+  const { comment, setComment } = useEmailFormContext()
 
   return (
     <label>
@@ -131,7 +138,7 @@ const CommentTextarea = ({ isPending }: { isPending: boolean }) => {
         maxLength={1000}
         minLength={1}
         name='comment'
-        onChange={(e) => setComment(e.target.value)}
+        onChange={(e) => setComment(e.currentTarget.value)}
         placeholder='의견을 남겨주세요'
         required
         rows={3}
@@ -142,7 +149,7 @@ const CommentTextarea = ({ isPending }: { isPending: boolean }) => {
 }
 
 const SubmitButton = ({ isPending }: { isPending: boolean }) => {
-  const { comment } = useContext(EmailFormContext)
+  const { comment } = useEmailFormContext()
 
   return (
     <button
