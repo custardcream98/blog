@@ -1,6 +1,6 @@
 import { Metadata } from "next"
 
-import { METADATA_DEFAULT_TITLE, METADATA_DEFAULT_URL, sharedMetadata } from "./sharedMetadata"
+import { METADATA_DEFAULT_TITLE, METADATA_DEFAULT_URL, sharedMetadata } from "./_sharedMetadata"
 
 export const metadata: Metadata = {
   ...sharedMetadata,

@@ -1,6 +1,6 @@
 import { Metadata } from "next"
 
-import { sharedMetadata } from "@/app/sharedMetadata"
+import { sharedMetadata } from "@/app/_sharedMetadata"
 import { getPostsList } from "@/lib/octokit/blog"
 
 export const generateMetadata = async ({
