@@ -5,6 +5,7 @@ import "./globals.css"
 import Script from "next/script"
 
 import { FONT_D2_CODING, FONT_PRETENDARD } from "@/assets/font"
+import { ToastProvider } from "@/components/ToastProvider"
 import { cn } from "@/utils/cn"
 
 export { metadata } from "./metadata"
@@ -33,6 +34,7 @@ export default function RootLayout({ children }: React.PropsWithChildren) {
       <body className='bg-background text-foreground flex min-h-screen flex-col font-sans'>
         <div className='w-full flex-1'>{children}</div>
         <SpeedInsights />
+        <ToastProvider />
       </body>
     </html>
   )

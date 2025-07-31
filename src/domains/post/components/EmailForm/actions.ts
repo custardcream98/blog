@@ -5,12 +5,17 @@ import nodemailer from "nodemailer"
 const transporter = nodemailer.createTransport({
   service: "gmail",
   auth: {
-    user: process.env.GMAIL_UER,
+    user: process.env.GMAIL_USER,
     pass: process.env.GMAIL_APP_PASSWORD,
   },
 })
 
 const isString = (value: unknown): value is string => typeof value === "string"
+
+export type SubmitEmailActionState =
+  | { status: "error"; error: string; submittedTime: number }
+  | { status: "idle"; error: null; submittedTime: null }
+  | { status: "success"; error: null; submittedTime: number }
 
 export const submitEmail = async (
   {
@@ -20,19 +25,20 @@ export const submitEmail = async (
     slug: string
     title: string
   },
-  previousState: { error: null | string; status: string },
+  previousState: SubmitEmailActionState,
   formData: FormData,
-) => {
+): Promise<SubmitEmailActionState> => {
   if (previousState.error) {
     return Promise.resolve(previousState)
   }
 
   const comment = formData.get("comment")
 
-  if (!isString(comment)) {
+  if (!isString(comment) || comment.length > 1000) {
     return Promise.resolve({
       status: "error",
       error: "Invalid comment",
+      submittedTime: Date.now(),
     })
   }
 
@@ -55,6 +61,7 @@ export const submitEmail = async (
 
   const mailOptions = {
     to: process.env.RECEIVE_EMAIL,
+    from: process.env.GMAIL_USER,
     subject: `[${title}] 블로그에 새 의견이 달렸습니다.`,
     text: resolvedComment,
   }
@@ -64,11 +71,13 @@ export const submitEmail = async (
     return {
       status: "success",
       error: null,
+      submittedTime: Date.now(),
     }
   } catch {
     return {
       status: "error",
       error: "Failed to send email",
+      submittedTime: Date.now(),
     }
   }
 }
