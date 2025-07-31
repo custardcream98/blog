@@ -4,6 +4,7 @@ import { useActionState, useEffect, useRef, useState } from "react"
 import { toast } from "react-hot-toast"
 
 import { submitEmail, SubmitEmailActionState } from "@/domains/post/components/EmailForm/actions"
+import { cn } from "@/utils/cn"
 
 const INITIAL_ACTION_STATE = {
   error: null,
@@ -19,11 +20,14 @@ export const EmailForm = ({ slug, title }: { slug: string; title: string }) => {
     INITIAL_ACTION_STATE,
   )
 
-  const toastIdRef = useRef<string | undefined>(undefined)
+  const toastIdRef = useRef<null | string>(null)
 
   useEffect(() => {
     if (isPending) {
-      toastIdRef.current = toast.loading("의견을 전송하고 있어요", { id: toastIdRef.current })
+      toastIdRef.current = toast.loading(
+        "의견을 전송하고 있어요",
+        toastIdRef.current ? { id: toastIdRef.current } : undefined,
+      )
     }
   }, [isPending])
 
@@ -31,6 +35,9 @@ export const EmailForm = ({ slug, title }: { slug: string; title: string }) => {
   const nicknameRef = useRef<HTMLInputElement>(null)
 
   useEffect(() => {
+    const toastId = toastIdRef.current
+    if (toastId === null) return
+
     const resetForm = () => {
       emailRef.current!.value = ""
       nicknameRef.current!.value = ""
@@ -40,10 +47,10 @@ export const EmailForm = ({ slug, title }: { slug: string; title: string }) => {
     if (!isPending && submittedTime) {
       if (status === "success") {
         resetForm()
-        toast.success("의견을 남겨주셔서 감사해요! 😃", { id: toastIdRef.current })
+        toast.success("의견을 남겨주셔서 감사해요! 😃", { id: toastId })
       } else if (status === "error") {
         toast.error("의견 전송에 실패했어요. 다시 시도해주세요.", {
-          id: toastIdRef.current,
+          id: toastId,
         })
       }
     }
@@ -59,7 +66,7 @@ export const EmailForm = ({ slug, title }: { slug: string; title: string }) => {
           <label className='flex-1'>
             <LabelSpan>이메일</LabelSpan>
             <input
-              className='border-foreground/20 text-foreground placeholder-foreground/40 focus:border-foreground/60 w-full border-0 border-b bg-transparent px-0 py-2 text-sm transition-colors focus:outline-none'
+              className={INPUT_STYLE}
               disabled={isPending}
               maxLength={100}
               name='email'
@@ -71,7 +78,7 @@ export const EmailForm = ({ slug, title }: { slug: string; title: string }) => {
           <label className='flex-1'>
             <LabelSpan>닉네임</LabelSpan>
             <input
-              className='border-foreground/20 text-foreground placeholder-foreground/40 focus:border-foreground/60 w-full border-0 border-b bg-transparent px-0 py-2 text-sm transition-colors focus:outline-none'
+              className={INPUT_STYLE}
               disabled={isPending}
               maxLength={10}
               name='nickname'
@@ -84,7 +91,7 @@ export const EmailForm = ({ slug, title }: { slug: string; title: string }) => {
         <label>
           <LabelSpan required>의견</LabelSpan>
           <textarea
-            className='border-foreground/20 text-foreground placeholder-foreground/40 focus:border-foreground/60 w-full resize-none border-0 border-b bg-transparent px-0 py-2 text-sm transition-colors focus:outline-none'
+            className={cn(INPUT_STYLE, "resize-none")}
             disabled={isPending}
             maxLength={1000}
             minLength={1}
@@ -118,3 +125,6 @@ const LabelSpan = ({ required, children }: { required?: boolean; children: React
     </span>
   )
 }
+
+const INPUT_STYLE =
+  "border-foreground/20 text-foreground placeholder-foreground/40 focus:border-foreground/60 w-full border-0 border-b bg-transparent px-0 py-2 text-sm transition-colors focus:outline-none disabled:opacity-50"
