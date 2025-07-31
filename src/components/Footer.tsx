@@ -14,6 +14,10 @@ const FOOTER_LINKS = [
     label: "Email",
     href: "mailto:custardcream@kakao.com",
   },
+  {
+    label: "RSS",
+    href: "/rss",
+  },
 ]
 
 export const Footer = () => (

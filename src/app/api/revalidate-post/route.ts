@@ -18,12 +18,12 @@ export async function POST(request: NextRequest) {
     return NextResponse.json({ error: "Slug is required" }, { status: 400 })
   }
 
-  // 태그 기반 캐시 무효화 - 더 효율적
   revalidateTag("posts")
 
-  // 기존 경로 기반 무효화도 함께 사용
   revalidatePath(`/posts/${slug}`)
+  revalidatePath(`/api/og-image/${slug}`)
   revalidatePath("/", "page")
+  revalidatePath("/rss", "page")
 
   return NextResponse.json({
     message: "Revalidated successfully",
