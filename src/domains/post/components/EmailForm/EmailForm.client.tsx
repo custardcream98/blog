@@ -1,6 +1,6 @@
 "use client"
 
-import { useActionState, useEffect, useRef, useState } from "react"
+import React, { useActionState, useContext, useEffect, useMemo, useRef, useState } from "react"
 import { toast } from "react-hot-toast"
 
 import { submitEmail, SubmitEmailActionState } from "@/domains/post/components/EmailForm/actions"
@@ -13,8 +13,6 @@ const INITIAL_ACTION_STATE = {
 } as const satisfies SubmitEmailActionState
 
 export const EmailForm = ({ slug, title }: { slug: string; title: string }) => {
-  const [comment, setComment] = useState("")
-
   const [{ status, submittedTime }, formAction, isPending] = useActionState(
     submitEmail.bind(null, { slug, title }),
     INITIAL_ACTION_STATE,
@@ -31,22 +29,18 @@ export const EmailForm = ({ slug, title }: { slug: string; title: string }) => {
     }
   }, [isPending])
 
-  const emailRef = useRef<HTMLInputElement>(null)
-  const nicknameRef = useRef<HTMLInputElement>(null)
+  const formRef = useRef<HTMLFormElement>(null)
 
   useEffect(() => {
     const toastId = toastIdRef.current
     if (toastId === null) return
 
-    const resetForm = () => {
-      emailRef.current!.value = ""
-      nicknameRef.current!.value = ""
-      setComment("")
-    }
-
     if (!isPending && submittedTime) {
       if (status === "success") {
-        resetForm()
+        // 모든 필드 초기화
+        formRef.current?.reset()
+        // NOTE: comment 초기화는 EmailFormProvider에서 처리
+
         toast.success("의견을 남겨주셔서 감사해요! 😃", { id: toastId })
       } else if (status === "error") {
         toast.error("의견 전송에 실패했어요. 다시 시도해주세요.", {
@@ -61,59 +55,103 @@ export const EmailForm = ({ slug, title }: { slug: string; title: string }) => {
       <div className='mb-6'>
         <h3 className='mb-2 text-xl font-bold tracking-tight'>의견을 남겨주세요</h3>
       </div>
-      <form action={formAction} className='space-y-6'>
-        <div className='flex flex-col gap-6 sm:flex-row sm:gap-8'>
-          <label className='flex-1'>
-            <LabelSpan>이메일</LabelSpan>
-            <input
-              className={INPUT_STYLE}
-              disabled={isPending}
-              maxLength={100}
-              name='email'
-              placeholder='your@email.com'
-              ref={emailRef}
-              type='email'
-            />
-          </label>
-          <label className='flex-1'>
-            <LabelSpan>닉네임</LabelSpan>
-            <input
-              className={INPUT_STYLE}
-              disabled={isPending}
-              maxLength={10}
-              name='nickname'
-              placeholder='익명'
-              ref={nicknameRef}
-              type='text'
-            />
-          </label>
-        </div>
-        <label>
-          <LabelSpan required>의견</LabelSpan>
-          <textarea
-            className={cn(INPUT_STYLE, "resize-none")}
-            disabled={isPending}
-            maxLength={1000}
-            minLength={1}
-            name='comment'
-            onChange={(e) => setComment(e.target.value)}
-            placeholder='의견을 남겨주세요'
-            required
-            rows={3}
-            value={comment}
-          />
-        </label>
-        <div className='text-end'>
-          <button
-            className='hover:bg-foreground/10 bg-background mt-3 cursor-pointer rounded-md px-1 py-0.5 transition-all duration-200 active:scale-[98%] disabled:cursor-not-allowed disabled:opacity-50'
-            disabled={!comment || isPending}
-            type='submit'
-          >
-            보내기
-          </button>
-        </div>
+      <form action={formAction} className='space-y-6' ref={formRef}>
+        <EmailFormProvider actionState={{ status, submittedTime }}>
+          <div className='flex flex-col gap-6 sm:flex-row sm:gap-8'>
+            <label className='flex-1'>
+              <LabelSpan>이메일</LabelSpan>
+              <input
+                className={INPUT_STYLE}
+                disabled={isPending}
+                maxLength={100}
+                name='email'
+                placeholder='your@email.com'
+                type='email'
+              />
+            </label>
+            <label className='flex-1'>
+              <LabelSpan>닉네임</LabelSpan>
+              <input
+                className={INPUT_STYLE}
+                disabled={isPending}
+                maxLength={10}
+                name='nickname'
+                placeholder='익명'
+                type='text'
+              />
+            </label>
+          </div>
+          <CommentTextarea isPending={isPending} />
+          <div className='text-end'>
+            <SubmitButton isPending={isPending} />
+          </div>
+        </EmailFormProvider>
       </form>
     </section>
+  )
+}
+
+const EmailFormContext = React.createContext<{
+  comment: string
+  setComment: (comment: string) => void
+}>({
+  comment: "",
+  setComment: () => {},
+})
+
+const EmailFormProvider = ({
+  actionState,
+  children,
+}: {
+  actionState: Pick<SubmitEmailActionState, "status" | "submittedTime">
+  children: React.ReactNode
+}) => {
+  const [comment, setComment] = useState("")
+
+  useEffect(() => {
+    if (actionState.status === "success" && actionState.submittedTime) {
+      setComment("")
+    }
+  }, [actionState.status, actionState.submittedTime])
+
+  const value = useMemo(() => ({ comment, setComment }), [comment, setComment])
+
+  return <EmailFormContext.Provider value={value}>{children}</EmailFormContext.Provider>
+}
+
+const CommentTextarea = ({ isPending }: { isPending: boolean }) => {
+  const { comment, setComment } = useContext(EmailFormContext)
+
+  return (
+    <label>
+      <LabelSpan required>의견</LabelSpan>
+      <textarea
+        className={cn(INPUT_STYLE, "resize-none")}
+        disabled={isPending}
+        maxLength={1000}
+        minLength={1}
+        name='comment'
+        onChange={(e) => setComment(e.target.value)}
+        placeholder='의견을 남겨주세요'
+        required
+        rows={3}
+        value={comment}
+      />
+    </label>
+  )
+}
+
+const SubmitButton = ({ isPending }: { isPending: boolean }) => {
+  const { comment } = useContext(EmailFormContext)
+
+  return (
+    <button
+      className='hover:bg-foreground/10 bg-background mt-3 cursor-pointer rounded-md px-1 py-0.5 transition-all duration-200 active:scale-[98%] disabled:cursor-not-allowed disabled:opacity-50'
+      disabled={!comment || isPending}
+      type='submit'
+    >
+      보내기
+    </button>
   )
 }
 
