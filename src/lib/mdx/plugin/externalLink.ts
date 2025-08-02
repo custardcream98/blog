@@ -12,8 +12,8 @@ export const externalLink = (options = {}) => {
       if (node.tagName === "a" && !!node.properties) {
         if ("href" in node.properties) {
           const href = node.properties.href as string
-          const isHashHref = /^#/.test(href)
-          if (!isHashHref) {
+          const isExternalLink = /^https?:\/\//.test(href)
+          if (isExternalLink) {
             node.properties = {
               ...node.properties,
               ...options,
