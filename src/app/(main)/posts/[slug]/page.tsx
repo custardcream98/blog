@@ -2,6 +2,7 @@ import { notFound } from "next/navigation"
 
 import "./post.css"
 
+import { PostAutoRefresher } from "@/domains/post/components/__dev__/PostAutoRefresher.client"
 import { EmailForm } from "@/domains/post/components/EmailForm/EmailForm.client"
 import { Post } from "@/domains/post/components/Post"
 import { PrevNextPostNavigator } from "@/domains/post/components/PrevNextPostNavigator"
@@ -28,6 +29,7 @@ export default async function PostPage({ params }: { params: Promise<{ slug: str
       <Post slug={slug} />
       <EmailForm slug={slug} title={post.title} />
       <PrevNextPostNavigator slug={slug} />
+      {process.env.NODE_ENV === "development" && <PostAutoRefresher />}
     </>
   )
 }
