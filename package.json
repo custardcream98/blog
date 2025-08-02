@@ -3,7 +3,9 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
+    "predev": "bash scripts/dev-post-submodule-link.sh",
     "dev": "next dev --turbopack",
+    "postdev": "rm -rf public/blog-posts",
     "build": "pnpm exec next telemetry disable && next build",
     "start": "next start",
     "format": "prettier --write .",
