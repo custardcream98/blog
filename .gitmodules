@@ -1,0 +1,3 @@
+[submodule "blog-posts"]
+	path = blog-posts
+	url = https://github.com/custardcream98/blog-posts.git

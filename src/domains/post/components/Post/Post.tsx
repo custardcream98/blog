@@ -1,13 +1,20 @@
+import matter from "gray-matter"
+
 import { Time } from "@/components/Time"
 import { evaluateMDX } from "@/lib/mdx/evaluateMDX"
 import { getPost } from "@/lib/octokit/blog"
 import { cn } from "@/utils/cn"
 
+import "./post.css"
+
 export const Post = async ({ slug }: { slug: string }) => {
   const post = await getPost({ slug })
 
+  const { toc } = matter(post).data as { toc?: boolean }
+
   const { content, frontmatter } = await evaluateMDX({
     source: post,
+    shouldAddTableOfContents: toc,
     components: {
       wrapper: ({ children }) => <article className='post pt-20 pb-10'>{children}</article>,
       h3: ({ className, children, ...props }) => (
@@ -70,6 +77,9 @@ export const Post = async ({ slug }: { slug: string }) => {
     title: string
     date: string
     excerpt: string
+    category: string[]
+    series?: string
+    toc?: boolean
   }
 
   return (

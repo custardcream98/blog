@@ -9,6 +9,10 @@ import rehypeSlug from "rehype-slug"
 import { externalLink } from "@/lib/mdx/plugin/externalLink"
 import { headingToStartFrom } from "@/lib/mdx/plugin/headingToStartFrom"
 import { imgToNextImagePlugin } from "@/lib/mdx/plugin/imgToNextImagePlugin"
+import {
+  tableOfContents,
+  wrapTableOfContents,
+} from "@/lib/mdx/plugin/tableOfContents/tableOfContents"
 
 const REHYPE_PRETTY_CODE_OPTIONS = {
   onVisitHighlightedLine(node) {
@@ -19,10 +23,16 @@ const REHYPE_PRETTY_CODE_OPTIONS = {
   },
 } as const satisfies Partial<RehypePrettyCodeOptions>
 
-const getMDXOptions = ({ codeTheme }: { codeTheme?: RehypePrettyCodeTheme }): EvaluateOptions => ({
+const getMDXOptions = ({
+  codeTheme,
+  shouldAddTableOfContents,
+}: {
+  codeTheme?: RehypePrettyCodeTheme
+  shouldAddTableOfContents?: boolean
+}): EvaluateOptions => ({
   mdxOptions: {
     rehypePlugins: [
-      imgToNextImagePlugin,
+      ...(process.env.NODE_ENV === "development" ? [] : [imgToNextImagePlugin]),
       [
         externalLink,
         {
@@ -31,9 +41,11 @@ const getMDXOptions = ({ codeTheme }: { codeTheme?: RehypePrettyCodeTheme }): Ev
         },
       ],
       rehypeSlug,
+      ...(shouldAddTableOfContents ? [wrapTableOfContents] : []),
       [rehypePrettyCode, { ...REHYPE_PRETTY_CODE_OPTIONS, theme: codeTheme }],
       [headingToStartFrom, { startFrom: 3 }],
     ],
+    remarkPlugins: [...(shouldAddTableOfContents ? [tableOfContents] : [])],
   },
   parseFrontmatter: true,
 })
@@ -42,14 +54,16 @@ export const evaluateMDX = async ({
   source,
   components,
   codeTheme = "github-dark",
+  shouldAddTableOfContents = false,
 }: {
   source: string
   components?: MDXComponents
   codeTheme?: RehypePrettyCodeTheme
+  shouldAddTableOfContents?: boolean
 }) =>
   evaluate({
     source,
-    options: getMDXOptions({ codeTheme }),
+    options: getMDXOptions({ codeTheme, shouldAddTableOfContents }),
     components: {
       Image,
       ...components,
