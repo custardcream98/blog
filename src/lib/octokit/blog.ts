@@ -1,33 +1,26 @@
 import fs from "fs"
-import { unstable_cache } from "next/cache"
 import path from "path"
 
-import { octokit } from "./instance"
+import { cache } from "@/utils/cache"
 
-const DEFAULT_CONFIG = {
-  owner: "custardcream98",
-  repo: "blog-posts",
-} as const
+import { DEFAULT_CONFIG } from "./_constants"
+import { octokit } from "./_instance"
 
-const cache =
-  process.env.NODE_ENV === "development"
-    ? // eslint-disable-next-line @typescript-eslint/no-explicit-any
-      (((fn: any) => fn) as typeof unstable_cache)
-    : unstable_cache
+type PostData = {
+  slug: string
+  title: string
+  excerpt: string
+  date: string
+  category: string[]
+  series?: string
+}
 
 export const getPostsList = cache(
   async () => {
     if (process.env.NODE_ENV === "development") {
       const data = fs.readFileSync(path.join(process.cwd(), "blog-posts/post-list.json"), "utf-8")
 
-      return JSON.parse(data) as {
-        slug: string
-        title: string
-        excerpt: string
-        date: string
-        category: string[]
-        series?: string
-      }[]
+      return JSON.parse(data) as PostData[]
     }
 
     const { data } = await octokit.rest.repos.getContent({
@@ -38,14 +31,7 @@ export const getPostsList = cache(
       },
     })
 
-    return JSON.parse(data as unknown as string) as {
-      slug: string
-      title: string
-      excerpt: string
-      date: string
-      category: string[]
-      series?: string
-    }[]
+    return JSON.parse(data as unknown as string) as PostData[]
   },
   ["posts-list"],
   {
