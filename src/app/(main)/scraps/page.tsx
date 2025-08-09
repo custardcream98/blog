@@ -5,6 +5,8 @@ import { normalizeScrapDataByDate, sortScrapData } from "@/domains/scrap/utils/n
 import { getScrapsList } from "@/lib/octokit/scraps"
 import { objectKeys } from "@/utils/types"
 
+export { metadata } from "./metadata"
+
 export default async function ScrapsPage() {
   const { scrapByDate, recentDateKeys } = await getScraps()
 

@@ -12,6 +12,8 @@ import {
 import { getScrapsList } from "@/lib/octokit/scraps"
 import { objectKeys } from "@/utils/types"
 
+export { generateMetadata } from "./metadata"
+
 export const generateStaticParams = async () => {
   const scraps = await getScrapsList()
   const scrapByMonth = normalizeScrapDataByMonth(scraps)
