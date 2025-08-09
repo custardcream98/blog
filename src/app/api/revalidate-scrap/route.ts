@@ -19,7 +19,9 @@ export async function POST(request: NextRequest) {
 
   revalidateTag("scraps")
 
-  revalidatePath(`/scraps/${year}/${month}`)
+  revalidatePath("/scraps", "layout")
+  revalidatePath("/scraps", "page")
+  revalidatePath(`/scraps/${year}/${month}`, "page")
 
   return NextResponse.json({
     message: "Revalidated successfully",
