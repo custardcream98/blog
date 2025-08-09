@@ -31,36 +31,38 @@ export default async function ScrapsMonthPage({
   const { byDate, dateKeys } = await getScraps({ year, month })
 
   return (
-    <>
+    <section className='mt-5 space-y-8'>
       <div className='flex items-center justify-between'>
-        <h2 className='font-bold'>
+        <h2 className='text-xl font-bold'>
           {year}년 {month}월 스크랩
         </h2>
-        <Link className='text-foreground/70 text-sm font-normal' href='/scraps'>
+        <Link className='text-foreground/70 hover:text-foreground text-sm' href='/scraps'>
           모든 스크랩 보기
         </Link>
       </div>
 
-      {dateKeys.map((date) => {
-        const scrapsForDate = byDate[date]
-        return (
-          <section className='mb-8' key={date}>
-            <h3 className='bg-background/80 sticky top-0 z-10 py-2 text-sm font-semibold backdrop-blur'>
-              {date}
-            </h3>
-            <ScrapGrid>
-              {scrapsForDate.map((scrap) => (
-                <ScrapGrid.Item key={scrap.url}>
-                  <ScrapItem {...scrap} />
-                </ScrapGrid.Item>
-              ))}
-            </ScrapGrid>
-          </section>
-        )
-      })}
+      <div className='space-y-8'>
+        {dateKeys.map((date) => {
+          const scrapsForDate = byDate[date]
+          return (
+            <section className='space-y-4' key={date}>
+              <h3 className='bg-background/90 border-foreground/10 sticky top-0 z-10 border-b py-3 text-base font-medium backdrop-blur-sm'>
+                {date}
+              </h3>
+              <ScrapGrid>
+                {scrapsForDate.map((scrap) => (
+                  <ScrapGrid.Item key={scrap.url}>
+                    <ScrapItem {...scrap} />
+                  </ScrapGrid.Item>
+                ))}
+              </ScrapGrid>
+            </section>
+          )
+        })}
+      </div>
 
       {process.env.NODE_ENV === "development" && <SubmoduleAutoRefresher />}
-    </>
+    </section>
   )
 }
 
