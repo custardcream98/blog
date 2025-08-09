@@ -27,6 +27,9 @@ export const getScrapsList = cache(
     const { data } = await octokit.rest.repos.getContent({
       ...DEFAULT_CONFIG,
       path: "scraps.json",
+      mediaType: {
+        format: "raw",
+      },
     })
 
     return JSON.parse(data as unknown as string) as ScrapData[]
