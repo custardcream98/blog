@@ -4,9 +4,9 @@
   "private": true,
   "scripts": {
     "predev": "bash scripts/dev-post-submodule-link.sh",
-    "dev": "concurrently -n \"Next.js,Post Watcher\" -c \"blue,green\" \"pnpm run dev:next\" \"pnpm run dev:post-watcher\"",
+    "dev": "concurrently -n \"Next.js,Post Watcher\" -c \"blue,green\" \"pnpm run dev:next\" \"pnpm run dev:submodule-watcher\"",
     "dev:next": "next dev --turbopack",
-    "dev:post-watcher": "tsx scripts/dev-post-watcher.mts",
+    "dev:submodule-watcher": "tsx scripts/dev-submodule-watcher.mts",
     "postdev": "rm -rf public/blog-posts",
     "build": "pnpm exec next telemetry disable && next build",
     "start": "next start",

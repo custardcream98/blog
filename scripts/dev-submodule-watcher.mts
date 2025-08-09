@@ -18,6 +18,7 @@ chokidar
       path.join(CONTENT_DIR, "posts"),
       path.join(CONTENT_DIR, "img"),
       path.join(CONTENT_DIR, "post-list.json"),
+      path.join(CONTENT_DIR, "scraps.json"),
     ],
     {
       ignoreInitial: true,

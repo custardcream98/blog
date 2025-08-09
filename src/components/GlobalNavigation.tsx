@@ -12,6 +12,7 @@ export const GlobalNavigation = () => {
       </h1>
 
       <div className='text-foreground/50 ml-auto flex items-center gap-2 text-sm'>
+        <Link href='/scraps'>scraps</Link>
         <Link href='/about'>about me</Link>
       </div>
     </nav>

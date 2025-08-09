@@ -38,6 +38,6 @@ blog-posts repo ──(Git Hook)─▶ /api/revalidate-post로 요청 ──▶ 
 
 dev 실행시 동시에 서브모듈의 파일 변경을 감지하고 알리는 웹소켓 서버 실행, 클라이언트에서 파일 변경이 감지되면 페이지 리로드
 
-구현된 내용은 `scripts/dev-post-watcher.mts`, `<PostAutoRefresher />`에 있음.
+구현된 내용은 `scripts/dev-submodule-watcher.mts`, `<SubmoduleAutoRefresher />`에 있음.
 
 > 추가로, dev에서는 `unstable_cache` 미사용

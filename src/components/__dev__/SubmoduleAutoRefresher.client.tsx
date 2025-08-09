@@ -3,9 +3,9 @@
 import { useRouter } from "next/navigation"
 import { useEffect } from "react"
 
-export const PostAutoRefresher = () => {
+export const SubmoduleAutoRefresher = () => {
   if (process.env.NODE_ENV !== "development")
-    throw new Error("PostAutoRefresher is only for development")
+    throw new Error("SubmoduleAutoRefresher is only for development")
 
   const router = useRouter()
 

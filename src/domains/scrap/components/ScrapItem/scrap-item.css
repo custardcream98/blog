@@ -1,0 +1,31 @@
+.scrap-item ul,
+.scrap-item ol {
+  margin: 0.5rem 0;
+  padding-left: 1rem;
+}
+
+.scrap-item ul {
+  list-style-type: disc;
+}
+
+.scrap-item ol {
+  list-style-type: decimal;
+}
+
+.scrap-item li {
+  margin-bottom: 0.25rem;
+  line-height: 1.7;
+}
+
+.scrap-item ol ol {
+  list-style-type: lower-alpha;
+}
+
+.scrap-item ol ol ol {
+  list-style-type: lower-roman;
+}
+
+.scrap-item li > ul,
+.scrap-item li > ol {
+  margin: 0.5rem 0;
+}
