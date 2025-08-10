@@ -42,12 +42,16 @@ export const getPostsList = unstable_cache(
 
 const getPostImages = async ({ slug }: { slug: string }) => {
   if (process.env.NODE_ENV === "development") {
-    const data = fs.readdirSync(path.join(process.cwd(), `blog-posts/img/${slug}`))
+    try {
+      const data = fs.readdirSync(path.join(process.cwd(), `blog-posts/img/${slug}`))
 
-    return data.map((name) => ({
-      path: `${slug}/${name}`,
-      name,
-    }))
+      return data.map((name) => ({
+        path: `${slug}/${name}`,
+        name,
+      }))
+    } catch {
+      return []
+    }
   }
 
   try {

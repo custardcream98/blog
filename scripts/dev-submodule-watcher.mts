@@ -34,14 +34,29 @@ chokidar
       followSymlinks: true,
     },
   )
-  .on("all", () => {
+  .on("all", (event, changedPath) => {
+    const isPost = changedPath.startsWith(path.join(CONTENT_DIR, "posts"))
+    const isScrap = path.join(CONTENT_DIR, "scraps.json")
+
     clearTimeout(
       (global as unknown as { __refreshTimer: ReturnType<typeof setTimeout> }).__refreshTimer,
     )
     ;(global as unknown as { __refreshTimer: ReturnType<typeof setTimeout> }).__refreshTimer =
       setTimeout(() => {
-        console.log("🔌 refresh")
-        clients.forEach((ws) => ws.send("refresh"))
+        console.log("🔌 refresh", path)
+        clients.forEach((ws) =>
+          ws.send(
+            JSON.stringify({
+              type: isPost ? "post" : isScrap ? "scrap" : "refresh",
+              slug: isPost
+                ? changedPath
+                    .split("/")
+                    .at(-1)
+                    ?.replace(/\.mdx$/, "")
+                : undefined,
+            }),
+          ),
+        )
       }, 100)
   })
 
