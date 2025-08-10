@@ -13,7 +13,7 @@ export default async function ScrapsPage() {
   return (
     <>
       <section className='mt-5'>
-        <h2 className='mb-6 text-xl font-bold'>최근 30일 스크랩</h2>
+        <h2 className='mb-6 text-xl font-bold'>최근 스크랩</h2>
 
         <div className='space-y-8'>
           {recentDateKeys.map((date) => {
