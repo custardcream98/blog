@@ -14,13 +14,9 @@ export const SubmoduleAutoRefresher = () => {
     const ws = new WebSocket("ws://localhost:3201")
 
     ws.onmessage = (e) => {
-      console.log("e", e)
       if (e.data === "refresh") {
         const revalidateByPath = async () => {
-          console.log("pathname", pathname)
           const paths = pathname.slice(1).split("/")
-
-          console.log("paths", paths)
 
           if (paths[0] === "posts" && paths[1]) {
             await fetch(`/api/revalidate-post?slug=${paths[1]}`, {
@@ -42,9 +38,7 @@ export const SubmoduleAutoRefresher = () => {
           }
         }
 
-        revalidateByPath().then(() => {
-          router.refresh()
-        })
+        revalidateByPath().then(() => router.refresh())
       }
     }
 
