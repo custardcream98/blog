@@ -17,7 +17,7 @@ export const PrevNextPostNavigator = async ({ slug }: { slug: string }) => {
   const { prev: prevPost, next: nextPost } = await getPrevNextPost({ slug })
 
   return (
-    <div className='mt-10 flex flex-col gap-4'>
+    <aside className='mt-10 flex flex-col gap-4'>
       {prevPost && (
         <Link className='flex flex-col gap-1' href={`/posts/${prevPost.slug}`}>
           <span className='text-foreground/70 text-sm'>← 이전 글</span>
@@ -30,6 +30,6 @@ export const PrevNextPostNavigator = async ({ slug }: { slug: string }) => {
           <span>{nextPost.title}</span>
         </Link>
       )}
-    </div>
+    </aside>
   )
 }

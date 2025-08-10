@@ -22,7 +22,7 @@ export default async function ScrapsPage() {
             return (
               <section className='space-y-4' key={date}>
                 <h3 className='bg-background/90 border-foreground/10 sticky top-0 z-10 border-b py-3 text-base font-medium backdrop-blur-sm'>
-                  {date}
+                  <time dateTime={date}>{date}</time> <span className='sr-only'>스크랩 목록</span>
                 </h3>
 
                 <ScrapGrid>

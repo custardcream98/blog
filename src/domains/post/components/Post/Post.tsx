@@ -16,7 +16,7 @@ export const Post = async ({ slug }: { slug: string }) => {
     source: post,
     shouldAddTableOfContents: toc,
     components: {
-      wrapper: ({ children }) => <article className='post pt-20 pb-10'>{children}</article>,
+      wrapper: ({ children }) => <div className='post pt-20 pb-10'>{children}</div>,
       h3: ({ className, children, ...props }) => (
         <h3
           className={cn(
@@ -83,12 +83,14 @@ export const Post = async ({ slug }: { slug: string }) => {
   }
 
   return (
-    <>
-      <Time className='mt-10 block text-sm lg:text-start' date={date} />
-      <h2 className='mt-2 text-2xl font-bold'>{title}</h2>
-      <p className='text-foreground/70 mt-4 text-sm'>{excerpt}</p>
+    <article>
+      <header>
+        <Time className='mt-10 block text-sm lg:text-start' date={date} />
+        <h2 className='mt-2 text-2xl font-bold'>{title}</h2>
+        <p className='text-foreground/70 mt-4 text-sm'>{excerpt}</p>
+      </header>
       {content}
-    </>
+    </article>
   )
 }
 
