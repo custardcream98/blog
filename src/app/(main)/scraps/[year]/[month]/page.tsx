@@ -32,7 +32,14 @@ export default async function ScrapsMonthPage({
   params: Promise<{ year: string; month: string }>
 }) {
   const { year, month } = await params
-  const { byDate, dateKeys } = await getScraps({ year, month })
+  const yearNum = parseInt(year)
+  const monthNum = parseInt(month)
+
+  if (isNaN(yearNum) || isNaN(monthNum) || monthNum < 1 || monthNum > 12) {
+    notFound()
+  }
+
+  const { byDate, dateKeys } = await getScraps({ year: yearNum, month: monthNum })
 
   return (
     <section className='mt-5 space-y-8'>
@@ -70,12 +77,18 @@ export default async function ScrapsMonthPage({
   )
 }
 
-const getScraps = async ({ year, month }: { year: string; month: string }) => {
-  const targetPrefix = `${year}-${month}`
+const getScraps = async ({ year, month }: { year: number; month: number }) => {
+  const targetPrefix = `${year}-${month.toString().padStart(2, "0")}`
   const scraps = await getScrapsList()
   const sortedScraps = sortScrapData(scraps)
   const monthScraps = sortedScraps
-    .filter((s) => new Date(s.scrapedAt).toISOString().startsWith(targetPrefix))
+    .filter((s) => {
+      try {
+        return new Date(s.scrapedAt).toISOString().startsWith(targetPrefix)
+      } catch {
+        return false
+      }
+    })
     .sort((a, b) => new Date(b.scrapedAt).getTime() - new Date(a.scrapedAt).getTime())
 
   if (!monthScraps.length) {

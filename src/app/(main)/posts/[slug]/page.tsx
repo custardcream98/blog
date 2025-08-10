@@ -4,11 +4,9 @@ import { SubmoduleAutoRefresher } from "@/components/__dev__/SubmoduleAutoRefres
 import { EmailForm } from "@/domains/post/components/EmailForm/EmailForm.client"
 import { Post } from "@/domains/post/components/Post/Post"
 import { PrevNextPostNavigator } from "@/domains/post/components/PrevNextPostNavigator"
-import { getPostsList } from "@/lib/octokit/blog"
+import { getPost, getPostsList } from "@/lib/octokit/blog"
 
 export { generateMetadata } from "./metadata"
-
-export const dynamicParams = false
 
 export const generateStaticParams = async () => {
   const posts = await getPostsList()
@@ -18,16 +16,19 @@ export const generateStaticParams = async () => {
 export default async function PostPage({ params }: { params: Promise<{ slug: string }> }) {
   const { slug } = await params
 
-  const post = (await getPostsList()).find((post) => post.slug === slug)
+  const [post, postData] = await Promise.all([
+    getPost({ slug }),
+    getPostsList().then((posts) => posts.find((post) => post.slug === slug)),
+  ])
 
-  if (!post) {
+  if (!post || !postData) {
     notFound()
   }
 
   return (
     <>
-      <Post slug={slug} />
-      <EmailForm slug={slug} title={post.title} />
+      <Post contents={post} />
+      <EmailForm slug={slug} title={postData.title} />
       <PrevNextPostNavigator slug={slug} />
       {process.env.NODE_ENV === "development" && <SubmoduleAutoRefresher />}
     </>
