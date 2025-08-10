@@ -1,7 +1,8 @@
 import fs from "fs"
+import { unstable_cache } from "next/cache"
+import { notFound } from "next/navigation"
+import { RequestError } from "octokit"
 import path from "path"
-
-import { cache } from "@/utils/cache"
 
 import { DEFAULT_CONFIG } from "./_constants"
 import { octokit } from "./_instance"
@@ -15,7 +16,7 @@ type PostData = {
   series?: string
 }
 
-export const getPostsList = cache(
+export const getPostsList = unstable_cache(
   async () => {
     if (process.env.NODE_ENV === "development") {
       const data = fs.readFileSync(path.join(process.cwd(), "blog-posts/post-list.json"), "utf-8")
@@ -56,8 +57,11 @@ const getPostImages = async ({ slug }: { slug: string }) => {
     })
 
     return data as unknown as { path: string; name: string }[]
-  } catch {
-    return []
+  } catch (error) {
+    if (error instanceof RequestError && error.status === 404) {
+      return []
+    }
+    throw error
   }
 }
 
@@ -71,13 +75,20 @@ const getPostContent = async ({ slug }: { slug: string }) => {
     return { data }
   }
 
-  return octokit.rest.repos.getContent({
-    ...DEFAULT_CONFIG,
-    path: `posts/${slug}.mdx`,
-    mediaType: {
-      format: "raw",
-    },
-  }) as unknown as Promise<{ data: string }>
+  try {
+    return (await octokit.rest.repos.getContent({
+      ...DEFAULT_CONFIG,
+      path: `posts/${slug}.mdx`,
+      mediaType: {
+        format: "raw",
+      },
+    })) as unknown as Promise<{ data: string }>
+  } catch (error) {
+    if (error instanceof RequestError && error.status === 404) {
+      return { data: "" }
+    }
+    throw error
+  }
 }
 
 const processPostImages = ({
@@ -106,12 +117,16 @@ const processPostImages = ({
   return result
 }
 
-export const getPost = cache(
+export const getPost = unstable_cache(
   async ({ slug }: { slug: string }) => {
     const [{ data }, images] = await Promise.all([
       getPostContent({ slug }),
       getPostImages({ slug }),
     ])
+
+    if (data === "") {
+      notFound()
+    }
 
     return processPostImages({ images, content: data })
   },

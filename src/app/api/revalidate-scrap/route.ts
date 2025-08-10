@@ -1,12 +1,13 @@
 import { revalidatePath, revalidateTag } from "next/cache"
 import { NextRequest, NextResponse } from "next/server"
 
-export async function POST(request: NextRequest) {
-  const apiKey = request.headers.get("x-api-key")
-  const validApiKey = process.env.REVALIDATE_API_KEY
+import { checkRevalidateRouteHandlerAuth } from "@/lib/next/checkRevalidateRouteHandlerAuth"
 
-  if (!apiKey || apiKey !== validApiKey) {
-    return NextResponse.json({ error: "Invalid API key" }, { status: 401 })
+export async function POST(request: NextRequest) {
+  if (process.env.NODE_ENV !== "development") {
+    const check = checkRevalidateRouteHandlerAuth(request)
+
+    if (check) return check
   }
 
   const { searchParams } = new URL(request.url)

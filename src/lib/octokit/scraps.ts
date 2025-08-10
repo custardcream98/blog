@@ -1,7 +1,6 @@
 import fs from "fs"
+import { unstable_cache } from "next/cache"
 import path from "path"
-
-import { cache } from "@/utils/cache"
 
 import { DEFAULT_CONFIG } from "./_constants"
 import { octokit } from "./_instance"
@@ -16,7 +15,7 @@ export type ScrapData = {
   comment: string
 }
 
-export const getScrapsList = cache(
+export const getScrapsList = unstable_cache(
   async () => {
     if (process.env.NODE_ENV === "development") {
       const data = fs.readFileSync(path.join(process.cwd(), "blog-posts/scraps.json"), "utf-8")
