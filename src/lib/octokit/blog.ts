@@ -1,7 +1,6 @@
 import fs from "fs"
 import { unstable_cache } from "next/cache"
 import { notFound } from "next/navigation"
-import { RequestError } from "octokit"
 import path from "path"
 
 import { DEFAULT_CONFIG } from "./_constants"
@@ -62,7 +61,7 @@ const getPostImages = async ({ slug }: { slug: string }) => {
 
     return data as unknown as { path: string; name: string }[]
   } catch (error) {
-    if (error instanceof RequestError && error.status === 404) {
+    if (typeof error === "object" && error !== null && "status" in error && error.status === 404) {
       return []
     }
     throw error
@@ -80,15 +79,17 @@ const getPostContent = async ({ slug }: { slug: string }) => {
   }
 
   try {
-    return (await octokit.rest.repos.getContent({
+    const { data } = await octokit.rest.repos.getContent({
       ...DEFAULT_CONFIG,
       path: `posts/${slug}.mdx`,
       mediaType: {
         format: "raw",
       },
-    })) as unknown as Promise<{ data: string }>
+    })
+
+    return { data: data as unknown as string }
   } catch (error) {
-    if (error instanceof RequestError && error.status === 404) {
+    if (typeof error === "object" && error !== null && "status" in error && error.status === 404) {
       return { data: "" }
     }
     throw error
