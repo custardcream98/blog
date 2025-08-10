@@ -12,7 +12,11 @@ export { metadata } from "./metadata"
 
 export default function RootLayout({ children }: React.PropsWithChildren) {
   return (
-    <html className={cn(FONTS, "scroll-smooth")} lang='ko'>
+    <html
+      className={cn(FONTS, "scroll-smooth")}
+      data-scroll-behavior='smooth' // https://nextjs.org/docs/messages/missing-data-scroll-behavior
+      lang='ko'
+    >
       <head>
         <link href='/static/icon.png' rel='icon' type='image/png' />
         {process.env.NODE_ENV === "production" && (
