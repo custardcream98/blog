@@ -11,7 +11,7 @@ export async function POST(request: NextRequest) {
 
   const { searchParams } = new URL(request.url)
   const year = searchParams.get("year")
-  const month = searchParams.get("month")
+  const month = searchParams.get("month")?.padStart(2, "0")
 
   if (!year || !month) {
     return NextResponse.json({ error: "year and month are required" }, { status: 400 })
@@ -19,9 +19,8 @@ export async function POST(request: NextRequest) {
 
   revalidateTag("scraps")
 
-  revalidatePath("/scraps", "layout")
-  revalidatePath("/scraps", "page")
-  revalidatePath(`/scraps/${year}/${month}`, "page")
+  revalidatePath("/scraps")
+  revalidatePath(`/scraps/${year}/${month}`)
 
   return NextResponse.json({
     message: "Revalidated successfully",
