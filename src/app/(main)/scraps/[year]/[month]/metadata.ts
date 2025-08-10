@@ -11,6 +11,6 @@ export const generateMetadata = async ({
 
   return {
     ...scrapsMetadata,
-    title: `shiwoo.dev: ${year}년 ${month}월 스크랩`,
+    title: `${year}년 ${month}월 스크랩`,
   }
 }
