@@ -4,11 +4,9 @@ import { NextRequest, NextResponse } from "next/server"
 import { checkRevalidateRouteHandlerAuth } from "@/lib/next/checkRevalidateRouteHandlerAuth"
 
 export async function POST(request: NextRequest) {
-  if (process.env.NODE_ENV !== "development") {
-    const check = checkRevalidateRouteHandlerAuth(request)
+  const check = checkRevalidateRouteHandlerAuth(request)
 
-    if (check) return check
-  }
+  if (process.env.NODE_ENV !== "development" && check) return check
 
   const { searchParams } = new URL(request.url)
   const year = searchParams.get("year")
