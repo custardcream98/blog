@@ -21,7 +21,7 @@ export default async function PostPage({ params }: { params: Promise<{ slug: str
     getPostsList().then((posts) => posts.find((post) => post.slug === slug)),
   ])
 
-  if (!post || !postData) {
+  if (post === null || typeof postData === "undefined") {
     notFound()
   }
 

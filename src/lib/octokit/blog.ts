@@ -1,6 +1,5 @@
 import fs from "fs"
 import { unstable_cache } from "next/cache"
-import { notFound } from "next/navigation"
 import path from "path"
 
 import { DEFAULT_CONFIG } from "./_constants"
@@ -90,7 +89,7 @@ const getPostContent = async ({ slug }: { slug: string }) => {
     return { data: data as unknown as string }
   } catch (error) {
     if (typeof error === "object" && error !== null && "status" in error && error.status === 404) {
-      return { data: "" }
+      return { data: null }
     }
     throw error
   }
@@ -129,8 +128,8 @@ export const getPost = unstable_cache(
       getPostImages({ slug }),
     ])
 
-    if (data === "") {
-      notFound()
+    if (data === null) {
+      return null
     }
 
     return processPostImages({ images, content: data })
