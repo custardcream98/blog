@@ -1,4 +1,5 @@
 import { Metadata } from "next"
+import { notFound } from "next/navigation"
 
 import { sharedMetadata } from "@/app/_sharedMetadata"
 import { getPostsList } from "@/lib/octokit/blog"
@@ -13,7 +14,7 @@ export const generateMetadata = async ({
   const post = posts.find((post) => post.slug === slug)
 
   if (!post) {
-    throw new Error("Post not found")
+    notFound()
   }
 
   return {
