@@ -17,6 +17,7 @@ export async function POST(request: NextRequest) {
 
   revalidateTag("posts")
 
+  revalidatePath("/posts/[slug]", "page")
   revalidatePath(`/posts/${slug}`)
   revalidatePath(`/api/og-image/${slug}`)
   revalidatePath("/", "page")

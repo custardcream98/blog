@@ -12,6 +12,8 @@ export async function POST(request: NextRequest) {
 
   revalidatePath("/scraps")
 
+  revalidatePath("/scraps/[year]/[month]", "page")
+
   const { searchParams } = new URL(request.url)
   const year = searchParams.get("year")
   const month = searchParams.get("month")?.padStart(2, "0")
