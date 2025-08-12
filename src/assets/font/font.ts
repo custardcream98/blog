@@ -101,6 +101,6 @@ export const FONT_D2_CODING = localFont({
   display: "swap",
   fallback: ["D2Coding", "Courier New", "Courier", "monospace"],
   preload: true,
-  src: "./D2Coding/d2coding-subset.woff2",
+  src: "./D2Coding/D2Coding.ttf",
   variable: "--font-d2coding",
 })
