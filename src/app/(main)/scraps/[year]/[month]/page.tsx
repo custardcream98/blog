@@ -14,7 +14,8 @@ import { objectKeys } from "@/utils/types"
 
 export { generateMetadata } from "./metadata"
 
-export const dynamicParams = false
+export const dynamicParams = true
+export const dynamic = "force-static"
 
 export const generateStaticParams = async () => {
   const scraps = await getScrapsList()

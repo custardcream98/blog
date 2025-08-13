@@ -8,6 +8,9 @@ import { getPost, getPostsList } from "@/lib/octokit/blog"
 
 export { generateMetadata } from "./metadata"
 
+export const dynamicParams = true
+export const dynamic = "force-static"
+
 export const generateStaticParams = async () => {
   const posts = await getPostsList()
   return posts.map((post) => ({ slug: post.slug }))
