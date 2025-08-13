@@ -22,15 +22,20 @@ export const getPostsList = unstable_cache(
       return JSON.parse(data) as PostData[]
     }
 
-    const { data } = await octokit.request("GET /repos/{owner}/{repo}/contents/{path}", {
-      ...DEFAULT_CONFIG,
-      path: "post-list.json",
-      mediaType: {
-        format: "raw",
-      },
-    })
+    try {
+      const { data } = await octokit.request("GET /repos/{owner}/{repo}/contents/{path}", {
+        ...DEFAULT_CONFIG,
+        path: "post-list.json",
+        mediaType: {
+          format: "raw",
+        },
+      })
 
-    return JSON.parse(data as unknown as string) as PostData[]
+      return JSON.parse(data as unknown as string) as PostData[]
+    } catch (error) {
+      console.error("ERROR [getPostsList] ", error)
+      return []
+    }
   },
   ["posts-list"],
   {
