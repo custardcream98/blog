@@ -22,7 +22,7 @@ export const getPostsList = unstable_cache(
       return JSON.parse(data) as PostData[]
     }
 
-    const { data } = await octokit.rest.repos.getContent({
+    const { data } = await octokit.request("GET /repos/{owner}/{repo}/contents/{path}", {
       ...DEFAULT_CONFIG,
       path: "post-list.json",
       mediaType: {
@@ -53,9 +53,12 @@ const getPostImages = async ({ slug }: { slug: string }) => {
   }
 
   try {
-    const { data } = await octokit.rest.repos.getContent({
+    const { data } = await octokit.request("GET /repos/{owner}/{repo}/contents/{path}", {
       ...DEFAULT_CONFIG,
       path: `img/${slug}`,
+      mediaType: {
+        format: "raw",
+      },
     })
 
     return data as unknown as { path: string; name: string }[]
@@ -78,7 +81,7 @@ const getPostContent = async ({ slug }: { slug: string }) => {
   }
 
   try {
-    const { data } = await octokit.rest.repos.getContent({
+    const { data } = await octokit.request("GET /repos/{owner}/{repo}/contents/{path}", {
       ...DEFAULT_CONFIG,
       path: `posts/${slug}.mdx`,
       mediaType: {
