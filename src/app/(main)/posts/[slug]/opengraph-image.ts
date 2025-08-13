@@ -14,9 +14,7 @@ export default async function Image({ params }: { params: Promise<{ slug: string
   const posts = await getPostsList()
   const post = posts.find((post) => post.slug === slug)
 
-  if (!post) {
-    return new Response("Not found", { status: 404 })
-  }
+  if (!post) return getThumbnailImageResponse(null)
 
   return getThumbnailImageResponse(post.title)
 }

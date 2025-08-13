@@ -12,13 +12,12 @@ export const generateMetadata = async ({
   const posts = await getPostsList()
   const post = posts.find((post) => post.slug === slug)
 
-  if (!post) {
+  if (!post)
     return {
       ...sharedMetadata,
       title: "Not found",
       description: "Not found",
     }
-  }
 
   return {
     ...sharedMetadata,

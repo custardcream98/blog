@@ -39,20 +39,16 @@ export const getPostsList = unstable_cache(
 )
 
 const getPostImages = async ({ slug }: { slug: string }) => {
-  if (process.env.NODE_ENV === "development") {
-    try {
-      const data = fs.readdirSync(path.join(process.cwd(), `blog-posts/img/${slug}`))
+  try {
+    if (process.env.NODE_ENV === "development") {
+      const data = await fs.promises.readdir(path.join(process.cwd(), `blog-posts/img/${slug}`))
 
       return data.map((name) => ({
         path: `${slug}/${name}`,
         name,
       }))
-    } catch {
-      return []
     }
-  }
 
-  try {
     const { data } = await octokit.request("GET /repos/{owner}/{repo}/contents/{path}", {
       ...DEFAULT_CONFIG,
       path: `img/${slug}`,
@@ -63,24 +59,23 @@ const getPostImages = async ({ slug }: { slug: string }) => {
 
     return data as unknown as { path: string; name: string }[]
   } catch (error) {
-    if (typeof error === "object" && error !== null && "status" in error && error.status === 404) {
-      return []
-    }
-    throw error
+    console.error("ERROR [getPostImages] ", slug, error)
+
+    return []
   }
 }
 
 const getPostContent = async ({ slug }: { slug: string }) => {
-  if (process.env.NODE_ENV === "development") {
-    const data = fs.readFileSync(
-      path.join(process.cwd(), "blog-posts/posts", `${slug}.mdx`),
-      "utf-8",
-    )
-
-    return { data }
-  }
-
   try {
+    if (process.env.NODE_ENV === "development") {
+      const data = await fs.promises.readFile(
+        path.join(process.cwd(), "blog-posts/posts", `${slug}.mdx`),
+        "utf-8",
+      )
+
+      return { data }
+    }
+
     const { data } = await octokit.request("GET /repos/{owner}/{repo}/contents/{path}", {
       ...DEFAULT_CONFIG,
       path: `posts/${slug}.mdx`,
@@ -91,10 +86,9 @@ const getPostContent = async ({ slug }: { slug: string }) => {
 
     return { data: data as unknown as string }
   } catch (error) {
-    if (typeof error === "object" && error !== null && "status" in error && error.status === 404) {
-      return { data: null }
-    }
-    throw error
+    console.error("ERROR [getPostContent] ", slug, error)
+
+    return { data: null }
   }
 }
 
