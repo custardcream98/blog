@@ -23,15 +23,23 @@ export const getScrapsList = unstable_cache(
       return JSON.parse(data) as ScrapData[]
     }
 
-    const { data } = await octokit.rest.repos.getContent({
-      ...DEFAULT_CONFIG,
-      path: "scraps.json",
-      mediaType: {
-        format: "raw",
-      },
-    })
+    try {
+      const { data } = await octokit.rest.repos.getContent({
+        ...DEFAULT_CONFIG,
+        path: "scraps.json",
+        mediaType: {
+          format: "raw",
+        },
+      })
 
-    return JSON.parse(data as unknown as string) as ScrapData[]
+      return JSON.parse(data as unknown as string) as ScrapData[]
+    } catch (error) {
+      console.error(error)
+      if (error instanceof Error) {
+        console.log(error.name, error.message, error.stack)
+      }
+      throw error
+    }
   },
   ["scraps-list"],
   {
