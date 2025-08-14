@@ -1,5 +1,7 @@
 import fs from "fs"
 import { unstable_cache } from "next/cache"
+import { notFound } from "next/navigation"
+import { RequestError } from "octokit"
 import path from "path"
 
 import { DEFAULT_CONFIG } from "./_constants"
@@ -22,24 +24,19 @@ export const getPostsList = unstable_cache(
       return JSON.parse(data) as PostData[]
     }
 
-    try {
-      const { data } = await octokit.request("GET /repos/{owner}/{repo}/contents/{path}", {
-        ...DEFAULT_CONFIG,
-        path: "post-list.json",
-        mediaType: {
-          format: "raw",
-        },
-      })
+    const { data } = await octokit.request("GET /repos/{owner}/{repo}/contents/{path}", {
+      ...DEFAULT_CONFIG,
+      path: "post-list.json",
+      mediaType: {
+        format: "raw",
+      },
+    })
 
-      return JSON.parse(data as unknown as string) as PostData[]
-    } catch (error) {
-      console.error("ERROR [getPostsList] ", error)
-      return []
-    }
+    return JSON.parse(data as unknown as string) as PostData[]
   },
   ["posts-list"],
   {
-    tags: ["posts"],
+    tags: ["posts", "posts-list"],
   },
 )
 
@@ -64,21 +61,23 @@ const getPostImages = async ({ slug }: { slug: string }) => {
 
     return data as unknown as { path: string; name: string }[]
   } catch (error) {
-    console.error("ERROR [getPostImages] ", slug, error)
+    if (error instanceof RequestError && error.status === 404) {
+      notFound()
+    }
 
-    return []
+    throw error
   }
 }
 
-const getPostContent = async ({ slug }: { slug: string }) => {
+const getRawPostContent = async ({ slug }: { slug: string }) => {
   try {
     if (process.env.NODE_ENV === "development" && !process.env.USE_OCTOKIT_INSTEAD_OF_SUBMODULE) {
-      const data = await fs.promises.readFile(
+      const content = await fs.promises.readFile(
         path.join(process.cwd(), "blog-posts/posts", `${slug}.mdx`),
         "utf-8",
       )
 
-      return { data }
+      return content
     }
 
     const { data } = await octokit.request("GET /repos/{owner}/{repo}/contents/{path}", {
@@ -89,11 +88,13 @@ const getPostContent = async ({ slug }: { slug: string }) => {
       },
     })
 
-    return { data: data as unknown as string }
+    return data as unknown as string
   } catch (error) {
-    console.error("ERROR [getPostContent] ", slug, error)
+    if (error instanceof RequestError && error.status === 404) {
+      notFound()
+    }
 
-    return { data: null }
+    throw error
   }
 }
 
@@ -123,21 +124,40 @@ const processPostImages = ({
   return result
 }
 
-export const getPost = unstable_cache(
-  async ({ slug }: { slug: string }) => {
-    const [{ data }, images] = await Promise.all([
-      getPostContent({ slug }),
-      getPostImages({ slug }),
-    ])
+export const getPostMetaData = async ({ slug }: { slug: string }) => {
+  const cached = unstable_cache(
+    async () => {
+      const posts = await getPostsList()
+      const meta = posts.find((post) => post.slug === slug)
 
-    if (data === null) {
-      return null
-    }
+      if (!meta) notFound()
 
-    return processPostImages({ images, content: data })
-  },
-  ["post"],
-  {
-    tags: ["posts"],
-  },
-)
+      return meta
+    },
+    ["post-meta-data", slug],
+    {
+      tags: ["posts", `post-meta-data:${slug}`],
+    },
+  )
+
+  return cached()
+}
+
+export const getPostContent = async ({ slug }: { slug: string }) => {
+  const cached = unstable_cache(
+    async () => {
+      const [content, images] = await Promise.all([
+        getRawPostContent({ slug }),
+        getPostImages({ slug }),
+      ])
+
+      return processPostImages({ images, content })
+    },
+    ["post-content", slug],
+    {
+      tags: ["posts", `post-content:${slug}`],
+    },
+  )
+
+  return cached()
+}

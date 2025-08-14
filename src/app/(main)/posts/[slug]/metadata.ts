@@ -1,7 +1,7 @@
 import { Metadata } from "next"
 
 import { sharedMetadata } from "@/app/_sharedMetadata"
-import { getPostsList } from "@/lib/octokit/blog"
+import { getPostMetaData } from "@/lib/octokit/blog"
 
 export const generateMetadata = async ({
   params,
@@ -9,15 +9,7 @@ export const generateMetadata = async ({
   params: Promise<{ slug: string }>
 }): Promise<Metadata> => {
   const { slug } = await params
-  const posts = await getPostsList()
-  const post = posts.find((post) => post.slug === slug)
-
-  if (!post)
-    return {
-      ...sharedMetadata,
-      title: "Not found",
-      description: "Not found",
-    }
+  const post = await getPostMetaData({ slug })
 
   return {
     ...sharedMetadata,
