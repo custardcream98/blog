@@ -5,9 +5,11 @@ import {
 } from "@/app/_sharedMetadata"
 import { getPostsList } from "@/lib/octokit/blog"
 
+const POSTS_MAX_COUNT = 100
+
 export const GET = async () => {
   const postsList = await getPostsList()
-  const posts = postsList.map((post) => ({
+  const posts = postsList.slice(0, POSTS_MAX_COUNT).map((post) => ({
     title: post.title,
     link: `https://shiwoo.dev/posts/${post.slug}`,
     pubDate: post.date,

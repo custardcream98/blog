@@ -5,10 +5,11 @@ import { getScrapsList } from "@/lib/octokit/scraps"
 const META_TITLE = "shiwoo.dev: scraps"
 const META_LINK = `${METADATA_DEFAULT_URL.toString()}scraps`
 const META_DESCRIPTION = scrapsMetadata.description
+const SCRAPS_MAX_COUNT = 100
 
 export const GET = async () => {
   const scrapsList = await getScrapsList()
-  const scraps = scrapsList.map((scrap) => ({
+  const scraps = scrapsList.slice(0, SCRAPS_MAX_COUNT).map((scrap) => ({
     title: scrap.title,
     link: scrap.url,
     pubDate: scrap.scrapedAt,
