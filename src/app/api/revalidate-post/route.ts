@@ -15,13 +15,14 @@ export async function POST(request: NextRequest) {
     return NextResponse.json({ error: "Slug is required" }, { status: 400 })
   }
 
-  revalidatePath(`/posts/${slug}`)
-  revalidatePath(`/api/og-image/${slug}`)
-  revalidatePath("/rss")
-
   revalidateTag("posts-list")
   revalidateTag(`post-content:${slug}`)
   revalidateTag(`post-meta-data:${slug}`)
+
+  revalidatePath(`/posts/${slug}`)
+  revalidatePath(`/api/og-image/${slug}`)
+  revalidatePath("/rss")
+  revalidatePath("/", "page")
 
   return NextResponse.json({
     message: "Revalidated successfully",
