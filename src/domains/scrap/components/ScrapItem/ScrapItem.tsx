@@ -1,9 +1,11 @@
+import Image from "next/image"
+
 import { Link } from "@/components/Link"
 import { evaluateMDX } from "@/lib/mdx/evaluateMDX"
 import { ScrapData } from "@/lib/octokit/scraps"
-import { cn } from "@/utils/cn"
 
 import "./scrap-item.css"
+import { cn } from "@/utils/cn"
 
 export const ScrapItem = ({ url, title, image, comment }: ScrapData) => {
   return (
@@ -15,12 +17,12 @@ export const ScrapItem = ({ url, title, image, comment }: ScrapData) => {
         target='_blank'
       >
         {image && (
-          /* eslint-disable-next-line @next/next/no-img-element */
-          <img
+          <Image
             alt={title}
             className='h-12 w-12 shrink-0 rounded object-cover'
             height={48}
             src={image}
+            unoptimized
             width={48}
           />
         )}
