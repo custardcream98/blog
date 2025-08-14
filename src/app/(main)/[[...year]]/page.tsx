@@ -14,13 +14,13 @@ export const generateStaticParams = async () => {
   const posts = await getPostsList()
   const postsByYear = normalizePostsByYear(posts)
 
-  return objectKeys(postsByYear).map((year) => ({ year: [year as PostYear] }))
+  return objectKeys(postsByYear).map((year) => ({ year: [year] }))
 }
 
 export const dynamicParams = true
 export const dynamic = "force-static"
 
-export default async function MainPage({ params }: { params: Promise<{ year?: PostYear[] }> }) {
+export default async function MainPage({ params }: { params: Promise<{ year?: [PostYear] }> }) {
   const [yearParam, postsList] = await Promise.all([
     params.then(({ year }) => year?.[0] ?? null),
     getPostsList(),
