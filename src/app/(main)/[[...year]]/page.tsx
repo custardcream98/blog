@@ -34,7 +34,7 @@ export default async function MainPage({ params }: { params: Promise<{ year?: Po
   return (
     <section className='mt-5'>
       <PageHeader
-        className='flex-col items-start md:flex-row md:items-center'
+        className='mb-2 md:mb-6'
         title={
           <span className='sr-only'>{yearParam ? `${yearParam}년 포스트` : "최근 포스트"}</span>
         }
