@@ -53,14 +53,27 @@ const processImageNode = async (jsxNode: MDXJSXNode) => {
 
 // 마크다운 이미지 노드 타입 정의
 interface MarkdownImageNode {
-  alt?: string
-  title?: string
-  url: string
+  properties: {
+    alt?: string
+    src: string
+  }
+  tagName: "img"
+  type: "element"
+}
+const isMarkdownImageNode = (node: unknown): node is MarkdownImageNode => {
+  return (
+    typeof node === "object" &&
+    node !== null &&
+    "type" in node &&
+    node.type === "element" &&
+    "tagName" in node &&
+    node.tagName === "img"
+  )
 }
 
 // 마크다운 이미지를 JSX Image로 변환
 const processMarkdownImageNode = async (imageNode: MarkdownImageNode) => {
-  const src = imageNode.url
+  const src = imageNode.properties.src
   if (!src) return
 
   // 노드 타입을 mdxJsxFlowElement로 변경
@@ -72,12 +85,8 @@ const processMarkdownImageNode = async (imageNode: MarkdownImageNode) => {
     { type: "mdxJsxAttribute", name: "src", value: src },
   ]
 
-  if (imageNode.alt) {
-    attributes.push({ type: "mdxJsxAttribute", name: "alt", value: imageNode.alt })
-  }
-
-  if (imageNode.title) {
-    attributes.push({ type: "mdxJsxAttribute", name: "title", value: imageNode.title })
+  if (imageNode.properties.alt) {
+    attributes.push({ type: "mdxJsxAttribute", name: "alt", value: imageNode.properties.alt })
   }
 
   // 원격 이미지인 경우 크기 정보 추가
@@ -96,10 +105,8 @@ const processMarkdownImageNode = async (imageNode: MarkdownImageNode) => {
     type: "mdxJsxFlowElement",
   })
 
-  // 기존 url, alt, title 프로퍼티 제거
-  delete (newNode as unknown as Record<string, unknown>).url
-  delete (newNode as unknown as Record<string, unknown>).alt
-  delete (newNode as unknown as Record<string, unknown>).title
+  // 기존 properties 프로퍼티 제거
+  delete (newNode as unknown as Record<string, unknown>).properties
 }
 
 export const imgToNextImagePlugin: Plugin = () => {
@@ -116,7 +123,7 @@ export const imgToNextImagePlugin: Plugin = () => {
       }
 
       // 마크다운 이미지 처리 ![alt](src)
-      if (node.type === "image") {
+      if (isMarkdownImageNode(node)) {
         const imageNode = node as unknown as MarkdownImageNode
         imageProcessingTasks.push(processMarkdownImageNode(imageNode))
       }
