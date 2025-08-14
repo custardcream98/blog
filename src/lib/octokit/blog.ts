@@ -7,7 +7,7 @@ import path from "path"
 import { DEFAULT_CONFIG } from "./_constants"
 import { octokit } from "./_instance"
 
-type PostData = {
+export type PostData = {
   slug: string
   title: string
   excerpt: string

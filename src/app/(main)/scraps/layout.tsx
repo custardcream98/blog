@@ -11,20 +11,21 @@ export default async function ScrapsLayout({ children }: { children: React.React
       <div className='flex-1'>{children}</div>
       <nav className='border-foreground/10 mt-6 border-t pt-6'>
         <h2 className='mb-4 text-lg font-medium'>월별 보기</h2>
-        <div className='flex flex-wrap gap-2'>
+        <ol className='flex flex-wrap gap-2'>
           {Array.from(new Set(monthKeys)).map((ym) => {
             const [y, m] = ym.split("-")
             return (
-              <Link
-                className='text-foreground/70 hover:text-foreground text-sm'
-                href={`/scraps/${y}/${m}`}
-                key={ym}
-              >
-                {ym}
-              </Link>
+              <li key={ym}>
+                <Link
+                  className='text-foreground/70 hover:text-foreground text-sm'
+                  href={`/scraps/${y}/${m}`}
+                >
+                  {ym}
+                </Link>
+              </li>
             )
           })}
-        </div>
+        </ol>
       </nav>
     </div>
   )

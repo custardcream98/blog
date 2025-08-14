@@ -21,7 +21,7 @@ export async function POST(request: NextRequest) {
   revalidatePath(`/posts/${slug}`)
   revalidatePath(`/api/og-image/${slug}`)
   revalidatePath("/rss")
-  revalidatePath("/", "page")
+  revalidatePath("/[[...year]]")
 
   return NextResponse.json({
     message: "Revalidated successfully",
