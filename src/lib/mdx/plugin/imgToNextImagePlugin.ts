@@ -16,7 +16,7 @@ interface MDXJSXNode {
 // 원격 이미지 크기 측정
 const fetchImageSize = async (src: string) => {
   try {
-    const response = await fetch(src)
+    const response = await fetch(src, { cache: "no-store" })
     const arrayBuffer = await response.arrayBuffer()
     return imageSize(new Uint8Array(arrayBuffer))
   } catch (error) {

@@ -16,8 +16,7 @@ export async function POST(request: NextRequest) {
   }
 
   revalidateTag("posts-list")
-  revalidateTag(`post-content:${slug}`)
-  revalidateTag(`post-meta-data:${slug}`)
+  revalidateTag(`post:${slug}`)
 
   revalidatePath(`/posts/${slug}`)
   revalidatePath(`/api/og-image/${slug}`)

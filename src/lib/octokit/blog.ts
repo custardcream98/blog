@@ -134,9 +134,9 @@ export const getPostMetaData = async ({ slug }: { slug: string }) => {
 
       return meta
     },
-    ["post-meta-data", slug],
+    [`post-meta-data:${slug}`],
     {
-      tags: ["posts", `post-meta-data:${slug}`],
+      tags: ["posts", `post-meta-data:${slug}`, `post:${slug}`],
     },
   )
 
@@ -153,9 +153,9 @@ export const getPostContent = async ({ slug }: { slug: string }) => {
 
       return processPostImages({ images, content })
     },
-    ["post-content", slug],
+    [`post-content:${slug}`],
     {
-      tags: ["posts", `post-content:${slug}`],
+      tags: ["posts", `post-content:${slug}`, `post:${slug}`],
     },
   )
 

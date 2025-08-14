@@ -9,8 +9,6 @@ export const octokit = new Octokit({
       fetch(input, {
         ...init,
         cache: "no-store",
-        // Also hint to Next to never retain this in the Data Cache
-        next: { revalidate: 0 },
       }),
   },
 })
