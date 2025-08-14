@@ -62,7 +62,6 @@ const generateRss = (
     </image>
     <pubDate>${now}</pubDate>
     <lastBuildDate>${now}</lastBuildDate>
-    <generator>Next.js</generator>
     ${itemsXml}
   </channel>
 </rss>`
