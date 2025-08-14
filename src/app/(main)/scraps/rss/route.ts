@@ -1,6 +1,5 @@
 import { metadata as scrapsMetadata } from "@/app/(main)/scraps/metadata"
 import { METADATA_DEFAULT_URL } from "@/app/_sharedMetadata"
-import { sortScrapData } from "@/domains/scrap/utils/normalize"
 import { getScrapsList } from "@/lib/octokit/scraps"
 
 const META_TITLE = "shiwoo.dev: scraps"
@@ -9,8 +8,7 @@ const META_DESCRIPTION = scrapsMetadata.description
 
 export const GET = async () => {
   const scrapsList = await getScrapsList()
-  const sorted = sortScrapData([...scrapsList])
-  const scraps = sorted.map((scrap) => ({
+  const scraps = scrapsList.map((scrap) => ({
     title: scrap.title,
     link: scrap.url,
     pubDate: scrap.scrapedAt,

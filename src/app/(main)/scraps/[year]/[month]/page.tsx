@@ -7,7 +7,6 @@ import { ScrapItem } from "@/domains/scrap/components/ScrapItem/ScrapItem"
 import {
   normalizeScrapDataByDate,
   normalizeScrapDataByMonth,
-  sortScrapData,
 } from "@/domains/scrap/utils/normalize"
 import { getScrapsList } from "@/lib/octokit/scraps"
 import { objectKeys } from "@/utils/types"
@@ -83,8 +82,7 @@ export default async function ScrapsMonthPage({
 const getScraps = async ({ year, month }: { year: number; month: number }) => {
   const targetPrefix = `${year}-${month.toString().padStart(2, "0")}`
   const scraps = await getScrapsList()
-  const sortedScraps = sortScrapData(scraps)
-  const monthScraps = sortedScraps
+  const monthScraps = scraps
     .filter((s) => {
       try {
         return new Date(s.scrapedAt).toISOString().startsWith(targetPrefix)

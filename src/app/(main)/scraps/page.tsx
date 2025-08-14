@@ -2,7 +2,7 @@ import { SubmoduleAutoRefresher } from "@/components/__dev__/SubmoduleAutoRefres
 import { Link } from "@/components/Link"
 import { ScrapGrid } from "@/domains/scrap/components/ScrapGrid"
 import { ScrapItem } from "@/domains/scrap/components/ScrapItem/ScrapItem"
-import { normalizeScrapDataByDate, sortScrapData } from "@/domains/scrap/utils/normalize"
+import { normalizeScrapDataByDate } from "@/domains/scrap/utils/normalize"
 import { getScrapsList } from "@/lib/octokit/scraps"
 import { objectKeys } from "@/utils/types"
 
@@ -53,10 +53,9 @@ export default async function ScrapsPage() {
 
 const getScraps = async () => {
   const scraps = await getScrapsList()
-  const sortedScraps = sortScrapData(scraps)
 
   const MAX_DAYS = 30
-  const scrapByDate = normalizeScrapDataByDate(sortedScraps)
+  const scrapByDate = normalizeScrapDataByDate(scraps)
   const dateKeys = objectKeys(scrapByDate)
   const recentDateKeys = dateKeys.slice(0, MAX_DAYS)
 

@@ -15,12 +15,14 @@ export type ScrapData = {
   comment: string
 }
 
+const sortScrapData = (scraps: ScrapData[]) =>
+  scraps.sort((a, b) => new Date(b.scrapedAt).getTime() - new Date(a.scrapedAt).getTime())
 export const getScrapsList = unstable_cache(
   async () => {
     if (process.env.NODE_ENV === "development" && !process.env.USE_OCTOKIT_INSTEAD_OF_SUBMODULE) {
       const data = fs.readFileSync(path.join(process.cwd(), "blog-posts/scraps.json"), "utf-8")
 
-      return JSON.parse(data) as ScrapData[]
+      return sortScrapData(JSON.parse(data) as ScrapData[])
     }
 
     const { data } = await octokit.request("GET /repos/{owner}/{repo}/contents/{path}", {
@@ -31,7 +33,7 @@ export const getScrapsList = unstable_cache(
       },
     })
 
-    return JSON.parse(data as unknown as string) as ScrapData[]
+    return sortScrapData(JSON.parse(data as unknown as string) as ScrapData[])
   },
   ["scraps-list"],
   {

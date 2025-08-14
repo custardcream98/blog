@@ -31,6 +31,3 @@ export const normalizeScrapDataByMonth = (scraps: ScrapData[]) =>
 
     return acc
   }, {})
-
-export const sortScrapData = (scraps: ScrapData[]) =>
-  scraps.sort((a, b) => new Date(b.scrapedAt).getTime() - new Date(a.scrapedAt).getTime())

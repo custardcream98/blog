@@ -1,5 +1,5 @@
 import { Link } from "@/components/Link"
-import { normalizeScrapDataByMonth, sortScrapData } from "@/domains/scrap/utils/normalize"
+import { normalizeScrapDataByMonth } from "@/domains/scrap/utils/normalize"
 import { getScrapsList } from "@/lib/octokit/scraps"
 import { objectKeys } from "@/utils/types"
 
@@ -32,9 +32,8 @@ export default async function ScrapsLayout({ children }: { children: React.React
 
 const getScrapMonthKeys = async () => {
   const scraps = await getScrapsList()
-  const sortedScraps = sortScrapData(scraps)
 
-  const scrapByMonth = normalizeScrapDataByMonth(sortedScraps)
+  const scrapByMonth = normalizeScrapDataByMonth(scraps)
   const monthKeys = objectKeys(scrapByMonth)
 
   return {
