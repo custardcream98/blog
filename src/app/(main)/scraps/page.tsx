@@ -1,4 +1,5 @@
 import { SubmoduleAutoRefresher } from "@/components/__dev__/SubmoduleAutoRefresher.client"
+import { Link } from "@/components/Link"
 import { ScrapGrid } from "@/domains/scrap/components/ScrapGrid"
 import { ScrapItem } from "@/domains/scrap/components/ScrapItem/ScrapItem"
 import { normalizeScrapDataByDate, sortScrapData } from "@/domains/scrap/utils/normalize"
@@ -13,7 +14,12 @@ export default async function ScrapsPage() {
   return (
     <>
       <section className='mt-5'>
-        <h2 className='mb-6 text-xl font-bold'>최근 스크랩</h2>
+        <div className='flex items-center justify-between'>
+          <h2 className='mb-6 text-xl font-bold'>최근 스크랩</h2>{" "}
+          <Link className='text-foreground/70 hover:text-foreground text-sm' href='/scraps/rss'>
+            스크랩 RSS
+          </Link>
+        </div>
 
         <div className='space-y-8'>
           {recentDateKeys.map((date) => {
