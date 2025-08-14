@@ -4,11 +4,11 @@ import { join } from "path"
 
 import { LogoSvg } from "@/assets/svg/LogoSvg"
 
-const PretendardFont = await readFile(
-  join(process.cwd(), "src/assets/font/Pretendard/Pretendard-Medium.otf"),
-)
+const loadPretendardFont = () =>
+  readFile(join(process.cwd(), "src/assets/font/Pretendard/Pretendard-Medium.otf"))
 
-const D2CodingFont = await readFile(join(process.cwd(), "src/assets/font/D2Coding/D2Coding.ttf"))
+const loadD2CodingFont = () =>
+  readFile(join(process.cwd(), "src/assets/font/D2Coding/D2Coding.ttf"))
 
 const Thumbnail = ({ title }: { title: null | string }) => {
   return (
@@ -68,19 +68,24 @@ const Thumbnail = ({ title }: { title: null | string }) => {
 }
 
 export const getThumbnailImageResponse = async (title: null | string) => {
+  const [pretendardFont, d2CodingFont] = await Promise.all([
+    loadPretendardFont(),
+    loadD2CodingFont(),
+  ])
+
   return new ImageResponse(<Thumbnail title={title} />, {
     width: 1200,
     height: 630,
     fonts: [
       {
         name: "D2Coding",
-        data: D2CodingFont,
+        data: d2CodingFont,
         weight: 400,
         style: "normal",
       },
       {
         name: "Pretendard",
-        data: PretendardFont,
+        data: pretendardFont,
         weight: 500,
         style: "normal",
       },
