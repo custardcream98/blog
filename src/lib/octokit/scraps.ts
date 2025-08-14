@@ -17,7 +17,7 @@ export type ScrapData = {
 
 export const getScrapsList = unstable_cache(
   async () => {
-    if (process.env.NODE_ENV === "development") {
+    if (process.env.NODE_ENV === "development" && !process.env.USE_OCTOKIT_INSTEAD_OF_SUBMODULE) {
       const data = fs.readFileSync(path.join(process.cwd(), "blog-posts/scraps.json"), "utf-8")
 
       return JSON.parse(data) as ScrapData[]

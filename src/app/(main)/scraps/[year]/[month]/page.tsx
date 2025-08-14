@@ -73,7 +73,9 @@ export default async function ScrapsMonthPage({
         })}
       </div>
 
-      {process.env.NODE_ENV === "development" && <SubmoduleAutoRefresher />}
+      {process.env.NODE_ENV === "development" && !process.env.USE_OCTOKIT_INSTEAD_OF_SUBMODULE && (
+        <SubmoduleAutoRefresher />
+      )}
     </section>
   )
 }

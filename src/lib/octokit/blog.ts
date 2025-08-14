@@ -16,7 +16,7 @@ type PostData = {
 
 export const getPostsList = unstable_cache(
   async () => {
-    if (process.env.NODE_ENV === "development") {
+    if (process.env.NODE_ENV === "development" && !process.env.USE_OCTOKIT_INSTEAD_OF_SUBMODULE) {
       const data = fs.readFileSync(path.join(process.cwd(), "blog-posts/post-list.json"), "utf-8")
 
       return JSON.parse(data) as PostData[]
@@ -45,7 +45,7 @@ export const getPostsList = unstable_cache(
 
 const getPostImages = async ({ slug }: { slug: string }) => {
   try {
-    if (process.env.NODE_ENV === "development") {
+    if (process.env.NODE_ENV === "development" && !process.env.USE_OCTOKIT_INSTEAD_OF_SUBMODULE) {
       const data = await fs.promises.readdir(path.join(process.cwd(), `blog-posts/img/${slug}`))
 
       return data.map((name) => ({
@@ -72,7 +72,7 @@ const getPostImages = async ({ slug }: { slug: string }) => {
 
 const getPostContent = async ({ slug }: { slug: string }) => {
   try {
-    if (process.env.NODE_ENV === "development") {
+    if (process.env.NODE_ENV === "development" && !process.env.USE_OCTOKIT_INSTEAD_OF_SUBMODULE) {
       const data = await fs.promises.readFile(
         path.join(process.cwd(), "blog-posts/posts", `${slug}.mdx`),
         "utf-8",
@@ -106,7 +106,7 @@ const processPostImages = ({
 }) => {
   let result = content
 
-  if (process.env.NODE_ENV === "development") {
+  if (process.env.NODE_ENV === "development" && !process.env.USE_OCTOKIT_INSTEAD_OF_SUBMODULE) {
     images.forEach(({ path }) => {
       result = result.replaceAll(`/img/${path}`, `/blog-posts/img/${path}`)
     })

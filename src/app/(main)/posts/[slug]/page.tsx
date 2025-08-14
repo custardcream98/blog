@@ -33,7 +33,9 @@ export default async function PostPage({ params }: { params: Promise<{ slug: str
       <Post contents={post} />
       <EmailForm slug={slug} title={postData.title} />
       <PrevNextPostNavigator slug={slug} />
-      {process.env.NODE_ENV === "development" && <SubmoduleAutoRefresher />}
+      {process.env.NODE_ENV === "development" && !process.env.USE_OCTOKIT_INSTEAD_OF_SUBMODULE && (
+        <SubmoduleAutoRefresher />
+      )}
     </>
   )
 }

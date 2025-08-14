@@ -44,7 +44,9 @@ export default async function ScrapsPage() {
         </div>
       </section>
 
-      {process.env.NODE_ENV === "development" && <SubmoduleAutoRefresher />}
+      {process.env.NODE_ENV === "development" && !process.env.USE_OCTOKIT_INSTEAD_OF_SUBMODULE && (
+        <SubmoduleAutoRefresher />
+      )}
     </>
   )
 }

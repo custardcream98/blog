@@ -5,9 +5,10 @@
   "scripts": {
     "predev": "bash scripts/dev-post-submodule-link.sh",
     "dev": "concurrently -n \"Next.js,Post Watcher\" -c \"blue,green\" \"pnpm run dev:next\" \"pnpm run dev:submodule-watcher\"",
+    "dev:api": "USE_OCTOKIT_INSTEAD_OF_SUBMODULE=true pnpm run dev:next",
     "dev:next": "next dev --turbopack",
     "dev:submodule-watcher": "tsx scripts/dev-submodule-watcher.mts",
-    "postdev": "rm -rf public/blog-posts",
+    "postdev": "rm -rf public/blog-posts && rm -rf .next",
     "build": "pnpm exec next telemetry disable && next build",
     "start": "next start",
     "format": "prettier --write .",
