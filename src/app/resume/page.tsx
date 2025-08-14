@@ -10,6 +10,12 @@ import "./resume.css"
 const getResumeSource = () =>
   fs.readFileSync(path.join(process.cwd(), "src/domains/resume/resume.mdx"), "utf8")
 
+const A = ({ children, ...props }: React.ComponentProps<"a">) => (
+  <a className='text-blue-500 underline underline-offset-4' {...props}>
+    {children}
+  </a>
+)
+
 const Strong = ({ children }: React.PropsWithChildren) => (
   <strong className='font-normal text-yellow-500'>{children}</strong>
 )
@@ -51,6 +57,7 @@ export default async function ResumePage() {
       Career,
       Project,
       Experience,
+      a: A,
       strong: Strong,
       p: P,
       h3: H3,
