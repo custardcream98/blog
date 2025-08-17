@@ -61,7 +61,10 @@ const getPostImages = async ({ slug }: { slug: string }) => {
 
     return data as unknown as { path: string; name: string }[]
   } catch (error) {
-    if (error instanceof RequestError && error.status === 404) {
+    if (
+      (error instanceof RequestError && error.status === 404) ||
+      process.env.NODE_ENV === "development"
+    ) {
       return [] // 이미지나 애셋이 없는 글
     }
 
@@ -90,7 +93,10 @@ const getRawPostContent = async ({ slug }: { slug: string }) => {
 
     return data as unknown as string
   } catch (error) {
-    if (error instanceof RequestError && error.status === 404) {
+    if (
+      (error instanceof RequestError && error.status === 404) ||
+      process.env.NODE_ENV === "development"
+    ) {
       notFound()
     }
 
