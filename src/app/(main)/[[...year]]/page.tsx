@@ -14,7 +14,10 @@ export const generateStaticParams = async () => {
   const posts = await getPostsList()
   const postsByYear = normalizePostsByYear(posts)
 
-  return objectKeys(postsByYear).map((year) => ({ year: [year] }))
+  return [
+    ...objectKeys(postsByYear).map((year) => ({ year: [year] })),
+    {}, // 최근 포스트 페이지
+  ]
 }
 
 export const dynamicParams = true
