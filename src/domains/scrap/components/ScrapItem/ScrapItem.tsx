@@ -26,9 +26,7 @@ export const ScrapItem = ({ url, title, image, comment }: ScrapData) => {
             width={48}
           />
         )}
-        <div className='min-w-0'>
-          <p className='line-clamp-2 text-sm leading-5 font-medium'>{title}</p>
-        </div>
+        <p className='line-clamp-2 text-sm leading-5 font-medium'>{title}</p>
       </Link>
       <Comment comment={comment} />
     </div>
@@ -40,7 +38,7 @@ const Comment = async ({ comment }: { comment: string }) => {
     source: comment ?? "",
     components: {
       p: ({ className, children, ...props }) => (
-        <p className={cn(className, "my-2")} {...props}>
+        <p className={cn(className, "mt-2")} {...props}>
           {children}
         </p>
       ),
