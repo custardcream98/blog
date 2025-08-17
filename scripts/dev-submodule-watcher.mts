@@ -43,7 +43,7 @@ chokidar
     )
     ;(global as unknown as { __refreshTimer: ReturnType<typeof setTimeout> }).__refreshTimer =
       setTimeout(() => {
-        console.log("🔌 refresh", path)
+        console.log("🔌 refresh")
         clients.forEach((ws) =>
           ws.send(
             JSON.stringify({
