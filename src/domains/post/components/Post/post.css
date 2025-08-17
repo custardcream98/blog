@@ -223,7 +223,7 @@
 .post [data-highlighted-line] {
   display: block;
   margin: 0 -0.75rem;
-  padding: 0 0.75rem;
+  padding: 0 0.75rem 0 calc(0.75rem - 2px);
   background-color: rgba(167, 139, 250, 0.1);
   border-left: 2px solid #a78bfa;
 }
