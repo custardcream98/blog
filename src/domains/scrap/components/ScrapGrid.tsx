@@ -3,7 +3,7 @@ export const ScrapGrid = ({ children }: React.PropsWithChildren) => {
 }
 
 const ScrapGridItem = ({ children }: React.PropsWithChildren) => {
-  return <li className='mb-3 break-inside-avoid'>{children}</li>
+  return <li className='break-inside-avoid [&+&]:mt-3'>{children}</li>
 }
 
 ScrapGrid.Item = ScrapGridItem
