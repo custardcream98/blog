@@ -1,13 +1,7 @@
 import { revalidatePath, revalidateTag } from "next/cache"
 import { NextRequest, NextResponse } from "next/server"
 
-import { checkRevalidateRouteHandlerAuth } from "@/lib/next/checkRevalidateRouteHandlerAuth"
-
 export async function POST(request: NextRequest) {
-  const check = checkRevalidateRouteHandlerAuth(request)
-
-  if (process.env.NODE_ENV !== "development" && check) return check
-
   revalidateTag("scraps")
 
   revalidatePath("/scraps")
