@@ -18,7 +18,7 @@ const checkApiKey = (request: NextRequest) => {
 const middleware: NextMiddleware = (request) => {
   const { pathname } = request.nextUrl
 
-  if (pathname.startsWith("/api")) {
+  if (pathname.startsWith("/api/guarded")) {
     return checkApiKey(request)
   }
 
