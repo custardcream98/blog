@@ -13,8 +13,8 @@
     "build": "pnpm exec next telemetry disable && next build",
     "start": "next start",
     "format": "prettier --write .",
-    "lint": "next lint",
-    "lint:fix": "next lint --fix",
+    "lint": "eslint .",
+    "lint:fix": "eslint --fix .",
     "typecheck": "tsc --noEmit",
     "prepare": "husky"
   },
