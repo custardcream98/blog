@@ -8,7 +8,7 @@ const FOOTER_LINKS = [
   },
   {
     label: "LinkedIn",
-    href: "https://www.linkedin.com/in/shi-woo-park-668b33147/",
+    href: "https://www.linkedin.com/in/custardcream/",
   },
   {
     label: "Email",
