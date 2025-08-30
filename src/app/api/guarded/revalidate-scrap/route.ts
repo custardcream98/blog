@@ -3,6 +3,7 @@ import { NextRequest, NextResponse } from "next/server"
 
 export async function POST(request: NextRequest) {
   revalidateTag("scraps")
+  revalidateTag("scraps-images-list")
 
   revalidatePath("/scraps")
 
