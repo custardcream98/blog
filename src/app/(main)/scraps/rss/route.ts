@@ -1,6 +1,6 @@
 import { metadata as scrapsMetadata } from "@/app/(main)/scraps/metadata"
 import { METADATA_DEFAULT_URL } from "@/app/_sharedMetadata"
-import { getScrapsList } from "@/lib/octokit/scraps"
+import { getScrapsList, getScrapThumbnailsMap } from "@/lib/octokit/scraps"
 
 const META_TITLE = "shiwoo.dev: scraps"
 const META_LINK = `${METADATA_DEFAULT_URL.toString()}scraps`
@@ -9,11 +9,12 @@ const SCRAPS_MAX_COUNT = 100
 
 export const GET = async () => {
   const scrapsList = await getScrapsList()
+  const thumbnailsMap = await getScrapThumbnailsMap()
   const scraps = scrapsList.slice(0, SCRAPS_MAX_COUNT).map((scrap) => ({
     title: scrap.title,
     link: scrap.url,
     pubDate: scrap.scrapedAt,
-    ogImage: scrap.image,
+    ogImage: scrap.url in thumbnailsMap ? thumbnailsMap[scrap.url].url : undefined,
     description: scrap.comment,
   }))
 
