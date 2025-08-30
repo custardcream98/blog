@@ -40,3 +40,33 @@ export const getScrapsList = unstable_cache(
     tags: ["scraps"],
   },
 )
+
+export type ScrapThumbnailData = {
+  url: string
+  width: number
+  height: number
+}
+
+export const getScrapThumbnailsMap = unstable_cache(async () => {
+  if (process.env.NODE_ENV === "development" && !process.env.USE_OCTOKIT_INSTEAD_OF_SUBMODULE) {
+    const data = fs.readFileSync(
+      path.join(process.cwd(), "blog-posts/scrap-thumbnails.json"),
+      "utf-8",
+    )
+    return JSON.parse(data) as {
+      [originalUrl: string]: ScrapThumbnailData
+    }
+  }
+
+  const { data } = await octokit.request("GET /repos/{owner}/{repo}/contents/{path}", {
+    ...DEFAULT_CONFIG,
+    path: "scrap-thumbnails.json",
+    mediaType: {
+      format: "raw",
+    },
+  })
+
+  return JSON.parse(data as unknown as string) as {
+    [originalUrl: string]: ScrapThumbnailData
+  }
+}, ["scraps-images-list"])

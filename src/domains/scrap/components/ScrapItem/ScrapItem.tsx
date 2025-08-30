@@ -1,13 +1,16 @@
 import Image from "next/image"
 
 import { Link } from "@/components/Link"
+import { getScrapThumbnail } from "@/domains/scrap/utils/getScrapThumbnail"
 import { evaluateMDX } from "@/lib/mdx/evaluateMDX"
-import { ScrapData } from "@/lib/octokit/scraps"
 
 import "./scrap-item.css"
+import { ScrapData } from "@/lib/octokit/scraps"
 import { cn } from "@/utils/cn"
 
-export const ScrapItem = ({ url, title, image, comment }: ScrapData) => {
+export const ScrapItem = async ({ url, title, comment }: ScrapData) => {
+  const thumbnail = await getScrapThumbnail(url)
+
   return (
     <div className='rounded-md border border-[#374151] p-3'>
       <Link
@@ -16,14 +19,13 @@ export const ScrapItem = ({ url, title, image, comment }: ScrapData) => {
         rel='noopener noreferrer'
         target='_blank'
       >
-        {image && (
+        {thumbnail && (
           <Image
             alt={title}
             className='h-12 w-12 shrink-0 rounded object-cover'
-            height={48}
-            src={image}
-            unoptimized
-            width={48}
+            height={thumbnail.height}
+            src={thumbnail.url}
+            width={thumbnail.width}
           />
         )}
         <p className='line-clamp-2 text-sm leading-5 font-medium'>{title}</p>
