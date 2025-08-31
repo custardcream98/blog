@@ -2,24 +2,42 @@ import { readFile, readdir, stat, writeFile } from "fs/promises"
 import { join } from "path"
 import subsetFont from "subset-font"
 
-const gatherAllCharactersRecursive = async (dir: string, textSet = new Set<string>()) => {
-  if ((await stat(dir)).isFile()) {
-    const text = await readFile(dir, "utf-8")
-    text.split("").forEach((char) => {
+const readFileAndGetCharacters = async (filePath: string) => {
+  const text = await readFile(filePath, "utf-8")
+  return [...text]
+}
+
+const gatherAllCharactersRecursive = async (
+  {
+    directory,
+    filesToInclude,
+    filesToExclude,
+  }: { directory: string; filesToInclude?: RegExp; filesToExclude?: RegExp },
+  textSet = new Set<string>(),
+) => {
+  if ((await stat(directory)).isFile()) {
+    const chars = await readFileAndGetCharacters(directory)
+    chars.forEach((char) => {
       textSet.add(char)
     })
     return textSet
   }
 
-  const files = await readdir(dir)
+  const files = await readdir(directory)
   for (const file of files) {
-    const filePath = join(dir, file)
+    const filePath = join(directory, file)
     const stats = await stat(filePath)
     if (stats.isDirectory()) {
-      textSet = await gatherAllCharactersRecursive(filePath, new Set([...textSet]))
-    } else {
-      const text = await readFile(filePath, "utf-8")
-      text.split("").forEach((char) => {
+      textSet = await gatherAllCharactersRecursive(
+        { directory: filePath, filesToInclude, filesToExclude },
+        new Set([...textSet]),
+      )
+    } else if (
+      (!filesToInclude || filesToInclude.test(filePath)) &&
+      (!filesToExclude || !filesToExclude.test(filePath))
+    ) {
+      const chars = await readFileAndGetCharacters(filePath)
+      chars.forEach((char) => {
         textSet.add(char)
       })
     }
@@ -31,11 +49,25 @@ const gatherAllCharactersRecursive = async (dir: string, textSet = new Set<strin
 const getTargetTexts = async () => {
   return [
     ...new Set([
-      ...(await gatherAllCharactersRecursive(join(process.cwd(), "blog-posts", "posts"))),
-      ...(await gatherAllCharactersRecursive(join(process.cwd(), "blog-posts", "scraps.json"))),
-      ...(await gatherAllCharactersRecursive(join(process.cwd(), "src", "app"))),
-      ...(await gatherAllCharactersRecursive(join(process.cwd(), "src", "components"))),
-      ...(await gatherAllCharactersRecursive(join(process.cwd(), "src", "domains"))),
+      ...(await gatherAllCharactersRecursive({
+        directory: join(process.cwd(), "blog-posts", "posts"),
+      })),
+      ...(await gatherAllCharactersRecursive({
+        directory: join(process.cwd(), "blog-posts", "scraps.json"),
+      })),
+      ...(await gatherAllCharactersRecursive({
+        directory: join(process.cwd(), "src", "app"),
+        filesToInclude: /\.(tsx|mdx)$/,
+      })),
+      ...(await gatherAllCharactersRecursive({
+        directory: join(process.cwd(), "src", "components"),
+        filesToInclude: /\.(tsx|mdx)$/,
+        filesToExclude: /(.*__dev__.*)/,
+      })),
+      ...(await gatherAllCharactersRecursive({
+        directory: join(process.cwd(), "src", "domains"),
+        filesToInclude: /\.(tsx|mdx)$/,
+      })),
     ]),
   ]
 }
