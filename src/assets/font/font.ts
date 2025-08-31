@@ -57,20 +57,20 @@ import localFont from "next/font/local"
 //   variable: "--font-noto-sans-kr",
 // });
 
-export const FONT_NOTO_SERIF_KR = localFont({
-  adjustFontFallback: "Times New Roman",
-  display: "swap",
-  fallback: ["Noto Serif KR", "Noto Serif", "Times New Roman", "Times", "serif"],
-  preload: true,
-  src: [
-    {
-      path: "./NotoSerifKR/NotoSerifKR-Regular.woff2",
-      style: "normal",
-      weight: "400",
-    },
-  ],
-  variable: "--font-noto-serif-kr",
-})
+// export const FONT_NOTO_SERIF_KR = localFont({
+//   adjustFontFallback: "Times New Roman",
+//   display: "swap",
+//   fallback: ["Noto Serif KR", "Noto Serif", "Times New Roman", "Times", "serif"],
+//   preload: true,
+//   src: [
+//     {
+//       path: "./NotoSerifKR/NotoSerifKR-Regular.woff2",
+//       style: "normal",
+//       weight: "400",
+//     },
+//   ],
+//   variable: "--font-noto-serif-kr",
+// })
 
 export const FONT_PRETENDARD = localFont({
   adjustFontFallback: "Arial",
@@ -91,7 +91,7 @@ export const FONT_PRETENDARD = localFont({
     "sans-serif",
   ],
   preload: true,
-  src: "./Pretendard/PretendardVariable.woff2",
+  src: "./Pretendard/PretendardVariable.subset.woff2",
   style: "normal",
   variable: "--font-pretendard",
 })
@@ -101,6 +101,6 @@ export const FONT_D2_CODING = localFont({
   display: "swap",
   fallback: ["D2Coding", "Courier New", "Courier", "monospace"],
   preload: true,
-  src: "./D2Coding/D2Coding.ttf",
+  src: "./D2Coding/D2Coding.subset.ttf",
   variable: "--font-d2coding",
 })

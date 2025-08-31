@@ -10,6 +10,7 @@
     "postdev:api": "pnpm run postdev",
     "dev:next": "next dev --turbopack",
     "dev:submodule-watcher": "tsx scripts/dev-submodule-watcher.mts",
+    "create-subset-font": "tsx scripts/create-subset-font.ts",
     "build": "pnpm exec next telemetry disable && next build",
     "start": "next start",
     "format": "prettier --write .",
@@ -36,6 +37,7 @@
     "rehype-pretty-code": "^0.14.1",
     "rehype-slug": "^6.0.0",
     "shiki": "^3.8.1",
+    "subset-font": "^2.4.0",
     "tailwind-merge": "^3.3.1",
     "unified": "^11.0.5",
     "unist-util-visit": "^5.0.0"
@@ -49,6 +51,7 @@
     "@types/nodemailer": "^6.4.17",
     "@types/react": "^19",
     "@types/react-dom": "^19",
+    "@types/subset-font": "^2.3.0",
     "@types/unist": "^3.0.3",
     "@types/ws": "^8.18.1",
     "chokidar": "^4.0.3",
