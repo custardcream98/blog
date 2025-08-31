@@ -34,6 +34,8 @@ const getTargetTexts = async () => {
       ...(await gatherAllCharactersRecursive(join(process.cwd(), "blog-posts", "posts"))),
       ...(await gatherAllCharactersRecursive(join(process.cwd(), "blog-posts", "scraps.json"))),
       ...(await gatherAllCharactersRecursive(join(process.cwd(), "src", "app"))),
+      ...(await gatherAllCharactersRecursive(join(process.cwd(), "src", "components"))),
+      ...(await gatherAllCharactersRecursive(join(process.cwd(), "src", "domains"))),
     ]),
   ]
 }
