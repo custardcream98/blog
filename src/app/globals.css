@@ -1,8 +1,31 @@
 @import "tailwindcss";
 
+@font-face {
+  font-family: Pretendard;
+  src:
+    local("Pretendard"),
+    url("/api/font/pretendard") format("woff2");
+  font-display: swap;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: D2Coding;
+  src:
+    local("D2Coding"),
+    url("/api/font/d2coding/woff2") format("woff2"),
+    url("/api/font/d2coding/woff") format("woff"),
+    url("/api/font/d2coding/ttf") format("truetype");
+  font-display: swap;
+  font-style: normal;
+}
+
 @theme {
-  --font-mono: var(--font-d2coding);
-  --font-sans: var(--font-pretendard);
+  --font-mono: D2Coding, "Courier New", Courier, monospace;
+  --font-sans:
+    Pretendard, -apple-system, BlinkMacSystemFont, system-ui, Roboto, "Helvetica Neue", "Segoe UI",
+    "Apple SD Gothic Neo", "Noto Sans KR", "Malgun Gothic", "Apple Color Emoji", "Segoe UI Emoji",
+    "Segoe UI Symbol", sans-serif;
 
   --color-background: #1f1f1f;
   --color-foreground: #e7e6d1;

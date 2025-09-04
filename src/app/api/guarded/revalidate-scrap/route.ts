@@ -1,6 +1,8 @@
 import { revalidatePath, revalidateTag } from "next/cache"
 import { NextRequest, NextResponse } from "next/server"
 
+import { revalidateFonts } from "@/lib/revalidation/revalidateFonts"
+
 export async function POST(request: NextRequest) {
   revalidateTag("scraps")
   revalidateTag("scraps-images-list")
@@ -8,6 +10,8 @@ export async function POST(request: NextRequest) {
   revalidatePath("/scraps")
 
   revalidatePath("/scraps/[year]/[month]", "page")
+
+  revalidateFonts()
 
   const { searchParams } = new URL(request.url)
   const year = searchParams.get("year")

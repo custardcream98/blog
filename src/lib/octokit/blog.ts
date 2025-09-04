@@ -72,36 +72,49 @@ const getPostImages = async ({ slug }: { slug: string }) => {
   }
 }
 
-const getRawPostContent = async ({ slug }: { slug: string }) => {
-  try {
-    if (process.env.NODE_ENV === "development" && !process.env.USE_OCTOKIT_INSTEAD_OF_SUBMODULE) {
-      const content = await fs.promises.readFile(
-        path.join(process.cwd(), "blog-posts/posts", `${slug}.mdx`),
-        "utf-8",
-      )
+export const getRawPostContent = async ({ slug }: { slug: string }) => {
+  const cached = unstable_cache(
+    async () => {
+      try {
+        if (
+          process.env.NODE_ENV === "development" &&
+          !process.env.USE_OCTOKIT_INSTEAD_OF_SUBMODULE
+        ) {
+          const content = await fs.promises.readFile(
+            path.join(process.cwd(), "blog-posts/posts", `${slug}.mdx`),
+            "utf-8",
+          )
 
-      return content
-    }
+          return content
+        }
 
-    const { data } = await octokit.request("GET /repos/{owner}/{repo}/contents/{path}", {
-      ...DEFAULT_CONFIG,
-      path: `posts/${slug}.mdx`,
-      mediaType: {
-        format: "raw",
-      },
-    })
+        const { data } = await octokit.request("GET /repos/{owner}/{repo}/contents/{path}", {
+          ...DEFAULT_CONFIG,
+          path: `posts/${slug}.mdx`,
+          mediaType: {
+            format: "raw",
+          },
+        })
 
-    return data as unknown as string
-  } catch (error) {
-    if (
-      (error instanceof RequestError && error.status === 404) ||
-      process.env.NODE_ENV === "development"
-    ) {
-      notFound()
-    }
+        return data as unknown as string
+      } catch (error) {
+        if (
+          (error instanceof RequestError && error.status === 404) ||
+          process.env.NODE_ENV === "development"
+        ) {
+          notFound()
+        }
 
-    throw error
-  }
+        throw error
+      }
+    },
+    [`post-content:${slug}`],
+    {
+      tags: ["posts", `post-raw-content:${slug}`, `post:${slug}`],
+    },
+  )
+
+  return cached()
 }
 
 const processPostImages = ({

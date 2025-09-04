@@ -10,7 +10,6 @@
     "postdev:api": "pnpm run postdev",
     "dev:next": "next dev --turbopack",
     "dev:submodule-watcher": "tsx scripts/dev-submodule-watcher.mts",
-    "create-subset-font": "tsx scripts/create-subset-font.ts",
     "build": "pnpm exec next telemetry disable && next build",
     "start": "next start",
     "format": "prettier --write .",
