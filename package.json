@@ -10,6 +10,7 @@
     "postdev:api": "pnpm run postdev",
     "dev:next": "next dev --turbopack",
     "dev:submodule-watcher": "tsx scripts/dev-submodule-watcher.mts",
+    "gather-local-file-characters": "tsx scripts/gather-local-file-characters.mts",
     "build": "pnpm exec next telemetry disable && next build",
     "start": "next start",
     "format": "prettier --write .",
