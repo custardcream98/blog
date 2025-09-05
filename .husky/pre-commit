@@ -1,3 +1,6 @@
+pnpm gather-local-file-characters
+git add src/assets/local-dynamic-font-targets/data.json
+
 pnpm typecheck
 
 pnpm lint-staged

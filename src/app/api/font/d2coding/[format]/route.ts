@@ -4,7 +4,11 @@ import { join } from "path"
 import { getSubsetFont } from "@/assets/font/getSubsetFont"
 
 export const runtime = "nodejs"
-export const dynamic = "force-static"
+export const dynamicParams = false
+
+export const generateStaticParams = () => {
+  return ["sfnt", "truetype", "ttf", "woff2", "woff"].map((format) => ({ format }))
+}
 
 export const GET = async (
   _req: Request,
@@ -15,6 +19,7 @@ export const GET = async (
 
   const font = await getSubsetFont({
     fontPath: join(process.cwd(), "src/assets/font/D2Coding/D2Coding.ttf"),
+
     targetFormat,
   })
 
