@@ -1,5 +1,5 @@
 import "./globals.css"
-import "./font.css"
+import "@/assets/font/D2Coding/subset/D2Coding.dynamic-subset.css"
 import "pretendard/dist/web/variable/pretendardvariable-dynamic-subset.css"
 import { Analytics } from "@vercel/analytics/next"
 import { SpeedInsights } from "@vercel/speed-insights/next"
