@@ -1,8 +1,6 @@
 import { revalidatePath, revalidateTag } from "next/cache"
 import { NextRequest, NextResponse } from "next/server"
 
-import { revalidateFonts } from "@/lib/revalidation/revalidateFonts"
-
 export async function POST(request: NextRequest) {
   const { searchParams } = new URL(request.url)
   const slug = searchParams.get("slug")
@@ -18,8 +16,6 @@ export async function POST(request: NextRequest) {
   revalidatePath(`/api/og-image/${slug}`)
   revalidatePath("/rss")
   revalidatePath("/[[...year]]", "page")
-
-  revalidateFonts()
 
   return NextResponse.json({
     message: "Revalidated successfully",
