@@ -4,7 +4,7 @@ import { WebSocketServer, WebSocket } from "ws"
 
 const CONTENT_DIR = path.join(process.cwd(), "blog-posts")
 
-const wss = new WebSocketServer({ port: 3201 })
+const wss = new WebSocketServer({ port: 3201, path: "/_dev_submodule_watcher" })
 const clients = new Set<WebSocket>()
 
 wss.on("connection", (ws) => {
@@ -19,6 +19,7 @@ chokidar
       path.join(CONTENT_DIR, "img"),
       path.join(CONTENT_DIR, "post-list.json"),
       path.join(CONTENT_DIR, "scraps.json"),
+      path.join(CONTENT_DIR, "scrap-thumbnails.json"),
     ],
     {
       ignoreInitial: true,
@@ -36,7 +37,9 @@ chokidar
   )
   .on("all", (event, changedPath) => {
     const isPost = changedPath.startsWith(path.join(CONTENT_DIR, "posts"))
-    const isScrap = path.join(CONTENT_DIR, "scraps.json")
+    const isScrap =
+      changedPath === path.join(CONTENT_DIR, "scraps.json") ||
+      changedPath === path.join(CONTENT_DIR, "scrap-thumbnails.json")
 
     clearTimeout(
       (global as unknown as { __refreshTimer: ReturnType<typeof setTimeout> }).__refreshTimer,

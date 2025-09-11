@@ -2,7 +2,7 @@ import { unstable_cache } from "next/cache"
 import { notFound } from "next/navigation"
 import path from "path"
 
-import { getFileContent } from "@/lib/octokit/_utils"
+import { getDirectoryFilesList, getFileContent } from "@/lib/octokit/_utils"
 
 export type PostData = {
   slug: string
@@ -28,24 +28,35 @@ export const getPostsList = unstable_cache(
   },
 )
 
-const getPostImages = ({ slug }: { slug: string }) =>
-  getFileContent<{ path: string; name: string }[]>({
-    fetchPath: `img/${slug}`,
-    localPath: path.join(process.cwd(), `blog-posts/img/${slug}`),
-    fallback: () => [], // 이미지나 애셋이 없는 글
-  })
+const getPostImages = ({ slug }: { slug: string }) => {
+  const cached = unstable_cache(
+    () =>
+      getDirectoryFilesList({
+        fetchPath: `img/${slug}`,
+        localPath: path.join(process.cwd(), `blog-posts/img/${slug}`),
+        fallback: () => [], // 이미지나 애셋이 없는 글
+      }),
+    [`post-images:${slug}`],
+    {
+      tags: ["posts", `post:${slug}`, `post-images:${slug}`],
+    },
+  )
+
+  return cached()
+}
 
 export const getRawPostContent = ({ slug }: { slug: string }) => {
   const cached = unstable_cache(
     async () =>
-      getFileContent<string>({
+      getFileContent({
         fetchPath: `posts/${slug}.mdx`,
         localPath: path.join(process.cwd(), "blog-posts/posts", `${slug}.mdx`),
         fallback: () => notFound(),
+        parseJson: false,
       }),
     [`post-content:${slug}`],
     {
-      tags: ["posts", `post-raw-content:${slug}`, `post:${slug}`],
+      tags: ["posts", `post:${slug}`, `post-raw-content:${slug}`],
     },
   )
 
@@ -63,7 +74,7 @@ const processPostImages = ({
 
   if (process.env.NODE_ENV === "development" && !process.env.USE_OCTOKIT_INSTEAD_OF_SUBMODULE) {
     images.forEach(({ path }) => {
-      result = result.replaceAll(`/img/${path}`, `/blog-posts/img/${path}`)
+      result = result.replaceAll(path.replace("/blog-posts", ""), path)
     })
 
     return result
@@ -90,7 +101,7 @@ export const getPostMetaData = ({ slug }: { slug: string }) => {
     },
     [`post-meta-data:${slug}`],
     {
-      tags: ["posts", `post-meta-data:${slug}`, `post:${slug}`],
+      tags: ["posts", `post:${slug}`, `post-meta-data:${slug}`],
     },
   )
 

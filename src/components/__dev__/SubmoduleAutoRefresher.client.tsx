@@ -11,7 +11,7 @@ export const SubmoduleAutoRefresher = () => {
   const pathname = usePathname()
 
   useEffect(() => {
-    const ws = new WebSocket("ws://localhost:3201")
+    const ws = new WebSocket("ws://localhost:3201/_dev_submodule_watcher")
 
     ws.onmessage = async (e) => {
       const data = JSON.parse(e.data) as
@@ -19,11 +19,11 @@ export const SubmoduleAutoRefresher = () => {
         | { type: "refresh" | "scrap" }
 
       if (data.type === "post") {
-        await fetch(`/api/revalidate-post?slug=${data.slug}`, {
+        await fetch(`/api/guarded/revalidate-post?slug=${data.slug}`, {
           method: "POST",
         })
-      } else {
-        await fetch(`/api/revalidate-scrap`, {
+      } else if (data.type === "scrap") {
+        await fetch(`/api/guarded/revalidate-scrap`, {
           method: "POST",
         })
       }
